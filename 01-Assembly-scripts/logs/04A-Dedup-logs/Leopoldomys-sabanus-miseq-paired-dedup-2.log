@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 967 duplicates.
+Finished exact matches.    Time: 6.958 seconds.
+Memory: max=30870m, total=30870m, free=24482m, used=6388m
+
+Found 5441 contained sequences.
+Finished containment.      Time: 1.829 seconds.
+Memory: max=30870m, total=30870m, free=24124m, used=6746m
+
+Removed 5441 invalid entries.
+Finished invalid removal.  Time: 0.042 seconds.
+Memory: max=30870m, total=30870m, free=24124m, used=6746m
+
+Input:                  	44749 reads 		6487885 bases.
+Duplicates:             	967 reads (2.16%) 	143302 bases (2.21%)     	0 collisions.
+Containments:           	5441 reads (12.16%) 	798331 bases (12.30%)    	32675 collisions.
+Result:                 	38341 reads (85.68%) 	5546252 bases (85.49%)
+
+Sorted output.             Time: 0.053 seconds.
+Memory: max=30870m, total=30870m, free=24124m, used=6746m
+
+Printed output.            Time: 0.288 seconds.
+Memory: max=30870m, total=30870m, free=24122m, used=6748m
+
+Time:                         	9.191 seconds.
+Reads Processed:       44749 	4.87k reads/sec
+Bases Processed:       6487k 	0.71m bases/sec

@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16340718
+total bases: 2451107700
+Q20 bases: 2409995480(98.3227%)
+Q30 bases: 2347884938(95.7887%)
+
+Read2 before filtering:
+total reads: 16340718
+total bases: 2451107700
+Q20 bases: 2388427507(97.4428%)
+Q30 bases: 2309604457(94.227%)
+
+Read1 after filtering:
+total reads: 16142123
+total bases: 2390025667
+Q20 bases: 2355043323(98.5363%)
+Q30 bases: 2297960810(96.148%)
+
+Read2 aftering filtering:
+total reads: 16142123
+total bases: 2390089057
+Q20 bases: 2340644045(97.9312%)
+Q30 bases: 2268789857(94.9249%)
+
+Filtering result:
+reads passed filter: 32284246
+reads failed due to low quality: 360204
+reads failed due to too many N: 1370
+reads failed due to too short: 3860
+reads failed due to low complexity: 31756
+reads with adapter trimmed: 2537863
+bases trimmed due to adapters: 62975335
+
+Duplication rate: 40.2555%
+
+Insert size peak (evaluated by paired-end reads): 266
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mammelomys-lanosus/hiseq4000-paired-1/SM047_CKDL190143343-1a-DY0088-AK1680_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.0, time used: 327 seconds

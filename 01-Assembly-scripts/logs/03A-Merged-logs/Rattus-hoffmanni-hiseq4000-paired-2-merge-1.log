@@ -1,0 +1,51 @@
+java -ea -Xmx30g -Xms30g -Djava.library.path=/home/gregg_thomas/bin/bbmap/jni/ -cp /home/gregg_thomas/bin/bbmap/current/ jgi.BBMerge -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.fastq.gz verystrict=t rem k=40 extend2=40 ecct outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_.fastp.decon.merged.fastq.gz
+Executing jgi.BBMerge [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, verystrict=t, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_.fastp.decon.merged.fastq.gz]
+Version 38.73
+
+Revised arguments: [maxbad=4, margin=3, minqo=8, qualiters=2, ratiomode=t, flatmode=f, minentropy=52, minoverlap=12, minoverlap0=4, maxratio=0.05, ratiomargin=12, ratiooffset=0.5, ratiominoverlapreduction=4, efilter=2, pfilter=0.008, minsecondratio=0.16, minapproxoverlap=22, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_.fastp.decon.merged.fastq.gz]
+
+Set threads to 1
+Executing assemble.Tadpole2 [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+Version 38.73
+
+Using 1 threads.
+Executing ukmer.KmerTableSetU [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+
+Initial:
+Ways=31, initialSize=128000, prefilter=f, prealloc=f
+Memory: max=30870m, total=30870m, free=30064m, used=806m
+
+Estimated kmer capacity: 	715752451
+After table allocation:
+Memory: max=30870m, total=30870m, free=29903m, used=967m
+
+After loading:
+Memory: max=30870m, total=30870m, free=9961m, used=20909m
+
+Input:                      	44511984 reads 		6531542042 bases.
+Unique Kmers:               	596303881
+Load Time:                  	3329.341 seconds.
+
+Writing mergable reads merged.
+Started output threads.
+Total time: 9731.033 seconds.
+
+Pairs:               	22255992
+Joined:              	17139811   	77.012%
+Ambiguous:           	5099386   	22.912%
+No Solution:         	16795   	0.075%
+Too Short:           	0       	0.000%
+Fully Extended:      	31589160   	69.727%
+Partly Extended:     	7651526   	16.889%
+Not Extended:        	6063688   	13.384%
+
+Avg Insert:          	227.6
+Standard Deviation:  	66.9
+Mode:                	216
+
+Insert range:        	35 - 369
+90th percentile:     	319
+75th percentile:     	279
+50th percentile:     	227
+25th percentile:     	177
+10th percentile:     	138

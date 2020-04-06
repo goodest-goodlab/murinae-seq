@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 263906 duplicates.
+Finished exact matches.    Time: 45.392 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Input:                  	3400120 reads 		256437382 bases.
+Duplicates:             	263906 reads (7.76%) 	19906424 bases (7.76%)     	83336 collisions.
+Result:                 	3136214 reads (92.24%) 	236530958 bases (92.24%)
+
+Sorted output.             Time: 4.236 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Printed output.            Time: 38.761 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Time:                         	88.409 seconds.
+Reads Processed:       3400k 	38.46k reads/sec
+Bases Processed:        256m 	2.90m bases/sec

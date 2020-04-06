@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L002_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L002_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	7987770 reads          	744490061 bases
+Output:                 	7987770 reads (100.00%) 	744490061 bases (100.00%)
+
+Time:                         	52.729 seconds.
+Reads Processed:       7987k 	151.49k reads/sec
+Bases Processed:        744m 	14.12m bases/sec

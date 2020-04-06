@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Saxatilomys-paulinae/hiseq4000-paired-1/SM075_CKDL190143344-1a-D710-AK1682_H7275BBXX_L3_.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Saxatilomys-paulinae/hiseq4000-paired-1/SM075_CKDL190143344-1a-D710-AK1682_H7275BBXX_L3_R1_.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Saxatilomys-paulinae/hiseq4000-paired-1/SM075_CKDL190143344-1a-D710-AK1682_H7275BBXX_L3_R2_.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Saxatilomys-paulinae/hiseq4000-paired-1/SM075_CKDL190143344-1a-D710-AK1682_H7275BBXX_L3_.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Saxatilomys-paulinae/hiseq4000-paired-1/SM075_CKDL190143344-1a-D710-AK1682_H7275BBXX_L3_R1_.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Saxatilomys-paulinae/hiseq4000-paired-1/SM075_CKDL190143344-1a-D710-AK1682_H7275BBXX_L3_R2_.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	8606254 reads          	1283956262 bases
+Output:                 	8606254 reads (100.00%) 	1283956262 bases (100.00%)
+
+Time:                         	59.903 seconds.
+Reads Processed:       8606k 	143.67k reads/sec
+Bases Processed:       1283m 	21.43m bases/sec

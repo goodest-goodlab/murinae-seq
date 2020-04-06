@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 19206590
+total bases: 2880988500
+Q20 bases: 2837392912(98.4868%)
+Q30 bases: 2771321598(96.1934%)
+
+Read2 before filtering:
+total reads: 19206590
+total bases: 2880988500
+Q20 bases: 2818689197(97.8376%)
+Q30 bases: 2739208004(95.0788%)
+
+Read1 after filtering:
+total reads: 19015038
+total bases: 2765235374
+Q20 bases: 2729674488(98.714%)
+Q30 bases: 2670586477(96.5772%)
+
+Read2 aftering filtering:
+total reads: 19015038
+total bases: 2765398231
+Q20 bases: 2717097327(98.2534%)
+Q30 bases: 2645768423(95.674%)
+
+Filtering result:
+reads passed filter: 38030076
+reads failed due to low quality: 341384
+reads failed due to too many N: 398
+reads failed due to too short: 8848
+reads failed due to low complexity: 32474
+reads with adapter trimmed: 6453244
+bases trimmed due to adapters: 174856707
+
+Duplication rate: 39.148%
+
+Insert size peak (evaluated by paired-end reads): 186
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R.fastp.json 
+fastp v0.20.0, time used: 345 seconds

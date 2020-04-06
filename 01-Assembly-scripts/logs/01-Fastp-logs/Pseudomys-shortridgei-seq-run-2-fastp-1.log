@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 3818348
+total bases: 385653148
+Q20 bases: 369294882(95.7583%)
+Q30 bases: 357162939(92.6125%)
+
+Read2 before filtering:
+total reads: 3818348
+total bases: 385653148
+Q20 bases: 351341664(91.103%)
+Q30 bases: 329217398(85.3662%)
+
+Read1 after filtering:
+total reads: 3677974
+total bases: 369500698
+Q20 bases: 354516904(95.9449%)
+Q30 bases: 343346341(92.9217%)
+
+Read2 aftering filtering:
+total reads: 3677974
+total bases: 369515619
+Q20 bases: 338809954(91.6903%)
+Q30 bases: 319024362(86.3358%)
+
+Filtering result:
+reads passed filter: 7355948
+reads failed due to low quality: 8814
+reads failed due to too many N: 266902
+reads failed due to too short: 1868
+reads failed due to low complexity: 3164
+reads with adapter trimmed: 190466
+bases trimmed due to adapters: 4215827
+
+Duplication rate: 9.59314%
+
+Insert size peak (evaluated by paired-end reads): 170
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-shortridgei/seq-run-2/53914_HTVLWBCX2_CTCTGCA_S2_L001_R.fastp.json 
+fastp v0.20.0, time used: 69 seconds

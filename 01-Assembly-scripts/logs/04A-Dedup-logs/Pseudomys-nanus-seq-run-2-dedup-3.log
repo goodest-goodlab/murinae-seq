@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-nanus/seq-run-2/52936_AH7T7NBCX2_TAGTCTA_S19_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-nanus/seq-run-2/52936_AH7T7NBCX2_TAGTCTA_S19_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-nanus/seq-run-2/52936_AH7T7NBCX2_TAGTCTA_S19_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-nanus/seq-run-2/52936_AH7T7NBCX2_TAGTCTA_S19_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-nanus/seq-run-2/52936_AH7T7NBCX2_TAGTCTA_S19_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-nanus/seq-run-2/52936_AH7T7NBCX2_TAGTCTA_S19_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 216804 duplicates.
+Finished exact matches.    Time: 36.119 seconds.
+Memory: max=30870m, total=30870m, free=25555m, used=5315m
+
+Input:                  	4239486 reads 		427661852 bases.
+Duplicates:             	216804 reads (5.11%) 	21858524 bases (5.11%)     	83193 collisions.
+Result:                 	4022682 reads (94.89%) 	405803328 bases (94.89%)
+
+Sorted output.             Time: 1.931 seconds.
+Memory: max=30870m, total=30870m, free=25555m, used=5315m
+
+Printed output.            Time: 30.150 seconds.
+Memory: max=30870m, total=30870m, free=24105m, used=6765m
+
+Time:                         	68.242 seconds.
+Reads Processed:       4239k 	62.12k reads/sec
+Bases Processed:        427m 	6.27m bases/sec

@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apomys-lubangensis/nextseq-paired-1/JAE169_S1_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apomys-lubangensis/nextseq-paired-1/JAE169_S1_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Apomys-lubangensis/nextseq-paired-1/JAE169_S1_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apomys-lubangensis/nextseq-paired-1/JAE169_S1_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apomys-lubangensis/nextseq-paired-1/JAE169_S1_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Apomys-lubangensis/nextseq-paired-1/JAE169_S1_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 714368 duplicates.
+Finished exact matches.    Time: 47.987 seconds.
+Memory: max=30870m, total=30870m, free=24492m, used=6378m
+
+Input:                  	8990090 reads 		673491184 bases.
+Duplicates:             	714368 reads (7.95%) 	53517856 bases (7.95%)     	607011 collisions.
+Result:                 	8275722 reads (92.05%) 	619973328 bases (92.05%)
+
+Sorted output.             Time: 7.783 seconds.
+Memory: max=30870m, total=30870m, free=24170m, used=6700m
+
+Printed output.            Time: 36.137 seconds.
+Memory: max=30870m, total=30870m, free=21663m, used=9207m
+
+Time:                         	91.931 seconds.
+Reads Processed:       8990k 	97.79k reads/sec
+Bases Processed:        673m 	7.33m bases/sec

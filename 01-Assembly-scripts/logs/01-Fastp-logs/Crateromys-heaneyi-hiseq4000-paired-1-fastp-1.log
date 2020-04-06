@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 18315421
+total bases: 2747313150
+Q20 bases: 2701857398(98.3454%)
+Q30 bases: 2629799963(95.7226%)
+
+Read2 before filtering:
+total reads: 18315421
+total bases: 2747313150
+Q20 bases: 2652755680(96.5582%)
+Q30 bases: 2537950999(92.3794%)
+
+Read1 after filtering:
+total reads: 18035234
+total bases: 2660105981
+Q20 bases: 2622582204(98.5894%)
+Q30 bases: 2558099857(96.1653%)
+
+Read2 aftering filtering:
+total reads: 18035234
+total bases: 2660101807
+Q20 bases: 2587454848(97.269%)
+Q30 bases: 2483960944(93.3784%)
+
+Filtering result:
+reads passed filter: 36070468
+reads failed due to low quality: 534638
+reads failed due to too many N: 1458
+reads failed due to too short: 1868
+reads failed due to low complexity: 22410
+reads with adapter trimmed: 2678922
+bases trimmed due to adapters: 90830727
+
+Duplication rate: 38.1228%
+
+Insert size peak (evaluated by paired-end reads): 266
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crateromys-heaneyi/hiseq4000-paired-1/REC4_CKDL190143343-1a-D702-AK1544_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.0, time used: 369 seconds

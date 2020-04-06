@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-musculus/hiseq2000-paired-2/lane1_TTGGAT_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-musculus/hiseq2000-paired-2/lane1_TTGGAT_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-musculus-musculus/hiseq2000-paired-2/lane1_TTGGAT_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-musculus/hiseq2000-paired-2/lane1_TTGGAT_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-musculus/hiseq2000-paired-2/lane1_TTGGAT_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-musculus-musculus/hiseq2000-paired-2/lane1_TTGGAT_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 90478 duplicates.
+Finished exact matches.    Time: 41.269 seconds.
+Memory: max=30870m, total=30870m, free=27004m, used=3866m
+
+Input:                  	2487518 reads 		250464277 bases.
+Duplicates:             	90478 reads (3.64%) 	9101023 bases (3.63%)     	90353 collisions.
+Result:                 	2397040 reads (96.36%) 	241363254 bases (96.37%)
+
+Sorted output.             Time: 1.960 seconds.
+Memory: max=30870m, total=30870m, free=27004m, used=3866m
+
+Printed output.            Time: 34.465 seconds.
+Memory: max=30870m, total=30870m, free=26199m, used=4671m
+
+Time:                         	77.711 seconds.
+Reads Processed:       2487k 	32.01k reads/sec
+Bases Processed:        250m 	3.22m bases/sec

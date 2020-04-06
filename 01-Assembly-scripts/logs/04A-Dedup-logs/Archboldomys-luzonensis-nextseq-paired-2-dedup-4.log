@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 172666 duplicates.
+Finished exact matches.    Time: 17.666 seconds.
+Memory: max=30870m, total=30870m, free=26004m, used=4866m
+
+Input:                  	3839624 reads 		289809239 bases.
+Duplicates:             	172666 reads (4.50%) 	13040401 bases (4.50%)     	148199 collisions.
+Result:                 	3666958 reads (95.50%) 	276768838 bases (95.50%)
+
+Sorted output.             Time: 1.190 seconds.
+Memory: max=30870m, total=30870m, free=26004m, used=4866m
+
+Printed output.            Time: 19.990 seconds.
+Memory: max=30870m, total=30870m, free=24843m, used=6027m
+
+Time:                         	38.865 seconds.
+Reads Processed:       3839k 	98.79k reads/sec
+Bases Processed:        289m 	7.46m bases/sec

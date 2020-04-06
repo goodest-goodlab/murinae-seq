@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16666838
+total bases: 1683350638
+Q20 bases: 1586325534(94.2362%)
+Q30 bases: 1518104781(90.1835%)
+
+Read2 before filtering:
+total reads: 16666838
+total bases: 1683350638
+Q20 bases: 1511614055(89.7979%)
+Q30 bases: 1398243176(83.0631%)
+
+Read1 after filtering:
+total reads: 16386780
+total bases: 1457992571
+Q20 bases: 1380694049(94.6983%)
+Q30 bases: 1325367330(90.9036%)
+
+Read2 aftering filtering:
+total reads: 16386780
+total bases: 1459804084
+Q20 bases: 1328281543(90.9904%)
+Q30 bases: 1240909587(85.0052%)
+
+Filtering result:
+reads passed filter: 32773560
+reads failed due to low quality: 3230
+reads failed due to too many N: 355066
+reads failed due to too short: 116680
+reads failed due to low complexity: 85140
+reads with adapter trimmed: 18387445
+bases trimmed due to adapters: 405971046
+
+Duplication rate: 19.009%
+
+Insert size peak (evaluated by paired-end reads): 93
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-amplus/seq-run-1/53926_HTVLKBCX2_TTGGATC_S14_L002_R.fastp.json 
+fastp v0.20.0, time used: 217 seconds

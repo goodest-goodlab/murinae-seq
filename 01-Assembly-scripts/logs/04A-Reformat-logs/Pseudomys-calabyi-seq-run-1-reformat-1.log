@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-calabyi/seq-run-1/52938_BH7T33BCX2_AATAAGC_S1_L001_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-calabyi/seq-run-1/52938_BH7T33BCX2_AATAAGC_S1_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-calabyi/seq-run-1/52938_BH7T33BCX2_AATAAGC_S1_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-calabyi/seq-run-1/52938_BH7T33BCX2_AATAAGC_S1_L001_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-calabyi/seq-run-1/52938_BH7T33BCX2_AATAAGC_S1_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-calabyi/seq-run-1/52938_BH7T33BCX2_AATAAGC_S1_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	9360978 reads          	942772225 bases
+Output:                 	9360978 reads (100.00%) 	942772225 bases (100.00%)
+
+Time:                         	54.947 seconds.
+Reads Processed:       9360k 	170.36k reads/sec
+Bases Processed:        942m 	17.16m bases/sec

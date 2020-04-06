@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-fieldi/seq-run-2/52941_BH7T77BCX2_GCAGAAG_S4_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-fieldi/seq-run-2/52941_BH7T77BCX2_GCAGAAG_S4_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-fieldi/seq-run-2/52941_BH7T77BCX2_GCAGAAG_S4_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-fieldi/seq-run-2/52941_BH7T77BCX2_GCAGAAG_S4_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-fieldi/seq-run-2/52941_BH7T77BCX2_GCAGAAG_S4_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-fieldi/seq-run-2/52941_BH7T77BCX2_GCAGAAG_S4_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 127200 duplicates.
+Finished exact matches.    Time: 19.177 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Input:                  	3208412 reads 		323390120 bases.
+Duplicates:             	127200 reads (3.96%) 	12814222 bases (3.96%)     	60198 collisions.
+Result:                 	3081212 reads (96.04%) 	310575898 bases (96.04%)
+
+Sorted output.             Time: 1.292 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Printed output.            Time: 22.499 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Time:                         	42.990 seconds.
+Reads Processed:       3208k 	74.63k reads/sec
+Bases Processed:        323m 	7.52m bases/sec

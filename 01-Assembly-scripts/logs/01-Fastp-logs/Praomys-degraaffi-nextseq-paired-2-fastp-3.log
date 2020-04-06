@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3619517
+total bases: 273446852
+Q20 bases: 262457953(95.9813%)
+Q30 bases: 257691968(94.2384%)
+
+Read2 before filtering:
+total reads: 3619517
+total bases: 273356201
+Q20 bases: 253249655(92.6446%)
+Q30 bases: 245828724(89.9298%)
+
+Read1 after filtering:
+total reads: 3489220
+total bases: 263377631
+Q20 bases: 254517380(96.6359%)
+Q30 bases: 250282247(95.0279%)
+
+Read2 aftering filtering:
+total reads: 3489220
+total bases: 263394690
+Q20 bases: 248260515(94.2542%)
+Q30 bases: 241579999(91.7179%)
+
+Filtering result:
+reads passed filter: 6978440
+reads failed due to low quality: 243540
+reads failed due to too many N: 2846
+reads failed due to too short: 12270
+reads failed due to low complexity: 1938
+reads with adapter trimmed: 18644
+bases trimmed due to adapters: 465855
+
+Duplication rate: 24.3972%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R.fastp.json 
+fastp v0.20.0, time used: 43 seconds

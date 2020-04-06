@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 11282469
+total bases: 1128246900
+Q20 bases: 1101788775(97.6549%)
+Q30 bases: 1050165262(93.0794%)
+
+Read2 before filtering:
+total reads: 11282469
+total bases: 1128246900
+Q20 bases: 1085243812(96.1885%)
+Q30 bases: 1027813866(91.0983%)
+
+Read1 after filtering:
+total reads: 10893913
+total bases: 1088146510
+Q20 bases: 1072384368(98.5515%)
+Q30 bases: 1026034869(94.292%)
+
+Read2 aftering filtering:
+total reads: 10893913
+total bases: 1088146510
+Q20 bases: 1066371989(97.9989%)
+Q30 bases: 1012956616(93.0901%)
+
+Filtering result:
+reads passed filter: 21787826
+reads failed due to low quality: 724498
+reads failed due to too many N: 52010
+reads failed due to too short: 0
+reads failed due to low complexity: 604
+reads with adapter trimmed: 245438
+bases trimmed due to adapters: 2519148
+
+Duplication rate: 22.9394%
+
+Insert size peak (evaluated by paired-end reads): 147
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-macedonicus/hiseq2000-paired-1/10460X12_131030_SN141_0734_AC2RLAACXX_7_R.fastp.json 
+fastp v0.20.0, time used: 143 seconds

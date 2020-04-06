@@ -1,0 +1,32 @@
+Detecting adapter sequence for read1...
+>Nextera_LMP_Read1_External_Adapter | >Illumina Multiplexing Index Sequencing Primer
+GATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+
+Read1 before filtering:
+total reads: 445036
+total bases: 33620132
+Q20 bases: 32288085(96.0379%)
+Q30 bases: 31687966(94.2529%)
+
+Read1 after filtering:
+total reads: 440686
+total bases: 33280678
+Q20 bases: 32068473(96.3576%)
+Q30 bases: 31487096(94.6107%)
+
+Filtering result:
+reads passed filter: 440686
+reads failed due to low quality: 2754
+reads failed due to too many N: 2
+reads failed due to too short: 1539
+reads failed due to low complexity: 55
+reads with adapter trimmed: 2062
+bases trimmed due to adapters: 111317
+
+Duplication rate (may be overestimated since this is SE data): 4.11686%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-single-2/JEC43_S28_L002_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-single-2/JEC43_S28_L002_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Phloeomys-pallidus/nextseq-single-2/JEC43_S28_L002_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-single-2/JEC43_S28_L002_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-single-2/JEC43_S28_L002_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-single-2/JEC43_S28_L002_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 8 seconds

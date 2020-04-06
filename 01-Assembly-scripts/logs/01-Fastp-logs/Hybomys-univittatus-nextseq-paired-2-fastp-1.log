@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 2652187
+total bases: 200367406
+Q20 bases: 192079735(95.8638%)
+Q30 bases: 188517312(94.0858%)
+
+Read2 before filtering:
+total reads: 2652187
+total bases: 200303804
+Q20 bases: 185255520(92.4873%)
+Q30 bases: 179738967(89.7332%)
+
+Read1 after filtering:
+total reads: 2545972
+total bases: 192186163
+Q20 bases: 185554801(96.5495%)
+Q30 bases: 182412216(94.9143%)
+
+Read2 aftering filtering:
+total reads: 2545972
+total bases: 192200299
+Q20 bases: 181018102(94.182%)
+Q30 bases: 176093496(91.6198%)
+
+Filtering result:
+reads passed filter: 5091944
+reads failed due to low quality: 185392
+reads failed due to too many N: 2150
+reads failed due to too short: 22736
+reads failed due to low complexity: 2152
+reads with adapter trimmed: 30284
+bases trimmed due to adapters: 1327510
+
+Duplication rate: 16.2623%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L001_R.fastp.json 
+fastp v0.20.0, time used: 29 seconds

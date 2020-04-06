@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L004_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L004_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L004_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L004_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 91 duplicates.
+Finished exact matches.    Time: 8.580 seconds.
+Memory: max=30870m, total=30870m, free=24224m, used=6646m
+
+Found 14 contained sequences.
+Finished containment.      Time: 1.242 seconds.
+Memory: max=30870m, total=30870m, free=23490m, used=7380m
+
+Removed 14 invalid entries.
+Finished invalid removal.  Time: 0.011 seconds.
+Memory: max=30870m, total=30870m, free=23490m, used=7380m
+
+Input:                  	15191 reads 		1139793 bases.
+Duplicates:             	91 reads (0.60%) 	6828 bases (0.60%)     	0 collisions.
+Containments:           	14 reads (0.09%) 	901 bases (0.08%)    	471 collisions.
+Result:                 	15086 reads (99.31%) 	1132064 bases (99.32%)
+
+Sorted output.             Time: 0.018 seconds.
+Memory: max=30870m, total=30870m, free=23490m, used=7380m
+
+Printed output.            Time: 0.209 seconds.
+Memory: max=30870m, total=30870m, free=23354m, used=7516m
+
+Time:                         	10.085 seconds.
+Reads Processed:       15191 	1.51k reads/sec
+Bases Processed:       1139k 	0.11m bases/sec

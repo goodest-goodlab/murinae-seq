@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2325963
+total bases: 175699127
+Q20 bases: 168629363(95.9762%)
+Q30 bases: 165544279(94.2203%)
+
+Read2 before filtering:
+total reads: 2325963
+total bases: 175690466
+Q20 bases: 163236805(92.9116%)
+Q30 bases: 158560658(90.25%)
+
+Read1 after filtering:
+total reads: 2247015
+total bases: 169625970
+Q20 bases: 163873316(96.6086%)
+Q30 bases: 161115892(94.983%)
+
+Read2 aftering filtering:
+total reads: 2247015
+total bases: 169638961
+Q20 bases: 160150755(94.4068%)
+Q30 bases: 155936204(91.9224%)
+
+Filtering result:
+reads passed filter: 4494030
+reads failed due to low quality: 148570
+reads failed due to too many N: 828
+reads failed due to too short: 7430
+reads failed due to low complexity: 1068
+reads with adapter trimmed: 8090
+bases trimmed due to adapters: 219980
+
+Duplication rate: 6.22417%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-2/Z21794_S15_L003_R.fastp.json 
+fastp v0.20.0, time used: 33 seconds

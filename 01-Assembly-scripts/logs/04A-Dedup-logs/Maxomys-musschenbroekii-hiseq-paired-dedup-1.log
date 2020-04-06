@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Found 290984 duplicates.
+Finished exact matches.    Time: 42.967 seconds.
+Memory: max=30870m, total=30870m, free=24802m, used=6068m
+
+Found 629655 contained sequences.
+Finished containment.      Time: 27.816 seconds.
+Memory: max=30870m, total=30870m, free=24327m, used=6543m
+
+Removed 629655 invalid entries.
+Finished invalid removal.  Time: 0.837 seconds.
+Memory: max=30870m, total=30870m, free=24327m, used=6543m
+
+Input:                  	1964995 reads 		321654281 bases.
+Duplicates:             	290984 reads (14.81%) 	43862671 bases (13.64%)     	0 collisions.
+Containments:           	629655 reads (32.04%) 	92769703 bases (28.84%)    	13146516 collisions.
+Result:                 	1044356 reads (53.15%) 	185021907 bases (57.52%)
+
+Sorted output.             Time: 0.646 seconds.
+Memory: max=30870m, total=30870m, free=24327m, used=6543m
+
+Printed output.            Time: 12.774 seconds.
+Memory: max=30870m, total=30870m, free=23664m, used=7206m
+
+Time:                         	85.070 seconds.
+Reads Processed:       1964k 	23.10k reads/sec
+Bases Processed:        321m 	3.78m bases/sec

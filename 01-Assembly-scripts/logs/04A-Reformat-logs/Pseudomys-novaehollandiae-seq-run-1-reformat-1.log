@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L002_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L002_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	5520266 reads          	516854264 bases
+Output:                 	5520266 reads (100.00%) 	516854264 bases (100.00%)
+
+Time:                         	29.534 seconds.
+Reads Processed:       5520k 	186.91k reads/sec
+Bases Processed:        516m 	17.50m bases/sec

@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Niviventer-lepturus/miseq-paired/JAE4746_S39_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Niviventer-lepturus/miseq-paired/JAE4746_S39_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Niviventer-lepturus/miseq-paired/JAE4746_S39_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Niviventer-lepturus/miseq-paired/JAE4746_S39_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Niviventer-lepturus/miseq-paired/JAE4746_S39_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Niviventer-lepturus/miseq-paired/JAE4746_S39_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 5586 duplicates.
+Finished exact matches.    Time: 8.149 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+Input:                  	654042 reads 		50991512 bases.
+Duplicates:             	5586 reads (0.85%) 	435708 bases (0.85%)     	4541 collisions.
+Result:                 	648456 reads (99.15%) 	50555804 bases (99.15%)
+
+Sorted output.             Time: 0.202 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+PPrinted output.            Time: 7.182 seconds.
+Memory: max=30870m, total=30870m, free=28131m, used=2739m
+
+Time:                         	20.387 seconds.
+Reads Processed:        654k 	32.08k reads/sec
+Bases Processed:      50991k 	2.50m bases/sec

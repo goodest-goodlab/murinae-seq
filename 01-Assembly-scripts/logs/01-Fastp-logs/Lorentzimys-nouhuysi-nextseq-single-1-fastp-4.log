@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 635474
+total bases: 48004226
+Q20 bases: 45584497(94.9593%)
+Q30 bases: 44525593(92.7535%)
+
+Read1 after filtering:
+total reads: 630382
+total bases: 47613469
+Q20 bases: 45371749(95.2918%)
+Q30 bases: 44338305(93.1213%)
+
+Filtering result:
+reads passed filter: 630382
+reads failed due to low quality: 4877
+reads failed due to too many N: 6
+reads failed due to too short: 140
+reads failed due to low complexity: 69
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.79275%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-single-1/ABTC46314_S55_L003_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-single-1/ABTC46314_S55_L003_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Lorentzimys-nouhuysi/nextseq-single-1/ABTC46314_S55_L003_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-single-1/ABTC46314_S55_L003_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-single-1/ABTC46314_S55_L003_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-single-1/ABTC46314_S55_L003_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 9 seconds

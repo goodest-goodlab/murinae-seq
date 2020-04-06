@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 20926441
+total bases: 3138966150
+Q20 bases: 3091574974(98.4902%)
+Q30 bases: 3022543653(96.2911%)
+
+Read2 before filtering:
+total reads: 20926441
+total bases: 3138966150
+Q20 bases: 3068214900(97.746%)
+Q30 bases: 2981326857(94.978%)
+
+Read1 after filtering:
+total reads: 20708297
+total bases: 3039125721
+Q20 bases: 3000119462(98.7165%)
+Q30 bases: 2937858161(96.6679%)
+
+Read2 aftering filtering:
+total reads: 20708297
+total bases: 3039299737
+Q20 bases: 2983819210(98.1746%)
+Q30 bases: 2905131707(95.5856%)
+
+Filtering result:
+reads passed filter: 41416594
+reads failed due to low quality: 395010
+reads failed due to too many N: 464
+reads failed due to too short: 2220
+reads failed due to low complexity: 38594
+reads with adapter trimmed: 4675655
+bases trimmed due to adapters: 134870889
+
+Duplication rate: 37.8664%
+
+Insert size peak (evaluated by paired-end reads): 218
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_R.fastp.json 
+fastp v0.20.0, time used: 332 seconds

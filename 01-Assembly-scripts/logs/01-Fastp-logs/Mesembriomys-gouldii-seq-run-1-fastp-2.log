@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 4174176
+total bases: 421591776
+Q20 bases: 403727703(95.7627%)
+Q30 bases: 390392986(92.5998%)
+
+Read2 before filtering:
+total reads: 4174176
+total bases: 421591776
+Q20 bases: 377770277(89.6057%)
+Q30 bases: 349097264(82.8046%)
+
+Read1 after filtering:
+total reads: 4128378
+total bases: 415208276
+Q20 bases: 398065179(95.8712%)
+Q30 bases: 385212123(92.7756%)
+
+Read2 aftering filtering:
+total reads: 4128378
+total bases: 415230935
+Q20 bases: 373240575(89.8875%)
+Q30 bases: 345856302(83.2925%)
+
+Filtering result:
+reads passed filter: 8256756
+reads failed due to low quality: 1136
+reads failed due to too many N: 84990
+reads failed due to too short: 2336
+reads failed due to low complexity: 3134
+reads with adapter trimmed: 169942
+bases trimmed due to adapters: 3733139
+
+Duplication rate: 6.88851%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-gouldii/seq-run-1/53919_HTVLKBCX2_CTCGATG_S7_L002_R.fastp.json 
+fastp v0.20.0, time used: 83 seconds

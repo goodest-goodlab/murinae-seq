@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 14677159
+total bases: 2201573850
+Q20 bases: 2162888811(98.2428%)
+Q30 bases: 2104523201(95.5918%)
+
+Read2 before filtering:
+total reads: 14677159
+total bases: 2201573850
+Q20 bases: 2135213618(96.9858%)
+Q30 bases: 2053143994(93.258%)
+
+Read1 after filtering:
+total reads: 14469148
+total bases: 2161696860
+Q20 bases: 2128301479(98.4551%)
+Q30 bases: 2074389320(95.9612%)
+
+Read2 aftering filtering:
+total reads: 14469148
+total bases: 2161699370
+Q20 bases: 2108632018(97.5451%)
+Q30 bases: 2033036456(94.0481%)
+
+Filtering result:
+reads passed filter: 28938296
+reads failed due to low quality: 374216
+reads failed due to too many N: 1212
+reads failed due to too short: 1348
+reads failed due to low complexity: 39246
+reads with adapter trimmed: 737007
+bases trimmed due to adapters: 17518750
+
+Duplication rate: 37.2773%
+
+Insert size peak (evaluated by paired-end reads): 269
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.0, time used: 263 seconds

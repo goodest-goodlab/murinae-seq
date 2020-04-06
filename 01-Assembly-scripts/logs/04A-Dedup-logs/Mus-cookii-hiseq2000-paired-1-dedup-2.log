@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R1_.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R2_.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R1_.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R2_.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 228314 duplicates.
+Finished exact matches.    Time: 53.398 seconds.
+Memory: max=30870m, total=30870m, free=25521m, used=5349m
+
+Input:                  	4162178 reads 		415198615 bases.
+Duplicates:             	228314 reads (5.49%) 	22739120 bases (5.48%)     	121839 collisions.
+Result:                 	3933864 reads (94.51%) 	392459495 bases (94.52%)
+
+Sorted output.             Time: 2.384 seconds.
+Memory: max=30870m, total=30870m, free=25521m, used=5349m
+
+Printed output.            Time: 56.757 seconds.
+Memory: max=30870m, total=30870m, free=24071m, used=6799m
+
+Time:                         	112.560 seconds.
+Reads Processed:       4162k 	36.98k reads/sec
+Bases Processed:        415m 	3.69m bases/sec

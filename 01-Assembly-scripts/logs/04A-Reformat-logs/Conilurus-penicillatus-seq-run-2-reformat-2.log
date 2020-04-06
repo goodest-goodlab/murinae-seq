@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	3974604 reads          	400291467 bases
+Output:                 	3974604 reads (100.00%) 	400291467 bases (100.00%)
+
+Time:                         	28.410 seconds.
+Reads Processed:       3974k 	139.90k reads/sec
+Bases Processed:        400m 	14.09m bases/sec

@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Maxomys-musschenbroekii/hiseq-paired/musschenbroekii-WGA_CAATTA_L007_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 85208 duplicates.
+Finished exact matches.    Time: 16.677 seconds.
+Memory: max=30870m, total=30870m, free=27487m, used=3383m
+
+Input:                  	1883026 reads 		187634119 bases.
+Duplicates:             	85208 reads (4.53%) 	8479036 bases (4.52%)     	43084 collisions.
+Result:                 	1797818 reads (95.47%) 	179155083 bases (95.48%)
+
+Sorted output.             Time: 2.001 seconds.
+Memory: max=30870m, total=30870m, free=27487m, used=3383m
+
+Printed output.            Time: 17.083 seconds.
+Memory: max=30870m, total=30870m, free=26682m, used=4188m
+
+Time:                         	35.776 seconds.
+Reads Processed:       1883k 	52.63k reads/sec
+Bases Processed:        187m 	5.24m bases/sec

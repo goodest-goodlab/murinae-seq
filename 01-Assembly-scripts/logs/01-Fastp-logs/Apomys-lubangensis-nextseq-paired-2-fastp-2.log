@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2593733
+total bases: 195911065
+Q20 bases: 187880623(95.901%)
+Q30 bases: 184468982(94.1596%)
+
+Read2 before filtering:
+total reads: 2593733
+total bases: 195846622
+Q20 bases: 179937719(91.8769%)
+Q30 bases: 174411327(89.0551%)
+
+Read1 after filtering:
+total reads: 2479119
+total bases: 187089093
+Q20 bases: 180717112(96.5941%)
+Q30 bases: 177727539(94.9962%)
+
+Read2 aftering filtering:
+total reads: 2479119
+total bases: 187106325
+Q20 bases: 175671464(93.8886%)
+Q30 bases: 170785224(91.2771%)
+
+Filtering result:
+reads passed filter: 4958238
+reads failed due to low quality: 217568
+reads failed due to too many N: 2088
+reads failed due to too short: 8398
+reads failed due to low complexity: 1174
+reads with adapter trimmed: 12222
+bases trimmed due to adapters: 292738
+
+Duplication rate: 7.72424%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-paired-2/JAE169_S1_L002_R.fastp.json 
+fastp v0.20.0, time used: 34 seconds

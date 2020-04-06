@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 361819 duplicates.
+Finished exact matches.    Time: 24.313 seconds.
+Memory: max=30870m, total=30870m, free=23234m, used=7636m
+
+Found 978390 contained sequences.
+Finished containment.      Time: 60.653 seconds.
+Memory: max=30870m, total=30870m, free=28378m, used=2492m
+
+Removed 978390 invalid entries.
+Finished invalid removal.  Time: 1.175 seconds.
+Memory: max=30870m, total=30870m, free=28378m, used=2492m
+
+Input:                  	2729135 reads 		476699474 bases.
+Duplicates:             	361819 reads (13.26%) 	60007309 bases (12.59%)     	0 collisions.
+Containments:           	978390 reads (35.85%) 	157677898 bases (33.08%)    	73373035 collisions.
+Result:                 	1388926 reads (50.89%) 	259014267 bases (54.33%)
+
+Sorted output.             Time: 1.552 seconds.
+Memory: max=30870m, total=30870m, free=28378m, used=2492m
+
+Printed output.            Time: 15.905 seconds.
+Memory: max=30870m, total=30870m, free=27516m, used=3354m
+
+Time:                         	103.619 seconds.
+Reads Processed:       2729k 	26.34k reads/sec
+Bases Processed:        476m 	4.60m bases/sec

@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 8689094
+total bases: 877598494
+Q20 bases: 858828424(97.8612%)
+Q30 bases: 843743966(96.1424%)
+
+Read2 before filtering:
+total reads: 8689094
+total bases: 877598494
+Q20 bases: 845057269(96.292%)
+Q30 bases: 823655735(93.8534%)
+
+Read1 after filtering:
+total reads: 8683372
+total bases: 876009578
+Q20 bases: 857464873(97.883%)
+Q30 bases: 842507415(96.1756%)
+
+Read2 aftering filtering:
+total reads: 8683372
+total bases: 876009578
+Q20 bases: 843827257(96.3263%)
+Q30 bases: 822591381(93.9021%)
+
+Filtering result:
+reads passed filter: 17366744
+reads failed due to low quality: 2228
+reads failed due to too many N: 3872
+reads failed due to too short: 0
+reads failed due to low complexity: 5344
+reads with adapter trimmed: 126424
+bases trimmed due to adapters: 2023206
+
+Duplication rate: 13.9097%
+
+Insert size peak (evaluated by paired-end reads): 170
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R.fastp.json 
+fastp v0.20.0, time used: 124 seconds

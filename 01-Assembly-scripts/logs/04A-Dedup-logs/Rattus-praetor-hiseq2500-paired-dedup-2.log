@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 1480816 duplicates.
+Finished exact matches.    Time: 57.810 seconds.
+Memory: max=30870m, total=30870m, free=23227m, used=7643m
+
+Found 1062775 contained sequences.
+Finished containment.      Time: 51.080 seconds.
+Memory: max=30870m, total=30870m, free=22794m, used=8076m
+
+Removed 1062775 invalid entries.
+Finished invalid removal.  Time: 1.937 seconds.
+Memory: max=30870m, total=30870m, free=22794m, used=8076m
+
+Input:                  	3937322 reads 		653504624 bases.
+Duplicates:             	1480816 reads (37.61%) 	227738569 bases (34.85%)     	0 collisions.
+Containments:           	1062775 reads (26.99%) 	166664127 bases (25.50%)    	64597057 collisions.
+Result:                 	1393731 reads (35.40%) 	259101928 bases (39.65%)
+
+Sorted output.             Time: 2.032 seconds.
+Memory: max=30870m, total=30870m, free=22714m, used=8156m
+
+Printed output.            Time: 17.522 seconds.
+Memory: max=30870m, total=30870m, free=21935m, used=8935m
+
+Time:                         	130.443 seconds.
+Reads Processed:       3937k 	30.18k reads/sec
+Bases Processed:        653m 	5.01m bases/sec

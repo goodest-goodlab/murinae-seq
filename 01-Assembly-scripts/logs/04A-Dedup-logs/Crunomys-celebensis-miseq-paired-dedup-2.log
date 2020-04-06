@@ -1,0 +1,25 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Crunomys-celebensis/miseq-paired/Z21894_S18_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Crunomys-celebensis/miseq-paired/Z21894_S18_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Crunomys-celebensis/miseq-paired/Z21894_S18_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Crunomys-celebensis/miseq-paired/Z21894_S18_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Crunomys-celebensis/miseq-paired/Z21894_S18_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Crunomys-celebensis/miseq-paired/Z21894_S18_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 7310 duplicates.
+Finished exact matches.    Time: 16.706 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+Input:                  	798136 reads 		62239892 bases.
+Duplicates:             	7310 reads (0.92%) 	570014 bases (0.92%)     	6020 collisions.
+Result:                 	790826 reads (99.08%) 	61669878 bases (99.08%)
+
+Sorted output.             Time: 0.254 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+PPrinted output.            Time: 8.837 seconds.
+Memory: max=30870m, total=30870m, free=28131m, used=2739m
+
+Time:                         	19.924 seconds.
+Reads Processed:        798k 	40.06k reads/sec
+Bases Processed:      62239k 	3.12m bases/sec

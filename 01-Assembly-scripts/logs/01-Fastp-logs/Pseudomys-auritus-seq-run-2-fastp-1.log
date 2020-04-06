@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 1295292
+total bases: 130824492
+Q20 bases: 120140190(91.8331%)
+Q30 bases: 113483483(86.7448%)
+
+Read2 before filtering:
+total reads: 1295292
+total bases: 130824492
+Q20 bases: 114454261(87.4869%)
+Q30 bases: 104621342(79.9708%)
+
+Read1 after filtering:
+total reads: 1241917
+total bases: 107035356
+Q20 bases: 99835577(93.2735%)
+Q30 bases: 95116355(88.8644%)
+
+Read2 aftering filtering:
+total reads: 1241917
+total bases: 107150080
+Q20 bases: 96783972(90.3256%)
+Q30 bases: 90321222(84.2941%)
+
+Filtering result:
+reads passed filter: 2483834
+reads failed due to low quality: 3114
+reads failed due to too many N: 79854
+reads failed due to too short: 13600
+reads failed due to low complexity: 10182
+reads with adapter trimmed: 1588546
+bases trimmed due to adapters: 38939634
+
+Duplication rate: 19.8859%
+
+Insert size peak (evaluated by paired-end reads): 101
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-auritus/seq-run-2/53928_HTVLWBCX2_TAATGCG_S16_L001_R.fastp.json 
+fastp v0.20.0, time used: 60 seconds

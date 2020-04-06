@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apodemus-sylvaticus/nextseq-paired-2/SMG3823_S28_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apodemus-sylvaticus/nextseq-paired-2/SMG3823_S28_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Apodemus-sylvaticus/nextseq-paired-2/SMG3823_S28_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apodemus-sylvaticus/nextseq-paired-2/SMG3823_S28_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Apodemus-sylvaticus/nextseq-paired-2/SMG3823_S28_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Apodemus-sylvaticus/nextseq-paired-2/SMG3823_S28_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 155892 duplicates.
+Finished exact matches.    Time: 17.882 seconds.
+Memory: max=30870m, total=30870m, free=26004m, used=4866m
+
+Input:                  	3854910 reads 		290907845 bases.
+Duplicates:             	155892 reads (4.04%) 	11769728 bases (4.05%)     	102085 collisions.
+Result:                 	3699018 reads (95.96%) 	279138117 bases (95.95%)
+
+Sorted output.             Time: 0.968 seconds.
+Memory: max=30870m, total=30870m, free=26004m, used=4866m
+
+Printed output.            Time: 17.674 seconds.
+Memory: max=30870m, total=30870m, free=24843m, used=6027m
+
+Time:                         	36.543 seconds.
+Reads Processed:       3854k 	105.49k reads/sec
+Bases Processed:        290m 	7.96m bases/sec

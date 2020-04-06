@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3167335
+total bases: 239256828
+Q20 bases: 229625602(95.9745%)
+Q30 bases: 225472485(94.2387%)
+
+Read2 before filtering:
+total reads: 3167335
+total bases: 239248920
+Q20 bases: 222871079(93.1545%)
+Q30 bases: 216716214(90.5819%)
+
+Read1 after filtering:
+total reads: 3056536
+total bases: 230712076
+Q20 bases: 223033517(96.6718%)
+Q30 bases: 219347834(95.0743%)
+
+Read2 aftering filtering:
+total reads: 3056536
+total bases: 230728603
+Q20 bases: 218541558(94.718%)
+Q30 bases: 213042037(92.3345%)
+
+Filtering result:
+reads passed filter: 6113072
+reads failed due to low quality: 208606
+reads failed due to too many N: 1164
+reads failed due to too short: 10256
+reads failed due to low complexity: 1572
+reads with adapter trimmed: 13592
+bases trimmed due to adapters: 356171
+
+Duplication rate: 7.96578%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R.fastp.json 
+fastp v0.20.0, time used: 38 seconds

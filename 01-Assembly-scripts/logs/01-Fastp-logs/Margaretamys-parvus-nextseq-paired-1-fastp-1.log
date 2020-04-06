@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 5567306
+total bases: 417547950
+Q20 bases: 409350322(98.0367%)
+Q30 bases: 405377361(97.0852%)
+
+Read2 before filtering:
+total reads: 5567306
+total bases: 417547950
+Q20 bases: 395662741(94.7586%)
+Q30 bases: 388878277(93.1338%)
+
+Read1 after filtering:
+total reads: 5377663
+total bases: 403051988
+Q20 bases: 396939627(98.4835%)
+Q30 bases: 393520690(97.6352%)
+
+Read2 aftering filtering:
+total reads: 5377663
+total bases: 403058574
+Q20 bases: 388743849(96.4485%)
+Q30 bases: 383078006(95.0428%)
+
+Filtering result:
+reads passed filter: 10755326
+reads failed due to low quality: 340918
+reads failed due to too many N: 2496
+reads failed due to too short: 31856
+reads failed due to low complexity: 4016
+reads with adapter trimmed: 20456
+bases trimmed due to adapters: 530357
+
+Duplication rate: 14.365%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Margaretamys-parvus/nextseq-paired-1/Z21794_S22_R.fastp.json 
+fastp v0.20.0, time used: 53 seconds

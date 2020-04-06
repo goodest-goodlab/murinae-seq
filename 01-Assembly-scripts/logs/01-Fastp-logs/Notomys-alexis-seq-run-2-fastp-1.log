@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 5056956
+total bases: 510752556
+Q20 bases: 498726222(97.6454%)
+Q30 bases: 489408627(95.8211%)
+
+Read2 before filtering:
+total reads: 5056956
+total bases: 510752556
+Q20 bases: 488458572(95.6351%)
+Q30 bases: 474353827(92.8735%)
+
+Read1 after filtering:
+total reads: 4982200
+total bases: 502059516
+Q20 bases: 491517442(97.9002%)
+Q30 bases: 483103663(96.2244%)
+
+Read2 aftering filtering:
+total reads: 4982200
+total bases: 502088938
+Q20 bases: 481845811(95.9682%)
+Q30 bases: 468796262(93.3692%)
+
+Filtering result:
+reads passed filter: 9964400
+reads failed due to low quality: 1558
+reads failed due to too many N: 2166
+reads failed due to too short: 139112
+reads failed due to low complexity: 6676
+reads with adapter trimmed: 267324
+bases trimmed due to adapters: 15806542
+
+Duplication rate: 13.1684%
+
+Insert size peak (evaluated by paired-end reads): 165
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-alexis/seq-run-2/52920_AH7T7NBCX2_ATACTGA_S3_L002_R.fastp.json 
+fastp v0.20.0, time used: 96 seconds

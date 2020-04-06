@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 19514965
+total bases: 2927244750
+Q20 bases: 2880395914(98.3996%)
+Q30 bases: 2807035115(95.8934%)
+
+Read2 before filtering:
+total reads: 19514965
+total bases: 2927244750
+Q20 bases: 2851649556(97.4175%)
+Q30 bases: 2755074230(94.1183%)
+
+Read1 after filtering:
+total reads: 19313744
+total bases: 2869935031
+Q20 bases: 2828919672(98.5709%)
+Q30 bases: 2760635816(96.1916%)
+
+Read2 aftering filtering:
+total reads: 19313744
+total bases: 2869995890
+Q20 bases: 2807773890(97.832%)
+Q30 bases: 2718291584(94.7141%)
+
+Filtering result:
+reads passed filter: 38627488
+reads failed due to low quality: 366374
+reads failed due to too many N: 1152
+reads failed due to too short: 1326
+reads failed due to low complexity: 33590
+reads with adapter trimmed: 2254141
+bases trimmed due to adapters: 54513453
+
+Duplication rate: 36.4617%
+
+Insert size peak (evaluated by paired-end reads): 269
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Papagomys-armandvillei/hiseq4000-paired-1/SM057_CKDL190143344-1a-D704-AK1682_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 385 seconds

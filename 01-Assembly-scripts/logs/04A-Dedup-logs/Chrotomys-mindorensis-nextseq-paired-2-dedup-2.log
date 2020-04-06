@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 298692 duplicates.
+Finished exact matches.    Time: 20.081 seconds.
+Memory: max=30870m, total=30870m, free=25038m, used=5832m
+
+Input:                  	5017596 reads 		378649328 bases.
+Duplicates:             	298692 reads (5.95%) 	22554771 bases (5.96%)     	154213 collisions.
+Result:                 	4718904 reads (94.05%) 	356094557 bases (94.04%)
+
+Sorted output.             Time: 1.263 seconds.
+Memory: max=30870m, total=30870m, free=24877m, used=5993m
+
+Printed output.            Time: 24.600 seconds.
+Memory: max=30870m, total=30870m, free=23588m, used=7282m
+
+Time:                         	45.963 seconds.
+Reads Processed:       5017k 	109.17k reads/sec
+Bases Processed:        378m 	8.24m bases/sec

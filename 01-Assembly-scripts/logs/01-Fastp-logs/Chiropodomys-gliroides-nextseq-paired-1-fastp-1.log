@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 6268190
+total bases: 470114250
+Q20 bases: 460845107(98.0283%)
+Q30 bases: 456388012(97.0802%)
+
+Read2 before filtering:
+total reads: 6268190
+total bases: 470114250
+Q20 bases: 445942948(94.8584%)
+Q30 bases: 438437697(93.2619%)
+
+Read1 after filtering:
+total reads: 6048849
+total bases: 453262909
+Q20 bases: 446343363(98.4734%)
+Q30 bases: 442501469(97.6258%)
+
+Read2 aftering filtering:
+total reads: 6048849
+total bases: 453274518
+Q20 bases: 437872028(96.602%)
+Q30 bases: 431670904(95.2339%)
+
+Filtering result:
+reads passed filter: 12097698
+reads failed due to low quality: 392126
+reads failed due to too many N: 2978
+reads failed due to too short: 38478
+reads failed due to low complexity: 5100
+reads with adapter trimmed: 30184
+bases trimmed due to adapters: 748759
+
+Duplication rate: 16.7307%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_R.fastp.json 
+fastp v0.20.0, time used: 60 seconds

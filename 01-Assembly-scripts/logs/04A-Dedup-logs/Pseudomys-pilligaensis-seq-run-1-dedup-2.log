@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-pilligaensis/seq-run-1/52942_BH7T33BCX2_AGAATTA_S5_L001_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-pilligaensis/seq-run-1/52942_BH7T33BCX2_AGAATTA_S5_L001_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-pilligaensis/seq-run-1/52942_BH7T33BCX2_AGAATTA_S5_L001_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-pilligaensis/seq-run-1/52942_BH7T33BCX2_AGAATTA_S5_L001_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 803498 duplicates.
+Finished exact matches.    Time: 38.034 seconds.
+Memory: max=30870m, total=30870m, free=22883m, used=7987m
+
+Found 1547970 contained sequences.
+Finished containment.      Time: 77.771 seconds.
+Memory: max=30870m, total=30870m, free=22362m, used=8508m
+
+Removed 1547970 invalid entries.
+Finished invalid removal.  Time: 1.263 seconds.
+Memory: max=30870m, total=30870m, free=22281m, used=8589m
+
+Input:                  	4119994 reads 		741684483 bases.
+Duplicates:             	803498 reads (19.50%) 	139745422 bases (18.84%)     	0 collisions.
+Containments:           	1547970 reads (37.57%) 	260511041 bases (35.12%)    	106083392 collisions.
+Result:                 	1768526 reads (42.93%) 	341428020 bases (46.03%)
+
+Sorted output.             Time: 0.846 seconds.
+Memory: max=30870m, total=30870m, free=22281m, used=8589m
+
+Printed output.            Time: 16.644 seconds.
+Memory: max=31015m, total=31015m, free=29906m, used=1109m
+
+Time:                         	134.579 seconds.
+Reads Processed:       4119k 	30.61k reads/sec
+Bases Processed:        741m 	5.51m bases/sec

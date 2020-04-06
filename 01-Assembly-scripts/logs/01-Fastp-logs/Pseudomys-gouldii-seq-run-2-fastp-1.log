@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 18407582
+total bases: 1859165782
+Q20 bases: 1795210051(96.56%)
+Q30 bases: 1750048614(94.1309%)
+
+Read2 before filtering:
+total reads: 18407582
+total bases: 1859165782
+Q20 bases: 1767452043(95.0669%)
+Q30 bases: 1711438855(92.0541%)
+
+Read1 after filtering:
+total reads: 18114063
+total bases: 1623162787
+Q20 bases: 1575477658(97.0622%)
+Q30 bases: 1540413723(94.902%)
+
+Read2 aftering filtering:
+total reads: 18114063
+total bases: 1623857816
+Q20 bases: 1559941024(96.0639%)
+Q30 bases: 1518936142(93.5387%)
+
+Filtering result:
+reads passed filter: 36228126
+reads failed due to low quality: 86028
+reads failed due to too many N: 21270
+reads failed due to too short: 412628
+reads failed due to low complexity: 67112
+reads with adapter trimmed: 21669615
+bases trimmed due to adapters: 450468312
+
+Duplication rate: 42.3186%
+
+Insert size peak (evaluated by paired-end reads): 101
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gouldii/seq-run-2/52955_BH7T77BCX2_AGCAGGT_S18_L002_R.fastp.json 
+fastp v0.20.0, time used: 306 seconds

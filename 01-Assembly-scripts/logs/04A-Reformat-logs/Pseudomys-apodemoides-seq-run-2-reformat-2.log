@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-apodemoides/seq-run-2/52931_AH7T7NBCX2_GACGATT_S14_L001_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-apodemoides/seq-run-2/52931_AH7T7NBCX2_GACGATT_S14_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-apodemoides/seq-run-2/52931_AH7T7NBCX2_GACGATT_S14_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-apodemoides/seq-run-2/52931_AH7T7NBCX2_GACGATT_S14_L001_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-apodemoides/seq-run-2/52931_AH7T7NBCX2_GACGATT_S14_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-apodemoides/seq-run-2/52931_AH7T7NBCX2_GACGATT_S14_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	4287230 reads          	432381033 bases
+Output:                 	4287230 reads (100.00%) 	432381033 bases (100.00%)
+
+Time:                         	28.411 seconds.
+Reads Processed:       4287k 	150.90k reads/sec
+Bases Processed:        432m 	15.22m bases/sec

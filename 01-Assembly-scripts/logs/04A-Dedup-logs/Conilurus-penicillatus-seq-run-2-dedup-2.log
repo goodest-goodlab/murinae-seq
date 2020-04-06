@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 110582 duplicates.
+Finished exact matches.    Time: 43.673 seconds.
+Memory: max=30870m, total=30870m, free=25716m, used=5154m
+
+Input:                  	3873672 reads 		390183169 bases.
+Duplicates:             	110582 reads (2.85%) 	11146601 bases (2.86%)     	84615 collisions.
+Result:                 	3763090 reads (97.15%) 	379036568 bases (97.14%)
+
+Sorted output.             Time: 2.014 seconds.
+Memory: max=30870m, total=30870m, free=25716m, used=5154m
+
+Printed output.            Time: 44.940 seconds.
+Memory: max=30870m, total=30870m, free=24427m, used=6443m
+
+Time:                         	90.651 seconds.
+Reads Processed:       3873k 	42.73k reads/sec
+Bases Processed:        390m 	4.30m bases/sec

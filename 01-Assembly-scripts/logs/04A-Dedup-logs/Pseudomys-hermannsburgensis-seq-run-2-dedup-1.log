@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-hermannsburgensis/seq-run-2/52943_BH7T77BCX2_CAGCATC_S6_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-hermannsburgensis/seq-run-2/52943_BH7T77BCX2_CAGCATC_S6_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-hermannsburgensis/seq-run-2/52943_BH7T77BCX2_CAGCATC_S6_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-hermannsburgensis/seq-run-2/52943_BH7T77BCX2_CAGCATC_S6_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-hermannsburgensis/seq-run-2/52943_BH7T77BCX2_CAGCATC_S6_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-hermannsburgensis/seq-run-2/52943_BH7T77BCX2_CAGCATC_S6_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 186290 duplicates.
+Finished exact matches.    Time: 18.018 seconds.
+Memory: max=30870m, total=30870m, free=26199m, used=4671m
+
+Input:                  	3311842 reads 		333752712 bases.
+Duplicates:             	186290 reads (5.62%) 	18770290 bases (5.62%)     	75184 collisions.
+Result:                 	3125552 reads (94.38%) 	314982422 bases (94.38%)
+
+Sorted output.             Time: 0.946 seconds.
+Memory: max=30870m, total=30870m, free=26199m, used=4671m
+
+Printed output.            Time: 21.967 seconds.
+Memory: max=30870m, total=30870m, free=25071m, used=5799m
+
+Time:                         	40.951 seconds.
+Reads Processed:       3311k 	80.87k reads/sec
+Bases Processed:        333m 	8.15m bases/sec

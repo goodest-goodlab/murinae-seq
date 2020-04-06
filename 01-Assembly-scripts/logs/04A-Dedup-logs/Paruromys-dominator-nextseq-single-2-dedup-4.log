@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Paruromys-dominator/nextseq-single-2/JAE4870_S66_L002_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Paruromys-dominator/nextseq-single-2/JAE4870_S66_L002_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Paruromys-dominator/nextseq-single-2/JAE4870_S66_L002_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Paruromys-dominator/nextseq-single-2/JAE4870_S66_L002_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 6718 duplicates.
+Finished exact matches.    Time: 1.358 seconds.
+Memory: max=30870m, total=30870m, free=23894m, used=6976m
+
+Found 1209 contained sequences.
+Finished containment.      Time: 1.306 seconds.
+Memory: max=30870m, total=30870m, free=23474m, used=7396m
+
+Removed 1209 invalid entries.
+Finished invalid removal.  Time: 0.091 seconds.
+Memory: max=30870m, total=30870m, free=23474m, used=7396m
+
+Input:                  	275329 reads 		20795586 bases.
+Duplicates:             	6718 reads (2.44%) 	507706 bases (2.44%)     	0 collisions.
+Containments:           	1209 reads (0.44%) 	89684 bases (0.43%)    	272467 collisions.
+Result:                 	267402 reads (97.12%) 	20198196 bases (97.13%)
+
+Sorted output.             Time: 0.161 seconds.
+Memory: max=30870m, total=30870m, free=23474m, used=7396m
+
+Printed output.            Time: 1.171 seconds.
+Memory: max=30870m, total=30870m, free=23420m, used=7450m
+
+Time:                         	4.104 seconds.
+Reads Processed:        275k 	67.09k reads/sec
+Bases Processed:      20795k 	5.07m bases/sec

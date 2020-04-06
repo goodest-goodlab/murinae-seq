@@ -1,0 +1,104 @@
+Command line: /home/gregg_thomas/bin/spades/bin/spades.py	-o	/scratch/gregg_thomas/Murinae-seq/05A-Spades/Mus-pos_ctrl_A	-k	21,33,55,77,99,127	--careful	--pe1-m	/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_.fastp.decon.merged.dedup.fastq.gz	--pe1-1	/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz	--pe1-2	/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz	
+
+System information:
+  SPAdes version: 3.13.0
+  Python version: 2.7.12
+  OS: Linux-4.4.0-104-generic-x86_64-with-Ubuntu-16.04-xenial
+
+Output dir: /scratch/gregg_thomas/Murinae-seq/05A-Spades/Mus-pos_ctrl_A
+Mode: read error correction and assembling
+Debug mode is turned OFF
+
+Dataset parameters:
+  Multi-cell mode (you should set '--sc' flag if input data was obtained with MDA (single-cell) technology or --meta flag if processing metagenomic dataset)
+  Reads:
+    Library number: 1, library type: paired-end
+      orientation: fr
+      left reads: ['/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz']
+      right reads: ['/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz']
+      interlaced reads: not specified
+      single reads: not specified
+      merged reads: ['/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_.fastp.decon.merged.dedup.fastq.gz']
+Read error correction parameters:
+  Iterations: 1
+  PHRED offset will be auto-detected
+  Corrected reads will be compressed
+Assembly parameters:
+  k: [21, 33, 55, 77, 99, 127]
+  Repeat resolution is enabled
+  Mismatch careful mode is turned ON
+  MismatchCorrector will be used
+  Coverage cutoff is turned OFF
+Other parameters:
+  Dir for temp files: /scratch/gregg_thomas/Murinae-seq/05A-Spades/Mus-pos_ctrl_A/tmp
+  Threads: 16
+  Memory limit (in Gb): 250
+
+
+======= SPAdes pipeline started. Log can be found here: /scratch/gregg_thomas/Murinae-seq/05A-Spades/Mus-pos_ctrl_A/spades.log
+
+
+===== Read error correction started. 
+
+
+== Running read error correction tool: /home/gregg_thomas/bin/spades/bin/spades-hammer /scratch/gregg_thomas/Murinae-seq/05A-Spades/Mus-pos_ctrl_A/corrected/configs/config.info
+
+  0:00:00.000     4M / 4M    INFO    General                 (main.cpp                  :  75)   Starting BayesHammer, built from refs/heads/spades_3.13.0, git revision 8ea46659e9b2aca35444a808db550ac333006f8b
+  0:00:00.000     4M / 4M    INFO    General                 (main.cpp                  :  76)   Loading config from /scratch/gregg_thomas/Murinae-seq/05A-Spades/Mus-pos_ctrl_A/corrected/configs/config.info
+  0:00:00.001     4M / 4M    INFO    General                 (main.cpp                  :  78)   Maximum # of threads to use (adjusted due to OMP capabilities): 16
+  0:00:00.001     4M / 4M    INFO    General                 (memory_limit.cpp          :  49)   Memory limit set to 250 Gb
+  0:00:00.001     4M / 4M    INFO    General                 (main.cpp                  :  86)   Trying to determine PHRED offset
+  0:00:00.165     4M / 4M    INFO    General                 (main.cpp                  :  92)   Determined value is 33
+  0:00:00.165     4M / 4M    INFO    General                 (hammer_tools.cpp          :  36)   Hamming graph threshold tau=1, k=21, subkmer positions = [ 0 10 ]
+  0:00:00.165     4M / 4M    INFO    General                 (main.cpp                  : 113)   Size of aux. kmer data 24 bytes
+     === ITERATION 0 begins ===
+  0:00:00.165     4M / 4M    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:00.165     4M / 4M    INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 256 files using 16 threads. This might take a while.
+  0:00:00.166     4M / 4M    INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 1024
+  0:00:00.166     4M / 4M    INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 5.20825 Gb
+  0:00:00.166     4M / 4M    INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 262144
+  0:00:05.211     8G / 8G    INFO   K-mer Splitting          (kmer_data.cpp             :  97)   Processing /scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz
+  0:03:58.754     8G / 8G    INFO   K-mer Splitting          (kmer_data.cpp             : 107)   Processed 273141 reads
+  0:03:58.754     8G / 8G    INFO   K-mer Splitting          (kmer_data.cpp             :  97)   Processing /scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz
+  0:08:16.586     8G / 8G    INFO   K-mer Splitting          (kmer_data.cpp             : 107)   Processed 546282 reads
+  0:08:16.586     8G / 8G    INFO   K-mer Splitting          (kmer_data.cpp             :  97)   Processing /scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_.fastp.decon.merged.dedup.fastq.gz
+  0:10:43.374     8G / 8G    INFO   K-mer Splitting          (kmer_data.cpp             : 107)   Processed 632173 reads
+  0:10:43.374     8G / 8G    INFO   K-mer Splitting          (kmer_data.cpp             : 112)   Total 632173 reads processed
+  0:10:43.961    64M / 8G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:11:29.632    64M / 8G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 103919668 kmers in total.
+  0:11:29.632    64M / 8G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:20:45.603    64M / 8G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:20:47.773    64M / 8G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:28:45.461    64M / 8G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 48195952 bytes occupied (3.71025 bits per kmer).
+  0:28:45.462    64M / 8G    INFO   K-mer Counting           (kmer_data.cpp             : 356)   Arranging kmers in hash map order
+  0:28:50.123     1G / 8G    INFO    General                 (main.cpp                  : 148)   Clustering Hamming graph.
+  0:30:19.656     1G / 8G    INFO    General                 (main.cpp                  : 155)   Extracting clusters
+  0:39:31.256     1G / 8G    INFO    General                 (main.cpp                  : 167)   Clustering done. Total clusters: 90354981
+  0:39:31.259   860M / 8G    INFO   K-mer Counting           (kmer_data.cpp             : 376)   Collecting K-mer information, this takes a while.
+  0:39:32.150     3G / 8G    INFO   K-mer Counting           (kmer_data.cpp             : 382)   Processing /scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz
+  0:39:35.351     3G / 8G    INFO   K-mer Counting           (kmer_data.cpp             : 382)   Processing /scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz
+  0:39:38.423     3G / 8G    INFO   K-mer Counting           (kmer_data.cpp             : 382)   Processing /scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_.fastp.decon.merged.dedup.fastq.gz
+  0:39:40.083     3G / 8G    INFO   K-mer Counting           (kmer_data.cpp             : 389)   Collection done, postprocessing.
+  0:39:40.496     3G / 8G    INFO   K-mer Counting           (kmer_data.cpp             : 403)   There are 103919668 kmers in total. Among them 68425652 (65.8448%) are singletons.
+  0:39:40.496     3G / 8G    INFO    General                 (main.cpp                  : 173)   Subclustering Hamming graph
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 649)   Subclustering done. Total 829 non-read kmers were generated.
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 650)   Subclustering statistics:
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 651)     Total singleton hamming clusters: 82398372. Among them 70114740 (85.0924%) are good
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 652)     Total singleton subclusters: 74370. Among them 73950 (99.4353%) are good
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 653)     Total non-singleton subcluster centers: 8122817. Among them 4921419 (60.5876%) are good
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 654)     Average size of non-trivial subcluster: 2.64987 kmers
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 655)     Average number of sub-clusters per non-singleton cluster: 1.03024
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 656)     Total solid k-mers: 75110109
+  0:39:55.343     3G / 8G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 657)     Substitution probabilities: [4,4]((0.927927,0.0246284,0.0299136,0.0175305),(0.0167034,0.927687,0.0180848,0.0375247),(0.0272363,0.0121711,0.934406,0.0261869),(0.0132275,0.0218673,0.0170869,0.947818))
+  0:39:55.552     3G / 8G    INFO    General                 (main.cpp                  : 178)   Finished clustering.
+  0:39:55.552     3G / 8G    INFO    General                 (main.cpp                  : 197)   Starting solid k-mers expansion in 16 threads.
+  0:39:58.687     3G / 8G    INFO    General                 (main.cpp                  : 218)   Solid k-mers iteration 0 produced 1451135 new k-mers.
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  basic_string::erase: __pos (which is 580) > this->size() (which is 125)
+
+
+== Error ==  system call for: "['/home/gregg_thomas/bin/spades/bin/spades-hammer', '/scratch/gregg_thomas/Murinae-seq/05A-Spades/Mus-pos_ctrl_A/corrected/configs/config.info']" finished abnormally, err code: -6
+
+In case you have troubles running SPAdes, you can write to spades.support@cab.spbu.ru
+or report an issue on our GitHub repository github.com/ablab/spades
+Please provide us with params.txt and spades.log files from the output directory.

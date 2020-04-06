@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 3387349
+total bases: 338734900
+Q20 bases: 333617151(98.4892%)
+Q30 bases: 326193859(96.2977%)
+
+Read2 before filtering:
+total reads: 3387349
+total bases: 338734900
+Q20 bases: 325779132(96.1752%)
+Q30 bases: 316376919(93.3996%)
+
+Read1 after filtering:
+total reads: 3234777
+total bases: 320567871
+Q20 bases: 317774327(99.1286%)
+Q30 bases: 311330210(97.1183%)
+
+Read2 aftering filtering:
+total reads: 3234777
+total bases: 320570769
+Q20 bases: 315800948(98.5121%)
+Q30 bases: 307343698(95.8739%)
+
+Filtering result:
+reads passed filter: 6469554
+reads failed due to low quality: 268412
+reads failed due to too many N: 32790
+reads failed due to too short: 2438
+reads failed due to low complexity: 1504
+reads with adapter trimmed: 338921
+bases trimmed due to adapters: 6147170
+
+Duplication rate: 13.2961%
+
+Insert size peak (evaluated by paired-end reads): 165
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-lutreolus/hiseq-paired/lutreolus-WGA_CAATAT_L007_R.fastp.json 
+fastp v0.20.0, time used: 44 seconds

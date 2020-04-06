@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Leggadina-lakedownensis/seq-run-2/52919_AH7T7NBCX2_ACGTATG_S2_L001_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Leggadina-lakedownensis/seq-run-2/52919_AH7T7NBCX2_ACGTATG_S2_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Leggadina-lakedownensis/seq-run-2/52919_AH7T7NBCX2_ACGTATG_S2_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Leggadina-lakedownensis/seq-run-2/52919_AH7T7NBCX2_ACGTATG_S2_L001_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Leggadina-lakedownensis/seq-run-2/52919_AH7T7NBCX2_ACGTATG_S2_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Leggadina-lakedownensis/seq-run-2/52919_AH7T7NBCX2_ACGTATG_S2_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	5526404 reads          	557095671 bases
+Output:                 	5526404 reads (100.00%) 	557095671 bases (100.00%)
+
+Time:                         	39.232 seconds.
+Reads Processed:       5526k 	140.86k reads/sec
+Bases Processed:        557m 	14.20m bases/sec

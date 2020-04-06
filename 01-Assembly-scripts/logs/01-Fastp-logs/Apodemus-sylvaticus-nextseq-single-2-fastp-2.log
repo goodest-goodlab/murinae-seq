@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 388008
+total bases: 29309076
+Q20 bases: 28124164(95.9572%)
+Q30 bases: 27586204(94.1217%)
+
+Read1 after filtering:
+total reads: 385681
+total bases: 29129520
+Q20 bases: 28027528(96.2169%)
+Q30 bases: 27500763(94.4086%)
+
+Filtering result:
+reads passed filter: 385681
+reads failed due to low quality: 2251
+reads failed due to too many N: 0
+reads failed due to too short: 52
+reads failed due to low complexity: 24
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.1895%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apodemus-sylvaticus/nextseq-single-2/SMG3823_S60_L002_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apodemus-sylvaticus/nextseq-single-2/SMG3823_S60_L002_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Apodemus-sylvaticus/nextseq-single-2/SMG3823_S60_L002_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apodemus-sylvaticus/nextseq-single-2/SMG3823_S60_L002_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apodemus-sylvaticus/nextseq-single-2/SMG3823_S60_L002_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apodemus-sylvaticus/nextseq-single-2/SMG3823_S60_L002_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 14 seconds

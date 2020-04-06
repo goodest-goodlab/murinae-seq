@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 5053515
+total bases: 381732363
+Q20 bases: 367911292(96.3794%)
+Q30 bases: 361934099(94.8136%)
+
+Read2 before filtering:
+total reads: 5053515
+total bases: 381735339
+Q20 bases: 356722278(93.4475%)
+Q30 bases: 347083769(90.9226%)
+
+Read1 after filtering:
+total reads: 4881103
+total bases: 368089945
+Q20 bases: 356961434(96.9767%)
+Q30 bases: 351630843(95.5285%)
+
+Read2 aftering filtering:
+total reads: 4881103
+total bases: 368117941
+Q20 bases: 349774108(95.0169%)
+Q30 bases: 341198448(92.6873%)
+
+Filtering result:
+reads passed filter: 9762206
+reads failed due to low quality: 321104
+reads failed due to too many N: 2822
+reads failed due to too short: 18572
+reads failed due to low complexity: 2326
+reads with adapter trimmed: 77295
+bases trimmed due to adapters: 1337331
+
+Duplication rate: 13.8838%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Berylymys-bowersi/nextseq-paired-2/ABTC116431_S9_L004_R.fastp.json 
+fastp v0.20.0, time used: 62 seconds

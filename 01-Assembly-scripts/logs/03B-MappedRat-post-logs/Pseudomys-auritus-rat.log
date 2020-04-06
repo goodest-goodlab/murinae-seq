@@ -1,0 +1,56 @@
+INFO	2020-01-27 17:22:28	MarkDuplicates	
+
+********** NOTE: Picard's command line syntax is changing.
+**********
+********** For more information, please see:
+********** https://github.com/broadinstitute/picard/wiki/Command-Line-Syntax-Transition-For-Users-(Pre-Transition)
+**********
+********** The command line looks like this in the new syntax:
+**********
+**********    MarkDuplicates -I /scratch/gregg_thomas/Murinae-seq/03B-MappedRat/Pseudomys-auritus/Pseudomys-auritus.sorted.bam -O /scratch/gregg_thomas/Murinae-seq/03B-MappedRat/Pseudomys-auritus/Pseudomys-auritus.sorted.mkdup.bam -M /scratch/gregg_thomas/Murinae-seq/03B-MappedRat/Pseudomys-auritus/Pseudomys-auritus-mkdup-metrics.txt
+**********
+
+
+17:22:29.525 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/home/gregg_thomas/bin/picard.jar!/com/intel/gkl/native/libgkl_compression.so
+[Mon Jan 27 17:22:29 UTC 2020] MarkDuplicates INPUT=[/scratch/gregg_thomas/Murinae-seq/03B-MappedRat/Pseudomys-auritus/Pseudomys-auritus.sorted.bam] OUTPUT=/scratch/gregg_thomas/Murinae-seq/03B-MappedRat/Pseudomys-auritus/Pseudomys-auritus.sorted.mkdup.bam METRICS_FILE=/scratch/gregg_thomas/Murinae-seq/03B-MappedRat/Pseudomys-auritus/Pseudomys-auritus-mkdup-metrics.txt    MAX_SEQUENCES_FOR_DISK_READ_ENDS_MAP=50000 MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=8000 SORTING_COLLECTION_SIZE_RATIO=0.25 TAG_DUPLICATE_SET_MEMBERS=false REMOVE_SEQUENCING_DUPLICATES=false TAGGING_POLICY=DontTag CLEAR_DT=true DUPLEX_UMI=false ADD_PG_TAG_TO_READS=true REMOVE_DUPLICATES=false ASSUME_SORTED=false DUPLICATE_SCORING_STRATEGY=SUM_OF_BASE_QUALITIES PROGRAM_RECORD_ID=MarkDuplicates PROGRAM_GROUP_NAME=MarkDuplicates READ_NAME_REGEX=<optimized capture of last three ':' separated fields as numeric values> OPTICAL_DUPLICATE_PIXEL_DISTANCE=100 MAX_OPTICAL_DUPLICATE_SET_SIZE=300000 VERBOSITY=INFO QUIET=false VALIDATION_STRINGENCY=STRICT COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false CREATE_MD5_FILE=false GA4GH_CLIENT_SECRETS=client_secrets.json USE_JDK_DEFLATER=false USE_JDK_INFLATER=false
+[Mon Jan 27 17:22:29 UTC 2020] Executing as gregg_thomas@ecae4883a231 on Linux 4.4.0-104-generic amd64; Java HotSpot(TM) 64-Bit Server VM 1.8.0_221-b11; Deflater: Intel; Inflater: Intel; Provider GCS is not available; Picard version: 2.20.6-SNAPSHOT
+INFO	2020-01-27 17:22:30	MarkDuplicates	Start of doWork freeMemory: 2037676464; totalMemory: 2058354688; maxMemory: 28631367680
+INFO	2020-01-27 17:22:30	MarkDuplicates	Reading input file and constructing read end information.
+INFO	2020-01-27 17:22:30	MarkDuplicates	Will retain up to 103736839 data points before spilling to disk.
+INFO	2020-01-27 17:22:45	MarkDuplicates	Read     1,000,000 records.  Elapsed time: 00:00:14s.  Time for last 1,000,000:   14s.  Last read position: 12:19,439,389
+INFO	2020-01-27 17:22:45	MarkDuplicates	Tracking 48471 as yet unmatched pairs. 1458 records in RAM.
+INFO	2020-01-27 17:22:56	MarkDuplicates	Read     2,000,000 records.  Elapsed time: 00:00:25s.  Time for last 1,000,000:   10s.  Last read position: 15:33,608,892
+INFO	2020-01-27 17:22:56	MarkDuplicates	Tracking 84651 as yet unmatched pairs. 2053 records in RAM.
+INFO	2020-01-27 17:23:18	MarkDuplicates	Read     3,000,000 records.  Elapsed time: 00:00:47s.  Time for last 1,000,000:   22s.  Last read position: 18:83,888,769
+INFO	2020-01-27 17:23:18	MarkDuplicates	Tracking 108956 as yet unmatched pairs. 149 records in RAM.
+INFO	2020-01-27 17:23:58	MarkDuplicates	Read     4,000,000 records.  Elapsed time: 00:01:27s.  Time for last 1,000,000:   39s.  Last read position: 1:219,459,267
+INFO	2020-01-27 17:23:58	MarkDuplicates	Tracking 120897 as yet unmatched pairs. 5284 records in RAM.
+INFO	2020-01-27 17:24:04	MarkDuplicates	Read     5,000,000 records.  Elapsed time: 00:01:33s.  Time for last 1,000,000:    6s.  Last read position: 2:210,912,326
+INFO	2020-01-27 17:24:04	MarkDuplicates	Tracking 121817 as yet unmatched pairs. 4077 records in RAM.
+INFO	2020-01-27 17:24:22	MarkDuplicates	Read     6,000,000 records.  Elapsed time: 00:01:51s.  Time for last 1,000,000:   17s.  Last read position: 4:27,754,919
+INFO	2020-01-27 17:24:22	MarkDuplicates	Tracking 113520 as yet unmatched pairs. 16903 records in RAM.
+INFO	2020-01-27 17:24:43	MarkDuplicates	Read     7,000,000 records.  Elapsed time: 00:02:13s.  Time for last 1,000,000:   21s.  Last read position: 5:155,264,808
+INFO	2020-01-27 17:24:43	MarkDuplicates	Tracking 92804 as yet unmatched pairs. 3803 records in RAM.
+INFO	2020-01-27 17:25:34	MarkDuplicates	Read     8,000,000 records.  Elapsed time: 00:03:03s.  Time for last 1,000,000:   50s.  Last read position: 8:9,709,454
+INFO	2020-01-27 17:25:34	MarkDuplicates	Tracking 57198 as yet unmatched pairs. 20788 records in RAM.
+INFO	2020-01-27 17:25:44	MarkDuplicates	Read     9,000,000 records.  Elapsed time: 00:03:14s.  Time for last 1,000,000:   10s.  Last read position: X:72,533,930
+INFO	2020-01-27 17:25:44	MarkDuplicates	Tracking 11882 as yet unmatched pairs. 11669 records in RAM.
+INFO	2020-01-27 17:25:47	MarkDuplicates	Read 9266349 records. 0 pairs never matched.
+INFO	2020-01-27 17:26:27	MarkDuplicates	After buildSortedReadEndLists freeMemory: 10726282152; totalMemory: 12698779648; maxMemory: 28631367680
+INFO	2020-01-27 17:26:27	MarkDuplicates	Will retain up to 894730240 duplicate indices before spilling to disk.
+INFO	2020-01-27 17:26:41	MarkDuplicates	Traversing read pair information and detecting duplicates.
+INFO	2020-01-27 17:28:22	MarkDuplicates	Traversing fragment information and detecting duplicates.
+INFO	2020-01-27 17:28:25	MarkDuplicates	Sorting list of duplicate records.
+INFO	2020-01-27 17:28:27	MarkDuplicates	After generateDuplicateIndexes freeMemory: 15992796720; totalMemory: 23276290048; maxMemory: 28631367680
+INFO	2020-01-27 17:28:27	MarkDuplicates	Marking 2734884 records as duplicates.
+INFO	2020-01-27 17:28:27	MarkDuplicates	Found 27 optical duplicate clusters.
+INFO	2020-01-27 17:28:27	MarkDuplicates	Reads are assumed to be ordered by: coordinate
+INFO	2020-01-27 17:30:59	MarkDuplicates	Writing complete. Closing input iterator.
+INFO	2020-01-27 17:30:59	MarkDuplicates	Duplicate Index cleanup.
+INFO	2020-01-27 17:30:59	MarkDuplicates	Getting Memory Stats.
+INFO	2020-01-27 17:30:59	MarkDuplicates	Before output close freeMemory: 22625996928; totalMemory: 22794469376; maxMemory: 28631367680
+INFO	2020-01-27 17:30:59	MarkDuplicates	Closed outputs. Getting more Memory Stats.
+INFO	2020-01-27 17:31:00	MarkDuplicates	After output close freeMemory: 23091564672; totalMemory: 23260037120; maxMemory: 28631367680
+[Mon Jan 27 17:31:00 UTC 2020] picard.sam.markduplicates.MarkDuplicates done. Elapsed time: 8.51 minutes.
+Runtime.totalMemory()=23260037120
+samtools depth: Could not read file "/scratch/gregg_thomas/Murinae-seq/Targets/tiles-rnor6-coords.bed": No such file or directory

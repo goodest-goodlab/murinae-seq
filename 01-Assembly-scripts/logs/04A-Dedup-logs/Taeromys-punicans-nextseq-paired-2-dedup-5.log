@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L004_R1_001.fastp.decon.unmerged.fastq.gz in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L004_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L004_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L004_R1_001.fastp.decon.unmerged.fastq.gz, in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L004_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L004_001.fastp.decon.unmerged.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 229774 duplicates.
+Finished exact matches.    Time: 31.162 seconds.
+Memory: max=30870m, total=30870m, free=25843m, used=5027m
+
+Input:                  	4319318 reads 		326015225 bases.
+Duplicates:             	229774 reads (5.32%) 	17351703 bases (5.32%)     	154729 collisions.
+Result:                 	4089544 reads (94.68%) 	308663522 bases (94.68%)
+
+Sorted output.             Time: 1.398 seconds.
+Memory: max=30870m, total=30870m, free=25843m, used=5027m
+
+Printed output.            Time: 35.056 seconds.
+Memory: max=30870m, total=30870m, free=24554m, used=6316m
+
+Time:                         	67.642 seconds.
+Reads Processed:       4319k 	63.86k reads/sec
+Bases Processed:        326m 	4.82m bases/sec

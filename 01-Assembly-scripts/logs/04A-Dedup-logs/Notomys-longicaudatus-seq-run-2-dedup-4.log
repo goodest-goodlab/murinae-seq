@@ -1,0 +1,35 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L001_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L001_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L001_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L001_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 3220775 duplicates.
+Finished exact matches.    Time: 107.017 seconds.
+Memory: max=28633m, total=26565m, free=18347m, used=8218m
+FFound 3429673 contained sequences.
+Finished containment.      Time: 232.353 seconds.
+Memory: max=28633m, total=27842m, free=21696m, used=6146m
+
+Removed 3429673 invalid entries.
+Finished invalid removal.  Time: 3.695 seconds.
+Memory: max=28633m, total=27842m, free=21640m, used=6202m
+
+Input:                  	10501233 reads 		1033376302 bases.
+Duplicates:             	3220775 reads (30.67%) 	308701382 bases (29.87%)     	0 collisions.
+Containments:           	3429673 reads (32.66%) 	317362133 bases (30.71%)    	1038148525 collisions.
+Result:                 	3850785 reads (36.67%) 	407312787 bases (39.42%)
+
+Sorted output.             Time: 3.399 seconds.
+Memory: max=28633m, total=27842m, free=21484m, used=6358m
+
+Printed output.            Time: 29.702 seconds.
+Memory: max=28633m, total=27842m, free=20060m, used=7782m
+
+Time:                         	376.199 seconds.
+Reads Processed:      10501k 	27.91k reads/sec
+Bases Processed:       1033m 	2.75m bases/sec
+
+ec

@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_R1_001.fastp.decon.unmerged.fastq.gz in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_R1_001.fastp.decon.unmerged.fastq.gz, in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_001.fastp.decon.unmerged.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 104030 duplicates.
+Finished exact matches.    Time: 15.441 seconds.
+Memory: max=30870m, total=30870m, free=27809m, used=3061m
+
+Input:                  	2073774 reads 		206463365 bases.
+Duplicates:             	104030 reads (5.02%) 	10331206 bases (5.00%)     	56851 collisions.
+Result:                 	1969744 reads (94.98%) 	196132159 bases (95.00%)
+
+Sorted output.             Time: 0.668 seconds.
+Memory: max=30870m, total=30870m, free=27809m, used=3061m
+
+Printed output.            Time: 25.422 seconds.
+Memory: max=30870m, total=30870m, free=27004m, used=3866m
+
+Time:                         	41.578 seconds.
+Reads Processed:       2073k 	49.88k reads/sec
+Bases Processed:        206m 	4.97m bases/sec

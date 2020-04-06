@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Archboldomys-luzonensis/nextseq-single-2/EAR1826_S61_L002_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Archboldomys-luzonensis/nextseq-single-2/EAR1826_S61_L002_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Archboldomys-luzonensis/nextseq-single-2/EAR1826_S61_L002_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Archboldomys-luzonensis/nextseq-single-2/EAR1826_S61_L002_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 11702 duplicates.
+Finished exact matches.    Time: 2.801 seconds.
+Memory: max=30870m, total=30870m, free=24021m, used=6849m
+
+Found 2142 contained sequences.
+Finished containment.      Time: 2.097 seconds.
+Memory: max=30870m, total=30870m, free=23575m, used=7295m
+
+Removed 2142 invalid entries.
+Finished invalid removal.  Time: 0.096 seconds.
+Memory: max=30870m, total=30870m, free=23575m, used=7295m
+
+Input:                  	394365 reads 		29788491 bases.
+Duplicates:             	11702 reads (2.97%) 	884778 bases (2.97%)     	0 collisions.
+Containments:           	2142 reads (0.54%) 	158920 bases (0.53%)    	375361 collisions.
+Result:                 	380521 reads (96.49%) 	28744793 bases (96.50%)
+
+Sorted output.             Time: 0.118 seconds.
+Memory: max=30870m, total=30870m, free=23575m, used=7295m
+
+Printed output.            Time: 2.075 seconds.
+Memory: max=30870m, total=30870m, free=23416m, used=7454m
+
+Time:                         	7.206 seconds.
+Reads Processed:        394k 	54.72k reads/sec
+Bases Processed:      29788k 	4.13m bases/sec

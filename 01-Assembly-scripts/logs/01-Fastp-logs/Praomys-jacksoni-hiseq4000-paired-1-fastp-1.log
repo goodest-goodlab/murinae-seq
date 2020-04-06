@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 19274797
+total bases: 2891219550
+Q20 bases: 2840093646(98.2317%)
+Q30 bases: 2765977665(95.6682%)
+
+Read2 before filtering:
+total reads: 19274797
+total bases: 2891219550
+Q20 bases: 2812833952(97.2888%)
+Q30 bases: 2720791051(94.1053%)
+
+Read1 after filtering:
+total reads: 19009258
+total bases: 2775786018
+Q20 bases: 2735056962(98.5327%)
+Q30 bases: 2669199067(96.1601%)
+
+Read2 aftering filtering:
+total reads: 19009258
+total bases: 2775901772
+Q20 bases: 2717890669(97.9102%)
+Q30 bases: 2636283677(94.9704%)
+
+Filtering result:
+reads passed filter: 38018516
+reads failed due to low quality: 487072
+reads failed due to too many N: 1128
+reads failed due to too short: 6198
+reads failed due to low complexity: 36680
+reads with adapter trimmed: 4508471
+bases trimmed due to adapters: 152138218
+
+Duplication rate: 39.6329%
+
+Insert size peak (evaluated by paired-end reads): 259
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-jacksoni/hiseq4000-paired-1/REC31_CKDL190143344-1a-D710-AK1546_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 365 seconds

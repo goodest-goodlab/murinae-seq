@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 353260
+total bases: 27554280
+Q20 bases: 27373308(99.3432%)
+Q30 bases: 26880422(97.5544%)
+
+Read2 before filtering:
+total reads: 353260
+total bases: 27554280
+Q20 bases: 27184575(98.6583%)
+Q30 bases: 26508744(96.2055%)
+
+Read1 after filtering:
+total reads: 350744
+total bases: 27343167
+Q20 bases: 27173926(99.381%)
+Q30 bases: 26695797(97.6324%)
+
+Read2 aftering filtering:
+total reads: 350744
+total bases: 27343296
+Q20 bases: 27039223(98.8879%)
+Q30 bases: 26399997(96.5502%)
+
+Filtering result:
+reads passed filter: 701488
+reads failed due to low quality: 2904
+reads failed due to too many N: 0
+reads failed due to too short: 1904
+reads failed due to low complexity: 224
+reads with adapter trimmed: 3854
+bases trimmed due to adapters: 160078
+
+Duplication rate: 2.9261%
+
+Insert size peak (evaluated by paired-end reads): 120
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R.fastp.json 
+fastp v0.20.0, time used: 11 seconds

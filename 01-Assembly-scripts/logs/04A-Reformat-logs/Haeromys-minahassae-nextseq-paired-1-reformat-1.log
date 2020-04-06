@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Haeromys-minahassae/nextseq-paired-1/JAE4996_S37_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Haeromys-minahassae/nextseq-paired-1/JAE4996_S37_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Haeromys-minahassae/nextseq-paired-1/JAE4996_S37_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Haeromys-minahassae/nextseq-paired-1/JAE4996_S37_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Haeromys-minahassae/nextseq-paired-1/JAE4996_S37_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Haeromys-minahassae/nextseq-paired-1/JAE4996_S37_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	7567784 reads          	567113487 bases
+Output:                 	7567784 reads (100.00%) 	567113487 bases (100.00%)
+
+Time:                         	58.892 seconds.
+Reads Processed:       7567k 	128.50k reads/sec
+Bases Processed:        567m 	9.63m bases/sec

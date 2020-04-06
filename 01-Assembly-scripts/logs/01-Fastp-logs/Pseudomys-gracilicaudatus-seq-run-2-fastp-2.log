@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 5444760
+total bases: 549920760
+Q20 bases: 538211683(97.8708%)
+Q30 bases: 528826071(96.164%)
+
+Read2 before filtering:
+total reads: 5444760
+total bases: 549920760
+Q20 bases: 529792987(96.3399%)
+Q30 bases: 516558602(93.9333%)
+
+Read1 after filtering:
+total reads: 5440920
+total bases: 548853453
+Q20 bases: 537283662(97.892%)
+Q30 bases: 527974121(96.1958%)
+
+Read2 aftering filtering:
+total reads: 5440920
+total bases: 548853453
+Q20 bases: 528950446(96.3737%)
+Q30 bases: 515821856(93.9817%)
+
+Filtering result:
+reads passed filter: 10881840
+reads failed due to low quality: 1414
+reads failed due to too many N: 2394
+reads failed due to too short: 0
+reads failed due to low complexity: 3872
+reads with adapter trimmed: 71612
+bases trimmed due to adapters: 1360032
+
+Duplication rate: 12.8997%
+
+Insert size peak (evaluated by paired-end reads): 169
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-gracilicaudatus/seq-run-2/52934_AH7T7NBCX2_TTCAACC_S17_L002_R.fastp.json 
+fastp v0.20.0, time used: 94 seconds

@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hylomyscus-vulcanorum/nextseq-single-1/TCD4382_S37_L002_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Hylomyscus-vulcanorum/nextseq-single-1/TCD4382_S37_L002_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hylomyscus-vulcanorum/nextseq-single-1/TCD4382_S37_L002_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Hylomyscus-vulcanorum/nextseq-single-1/TCD4382_S37_L002_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 17868 duplicates.
+Finished exact matches.    Time: 19.556 seconds.
+Memory: max=30870m, total=30870m, free=24936m, used=5934m
+
+Found 2963 contained sequences.
+Finished containment.      Time: 2.726 seconds.
+Memory: max=30870m, total=30870m, free=24618m, used=6252m
+
+Removed 2963 invalid entries.
+Finished invalid removal.  Time: 0.121 seconds.
+Memory: max=30870m, total=30870m, free=24618m, used=6252m
+
+Input:                  	631293 reads 		47685759 bases.
+Duplicates:             	17868 reads (2.83%) 	1350382 bases (2.83%)     	0 collisions.
+Containments:           	2963 reads (0.47%) 	219495 bases (0.46%)    	702246 collisions.
+Result:                 	610462 reads (96.70%) 	46115882 bases (96.71%)
+
+Sorted output.             Time: 0.308 seconds.
+Memory: max=30870m, total=30870m, free=24618m, used=6252m
+
+Printed output.            Time: 4.207 seconds.
+Memory: max=30870m, total=30870m, free=24192m, used=6678m
+
+Time:                         	26.934 seconds.
+Reads Processed:        631k 	23.44k reads/sec
+Bases Processed:      47685k 	1.77m bases/sec

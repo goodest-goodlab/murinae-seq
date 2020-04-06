@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	4457688 reads          	449576199 bases
+Output:                 	4457688 reads (100.00%) 	449576199 bases (100.00%)
+
+Time:                         	62.197 seconds.
+Reads Processed:       4457k 	71.67k reads/sec
+Bases Processed:        449m 	7.23m bases/sec

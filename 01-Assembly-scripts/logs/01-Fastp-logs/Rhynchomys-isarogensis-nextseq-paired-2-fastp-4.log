@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2905592
+total bases: 219446936
+Q20 bases: 211326141(96.2994%)
+Q30 bases: 207946732(94.7595%)
+
+Read2 before filtering:
+total reads: 2905592
+total bases: 219379370
+Q20 bases: 204483875(93.2102%)
+Q30 bases: 199030223(90.7242%)
+
+Read1 after filtering:
+total reads: 2797301
+total bases: 211068081
+Q20 bases: 204687856(96.9772%)
+Q30 bases: 201701639(95.5624%)
+
+Read2 aftering filtering:
+total reads: 2797301
+total bases: 211093167
+Q20 bases: 200462625(94.9641%)
+Q30 bases: 195646084(92.6823%)
+
+Filtering result:
+reads passed filter: 5594602
+reads failed due to low quality: 204058
+reads failed due to too many N: 2506
+reads failed due to too short: 9578
+reads failed due to low complexity: 440
+reads with adapter trimmed: 14392
+bases trimmed due to adapters: 361658
+
+Duplication rate: 16.2426%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-paired-2/JAE2195_S37_L002_R.fastp.json 
+fastp v0.20.0, time used: 27 seconds

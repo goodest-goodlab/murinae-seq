@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 285990 duplicates.
+Finished exact matches.    Time: 33.199 seconds.
+Memory: max=30870m, total=30870m, free=24555m, used=6315m
+
+Input:                  	5350430 reads 		403825690 bases.
+Duplicates:             	285990 reads (5.35%) 	21594875 bases (5.35%)     	168952 collisions.
+Result:                 	5064440 reads (94.65%) 	382230815 bases (94.65%)
+
+Sorted output.             Time: 1.371 seconds.
+Memory: max=30870m, total=30870m, free=24394m, used=6476m
+
+Printed output.            Time: 22.636 seconds.
+Memory: max=30870m, total=30870m, free=22944m, used=7926m
+
+Time:                         	57.225 seconds.
+Reads Processed:       5350k 	93.50k reads/sec
+Bases Processed:        403m 	7.06m bases/sec

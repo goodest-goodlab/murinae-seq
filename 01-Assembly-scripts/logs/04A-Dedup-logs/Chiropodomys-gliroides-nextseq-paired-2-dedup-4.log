@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chiropodomys-gliroides/nextseq-paired-2/Z25153_S22_L003_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chiropodomys-gliroides/nextseq-paired-2/Z25153_S22_L003_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Chiropodomys-gliroides/nextseq-paired-2/Z25153_S22_L003_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chiropodomys-gliroides/nextseq-paired-2/Z25153_S22_L003_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chiropodomys-gliroides/nextseq-paired-2/Z25153_S22_L003_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Chiropodomys-gliroides/nextseq-paired-2/Z25153_S22_L003_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 159752 duplicates.
+Finished exact matches.    Time: 30.394 seconds.
+Memory: max=30870m, total=30870m, free=25843m, used=5027m
+
+Input:                  	3683722 reads 		277935399 bases.
+Duplicates:             	159752 reads (4.34%) 	12058463 bases (4.34%)     	81550 collisions.
+Result:                 	3523970 reads (95.66%) 	265876936 bases (95.66%)
+
+Sorted output.             Time: 0.814 seconds.
+Memory: max=30870m, total=30870m, free=25843m, used=5027m
+
+Printed output.            Time: 16.098 seconds.
+Memory: max=30870m, total=30870m, free=24682m, used=6188m
+
+Time:                         	47.326 seconds.
+Reads Processed:       3683k 	77.84k reads/sec
+Bases Processed:        277m 	5.87m bases/sec

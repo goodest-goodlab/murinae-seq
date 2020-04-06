@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.ReformatReads in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Reformat/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz overwrite=true out1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz out2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Reformat/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz, out2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq4000-paired-2/SM074_CKDL190143345-1a-D709-AK1682_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	8593420 reads          	1275108168 bases
+Output:                 	8593420 reads (100.00%) 	1275108168 bases (100.00%)
+
+Time:                         	49.585 seconds.
+Reads Processed:       8593k 	173.31k reads/sec
+Bases Processed:       1275m 	25.72m bases/sec

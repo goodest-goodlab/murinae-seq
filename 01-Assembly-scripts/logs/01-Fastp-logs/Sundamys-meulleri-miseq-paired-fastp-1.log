@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 294767
+total bases: 22991826
+Q20 bases: 22847097(99.3705%)
+Q30 bases: 22445432(97.6235%)
+
+Read2 before filtering:
+total reads: 294767
+total bases: 22991826
+Q20 bases: 22664626(98.5769%)
+Q30 bases: 22063020(95.9603%)
+
+Read1 after filtering:
+total reads: 293618
+total bases: 22894836
+Q20 bases: 22756510(99.3958%)
+Q30 bases: 22363458(97.679%)
+
+Read2 aftering filtering:
+total reads: 293618
+total bases: 22894836
+Q20 bases: 22613236(98.77%)
+Q30 bases: 22035047(96.2446%)
+
+Filtering result:
+reads passed filter: 587236
+reads failed due to low quality: 2160
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads failed due to low complexity: 138
+reads with adapter trimmed: 592
+bases trimmed due to adapters: 14736
+
+Duplication rate: 1.02265%
+
+Insert size peak (evaluated by paired-end reads): 125
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sundamys-meulleri/miseq-paired/JAE1283_S7_L001_R.fastp.json 
+fastp v0.20.0, time used: 21 seconds

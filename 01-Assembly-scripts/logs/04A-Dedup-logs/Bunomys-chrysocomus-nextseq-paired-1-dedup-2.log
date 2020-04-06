@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-chrysocomus/nextseq-paired-1/JAE4867_S36_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-chrysocomus/nextseq-paired-1/JAE4867_S36_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Bunomys-chrysocomus/nextseq-paired-1/JAE4867_S36_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-chrysocomus/nextseq-paired-1/JAE4867_S36_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-chrysocomus/nextseq-paired-1/JAE4867_S36_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Bunomys-chrysocomus/nextseq-paired-1/JAE4867_S36_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 626530 duplicates.
+Finished exact matches.    Time: 58.983 seconds.
+Memory: max=30870m, total=30870m, free=24455m, used=6415m
+
+Input:                  	8973598 reads 		672151073 bases.
+Duplicates:             	626530 reads (6.98%) 	46934896 bases (6.98%)     	591530 collisions.
+Result:                 	8347068 reads (93.02%) 	625216177 bases (93.02%)
+
+Sorted output.             Time: 5.652 seconds.
+Memory: max=30870m, total=30870m, free=24133m, used=6737m
+
+Printed output.            Time: 33.423 seconds.
+Memory: max=30870m, total=30870m, free=21626m, used=9244m
+
+Time:                         	98.076 seconds.
+Reads Processed:       8973k 	91.50k reads/sec
+Bases Processed:        672m 	6.85m bases/sec

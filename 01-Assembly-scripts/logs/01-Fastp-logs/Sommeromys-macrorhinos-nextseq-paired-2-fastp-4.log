@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2477787
+total bases: 187169960
+Q20 bases: 179832878(96.08%)
+Q30 bases: 176638641(94.3734%)
+
+Read2 before filtering:
+total reads: 2477787
+total bases: 187161879
+Q20 bases: 174715252(93.3498%)
+Q30 bases: 169965691(90.8121%)
+
+Read1 after filtering:
+total reads: 2398071
+total bases: 181017415
+Q20 bases: 175013778(96.6834%)
+Q30 bases: 172139148(95.0954%)
+
+Read2 aftering filtering:
+total reads: 2398071
+total bases: 181030374
+Q20 bases: 171587848(94.784%)
+Q30 bases: 167308223(92.42%)
+
+Filtering result:
+reads passed filter: 4796142
+reads failed due to low quality: 149750
+reads failed due to too many N: 864
+reads failed due to too short: 7756
+reads failed due to low complexity: 1062
+reads with adapter trimmed: 9614
+bases trimmed due to adapters: 268775
+
+Duplication rate: 6.9526%
+
+Insert size peak (evaluated by paired-end reads): 117
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L003_R.fastp.json 
+fastp v0.20.0, time used: 35 seconds

@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-colletti/seq-run-1/52951_BH7T33BCX2_GCTAATC_S14_L001_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-colletti/seq-run-1/52951_BH7T33BCX2_GCTAATC_S14_L001_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-colletti/seq-run-1/52951_BH7T33BCX2_GCTAATC_S14_L001_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-colletti/seq-run-1/52951_BH7T33BCX2_GCTAATC_S14_L001_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 1773777 duplicates.
+Finished exact matches.    Time: 95.047 seconds.
+Memory: max=28633m, total=26780m, free=19896m, used=6884m
+
+Found 2606416 contained sequences.
+Finished containment.      Time: 121.840 seconds.
+Memory: max=28633m, total=26780m, free=19399m, used=7381m
+
+Removed 2606416 invalid entries.
+Finished invalid removal.  Time: 3.593 seconds.
+Memory: max=28633m, total=26780m, free=19354m, used=7426m
+
+Input:                  	6814441 reads 		1220584877 bases.
+Duplicates:             	1773777 reads (26.03%) 	306384205 bases (25.10%)     	0 collisions.
+Containments:           	2606416 reads (38.25%) 	442662324 bases (36.27%)    	248036490 collisions.
+Result:                 	2434248 reads (35.72%) 	471538348 bases (38.63%)
+
+Sorted output.             Time: 1.874 seconds.
+Memory: max=28633m, total=26780m, free=19354m, used=7426m
+
+Printed output.            Time: 30.517 seconds.
+Memory: max=28633m, total=26780m, free=18019m, used=8761m
+
+Time:                         	252.897 seconds.
+Reads Processed:       6814k 	26.95k reads/sec
+Bases Processed:       1220m 	4.83m bases/sec

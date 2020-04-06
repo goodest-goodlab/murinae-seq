@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 602062
+total bases: 45481672
+Q20 bases: 43737131(96.1643%)
+Q30 bases: 42937382(94.4059%)
+
+Read1 after filtering:
+total reads: 598280
+total bases: 45191449
+Q20 bases: 43578713(96.4313%)
+Q30 bases: 42797640(94.703%)
+
+Filtering result:
+reads passed filter: 598280
+reads failed due to low quality: 3535
+reads failed due to too many N: 8
+reads failed due to too short: 182
+reads failed due to low complexity: 57
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.96385%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-single-2/TCD4382_S37_L003_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-single-2/TCD4382_S37_L003_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hylomyscus-vulcanorum/nextseq-single-2/TCD4382_S37_L003_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-single-2/TCD4382_S37_L003_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-single-2/TCD4382_S37_L003_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-single-2/TCD4382_S37_L003_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 15 seconds

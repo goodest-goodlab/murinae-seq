@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2964032
+total bases: 223884526
+Q20 bases: 215311720(96.1709%)
+Q30 bases: 211560176(94.4952%)
+
+Read2 before filtering:
+total reads: 2964032
+total bases: 223878831
+Q20 bases: 207810239(92.8226%)
+Q30 bases: 201781990(90.13%)
+
+Read1 after filtering:
+total reads: 2856576
+total bases: 215641853
+Q20 bases: 208628342(96.7476%)
+Q30 bases: 205270191(95.1903%)
+
+Read2 aftering filtering:
+total reads: 2856576
+total bases: 215653900
+Q20 bases: 203720857(94.4666%)
+Q30 bases: 198331239(91.9674%)
+
+Filtering result:
+reads passed filter: 5713152
+reads failed due to low quality: 203058
+reads failed due to too many N: 1610
+reads failed due to too short: 9348
+reads failed due to low complexity: 896
+reads with adapter trimmed: 10068
+bases trimmed due to adapters: 225072
+
+Duplication rate: 10.916%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-2/JAE3320_S12_L004_R.fastp.json 
+fastp v0.20.0, time used: 28 seconds

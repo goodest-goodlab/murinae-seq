@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 573953
+total bases: 44768334
+Q20 bases: 44484851(99.3668%)
+Q30 bases: 43702273(97.6187%)
+
+Read2 before filtering:
+total reads: 573953
+total bases: 44768334
+Q20 bases: 44190945(98.7103%)
+Q30 bases: 43110431(96.2967%)
+
+Read1 after filtering:
+total reads: 571695
+total bases: 44576574
+Q20 bases: 44305985(99.393%)
+Q30 bases: 43539124(97.6727%)
+
+Read2 aftering filtering:
+total reads: 571695
+total bases: 44576574
+Q20 bases: 44087065(98.9019%)
+Q30 bases: 43051539(96.5788%)
+
+Filtering result:
+reads passed filter: 1143390
+reads failed due to low quality: 4166
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads failed due to low complexity: 350
+reads with adapter trimmed: 1534
+bases trimmed due to adapters: 31272
+
+Duplication rate: 6.49577%
+
+Insert size peak (evaluated by paired-end reads): 124
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/miseq-paired/TCD4312_S14_L001_R.fastp.json 
+fastp v0.20.0, time used: 24 seconds

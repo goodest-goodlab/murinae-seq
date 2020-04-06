@@ -1,0 +1,12 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	1372356 reads          	136332012 bases
+Output:                 	1372356 reads (100.00%) 	136332012 bases (100.00%)
+
+Time:                         	20.950 seconds.
+Reads Processed:       1372k 	65.51k reads/sec
+Bases Processed:        136m 	6.51m bases/sec
+  195m 	7.22m bases/sec

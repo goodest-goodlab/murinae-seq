@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Praomys-degraaffi/nextseq-paired-2/TCD4312_S6_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 857730 duplicates.
+Finished exact matches.    Time: 56.429 seconds.
+Memory: max=30870m, total=30870m, free=24588m, used=6282m
+
+Input:                  	5369486 reads 		405241754 bases.
+Duplicates:             	857730 reads (15.97%) 	64785820 bases (15.99%)     	209966 collisions.
+Result:                 	4511756 reads (84.03%) 	340455934 bases (84.01%)
+
+Sorted output.             Time: 1.578 seconds.
+Memory: max=30870m, total=30870m, free=24588m, used=6282m
+
+Printed output.            Time: 41.057 seconds.
+Memory: max=30870m, total=30870m, free=23299m, used=7571m
+
+Time:                         	99.082 seconds.
+Reads Processed:       5369k 	54.19k reads/sec
+Bases Processed:        405m 	4.09m bases/sec

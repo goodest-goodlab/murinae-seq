@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-reference/hiseq2000-paired-1/10460X5_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-reference/hiseq2000-paired-1/10460X5_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-reference/hiseq2000-paired-1/10460X5_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-reference/hiseq2000-paired-1/10460X5_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 680612 duplicates.
+Finished exact matches.    Time: 54.560 seconds.
+Memory: max=30870m, total=30870m, free=21956m, used=8914m
+
+Found 3391875 contained sequences.
+Finished containment.      Time: 65.590 seconds.
+Memory: max=30870m, total=30870m, free=21522m, used=9348m
+
+Removed 3391875 invalid entries.
+Finished invalid removal.  Time: 2.159 seconds.
+Memory: max=30870m, total=30870m, free=21418m, used=9452m
+
+Input:                  	6103247 reads 		1026846806 bases.
+Duplicates:             	680612 reads (11.15%) 	109158674 bases (10.63%)     	0 collisions.
+Containments:           	3391875 reads (55.57%) 	523989263 bases (51.03%)    	54533033 collisions.
+Result:                 	2030760 reads (33.27%) 	393698869 bases (38.34%)
+
+Sorted output.             Time: 1.142 seconds.
+Memory: max=30870m, total=30870m, free=21418m, used=9452m
+
+Printed output.            Time: 25.095 seconds.
+Memory: max=28730m, total=28730m, free=25318m, used=3412m
+
+Time:                         	148.565 seconds.
+Reads Processed:       6103k 	41.08k reads/sec
+Bases Processed:       1026m 	6.91m bases/sec

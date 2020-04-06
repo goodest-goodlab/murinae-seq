@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Waiomys-mamasae/nextseq-paired-2/Z20624_S21_L004_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Waiomys-mamasae/nextseq-paired-2/Z20624_S21_L004_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Waiomys-mamasae/nextseq-paired-2/Z20624_S21_L004_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Waiomys-mamasae/nextseq-paired-2/Z20624_S21_L004_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Waiomys-mamasae/nextseq-paired-2/Z20624_S21_L004_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Waiomys-mamasae/nextseq-paired-2/Z20624_S21_L004_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 149296 duplicates.
+Finished exact matches.    Time: 13.512 seconds.
+Memory: max=30870m, total=30870m, free=26487m, used=4383m
+
+Input:                  	3422666 reads 		258153745 bases.
+Duplicates:             	149296 reads (4.36%) 	11266826 bases (4.36%)     	88855 collisions.
+Result:                 	3273370 reads (95.64%) 	246886919 bases (95.64%)
+
+Sorted output.             Time: 0.904 seconds.
+Memory: max=30870m, total=30870m, free=26487m, used=4383m
+
+Printed output.            Time: 14.135 seconds.
+Memory: max=30870m, total=30870m, free=25360m, used=5510m
+
+Time:                         	28.568 seconds.
+Reads Processed:       3422k 	119.81k reads/sec
+Bases Processed:        258m 	9.04m bases/sec

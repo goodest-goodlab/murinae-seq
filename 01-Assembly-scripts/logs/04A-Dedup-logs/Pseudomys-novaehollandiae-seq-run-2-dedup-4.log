@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-novaehollandiae/seq-run-2/53927_HTVLWBCX2_CGACCTG_S15_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-novaehollandiae/seq-run-2/53927_HTVLWBCX2_CGACCTG_S15_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-novaehollandiae/seq-run-2/53927_HTVLWBCX2_CGACCTG_S15_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-novaehollandiae/seq-run-2/53927_HTVLWBCX2_CGACCTG_S15_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-novaehollandiae/seq-run-2/53927_HTVLWBCX2_CGACCTG_S15_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-novaehollandiae/seq-run-2/53927_HTVLWBCX2_CGACCTG_S15_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 191216 duplicates.
+Finished exact matches.    Time: 72.871 seconds.
+Memory: max=30870m, total=30870m, free=25038m, used=5832m
+
+Input:                  	4837804 reads 		452461244 bases.
+Duplicates:             	191216 reads (3.95%) 	16927467 bases (3.74%)     	411305 collisions.
+Result:                 	4646588 reads (96.05%) 	435533777 bases (96.26%)
+
+Sorted output.             Time: 2.084 seconds.
+Memory: max=30870m, total=30870m, free=25038m, used=5832m
+
+Printed output.            Time: 65.235 seconds.
+Memory: max=30870m, total=30870m, free=23427m, used=7443m
+
+Time:                         	140.250 seconds.
+Reads Processed:       4837k 	34.49k reads/sec
+Bases Processed:        452m 	3.23m bases/sec

@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 304835
+total bases: 23777130
+Q20 bases: 23627827(99.3721%)
+Q30 bases: 23214429(97.6334%)
+
+Read2 before filtering:
+total reads: 304835
+total bases: 23777130
+Q20 bases: 23437607(98.5721%)
+Q30 bases: 22816882(95.9615%)
+
+Read1 after filtering:
+total reads: 303525
+total bases: 23665350
+Q20 bases: 23524362(99.4042%)
+Q30 bases: 23121082(97.7001%)
+
+Read2 aftering filtering:
+total reads: 303525
+total bases: 23665350
+Q20 bases: 23378865(98.7894%)
+Q30 bases: 22785516(96.2822%)
+
+Filtering result:
+reads passed filter: 607050
+reads failed due to low quality: 2482
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads failed due to low complexity: 138
+reads with adapter trimmed: 720
+bases trimmed due to adapters: 19288
+
+Duplication rate: 0.763881%
+
+Insert size peak (evaluated by paired-end reads): 125
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/miseq-paired/Z21914_S24_L001_R.fastp.json 
+fastp v0.20.0, time used: 23 seconds

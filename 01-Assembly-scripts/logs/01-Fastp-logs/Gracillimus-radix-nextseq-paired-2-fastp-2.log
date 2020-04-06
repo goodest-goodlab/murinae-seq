@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3952163
+total bases: 298532793
+Q20 bases: 286904791(96.1049%)
+Q30 bases: 281913493(94.433%)
+
+Read2 before filtering:
+total reads: 3952163
+total bases: 298534291
+Q20 bases: 277213233(92.8581%)
+Q30 bases: 269244776(90.1889%)
+
+Read1 after filtering:
+total reads: 3805946
+total bases: 287253686
+Q20 bases: 277882758(96.7378%)
+Q30 bases: 273432273(95.1884%)
+
+Read2 aftering filtering:
+total reads: 3805946
+total bases: 287280616
+Q20 bases: 271596337(94.5404%)
+Q30 bases: 264489671(92.0667%)
+
+Filtering result:
+reads passed filter: 7611892
+reads failed due to low quality: 275782
+reads failed due to too many N: 2122
+reads failed due to too short: 12460
+reads failed due to low complexity: 2070
+reads with adapter trimmed: 15198
+bases trimmed due to adapters: 427535
+
+Duplication rate: 8.26182%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Gracillimus-radix/nextseq-paired-2/Z08508_S13_L004_R.fastp.json 
+fastp v0.20.0, time used: 46 seconds

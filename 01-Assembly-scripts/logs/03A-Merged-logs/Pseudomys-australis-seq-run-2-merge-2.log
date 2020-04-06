@@ -1,0 +1,51 @@
+java -ea -Xmx15g -Xms15g -Djava.library.path=/home/gregg_thomas/bin/bbmap/jni/ -cp /home/gregg_thomas/bin/bbmap/current/ jgi.BBMerge -Xmx15g t=1 in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.fastq.gz verystrict=t rem k=40 extend2=40 ecct outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.unmerged.fastq.gz outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.unmerged.fastq.gz out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.merged.fastq.gz
+Executing jgi.BBMerge [-Xmx15g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.fastq.gz, verystrict=t, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.merged.fastq.gz]
+Version 38.73
+
+Revised arguments: [maxbad=4, margin=3, minqo=8, qualiters=2, ratiomode=t, flatmode=f, minentropy=52, minoverlap=12, minoverlap0=4, maxratio=0.05, ratiomargin=12, ratiooffset=0.5, ratiominoverlapreduction=4, efilter=2, pfilter=0.008, minsecondratio=0.16, minapproxoverlap=22, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.fastq.gz, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.merged.fastq.gz]
+
+Set threads to 1
+Executing assemble.Tadpole2 [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+Version 38.73
+
+Using 1 threads.
+Executing ukmer.KmerTableSetU [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_R2_001.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+
+Initial:
+Ways=31, initialSize=128000, prefilter=f, prealloc=f
+Memory: max=15435m, total=15435m, free=15112m, used=323m
+
+Estimated kmer capacity: 	356759827
+After table allocation:
+Memory: max=15435m, total=15435m, free=15032m, used=403m
+
+After loading:
+Memory: max=15435m, total=15435m, free=4710m, used=10725m
+
+Input:                      	13661862 reads 		1378337731 bases.
+Unique Kmers:               	241065028
+Load Time:                  	941.812 seconds.
+
+Writing mergable reads merged.
+Started output threads.
+Total time: 2847.993 seconds.
+
+Pairs:               	6830931
+Joined:              	4464741   	65.361%
+Ambiguous:           	2366109   	34.638%
+No Solution:         	81       	0.001%
+Too Short:           	0       	0.000%
+Fully Extended:      	8223464   	59.387%
+Partly Extended:     	2323374   	16.779%
+Not Extended:        	3300374   	23.834%
+
+Avg Insert:          	180.6
+Standard Deviation:  	35.9
+Mode:                	169
+
+Insert range:        	35 - 271
+90th percentile:     	231
+75th percentile:     	205
+50th percentile:     	177
+25th percentile:     	155
+10th percentile:     	137

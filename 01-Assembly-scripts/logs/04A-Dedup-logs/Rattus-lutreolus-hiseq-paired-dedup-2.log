@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-lutreolus/hiseq-paired/lutreolusWGA_CAATAT_L008_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-lutreolus/hiseq-paired/lutreolusWGA_CAATAT_L008_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-lutreolus/hiseq-paired/lutreolusWGA_CAATAT_L008_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-lutreolus/hiseq-paired/lutreolusWGA_CAATAT_L008_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-lutreolus/hiseq-paired/lutreolusWGA_CAATAT_L008_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-lutreolus/hiseq-paired/lutreolusWGA_CAATAT_L008_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 52516 duplicates.
+Finished exact matches.    Time: 27.757 seconds.
+Memory: max=30870m, total=30870m, free=27970m, used=2900m
+
+Input:                  	1351592 reads 		134232726 bases.
+Duplicates:             	52516 reads (3.89%) 	5176276 bases (3.86%)     	32866 collisions.
+Result:                 	1299076 reads (96.11%) 	129056450 bases (96.14%)
+
+Sorted output.             Time: 0.747 seconds.
+Memory: max=30870m, total=30870m, free=27970m, used=2900m
+
+Printed output.            Time: 11.711 seconds.
+Memory: max=30870m, total=30870m, free=27487m, used=3383m
+
+Time:                         	40.232 seconds.
+Reads Processed:       1351k 	33.59k reads/sec
+Bases Processed:        134m 	3.34m bases/sec

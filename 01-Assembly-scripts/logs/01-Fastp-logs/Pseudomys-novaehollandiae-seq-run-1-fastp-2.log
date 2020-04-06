@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 13803236
+total bases: 1394126836
+Q20 bases: 1323323863(94.9213%)
+Q30 bases: 1271193183(91.182%)
+
+Read2 before filtering:
+total reads: 13803236
+total bases: 1394126836
+Q20 bases: 1267389862(90.9092%)
+Q30 bases: 1182878302(84.8473%)
+
+Read1 after filtering:
+total reads: 13564420
+total bases: 1256910674
+Q20 bases: 1197285789(95.2562%)
+Q30 bases: 1152859765(91.7217%)
+
+Read2 aftering filtering:
+total reads: 13564420
+total bases: 1258002176
+Q20 bases: 1156048909(91.8956%)
+Q30 bases: 1087550778(86.4506%)
+
+Filtering result:
+reads passed filter: 27128840
+reads failed due to low quality: 4614
+reads failed due to too many N: 424686
+reads failed due to too short: 33248
+reads failed due to low complexity: 15084
+reads with adapter trimmed: 10989950
+bases trimmed due to adapters: 230717701
+
+Duplication rate: 14.8188%
+
+Insert size peak (evaluated by paired-end reads): 102
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-novaehollandiae/seq-run-1/53927_HTVLKBCX2_CGACCTG_S15_L001_R.fastp.json 
+fastp v0.20.0, time used: 216 seconds

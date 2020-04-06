@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 463025
+total bases: 36115950
+Q20 bases: 35872953(99.3272%)
+Q30 bases: 35206167(97.4809%)
+
+Read2 before filtering:
+total reads: 463025
+total bases: 36115950
+Q20 bases: 35608799(98.5958%)
+Q30 bases: 34658119(95.9635%)
+
+Read1 after filtering:
+total reads: 461387
+total bases: 35973565
+Q20 bases: 35740837(99.3531%)
+Q30 bases: 35086653(97.5345%)
+
+Read2 aftering filtering:
+total reads: 461387
+total bases: 35973565
+Q20 bases: 35533362(98.7763%)
+Q30 bases: 34616445(96.2275%)
+
+Filtering result:
+reads passed filter: 922774
+reads failed due to low quality: 3074
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads failed due to low complexity: 202
+reads with adapter trimmed: 1174
+bases trimmed due to adapters: 29414
+
+Duplication rate: 1.04639%
+
+Insert size peak (evaluated by paired-end reads): 125
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_R.fastp.json 
+fastp v0.20.0, time used: 23 seconds

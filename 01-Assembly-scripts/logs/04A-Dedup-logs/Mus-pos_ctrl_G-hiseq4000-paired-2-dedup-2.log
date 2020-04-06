@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-pos_ctrl_G/hiseq4000-paired-2/M44_G11_CKDL190143345-1a-D711-AK1545_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-pos_ctrl_G/hiseq4000-paired-2/M44_G11_CKDL190143345-1a-D711-AK1545_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-pos_ctrl_G/hiseq4000-paired-2/M44_G11_CKDL190143345-1a-D711-AK1545_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-pos_ctrl_G/hiseq4000-paired-2/M44_G11_CKDL190143345-1a-D711-AK1545_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-pos_ctrl_G/hiseq4000-paired-2/M44_G11_CKDL190143345-1a-D711-AK1545_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-pos_ctrl_G/hiseq4000-paired-2/M44_G11_CKDL190143345-1a-D711-AK1545_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 103514 duplicates.
+Finished exact matches.    Time: 7.039 seconds.
+Memory: max=30870m, total=30870m, free=28615m, used=2255m
+
+Input:                  	535576 reads 		79847042 bases.
+Duplicates:             	103514 reads (19.33%) 	15447022 bases (19.35%)     	35654 collisions.
+Result:                 	432062 reads (80.67%) 	64400020 bases (80.65%)
+
+Sorted output.             Time: 0.246 seconds.
+Memory: max=30870m, total=30870m, free=28615m, used=2255m
+
+Printed output.            Time: 5.018 seconds.
+Memory: max=30870m, total=30870m, free=28293m, used=2577m
+
+Time:                         	12.323 seconds.
+Reads Processed:        535k 	43.46k reads/sec
+Bases Processed:      79847k 	6.48m bases/sec

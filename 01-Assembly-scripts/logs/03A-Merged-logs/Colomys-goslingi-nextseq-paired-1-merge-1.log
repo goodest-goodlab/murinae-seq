@@ -1,0 +1,51 @@
+java -ea -Xmx15g -Xms15g -Djava.library.path=/home/gregg_thomas/bin/bbmap/jni/ -cp /home/gregg_thomas/bin/bbmap/current/ jgi.BBMerge -Xmx15g t=1 in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.fastq.gz verystrict=t rem k=40 extend2=40 ecct outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.unmerged.fastq.gz outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.unmerged.fastq.gz out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_001.fastp.decon.merged.fastq.gz
+Executing jgi.BBMerge [-Xmx15g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.fastq.gz, verystrict=t, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_001.fastp.decon.merged.fastq.gz]
+Version 38.73
+
+Revised arguments: [maxbad=4, margin=3, minqo=8, qualiters=2, ratiomode=t, flatmode=f, minentropy=52, minoverlap=12, minoverlap0=4, maxratio=0.05, ratiomargin=12, ratiooffset=0.5, ratiominoverlapreduction=4, efilter=2, pfilter=0.008, minsecondratio=0.16, minapproxoverlap=22, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.fastq.gz, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_001.fastp.decon.merged.fastq.gz]
+
+Set threads to 1
+Executing assemble.Tadpole2 [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+Version 38.73
+
+Using 1 threads.
+Executing ukmer.KmerTableSetU [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R1_001.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_R2_001.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+
+Initial:
+Ways=31, initialSize=128000, prefilter=f, prealloc=f
+Memory: max=15435m, total=15435m, free=15032m, used=403m
+
+Estimated kmer capacity: 	356759827
+After table allocation:
+Memory: max=15435m, total=15435m, free=14871m, used=564m
+
+After loading:
+Memory: max=15435m, total=15435m, free=5999m, used=9436m
+
+Input:                      	18792652 reads 		1408711562 bases.
+Unique Kmers:               	209746745
+Load Time:                  	399.533 seconds.
+
+Writing mergable reads merged.
+Started output threads.
+Total time: 1627.717 seconds.
+
+Pairs:               	9396326
+Joined:              	3674150   	39.102%
+Ambiguous:           	5722173   	60.898%
+No Solution:         	3       	0.000%
+Too Short:           	0       	0.000%
+Fully Extended:      	9747209   	51.466%
+Partly Extended:     	4172018   	22.028%
+Not Extended:        	5019997   	26.506%
+
+Avg Insert:          	157.6
+Standard Deviation:  	29.2
+Mode:                	154
+
+Insert range:        	35 - 219
+90th percentile:     	198
+75th percentile:     	179
+50th percentile:     	157
+25th percentile:     	136
+10th percentile:     	120

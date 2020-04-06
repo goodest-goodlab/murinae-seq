@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 112976 duplicates.
+Finished exact matches.    Time: 15.532 seconds.
+Memory: max=30870m, total=30870m, free=27004m, used=3866m
+
+Input:                  	2599388 reads 		262165543 bases.
+Duplicates:             	112976 reads (4.35%) 	11393794 bases (4.35%)     	72047 collisions.
+Result:                 	2486412 reads (95.65%) 	250771749 bases (95.65%)
+
+Sorted output.             Time: 2.345 seconds.
+Memory: max=30870m, total=30870m, free=27004m, used=3866m
+
+Printed output.            Time: 15.759 seconds.
+Memory: max=30870m, total=30870m, free=26038m, used=4832m
+
+Time:                         	33.658 seconds.
+Reads Processed:       2599k 	77.23k reads/sec
+Bases Processed:        262m 	7.79m bases/sec

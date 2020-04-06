@@ -1,0 +1,118 @@
+INFO	2020-01-15 02:10:50	MarkDuplicates	
+
+********** NOTE: Picard's command line syntax is changing.
+**********
+********** For more information, please see:
+********** https://github.com/broadinstitute/picard/wiki/Command-Line-Syntax-Transition-For-Users-(Pre-Transition)
+**********
+********** The command line looks like this in the new syntax:
+**********
+**********    MarkDuplicates -I /scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Vandeleuria-oleracea/Vandeleuria-oleracea.sorted.bam -O /scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Vandeleuria-oleracea/Vandeleuria-oleracea.sorted.mkdup.bam -M /scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Vandeleuria-oleracea/Vandeleuria-oleracea-mkdup-metrics.txt
+**********
+
+
+02:10:51.811 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/home/gregg_thomas/bin/picard.jar!/com/intel/gkl/native/libgkl_compression.so
+[Wed Jan 15 02:10:51 UTC 2020] MarkDuplicates INPUT=[/scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Vandeleuria-oleracea/Vandeleuria-oleracea.sorted.bam] OUTPUT=/scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Vandeleuria-oleracea/Vandeleuria-oleracea.sorted.mkdup.bam METRICS_FILE=/scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Vandeleuria-oleracea/Vandeleuria-oleracea-mkdup-metrics.txt    MAX_SEQUENCES_FOR_DISK_READ_ENDS_MAP=50000 MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=8000 SORTING_COLLECTION_SIZE_RATIO=0.25 TAG_DUPLICATE_SET_MEMBERS=false REMOVE_SEQUENCING_DUPLICATES=false TAGGING_POLICY=DontTag CLEAR_DT=true DUPLEX_UMI=false ADD_PG_TAG_TO_READS=true REMOVE_DUPLICATES=false ASSUME_SORTED=false DUPLICATE_SCORING_STRATEGY=SUM_OF_BASE_QUALITIES PROGRAM_RECORD_ID=MarkDuplicates PROGRAM_GROUP_NAME=MarkDuplicates READ_NAME_REGEX=<optimized capture of last three ':' separated fields as numeric values> OPTICAL_DUPLICATE_PIXEL_DISTANCE=100 MAX_OPTICAL_DUPLICATE_SET_SIZE=300000 VERBOSITY=INFO QUIET=false VALIDATION_STRINGENCY=STRICT COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false CREATE_MD5_FILE=false GA4GH_CLIENT_SECRETS=client_secrets.json USE_JDK_DEFLATER=false USE_JDK_INFLATER=false
+[Wed Jan 15 02:10:51 UTC 2020] Executing as gregg_thomas@ecae4883a231 on Linux 4.4.0-104-generic amd64; Java HotSpot(TM) 64-Bit Server VM 1.8.0_221-b11; Deflater: Intel; Inflater: Intel; Provider GCS is not available; Picard version: 2.20.6-SNAPSHOT
+INFO	2020-01-15 02:10:52	MarkDuplicates	Start of doWork freeMemory: 2037674472; totalMemory: 2058354688; maxMemory: 28631367680
+INFO	2020-01-15 02:10:52	MarkDuplicates	Reading input file and constructing read end information.
+INFO	2020-01-15 02:10:52	MarkDuplicates	Will retain up to 103736839 data points before spilling to disk.
+INFO	2020-01-15 02:11:37	MarkDuplicates	Read     1,000,000 records.  Elapsed time: 00:00:34s.  Time for last 1,000,000:   34s.  Last read position: chr1:75,363,646
+INFO	2020-01-15 02:11:37	MarkDuplicates	Tracking 40076 as yet unmatched pairs. 1728 records in RAM.
+INFO	2020-01-15 02:12:06	MarkDuplicates	Read     2,000,000 records.  Elapsed time: 00:01:03s.  Time for last 1,000,000:   29s.  Last read position: chr1:157,243,615
+INFO	2020-01-15 02:12:06	MarkDuplicates	Tracking 80847 as yet unmatched pairs. 1220 records in RAM.
+INFO	2020-01-15 02:12:26	MarkDuplicates	Read     3,000,000 records.  Elapsed time: 00:01:23s.  Time for last 1,000,000:   19s.  Last read position: chr2:27,445,591
+INFO	2020-01-15 02:12:26	MarkDuplicates	Tracking 114638 as yet unmatched pairs. 7865 records in RAM.
+INFO	2020-01-15 02:12:44	MarkDuplicates	Read     4,000,000 records.  Elapsed time: 00:01:41s.  Time for last 1,000,000:   18s.  Last read position: chr2:76,747,678
+INFO	2020-01-15 02:12:44	MarkDuplicates	Tracking 140021 as yet unmatched pairs. 6733 records in RAM.
+INFO	2020-01-15 02:12:55	MarkDuplicates	Read     5,000,000 records.  Elapsed time: 00:01:52s.  Time for last 1,000,000:   10s.  Last read position: chr2:128,846,645
+INFO	2020-01-15 02:12:55	MarkDuplicates	Tracking 165230 as yet unmatched pairs. 4427 records in RAM.
+INFO	2020-01-15 02:13:09	MarkDuplicates	Read     6,000,000 records.  Elapsed time: 00:02:06s.  Time for last 1,000,000:   13s.  Last read position: chr2:180,500,847
+INFO	2020-01-15 02:13:09	MarkDuplicates	Tracking 193413 as yet unmatched pairs. 212 records in RAM.
+INFO	2020-01-15 02:13:47	MarkDuplicates	Read     7,000,000 records.  Elapsed time: 00:02:44s.  Time for last 1,000,000:   38s.  Last read position: chr3:89,136,187
+INFO	2020-01-15 02:13:47	MarkDuplicates	Tracking 226318 as yet unmatched pairs. 7349 records in RAM.
+INFO	2020-01-15 02:13:55	MarkDuplicates	Read     8,000,000 records.  Elapsed time: 00:02:51s.  Time for last 1,000,000:    7s.  Last read position: chr3:141,407,654
+INFO	2020-01-15 02:13:55	MarkDuplicates	Tracking 248080 as yet unmatched pairs. 1700 records in RAM.
+INFO	2020-01-15 02:14:11	MarkDuplicates	Read     9,000,000 records.  Elapsed time: 00:03:08s.  Time for last 1,000,000:   16s.  Last read position: chr4:63,334,200
+INFO	2020-01-15 02:14:11	MarkDuplicates	Tracking 271538 as yet unmatched pairs. 13523 records in RAM.
+INFO	2020-01-15 02:14:20	MarkDuplicates	Read    10,000,000 records.  Elapsed time: 00:03:16s.  Time for last 1,000,000:    8s.  Last read position: chr4:128,959,907
+INFO	2020-01-15 02:14:20	MarkDuplicates	Tracking 291455 as yet unmatched pairs. 6042 records in RAM.
+INFO	2020-01-15 02:14:27	MarkDuplicates	Read    11,000,000 records.  Elapsed time: 00:03:24s.  Time for last 1,000,000:    7s.  Last read position: chr5:3,428,941
+INFO	2020-01-15 02:14:27	MarkDuplicates	Tracking 305909 as yet unmatched pairs. 25322 records in RAM.
+INFO	2020-01-15 02:14:49	MarkDuplicates	Read    12,000,000 records.  Elapsed time: 00:03:45s.  Time for last 1,000,000:   21s.  Last read position: chr5:73,050,315
+INFO	2020-01-15 02:14:49	MarkDuplicates	Tracking 324049 as yet unmatched pairs. 16652 records in RAM.
+INFO	2020-01-15 02:14:59	MarkDuplicates	Read    13,000,000 records.  Elapsed time: 00:03:56s.  Time for last 1,000,000:   10s.  Last read position: chr5:129,570,919
+INFO	2020-01-15 02:14:59	MarkDuplicates	Tracking 342401 as yet unmatched pairs. 6058 records in RAM.
+INFO	2020-01-15 02:15:09	MarkDuplicates	Read    14,000,000 records.  Elapsed time: 00:04:06s.  Time for last 1,000,000:   10s.  Last read position: chr6:41,374,261
+INFO	2020-01-15 02:15:09	MarkDuplicates	Tracking 357350 as yet unmatched pairs. 22232 records in RAM.
+INFO	2020-01-15 02:15:40	MarkDuplicates	Read    15,000,000 records.  Elapsed time: 00:04:36s.  Time for last 1,000,000:   30s.  Last read position: chr6:120,441,661
+INFO	2020-01-15 02:15:40	MarkDuplicates	Tracking 370440 as yet unmatched pairs. 8726 records in RAM.
+INFO	2020-01-15 02:15:53	MarkDuplicates	Read    16,000,000 records.  Elapsed time: 00:04:50s.  Time for last 1,000,000:   13s.  Last read position: chr7:28,999,850
+INFO	2020-01-15 02:15:53	MarkDuplicates	Tracking 378667 as yet unmatched pairs. 31192 records in RAM.
+INFO	2020-01-15 02:16:00	MarkDuplicates	Read    17,000,000 records.  Elapsed time: 00:04:57s.  Time for last 1,000,000:    6s.  Last read position: chr7:98,213,719
+INFO	2020-01-15 02:16:00	MarkDuplicates	Tracking 388963 as yet unmatched pairs. 14819 records in RAM.
+INFO	2020-01-15 02:16:14	MarkDuplicates	Read    18,000,000 records.  Elapsed time: 00:05:10s.  Time for last 1,000,000:   13s.  Last read position: chr7:144,423,992
+INFO	2020-01-15 02:16:14	MarkDuplicates	Tracking 392413 as yet unmatched pairs. 378 records in RAM.
+INFO	2020-01-15 02:16:25	MarkDuplicates	Read    19,000,000 records.  Elapsed time: 00:05:21s.  Time for last 1,000,000:   10s.  Last read position: chr8:85,550,236
+INFO	2020-01-15 02:16:25	MarkDuplicates	Tracking 396333 as yet unmatched pairs. 13947 records in RAM.
+INFO	2020-01-15 02:16:37	MarkDuplicates	Read    20,000,000 records.  Elapsed time: 00:05:33s.  Time for last 1,000,000:   11s.  Last read position: chr9:30,428,754
+INFO	2020-01-15 02:16:37	MarkDuplicates	Tracking 397972 as yet unmatched pairs. 30938 records in RAM.
+INFO	2020-01-15 02:16:54	MarkDuplicates	Read    21,000,000 records.  Elapsed time: 00:05:50s.  Time for last 1,000,000:   17s.  Last read position: chr9:88,381,738
+INFO	2020-01-15 02:16:54	MarkDuplicates	Tracking 397462 as yet unmatched pairs. 13173 records in RAM.
+INFO	2020-01-15 02:17:11	MarkDuplicates	Read    22,000,000 records.  Elapsed time: 00:06:08s.  Time for last 1,000,000:   17s.  Last read position: chr10:33,464,555
+INFO	2020-01-15 02:17:11	MarkDuplicates	Tracking 395110 as yet unmatched pairs. 35959 records in RAM.
+INFO	2020-01-15 02:17:28	MarkDuplicates	Read    23,000,000 records.  Elapsed time: 00:06:25s.  Time for last 1,000,000:   16s.  Last read position: chr10:99,003,225
+INFO	2020-01-15 02:17:28	MarkDuplicates	Tracking 390002 as yet unmatched pairs. 12238 records in RAM.
+INFO	2020-01-15 02:17:45	MarkDuplicates	Read    24,000,000 records.  Elapsed time: 00:06:41s.  Time for last 1,000,000:   16s.  Last read position: chr11:38,087,829
+INFO	2020-01-15 02:17:45	MarkDuplicates	Tracking 382841 as yet unmatched pairs. 46675 records in RAM.
+INFO	2020-01-15 02:17:52	MarkDuplicates	Read    25,000,000 records.  Elapsed time: 00:06:48s.  Time for last 1,000,000:    6s.  Last read position: chr11:75,755,573
+INFO	2020-01-15 02:17:52	MarkDuplicates	Tracking 377038 as yet unmatched pairs. 30894 records in RAM.
+INFO	2020-01-15 02:18:33	MarkDuplicates	Read    26,000,000 records.  Elapsed time: 00:07:30s.  Time for last 1,000,000:   41s.  Last read position: chr11:101,572,146
+INFO	2020-01-15 02:18:33	MarkDuplicates	Tracking 369080 as yet unmatched pairs. 12574 records in RAM.
+INFO	2020-01-15 02:18:50	MarkDuplicates	Read    27,000,000 records.  Elapsed time: 00:07:47s.  Time for last 1,000,000:   16s.  Last read position: chr12:44,861,313
+INFO	2020-01-15 02:18:50	MarkDuplicates	Tracking 357030 as yet unmatched pairs. 29647 records in RAM.
+INFO	2020-01-15 02:19:07	MarkDuplicates	Read    28,000,000 records.  Elapsed time: 00:08:03s.  Time for last 1,000,000:   16s.  Last read position: chr13:3,613,059
+INFO	2020-01-15 02:19:07	MarkDuplicates	Tracking 341673 as yet unmatched pairs. 47471 records in RAM.
+INFO	2020-01-15 02:19:25	MarkDuplicates	Read    29,000,000 records.  Elapsed time: 00:08:21s.  Time for last 1,000,000:   17s.  Last read position: chr13:85,256,380
+INFO	2020-01-15 02:19:25	MarkDuplicates	Tracking 321492 as yet unmatched pairs. 14930 records in RAM.
+INFO	2020-01-15 02:19:41	MarkDuplicates	Read    30,000,000 records.  Elapsed time: 00:08:38s.  Time for last 1,000,000:   16s.  Last read position: chr14:51,826,020
+INFO	2020-01-15 02:19:41	MarkDuplicates	Tracking 299606 as yet unmatched pairs. 30020 records in RAM.
+INFO	2020-01-15 02:20:01	MarkDuplicates	Read    31,000,000 records.  Elapsed time: 00:08:58s.  Time for last 1,000,000:   20s.  Last read position: chr15:31,731,958
+INFO	2020-01-15 02:20:01	MarkDuplicates	Tracking 270981 as yet unmatched pairs. 33085 records in RAM.
+INFO	2020-01-15 02:20:18	MarkDuplicates	Read    32,000,000 records.  Elapsed time: 00:09:15s.  Time for last 1,000,000:   16s.  Last read position: chr15:101,679,031
+INFO	2020-01-15 02:20:18	MarkDuplicates	Tracking 248270 as yet unmatched pairs. 2187 records in RAM.
+INFO	2020-01-15 02:20:34	MarkDuplicates	Read    33,000,000 records.  Elapsed time: 00:09:30s.  Time for last 1,000,000:   15s.  Last read position: chr16:60,424,806
+INFO	2020-01-15 02:20:34	MarkDuplicates	Tracking 221664 as yet unmatched pairs. 17116 records in RAM.
+INFO	2020-01-15 02:20:46	MarkDuplicates	Read    34,000,000 records.  Elapsed time: 00:09:43s.  Time for last 1,000,000:   12s.  Last read position: chr17:34,284,094
+INFO	2020-01-15 02:20:46	MarkDuplicates	Tracking 192036 as yet unmatched pairs. 35207 records in RAM.
+INFO	2020-01-15 02:21:07	MarkDuplicates	Read    35,000,000 records.  Elapsed time: 00:10:03s.  Time for last 1,000,000:   20s.  Last read position: chr18:10,816,641
+INFO	2020-01-15 02:21:07	MarkDuplicates	Tracking 157568 as yet unmatched pairs. 39383 records in RAM.
+INFO	2020-01-15 02:21:12	MarkDuplicates	Read    36,000,000 records.  Elapsed time: 00:10:09s.  Time for last 1,000,000:    5s.  Last read position: chr18:87,757,134
+INFO	2020-01-15 02:21:12	MarkDuplicates	Tracking 123526 as yet unmatched pairs. 1720 records in RAM.
+INFO	2020-01-15 02:21:33	MarkDuplicates	Read    37,000,000 records.  Elapsed time: 00:10:30s.  Time for last 1,000,000:   21s.  Last read position: chr19:46,486,718
+INFO	2020-01-15 02:21:33	MarkDuplicates	Tracking 95887 as yet unmatched pairs. 7914 records in RAM.
+INFO	2020-01-15 02:21:48	MarkDuplicates	Read    38,000,000 records.  Elapsed time: 00:10:45s.  Time for last 1,000,000:   14s.  Last read position: chrX:73,156,388
+INFO	2020-01-15 02:21:48	MarkDuplicates	Tracking 59448 as yet unmatched pairs. 50874 records in RAM.
+INFO	2020-01-15 02:21:56	MarkDuplicates	Read    39,000,000 records.  Elapsed time: 00:10:52s.  Time for last 1,000,000:    7s.  Last read position: chrX:155,053,595
+INFO	2020-01-15 02:21:56	MarkDuplicates	Tracking 17768 as yet unmatched pairs. 8903 records in RAM.
+INFO	2020-01-15 02:21:58	MarkDuplicates	Read 39208654 records. 0 pairs never matched.
+INFO	2020-01-15 02:22:39	MarkDuplicates	After buildSortedReadEndLists freeMemory: 10152316760; totalMemory: 15222702080; maxMemory: 28631367680
+INFO	2020-01-15 02:22:39	MarkDuplicates	Will retain up to 894730240 duplicate indices before spilling to disk.
+INFO	2020-01-15 02:22:41	MarkDuplicates	Traversing read pair information and detecting duplicates.
+INFO	2020-01-15 02:23:47	MarkDuplicates	Traversing fragment information and detecting duplicates.
+INFO	2020-01-15 02:23:49	MarkDuplicates	Sorting list of duplicate records.
+INFO	2020-01-15 02:23:50	MarkDuplicates	After generateDuplicateIndexes freeMemory: 19457885656; totalMemory: 26719813632; maxMemory: 28631367680
+INFO	2020-01-15 02:23:50	MarkDuplicates	Marking 15075118 records as duplicates.
+INFO	2020-01-15 02:23:50	MarkDuplicates	Found 191380 optical duplicate clusters.
+INFO	2020-01-15 02:23:50	MarkDuplicates	Reads are assumed to be ordered by: coordinate
+INFO	2020-01-15 02:26:28	MarkDuplicates	Written    10,000,000 records.  Elapsed time: 00:02:37s.  Time for last 10,000,000:  157s.  Last read position: chr4:128,959,907
+INFO	2020-01-15 02:30:14	MarkDuplicates	Written    20,000,000 records.  Elapsed time: 00:06:23s.  Time for last 10,000,000:  225s.  Last read position: chr9:30,428,754
+INFO	2020-01-15 02:35:35	MarkDuplicates	Written    30,000,000 records.  Elapsed time: 00:11:44s.  Time for last 10,000,000:  321s.  Last read position: chr14:51,826,020
+INFO	2020-01-15 02:42:02	MarkDuplicates	Writing complete. Closing input iterator.
+INFO	2020-01-15 02:42:02	MarkDuplicates	Duplicate Index cleanup.
+INFO	2020-01-15 02:42:02	MarkDuplicates	Getting Memory Stats.
+INFO	2020-01-15 02:42:02	MarkDuplicates	Before output close freeMemory: 26678622832; totalMemory: 26883915776; maxMemory: 28631367680
+INFO	2020-01-15 02:42:02	MarkDuplicates	Closed outputs. Getting more Memory Stats.
+INFO	2020-01-15 02:42:03	MarkDuplicates	After output close freeMemory: 26979564144; totalMemory: 27184857088; maxMemory: 28631367680
+[Wed Jan 15 02:42:03 UTC 2020] picard.sam.markduplicates.MarkDuplicates done. Elapsed time: 31.19 minutes.
+Runtime.totalMemory()=27184857088

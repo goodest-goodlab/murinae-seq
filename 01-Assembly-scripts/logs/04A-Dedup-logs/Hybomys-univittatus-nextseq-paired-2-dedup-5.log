@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 382060 duplicates.
+Finished exact matches.    Time: 65.181 seconds.
+Memory: max=30870m, total=30870m, free=26038m, used=4832m
+
+Input:                  	3855670 reads 		291010783 bases.
+Duplicates:             	382060 reads (9.91%) 	28858659 bases (9.92%)     	128631 collisions.
+Result:                 	3473610 reads (90.09%) 	262152124 bases (90.08%)
+
+Sorted output.             Time: 2.724 seconds.
+Memory: max=30870m, total=30870m, free=26038m, used=4832m
+
+Printed output.            Time: 43.548 seconds.
+Memory: max=30870m, total=30870m, free=24910m, used=5960m
+
+Time:                         	111.504 seconds.
+Reads Processed:       3855k 	34.58k reads/sec
+Bases Processed:        291m 	2.61m bases/sec

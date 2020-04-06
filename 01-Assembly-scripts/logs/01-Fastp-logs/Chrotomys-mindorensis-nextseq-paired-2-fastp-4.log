@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3339009
+total bases: 252213760
+Q20 bases: 241889040(95.9064%)
+Q30 bases: 237465399(94.1524%)
+
+Read2 before filtering:
+total reads: 3339009
+total bases: 252209769
+Q20 bases: 233727147(92.6717%)
+Q30 bases: 226798658(89.9246%)
+
+Read1 after filtering:
+total reads: 3216631
+total bases: 242779334
+Q20 bases: 234452270(96.5701%)
+Q30 bases: 230515370(94.9485%)
+
+Read2 aftering filtering:
+total reads: 3216631
+total bases: 242796244
+Q20 bases: 228943515(94.2945%)
+Q30 bases: 222744800(91.7415%)
+
+Filtering result:
+reads passed filter: 6433262
+reads failed due to low quality: 233404
+reads failed due to too many N: 1902
+reads failed due to too short: 7166
+reads failed due to low complexity: 2284
+reads with adapter trimmed: 13020
+bases trimmed due to adapters: 337776
+
+Duplication rate: 9.53567%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chrotomys-mindorensis/nextseq-paired-2/JAE520_S34_L004_R.fastp.json 
+fastp v0.20.0, time used: 32 seconds

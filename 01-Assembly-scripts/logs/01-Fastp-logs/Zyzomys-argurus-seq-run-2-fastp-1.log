@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 5237419
+total bases: 528979319
+Q20 bases: 518179266(97.9583%)
+Q30 bases: 509443237(96.3068%)
+
+Read2 before filtering:
+total reads: 5237419
+total bases: 528979319
+Q20 bases: 504682829(95.4069%)
+Q30 bases: 489569478(92.5498%)
+
+Read1 after filtering:
+total reads: 5206978
+total bases: 524259059
+Q20 bases: 513873139(98.0189%)
+Q30 bases: 505400914(96.4029%)
+
+Read2 aftering filtering:
+total reads: 5206978
+total bases: 524275853
+Q20 bases: 501716986(95.6971%)
+Q30 bases: 487057648(92.901%)
+
+Filtering result:
+reads passed filter: 10413956
+reads failed due to low quality: 23716
+reads failed due to too many N: 7510
+reads failed due to too short: 25852
+reads failed due to low complexity: 3804
+reads with adapter trimmed: 201992
+bases trimmed due to adapters: 5769080
+
+Duplication rate: 12.0272%
+
+Insert size peak (evaluated by paired-end reads): 170
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-argurus/seq-run-2/52946_BH7T77BCX2_AACGACC_S9_L002_R.fastp.json 
+fastp v0.20.0, time used: 96 seconds

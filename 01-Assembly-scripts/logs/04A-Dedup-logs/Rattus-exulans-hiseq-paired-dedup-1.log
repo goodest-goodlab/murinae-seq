@@ -1,0 +1,27 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-exulans/hiseq-paired/exulansWGA_TGACGT_L008_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 69580 duplicates.
+Finished exact matches.    Time: 15.957 seconds.
+Memory: max=30870m, total=30870m, free=27970m, used=2900m
+
+Input:                  	1441936 reads 		143194293 bases.
+Duplicates:             	69580 reads (4.83%) 	6862281 bases (4.79%)     	39097 collisions.
+Result:                 	1372356 reads (95.17%) 	136332012 bases (95.21%)
+
+Sorted output.             Time: 1.642 seconds.
+Memory: max=30870m, total=30870m, free=27970m, used=2900m
+
+Printed output.            Time: 11.843 seconds.
+Memory: max=30870m, total=30870m, free=27326m, used=3544m
+
+Time:                         	29.460 seconds.
+Reads Processed:       1441k 	48.95k reads/sec
+Bases Processed:        143m 	4.86m bases/sec
+  203m 	6.42m bases/sec

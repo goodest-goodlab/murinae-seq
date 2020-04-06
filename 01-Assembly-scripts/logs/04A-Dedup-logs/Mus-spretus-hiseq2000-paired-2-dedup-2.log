@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-spretus/hiseq2000-paired-2/lane1_GGATCA_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-spretus/hiseq2000-paired-2/lane1_GGATCA_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-spretus/hiseq2000-paired-2/lane1_GGATCA_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-spretus/hiseq2000-paired-2/lane1_GGATCA_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-spretus/hiseq2000-paired-2/lane1_GGATCA_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-spretus/hiseq2000-paired-2/lane1_GGATCA_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 80968 duplicates.
+Finished exact matches.    Time: 35.138 seconds.
+Memory: max=30870m, total=30870m, free=26682m, used=4188m
+
+Input:                  	2703078 reads 		272639995 bases.
+Duplicates:             	80968 reads (3.00%) 	8162039 bases (2.99%)     	57620 collisions.
+Result:                 	2622110 reads (97.00%) 	264477956 bases (97.01%)
+
+Sorted output.             Time: 1.883 seconds.
+Memory: max=30870m, total=30870m, free=26682m, used=4188m
+
+Printed output.            Time: 21.002 seconds.
+Memory: max=30870m, total=30870m, free=25715m, used=5155m
+
+Time:                         	58.050 seconds.
+Reads Processed:       2703k 	46.56k reads/sec
+Bases Processed:        272m 	4.70m bases/sec

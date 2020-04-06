@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 415332
+total bases: 31371895
+Q20 bases: 30124049(96.0224%)
+Q30 bases: 29549661(94.1915%)
+
+Read1 after filtering:
+total reads: 412879
+total bases: 31183313
+Q20 bases: 30023174(96.2796%)
+Q30 bases: 29460472(94.4751%)
+
+Filtering result:
+reads passed filter: 412879
+reads failed due to low quality: 2376
+reads failed due to too many N: 1
+reads failed due to too short: 40
+reads failed due to low complexity: 36
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.68878%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Taeromys-punicans/nextseq-single-2/JLP25862_S31_L004_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Taeromys-punicans/nextseq-single-2/JLP25862_S31_L004_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Taeromys-punicans/nextseq-single-2/JLP25862_S31_L004_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Taeromys-punicans/nextseq-single-2/JLP25862_S31_L004_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Taeromys-punicans/nextseq-single-2/JLP25862_S31_L004_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Taeromys-punicans/nextseq-single-2/JLP25862_S31_L004_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 13 seconds

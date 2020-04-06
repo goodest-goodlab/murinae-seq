@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 403082 duplicates.
+Finished exact matches.    Time: 32.656 seconds.
+Memory: max=30870m, total=30870m, free=23749m, used=7121m
+
+Input:                  	6409802 reads 		480352952 bases.
+Duplicates:             	403082 reads (6.29%) 	30209913 bases (6.29%)     	321708 collisions.
+Result:                 	6006720 reads (93.71%) 	450143039 bases (93.71%)
+
+Sorted output.             Time: 3.915 seconds.
+Memory: max=30870m, total=30870m, free=23588m, used=7282m
+
+Printed output.            Time: 24.599 seconds.
+Memory: max=30870m, total=30870m, free=27276m, used=3594m
+
+Time:                         	61.196 seconds.
+Reads Processed:       6409k 	104.74k reads/sec
+Bases Processed:        480m 	7.85m bases/sec

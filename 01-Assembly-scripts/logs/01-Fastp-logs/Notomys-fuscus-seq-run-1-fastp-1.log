@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 8614076
+total bases: 870021676
+Q20 bases: 854425426(98.2074%)
+Q30 bases: 842112032(96.7921%)
+
+Read2 before filtering:
+total reads: 8614076
+total bases: 870021676
+Q20 bases: 844378515(97.0526%)
+Q30 bases: 827494936(95.112%)
+
+Read1 after filtering:
+total reads: 8550891
+total bases: 860891409
+Q20 bases: 846495328(98.3278%)
+Q30 bases: 834928767(96.9842%)
+
+Read2 aftering filtering:
+total reads: 8550891
+total bases: 860911840
+Q20 bases: 837286054(97.2557%)
+Q30 bases: 821333755(95.4028%)
+
+Filtering result:
+reads passed filter: 17101782
+reads failed due to low quality: 7946
+reads failed due to too many N: 2656
+reads failed due to too short: 107050
+reads failed due to low complexity: 8718
+reads with adapter trimmed: 500188
+bases trimmed due to adapters: 15838730
+
+Duplication rate: 17.5877%
+
+Insert size peak (evaluated by paired-end reads): 169
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-fuscus/seq-run-1/52924_AH7T2JBCX2_AGAAGAC_S7_L001_R.fastp.json 
+fastp v0.20.0, time used: 143 seconds

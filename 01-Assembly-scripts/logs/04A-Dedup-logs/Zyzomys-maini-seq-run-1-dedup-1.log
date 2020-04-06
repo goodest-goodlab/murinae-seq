@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 627518 duplicates.
+Finished exact matches.    Time: 80.021 seconds.
+Memory: max=30870m, total=30870m, free=25017m, used=5853m
+
+Input:                  	8227306 reads 		828994491 bases.
+Duplicates:             	627518 reads (7.63%) 	63203227 bases (7.62%)     	591834 collisions.
+Result:                 	7599788 reads (92.37%) 	765791264 bases (92.38%)
+
+Sorted output.             Time: 6.531 seconds.
+Memory: max=30870m, total=30870m, free=24695m, used=6175m
+
+Printed output.            Time: 57.991 seconds.
+Memory: max=30870m, total=30870m, free=22027m, used=8843m
+
+Time:                         	144.563 seconds.
+Reads Processed:       8227k 	56.91k reads/sec
+Bases Processed:        828m 	5.73m bases/sec

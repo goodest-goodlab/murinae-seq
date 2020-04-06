@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 12266 duplicates.
+Finished exact matches.    Time: 9.064 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+Input:                  	611780 reads 		47694909 bases.
+Duplicates:             	12266 reads (2.00%) 	956455 bases (2.01%)     	5022 collisions.
+Result:                 	599514 reads (98.00%) 	46738454 bases (97.99%)
+
+Sorted output.             Time: 0.314 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+Printed output.            Time: 7.083 seconds.
+Memory: max=30870m, total=30870m, free=28131m, used=2739m
+
+Time:                         	16.479 seconds.
+Reads Processed:        611k 	37.13k reads/sec
+Bases Processed:      47694k 	2.89m bases/sec

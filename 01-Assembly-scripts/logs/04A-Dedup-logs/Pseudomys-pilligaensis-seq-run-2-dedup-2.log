@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-pilligaensis/seq-run-2/52942_BH7T77BCX2_AGAATTA_S5_L002_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-pilligaensis/seq-run-2/52942_BH7T77BCX2_AGAATTA_S5_L002_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-pilligaensis/seq-run-2/52942_BH7T77BCX2_AGAATTA_S5_L002_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-pilligaensis/seq-run-2/52942_BH7T77BCX2_AGAATTA_S5_L002_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 162924 duplicates.
+Finished exact matches.    Time: 17.440 seconds.
+Memory: max=30870m, total=30870m, free=24855m, used=6015m
+
+Found 531835 contained sequences.
+Finished containment.      Time: 28.431 seconds.
+Memory: max=30870m, total=30870m, free=24245m, used=6625m
+
+Removed 531835 invalid entries.
+Finished invalid removal.  Time: 0.580 seconds.
+Memory: max=30870m, total=30870m, free=24245m, used=6625m
+
+Input:                  	1659703 reads 		291771001 bases.
+Duplicates:             	162924 reads (9.82%) 	27594940 bases (9.46%)     	0 collisions.
+Containments:           	531835 reads (32.04%) 	86646940 bases (29.70%)    	31365491 collisions.
+Result:                 	964944 reads (58.14%) 	177529121 bases (60.85%)
+
+Sorted output.             Time: 0.590 seconds.
+Memory: max=30870m, total=30870m, free=24165m, used=6705m
+
+Printed output.            Time: 8.335 seconds.
+Memory: max=30870m, total=30870m, free=23599m, used=7271m
+
+Time:                         	55.404 seconds.
+Reads Processed:       1659k 	29.96k reads/sec
+Bases Processed:        291m 	5.27m bases/sec

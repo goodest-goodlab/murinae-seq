@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/miseq-paired/JLP25862_S8_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/miseq-paired/JLP25862_S8_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Taeromys-punicans/miseq-paired/JLP25862_S8_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/miseq-paired/JLP25862_S8_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/miseq-paired/JLP25862_S8_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Taeromys-punicans/miseq-paired/JLP25862_S8_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 8096 duplicates.
+Finished exact matches.    Time: 6.289 seconds.
+Memory: max=30870m, total=30870m, free=28776m, used=2094m
+
+Input:                  	799172 reads 		62324184 bases.
+Duplicates:             	8096 reads (1.01%) 	631416 bases (1.01%)     	8084 collisions.
+Result:                 	791076 reads (98.99%) 	61692768 bases (98.99%)
+
+Sorted output.             Time: 0.304 seconds.
+Memory: max=30870m, total=30870m, free=28776m, used=2094m
+
+Printed output.            Time: 6.786 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+Time:                         	13.402 seconds.
+Reads Processed:        799k 	59.63k reads/sec
+Bases Processed:      62324k 	4.65m bases/sec

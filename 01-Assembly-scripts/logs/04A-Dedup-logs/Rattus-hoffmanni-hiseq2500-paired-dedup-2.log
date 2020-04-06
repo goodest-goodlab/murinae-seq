@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq2500-paired/lane2_CCGATT_R1_001.fastp.decon.unmerged.fastq.gz in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq2500-paired/lane2_CCGATT_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Rattus-hoffmanni/hiseq2500-paired/lane2_CCGATT_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq2500-paired/lane2_CCGATT_R1_001.fastp.decon.unmerged.fastq.gz, in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq2500-paired/lane2_CCGATT_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-intermediate/Rattus-hoffmanni/hiseq2500-paired/lane2_CCGATT_001.fastp.decon.unmerged.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 483158 duplicates.
+Finished exact matches.    Time: 30.334 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Input:                  	3478204 reads 		349193569 bases.
+Duplicates:             	483158 reads (13.89%) 	48240300 bases (13.81%)     	163288 collisions.
+Result:                 	2995046 reads (86.11%) 	300953269 bases (86.19%)
+
+Sorted output.             Time: 1.319 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Printed output.            Time: 39.242 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Time:                         	70.946 seconds.
+Reads Processed:       3478k 	49.03k reads/sec
+Bases Processed:        349m 	4.92m bases/sec

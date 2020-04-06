@@ -1,0 +1,35 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L002_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 697762 duplicates.
+Finished exact matches.    Time: 49.114 seconds.
+Memory: max=30870m, total=30870m, free=22875m, used=7995m
+
+Found 1750369 contained sequences.
+Finished containment.      Time: 97.972 seconds.
+Memory: max=30870m, total=30870m, free=22526m, used=8344m
+
+Removed 1750369 invalid entries.
+Finished invalid removal.  Time: 1.298 seconds.
+Memory: max=30870m, total=30870m, free=22474m, used=8396m
+
+Input:                  	4464741 reads 		806468139 bases.
+Duplicates:             	697762 reads (15.63%) 	121016773 bases (15.01%)     	0 collisions.
+Containments:           	1750369 reads (39.20%) 	296742218 bases (36.80%)    	189414080 collisions.
+Result:                 	2016610 reads (45.17%) 	388709148 bases (48.20%)
+
+Sorted output.             Time: 0.835 seconds.
+Memory: max=30870m, total=30870m, free=22422m, used=8448m
+
+Printed output.            Time: 24.783 seconds.
+Memory: max=29582m, total=29582m, free=27276m, used=2306m
+
+Time:                         	174.026 seconds.
+Reads Processed:       4464k 	25.66k reads/sec
+Bases Processed:        806m 	4.63m bases/sec
+

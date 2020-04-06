@@ -1,0 +1,39 @@
+INFO	2020-01-15 02:03:32	MarkDuplicates	
+
+********** NOTE: Picard's command line syntax is changing.
+**********
+********** For more information, please see:
+********** https://github.com/broadinstitute/picard/wiki/Command-Line-Syntax-Transition-For-Users-(Pre-Transition)
+**********
+********** The command line looks like this in the new syntax:
+**********
+**********    MarkDuplicates -I /scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Mus-pos_ctrl_D2/Mus-pos_ctrl_D2.sorted.bam -O /scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Mus-pos_ctrl_D2/Mus-pos_ctrl_D2.sorted.mkdup.bam -M /scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Mus-pos_ctrl_D2/Mus-pos_ctrl_D2-mkdup-metrics.txt
+**********
+
+
+02:03:33.455 INFO  NativeLibraryLoader - Loading libgkl_compression.so from jar:file:/home/gregg_thomas/bin/picard.jar!/com/intel/gkl/native/libgkl_compression.so
+[Wed Jan 15 02:03:33 UTC 2020] MarkDuplicates INPUT=[/scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Mus-pos_ctrl_D2/Mus-pos_ctrl_D2.sorted.bam] OUTPUT=/scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Mus-pos_ctrl_D2/Mus-pos_ctrl_D2.sorted.mkdup.bam METRICS_FILE=/scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/Mus-pos_ctrl_D2/Mus-pos_ctrl_D2-mkdup-metrics.txt    MAX_SEQUENCES_FOR_DISK_READ_ENDS_MAP=50000 MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=8000 SORTING_COLLECTION_SIZE_RATIO=0.25 TAG_DUPLICATE_SET_MEMBERS=false REMOVE_SEQUENCING_DUPLICATES=false TAGGING_POLICY=DontTag CLEAR_DT=true DUPLEX_UMI=false ADD_PG_TAG_TO_READS=true REMOVE_DUPLICATES=false ASSUME_SORTED=false DUPLICATE_SCORING_STRATEGY=SUM_OF_BASE_QUALITIES PROGRAM_RECORD_ID=MarkDuplicates PROGRAM_GROUP_NAME=MarkDuplicates READ_NAME_REGEX=<optimized capture of last three ':' separated fields as numeric values> OPTICAL_DUPLICATE_PIXEL_DISTANCE=100 MAX_OPTICAL_DUPLICATE_SET_SIZE=300000 VERBOSITY=INFO QUIET=false VALIDATION_STRINGENCY=STRICT COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false CREATE_MD5_FILE=false GA4GH_CLIENT_SECRETS=client_secrets.json USE_JDK_DEFLATER=false USE_JDK_INFLATER=false
+[Wed Jan 15 02:03:33 UTC 2020] Executing as gregg_thomas@ecae4883a231 on Linux 4.4.0-104-generic amd64; Java HotSpot(TM) 64-Bit Server VM 1.8.0_221-b11; Deflater: Intel; Inflater: Intel; Provider GCS is not available; Picard version: 2.20.6-SNAPSHOT
+INFO	2020-01-15 02:03:34	MarkDuplicates	Start of doWork freeMemory: 2037674664; totalMemory: 2058354688; maxMemory: 28631367680
+INFO	2020-01-15 02:03:34	MarkDuplicates	Reading input file and constructing read end information.
+INFO	2020-01-15 02:03:34	MarkDuplicates	Will retain up to 103736839 data points before spilling to disk.
+INFO	2020-01-15 02:04:10	MarkDuplicates	Read     1,000,000 records.  Elapsed time: 00:00:32s.  Time for last 1,000,000:   32s.  Last read position: chr9:22,258,871
+INFO	2020-01-15 02:04:10	MarkDuplicates	Tracking 6231 as yet unmatched pairs. 535 records in RAM.
+INFO	2020-01-15 02:04:41	MarkDuplicates	Read 1909434 records. 0 pairs never matched.
+INFO	2020-01-15 02:04:48	MarkDuplicates	After buildSortedReadEndLists freeMemory: 4708415224; totalMemory: 5829558272; maxMemory: 28631367680
+INFO	2020-01-15 02:04:48	MarkDuplicates	Will retain up to 894730240 duplicate indices before spilling to disk.
+INFO	2020-01-15 02:05:12	MarkDuplicates	Traversing read pair information and detecting duplicates.
+INFO	2020-01-15 02:05:15	MarkDuplicates	Traversing fragment information and detecting duplicates.
+INFO	2020-01-15 02:05:22	MarkDuplicates	Sorting list of duplicate records.
+INFO	2020-01-15 02:05:23	MarkDuplicates	After generateDuplicateIndexes freeMemory: 8472129080; totalMemory: 15767437312; maxMemory: 28631367680
+INFO	2020-01-15 02:05:23	MarkDuplicates	Marking 730314 records as duplicates.
+INFO	2020-01-15 02:05:23	MarkDuplicates	Found 11480 optical duplicate clusters.
+INFO	2020-01-15 02:05:23	MarkDuplicates	Reads are assumed to be ordered by: coordinate
+INFO	2020-01-15 02:06:34	MarkDuplicates	Writing complete. Closing input iterator.
+INFO	2020-01-15 02:06:34	MarkDuplicates	Duplicate Index cleanup.
+INFO	2020-01-15 02:06:34	MarkDuplicates	Getting Memory Stats.
+INFO	2020-01-15 02:06:35	MarkDuplicates	Before output close freeMemory: 15631256376; totalMemory: 15766913024; maxMemory: 28631367680
+INFO	2020-01-15 02:06:35	MarkDuplicates	Closed outputs. Getting more Memory Stats.
+INFO	2020-01-15 02:06:35	MarkDuplicates	After output close freeMemory: 15630287944; totalMemory: 15765864448; maxMemory: 28631367680
+[Wed Jan 15 02:06:35 UTC 2020] picard.sam.markduplicates.MarkDuplicates done. Elapsed time: 3.04 minutes.
+Runtime.totalMemory()=15765864448

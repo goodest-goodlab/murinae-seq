@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-praetor/hiseq-paired/praetorWGA_CAGTAC_L008_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-praetor/hiseq-paired/praetorWGA_CAGTAC_L008_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-praetor/hiseq-paired/praetorWGA_CAGTAC_L008_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-praetor/hiseq-paired/praetorWGA_CAGTAC_L008_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-praetor/hiseq-paired/praetorWGA_CAGTAC_L008_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-praetor/hiseq-paired/praetorWGA_CAGTAC_L008_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 50844 duplicates.
+Finished exact matches.    Time: 16.715 seconds.
+Memory: max=30870m, total=30870m, free=27970m, used=2900m
+
+Input:                  	1290310 reads 		128489782 bases.
+Duplicates:             	50844 reads (3.94%) 	5045099 bases (3.93%)     	24944 collisions.
+Result:                 	1239466 reads (96.06%) 	123444683 bases (96.07%)
+
+Sorted output.             Time: 0.891 seconds.
+Memory: max=30870m, total=30870m, free=27970m, used=2900m
+
+Printed output.            Time: 11.917 seconds.
+Memory: max=30870m, total=30870m, free=27487m, used=3383m
+
+Time:                         	29.543 seconds.
+Reads Processed:       1290k 	43.68k reads/sec
+Bases Processed:        128m 	4.35m bases/sec

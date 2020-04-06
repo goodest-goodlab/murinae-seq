@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-musculus-musculus/hiseq2000-paired-1/10460X14_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-musculus/hiseq2000-paired-1/10460X14_131030_SN141_0734_AC2RLAACXX_7_R1_.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-musculus/hiseq2000-paired-1/10460X14_131030_SN141_0734_AC2RLAACXX_7_R2_.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-musculus-musculus/hiseq2000-paired-1/10460X14_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-musculus/hiseq2000-paired-1/10460X14_131030_SN141_0734_AC2RLAACXX_7_R1_.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-musculus/hiseq2000-paired-1/10460X14_131030_SN141_0734_AC2RLAACXX_7_R2_.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	2883962 reads          	287574681 bases
+Output:                 	2883962 reads (100.00%) 	287574681 bases (100.00%)
+
+Time:                         	20.704 seconds.
+Reads Processed:       2883k 	139.29k reads/sec
+Bases Processed:        287m 	13.89m bases/sec

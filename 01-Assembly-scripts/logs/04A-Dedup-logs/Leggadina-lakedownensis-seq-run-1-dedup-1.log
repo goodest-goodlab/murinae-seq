@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leggadina-lakedownensis/seq-run-1/52919_AH7T2JBCX2_ACGTATG_S2_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leggadina-lakedownensis/seq-run-1/52919_AH7T2JBCX2_ACGTATG_S2_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Leggadina-lakedownensis/seq-run-1/52919_AH7T2JBCX2_ACGTATG_S2_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leggadina-lakedownensis/seq-run-1/52919_AH7T2JBCX2_ACGTATG_S2_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leggadina-lakedownensis/seq-run-1/52919_AH7T2JBCX2_ACGTATG_S2_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Leggadina-lakedownensis/seq-run-1/52919_AH7T2JBCX2_ACGTATG_S2_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 1181902 duplicates.
+Finished exact matches.    Time: 93.385 seconds.
+Memory: max=30870m, total=30870m, free=23359m, used=7511m
+
+Input:                  	10172176 reads 		1025488382 bases.
+Duplicates:             	1181902 reads (11.62%) 	119100623 bases (11.61%)     	442480 collisions.
+Result:                 	8990274 reads (88.38%) 	906387759 bases (88.39%)
+
+Sorted output.             Time: 3.847 seconds.
+Memory: max=30870m, total=30870m, free=23037m, used=7833m
+
+Printed output.            Time: 56.185 seconds.
+Memory: max=30870m, total=30870m, free=19804m, used=11066m
+
+Time:                         	153.442 seconds.
+Reads Processed:      10172k 	66.29k reads/sec
+Bases Processed:       1025m 	6.68m bases/sec

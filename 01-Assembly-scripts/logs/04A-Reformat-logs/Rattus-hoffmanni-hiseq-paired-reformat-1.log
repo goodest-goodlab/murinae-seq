@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.ReformatReads in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Reformat/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Reformat/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	1429898 reads          	142123639 bases
+Output:                 	1429898 reads (100.00%) 	142123639 bases (100.00%)
+
+Time:                         	14.230 seconds.
+Reads Processed:       1429k 	100.48k reads/sec
+Bases Processed:        142m 	9.99m bases/sec

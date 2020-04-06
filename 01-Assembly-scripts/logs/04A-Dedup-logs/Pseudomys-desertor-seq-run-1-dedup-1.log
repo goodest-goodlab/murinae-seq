@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-desertor/seq-run-1/52925_AH7T2JBCX2_GTCCGGC_S8_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-desertor/seq-run-1/52925_AH7T2JBCX2_GTCCGGC_S8_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-desertor/seq-run-1/52925_AH7T2JBCX2_GTCCGGC_S8_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-desertor/seq-run-1/52925_AH7T2JBCX2_GTCCGGC_S8_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-desertor/seq-run-1/52925_AH7T2JBCX2_GTCCGGC_S8_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-desertor/seq-run-1/52925_AH7T2JBCX2_GTCCGGC_S8_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 508964 duplicates.
+Finished exact matches.    Time: 42.117 seconds.
+Memory: max=30870m, total=30870m, free=24233m, used=6637m
+
+Input:                  	5812440 reads 		585203122 bases.
+Duplicates:             	508964 reads (8.76%) 	51179563 bases (8.75%)     	193379 collisions.
+Result:                 	5303476 reads (91.24%) 	534023559 bases (91.25%)
+
+Sorted output.             Time: 2.025 seconds.
+Memory: max=30870m, total=30870m, free=24071m, used=6799m
+
+Printed output.            Time: 34.266 seconds.
+Memory: max=30870m, total=30870m, free=28604m, used=2266m
+
+Time:                         	78.427 seconds.
+Reads Processed:       5812k 	74.11k reads/sec
+Bases Processed:        585m 	7.46m bases/sec

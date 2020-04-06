@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Conilurus-penicillatus/seq-run-2/53920_HTVLWBCX2_GCTCGAA_S8_L002_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 175175 duplicates.
+Finished exact matches.    Time: 20.711 seconds.
+Memory: max=30870m, total=30870m, free=23373m, used=7497m
+
+Found 416800 contained sequences.
+Finished containment.      Time: 26.949 seconds.
+Memory: max=30870m, total=30870m, free=29267m, used=1603m
+
+Removed 416800 invalid entries.
+Finished invalid removal.  Time: 0.928 seconds.
+Memory: max=30870m, total=30870m, free=29267m, used=1603m
+
+Input:                  	1486585 reads 		268637839 bases.
+Duplicates:             	175175 reads (11.78%) 	31160654 bases (11.60%)     	0 collisions.
+Containments:           	416800 reads (28.04%) 	70516964 bases (26.25%)    	18155711 collisions.
+Result:                 	894610 reads (60.18%) 	166960221 bases (62.15%)
+
+Sorted output.             Time: 0.678 seconds.
+Memory: max=30870m, total=30870m, free=29267m, used=1603m
+
+Printed output.            Time: 11.314 seconds.
+Memory: max=30870m, total=30870m, free=28730m, used=2140m
+
+Time:                         	60.605 seconds.
+Reads Processed:       1486k 	24.53k reads/sec
+Bases Processed:        268m 	4.43m bases/sec

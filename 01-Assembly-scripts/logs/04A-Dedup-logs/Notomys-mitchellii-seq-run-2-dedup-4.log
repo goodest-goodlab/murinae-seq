@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 91234 duplicates.
+Finished exact matches.    Time: 25.830 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Input:                  	2923874 reads 		294285563 bases.
+Duplicates:             	91234 reads (3.12%) 	9173597 bases (3.12%)     	77985 collisions.
+Result:                 	2832640 reads (96.88%) 	285111966 bases (96.88%)
+
+Sorted output.             Time: 1.358 seconds.
+Memory: max=30870m, total=30870m, free=26521m, used=4349m
+
+Printed output.            Time: 23.994 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Time:                         	51.206 seconds.
+Reads Processed:       2923k 	57.10k reads/sec
+Bases Processed:        294m 	5.75m bases/sec

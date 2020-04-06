@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 549119
+total bases: 41485700
+Q20 bases: 39583493(95.4148%)
+Q30 bases: 38740689(93.3832%)
+
+Read1 after filtering:
+total reads: 544831
+total bases: 41157059
+Q20 bases: 39405883(95.7451%)
+Q30 bases: 38583726(93.7475%)
+
+Filtering result:
+reads passed filter: 544831
+reads failed due to low quality: 4074
+reads failed due to too many N: 39
+reads failed due to too short: 80
+reads failed due to low complexity: 95
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 3.90438%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Malacomys-longipes/nextseq-single-1/TCD4253_S36_L002_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Malacomys-longipes/nextseq-single-1/TCD4253_S36_L002_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Malacomys-longipes/nextseq-single-1/TCD4253_S36_L002_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Malacomys-longipes/nextseq-single-1/TCD4253_S36_L002_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Malacomys-longipes/nextseq-single-1/TCD4253_S36_L002_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Malacomys-longipes/nextseq-single-1/TCD4253_S36_L002_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 16 seconds

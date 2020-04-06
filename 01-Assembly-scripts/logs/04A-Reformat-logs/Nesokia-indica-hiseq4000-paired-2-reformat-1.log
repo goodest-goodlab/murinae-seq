@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Nesokia-indica/hiseq4000-paired-2/SM053_CKDL190143345-1a-D701-AK1682_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Nesokia-indica/hiseq4000-paired-2/SM053_CKDL190143345-1a-D701-AK1682_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Nesokia-indica/hiseq4000-paired-2/SM053_CKDL190143345-1a-D701-AK1682_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Nesokia-indica/hiseq4000-paired-2/SM053_CKDL190143345-1a-D701-AK1682_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Nesokia-indica/hiseq4000-paired-2/SM053_CKDL190143345-1a-D701-AK1682_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Nesokia-indica/hiseq4000-paired-2/SM053_CKDL190143345-1a-D701-AK1682_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	6278004 reads          	919731810 bases
+Output:                 	6278004 reads (100.00%) 	919731810 bases (100.00%)
+
+Time:                         	39.920 seconds.
+Reads Processed:       6278k 	157.27k reads/sec
+Bases Processed:        919m 	23.04m bases/sec

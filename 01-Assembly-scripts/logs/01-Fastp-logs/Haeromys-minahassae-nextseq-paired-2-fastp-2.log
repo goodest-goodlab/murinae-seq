@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2365844
+total bases: 178716020
+Q20 bases: 171358613(95.8832%)
+Q30 bases: 168191776(94.1112%)
+
+Read2 before filtering:
+total reads: 2365844
+total bases: 178708717
+Q20 bases: 165287682(92.49%)
+Q30 bases: 160388613(89.7486%)
+
+Read1 after filtering:
+total reads: 2276343
+total bases: 171820403
+Q20 bases: 165969228(96.5946%)
+Q30 bases: 163171180(94.9661%)
+
+Read2 aftering filtering:
+total reads: 2276343
+total bases: 171832247
+Q20 bases: 161780185(94.1501%)
+Q30 bases: 157399913(91.6009%)
+
+Filtering result:
+reads passed filter: 4552686
+reads failed due to low quality: 168616
+reads failed due to too many N: 770
+reads failed due to too short: 7902
+reads failed due to low complexity: 1714
+reads with adapter trimmed: 9484
+bases trimmed due to adapters: 264697
+
+Duplication rate: 7.00236%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Haeromys-minahassae/nextseq-paired-2/JAE4996_S31_L003_R.fastp.json 
+fastp v0.20.0, time used: 32 seconds

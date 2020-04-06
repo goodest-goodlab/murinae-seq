@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Phloeomys-pallidus/nextseq-paired-1/JEC43_S5_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Phloeomys-pallidus/nextseq-paired-1/JEC43_S5_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Phloeomys-pallidus/nextseq-paired-1/JEC43_S5_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Phloeomys-pallidus/nextseq-paired-1/JEC43_S5_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Phloeomys-pallidus/nextseq-paired-1/JEC43_S5_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Phloeomys-pallidus/nextseq-paired-1/JEC43_S5_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 1133398 duplicates.
+Finished exact matches.    Time: 45.510 seconds.
+Memory: max=30870m, total=30870m, free=23983m, used=6887m
+
+Input:                  	9822672 reads 		736186848 bases.
+Duplicates:             	1133398 reads (11.54%) 	84959498 bases (11.54%)     	825265 collisions.
+Result:                 	8689274 reads (88.46%) 	651227350 bases (88.46%)
+
+Sorted output.             Time: 4.018 seconds.
+Memory: max=30870m, total=30870m, free=23661m, used=7209m
+
+Printed output.            Time: 34.097 seconds.
+Memory: max=30870m, total=30870m, free=20993m, used=9877m
+
+Time:                         	83.642 seconds.
+Reads Processed:       9822k 	117.44k reads/sec
+Bases Processed:        736m 	8.80m bases/sec

@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-castaneus/hiseq2000-paired-2/lane1_CTCGAT_L001_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-castaneus/hiseq2000-paired-2/lane1_CTCGAT_L001_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-musculus-castaneus/hiseq2000-paired-2/lane1_CTCGAT_L001_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-musculus-castaneus/hiseq2000-paired-2/lane1_CTCGAT_L001_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 557198 duplicates.
+Finished exact matches.    Time: 93.948 seconds.
+Memory: max=30870m, total=30870m, free=22532m, used=8338m
+
+Found 2388841 contained sequences.
+Finished containment.      Time: 61.923 seconds.
+Memory: max=30870m, total=30870m, free=21943m, used=8927m
+
+Removed 2388841 invalid entries.
+Finished invalid removal.  Time: 2.534 seconds.
+Memory: max=30870m, total=30870m, free=21891m, used=8979m
+
+Input:                  	4911792 reads 		837537923 bases.
+Duplicates:             	557198 reads (11.34%) 	90197308 bases (10.77%)     	0 collisions.
+Containments:           	2388841 reads (48.63%) 	370692675 bases (44.26%)    	55355302 collisions.
+Result:                 	1965753 reads (40.02%) 	376647940 bases (44.97%)
+
+Sorted output.             Time: 0.888 seconds.
+Memory: max=30870m, total=30870m, free=21839m, used=9031m
+
+Printed output.            Time: 36.504 seconds.
+Memory: max=30870m, total=30870m, free=28480m, used=2390m
+
+Time:                         	195.815 seconds.
+Reads Processed:       4911k 	25.08k reads/sec
+Bases Processed:        837m 	4.28m bases/sec

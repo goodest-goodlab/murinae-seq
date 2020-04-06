@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 6113224
+total bases: 617435624
+Q20 bases: 601911956(97.4858%)
+Q30 bases: 586134752(94.9305%)
+
+Read2 before filtering:
+total reads: 6113224
+total bases: 617435624
+Q20 bases: 584536351(94.6716%)
+Q30 bases: 565511668(91.5904%)
+
+Read1 after filtering:
+total reads: 5722528
+total bases: 573455363
+Q20 bases: 568980701(99.2197%)
+Q30 bases: 556441517(97.0331%)
+
+Read2 aftering filtering:
+total reads: 5722528
+total bases: 573452330
+Q20 bases: 567148988(98.9008%)
+Q30 bases: 551130504(96.1075%)
+
+Filtering result:
+reads passed filter: 11445056
+reads failed due to low quality: 715960
+reads failed due to too many N: 53946
+reads failed due to too short: 11110
+reads failed due to low complexity: 376
+reads with adapter trimmed: 520447
+bases trimmed due to adapters: 10346902
+
+Duplication rate: 33.288%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-andrewsi/hiseq2500-paired/lane2_GATGCC_R.fastp.json 
+fastp v0.20.0, time used: 97 seconds

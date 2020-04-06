@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 215978 duplicates.
+Finished exact matches.    Time: 34.754 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Input:                  	4537106 reads 		342445255 bases.
+Duplicates:             	215978 reads (4.76%) 	16311776 bases (4.76%)     	123270 collisions.
+Result:                 	4321128 reads (95.24%) 	326133479 bases (95.24%)
+
+Sorted output.             Time: 2.328 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Printed output.            Time: 20.456 seconds.
+Memory: max=30870m, total=30870m, free=23910m, used=6960m
+
+Time:                         	57.558 seconds.
+Reads Processed:       4537k 	78.83k reads/sec
+Bases Processed:        342m 	5.95m bases/sec

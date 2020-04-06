@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 4827666
+total bases: 487594266
+Q20 bases: 477588430(97.9479%)
+Q30 bases: 469396448(96.2678%)
+
+Read2 before filtering:
+total reads: 4827666
+total bases: 487594266
+Q20 bases: 465692370(95.5082%)
+Q30 bases: 451922355(92.6841%)
+
+Read1 after filtering:
+total reads: 4808563
+total bases: 483982770
+Q20 bases: 474232231(97.9854%)
+Q30 bases: 466204384(96.3266%)
+
+Read2 aftering filtering:
+total reads: 4808563
+total bases: 483992709
+Q20 bases: 463512731(95.7685%)
+Q30 bases: 450066340(92.9903%)
+
+Filtering result:
+reads passed filter: 9617126
+reads failed due to low quality: 21960
+reads failed due to too many N: 7210
+reads failed due to too short: 6396
+reads failed due to low complexity: 2640
+reads with adapter trimmed: 198995
+bases trimmed due to adapters: 3956318
+
+Duplication rate: 11.0517%
+
+Insert size peak (evaluated by paired-end reads): 164
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-colletti/seq-run-2/52951_BH7T77BCX2_GCTAATC_S14_L002_R.fastp.json 
+fastp v0.20.0, time used: 85 seconds

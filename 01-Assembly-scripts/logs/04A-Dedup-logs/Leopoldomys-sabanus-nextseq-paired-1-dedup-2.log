@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leopoldomys-sabanus/nextseq-paired-1/Z25191_S21_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leopoldomys-sabanus/nextseq-paired-1/Z25191_S21_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Leopoldomys-sabanus/nextseq-paired-1/Z25191_S21_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leopoldomys-sabanus/nextseq-paired-1/Z25191_S21_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Leopoldomys-sabanus/nextseq-paired-1/Z25191_S21_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Leopoldomys-sabanus/nextseq-paired-1/Z25191_S21_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 614694 duplicates.
+Finished exact matches.    Time: 59.638 seconds.
+Memory: max=30870m, total=30870m, free=23888m, used=6982m
+
+Input:                  	9636104 reads 		721790184 bases.
+Duplicates:             	614694 reads (6.38%) 	46046808 bases (6.38%)     	581084 collisions.
+Result:                 	9021410 reads (93.62%) 	675743376 bases (93.62%)
+
+Sorted output.             Time: 3.387 seconds.
+Memory: max=30870m, total=30870m, free=23566m, used=7304m
+
+Printed output.            Time: 36.915 seconds.
+Memory: max=30870m, total=30870m, free=20737m, used=10133m
+
+Time:                         	99.959 seconds.
+Reads Processed:       9636k 	96.40k reads/sec
+Bases Processed:        721m 	7.22m bases/sec

@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 269210 duplicates.
+Finished exact matches.    Time: 39.791 seconds.
+Memory: max=30870m, total=30870m, free=24588m, used=6282m
+
+Input:                  	5272314 reads 		531845822 bases.
+Duplicates:             	269210 reads (5.11%) 	27143416 bases (5.10%)     	125310 collisions.
+Result:                 	5003104 reads (94.89%) 	504702406 bases (94.90%)
+
+Sorted output.             Time: 1.909 seconds.
+Memory: max=30870m, total=30870m, free=24427m, used=6443m
+
+Printed output.            Time: 38.464 seconds.
+Memory: max=30870m, total=30870m, free=29721m, used=1149m
+
+Time:                         	80.186 seconds.
+Reads Processed:       5272k 	65.75k reads/sec
+Bases Processed:        531m 	6.63m bases/sec

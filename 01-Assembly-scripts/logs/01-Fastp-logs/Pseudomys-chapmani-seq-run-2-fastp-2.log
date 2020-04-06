@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 5685059
+total bases: 574190959
+Q20 bases: 562103131(97.8948%)
+Q30 bases: 552449013(96.2135%)
+
+Read2 before filtering:
+total reads: 5685059
+total bases: 574190959
+Q20 bases: 551462794(96.0417%)
+Q30 bases: 536630486(93.4585%)
+
+Read1 after filtering:
+total reads: 5680287
+total bases: 572964676
+Q20 bases: 561045962(97.9198%)
+Q30 bases: 551483342(96.2508%)
+
+Read2 aftering filtering:
+total reads: 5680287
+total bases: 572964676
+Q20 bases: 550515090(96.0819%)
+Q30 bases: 535812631(93.5158%)
+
+Filtering result:
+reads passed filter: 11360574
+reads failed due to low quality: 1578
+reads failed due to too many N: 2562
+reads failed due to too short: 0
+reads failed due to low complexity: 5404
+reads with adapter trimmed: 57982
+bases trimmed due to adapters: 1490564
+
+Duplication rate: 11.1614%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-chapmani/seq-run-2/52926_AH7T7NBCX2_TCAGCTT_S9_L002_R.fastp.json 
+fastp v0.20.0, time used: 90 seconds

@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-andrewsi/hiseq-paired/andrewsii-WGA_GATGCC_L007_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-andrewsi/hiseq-paired/andrewsii-WGA_GATGCC_L007_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Bunomys-andrewsi/hiseq-paired/andrewsii-WGA_GATGCC_L007_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-andrewsi/hiseq-paired/andrewsii-WGA_GATGCC_L007_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Bunomys-andrewsi/hiseq-paired/andrewsii-WGA_GATGCC_L007_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Bunomys-andrewsi/hiseq-paired/andrewsii-WGA_GATGCC_L007_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 116392 duplicates.
+Finished exact matches.    Time: 12.069 seconds.
+Memory: max=30870m, total=30870m, free=27165m, used=3705m
+
+Input:                  	2284298 reads 		227970733 bases.
+Duplicates:             	116392 reads (5.10%) 	11608256 bases (5.09%)     	54366 collisions.
+Result:                 	2167906 reads (94.90%) 	216362477 bases (94.91%)
+
+Sorted output.             Time: 0.528 seconds.
+Memory: max=30870m, total=30870m, free=27165m, used=3705m
+
+Printed output.            Time: 17.018 seconds.
+Memory: max=30870m, total=30870m, free=26360m, used=4510m
+
+Time:                         	29.632 seconds.
+Reads Processed:       2284k 	77.09k reads/sec
+Bases Processed:        227m 	7.69m bases/sec

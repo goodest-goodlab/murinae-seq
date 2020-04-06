@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 517840
+total bases: 39117814
+Q20 bases: 37285401(95.3157%)
+Q30 bases: 36481701(93.2611%)
+
+Read1 after filtering:
+total reads: 512193
+total bases: 38686367
+Q20 bases: 37060360(95.797%)
+Q30 bases: 36289577(93.8046%)
+
+Filtering result:
+reads passed filter: 512193
+reads failed due to low quality: 5526
+reads failed due to too many N: 11
+reads failed due to too short: 67
+reads failed due to low complexity: 43
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.82127%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melomys-rufescens/nextseq-single-1/ABTC44798_S58_L004_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melomys-rufescens/nextseq-single-1/ABTC44798_S58_L004_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Melomys-rufescens/nextseq-single-1/ABTC44798_S58_L004_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melomys-rufescens/nextseq-single-1/ABTC44798_S58_L004_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melomys-rufescens/nextseq-single-1/ABTC44798_S58_L004_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melomys-rufescens/nextseq-single-1/ABTC44798_S58_L004_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 15 seconds

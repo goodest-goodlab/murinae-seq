@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16489174
+total bases: 2473376100
+Q20 bases: 2427310674(98.1375%)
+Q30 bases: 2360688543(95.444%)
+
+Read2 before filtering:
+total reads: 16489174
+total bases: 2473376100
+Q20 bases: 2387835443(96.5415%)
+Q30 bases: 2288426726(92.5224%)
+
+Read1 after filtering:
+total reads: 16198984
+total bases: 2391010075
+Q20 bases: 2354103184(98.4564%)
+Q30 bases: 2294985141(95.9839%)
+
+Read2 aftering filtering:
+total reads: 16198984
+total bases: 2391041962
+Q20 bases: 2325774540(97.2703%)
+Q30 bases: 2236771900(93.548%)
+
+Filtering result:
+reads passed filter: 32397968
+reads failed due to low quality: 544168
+reads failed due to too many N: 1004
+reads failed due to too short: 2656
+reads failed due to low complexity: 32552
+reads with adapter trimmed: 2322126
+bases trimmed due to adapters: 78237161
+
+Duplication rate: 38.7271%
+
+Insert size peak (evaluated by paired-end reads): 268
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Crunomys-sp./hiseq4000-paired-1/REC6_CKDL190143344-1a-D704-AK1544_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 322 seconds

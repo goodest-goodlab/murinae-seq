@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Notomys-macrotis/seq-run-2/53929_HTVLWBCX2_AGGTACC_S17_L001_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-macrotis/seq-run-2/53929_HTVLWBCX2_AGGTACC_S17_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-macrotis/seq-run-2/53929_HTVLWBCX2_AGGTACC_S17_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Notomys-macrotis/seq-run-2/53929_HTVLWBCX2_AGGTACC_S17_L001_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-macrotis/seq-run-2/53929_HTVLWBCX2_AGGTACC_S17_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-macrotis/seq-run-2/53929_HTVLWBCX2_AGGTACC_S17_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	4128464 reads          	345600291 bases
+Output:                 	4128464 reads (100.00%) 	345600291 bases (100.00%)
+
+Time:                         	23.415 seconds.
+Reads Processed:       4128k 	176.32k reads/sec
+Bases Processed:        345m 	14.76m bases/sec

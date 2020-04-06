@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3781779
+total bases: 285675575
+Q20 bases: 274525308(96.0969%)
+Q30 bases: 269790568(94.4395%)
+
+Read2 before filtering:
+total reads: 3781779
+total bases: 285574015
+Q20 bases: 264731107(92.7014%)
+Q30 bases: 257248324(90.0811%)
+
+Read1 after filtering:
+total reads: 3630050
+total bases: 274035054
+Q20 bases: 265211292(96.7801%)
+Q30 bases: 261056855(95.264%)
+
+Read2 aftering filtering:
+total reads: 3630050
+total bases: 274054632
+Q20 bases: 259056017(94.5271%)
+Q30 bases: 252443402(92.1143%)
+
+Filtering result:
+reads passed filter: 7260100
+reads failed due to low quality: 287966
+reads failed due to too many N: 3210
+reads failed due to too short: 10486
+reads failed due to low complexity: 1796
+reads with adapter trimmed: 12662
+bases trimmed due to adapters: 311865
+
+Duplication rate: 8.44849%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hylomyscus-vulcanorum/nextseq-paired-2/TCD4382_S5_L002_R.fastp.json 
+fastp v0.20.0, time used: 43 seconds

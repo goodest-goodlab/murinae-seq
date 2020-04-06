@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 112990 duplicates.
+Finished exact matches.    Time: 18.257 seconds.
+Memory: max=30870m, total=30870m, free=27326m, used=3544m
+
+Input:                  	2258724 reads 		227590008 bases.
+Duplicates:             	112990 reads (5.00%) 	11377090 bases (5.00%)     	44010 collisions.
+Result:                 	2145734 reads (95.00%) 	216212918 bases (95.00%)
+
+Sorted output.             Time: 1.584 seconds.
+Memory: max=30870m, total=30870m, free=27165m, used=3705m
+
+Printed output.            Time: 18.972 seconds.
+Memory: max=30870m, total=30870m, free=26360m, used=4510m
+
+Time:                         	38.835 seconds.
+Reads Processed:       2258k 	58.16k reads/sec
+Bases Processed:        227m 	5.86m bases/sec

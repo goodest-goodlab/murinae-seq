@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16803139
+total bases: 2520470850
+Q20 bases: 2479939845(98.3919%)
+Q30 bases: 2419779076(96.005%)
+
+Read2 before filtering:
+total reads: 16803139
+total bases: 2520470850
+Q20 bases: 2447801357(97.1168%)
+Q30 bases: 2361270597(93.6837%)
+
+Read1 after filtering:
+total reads: 16551431
+total bases: 2431905886
+Q20 bases: 2399795230(98.6796%)
+Q30 bases: 2346369317(96.4827%)
+
+Read2 aftering filtering:
+total reads: 16551431
+total bases: 2431934012
+Q20 bases: 2378500263(97.8028%)
+Q30 bases: 2301292366(94.6281%)
+
+Filtering result:
+reads passed filter: 33102862
+reads failed due to low quality: 465674
+reads failed due to too many N: 394
+reads failed due to too short: 12052
+reads failed due to low complexity: 25296
+reads with adapter trimmed: 3181481
+bases trimmed due to adapters: 102566109
+
+Duplication rate: 40.8416%
+
+Insert size peak (evaluated by paired-end reads): 252
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-russatus/hiseq4000-paired-2/REC28_CKDL190143345-1a-D706-AK1546_H7275BBXX_L4_R.fastp.json 
+fastp v0.20.0, time used: 319 seconds

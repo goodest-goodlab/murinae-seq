@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Limnomys-sibuanus/hiseq4000-paired-1/SM089_CKDL190143343-1a-D707-AK1543_H7275BBXX_L2_.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Limnomys-sibuanus/hiseq4000-paired-1/SM089_CKDL190143343-1a-D707-AK1543_H7275BBXX_L2_R1_.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Limnomys-sibuanus/hiseq4000-paired-1/SM089_CKDL190143343-1a-D707-AK1543_H7275BBXX_L2_R2_.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Limnomys-sibuanus/hiseq4000-paired-1/SM089_CKDL190143343-1a-D707-AK1543_H7275BBXX_L2_.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Limnomys-sibuanus/hiseq4000-paired-1/SM089_CKDL190143343-1a-D707-AK1543_H7275BBXX_L2_R1_.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Limnomys-sibuanus/hiseq4000-paired-1/SM089_CKDL190143343-1a-D707-AK1543_H7275BBXX_L2_R2_.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	12292310 reads          	1839304683 bases
+Output:                 	12292310 reads (100.00%) 	1839304683 bases (100.00%)
+
+Time:                         	79.139 seconds.
+Reads Processed:      12292k 	155.33k reads/sec
+Bases Processed:       1839m 	23.24m bases/sec

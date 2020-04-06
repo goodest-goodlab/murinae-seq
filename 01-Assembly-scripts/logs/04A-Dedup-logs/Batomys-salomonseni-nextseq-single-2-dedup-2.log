@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Batomys-salomonseni/nextseq-single-2/JAE3320_S25_L003_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Batomys-salomonseni/nextseq-single-2/JAE3320_S25_L003_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Batomys-salomonseni/nextseq-single-2/JAE3320_S25_L003_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Batomys-salomonseni/nextseq-single-2/JAE3320_S25_L003_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 14436 duplicates.
+Finished exact matches.    Time: 9.877 seconds.
+Memory: max=30870m, total=30870m, free=23253m, used=7617m
+
+Found 1572 contained sequences.
+Finished containment.      Time: 2.493 seconds.
+Memory: max=30870m, total=30870m, free=22783m, used=8087m
+
+Removed 1572 invalid entries.
+Finished invalid removal.  Time: 0.109 seconds.
+Memory: max=30870m, total=30870m, free=22783m, used=8087m
+
+Input:                  	452785 reads 		34198025 bases.
+Duplicates:             	14436 reads (3.19%) 	1091065 bases (3.19%)     	0 collisions.
+Containments:           	1572 reads (0.35%) 	116415 bases (0.34%)    	306922 collisions.
+Result:                 	436777 reads (96.46%) 	32990545 bases (96.47%)
+
+Sorted output.             Time: 0.187 seconds.
+Memory: max=30870m, total=30870m, free=22783m, used=8087m
+
+Printed output.            Time: 1.969 seconds.
+Memory: max=30870m, total=30870m, free=30415m, used=455m
+
+Time:                         	14.762 seconds.
+Reads Processed:        452k 	30.67k reads/sec
+Bases Processed:      34198k 	2.32m bases/sec

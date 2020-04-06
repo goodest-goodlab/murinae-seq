@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Paucidentomys-vermidax/nextseq-paired-1/Z21914_S24_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Paucidentomys-vermidax/nextseq-paired-1/Z21914_S24_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Paucidentomys-vermidax/nextseq-paired-1/Z21914_S24_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Paucidentomys-vermidax/nextseq-paired-1/Z21914_S24_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Paucidentomys-vermidax/nextseq-paired-1/Z21914_S24_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Paucidentomys-vermidax/nextseq-paired-1/Z21914_S24_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 521554 duplicates.
+Finished exact matches.    Time: 65.282 seconds.
+Memory: max=30870m, total=30870m, free=25011m, used=5859m
+
+Input:                  	8378182 reads 		627824583 bases.
+Duplicates:             	521554 reads (6.23%) 	39077741 bases (6.22%)     	476438 collisions.
+Result:                 	7856628 reads (93.77%) 	588746842 bases (93.78%)
+
+Sorted output.             Time: 6.648 seconds.
+Memory: max=30870m, total=30870m, free=24689m, used=6181m
+
+Printed output.            Time: 29.989 seconds.
+Memory: max=30870m, total=30870m, free=22182m, used=8688m
+
+Time:                         	101.948 seconds.
+Reads Processed:       8378k 	82.18k reads/sec
+Bases Processed:        627m 	6.16m bases/sec

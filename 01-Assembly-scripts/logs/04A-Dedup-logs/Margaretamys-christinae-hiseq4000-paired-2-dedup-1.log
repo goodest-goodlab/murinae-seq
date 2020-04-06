@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Margaretamys-christinae/hiseq4000-paired-2/SM061_CKDL190143345-1a-D702-AK1780_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Margaretamys-christinae/hiseq4000-paired-2/SM061_CKDL190143345-1a-D702-AK1780_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Margaretamys-christinae/hiseq4000-paired-2/SM061_CKDL190143345-1a-D702-AK1780_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Margaretamys-christinae/hiseq4000-paired-2/SM061_CKDL190143345-1a-D702-AK1780_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Margaretamys-christinae/hiseq4000-paired-2/SM061_CKDL190143345-1a-D702-AK1780_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Margaretamys-christinae/hiseq4000-paired-2/SM061_CKDL190143345-1a-D702-AK1780_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 1802774 duplicates.
+Finished exact matches.    Time: 133.549 seconds.
+Memory: max=30870m, total=30870m, free=23020m, used=7850m
+
+Input:                  	9747126 reads 		1452779079 bases.
+Duplicates:             	1802774 reads (18.50%) 	268959955 bases (18.51%)     	841743 collisions.
+Result:                 	7944352 reads (81.50%) 	1183819124 bases (81.49%)
+
+Sorted output.             Time: 4.483 seconds.
+Memory: max=30870m, total=30870m, free=22698m, used=8172m
+
+Printed output.            Time: 116.972 seconds.
+Memory: max=30870m, total=30870m, free=19059m, used=11811m
+
+Time:                         	255.045 seconds.
+Reads Processed:       9747k 	38.22k reads/sec
+Bases Processed:       1452m 	5.70m bases/sec

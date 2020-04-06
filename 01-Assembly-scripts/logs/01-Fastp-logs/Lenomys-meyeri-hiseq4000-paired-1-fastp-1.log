@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 20053728
+total bases: 3008059200
+Q20 bases: 2958404395(98.3493%)
+Q30 bases: 2884888327(95.9053%)
+
+Read2 before filtering:
+total reads: 20053728
+total bases: 3008059200
+Q20 bases: 2917078595(96.9754%)
+Q30 bases: 2809763696(93.4079%)
+
+Read1 after filtering:
+total reads: 19798699
+total bases: 2844293759
+Q20 bases: 2806303736(98.6643%)
+Q30 bases: 2742932373(96.4363%)
+
+Read2 aftering filtering:
+total reads: 19798699
+total bases: 2844425110
+Q20 bases: 2776139046(97.5993%)
+Q30 bases: 2681501241(94.2722%)
+
+Filtering result:
+reads passed filter: 39597398
+reads failed due to low quality: 473158
+reads failed due to too many N: 1180
+reads failed due to too short: 2260
+reads failed due to low complexity: 33460
+reads with adapter trimmed: 6658907
+bases trimmed due to adapters: 251919536
+
+Duplication rate: 38.1313%
+
+Insert size peak (evaluated by paired-end reads): 198
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lenomys-meyeri/hiseq4000-paired-1/REC11_CKDL190143344-1a-D709-AK1544_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 389 seconds

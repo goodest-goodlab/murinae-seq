@@ -1,0 +1,32 @@
+Detecting adapter sequence for read1...
+>Nextera_LMP_Read1_External_Adapter | >Illumina Multiplexing Index Sequencing Primer
+GATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+
+Read1 before filtering:
+total reads: 674280
+total bases: 50928847
+Q20 bases: 48565876(95.3603%)
+Q30 bases: 47527804(93.322%)
+
+Read1 after filtering:
+total reads: 667077
+total bases: 50364627
+Q20 bases: 48241669(95.7848%)
+Q30 bases: 47236792(93.7896%)
+
+Filtering result:
+reads passed filter: 667077
+reads failed due to low quality: 5445
+reads failed due to too many N: 12
+reads failed due to too short: 1677
+reads failed due to low complexity: 69
+reads with adapter trimmed: 2852
+bases trimmed due to adapters: 122613
+
+Duplication rate (may be overestimated since this is SE data): 17.8379%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-single-1/Z5248_S59_L004_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-single-1/Z5248_S59_L004_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hydromys-chrysogaster/nextseq-single-1/Z5248_S59_L004_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-single-1/Z5248_S59_L004_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-single-1/Z5248_S59_L004_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-single-1/Z5248_S59_L004_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 10 seconds

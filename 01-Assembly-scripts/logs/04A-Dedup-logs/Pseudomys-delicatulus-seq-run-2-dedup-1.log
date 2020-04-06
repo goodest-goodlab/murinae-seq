@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-delicatulus/seq-run-2/52944_BH7T77BCX2_TTCTAGG_S7_L001_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-delicatulus/seq-run-2/52944_BH7T77BCX2_TTCTAGG_S7_L001_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-delicatulus/seq-run-2/52944_BH7T77BCX2_TTCTAGG_S7_L001_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-delicatulus/seq-run-2/52944_BH7T77BCX2_TTCTAGG_S7_L001_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 340007 duplicates.
+Finished exact matches.    Time: 29.991 seconds.
+Memory: max=30870m, total=30870m, free=24018m, used=6852m
+
+Found 1000653 contained sequences.
+Finished containment.      Time: 56.725 seconds.
+Memory: max=30870m, total=30870m, free=23440m, used=7430m
+
+Removed 1000653 invalid entries.
+Finished invalid removal.  Time: 1.230 seconds.
+Memory: max=30870m, total=30870m, free=23440m, used=7430m
+
+Input:                  	2747522 reads 		490640382 bases.
+Duplicates:             	340007 reads (12.38%) 	58456769 bases (11.91%)     	0 collisions.
+Containments:           	1000653 reads (36.42%) 	166801353 bases (34.00%)    	71398584 collisions.
+Result:                 	1406862 reads (51.20%) 	265382260 bases (54.09%)
+
+Sorted output.             Time: 1.806 seconds.
+Memory: max=30870m, total=30870m, free=23360m, used=7510m
+
+Printed output.            Time: 16.386 seconds.
+Memory: max=30870m, total=30870m, free=22633m, used=8237m
+
+Time:                         	106.161 seconds.
+Reads Processed:       2747k 	25.88k reads/sec
+Bases Processed:        490m 	4.62m bases/sec

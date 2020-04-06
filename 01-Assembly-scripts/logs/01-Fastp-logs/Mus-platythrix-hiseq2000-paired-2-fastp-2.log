@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16000000
+total bases: 1616000000
+Q20 bases: 1558472010(96.4401%)
+Q30 bases: 1491085206(92.2701%)
+
+Read2 before filtering:
+total reads: 16000000
+total bases: 1616000000
+Q20 bases: 1538303364(95.192%)
+Q30 bases: 1466033488(90.7199%)
+
+Read1 after filtering:
+total reads: 15153253
+total bases: 1511097068
+Q20 bases: 1493501659(98.8356%)
+Q30 bases: 1437513236(95.1304%)
+
+Read2 aftering filtering:
+total reads: 15153253
+total bases: 1511084267
+Q20 bases: 1489717776(98.586%)
+Q30 bases: 1428359412(94.5255%)
+
+Filtering result:
+reads passed filter: 30306506
+reads failed due to low quality: 1685270
+reads failed due to too many N: 5422
+reads failed due to too short: 1666
+reads failed due to low complexity: 1136
+reads with adapter trimmed: 2682403
+bases trimmed due to adapters: 40022657
+
+Duplication rate: 19.4205%
+
+Insert size peak (evaluated by paired-end reads): 130
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-platythrix/hiseq2000-paired-2/lane1_ACTATC_L001_R.fastp.json 
+fastp v0.20.0, time used: 203 seconds

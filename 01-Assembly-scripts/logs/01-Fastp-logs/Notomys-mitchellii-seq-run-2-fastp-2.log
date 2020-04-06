@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 2694377
+total bases: 272132077
+Q20 bases: 258155101(94.8639%)
+Q30 bases: 248294110(91.2403%)
+
+Read2 before filtering:
+total reads: 2694377
+total bases: 272132077
+Q20 bases: 243320760(89.4127%)
+Q30 bases: 225237732(82.7678%)
+
+Read1 after filtering:
+total reads: 2483192
+total bases: 249406411
+Q20 bases: 239178531(95.8991%)
+Q30 bases: 231567096(92.8473%)
+
+Read2 aftering filtering:
+total reads: 2483192
+total bases: 249436494
+Q20 bases: 227445323(91.1837%)
+Q30 bases: 213314522(85.5186%)
+
+Filtering result:
+reads passed filter: 4966384
+reads failed due to low quality: 6028
+reads failed due to too many N: 179716
+reads failed due to too short: 233946
+reads failed due to low complexity: 2680
+reads with adapter trimmed: 361559
+bases trimmed due to adapters: 24978024
+
+Duplication rate: 7.83152%
+
+Insert size peak (evaluated by paired-end reads): 165
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-mitchellii/seq-run-2/53916_HTVLWBCX2_GGATCAA_S4_L001_R.fastp.json 
+fastp v0.20.0, time used: 50 seconds

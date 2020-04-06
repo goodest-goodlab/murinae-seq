@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.ReformatReads in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Reformat/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Reformat/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	4125790 reads          	311382958 bases
+Output:                 	4125790 reads (100.00%) 	311382958 bases (100.00%)
+
+Time:                         	29.170 seconds.
+Reads Processed:       4125k 	141.44k reads/sec
+Bases Processed:        311m 	10.67m bases/sec

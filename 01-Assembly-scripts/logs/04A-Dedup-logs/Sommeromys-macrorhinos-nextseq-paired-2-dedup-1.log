@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Sommeromys-macrorhinos/nextseq-paired-2/Z21740_S18_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 150826 duplicates.
+Finished exact matches.    Time: 33.265 seconds.
+Memory: max=30870m, total=30870m, free=26004m, used=4866m
+
+Input:                  	3600344 reads 		271749311 bases.
+Duplicates:             	150826 reads (4.19%) 	11388325 bases (4.19%)     	96686 collisions.
+Result:                 	3449518 reads (95.81%) 	260360986 bases (95.81%)
+
+Sorted output.             Time: 1.359 seconds.
+Memory: max=30870m, total=30870m, free=26004m, used=4866m
+
+Printed output.            Time: 27.617 seconds.
+Memory: max=30870m, total=30870m, free=25038m, used=5832m
+
+Time:                         	62.262 seconds.
+Reads Processed:       3600k 	57.83k reads/sec
+Bases Processed:        271m 	4.36m bases/sec

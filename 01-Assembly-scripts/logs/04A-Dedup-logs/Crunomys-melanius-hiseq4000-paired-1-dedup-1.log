@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Crunomys-melanius/hiseq4000-paired-1/REC5_CKDL190143343-1a-DY0088-AK1544_H7275BBXX_L2_.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Crunomys-melanius/hiseq4000-paired-1/REC5_CKDL190143343-1a-DY0088-AK1544_H7275BBXX_L2_.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Crunomys-melanius/hiseq4000-paired-1/REC5_CKDL190143343-1a-DY0088-AK1544_H7275BBXX_L2_.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Crunomys-melanius/hiseq4000-paired-1/REC5_CKDL190143343-1a-DY0088-AK1544_H7275BBXX_L2_.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Found 3303706 duplicates.
+Finished exact matches.    Time: 164.995 seconds.
+Memory: max=28664m, total=28664m, free=20927m, used=7737m
+
+Found 3198841 contained sequences.
+Finished containment.      Time: 325.842 seconds.
+Memory: max=29139m, total=29139m, free=20702m, used=8437m
+
+Removed 3198841 invalid entries.
+Finished invalid removal.  Time: 2.888 seconds.
+Memory: max=29139m, total=29139m, free=20653m, used=8486m
+
+Input:                  	8875120 reads 		2207120368 bases.
+Duplicates:             	3303706 reads (37.22%) 	826931550 bases (37.47%)     	0 collisions.
+Containments:           	3198841 reads (36.04%) 	706599315 bases (32.01%)    	1094798673 collisions.
+Result:                 	2372573 reads (26.73%) 	673589503 bases (30.52%)
+
+Sorted output.             Time: 1.059 seconds.
+Memory: max=29139m, total=29139m, free=20644m, used=8495m
+
+Printed output.            Time: 42.708 seconds.
+Memory: max=29139m, total=29139m, free=18806m, used=10333m
+
+Time:                         	579.281 seconds.
+Reads Processed:       8875k 	15.32k reads/sec
+Bases Processed:       2207m 	3.81m bases/sec

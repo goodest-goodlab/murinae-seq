@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-bolami/seq-run-1/53922_HTVLKBCX2_CCGGTAC_S10_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-bolami/seq-run-1/53922_HTVLKBCX2_CCGGTAC_S10_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-bolami/seq-run-1/53922_HTVLKBCX2_CCGGTAC_S10_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-bolami/seq-run-1/53922_HTVLKBCX2_CCGGTAC_S10_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-bolami/seq-run-1/53922_HTVLKBCX2_CCGGTAC_S10_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-bolami/seq-run-1/53922_HTVLKBCX2_CCGGTAC_S10_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 180946 duplicates.
+Finished exact matches.    Time: 45.943 seconds.
+Memory: max=30870m, total=30870m, free=25521m, used=5349m
+
+Input:                  	4279918 reads 		431183613 bases.
+Duplicates:             	180946 reads (4.23%) 	18254207 bases (4.23%)     	144780 collisions.
+Result:                 	4098972 reads (95.77%) 	412929406 bases (95.77%)
+
+Sorted output.             Time: 1.863 seconds.
+Memory: max=30870m, total=30870m, free=25521m, used=5349m
+
+Printed output.            Time: 40.660 seconds.
+Memory: max=30870m, total=30870m, free=24038m, used=6832m
+
+Time:                         	88.488 seconds.
+Reads Processed:       4279k 	48.37k reads/sec
+Bases Processed:        431m 	4.87m bases/sec

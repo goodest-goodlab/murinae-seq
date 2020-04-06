@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Rattus-hoffmanni/hiseq-paired/hoffmani-WGA_CCGATT_L007_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Found 404588 duplicates.
+Finished exact matches.    Time: 24.213 seconds.
+Memory: max=30870m, total=30870m, free=26360m, used=4510m
+
+Found 774573 contained sequences.
+Finished containment.      Time: 33.044 seconds.
+Memory: max=30870m, total=30870m, free=24588m, used=6282m
+
+Removed 774573 invalid entries.
+Finished invalid removal.  Time: 0.767 seconds.
+Memory: max=30870m, total=30870m, free=24588m, used=6282m
+
+Input:                  	2342560 reads 		385023727 bases.
+Duplicates:             	404588 reads (17.27%) 	60994781 bases (15.84%)     	0 collisions.
+Containments:           	774573 reads (33.07%) 	115507761 bases (30.00%)    	20269988 collisions.
+Result:                 	1163399 reads (49.66%) 	208521185 bases (54.16%)
+
+Sorted output.             Time: 0.627 seconds.
+Memory: max=30870m, total=30870m, free=24588m, used=6282m
+
+Printed output.            Time: 22.244 seconds.
+Memory: max=30870m, total=30870m, free=23783m, used=7087m
+
+Time:                         	80.932 seconds.
+Reads Processed:       2342k 	28.94k reads/sec
+Bases Processed:        385m 	4.76m bases/sec

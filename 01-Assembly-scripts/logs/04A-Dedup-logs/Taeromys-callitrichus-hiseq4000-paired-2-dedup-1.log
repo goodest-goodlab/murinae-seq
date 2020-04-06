@@ -1,0 +1,25 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Taeromys-callitrichus/hiseq4000-paired-2/REC19_CKDL190143345-1a-D707-AK1545_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Taeromys-callitrichus/hiseq4000-paired-2/REC19_CKDL190143345-1a-D707-AK1545_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Taeromys-callitrichus/hiseq4000-paired-2/REC19_CKDL190143345-1a-D707-AK1545_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Taeromys-callitrichus/hiseq4000-paired-2/REC19_CKDL190143345-1a-D707-AK1545_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Taeromys-callitrichus/hiseq4000-paired-2/REC19_CKDL190143345-1a-D707-AK1545_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Taeromys-callitrichus/hiseq4000-paired-2/REC19_CKDL190143345-1a-D707-AK1545_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 2048674 duplicates.
+Finished exact matches.    Time: 193.078 seconds.
+Memory: max=30870m, total=30870m, free=21101m, used=9769m
+
+Input:                  	11646482 reads 		1724524452 bases.
+Duplicates:             	2048674 reads (17.59%) 	303690880 bases (17.61%)     	1196924 collisions.
+Result:                 	9597808 reads (82.41%) 	1420833572 bases (82.39%)
+
+Sorted output.             Time: 18.245 seconds.
+Memory: max=30870m, total=30870m, free=20779m, used=10091m
+PPrinted output.            Time: 109.087 seconds.
+Memory: max=30870m, total=30870m, free=21594m, used=9276m
+
+Time:                         	320.453 seconds.
+Reads Processed:      11646k 	36.34k reads/sec
+Bases Processed:       1724m 	5.38m bases/sec

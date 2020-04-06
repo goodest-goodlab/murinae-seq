@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-higginsi/seq-run-3/53925_HTVLKBCX2_ACTATCA_S13_L002_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-higginsi/seq-run-3/53925_HTVLKBCX2_ACTATCA_S13_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-higginsi/seq-run-3/53925_HTVLKBCX2_ACTATCA_S13_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-higginsi/seq-run-3/53925_HTVLKBCX2_ACTATCA_S13_L002_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-higginsi/seq-run-3/53925_HTVLKBCX2_ACTATCA_S13_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Pseudomys-higginsi/seq-run-3/53925_HTVLKBCX2_ACTATCA_S13_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	4074174 reads          	410008189 bases
+Output:                 	4074174 reads (100.00%) 	410008189 bases (100.00%)
+
+Time:                         	24.456 seconds.
+Reads Processed:       4074k 	166.59k reads/sec
+Bases Processed:        410m 	16.77m bases/sec

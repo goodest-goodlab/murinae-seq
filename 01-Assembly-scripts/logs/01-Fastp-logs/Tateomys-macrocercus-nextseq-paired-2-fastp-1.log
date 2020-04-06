@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 1964775
+total bases: 148417018
+Q20 bases: 142421639(95.9605%)
+Q30 bases: 139810521(94.2011%)
+
+Read2 before filtering:
+total reads: 1964775
+total bases: 148413633
+Q20 bases: 137515063(92.6566%)
+Q30 bases: 133425494(89.9011%)
+
+Read1 after filtering:
+total reads: 1893998
+total bases: 142968391
+Q20 bases: 138087174(96.5858%)
+Q30 bases: 135755607(94.955%)
+
+Read2 aftering filtering:
+total reads: 1893998
+total bases: 142977852
+Q20 bases: 134780740(94.2669%)
+Q30 bases: 131115526(91.7034%)
+
+Filtering result:
+reads passed filter: 3787996
+reads failed due to low quality: 134460
+reads failed due to too many N: 1094
+reads failed due to too short: 5296
+reads failed due to low complexity: 704
+reads with adapter trimmed: 7208
+bases trimmed due to adapters: 186373
+
+Duplication rate: 6.44914%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-2/Z21834_S19_L004_R.fastp.json 
+fastp v0.20.0, time used: 31 seconds

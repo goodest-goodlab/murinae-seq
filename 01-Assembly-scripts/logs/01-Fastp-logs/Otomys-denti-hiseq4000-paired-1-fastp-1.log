@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 19065220
+total bases: 2859783000
+Q20 bases: 2813763963(98.3908%)
+Q30 bases: 2744236413(95.9596%)
+
+Read2 before filtering:
+total reads: 19065220
+total bases: 2859783000
+Q20 bases: 2780970453(97.2441%)
+Q30 bases: 2685528147(93.9067%)
+
+Read1 after filtering:
+total reads: 18854794
+total bases: 2746016223
+Q20 bases: 2708846019(98.6464%)
+Q30 bases: 2646902408(96.3906%)
+
+Read2 aftering filtering:
+total reads: 18854794
+total bases: 2746103654
+Q20 bases: 2685371072(97.7884%)
+Q30 bases: 2599682019(94.668%)
+
+Filtering result:
+reads passed filter: 37709588
+reads failed due to low quality: 391672
+reads failed due to too many N: 1208
+reads failed due to too short: 4444
+reads failed due to low complexity: 23528
+reads with adapter trimmed: 4747978
+bases trimmed due to adapters: 165075781
+
+Duplication rate: 38.8244%
+
+Insert size peak (evaluated by paired-end reads): 229
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-denti/hiseq4000-paired-1/REC14_CKDL190143344-1a-D702-AK1545_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 344 seconds

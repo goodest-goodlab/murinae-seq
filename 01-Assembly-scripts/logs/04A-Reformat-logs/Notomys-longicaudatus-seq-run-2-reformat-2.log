@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	2958396 reads          	273533688 bases
+Output:                 	2958396 reads (100.00%) 	273533688 bases (100.00%)
+
+Time:                         	29.898 seconds.
+Reads Processed:       2958k 	98.95k reads/sec
+Bases Processed:        273m 	9.15m bases/sec

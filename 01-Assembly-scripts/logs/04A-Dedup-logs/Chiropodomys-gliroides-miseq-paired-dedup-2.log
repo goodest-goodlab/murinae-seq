@@ -1,0 +1,35 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chiropodomys-gliroides/miseq-paired/Z25153_S29_L001_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Chiropodomys-gliroides/miseq-paired/Z25153_S29_L001_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chiropodomys-gliroides/miseq-paired/Z25153_S29_L001_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Chiropodomys-gliroides/miseq-paired/Z25153_S29_L001_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Found 494 duplicates.
+Finished exact matches.    Time: 8.361 seconds.
+Memory: max=30870m, total=30870m, free=23373m, used=7497m
+
+Found 2023 contained sequences.
+Finished containment.      Time: 1.788 seconds.
+Memory: max=30870m, total=30870m, free=22803m, used=8067m
+
+Removed 2023 invalid entries.
+Finished invalid removal.  Time: 0.029 seconds.
+Memory: max=30870m, total=30870m, free=22803m, used=8067m
+
+Input:                  	30567 reads 		4116177 bases.
+Duplicates:             	494 reads (1.62%) 	67901 bases (1.65%)     	0 collisions.
+Containments:           	2023 reads (6.62%) 	274189 bases (6.66%)    	14576 collisions.
+Result:                 	28050 reads (91.77%) 	3774087 bases (91.69%)
+
+Sorted output.             Time: 0.043 seconds.
+Memory: max=30870m, total=30870m, free=22803m, used=8067m
+
+Printed output.            Time: 0.226 seconds.
+Memory: max=30870m, total=30870m, free=22800m, used=8070m
+
+Time:                         	10.505 seconds.
+Reads Processed:       30567 	2.91k reads/sec
+Bases Processed:       4116k 	0.39m bases/sec
+

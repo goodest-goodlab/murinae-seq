@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Solomys-salebrosus/hiseq4000-paired-2/SM076_CKDL190143345-1a-D705-AK1780_H7275BBXX_L4_.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Found 6019044 duplicates.
+Finished exact matches.    Time: 258.177 seconds.
+Memory: max=28633m, total=28633m, free=15524m, used=13109m
+
+Found 6029984 contained sequences.
+Finished containment.      Time: 795.997 seconds.
+Memory: max=28633m, total=28633m, free=16873m, used=11760m
+
+Removed 6029984 invalid entries.
+Finished invalid removal.  Time: 8.152 seconds.
+Memory: max=28633m, total=28633m, free=16744m, used=11889m
+
+Input:                  	16315827 reads 		3654899397 bases.
+Duplicates:             	6019044 reads (36.89%) 	1345678959 bases (36.82%)     	0 collisions.
+Containments:           	6029984 reads (36.96%) 	1242918799 bases (34.01%)    	2756059878 collisions.
+Result:                 	4266799 reads (26.15%) 	1066301639 bases (29.17%)
+
+Sorted output.             Time: 5.346 seconds.
+Memory: max=28633m, total=28633m, free=16726m, used=11907m
+
+Printed output.            Time: 67.039 seconds.
+Memory: max=28633m, total=28633m, free=13801m, used=14832m
+
+Time:                         	1134.747 seconds.
+Reads Processed:      16315k 	14.38k reads/sec
+Bases Processed:       3654m 	3.22m bases/sec

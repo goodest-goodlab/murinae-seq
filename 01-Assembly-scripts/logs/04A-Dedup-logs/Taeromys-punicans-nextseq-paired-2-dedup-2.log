@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03A-Merged/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/04A-Dedup/Taeromys-punicans/nextseq-paired-2/JLP25862_S39_L003_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 61798 duplicates.
+Finished exact matches.    Time: 5.293 seconds.
+Memory: max=30870m, total=30870m, free=27809m, used=3061m
+
+Found 112087 contained sequences.
+Finished containment.      Time: 6.166 seconds.
+Memory: max=30870m, total=30870m, free=26038m, used=4832m
+
+Removed 112087 invalid entries.
+Finished invalid removal.  Time: 0.217 seconds.
+Memory: max=30870m, total=30870m, free=26038m, used=4832m
+
+Input:                  	404170 reads 		67322536 bases.
+Duplicates:             	61798 reads (15.29%) 	10363064 bases (15.39%)     	0 collisions.
+Containments:           	112087 reads (27.73%) 	17739467 bases (26.35%)    	832320 collisions.
+Result:                 	230285 reads (56.98%) 	39220005 bases (58.26%)
+
+Sorted output.             Time: 0.165 seconds.
+Memory: max=30870m, total=30870m, free=26038m, used=4832m
+
+Printed output.            Time: 3.919 seconds.
+Memory: max=30870m, total=30870m, free=25877m, used=4993m
+
+Time:                         	15.803 seconds.
+Reads Processed:        404k 	25.58k reads/sec
+Bases Processed:      67322k 	4.26m bases/sec

@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 12355833
+total bases: 1247939133
+Q20 bases: 1214577322(97.3266%)
+Q30 bases: 1189035786(95.28%)
+
+Read2 before filtering:
+total reads: 12355833
+total bases: 1247939133
+Q20 bases: 1198694106(96.0539%)
+Q30 bases: 1167823105(93.5801%)
+
+Read1 after filtering:
+total reads: 12203617
+total bases: 1103797913
+Q20 bases: 1077753827(97.6405%)
+Q30 bases: 1057150935(95.774%)
+
+Read2 aftering filtering:
+total reads: 12203617
+total bases: 1104212675
+Q20 bases: 1068814996(96.7943%)
+Q30 bases: 1045435260(94.677%)
+
+Filtering result:
+reads passed filter: 24407234
+reads failed due to low quality: 56680
+reads failed due to too many N: 14798
+reads failed due to too short: 183870
+reads failed due to low complexity: 49084
+reads with adapter trimmed: 13889716
+bases trimmed due to adapters: 274371938
+
+Duplication rate: 27.7956%
+
+Insert size peak (evaluated by paired-end reads): 90
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-longicaudatus/seq-run-2/52956_BH7T77BCX2_GGTCAAG_S19_L002_R.fastp.json 
+fastp v0.20.0, time used: 160 seconds

@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 429714
+total bases: 32463897
+Q20 bases: 30918809(95.2406%)
+Q30 bases: 30229391(93.117%)
+
+Read1 after filtering:
+total reads: 426593
+total bases: 32224213
+Q20 bases: 30788317(95.544%)
+Q30 bases: 30115010(93.4546%)
+
+Filtering result:
+reads passed filter: 426593
+reads failed due to low quality: 2993
+reads failed due to too many N: 38
+reads failed due to too short: 62
+reads failed due to low complexity: 28
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.92343%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-single-1/EAR1826_S61_L002_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-single-1/EAR1826_S61_L002_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Archboldomys-luzonensis/nextseq-single-1/EAR1826_S61_L002_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-single-1/EAR1826_S61_L002_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-single-1/EAR1826_S61_L002_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-single-1/EAR1826_S61_L002_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 12 seconds

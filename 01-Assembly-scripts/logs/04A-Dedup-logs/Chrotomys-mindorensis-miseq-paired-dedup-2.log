@@ -1,0 +1,27 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/miseq-paired/JAE520_S4_L001_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/miseq-paired/JAE520_S4_L001_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Chrotomys-mindorensis/miseq-paired/JAE520_S4_L001_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/miseq-paired/JAE520_S4_L001_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Chrotomys-mindorensis/miseq-paired/JAE520_S4_L001_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Chrotomys-mindorensis/miseq-paired/JAE520_S4_L001_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 11982 duplicates.
+Finished exact matches.    Time: 9.905 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+Input:                  	974620 reads 		75996856 bases.
+Duplicates:             	11982 reads (1.23%) 	934340 bases (1.23%)     	8248 collisions.
+Result:                 	962638 reads (98.77%) 	75062516 bases (98.77%)
+
+Sorted output.             Time: 0.290 seconds.
+Memory: max=30870m, total=30870m, free=28454m, used=2416m
+
+Printed output.            Time: 4.192 seconds.
+Memory: max=30870m, total=30870m, free=28131m, used=2739m
+
+Time:                         	14.406 seconds.
+Reads Processed:        974k 	67.65k reads/sec
+Bases Processed:      75996k 	5.28m bases/sec
+

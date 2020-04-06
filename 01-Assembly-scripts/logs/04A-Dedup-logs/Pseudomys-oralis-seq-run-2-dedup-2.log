@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-oralis/seq-run-2/52928_AH7T7NBCX2_GCCTACG_S11_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 332404 duplicates.
+Finished exact matches.    Time: 51.638 seconds.
+Memory: max=30870m, total=30870m, free=24105m, used=6765m
+
+Input:                  	5851022 reads 		590225638 bases.
+Duplicates:             	332404 reads (5.68%) 	33512424 bases (5.68%)     	143147 collisions.
+Result:                 	5518618 reads (94.32%) 	556713214 bases (94.32%)
+
+Sorted output.             Time: 3.248 seconds.
+Memory: max=30870m, total=30870m, free=23944m, used=6926m
+
+Printed output.            Time: 59.537 seconds.
+Memory: max=30870m, total=30870m, free=28117m, used=2753m
+
+Time:                         	114.452 seconds.
+Reads Processed:       5851k 	51.12k reads/sec
+Bases Processed:        590m 	5.16m bases/sec

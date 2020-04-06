@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R1_.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-pos_ctrl_A/hiseq4000-paired-2/M44_A12_CKDL190143345-1a-D712-AK1680_H7275BBXX_L4_R2_.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	546282 reads          	81521390 bases
+Output:                 	546282 reads (100.00%) 	81521390 bases (100.00%)
+
+Time:                         	5.207 seconds.
+Reads Processed:        546k 	104.91k reads/sec
+Bases Processed:      81521k 	15.66m bases/sec

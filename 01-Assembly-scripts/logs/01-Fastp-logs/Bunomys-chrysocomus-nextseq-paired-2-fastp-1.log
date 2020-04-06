@@ -1,0 +1,49 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2875508
+total bases: 217174299
+Q20 bases: 208433231(95.9751%)
+Q30 bases: 204771345(94.2889%)
+
+Read2 before filtering:
+total reads: 2875508
+total bases: 217101584
+Q20 bases: 200857809(92.5179%)
+Q30 bases: 195111415(89.871%)
+
+Read1 after filtering:
+total reads: 2748610
+total bases: 207404841
+Q20 bases: 200558591(96.6991%)
+Q30 bases: 197355784(95.1549%)
+
+Read2 aftering filtering:
+total reads: 2748610
+total bases: 207437584
+Q20 bases: 196027662(94.4996%)
+Q30 bases: 190997913(92.0749%)
+
+Filtering result:
+reads passed filter: 5497220
+reads failed due to low quality: 234444
+reads failed due to too many N: 2234
+reads failed due to too short: 15474
+reads failed due to low complexity: 1644
+reads with adapter trimmed: 18176
+bases trimmed due to adapters: 559807
+
+Duplication rate: 7.56011%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-paired-2/JAE4867_S30_L002_R.fastp.json 
+fastp v0.20.0, time used: 31 seconds

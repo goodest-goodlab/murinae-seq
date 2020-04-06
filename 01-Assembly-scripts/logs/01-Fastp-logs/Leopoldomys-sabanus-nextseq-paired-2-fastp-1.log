@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2984790
+total bases: 225423854
+Q20 bases: 215799170(95.7304%)
+Q30 bases: 211722892(93.9221%)
+
+Read2 before filtering:
+total reads: 2984790
+total bases: 225419222
+Q20 bases: 209382190(92.8857%)
+Q30 bases: 203378766(90.2225%)
+
+Read1 after filtering:
+total reads: 2877392
+total bases: 217066283
+Q20 bases: 209444369(96.4887%)
+Q30 bases: 205828742(94.823%)
+
+Read2 aftering filtering:
+total reads: 2877392
+total bases: 217084079
+Q20 bases: 205147858(94.5016%)
+Q30 bases: 199778600(92.0282%)
+
+Filtering result:
+reads passed filter: 5754784
+reads failed due to low quality: 203112
+reads failed due to too many N: 1034
+reads failed due to too short: 9432
+reads failed due to low complexity: 1218
+reads with adapter trimmed: 16648
+bases trimmed due to adapters: 488600
+
+Duplication rate: 6.6659%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leopoldomys-sabanus/nextseq-paired-2/Z25191_S14_L003_R.fastp.json 
+fastp v0.20.0, time used: 30 seconds

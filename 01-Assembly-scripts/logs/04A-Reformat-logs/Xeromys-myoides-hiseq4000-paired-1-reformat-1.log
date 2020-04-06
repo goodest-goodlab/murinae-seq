@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R1_.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R2_.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R1_.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Xeromys-myoides/hiseq4000-paired-1/SM080_CKDL190143343-1a-D709-AK1780_H7275BBXX_L2_R2_.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	8794326 reads          	1315955799 bases
+Output:                 	8794326 reads (100.00%) 	1315955799 bases (100.00%)
+
+Time:                         	67.831 seconds.
+Reads Processed:       8794k 	129.65k reads/sec
+Bases Processed:       1315m 	19.40m bases/sec

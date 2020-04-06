@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-palatalis/seq-run-2/52949_BH7T77BCX2_TGGCAAT_S12_L002_001.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Zyzomys-palatalis/seq-run-2/52949_BH7T77BCX2_TGGCAAT_S12_L002_001.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Zyzomys-palatalis/seq-run-2/52949_BH7T77BCX2_TGGCAAT_S12_L002_001.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Zyzomys-palatalis/seq-run-2/52949_BH7T77BCX2_TGGCAAT_S12_L002_001.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 210060 duplicates.
+Finished exact matches.    Time: 21.234 seconds.
+Memory: max=30870m, total=30870m, free=24849m, used=6021m
+
+Found 486215 contained sequences.
+Finished containment.      Time: 28.354 seconds.
+Memory: max=30870m, total=30870m, free=24475m, used=6395m
+
+Removed 486215 invalid entries.
+Finished invalid removal.  Time: 0.613 seconds.
+Memory: max=30870m, total=30870m, free=24475m, used=6395m
+
+Input:                  	1589258 reads 		285248431 bases.
+Duplicates:             	210060 reads (13.22%) 	36187413 bases (12.69%)     	0 collisions.
+Containments:           	486215 reads (30.59%) 	80619918 bases (28.26%)    	26702956 collisions.
+Result:                 	892983 reads (56.19%) 	168441100 bases (59.05%)
+
+Sorted output.             Time: 0.630 seconds.
+Memory: max=30870m, total=30870m, free=24475m, used=6395m
+
+Printed output.            Time: 10.641 seconds.
+Memory: max=30870m, total=30870m, free=23857m, used=7013m
+
+Time:                         	61.495 seconds.
+Reads Processed:       1589k 	25.84k reads/sec
+Bases Processed:        285m 	4.64m bases/sec

@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-caroli/hiseq2000-paired-1/10460X9_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-caroli/hiseq2000-paired-1/10460X9_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Mus-caroli/hiseq2000-paired-1/10460X9_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mus-caroli/hiseq2000-paired-1/10460X9_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.merged.dedup.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 1037773 duplicates.
+Finished exact matches.    Time: 60.164 seconds.
+Memory: max=30870m, total=30870m, free=21392m, used=9478m
+
+Found 3626649 contained sequences.
+Finished containment.      Time: 69.294 seconds.
+Memory: max=30870m, total=30870m, free=20951m, used=9919m
+
+Removed 3626649 invalid entries.
+Finished invalid removal.  Time: 2.546 seconds.
+Memory: max=30870m, total=30870m, free=20846m, used=10024m
+
+Input:                  	6927188 reads 		1072492551 bases.
+Duplicates:             	1037773 reads (14.98%) 	151211455 bases (14.10%)     	0 collisions.
+Containments:           	3626649 reads (52.35%) 	516344695 bases (48.14%)    	34296647 collisions.
+Result:                 	2262766 reads (32.67%) 	404936401 bases (37.76%)
+
+Sorted output.             Time: 1.192 seconds.
+Memory: max=30870m, total=30870m, free=20793m, used=10077m
+
+Printed output.            Time: 34.623 seconds.
+Memory: max=30870m, total=30870m, free=26213m, used=4657m
+
+Time:                         	167.837 seconds.
+Reads Processed:       6927k 	41.27k reads/sec
+Bases Processed:       1072m 	6.39m bases/sec

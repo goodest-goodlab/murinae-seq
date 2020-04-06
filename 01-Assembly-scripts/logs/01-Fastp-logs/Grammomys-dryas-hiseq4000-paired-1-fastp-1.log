@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16855213
+total bases: 2528281950
+Q20 bases: 2486856361(98.3615%)
+Q30 bases: 2421866066(95.791%)
+
+Read2 before filtering:
+total reads: 16855213
+total bases: 2528281950
+Q20 bases: 2444624780(96.6911%)
+Q30 bases: 2342192410(92.6397%)
+
+Read1 after filtering:
+total reads: 16603258
+total bases: 2465651099
+Q20 bases: 2430752976(98.5846%)
+Q30 bases: 2371756638(96.1919%)
+
+Read2 aftering filtering:
+total reads: 16603258
+total bases: 2465642421
+Q20 bases: 2400486144(97.3574%)
+Q30 bases: 2307165853(93.5726%)
+
+Filtering result:
+reads passed filter: 33206516
+reads failed due to low quality: 480962
+reads failed due to too many N: 1400
+reads failed due to too short: 1246
+reads failed due to low complexity: 20302
+reads with adapter trimmed: 1531062
+bases trimmed due to adapters: 50012282
+
+Duplication rate: 38.9245%
+
+Insert size peak (evaluated by paired-end reads): 269
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-dryas/hiseq4000-paired-1/REC8_CKDL190143343-1a-D706-AK1544_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.0, time used: 346 seconds

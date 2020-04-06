@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L002_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L002_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L002_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L002_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L002_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L002_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30547m, used=323m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 122252 duplicates.
+Finished exact matches.    Time: 17.325 seconds.
+Memory: max=30870m, total=30870m, free=27004m, used=3866m
+
+Input:                  	2389158 reads 		240750775 bases.
+Duplicates:             	122252 reads (5.12%) 	12311325 bases (5.11%)     	43583 collisions.
+Result:                 	2266906 reads (94.88%) 	228439450 bases (94.89%)
+
+Sorted output.             Time: 0.986 seconds.
+Memory: max=30870m, total=30870m, free=27004m, used=3866m
+
+Printed output.            Time: 15.255 seconds.
+Memory: max=30870m, total=30870m, free=26038m, used=4832m
+
+Time:                         	33.587 seconds.
+Reads Processed:       2389k 	71.13k reads/sec
+Bases Processed:        240m 	7.17m bases/sec

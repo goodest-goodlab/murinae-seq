@@ -1,0 +1,11 @@
+java -ea -Xms300m -cp /home/gregg_thomas/bin/bbmap/current/ jgi.ReformatReads in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mesembriomys-macrurus/seq-run-2/53918_HTVLWBCX2_ATGGAGA_S6_L001_001.fastp.decon.unmerged.fastq.gz overwrite=true out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mesembriomys-macrurus/seq-run-2/53918_HTVLWBCX2_ATGGAGA_S6_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mesembriomys-macrurus/seq-run-2/53918_HTVLWBCX2_ATGGAGA_S6_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz
+Executing jgi.ReformatReads [in=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Mesembriomys-macrurus/seq-run-2/53918_HTVLWBCX2_ATGGAGA_S6_L001_001.fastp.decon.unmerged.fastq.gz, overwrite=true, out1=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mesembriomys-macrurus/seq-run-2/53918_HTVLWBCX2_ATGGAGA_S6_L001_R1_001.fastp.decon.unmerged.dedup.fastq.gz, out2=/scratch/gregg_thomas/Murinae-seq/04A-Dedup/Mesembriomys-macrurus/seq-run-2/53918_HTVLWBCX2_ATGGAGA_S6_L001_R2_001.fastp.decon.unmerged.dedup.fastq.gz]
+
+Set INTERLEAVED to true
+Input is being processed as paired
+Input:                  	3299158 reads          	332471179 bases
+Output:                 	3299158 reads (100.00%) 	332471179 bases (100.00%)
+
+Time:                         	23.606 seconds.
+Reads Processed:       3299k 	139.76k reads/sec
+Bases Processed:        332m 	14.08m bases/sec

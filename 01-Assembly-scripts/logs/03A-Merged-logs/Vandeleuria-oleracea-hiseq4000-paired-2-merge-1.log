@@ -1,0 +1,51 @@
+java -ea -Xmx30g -Xms30g -Djava.library.path=/home/gregg_thomas/bin/bbmap/jni/ -cp /home/gregg_thomas/bin/bbmap/current/ jgi.BBMerge -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.fastq.gz verystrict=t rem k=40 extend2=40 ecct outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_.fastp.decon.merged.fastq.gz
+Executing jgi.BBMerge [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, verystrict=t, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_.fastp.decon.merged.fastq.gz]
+Version 38.73
+
+Revised arguments: [maxbad=4, margin=3, minqo=8, qualiters=2, ratiomode=t, flatmode=f, minentropy=52, minoverlap=12, minoverlap0=4, maxratio=0.05, ratiomargin=12, ratiooffset=0.5, ratiominoverlapreduction=4, efilter=2, pfilter=0.008, minsecondratio=0.16, minapproxoverlap=22, t=1, in1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, rem, k=40, extend2=40, ecct, outu1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.unmerged.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.unmerged.fastq.gz, out=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_.fastp.decon.merged.fastq.gz]
+
+Set threads to 1
+Executing assemble.Tadpole2 [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+Version 38.73
+
+Using 1 threads.
+Executing ukmer.KmerTableSetU [in=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R1_.fastp.decon.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Vandeleuria-oleracea/hiseq4000-paired-2/SM079_CKDL190143345-1a-D708-AK1780_H7275BBXX_L4_R2_.fastp.decon.fastq.gz, branchlower=3, branchmult1=20.0, branchmult2=3.0, mincountseed=3, mincountextend=2, minprob=0.5, k=40, prealloc=false, prefilter=0, ecctail=false, eccpincer=false, eccreassemble=true]
+
+Initial:
+Ways=31, initialSize=128000, prefilter=f, prealloc=f
+Memory: max=30870m, total=30870m, free=29903m, used=967m
+
+Estimated kmer capacity: 	715752451
+After table allocation:
+Memory: max=30870m, total=30870m, free=29742m, used=1128m
+
+After loading:
+Memory: max=30870m, total=30870m, free=7714m, used=23156m
+
+Input:                      	37976322 reads 		5523922972 bases.
+Unique Kmers:               	496068717
+Load Time:                  	1468.609 seconds.
+
+Writing mergable reads merged.
+Started output threads.
+Total time: 5062.497 seconds.
+
+Pairs:               	18988161
+Joined:              	15565812   	81.976%
+Ambiguous:           	3404757   	17.931%
+No Solution:         	17592   	0.093%
+Too Short:           	0       	0.000%
+Fully Extended:      	27795784   	71.355%
+Partly Extended:     	6308884   	16.196%
+Not Extended:        	4849768   	12.450%
+
+Avg Insert:          	210.8
+Standard Deviation:  	64.0
+Mode:                	186
+
+Insert range:        	35 - 369
+90th percentile:     	301
+75th percentile:     	257
+50th percentile:     	207
+25th percentile:     	162
+10th percentile:     	130

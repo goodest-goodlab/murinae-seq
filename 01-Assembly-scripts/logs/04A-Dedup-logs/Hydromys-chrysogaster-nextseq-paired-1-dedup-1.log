@@ -1,0 +1,26 @@
+java -ea -Xmx30g -Xms30g -cp /home/gregg_thomas/bin/bbmap/current/ jgi.Dedupe -Xmx30g t=1 in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hydromys-chrysogaster/nextseq-paired-1/Z5248_S33_R1_001.fastp.decon.unmerged.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hydromys-chrysogaster/nextseq-paired-1/Z5248_S33_R2_001.fastp.decon.unmerged.fastq.gz ordered=t overwrite=true minidentity=100 out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hydromys-chrysogaster/nextseq-paired-1/Z5248_S33_001.fastp.decon.unmerged.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hydromys-chrysogaster/nextseq-paired-1/Z5248_S33_R1_001.fastp.decon.unmerged.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/03A-Merged/Hydromys-chrysogaster/nextseq-paired-1/Z5248_S33_R2_001.fastp.decon.unmerged.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/scratch/gregg_thomas/Murinae-seq/04A-intermediate/Hydromys-chrysogaster/nextseq-paired-1/Z5248_S33_001.fastp.decon.unmerged.fastq.gz]
+Version 38.73
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Set absorbContainment to false because it is not currently supported for paired reads.
+Found 2754678 duplicates.
+Finished exact matches.    Time: 40.291 seconds.
+Memory: max=30870m, total=30870m, free=23617m, used=7253m
+
+Input:                  	11031958 reads 		825459619 bases.
+Duplicates:             	2754678 reads (24.97%) 	206237402 bases (24.98%)     	1245603 collisions.
+Result:                 	8277280 reads (75.03%) 	619222217 bases (75.02%)
+
+Sorted output.             Time: 3.659 seconds.
+Memory: max=30870m, total=30870m, free=23537m, used=7333m
+
+Printed output.            Time: 31.776 seconds.
+Memory: max=30870m, total=30870m, free=21026m, used=9844m
+
+Time:                         	75.746 seconds.
+Reads Processed:      11031k 	145.64k reads/sec
+Bases Processed:        825m 	10.90m bases/sec
