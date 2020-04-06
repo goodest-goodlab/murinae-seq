@@ -30,6 +30,7 @@ html_template = """
                     <li>Jeff Good</li>
                     <li>Kevin Rowe</li>
 					<li>Carl Hutter</li>
+                    <li>Emily Kopania</li>
 					<li>Sebastian Mortimer</li>
                     <li>Emily Roycroft</li>
                     <li>Gregg Thomas</li>
