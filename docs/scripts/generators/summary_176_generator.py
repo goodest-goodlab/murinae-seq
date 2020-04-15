@@ -29,7 +29,8 @@ html_template = """
                     <p><h4><a href="../data/multiqc/multiqc-full.html", target="_blank">MultiQC report after Fastp</a></h4></p>
                     <p><h4><a href="filter_stats.html">Read filtering stats</a></h4></p>
                     <p><h4><a href="full_assembly_stats.html">Assembly with Spades</a></h4></p>
-                    <p><h4><a href="full_mapping_stats.html">Mapping with BWA to Mouse and Rat reference genomes</a></p></h4>
+                    <p><h4><a href="full_mapping_stats.html">Mapping with BWA to Mouse and Rat reference genomes</a></h4></p>
+                    <p><h4><a href="mouse_rat_transcripts.html">Transcript selection from mouse and rat references</a></h4></p>
 
                     <h2>Sample summary table</h2>
                     

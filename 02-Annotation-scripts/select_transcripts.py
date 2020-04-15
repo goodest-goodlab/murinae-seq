@@ -153,7 +153,7 @@ with open(outfilename, "w") as outfile:
     core.PWS("# Genes with selected transcript:                                                        " + str(len(selected_transcripts)), outfile);
     core.PWS("# --------------", outfile);
     core.PWS("# " + core.getDateTime() + " Writing selected transcripts to output file...", outfile);
-    orig_headers = orig_headers + "\t".join(["Mouse chrome", "Mouse start", "Mouse end", "Mouse length", "Rat chrome", "Rat start", "Rat end", "Rat length"]);
+    orig_headers = orig_headers + "\t" + "\t".join(["Mouse chrome", "Mouse start", "Mouse end", "Mouse length", "Rat chrome", "Rat start", "Rat end", "Rat length"]);
     outfile.write(orig_headers + "\n");
     for gid in selected_transcripts:
         mouse_tid = selected_transcripts[gid][0];

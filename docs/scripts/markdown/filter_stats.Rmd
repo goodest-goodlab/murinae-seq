@@ -41,7 +41,7 @@ htmltools::includeHTML("../html-chunks/nav.html")
 4. Deduplication
 
 ```{r readdata, echo=FALSE, warning=FALSE}
-new_data = read.csv("../../data/summary-exomes-long.csv", header=TRUE)
+new_data = read.csv("../../../data/summary-exomes-long.csv", header=TRUE)
 new_data = new_data[!grepl("pos_ctrl", new_data$Label),]
 #new_data$Filter.step = as.character(new_data$Filter.step)
 ```

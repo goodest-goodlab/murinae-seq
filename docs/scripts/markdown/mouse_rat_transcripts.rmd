@@ -1,0 +1,178 @@
+---
+#title: "Mouse and rat transcript analysis"
+#author: "gwct"
+#date: "04/14/2020"
+output: 
+  html_document:
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+---
+
+```{r setup}
+binData <- function(df, column, max_bin){
+# Function to pre-bin SVs by length
+  binned_df = data.frame("bin"=seq(from=0,to=max_bin,by=0.01), count=0)
+  for(i in 1:nrow(df)) {
+    row <- df[i,]
+    bin = floor(row[[column]]*100)/100
+    binned_df[binned_df$bin==bin,]$count = binned_df[binned_df$bin==bin,]$count + 1
+  }
+  return(binned_df) 
+}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+library(plyr)
+source("../lib/design.r")
+
+htmltools::includeHTML("../html-chunks/nav.html")
+```
+
+# Exome transcript selection
+
+```{r readdata, echo=FALSE, warning=FALSE}
+pre_data = read.csv("../../../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt", header=T, sep="\t")
+pre_data$dnds = pre_data$dN.with.Rat / pre_data$dS.with.Rat
+pre_data = subset(pre_data, dS.with.Rat < 1)
+pre_data = subset(pre_data, dN.with.Rat < 1)
+
+
+filter_data = read.csv("../../../02-Annotation-data/selected-transcripts.txt", header=T, sep="\t", comment.char='#')
+filter_data$dnds = filter_data$dN.with.Rat / filter_data$dS.with.Rat
+filter_data = subset(filter_data, dS.with.Rat < 1)
+filter_data = subset(filter_data, dN.with.Rat < 1)
+```
+
+## Mouse-rat dS for orthologous transcripts -- All transcripts
+
+Data from Ensembl release 99.
+
+```{r fig1, out.width="100%", fig.align = "center", warning=FALSE}
+#####################
+# Mouse-rat dS for transcripts
+#####################\
+pre_binned = binData(pre_data, "dS.with.Rat", 1)
+pre_binned$filter = "Pre-filter"
+
+filter_binned = binData(filter_data, "dS.with.Rat", 1)
+filter_binned$filter = "Post-filter"
+
+binned_data = rbind.fill(pre_binned, filter_binned)
+col = corecol(numcol=2)
+lab = c("Pre-filter", "Post-filter")
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 1)*count, fill = filter)) + 
+  geom_col() +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "dS", limits = c(-0.02, 1), expand = c(0, 0)) +
+  scale_y_continuous(name = "# Transcripts", limits=c(-1200,7000), breaks = 1000*(-1:7), labels=c("1000","0","1000","2000","3000","3000","5000","6000","7000")) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+```
+
+## Mouse-rat dN for orthologous transcripts
+
+Data from Ensembl release 99.
+
+```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
+#####################
+# Mouse-rat dN for transcripts
+#####################\
+pre_binned = binData(pre_data, "dN.with.Rat", 1)
+pre_binned$filter = "Pre-filter"
+
+filter_binned = binData(filter_data, "dN.with.Rat", 1)
+filter_binned$filter = "Post-filter"
+
+binned_data = rbind.fill(pre_binned, filter_binned)
+col = corecol(numcol=2)
+lab = c("Pre-filter", "Post-filter")
+ylabels = c("5000", as.character(seq(from=0, to=30000, by=5000)))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 1)*count, fill = filter)) + 
+  geom_col() +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "dN", limits = c(-0.02, 1), expand = c(0, 0)) +
+  scale_y_continuous(name = "# Transcripts", limits=c(-5000,30000), breaks = 5000*(-1:6), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+```
+
+## Mouse-rat dN/dS for orthologous transcripts
+
+Data from Ensembl release 99.
+
+```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
+#####################
+# Mouse-rat dN/dS for transcripts
+#####################
+pre_data = subset(pre_data, !is.na(dnds))
+pre_binned = binData(pre_data, "dnds", 2)
+pre_binned$filter = "Pre-filter"
+
+filter_data = subset(filter_data, !is.na(dnds))
+filter_binned = binData(filter_data, "dnds", 2)
+filter_binned$filter = "Post-filter"
+
+binned_data = rbind.fill(pre_binned, filter_binned)
+col = corecol(numcol=2)
+lab = c("Pre-filter", "Post-filter")
+ylabels = c("1000", as.character(seq(from=0, to=6000, by=1000)))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 1)*count, fill = filter)) + 
+  geom_col() +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "dN/dS", limits = c(-0.02, 2), expand = c(0, 0)) +
+  scale_y_continuous(name = "# Transcripts", limits=c(-1000,6000), breaks = 1000*(-1:6), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+```
+
+## Filter script log
+
+```
+Rodent exomes -- select mouse trancsripts
+PYTHON VERSION: 3.6.6
+Script call: select_transcripts.py
+Runtime: 04/14/2020 21:09:10
+----------
+Mouse GTF file:        ../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz
+Rat GTF file:          ../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
+Ensembl ortholog file: ../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt
+Output file:           ../02-Annotation-data/selected-transcripts.txt
+--------------
+dS threshold:          0.5
+--------------
+04.14.2020 | 21:09:10 Reading mouse feature lengths...
+Mouse transcripts read: 142647
+04.14.2020 | 21:09:20 Reading rat feature lengths...
+Rat transcripts read:   41078
+--------------
+04.14.2020 | 21:09:27 Reading orthologs...
+Genes read:      56289
+Transcipts read: 170971
+--------------
+04.14.2020 | 21:09:28 Filtering transcripts...
+Transcripts with no rat ortholog:                                                      44696
+Transcripts with no one2one rat ortholog:                                              37291
+Transcripts with no high confidence rat ortholog:                                      11069
+Transcripts with no rat ortholog below dS threshold:                                   1204
+Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
+Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
+--------------
+Genes with no passed transcripts:                                                      41857
+Genes with selected transcript:                                                        14432
+--------------
+04.14.2020 | 21:09:28 Writing selected transcripts to output file...
+```
+
+```{r footer}
+cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
+htmltools::includeHTML("../html-chunks/rmd_footer.html")
+```

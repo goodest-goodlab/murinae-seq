@@ -1730,7 +1730,7 @@ htmltools::includeHTML(&quot;../html-chunks/nav.html&quot;)</code></pre>
     <div class="pure-u-7-24" id="margin"></div>
     <div class="pure-u-2-24" id="nav_link_cell"><a href="summary.html" class="nav_link">Summary</a></div>
     <div class="pure-u-2-24" id="nav_link_cell"><a href="samples.html" class="nav_link">Samples</a></div>
-    <div class="pure-u-2-24" id="nav_link_cell"><a href="summary_186.html" class="nav_link">186 Exomes</a></div>
+    <div class="pure-u-2-24" id="nav_link_cell"><a href="summary_176.html" class="nav_link">176 Exomes</a></div>
     <div class="pure-u-2-24" id="nav_link_cell"><a href="wgs.html" class="nav_link">WGS</a></div>
     <!-- <div class="pure-u-2-24" id="nav_link_cell"><a href="scores.html" class="nav_link">Sequencing</a></div> -->
     <div class="pure-u-2-24" id="nav_link_cell"><a href="workflows.html" class="nav_link">Workflows</a></div>
@@ -1746,7 +1746,7 @@ htmltools::includeHTML(&quot;../html-chunks/nav.html&quot;)</code></pre>
             <ul class="pure-menu-list">
                 <li><a href="summary.html" id="mobile_nav_link">Summary</a></li>
                 <li><a href="samples.html" id="mobile_nav_link">Sample</a></li>
-                <li><a href="summary_186.html" id="mobile_nav_link">186 Exomes</a></li>
+                <li><a href="summary_176.html" id="mobile_nav_link">176 Exomes</a></li>
                 <li><a href="wgs.html" id="mobile_nav_link">WGS</a></li>
                 <li><a href="workflows.html" id="mobile_nav_link">Workflows</a></li>
                 <li><a href="notes.html" id="mobile_nav_link">Notes</a></li>	
@@ -1759,7 +1759,7 @@ htmltools::includeHTML(&quot;../html-chunks/nav.html&quot;)</code></pre>
 <div class="pure-g"><div class="pure-u-1" id="divider_row"></div></div>
 <div id="exome-assembly-stats-with-spades" class="section level1">
 <h1>Exome assembly stats with Spades</h1>
-<pre class="r"><code>spades_data = read.csv(&quot;../../data/exome-spades-stats.csv&quot;, header=TRUE)
+<pre class="r"><code>spades_data = read.csv(&quot;../../../data/exome-spades-stats.csv&quot;, header=TRUE)
 spades_data = spades_data[!grepl(&quot;Mus pos_ctrl&quot;, spades_data$Species),]
 spades_data$type = factor(spades_data$type, levels=c(&quot;Contig&quot;,&quot;Scaffold&quot;), ordered=TRUE)
 spades_data$batch = as.character(spades_data$batch)
@@ -1912,7 +1912,7 @@ len_p = ggplot(spades_data, aes(x=type, y=avg.len, fill=type, color=type)) +
 
 print(len_p)</code></pre>
 <pre class="r"><code>cat(&quot;Page last updated:&quot;, format(Sys.time(), &quot;%m/%d/%Y %H:%M:%S %Z&quot;))</code></pre>
-<pre><code>## Page last updated: 03/06/2020 15:14:48 MST</code></pre>
+<pre><code>## Page last updated: 04/15/2020 10:03:48 MDT</code></pre>
 <pre class="r"><code>htmltools::includeHTML(&quot;../html-chunks/rmd_footer.html&quot;)</code></pre>
 <div class="pure-g"><div class="pure-u-1" id="divider_row"></div></div>
 <div class="pure-g" id="footer">

@@ -18,6 +18,7 @@ parser.add_argument("--wgs", dest="wgs", help="Without --all: build wgs.html. Wi
 parser.add_argument("--fullassemblystats", dest="fullassemblystats", help="Without --all: build assembly_stats.html. With --all: exlude full_assembly_stats.html", action="store_true", default=False);
 parser.add_argument("--fullmappingstats", dest="fullmappingstats", help="Without --all: build full_mapping_stats.html. With --all: exlude full_mapping_stats.html", action="store_true", default=False);
 parser.add_argument("--filterstats", dest="filterstats", help="Without --all: build fiter_stats.html. With --all: exlude filter_stats.html", action="store_true", default=False);
+parser.add_argument("--mouserat", dest="mouserat", help="Without --all: build mouse_rat_transcripts.html. With --all: exlude mouse_rat_transcripts.html", action="store_true", default=False);
 args = parser.parse_args();
 # Input options.
 
@@ -35,7 +36,8 @@ pages = {
     'wgs' : args.wgs,
     'fullassemblystats' : args.fullassemblystats,
     'fullmappingstats' : args.fullmappingstats,
-    'filterstats' : args.filterstats
+    'filterstats' : args.filterstats,
+    'mouserat' : args.mouserat
 }
 
 if args.all:
@@ -73,6 +75,9 @@ if pages['fullmappingstats']:
 
 if pages['filterstats']:
     os.system("Rscript filter_stats_generator.r");
+
+if pages['mouserat']:
+    os.system("Rscript mouse_rat_generator.r");
 
 print("----------\nDone!");
 

@@ -1,3 +1,4 @@
+Gene stable ID	Transcript stable ID	Protein stable ID	Gene name	Transcript count	Rat gene stable ID	Rat protein or transcript stable ID	Rat homology type	%id. target Rat gene identical to query gene	%id. query gene identical to target Rat gene	Rat Gene-order conservation score	Rat Whole-genome alignment coverage	dN with Rat	dS with Rat	Rat orthology confidence [0 low, 1 high]	Mouse chrome	Mouse start	Mouse end	Mouse length	Rat chrome	Rat start	Rat end	Rat length
 # Rodent exomes -- select mouse trancsripts
 # PYTHON VERSION: 3.6.6
 # Script call: select_transcripts.py
@@ -11,8 +12,9 @@
 # dS threshold:          0.5
 # --------------
 # 04.14.2020 | 21:09:10 Reading mouse feature lengths...
-Mouse transcripts read: 142647
-Rat transcripts read:   41078
+# Mouse transcripts read: 142647
+# 04.14.2020 | 21:09:20 Reading rat feature lengths...
+# Rat transcripts read:   41078
 # --------------
 # 04.14.2020 | 21:09:27 Reading orthologs...
 # Genes read:      56289
@@ -24,13 +26,12 @@ Rat transcripts read:   41078
 # Transcripts with no high confidence rat ortholog:                                      11069
 # Transcripts with no rat ortholog below dS threshold:                                   1204
 # Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
+# Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
 # --------------
 # Genes with no passed transcripts:                                                      41857
 # Genes with selected transcript:                                                        14432
 # --------------
 # 04.14.2020 | 21:09:28 Writing selected transcripts to output file...
-Gene stable ID	Transcript stable ID	Protein stable ID	Gene name	Transcript count	Rat gene stable ID	Rat protein or transcript stable ID	Rat homology type	%id. target Rat gene identical to query gene	%id. query gene identical to target Rat gene	Rat Gene-order conservation score	Rat Whole-genome alignment coverage	dN with Rat	dS with Rat	Rat orthology confidence [0 low, 1 high]
-Mouse chrome	Mouse start	Mouse end	Mouse length	Rat chrome	Rat start	Rat end	Rat length
 ENSMUSG00000033970	ENSMUST00000038131	ENSMUSP00000039621	Rfc3	7	ENSRNOG00000001088	ENSRNOP00000001444	ortholog_one2one	98.3146	98.3146	0	100.00	0.0081	0.3328	1	5	151642756	151651242	8486	12	1460538	1471357	10819
 ENSMUSG00000000632	ENSMUST00000093995	ENSMUSP00000091532	Sez6	9	ENSRNOG00000009350	ENSRNOP00000040374	ortholog_one2one	96.8718	96.7742	75	100.00	0.0154	0.1757	1	11	77930800	77979048	48248	10	64865805	64915148	49343
 ENSMUSG00000036097	ENSMUST00000096053	ENSMUSP00000093758	Slf2	5	ENSRNOG00000014482	ENSRNOP00000069230	ortholog_one2one	94.7549	94.7549	100	100.00	0.0245	0.1205	1	19	44931151	44983188	52037	1	264670924	264732578	61654

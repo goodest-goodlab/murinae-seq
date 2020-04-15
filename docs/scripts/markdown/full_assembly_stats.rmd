@@ -33,7 +33,7 @@ htmltools::includeHTML("../html-chunks/nav.html")
 # Exome assembly stats with Spades
 
 ```{r fig1, out.width="100%", fig.align="center"}
-spades_data = read.csv("../../data/exome-spades-stats.csv", header=TRUE)
+spades_data = read.csv("../../../data/exome-spades-stats.csv", header=TRUE)
 spades_data = spades_data[!grepl("Mus pos_ctrl", spades_data$Species),]
 spades_data$type = factor(spades_data$type, levels=c("Contig","Scaffold"), ordered=TRUE)
 spades_data$batch = as.character(spades_data$batch)
