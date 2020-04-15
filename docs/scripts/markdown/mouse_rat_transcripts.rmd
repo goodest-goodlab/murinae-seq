@@ -33,6 +33,52 @@ htmltools::includeHTML("../html-chunks/nav.html")
 
 # Exome transcript selection
 
+## Filtering criteria:
+
+1. Transcript must be present in both mouse and rat.
+2. Transcript must have one-to-one relationship between mouse and rat.
+3. Orthology confidence must be high (1).
+4. Transcript must have dS below 0.5 (see distibutions below).
+5. If multiple transcripts from a gene pass all above filters, the one with the average longest length between mouse and rat is selected.
+
+## Filter script log
+
+```
+Rodent exomes -- select mouse trancsripts
+PYTHON VERSION: 3.6.6
+Script call: select_transcripts.py
+Runtime: 04/14/2020 21:09:10
+----------
+Mouse GTF file:        ../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz
+Rat GTF file:          ../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
+Ensembl ortholog file: ../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt
+Output file:           ../02-Annotation-data/selected-transcripts.txt
+--------------
+dS threshold:          0.5
+--------------
+04.14.2020 | 21:09:10 Reading mouse feature lengths...
+Mouse transcripts read: 142647
+04.14.2020 | 21:09:20 Reading rat feature lengths...
+Rat transcripts read:   41078
+--------------
+04.14.2020 | 21:09:27 Reading orthologs...
+Genes read:      56289
+Transcipts read: 170971
+--------------
+04.14.2020 | 21:09:28 Filtering transcripts...
+Transcripts with no rat ortholog:                                                      44696
+Transcripts with no one2one rat ortholog:                                              37291
+Transcripts with no high confidence rat ortholog:                                      11069
+Transcripts with no rat ortholog below dS threshold:                                   1204
+Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
+Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
+--------------
+Genes with no passed transcripts:                                                      41857
+Genes with selected transcript:                                                        14432
+--------------
+04.14.2020 | 21:09:28 Writing selected transcripts to output file...
+```
+
 ```{r readdata, echo=FALSE, warning=FALSE}
 pre_data = read.csv("../../../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt", header=T, sep="\t")
 pre_data$dnds = pre_data$dN.with.Rat / pre_data$dS.with.Rat
@@ -63,12 +109,13 @@ filter_binned$filter = "Post-filter"
 binned_data = rbind.fill(pre_binned, filter_binned)
 col = corecol(numcol=2)
 lab = c("Pre-filter", "Post-filter")
+ylabels = c("1200", as.character(seq(from=0, to=7000, by=1000)))
 
 dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 1)*count, fill = filter)) + 
   geom_col() +
   geom_hline(yintercept=0) +
   scale_x_continuous(name = "dS", limits = c(-0.02, 1), expand = c(0, 0)) +
-  scale_y_continuous(name = "# Transcripts", limits=c(-1200,7000), breaks = 1000*(-1:7), labels=c("1000","0","1000","2000","3000","3000","5000","6000","7000")) +
+  scale_y_continuous(name = "# Transcripts", limits=c(-1200,7000), breaks = 1000*(-1:7), labels=ylabels) +
   scale_fill_manual(name="", limits=lab, values=col) +
   bartheme()
 print(dualp)
@@ -134,43 +181,7 @@ dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 
 print(dualp)
 ```
 
-## Filter script log
 
-```
-Rodent exomes -- select mouse trancsripts
-PYTHON VERSION: 3.6.6
-Script call: select_transcripts.py
-Runtime: 04/14/2020 21:09:10
-----------
-Mouse GTF file:        ../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz
-Rat GTF file:          ../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
-Ensembl ortholog file: ../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt
-Output file:           ../02-Annotation-data/selected-transcripts.txt
---------------
-dS threshold:          0.5
---------------
-04.14.2020 | 21:09:10 Reading mouse feature lengths...
-Mouse transcripts read: 142647
-04.14.2020 | 21:09:20 Reading rat feature lengths...
-Rat transcripts read:   41078
---------------
-04.14.2020 | 21:09:27 Reading orthologs...
-Genes read:      56289
-Transcipts read: 170971
---------------
-04.14.2020 | 21:09:28 Filtering transcripts...
-Transcripts with no rat ortholog:                                                      44696
-Transcripts with no one2one rat ortholog:                                              37291
-Transcripts with no high confidence rat ortholog:                                      11069
-Transcripts with no rat ortholog below dS threshold:                                   1204
-Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
-Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
---------------
-Genes with no passed transcripts:                                                      41857
-Genes with selected transcript:                                                        14432
---------------
-04.14.2020 | 21:09:28 Writing selected transcripts to output file...
-```
 
 ```{r footer}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
