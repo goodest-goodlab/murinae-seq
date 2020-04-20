@@ -5,29 +5,33 @@
 # presence in mouse and rat
 ############################################################
 
-import sys, os, core, gzip, argparse, re
+import sys
+sys.path.append("../lib/");
+# Add the repo's lib dir to the path.
+
+import os, core, gzip, re
 from collections import defaultdict
 
 ############################################################
 
-infile = "../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt";
-gtffile_mouse = "../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz";
-gtffile_rat = "../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz";
+infile = "../02-Annotation-data/mouse-rat-orths-ens99.txt";
+gtffile_mouse = "../Reference-genomes/mm10/Mus_musculus.GRCm38.99.gtf.gz";
+gtffile_rat = "../Reference-genomes/Rnor6/Rattus_norvegicus.Rnor_6.0.99.gtf.gz";
 outfilename = "../02-Annotation-data/selected-transcripts.txt"
 
 ds_thresh = 0.5
 
 with open(outfilename, "w") as outfile:
-    core.runTime("# Rodent exomes -- select mouse trancsripts", outfile);
-    core.PWS("# Mouse GTF file:        " + gtffile_mouse, outfile);
-    core.PWS("# Rat GTF file:          " + gtffile_rat, outfile);
-    core.PWS("# Ensembl ortholog file: " + infile, outfile);
-    core.PWS("# Output file:           " + outfilename, outfile);
-    core.PWS("# --------------", outfile);
-    core.PWS("# dS threshold:          " + str(ds_thresh), outfile);
+    mcore.runTime("# Rodent exomes -- select mouse trancsripts", outfile);
+    mcore.PWS("# Mouse GTF file:        " + gtffile_mouse, outfile);
+    mcore.PWS("# Rat GTF file:          " + gtffile_rat, outfile);
+    mcore.PWS("# Ensembl ortholog file: " + infile, outfile);
+    mcore.PWS("# Output file:           " + outfilename, outfile);
+    mcore.PWS("# --------------", outfile);
+    mcore.PWS("# dS threshold:          " + str(ds_thresh), outfile);
 
-    core.PWS("# --------------", outfile);
-    core.PWS("# " + core.getDateTime() + " Reading mouse feature lengths...", outfile);
+    mcore.PWS("# --------------", outfile);
+    mcore.PWS("# " + mcore.getDateTime() + " Reading mouse feature lengths...", outfile);
     mouse_transcript_lengths = {};
     exons = {};
     for line in gzip.open(gtffile_mouse):
@@ -42,7 +46,7 @@ with open(outfilename, "w") as outfile:
             mouse_transcript_lengths[tid] = { 'chrome' : chrome,  'start' : start, 'end' : end, 'len' : transcript_len };
     
 
-    core.PWS("# " + core.getDateTime() + " Reading rat feature lengths...");
+    mcore.PWS("# " + mcore.getDateTime() + " Reading rat feature lengths...");
     rat_transcript_lengths = {};
     rat_pid_to_tid = {};
     for line in gzip.open(gtffile_rat):
@@ -61,11 +65,11 @@ with open(outfilename, "w") as outfile:
             pid = re.findall('ENSRNOP[\d]+', feature_info)[0];
             rat_pid_to_tid[pid] = tid;
             
-    core.PWS("Mouse transcripts read: " + str(len(mouse_transcript_lengths)), outfile);
-    core.PWS("Rat transcripts read:   " + str(len(rat_transcript_lengths)), outfile);
-    core.PWS("# --------------", outfile);
+    mcore.PWS("Mouse transcripts read: " + str(len(mouse_transcript_lengths)), outfile);
+    mcore.PWS("Rat transcripts read:   " + str(len(rat_transcript_lengths)), outfile);
+    mcore.PWS("# --------------", outfile);
     
-    core.PWS("# " + core.getDateTime() + " Reading orthologs...", outfile);
+    mcore.PWS("# " + mcore.getDateTime() + " Reading orthologs...", outfile);
     genes = defaultdict(list);
     first = True;
     transcript_count = 0;
@@ -79,11 +83,11 @@ with open(outfilename, "w") as outfile:
         line = line.strip().split("\t");
         gid = line[0];
         genes[gid].append(line[1:]);
-    core.PWS("# Genes read:      " + str(len(genes)), outfile);
-    core.PWS("# Transcipts read: " + str(transcript_count), outfile);
-    core.PWS("# --------------", outfile);
+    mcore.PWS("# Genes read:      " + str(len(genes)), outfile);
+    mcore.PWS("# Transcipts read: " + str(transcript_count), outfile);
+    mcore.PWS("# --------------", outfile);
 
-    core.PWS("# " + core.getDateTime() + " Filtering transcripts...", outfile);
+    mcore.PWS("# " + mcore.getDateTime() + " Filtering transcripts...", outfile);
     selected_transcripts = {};
 
     no_orth = 0;
@@ -142,17 +146,17 @@ with open(outfilename, "w") as outfile:
             no_passed_transcripts += 1;
       
 
-    core.PWS("# Transcripts with no rat ortholog:                                                      " + str(no_orth), outfile);
-    core.PWS("# Transcripts with no one2one rat ortholog:                                              " + str(no_one2one), outfile);
-    core.PWS("# Transcripts with no high confidence rat ortholog:                                      " + str(low_conf), outfile);
-    core.PWS("# Transcripts with no rat ortholog below dS threshold:                                   " + str(ds_filter), outfile);
-    core.PWS("# Transcripts filtered for not being, on average between rat and mouse, longest in gene: " + str(len_filter), outfile);
-    core.PWS("# Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.");
-    core.PWS("# --------------", outfile);
-    core.PWS("# Genes with no passed transcripts:                                                      " + str(no_passed_transcripts), outfile);
-    core.PWS("# Genes with selected transcript:                                                        " + str(len(selected_transcripts)), outfile);
-    core.PWS("# --------------", outfile);
-    core.PWS("# " + core.getDateTime() + " Writing selected transcripts to output file...", outfile);
+    mcore.PWS("# Transcripts with no rat ortholog:                                                      " + str(no_orth), outfile);
+    mcore.PWS("# Transcripts with no one2one rat ortholog:                                              " + str(no_one2one), outfile);
+    mcore.PWS("# Transcripts with no high confidence rat ortholog:                                      " + str(low_conf), outfile);
+    mcore.PWS("# Transcripts with no rat ortholog below dS threshold:                                   " + str(ds_filter), outfile);
+    mcore.PWS("# Transcripts filtered for not being, on average between rat and mouse, longest in gene: " + str(len_filter), outfile);
+    mcore.PWS("# Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.");
+    mcore.PWS("# --------------", outfile);
+    mcore.PWS("# Genes with no passed transcripts:                                                      " + str(no_passed_transcripts), outfile);
+    mcore.PWS("# Genes with selected transcript:                                                        " + str(len(selected_transcripts)), outfile);
+    mcore.PWS("# --------------", outfile);
+    mcore.PWS("# " + mcore.getDateTime() + " Writing selected transcripts to output file...", outfile);
     orig_headers = orig_headers + "\t" + "\t".join(["Mouse chrome", "Mouse start", "Mouse end", "Mouse length", "Rat chrome", "Rat start", "Rat end", "Rat length"]);
     outfile.write(orig_headers + "\n");
     for gid in selected_transcripts:

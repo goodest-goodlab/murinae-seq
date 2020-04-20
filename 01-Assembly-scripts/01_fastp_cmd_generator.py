@@ -5,64 +5,15 @@
 # sequencing run.
 ############################################################
 
-import sys, os, argparse, core, lib.globs as globs
-from datetime import datetime
+import sys
+sys.path.append("../lib/");
+# Add the repo's lib dir to the path.
+
+import os, argparse, mcore, mfiles, globs
 
 ############################################################
-
-def getFiles(s, run_string):
-    indir = os.path.join("/scratch/gregg_thomas/Murinae-seq/00-RawReads/", s, run_string);
-
-    if not os.path.isdir(indir):
-        return False, False;
-
-    seqfiles = os.listdir(indir);
-
-    if r in [0,1]:
-        seqfiles = [ os.path.join(indir, f) for f in seqfiles ];
-
-    elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
-        seqfiles = pairUp(seqfiles, indir);
-
-    specout = os.path.join("/scratch/gregg_thomas/Murinae-seq/01-Fastp/" + s_mod);
-    if not os.path.isdir(specout):
-        os.system("mkdir " + specout);
-    outdir = os.path.join(specout, run_string);
-    if not os.path.isdir(outdir):
-        os.system("mkdir " + outdir);
-
-    return seqfiles, outdir;
-
-########################
-
-def pairUp(sfiles, indir):
-# Pairs up the paired end read files.
-    paired_files = [];
-    done = [];
-    for f in sfiles:
-        if "_R1_" in f:
-            f2 = f.replace("_R1_", "_R2_");
-        else:
-            continue;
-
-        f = os.path.join(indir, f);
-        f2 = os.path.join(indir, f2);
-
-        if not os.path.isfile(f) or not os.path.isfile(f2):
-            sys.exit(" * File not found! " + "\n" + f + "\n" + f2 + "\n");
-
-        if f in done or f2 in done:
-            continue;
-
-        done += f, f2;
-
-        paired_files.append(f + ";" + f2);
-
-    return paired_files;
-
-########################
-
-def genFastpCmd(sfiles, r, outdir, baselogfile):
+# Functions
+def genFastpCmd(fastp_path, sfiles, r, baselogfile, step, prev_step):
     cmd_list = [];
     cmd_num = 0;
     for f in sfiles:
@@ -70,12 +21,11 @@ def genFastpCmd(sfiles, r, outdir, baselogfile):
             sys.exit(" * ERROR: Invalid file extension: " + f);
 
         if r in [0,1]:
-            basefile = os.path.splitext(os.path.basename(f))[0].replace("fastq", "fastp");
-            readfile = os.path.join(outdir, basefile + ".fastq.gz");
-            htmlfile = os.path.join(outdir, basefile + ".fastp.html");
-            jsonfile = os.path.join(outdir, basefile + ".fastp.json");   
+            outfile = f.replace(".fastq.gz", ".fastp.fastq.gz");
+            htmlfile = outfile.replace(".fastq.gz", ".fastp.html");
+            jsonfile = outfile.replace(".fastq.gz", ".fastp.json");
 
-            fastp_cmd = "fastp -i " + f + " --length_required 30 --low_complexity_filter --complexity_threshold 30 -o " + readfile  + " -h " + htmlfile + " -j " + jsonfile;
+            fastp_cmd = fastp_path + " -i " + f + " --length_required 30 --low_complexity_filter --complexity_threshold 30 -o " + outfile  + " -h " + htmlfile + " -j " + jsonfile;
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
             fastp_cmd += " &> " + logfile;
@@ -84,24 +34,22 @@ def genFastpCmd(sfiles, r, outdir, baselogfile):
 
         elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
             f = f.split(";");
-            basefile1 = os.path.splitext(os.path.basename(f[0]))[0].replace("fastq", "fastp");
-            readfile1 = os.path.join(outdir, basefile1 + ".fastq.gz");
-
-            basefile2 = os.path.splitext(os.path.basename(f[1]))[0].replace("fastq", "fastp");
-            readfile2 = os.path.join(outdir, basefile2 + ".fastq.gz");
+            outfile1 = f[0].replace(".fastq.gz", ".fastp.fastq.gz");
+            outfile2 = f[1].replace(".fastq.gz", ".fastp.fastq.gz");
 
             c = 0;
-            baselogf = "";
-            while basefile1[c] == basefile2[c]:
-                baselogf += basefile1[c];
+            supp_file = "";
+            while outfile1[c] == outfile2[c]:
+                supp_file += outfile1[c];
                 c += 1;
+            # Weird way to get the common file string between the two output files.
 
-            htmlfile = os.path.join(outdir, baselogf + ".fastp.html");
-            jsonfile = os.path.join(outdir, baselogf + ".fastp.json");
+            htmlfile = supp_file + ".fastp.html";
+            jsonfile = supp_file + ".fastp.json";
 
             fastp_cmd = "fastp -i " + f[0] + " -I " + f[1] + " --detect_adapter_for_pe";
             fastp_cmd += " --length_required 30 --low_complexity_filter --complexity_threshold 30";
-            fastp_cmd += " -o " + readfile1 + " -O " + readfile2  + " -h " + htmlfile + " -j " + jsonfile;
+            fastp_cmd += " -o " + outfile1 + " -O " + outfile2  + " -h " + htmlfile + " -j " + jsonfile;
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
             fastp_cmd += " &> " + logfile;
@@ -110,78 +58,134 @@ def genFastpCmd(sfiles, r, outdir, baselogfile):
     return cmd_list;
 ############################################################
 
+##########################
+# Parsing input and output options.
 
-core.runTime("#!/bin/bash\n# Rodent fastp commands");
+parser = argparse.ArgumentParser(description="Generates commands for Fastp on rodent exomes.");
+parser.add_argument("-s", dest="spec", help="A species to generate a command for. Default: all", default="all");
+parser.add_argument("-r", dest="runtype", help="The sequencing run to generate commands for. Default: all.", default="all");
+parser.add_argument("-n", dest="name", help="A short name for all files associated with this job.", default=False);
+parser.add_argument("-p", dest="path", help="The path to fastp. Default: fastq", default="fastp");
+parser.add_argument("--overwrite", dest="overwrite", help="If the job and submit files already exist and you wish to overwrite them, set this option.", action="store_true", default=False);
+# IO options
 
-parser = argparse.ArgumentParser(description="Generates commands for read filtering and trimming with fastp for 48 exomes.");
-parser.add_argument("-s", dest="spec", help="A species to lookup", default="all");
-parser.add_argument("-r", dest="runtype", help="The sequencing run to lookup. One of: 'nextseq single 1', 'nextseq single 2', 'all'", default="all");
-parser.add_argument("--c", dest="carnation", help="Set this option if running on Carnation.", action="store_true", default=False);
+parser.add_argument("-part", dest="part", help="SLURM partition option.", default=False);
+parser.add_argument("-tasks", dest="tasks", help="SLURM --ntasks option.", type=int, default=1);
+parser.add_argument("-cpus", dest="cpus", help="SLURM --cpus-per-task option.", type=int, default=1);
+parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, default=0);
+# SLURM options
+
 args = parser.parse_args();
 # Input options.
 
 seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
+# Get all the meta info for the species and sequencing runs.
 
-if args.carnation:
-    basedirs = ["/nfs/musculus" + d for d in basedirs];
-
-if args.runtype == "all":
-    runtype = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+if not args.name:
+    name = mcore.getRandStr();
 else:
-    runtype = [];
-    args.runtype = args.runtype.replace(", ", ",").split(",");
-    for r in args.runtype:
-        if r in seq_run_ids:
-            runtype.append(seq_run_ids[r]);
-        elif r in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
-            runtype.append(int(r));
-        else:
-            sys.exit(core.errorOut("FP1", "Cannot find specified sequencing run: " + str(r)));
-# Parse the input runtypes.
+    name = args.name;
+# Get the job name.
 
-runstrs = {};
-for runstr, runind in seq_run_ids.items():
-    runstrs[runind] = runstr;
-# Get the string run type if int is given as input.
+step = "01-Fastp";
+prev_step = "00-RawReads";
+# Step vars
 
-if args.spec == "all":
-    spec = specs_ordered;
-else:
-    spec = args.spec.replace(", ", ",").split(","); 
-    for s in spec:
-        if s not in spec_ids:
-            sys.exit(core.errorOut("FP2", "Cannot find specified species: " + s));
+pad = 26
+cwd = os.getcwd();
+# Job vars
+
+output_file = os.path.join(cwd, "jobs", name + ".sh");
+submit_file = os.path.join(cwd, "submit", name + "_submit.sh");
+# Job files
+
+if not args.part:
+    sys.exit( " * ERROR 1: Please specify a SLURM partition (-part) or submit -part none to not generate the submit script.");
+
+if (os.path.isfile(output_file) or os.path.isfile(submit_file)) and not args.overwrite:
+    sys.exit( " * ERROR 2: Job and submit files already exist! Explicity specify --overwrite to overwrite them.");
+
+base_outdir = os.path.abspath("../01-Assembly-data/");
+step_dir = os.path.join(base_outdir, step);
+prev_step_dir = os.path.join(base_outdir, prev_step);
+
+base_logdir = os.path.abspath("logs/");
+logdir = os.path.join(base_logdir, step + "-logs");
+# Step I/O info.
+
+runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
+# Parse the input run types.
+
+spec = mfiles.parseSpecs(args.spec, specs_ordered, spec_ids)
 # Parse the input species.
 
-i = 1;
-for s in spec:
-    s_mod = s.replace(" ", "-");
-    
-    if "(no-WGA)" in s_mod:
-        continue;
+##########################
+# Reporting run-time info for records.
+with open(output_file, "w") as jobfile:
+    mcore.runTime("#!/bin/bash\n# Rodent fastp commands", jobfile);
+    mcore.PWS("# STEP INFO", jobfile);
+    mcore.PWS(mcore.spacedOut("# Current step:", pad) + step, jobfile);
+    mcore.PWS(mcore.spacedOut("# Previous step:", pad) + prev_step, jobfile);
+    mcore.PWS("# ----------", jobfile);
+    mcore.PWS("# I/O INFO", jobfile);
+    mcore.PWS(mcore.spacedOut("# Input directory:", pad) + prev_step_dir, jobfile);
+    mcore.PWS(mcore.spacedOut("# Output directory:", pad) + step_dir, jobfile);
+    mcore.PWS(mcore.spacedOut("# fastp path:", pad) + args.path, jobfile);
+    mcore.PWS(mcore.spacedOut("# Species:", pad) + args.spec, jobfile);
+    mcore.PWS(mcore.spacedOut("# Seq runs:", pad) + args.runtype, jobfile);
+    if not args.name:
+        mcore.PWS("# -n not specified --> Generating random string for job name", jobfile);
+    mcore.PWS(mcore.spacedOut("# Job name:", pad) + name, jobfile);
+    mcore.PWS(mcore.spacedOut("# Logfile directory:", pad) + logdir, jobfile);
+    if not os.path.isdir(logdir):
+        mcore.PWS("# Creating logfile directory.", jobfile);
+        os.system("mkdir " + logdir);
+    mcore.PWS(mcore.spacedOut("# Job file:", pad) + output_file, jobfile);
+    mcore.PWS("# ----------", jobfile);
+    mcore.PWS("# SLURM OPTIONS", jobfile);
+    mcore.PWS(mcore.spacedOut("# Submit file:", pad) + submit_file, jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM partition:", pad) + args.part, jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM ntasks:", pad) + str(args.tasks), jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
+    mcore.PWS("# ----------", jobfile);
 
-    for r in runtype:
-        run_string = runstrs[r];
-
-        baselogfile = "/scratch/gregg_thomas/Murinae-seq/scripts/logs/01-Fastp-logs/" + s_mod + "-" + run_string + "-fastp";
-
-        seqfiles, outdir = getFiles(s_mod, run_string);
-
-        if not seqfiles:
+##########################
+# Generating the commands in the job file.
+    for s in spec:
+        if "(no WGA)" in s:
             continue;
-            
-        fastp_cmds = genFastpCmd(seqfiles, r, outdir, baselogfile);
-        for cmd in fastp_cmds:
-            print(cmd);
+        s_mod = s.replace(" ", "-");
 
-        if s_mod in ["Rattus-exulans", "Rattus-hoffmanni"]:
-            run_string += "-no-WGA"
+        spec_dir = os.path.join(step_dir, s_mod);
+        if not os.path.isdir(spec_dir):
+            os.system("mkdir " + spec_dir);
+        # Make output directory
 
-            seqfiles, outdir = getFiles(s_mod, run_string);
-            if not seqfiles:
-                continue;
-            fastp_cmds = genFastpCmd(seqfiles, r, outdir, baselogfile);
-            for cmd in fastp_cmds:
-                print(cmd);
+        for r in runtype:
+            run_string = runstrs[r];
 
+            base_logfile = os.path.join(logdir, s_mod + "-" + run_string + "-fastp");
+            # Get the base logfile name for this run.
 
+            seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
+            if seqfiles:
+                fastp_cmds = genFastpCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
+
+            if s_mod in ["Rattus-exulans", "Rattus-hoffmanni"]:
+                run_string += "-no-WGA"
+
+                seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
+                if seqfiles:
+                    fastp_cmds_2 = genFastpCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
+                    fastp_cmds += fastp_cmds_2;
+
+            if fastp_cmds:
+                for cmd in sorted(fastp_cmds):
+                    mcore.PWS(cmd, jobfile);
+
+##########################
+# Generating the submit script.
+if args.part != "none":
+    mfiles.genSlurmSubmit(submit_file, name, args.part, args.tasks, args.cpus, args.mem, output_file)
+##########################           

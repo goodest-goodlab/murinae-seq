@@ -5,97 +5,44 @@
 # been interleaved by dedupe.sh
 ############################################################
 
-import sys, os, argparse, core, lib.globs as globs
-from datetime import datetime
+import sys
+sys.path.append("../lib/");
+# Add the repo's lib dir to the path.
+
+import os, argparse, mcore, mfiles, globs
 
 ############################################################
-
-def getFiles(s, run_string, prev_dir):
-    indir = os.path.join(prev_dir, s, run_string);
-    # indir is still merged folder to preseve paired file names -- output files will replace merged directory with dedup directory
-    # even though input files are from intermediate directory.
-
-    if not os.path.isdir(indir):
-        return False;
-
-    seqfiles = [ f for f in os.listdir(indir) if ".fastq.gz" in f ];
-
-    if r in [0,1]:
-        seqfiles = [ os.path.join(indir, f) for f in seqfiles ];
-
-    elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
-        seqfiles = pairUp(seqfiles, indir);
-
-    return seqfiles;
-
-########################
-
-def pairUp(sfiles, indir):
-# Pairs up the paired end read files.
-    paired_files = [];
-    done = [];
+# Functions
+def genReformatCmd(reformat_path, sfiles, r, baselogfile, step, prev_step):
+    cmd_list, cmd_num = [], 0;
     for f in sfiles:
-        if ".unmerged." in f:
-            if "_R1_" in f:
-                f2 = f.replace("_R1_", "_R2_");
-            else:
-                continue;
-
-            f = os.path.join(indir, f);
-            f2 = os.path.join(indir, f2);
-
-            if not os.path.isfile(f) or not os.path.isfile(f2):
-                sys.exit(" * File not found! " + "\n" + f + "\n" + f2 + "\n");
-
-            if f in done or f2 in done:
-                continue;
-
-            done += f, f2;
-
-            paired_files.append(f + ";" + f2);
-        else:
-            paired_files.append(os.path.join(indir, f));
-
-    return paired_files;
-
-########################
-
-def genReformatCmd(sfiles, r, baselogfile, step, prev_step):
-    cmd_list = [];
-    cmd_num = 0;
-    #print(sfiles);
-    for f in sfiles:
-        #print(f);
         if r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
             if ".unmerged." in f:
-               
                 f = f.split(";");
                 fint = f[0].replace("_R2_", "_R1_").replace("_R1_", "_").replace(prev_step, "04A-Reformat");
 
                 fout1 = f[0].replace(prev_step, "04A-Dedup").replace(".fastq.gz", ".dedup.fastq.gz");
                 fout2 = f[1].replace(prev_step, "04A-Dedup").replace(".fastq.gz", ".dedup.fastq.gz");
 
-                reformat_cmd = "reformat.sh in=" + fint + " overwrite=true out1=" + fout1 + " out2=" + fout2;
+                reformat_cmd = reformat_path + " in=" + fint + " overwrite=true out1=" + fout1 + " out2=" + fout2;
                 cmd_num += 1;
                 logfile = baselogfile + "-" + str(cmd_num) + ".log";
                 reformat_cmd += " &> " + logfile;
-                #print(str(cmd_num) + "    " + reformat_cmd); 
                 cmd_list.append(reformat_cmd);
             # Unmerged reads         
         # Paired end runs 
 
     return cmd_list;
-
 ############################################################
 
 ##########################
 # Parsing input and output options.
 
-parser = argparse.ArgumentParser(description="Generates commands for read deduping with bbmap for rodent exomes.");
+parser = argparse.ArgumentParser(description="Generates commands for read reformatting after deduping with bbmap for rodent exomes.");
 parser.add_argument("-s", dest="spec", help="A species to generate a command for. Default: all", default="all");
 parser.add_argument("-r", dest="runtype", help="The sequencing run to generate commands for. Default: all.", default="all");
 parser.add_argument("-n", dest="name", help="A short name for all files associated with this job.", default=False);
-parser.add_argument("-p", dest="path", help="The path to dedup.sh. Default: dedup.sh", default="muscle");
+parser.add_argument("-p", dest="path", help="The path to reformat.sh. Default: reformat.sh", default="dedup.sh");
 parser.add_argument("--overwrite", dest="overwrite", help="If the job and submit files already exist and you wish to overwrite them, set this option.", action="store_true", default=False);
 # IO options
 
@@ -112,7 +59,7 @@ seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
 # Get all the meta info for the species and sequencing runs.
 
 if not args.name:
-    name = core.getRandStr();
+    name = mcore.getRandStr();
 else:
     name = args.name;
 # Get the job name.
@@ -129,8 +76,11 @@ output_file = os.path.join(cwd, "jobs", name + ".sh");
 submit_file = os.path.join(cwd, "submit", name + "_submit.sh");
 # Job files
 
+if not args.part:
+    sys.exit( " * ERROR 1: Please specify a SLURM partition (-part) or submit -part none to not generate the submit script.");
+
 if (os.path.isfile(output_file) or os.path.isfile(submit_file)) and not args.overwrite:
-    sys.exit( " * ERROR 1: Job and submit files already exist! Explicity specify --overwrite to overwrite them.");
+    sys.exit( " * ERROR 2: Job and submit files already exist! Explicity specify --overwrite to overwrite them.");
 
 base_outdir = os.path.abspath("../01-Assembly-data/");
 reformat_dir = os.path.join(base_outdir, step);
@@ -176,38 +126,37 @@ else:
 # Reporting run-time info for records.
 
 with open(output_file, "w") as jobfile:
-    core.runTime(core.runTime("#!/bin/bash\n# Rodent post-dedup reformat commands"), jobfile);
-    core.PWS("# STEP INFO", jobfile);
-    core.PWS(core.spacedOut("# Current step:", pad) + step, jobfile);
-    core.PWS(core.spacedOut("# Previous step:", pad) + prev_step, jobfile);
-    core.PWS("# ----------", jobfile);
-    core.PWS("# I/O INFO", jobfile);
-    core.PWS(core.spacedOut("# Input directory:", pad) + prev_step_dir, jobfile);
-    core.PWS(core.spacedOut("# Output directory:", pad) + dedup_dir, jobfile);
-    core.PWS(core.spacedOut("# Intermediate reformat directory:", pad) + reformat_dir, jobfile);
-    core.PWS(core.spacedOut("# Species:", pad) + args.spec, jobfile);
-    core.PWS(core.spacedOut("# Seq runs:", pad) + args.runtype, jobfile);
+    mcore.runTime("#!/bin/bash\n# Rodent post-dedup reformat commands", jobfile);
+    mcore.PWS("# STEP INFO", jobfile);
+    mcore.PWS(mcore.spacedOut("# Current step:", pad) + step, jobfile);
+    mcore.PWS(mcore.spacedOut("# Previous step:", pad) + prev_step, jobfile);
+    mcore.PWS("# ----------", jobfile);
+    mcore.PWS("# I/O INFO", jobfile);
+    mcore.PWS(mcore.spacedOut("# Input directory:", pad) + prev_step_dir, jobfile);
+    mcore.PWS(mcore.spacedOut("# Output directory:", pad) + dedup_dir, jobfile);
+    mcore.PWS(mcore.spacedOut("# Intermediate reformat directory:", pad) + reformat_dir, jobfile);
+    mcore.PWS(mcore.spacedOut("# reformat.sh path:", pad) + args.path, jobfile);
+    mcore.PWS(mcore.spacedOut("# Species:", pad) + args.spec, jobfile);
+    mcore.PWS(mcore.spacedOut("# Seq runs:", pad) + args.runtype, jobfile);
     if not args.name:
-        core.PWS("# -n not specified --> Generating random string for job name", jobfile);
-    core.PWS(core.spacedOut("# Job name:", pad) + name, jobfile);
-    core.PWS(core.spacedOut("# Logfile directory:", pad) + logdir, jobfile);
+        mcore.PWS("# -n not specified --> Generating random string for job name", jobfile);
+    mcore.PWS(mcore.spacedOut("# Job name:", pad) + name, jobfile);
+    mcore.PWS(mcore.spacedOut("# Logfile directory:", pad) + logdir, jobfile);
     if not os.path.isdir(logdir):
-        core.PWS("# Creating logfile directory.", jobfile);
+        mcore.PWS("# Creating logfile directory.", jobfile);
         os.system("mkdir " + logdir);
-    core.PWS(core.spacedOut("# Job file:", pad) + output_file, jobfile);
-    core.PWS("# ----------", jobfile);
-    core.PWS("# SLURM OPTIONS", jobfile);
-    core.PWS(core.spacedOut("# Submit file:", pad) + submit_file, jobfile);
-    core.PWS(core.spacedOut("# SLURM partition:", pad) + args.part, jobfile);
-    core.PWS(core.spacedOut("# SLURM ntasks:", pad) + str(args.tasks), jobfile);
-    core.PWS(core.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
-    core.PWS(core.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
-    core.PWS("# ----------", jobfile);
+    mcore.PWS(mcore.spacedOut("# Job file:", pad) + output_file, jobfile);
+    mcore.PWS("# ----------", jobfile);
+    mcore.PWS("# SLURM OPTIONS", jobfile);
+    mcore.PWS(mcore.spacedOut("# Submit file:", pad) + submit_file, jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM partition:", pad) + args.part, jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM ntasks:", pad) + str(args.tasks), jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
+    mcore.PWS("# ----------", jobfile);
 
 ##########################
 # Generating the commands in the job file.
-
-    i = 1;
     for s in spec:
         if "(no WGA)" in s:
             continue;
@@ -227,36 +176,36 @@ with open(output_file, "w") as jobfile:
             base_logfile = os.path.join(logdir, s_mod + "-" + run_string + "-reformat");
             # Get the base logfile name for this run.
 
-            seqfiles = getFiles(s_mod, run_string, prev_step_dir);
+            seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir, unmerged_flag=True);
             if seqfiles:
                 run_reformat_indir = os.path.join(spec_reformat_indir, run_string);
                 run_dedup_outdir = os.path.join(spec_dedup_outdir, run_string);
                 # Make the output and reformat directories for this run.
 
-                reformat_cmds = genReformatCmd(seqfiles, r, base_logfile, step, prev_step); 
+                reformat_cmds = genReformatCmd(args.path, seqfiles, r, base_logfile, step, prev_step); 
 
             if s_mod in ["Rattus-exulans", "Rattus-hoffmani"]:
                 run_string += "-no-WGA";
-                seqfiles = getFiles(s_mod, run_string, prev_step_dir);
+                seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir, unmerged_flag=True);
                 if seqfiles:
                     run_reformat_indir = os.path.join(spec_reformat_indir, run_string);
                     run_dedup_outdir = os.path.join(spec_dedup_outdir, run_string);
                     # Make the output and reformat directories for this run.
 
-                    reformat_cmds_2 = genReformatCmd(seqfiles, r, base_logfile, step, prev_step);
+                    reformat_cmds_2 = genReformatCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
                     reformat_cmds += reformat_cmds_2;            
             
             if reformat_cmds:
                 for cmd in sorted(reformat_cmds):
-                    core.PWS(cmd, jobfile);
+                    mcore.PWS(cmd, jobfile);
 
 ############################################################
 
 ##########################
 # Parsing input and output options.
-
-with open(submit_file, "w") as sfile:
-    submit = '''#!/bin/bash
+if args.part != "none":
+    with open(submit_file, "w") as sfile:
+        submit = '''#!/bin/bash
 #SBATCH --job-name={name}
 #SBATCH --output={name}-%j.out
 #SBATCH --mail-type=ALL
@@ -269,6 +218,6 @@ with open(submit_file, "w") as sfile:
 
 parallel -j {tasks} < {output_file}'''
 
-    sfile.write(submit.format(name=name, partition=args.part, tasks=args.tasks, cpus=args.cpus, mem=args.mem, output_file=output_file));
+        sfile.write(submit.format(name=name, partition=args.part, tasks=args.tasks, cpus=args.cpus, mem=args.mem, output_file=output_file));
 
 ##########################

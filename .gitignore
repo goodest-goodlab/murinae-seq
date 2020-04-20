@@ -1,6 +1,9 @@
 *.RHistory
 *.pyc
+__pycache__
 
+Reference-genomes/
+Targets/
 01-Assembly-data/
 01-Assembly-scripts/submit/
-Targets/
+02-Annotation-data/transcript-seq/

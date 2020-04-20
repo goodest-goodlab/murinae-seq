@@ -5,64 +5,15 @@
 # sequencing run.
 ############################################################
 
-import sys, os, argparse, core, gzip, lib.globs as globs
-from datetime import datetime
+import sys
+sys.path.append("../lib/");
+# Add the repo's lib dir to the path.
+
+import os, argparse, mcore, mfiles, gzip, globs
 
 ############################################################
-
-def getFiles(s, run_string, ref_outdir):
-    indir = os.path.join("/scratch/gregg_thomas/Murinae-seq/02-Decon/", s, run_string);
-
-    if not os.path.isdir(indir):
-        return False, False;
-
-    seqfiles = [ f for f in os.listdir(indir) if ".fastq.gz" in f ];
-
-    if r in [0,1]:
-        seqfiles = [ os.path.join(indir, f) for f in seqfiles ];
-
-    elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
-        seqfiles = pairUp(seqfiles, indir);
-
-    specout = os.path.join(ref_outdir + s_mod);
-    if not os.path.isdir(specout):
-        os.system("mkdir " + specout);
-    outdir = os.path.join(specout, run_string);
-    if not os.path.isdir(outdir):
-        os.system("mkdir " + outdir);
-
-    return seqfiles, outdir;
-
-########################
-
-def pairUp(sfiles, indir):
-# Pairs up the paired end read files.
-    paired_files = [];
-    done = [];
-    for f in sfiles:
-        if "_R1_" in f:
-            f2 = f.replace("_R1_", "_R2_");
-        else:
-            continue;
-
-        f = os.path.join(indir, f);
-        f2 = os.path.join(indir, f2);
-
-        if not os.path.isfile(f) or not os.path.isfile(f2):
-            sys.exit(" * File not found! " + "\n" + f + "\n" + f2 + "\n");
-
-        if f in done or f2 in done:
-            continue;
-
-        done += f, f2;
-
-        paired_files.append(f + ";" + f2);
-
-    return paired_files;
-
-########################
-
-def genBWACmd(sfiles, r, run_string, spec, outdir, baselogfile, ref):
+# Functions
+def genBWACmd(bwa_path, sfiles, r, run_string, spec, outdir, baselogfile, ref):
     cmd_list = [];
     cmd_num = 0;
     for f in sfiles:
@@ -85,7 +36,7 @@ def genBWACmd(sfiles, r, run_string, spec, outdir, baselogfile, ref):
             basefile = os.path.splitext(os.path.basename(f))[0].replace(".fastq", ".bam");
             bamfile = os.path.join(outdir, basefile);
 
-            bwa_cmd = "bwa mem -R '" + read_group + "' " + ref + " " + f + " | samtools view -bh - | samtools sort - -o " + bamfile; 
+            bwa_cmd = bwa_path + " mem -R '" + read_group + "' " + ref + " " + f + " | samtools view -bh - | samtools sort - -o " + bamfile; 
 
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
@@ -97,7 +48,7 @@ def genBWACmd(sfiles, r, run_string, spec, outdir, baselogfile, ref):
             basefile = os.path.splitext(os.path.basename(f))[0].replace("_R1_", "_").replace(".fastq", ".bam");
             bamfile = os.path.join(outdir, basefile);
 
-            bwa_cmd = "bwa mem -R '" + read_group + "' " + ref + " " + f_pair + " | samtools view -bh - | samtools sort - -o " + bamfile; 
+            bwa_cmd = bwa_path + " mem -R '" + read_group + "' " + ref + " " + f_pair + " | samtools view -bh - | samtools sort - -o " + bamfile; 
 
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
@@ -106,93 +57,140 @@ def genBWACmd(sfiles, r, run_string, spec, outdir, baselogfile, ref):
         # Paired end runs 
 
     return cmd_list;
-
 ############################################################
 
-core.runTime("#!/bin/bash\n# Rodent BWA commands");
+##########################
+# Parsing input and output options.
 
-parser = argparse.ArgumentParser(description="Generates commands for BWA for rodent exomes.");
-parser.add_argument("-s", dest="spec", help="A species to lookup", default="all");
+parser = argparse.ArgumentParser(description="Generates commands for mapping reads with BWA for rodent exomes. Dependencies: samtools, picard.");
+parser.add_argument("-s", dest="spec", help="A species to generate a command for. Default: all", default="all");
+parser.add_argument("-r", dest="runtype", help="The sequencing run to generate commands for. Default: all.", default="all");
+parser.add_argument("-n", dest="name", help="A short name for all files associated with this job.", default=False);
+parser.add_argument("-p", dest="path", help="The path to BWA. Default: bwa", default="bwa");
 parser.add_argument("-ref", dest="ref", help="One of rat, mouse, or mouse-targets", default="mouse");
-parser.add_argument("-r", dest="runtype", help="The sequencing run to lookup. One of: 'nextseq single 1', 'nextseq single 2', 'all'", default="all");
-parser.add_argument("--c", dest="carnation", help="Set this option if running on Carnation.", action="store_true", default=False);
+parser.add_argument("--overwrite", dest="overwrite", help="If the job and submit files already exist and you wish to overwrite them, set this option.", action="store_true", default=False);
+# IO options
+
+parser.add_argument("-part", dest="part", help="SLURM partition option.", default=False);
+parser.add_argument("-tasks", dest="tasks", help="SLURM --ntasks option.", type=int, default=1);
+parser.add_argument("-cpus", dest="cpus", help="SLURM --cpus-per-task option.", type=int, default=1);
+parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, default=0);
+# SLURM options
+
 args = parser.parse_args();
 # Input options.
 
 seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
+# Get all the meta info for the species and sequencing runs.
 
-if args.carnation:
-    basedirs = ["/nfs/musculus" + d for d in basedirs];
-
-if args.runtype == "all":
-    runtype = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+if not args.name:
+    name = mcore.getRandStr();
 else:
-    runtype = [];
-    args.runtype = args.runtype.replace(", ", ",").split(",");
-    for r in args.runtype:
-        if r in seq_run_ids:
-            runtype.append(seq_run_ids[r]);
-        elif r in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
-            runtype.append(int(r));
-        else:
-            sys.exit(core.errorOut("SF1", "Cannot find specified sequencing run: " + str(r)));
-# Parse the input runtypes.
+    name = args.name;
+# Get the job name.
 
-runstrs = {};
-for runstr, runind in seq_run_ids.items():
-    runstrs[runind] = runstr;
-# Get the string run type if int is given as input.
+args.ref = args.ref.lower();
+ref = mfiles.getRef(args.ref);
+# Lookup the reference genome file.
 
-if args.spec == "all":
-    spec = specs_ordered;
-else:
-    spec = args.spec.replace(", ", ",").split(",");
-    for s in spec:
-        if s not in spec_ids:
-            sys.exit(core.errorOut("SF2", "Cannot find specified species: " + s));
+step = "03B-Mapped" + args.ref.title();
+prev_step = "02-Decon";
+# Step vars
+
+pad = 26
+cwd = os.getcwd();
+# Job vars
+
+output_file = os.path.join(cwd, "jobs", name + ".sh");
+submit_file = os.path.join(cwd, "submit", name + "_submit.sh");
+# Job files
+
+base_outdir = os.path.abspath("../01-Assembly-data/");
+step_dir = os.path.join(base_outdir, step);
+prev_step_dir = os.path.join(base_outdir, prev_step);
+
+if not args.part:
+    sys.exit( " * ERROR 1: Please specify a SLURM partition (-part) or submit -part none to not generate the submit script.");
+
+if (os.path.isfile(output_file) or os.path.isfile(submit_file)) and not args.overwrite:
+    sys.exit( " * ERROR 2: Job and submit files already exist! Explicity specify --overwrite to overwrite them.");
+
+base_outdir = os.path.abspath("../01-Assembly-data/");
+step_dir = os.path.join(base_outdir, step);
+prev_step_dir = os.path.join(base_outdir, prev_step);
+
+base_logdir = os.path.abspath("logs/");
+logdir = os.path.join(base_logdir, step + "-logs");
+# Step I/O info.
+
+runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
+# Parse the input run types.
+
+spec = mfiles.parseSpecs(args.spec, specs_ordered, spec_ids)
 # Parse the input species.
 
-args.ref = args.ref.lower()
-if args.ref not in ['rat','mouse']:
-    sys.exit(core.errorOut("M1", "-ref must be one of either 'rat' or 'mouse'."));
-if args.ref == 'mouse':
-    ref = "/scratch/gregg_thomas/Rodent-ref-genomes/mm10/mm10.fa"
-    ref_outdir = "/scratch/gregg_thomas/Murinae-seq/03B-MappedMouse/"
-    log_outdir = "/scratch/gregg_thomas/Murinae-seq/scripts/logs/03B-MappedMouse-logs/"    
-elif args.ref == 'rat':
-    ref = "/scratch/gregg_thomas/Rodent-ref-genomes/rnor6/rnor6.fa"
-    ref_outdir = "/scratch/gregg_thomas/Murinae-seq/03B-MappedRat/"
-    log_outdir = "/scratch/gregg_thomas/Murinae-seq/scripts/logs/03B-MappedRat-logs/"
-# Reference options
+with open(output_file, "w") as jobfile:
+    mcore.runTime("#!/bin/bash\n# Rodent BWA commands", jobfile);
+    mcore.PWS("# STEP INFO", jobfile);
+    mcore.PWS(mcore.spacedOut("# Current step:", pad) + step, jobfile);
+    mcore.PWS(mcore.spacedOut("# Previous step:", pad) + prev_step, jobfile);
+    mcore.PWS(mcore.spacedOut("# Input directory:", pad) + prev_step_dir, jobfile);
+    mcore.PWS(mcore.spacedOut("# Output directory:", pad) + step_dir, jobfile);
+    mcore.PWS(mcore.spacedOut("# BWA path:", pad) + args.path, jobfile);
+    mcore.PWS(mcore.spacedOut("# Species:", pad) + args.spec, jobfile);
+    mcore.PWS(mcore.spacedOut("# Reference file:", pad) + ref, jobfile);
+    if not args.name:
+        mcore.PWS("# -n not specified --> Generating random string for job name", jobfile);
+    mcore.PWS(mcore.spacedOut("# Job name:", pad) + name, jobfile);
+    mcore.PWS(mcore.spacedOut("# Logfile directory:", pad) + logdir, jobfile);
+    if not os.path.isdir(logdir):
+        mcore.PWS("# Creating logfile directory.", jobfile);
+        os.system("mkdir " + logdir);
+    mcore.PWS(mcore.spacedOut("# Job file:", pad) + output_file, jobfile);
+    mcore.PWS("# ----------", jobfile);
+    mcore.PWS("# SLURM OPTIONS", jobfile);
+    mcore.PWS(mcore.spacedOut("# Submit file:", pad) + submit_file, jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM partition:", pad) + args.part, jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM ntasks:", pad) + str(args.tasks), jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
+    mcore.PWS(mcore.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
+    mcore.PWS("# ----------", jobfile);
 
-i = 1;
-for s in spec:
-    s_mod = s.replace(" ", "-");
-    
-    if "(no-WGA)" in s_mod:
-        continue;
-
-    for r in runtype:
-        run_string = runstrs[r];
-
-        baselogfile = os.path.join(log_outdir, s_mod + "-" + run_string + "-bwa");
-
-        seqfiles, outdir = getFiles(s_mod, run_string, ref_outdir);
-
-        if not seqfiles:
+##########################
+# Generating the commands in the job file.
+    for s in spec:
+        if "(no WGA)" in s:
             continue;
-            
-        bwa_cmds = genBWACmd(seqfiles, r, run_string, s_mod, outdir, baselogfile, ref);
-        for cmd in bwa_cmds:
-            print(cmd);
+        s_mod = s.replace(" ", "-");
 
+        spec_dir = os.path.join(step_dir, s_mod);
+        if not os.path.isdir(spec_dir):
+            os.system("mkdir " + spec_dir);
 
-        if s_mod in ["Rattus-exulans", "Rattus-hoffmanni"]:
-            run_string += "-no-WGA"
+        base_logfile = os.path.join(logdir, s_mod + "-bwa");
+        # Make output directory and logfile
 
-            seqfiles, outdir = getFiles(s_mod, run_string, ref_outdir);
-            if not seqfiles:
-                continue;
-            bwa_cmds = genBWACmd(seqfiles, r, run_string, s_mod, outdir, baselogfile, ref);
-            for cmd in bwa_cmds:
-                print(cmd);
+        for r in runtype:
+            run_string = runstrs[r];
+
+            seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
+            if seqfiles:
+                bwa_cmds = genBWACmd(args.path, seqfiles, r, run_string, s_mod, spec_dir, base_logfile, ref);
+
+            if s_mod in ["Rattus-exulans", "Rattus-hoffmanni"]:
+                run_string += "-no-WGA"
+
+                seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
+                if seqfiles:
+                    bwa_cmds_2 = genBWACmd(args.path, seqfiles, r, run_string, s_mod, spec_dir, base_logfile, ref);
+                    bwa_cmds += bwa_cmds_2;
+
+            if bwa_cmds:
+                for cmd in sorted(bwa_cmds):
+                    mcore.PWS(cmd, jobfile);
+
+##########################
+# Generating the submit script.
+if args.part != "none":
+    mfiles.genSlurmSubmit(submit_file, name, args.part, args.tasks, args.cpus, args.mem, output_file)
+##########################
