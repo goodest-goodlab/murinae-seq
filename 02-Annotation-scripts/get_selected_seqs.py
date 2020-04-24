@@ -17,9 +17,9 @@ from collections import defaultdict
 ref = "../Reference-genomes/mm10/mm10.fa";
 gtffile_mouse = "../Reference-genomes/mm10/Mus_musculus.GRCm38.99.gtf.gz";
 transcript_file = "../02-Annotation-data/selected-transcripts.txt";
-#outdir = "../02-Annotation-data/transcript-seq/";
-outdir = "../02-Annotation-data/ts2/";
-logfilename = "get_selected_seqs-2.log";
+outdir = "../02-Annotation-data/transcript-seq/";
+#outdir = "../02-Annotation-data/ts2/";
+logfilename = "get_selected_seqs.log";
 # Hardcoded file names
 
 with open(logfilename, "w") as logfile:
@@ -191,7 +191,7 @@ with open(logfilename, "w") as logfile:
         cds_seq = "";
         for cds in mouse_transcripts[tid]['cds']:
             c_chrome, c_start, c_end, c_strand = cds[0], cds[1], cds[2], cds[4];
-            cds_cmd = exon_cmd = "samtools faidx " + ref + " " + c_chrome + ":" + str(c_start) + "-" + str(c_end)
+            cds_cmd = "samtools faidx " + ref + " " + c_chrome + ":" + str(c_start) + "-" + str(c_end)
             if c_strand == "-":
                 cds_cmd += " -i ";            
             cds_cmd += " > tmp.fa";
@@ -199,9 +199,9 @@ with open(logfilename, "w") as logfile:
             os.system(cds_cmd);
             
             titles, seqs = mseq.fastaGetLists("tmp.fa");
-            print(titles);
-            print(seqs);
-            sys.exit();
+            # print(titles);
+            # print(seqs);
+            # sys.exit();
             cds_seq += seqs[0];
         mseq.writeSeq(cds_outfile, cds_seq, cds_title);
 
