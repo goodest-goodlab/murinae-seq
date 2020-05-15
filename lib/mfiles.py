@@ -8,7 +8,7 @@ import sys, os
 
 def getFiles(s, run, run_string, prev_dir, unmerged_flag=False):
     indir = os.path.join(prev_dir, s, run_string);
-
+    #print(indir);
     if not os.path.isdir(indir):
         return False;
 

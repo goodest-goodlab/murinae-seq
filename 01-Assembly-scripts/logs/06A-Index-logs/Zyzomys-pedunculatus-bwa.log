@@ -1,0 +1,18 @@
+[bwa_index] Pack FASTA... 1.82 sec
+[bwa_index] Construct BWT for the packed sequence...
+[BWTIncCreate] textLength=246320934, availableWord=29331748
+[BWTIncConstructFromPacked] 10 iterations done. 48383974 characters processed.
+[BWTIncConstructFromPacked] 20 iterations done. 89385414 characters processed.
+[BWTIncConstructFromPacked] 30 iterations done. 125823574 characters processed.
+[BWTIncConstructFromPacked] 40 iterations done. 158205878 characters processed.
+[BWTIncConstructFromPacked] 50 iterations done. 186983302 characters processed.
+[BWTIncConstructFromPacked] 60 iterations done. 212556742 characters processed.
+[BWTIncConstructFromPacked] 70 iterations done. 235282438 characters processed.
+[bwt_gen] Finished constructing BWT in 76 iterations.
+[bwa_index] 139.55 seconds elapse.
+[bwa_index] Update BWT... 1.02 sec
+[bwa_index] Pack forward-only FASTA... 1.26 sec
+[bwa_index] Construct SA from BWT and Occ... 47.21 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05A-Spades/Zyzomys-pedunculatus/scaffolds.fasta
+[main] Real time: 196.988 sec; CPU: 190.863 sec

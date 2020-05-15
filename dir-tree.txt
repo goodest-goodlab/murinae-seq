@@ -1,0 +1,69 @@
+.
+ |-data
+ | |-2019-Muridae-NSF-Genomics-Status-11.19.19.csv
+ | |-exome-spades-stats.csv
+ | |-multiqc
+ | |-sample-summary.csv
+ | |-summary-exomes-long.csv
+ | |-summary-exomes.csv
+ |-01-Assembly-scripts
+ | |-01_fastp_cmd_generator.py
+ | |-02_decon_cmd_generator.py
+ | |-03A_merge_cmd_generator.py
+ | |-03B_map_cmd_generator.py
+ | |-04A_dedup_cmd_generator.py
+ | |-04A_reformat_cmd_generator.py
+ | |-04B_bam_merge_cmd_generator.py
+ | |-05A_spades_cmd_generator.py
+ | |-data
+ | |-helper
+ | |-jobs
+ | |-lib
+ | |-submit
+ | |-logs
+ |-01-Assembly-data
+ | |-00-RawReads
+ | |-01-Fastp
+ | |-02-Decon
+ | |-03A-Merged
+ | |-03B-MappedMouse
+ | |-03B-MappedRat
+ | |-04A-Dedup
+ | |-04B-GATKMouse
+ | |-04B-GATKRat
+ | |-05A-Spades
+ | |-Contamination_Genomes
+ | |-04A-Reformat
+ | |-sample-assemblies
+ |-Targets
+ | |-targets-rnor6-coords.bed
+ | |-mm9_to_mm10_targeted_regions.bed
+ | |-110624_MM9_exome_L2R_D02_EZ_HX1.bed.targeted_regions.bed
+ | |-rnor6.targeted_regions.4field.bed
+ | |-110624_MM9_exome_L2R_D02_EZ_HX1.bed.tiled_regions.bed
+ | |-mm9_to_mm10_tiled_regions.bed
+ | |-targets-mm10-coords.bed
+ | |-tiles-mm10-coords.bed
+ |-02-Annotation-data
+ | |-selected-transcripts.txt
+ | |-mouse-rat-orths-ens99.txt
+ | |-transcript-seq-OLD
+ | |-transcript-seq
+ |-02-Annotation-scripts
+ | |-select_transcripts.py
+ | |-get_selected_seqs.py
+ | |-intron_sizes.py
+ | |-get_selected_seqs-OLD.log
+ | |-tmp.fa
+ | |-submit
+ | |-get_selected_seqs.log
+ |-Reference-genomes
+ | |-mm10
+ | |-Rnor6
+ |-lib
+ | |-mcore.py
+ | |-mseq.py
+ | |-globs.py
+ | |-resort.py
+ | |-mfiles.py
+ |-dir-tree.txt

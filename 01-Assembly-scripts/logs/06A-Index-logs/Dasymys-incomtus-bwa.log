@@ -1,0 +1,18 @@
+[bwa_index] Pack FASTA... 1.76 sec
+[bwa_index] Construct BWT for the packed sequence...
+[BWTIncCreate] textLength=244680420, availableWord=29216384
+[BWTIncConstructFromPacked] 10 iterations done. 48193716 characters processed.
+[BWTIncConstructFromPacked] 20 iterations done. 89033876 characters processed.
+[BWTIncConstructFromPacked] 30 iterations done. 125328692 characters processed.
+[BWTIncConstructFromPacked] 40 iterations done. 157583588 characters processed.
+[BWTIncConstructFromPacked] 50 iterations done. 186247764 characters processed.
+[BWTIncConstructFromPacked] 60 iterations done. 211720516 characters processed.
+[BWTIncConstructFromPacked] 70 iterations done. 234356756 characters processed.
+[bwt_gen] Finished constructing BWT in 75 iterations.
+[bwa_index] 138.53 seconds elapse.
+[bwa_index] Update BWT... 1.03 sec
+[bwa_index] Pack forward-only FASTA... 1.07 sec
+[bwa_index] Construct SA from BWT and Occ... 48.00 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05A-Spades/Dasymys-incomtus/scaffolds.fasta
+[main] Real time: 196.232 sec; CPU: 190.404 sec
