@@ -15,6 +15,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
 library(ggbeeswarm)
+library(ggpubr)
+source("../lib/design.r")
 
 targets = 203198
 target_avg_len = 267.5448577249776
@@ -53,22 +55,8 @@ scaff_batch_p = ggplot(spades_scaffs, aes(x=batch, y=count, fill=batch)) +
   #ggtitle("Spades assembly counts") +
   labs(x="Sequencing batch", y="# Scaffolds") +
   scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="none",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=20),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+  bartheme() + 
+  theme(legend.position="none")
 
 print(scaff_batch_p)
 ```
@@ -92,24 +80,7 @@ contig_p = ggplot(spades_data, aes(x=type, y=count, fill=type, color=batch)) +
   ggtitle("Spades assembly counts") +
   labs(x="", y="# Contigs") +
   scale_fill_manual(name="Assembly level", labels=c("Contig","Scaffold"), values=c("#ffcd00","#cc1c00")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="right",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=20),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+  bartheme()
 
 print(contig_p)
 ```
@@ -133,22 +104,8 @@ len_batch_p = ggplot(spades_scaffs, aes(x=batch, y=avg.len, fill=batch)) +
   #ggtitle("Spades assembly counts") +
   labs(x="Sequencing batch", y="Avg. scaffold length") +
   scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="none",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=20),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+  bartheme() +
+  theme(legend.position="none")
 
 print(len_batch_p)
 ```
@@ -173,28 +130,42 @@ len_p = ggplot(spades_data, aes(x=type, y=avg.len, fill=type, color=type)) +
   ggtitle("Spades assembly lengths") +
   labs(x="", y="Average length") +
   scale_fill_manual(name="Assembly level", labels=c("Contig","Scaffold"), values=c("#ffcd00","#cc1c00")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12), 
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="right",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=18),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+  bartheme()
 
 print(len_p)
 ```
 
+
+```{r fig5, out.width="100%", fig.align="center"}
+####################
+# Spades Australian assembly comparisons
+
+in_data = read.csv("../../../data/Hutter_rodent_assembly.csv", header=T, comment.char="#")
+in_data = subset(in_data, !is.na(No_scaffolds))
+
+scaff_p = ggpaired(in_data, x="Assembly", y="No_scaffolds",
+                 fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
+                 line.color="#b3b3b3", line.size = 0.4,
+                 width=0.4, point.size=2,
+                 xlab="Assembly", ylab="# of scaffolds") +
+  stat_compare_means(paired=TRUE, label.x=1) +
+  bartheme() +
+  theme(legend.position="none")
+
+print(scaff_p)
+
+len_p = ggpaired(in_data, x="Assembly", y="Mean_Len",
+         fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
+         line.color="#b3b3b3", line.size = 0.4,
+         width=0.4, point.size=2,
+         xlab="Assembly", ylab="Avg. scaffold length (bp)") +
+  stat_compare_means(paired=TRUE, label.x=2) +
+  bartheme() +
+  theme(legend.position="none")
+
+print(len_p)
+
+```
 
 ```{r footer}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
