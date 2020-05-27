@@ -1,0 +1,8 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Taeromys-punicans/hiseq4000-paired-1/SM077_CKDL190143344-1a-D706-AK1780_H7275BBXX_L3_R1_.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Taeromys-punicans/hiseq4000-paired-1/SM077_CKDL190143344-1a-D706-AK1780_H7275BBXX_L3_R2_.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Taeromys-punicans/hiseq4000-paired-1/SM077_CKDL190143344-1a-D706-AK1780_H7275BBXX_L3_.fastp.decon.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Taeromys-punicans/hiseq4000-paired-1/SM077_CKDL190143344-1a-D706-AK1780_H7275BBXX_L3_R1_.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Taeromys-punicans/hiseq4000-paired-1/SM077_CKDL190143344-1a-D706-AK1780_H7275BBXX_L3_R2_.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Taeromys-punicans/hiseq4000-paired-1/SM077_CKDL190143344-1a-D706-AK1780_H7275BBXX_L3_.fastp.decon.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+

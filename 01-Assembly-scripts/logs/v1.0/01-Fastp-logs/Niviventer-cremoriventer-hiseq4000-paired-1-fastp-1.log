@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 23520409
+total bases: 3528061350
+Q20 bases: 3467634772(98.2873%)
+Q30 bases: 3377541056(95.7336%)
+
+Read2 before filtering:
+total reads: 23520409
+total bases: 3528061350
+Q20 bases: 3432670876(97.2962%)
+Q30 bases: 3316521866(94.0041%)
+
+Read1 after filtering:
+total reads: 23229405
+total bases: 3437230879
+Q20 bases: 3385570859(98.497%)
+Q30 bases: 3302906528(96.0921%)
+
+Read2 aftering filtering:
+total reads: 23229405
+total bases: 3437381226
+Q20 bases: 3362197552(97.8128%)
+Q30 bases: 3256707959(94.7439%)
+
+Filtering result:
+reads passed filter: 46458810
+reads failed due to low quality: 516682
+reads failed due to too many N: 1418
+reads failed due to too short: 3588
+reads failed due to low complexity: 60320
+reads with adapter trimmed: 3895333
+bases trimmed due to adapters: 94928187
+
+Duplication rate: 38.1742%
+
+Insert size peak (evaluated by paired-end reads): 198
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-cremoriventer/hiseq4000-paired-1/SM055_CKDL190143344-1a-DY0088-AK1682_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 411 seconds

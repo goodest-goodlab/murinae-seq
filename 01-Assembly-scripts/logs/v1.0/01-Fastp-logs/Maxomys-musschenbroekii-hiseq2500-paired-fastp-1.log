@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 7035137
+total bases: 710548837
+Q20 bases: 690386601(97.1624%)
+Q30 bases: 671801538(94.5468%)
+
+Read2 before filtering:
+total reads: 7035137
+total bases: 710548837
+Q20 bases: 667584815(93.9534%)
+Q30 bases: 645865179(90.8967%)
+
+Read1 after filtering:
+total reads: 6523787
+total bases: 651119744
+Q20 bases: 645795898(99.1824%)
+Q30 bases: 631245560(96.9477%)
+
+Read2 aftering filtering:
+total reads: 6523787
+total bases: 651112991
+Q20 bases: 644020496(98.9107%)
+Q30 bases: 626233894(96.179%)
+
+Filtering result:
+reads passed filter: 13047574
+reads failed due to low quality: 949348
+reads failed due to too many N: 61304
+reads failed due to too short: 11478
+reads failed due to low complexity: 570
+reads with adapter trimmed: 886784
+bases trimmed due to adapters: 17131950
+
+Duplication rate: 33.3137%
+
+Insert size peak (evaluated by paired-end reads): 159
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-musschenbroekii/hiseq2500-paired/lane2_CAATTA_R.fastp.json 
+fastp v0.20.0, time used: 101 seconds

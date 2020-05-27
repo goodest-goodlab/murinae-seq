@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2570780
+total bases: 194202365
+Q20 bases: 185984768(95.7685%)
+Q30 bases: 182444002(93.9453%)
+
+Read2 before filtering:
+total reads: 2570780
+total bases: 194142906
+Q20 bases: 179607895(92.5132%)
+Q30 bases: 174276183(89.767%)
+
+Read1 after filtering:
+total reads: 2471936
+total bases: 186609595
+Q20 bases: 180033998(96.4763%)
+Q30 bases: 176908047(94.8012%)
+
+Read2 aftering filtering:
+total reads: 2471936
+total bases: 186625379
+Q20 bases: 175846103(94.2241%)
+Q30 bases: 171085293(91.6731%)
+
+Filtering result:
+reads passed filter: 4943872
+reads failed due to low quality: 185418
+reads failed due to too many N: 2030
+reads failed due to too short: 8840
+reads failed due to low complexity: 1400
+reads with adapter trimmed: 9380
+bases trimmed due to adapters: 250818
+
+Duplication rate: 7.43159%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-2/EAR1826_S29_L001_R.fastp.json 
+fastp v0.20.0, time used: 33 seconds

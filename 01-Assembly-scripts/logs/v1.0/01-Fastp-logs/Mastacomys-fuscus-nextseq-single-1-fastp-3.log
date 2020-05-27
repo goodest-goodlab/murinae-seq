@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 520373
+total bases: 39311064
+Q20 bases: 37439673(95.2395%)
+Q30 bases: 36623363(93.163%)
+
+Read1 after filtering:
+total reads: 515517
+total bases: 38938939
+Q20 bases: 37241194(95.64%)
+Q30 bases: 36450632(93.6097%)
+
+Filtering result:
+reads passed filter: 515517
+reads failed due to low quality: 4685
+reads failed due to too many N: 51
+reads failed due to too short: 69
+reads failed due to low complexity: 51
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.60008%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-single-1/ABTC07354_S57_L002_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-single-1/ABTC07354_S57_L002_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mastacomys-fuscus/nextseq-single-1/ABTC07354_S57_L002_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-single-1/ABTC07354_S57_L002_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-single-1/ABTC07354_S57_L002_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-single-1/ABTC07354_S57_L002_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 15 seconds

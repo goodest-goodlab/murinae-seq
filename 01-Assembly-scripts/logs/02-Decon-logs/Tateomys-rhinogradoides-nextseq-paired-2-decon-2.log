@@ -1,25 +1,25 @@
-java -ea -Xmx10g -Xms10g -cp /home/gregg_thomas/bin/bbmap/current/ align2.BBSplitter ow=t fastareadlen=500 minhits=1 minratio=0.56 maxindel=20 qtrim=rl untrim=t trimq=6 -Xmx10g t=1 in1=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.fastq.gz in2=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.fastq.gz ref=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/ path=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/ minid=0.95 outu1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.decon.fastq.gz outu2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.decon.fastq.gz
-Executing align2.BBSplitter [ow=t, fastareadlen=500, minhits=1, minratio=0.56, maxindel=20, qtrim=rl, untrim=t, trimq=6, -Xmx10g, t=1, in1=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.fastq.gz, ref=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/, path=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/, minid=0.95, outu1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.decon.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.decon.fastq.gz]
+java -ea -Xmx15g -Xms15g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ align2.BBSplitter ow=t fastareadlen=500 minhits=1 minratio=0.56 maxindel=20 qtrim=rl untrim=t trimq=6 -Xmx15g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.fastq.gz in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.fastq.gz ref=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes path=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes minid=0.99 outu1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.decon.fastq.gz outu2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.decon.fastq.gz
+Executing align2.BBSplitter [ow=t, fastareadlen=500, minhits=1, minratio=0.56, maxindel=20, qtrim=rl, untrim=t, trimq=6, -Xmx15g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.fastq.gz, in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.fastq.gz, ref=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes, path=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes, minid=0.99, outu1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.decon.fastq.gz, outu2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.decon.fastq.gz]
 
-Converted arguments to [ow=t, fastareadlen=500, minhits=1, minratio=0.56, maxindel=20, qtrim=rl, untrim=t, trimq=6, t=1, in1=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.fastq.gz, path=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/, minid=0.95, outu1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.decon.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.decon.fastq.gz, ref_Alcaligenes=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Alcaligenes.fa, ref_Novosphingobium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Novosphingobium.fa, ref_Flavobacterium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Flavobacterium.fa, ref_Ochrobactrum=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Ochrobactrum.fa, ref_Saccharomyces=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Saccharomyces.fa, ref_Scerevisiae=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Scerevisiae.fa, ref_UniVec=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/UniVec.fa, ref_Drosophila_melanogaster=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Drosophila_melanogaster.fa, ref_Stenotrophomonas=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Stenotrophomonas.fa, ref_Pseudonocardia=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Pseudonocardia.fa, ref_Staphylococcus=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Staphylococcus.fa, ref_Malassezia=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Malassezia.fa, ref_Leifsonia=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Leifsonia.fa, ref_Achromobacter=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Achromobacter.fa, ref_Herbaspirillum=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Herbaspirillum.fa, ref_Mesorhizobium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Mesorhizobium.fa, ref_Pedobacter=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Pedobacter.fa, ref_Burkholderia=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Burkholderia.fa, ref_Moraxella=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Moraxella.fa, ref_Acinetobacter=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Acinetobacter.fa, ref_Brevundimonas=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Brevundimonas.fa, ref_Puccinia=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Puccinia.fa, ref_Rhodococcus=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Rhodococcus.fa, ref_Methylobacterium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Methylobacterium.fa, ref_Aminobacter=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Aminobacter.fa, ref_Schizosaccharomyces=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Schizosaccharomyces.fa, ref_Legionella=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Legionella.fa, ref_Curvibacter=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Curvibacter.fa, ref_Mycoplasma=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Mycoplasma.fa, ref_Magnaporthe=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Magnaporthe.fa, ref_Caenorhabditis=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Caenorhabditis.fa, ref_Sphingomonas=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Sphingomonas.fa, ref_Pseudomonas=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Pseudomonas.fa, ref_Salmonella=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Salmonella.fa, ref_Helcococcus=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Helcococcus.fa, ref_Afipia=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Afipia.fa, ref_Agrobacterium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Agrobacterium.fa, ref_Phyllobacterium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Phyllobacterium.fa, ref_Penicillium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Penicillium.fa, ref_Corynebacterium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Corynebacterium.fa, ref_Ecoli=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Ecoli.fa, ref_Bradyrhizobium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Bradyrhizobium.fa, ref_Aspergillus=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Aspergillus.fa, ref_Ralstonia=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Ralstonia.fa, ref_Haemophilus=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Haemophilus.fa, ref_Microbacterium=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Microbacterium.fa, ref_Acidaminococcus=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/Acidaminococcus.fa]
-Merged reference file /scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/ref/genome/1/merged_ref_5759390567066404624.fa.gz already exists; skipping merge.
-Ref merge time:     	0.232 seconds.
-Executing align2.BBMap [ow=t, fastareadlen=500, minhits=1, minratio=0.56, maxindel=20, qtrim=rl, untrim=t, trimq=6, t=1, in1=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.fastq.gz, in2=/scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.fastq.gz, minid=0.95, outu1=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R1_001.fastp.decon.fastq.gz, outu2=/scratch/gregg_thomas/Murinae-seq/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L003_R2_001.fastp.decon.fastq.gz, ref=/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/ref/genome/1/merged_ref_5759390567066404624.fa.gz]
-Version 38.73
+Converted arguments to [ow=t, fastareadlen=500, minhits=1, minratio=0.56, maxindel=20, qtrim=rl, untrim=t, trimq=6, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.fastq.gz, in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.fastq.gz, path=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes, minid=0.99, outu1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.decon.fastq.gz, outu2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.decon.fastq.gz, ref_Alcaligenes=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Alcaligenes.fa, ref_Novosphingobium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Novosphingobium.fa, ref_Flavobacterium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Flavobacterium.fa, ref_Ochrobactrum=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Ochrobactrum.fa, ref_Saccharomyces=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Saccharomyces.fa, ref_Scerevisiae=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Scerevisiae.fa, ref_UniVec=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/UniVec.fa, ref_Drosophila_melanogaster=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Drosophila_melanogaster.fa, ref_Stenotrophomonas=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Stenotrophomonas.fa, ref_Pseudonocardia=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Pseudonocardia.fa, ref_Staphylococcus=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Staphylococcus.fa, ref_Malassezia=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Malassezia.fa, ref_Leifsonia=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Leifsonia.fa, ref_Achromobacter=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Achromobacter.fa, ref_Herbaspirillum=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Herbaspirillum.fa, ref_Mesorhizobium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Mesorhizobium.fa, ref_Pedobacter=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Pedobacter.fa, ref_Burkholderia=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Burkholderia.fa, ref_Moraxella=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Moraxella.fa, ref_Acinetobacter=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Acinetobacter.fa, ref_Brevundimonas=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Brevundimonas.fa, ref_Puccinia=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Puccinia.fa, ref_Rhodococcus=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Rhodococcus.fa, ref_Methylobacterium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Methylobacterium.fa, ref_Aminobacter=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Aminobacter.fa, ref_Schizosaccharomyces=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Schizosaccharomyces.fa, ref_Legionella=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Legionella.fa, ref_Curvibacter=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Curvibacter.fa, ref_Mycoplasma=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Mycoplasma.fa, ref_Magnaporthe=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Magnaporthe.fa, ref_Caenorhabditis=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Caenorhabditis.fa, ref_Sphingomonas=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Sphingomonas.fa, ref_Pseudomonas=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Pseudomonas.fa, ref_Salmonella=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Salmonella.fa, ref_Helcococcus=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Helcococcus.fa, ref_Afipia=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Afipia.fa, ref_Agrobacterium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Agrobacterium.fa, ref_Phyllobacterium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Phyllobacterium.fa, ref_Penicillium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Penicillium.fa, ref_Corynebacterium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Corynebacterium.fa, ref_Ecoli=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Ecoli.fa, ref_Bradyrhizobium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Bradyrhizobium.fa, ref_Aspergillus=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Aspergillus.fa, ref_Ralstonia=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Ralstonia.fa, ref_Haemophilus=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Haemophilus.fa, ref_Microbacterium=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Microbacterium.fa, ref_Acidaminococcus=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/Acidaminococcus.fa]
+Merged reference file /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/ref/genome/1/merged_ref_5759390567066404624.fa.gz already exists; skipping merge.
+Ref merge time:     	0.130 seconds.
+Executing align2.BBMap [ow=t, fastareadlen=500, minhits=1, minratio=0.56, maxindel=20, qtrim=rl, untrim=t, trimq=6, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.fastq.gz, in2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.fastq.gz, minid=0.99, outu1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R1_001.fastp.decon.fastq.gz, outu2=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Tateomys-rhinogradoides/nextseq-paired-2/Z21785_S20_L002_R2_001.fastp.decon.fastq.gz, ref=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/ref/genome/1/merged_ref_5759390567066404624.fa.gz]
+Version 38.79
 
 Set MINIMUM_ALIGNMENT_SCORE_RATIO to 0.560
 Set threads to 1
 Retaining first best site only for ambiguous mappings.
 NOTE:	Ignoring reference file because it already appears to have been processed.
-NOTE:	If you wish to regenerate the index, please manually delete /scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/ref/genome/1/summary.txt
+NOTE:	If you wish to regenerate the index, please manually delete /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/Contamination_Genomes/ref/genome/1/summary.txt
 Set genome to 1
 
-Loaded Reference:	12.264 seconds.
+Loaded Reference:	7.128 seconds.
 Loading index for chunk 1-2, build 1
-Generated Index:	50.768 seconds.
-Analyzed Index:   	8.335 seconds.
-Started output stream:	0.083 seconds.
-Cleared Memory:    	6.947 seconds.
+Generated Index:	113.125 seconds.
+Analyzed Index:   	7.665 seconds.
+Started output stream:	0.075 seconds.
+Cleared Memory:    	0.842 seconds.
 Processing reads in paired-ended mode.
 Started read stream.
 Started 1 mapping thread.
@@ -32,55 +32,55 @@ Key Length:            	13
 Max Indel:             	20
 Minimum Score Ratio:  	0.56
 Mapping Mode:         	normal
-Reads Used:           	6113072	(461436897 bases)
+Reads Used:           	5821516	(439444742 bases)
 
-Mapping:          	2206.182 seconds.
-Reads/sec:       	2770.88
-kBases/sec:      	209.16
+Mapping:          	2060.887 seconds.
+Reads/sec:       	2824.76
+kBases/sec:      	213.23
 
 
 Pairing data:   	pct pairs	num pairs 	pct bases	   num bases
 
-mated pairs:     	  0.0925% 	     2828 	  0.0754% 	      348082
-bad pairs:       	  0.0006% 	       18 	  0.0005% 	        2216
-insert size avg: 	  146.41
+mated pairs:     	  0.0893% 	     2598 	  0.0733% 	      322266
+bad pairs:       	  0.0000% 	        0 	  0.0000% 	           0
+insert size avg: 	  142.11
 
 
 Read 1 data:      	pct reads	num reads 	pct bases	   num bases
 
-mapped:          	  0.0983% 	     3005 	  0.0809% 	      186651
-unambiguous:     	  0.0631% 	     1928 	  0.0524% 	      120972
-ambiguous:       	  0.0352% 	     1077 	  0.0285% 	       65679
+mapped:          	  0.0897% 	     2611 	  0.0738% 	      162112
+unambiguous:     	  0.0602% 	     1751 	  0.0502% 	      110263
+ambiguous:       	  0.0295% 	      860 	  0.0236% 	       51849
 low-Q discards:  	  0.0000% 	        0 	  0.0000% 	           0
 
-perfect best site:	  0.0010% 	       32 	  0.0009% 	        2130
-semiperfect site:	  0.0011% 	       35 	  0.0010% 	        2270
-rescued:         	  0.0300% 	      916
+perfect best site:	  0.0010% 	       28 	  0.0009% 	        1897
+semiperfect site:	  0.0011% 	       31 	  0.0009% 	        2013
+rescued:         	  0.0294% 	      856
 
-Match Rate:      	      NA 	       NA 	 86.0674% 	      161299
-Error Rate:      	 42.4896% 	     2973 	 13.9304% 	       26107
-Sub Rate:        	 42.4182% 	     2968 	 13.2368% 	       24807
-Del Rate:        	  2.2009% 	      154 	  0.4050% 	         759
-Ins Rate:        	  2.7726% 	      194 	  0.2887% 	         541
-N Rate:          	  0.0572% 	        4 	  0.0021% 	           4
+Match Rate:      	      NA 	       NA 	 85.3857% 	      139083
+Error Rate:      	 39.1865% 	     2582 	 14.6064% 	       23792
+Sub Rate:        	 39.1410% 	     2579 	 13.7671% 	       22425
+Del Rate:        	  2.4890% 	      164 	  0.4764% 	         776
+Ins Rate:        	  2.8077% 	      185 	  0.3628% 	         591
+N Rate:          	  0.0455% 	        3 	  0.0080% 	          13
 
 
 Read 2 data:      	pct reads	num reads 	pct bases	   num bases
 
-mapped:          	  0.0978% 	     2988 	  0.0804% 	      185412
-unambiguous:     	  0.0621% 	     1899 	  0.0517% 	      119209
-ambiguous:       	  0.0356% 	     1089 	  0.0287% 	       66203
+mapped:          	  0.0897% 	     2612 	  0.0738% 	      162152
+unambiguous:     	  0.0593% 	     1727 	  0.0495% 	      108777
+ambiguous:       	  0.0304% 	      885 	  0.0243% 	       53375
 low-Q discards:  	  0.0000% 	        0 	  0.0000% 	           0
 
-perfect best site:	  0.0008% 	       23 	  0.0006% 	        1335
-semiperfect site:	  0.0009% 	       27 	  0.0007% 	        1529
-rescued:         	  0.0333% 	     1018
+perfect best site:	  0.0008% 	       23 	  0.0007% 	        1561
+semiperfect site:	  0.0008% 	       24 	  0.0007% 	        1606
+rescued:         	  0.0321% 	      933
 
-Match Rate:      	      NA 	       NA 	 85.8593% 	      159731
-Error Rate:      	 42.0605% 	     2964 	 14.0880% 	       26209
-Sub Rate:        	 41.9753% 	     2958 	 13.4451% 	       25013
-Del Rate:        	  2.2279% 	      157 	  0.3365% 	         626
-Ins Rate:        	  2.5827% 	      182 	  0.3064% 	         570
-N Rate:          	  0.0993% 	        7 	  0.0527% 	          98
+Match Rate:      	      NA 	       NA 	 85.3144% 	      138914
+Error Rate:      	 39.5690% 	     2589 	 14.6629% 	       23875
+Sub Rate:        	 39.5384% 	     2587 	 13.9511% 	       22716
+Del Rate:        	  2.1397% 	      140 	  0.4139% 	         674
+Ins Rate:        	  2.3384% 	      153 	  0.2979% 	         485
+N Rate:          	  0.0917% 	        6 	  0.0227% 	          37
 
-Total time:     	2284.722 seconds.
+Total time:     	2189.857 seconds.

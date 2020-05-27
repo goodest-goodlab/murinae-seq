@@ -1,0 +1,49 @@
+Detecting adapter sequence for read1...
+>Nextera_LMP_Read1_External_Adapter | >Illumina Multiplexing Index Sequencing Primer
+GATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3765762
+total bases: 284397494
+Q20 bases: 272896890(95.9562%)
+Q30 bases: 268165638(94.2925%)
+
+Read2 before filtering:
+total reads: 3765762
+total bases: 284310470
+Q20 bases: 263514151(92.6853%)
+Q30 bases: 256103730(90.0789%)
+
+Read1 after filtering:
+total reads: 3600916
+total bases: 271577968
+Q20 bases: 262714272(96.7362%)
+Q30 bases: 258566688(95.209%)
+
+Read2 aftering filtering:
+total reads: 3600916
+total bases: 271624666
+Q20 bases: 257326798(94.7362%)
+Q30 bases: 250895293(92.3684%)
+
+Filtering result:
+reads passed filter: 7201832
+reads failed due to low quality: 305236
+reads failed due to too many N: 3194
+reads failed due to too short: 19058
+reads failed due to low complexity: 2204
+reads with adapter trimmed: 44711
+bases trimmed due to adapters: 1347652
+
+Duplication rate: 37.9795%
+
+Insert size peak (evaluated by paired-end reads): 111
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hydromys-chrysogaster/nextseq-paired-2/Z5248_S27_L002_R.fastp.json 
+fastp v0.20.0, time used: 45 seconds

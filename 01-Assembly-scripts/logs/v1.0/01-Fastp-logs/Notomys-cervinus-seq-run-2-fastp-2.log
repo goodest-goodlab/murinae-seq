@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 4703608
+total bases: 475064408
+Q20 bases: 464945120(97.8699%)
+Q30 bases: 456868666(96.1698%)
+
+Read2 before filtering:
+total reads: 4703608
+total bases: 475064408
+Q20 bases: 456603012(96.1139%)
+Q30 bases: 444605315(93.5884%)
+
+Read1 after filtering:
+total reads: 4693278
+total bases: 472935338
+Q20 bases: 463075810(97.9152%)
+Q30 bases: 455149742(96.2393%)
+
+Read2 aftering filtering:
+total reads: 4693278
+total bases: 472939961
+Q20 bases: 454886368(96.1827%)
+Q30 bases: 443090623(93.6886%)
+
+Filtering result:
+reads passed filter: 9386556
+reads failed due to low quality: 1354
+reads failed due to too many N: 2124
+reads failed due to too short: 12248
+reads failed due to low complexity: 4934
+reads with adapter trimmed: 161562
+bases trimmed due to adapters: 3341431
+
+Duplication rate: 10.717%
+
+Insert size peak (evaluated by paired-end reads): 164
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-cervinus/seq-run-2/52922_AH7T7NBCX2_AAGCTAA_S5_L002_R.fastp.json 
+fastp v0.20.0, time used: 85 seconds

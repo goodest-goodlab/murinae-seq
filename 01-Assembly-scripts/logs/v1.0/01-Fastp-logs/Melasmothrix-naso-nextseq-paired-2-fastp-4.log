@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2588279
+total bases: 195497724
+Q20 bases: 187419187(95.8677%)
+Q30 bases: 183938660(94.0874%)
+
+Read2 before filtering:
+total reads: 2588279
+total bases: 195441475
+Q20 bases: 181262661(92.7452%)
+Q30 bases: 175984958(90.0448%)
+
+Read1 after filtering:
+total reads: 2495995
+total bases: 188351879
+Q20 bases: 181811148(96.5274%)
+Q30 bases: 178707127(94.8794%)
+
+Read2 aftering filtering:
+total reads: 2495995
+total bases: 188369662
+Q20 bases: 177739177(94.3566%)
+Q30 bases: 172991653(91.8363%)
+
+Filtering result:
+reads passed filter: 4991990
+reads failed due to low quality: 173436
+reads failed due to too many N: 2100
+reads failed due to too short: 8132
+reads failed due to low complexity: 900
+reads with adapter trimmed: 13052
+bases trimmed due to adapters: 356343
+
+Duplication rate: 6.39638%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Melasmothrix-naso/nextseq-paired-2/Z21808_S16_L001_R.fastp.json 
+fastp v0.20.0, time used: 37 seconds

@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 5805562
+total bases: 586361762
+Q20 bases: 571299366(97.4312%)
+Q30 bases: 556459540(94.9004%)
+
+Read2 before filtering:
+total reads: 5805562
+total bases: 586361762
+Q20 bases: 551854751(94.1151%)
+Q30 bases: 533568533(90.9965%)
+
+Read1 after filtering:
+total reads: 5399570
+total bases: 539974102
+Q20 bases: 535806594(99.2282%)
+Q30 bases: 524134298(97.0666%)
+
+Read2 aftering filtering:
+total reads: 5399570
+total bases: 539968460
+Q20 bases: 533974351(98.8899%)
+Q30 bases: 518761167(96.0725%)
+
+Filtering result:
+reads passed filter: 10799140
+reads failed due to low quality: 747630
+reads failed due to too many N: 51046
+reads failed due to too short: 13042
+reads failed due to low complexity: 266
+reads with adapter trimmed: 596865
+bases trimmed due to adapters: 12317755
+
+Duplication rate: 32.5062%
+
+Insert size peak (evaluated by paired-end reads): 169
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-praetor/hiseq2500-paired/lane2_CAGTAC_R.fastp.json 
+fastp v0.20.0, time used: 94 seconds

@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 17521725
+total bases: 2628258750
+Q20 bases: 2585579448(98.3761%)
+Q30 bases: 2520615740(95.9044%)
+
+Read2 before filtering:
+total reads: 17521725
+total bases: 2628258750
+Q20 bases: 2560622941(97.4266%)
+Q30 bases: 2475945349(94.2048%)
+
+Read1 after filtering:
+total reads: 17331920
+total bases: 2570000161
+Q20 bases: 2533414394(98.5764%)
+Q30 bases: 2473557846(96.2474%)
+
+Read2 aftering filtering:
+total reads: 17331920
+total bases: 2570059879
+Q20 bases: 2515305063(97.8695%)
+Q30 bases: 2437424974(94.8392%)
+
+Filtering result:
+reads passed filter: 34663840
+reads failed due to low quality: 338020
+reads failed due to too many N: 1128
+reads failed due to too short: 7308
+reads failed due to low complexity: 33154
+reads with adapter trimmed: 2452916
+bases trimmed due to adapters: 60075323
+
+Duplication rate: 39.8166%
+
+Insert size peak (evaluated by paired-end reads): 268
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Chiromyscus-chiropus/hiseq4000-paired-1/SM034_CKDL190143344-1a-D702-AK1680_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 343 seconds

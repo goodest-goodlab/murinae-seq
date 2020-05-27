@@ -1,0 +1,32 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 18155
+total bases: 1372472
+Q20 bases: 1131550(82.4461%)
+Q30 bases: 1066740(77.724%)
+
+Read1 after filtering:
+total reads: 14691
+total bases: 1101957
+Q20 bases: 968535(87.8923%)
+Q30 bases: 922639(83.7273%)
+
+Filtering result:
+reads passed filter: 14691
+reads failed due to low quality: 2032
+reads failed due to too many N: 3
+reads failed due to too short: 1428
+reads failed due to low complexity: 1
+reads with adapter trimmed: 1952
+bases trimmed due to adapters: 56209
+
+Duplication rate (may be overestimated since this is SE data): 0.693147%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L001_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L001_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L001_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L001_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L001_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Echiothrix-centrosa/nextseq-single-1/Z27993_S43_L001_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 8 seconds

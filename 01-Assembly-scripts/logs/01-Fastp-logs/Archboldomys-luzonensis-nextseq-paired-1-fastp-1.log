@@ -43,8 +43,8 @@ Duplication rate: 18.0916%
 
 Insert size peak (evaluated by paired-end reads): 0
 
-JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.json
-HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.html
+JSON report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.json
+HTML report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.html
 
-fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.json 
-fastp v0.20.0, time used: 72 seconds
+fastp -i /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R1_001.fastq.gz -I /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R1_001.fastp.fastq.gz -O /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R2_001.fastp.fastq.gz -h /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.html -j /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_R.fastp.json 
+fastp v0.20.1, time used: 107 seconds

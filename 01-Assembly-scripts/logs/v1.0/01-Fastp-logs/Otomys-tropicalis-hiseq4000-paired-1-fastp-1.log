@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16276735
+total bases: 2441510250
+Q20 bases: 2404207417(98.4721%)
+Q30 bases: 2345361960(96.0619%)
+
+Read2 before filtering:
+total reads: 16276735
+total bases: 2441510250
+Q20 bases: 2371250538(97.1223%)
+Q30 bases: 2284908848(93.5859%)
+
+Read1 after filtering:
+total reads: 16081908
+total bases: 2373904789
+Q20 bases: 2342275722(98.6676%)
+Q30 bases: 2288694869(96.4106%)
+
+Read2 aftering filtering:
+total reads: 16081908
+total bases: 2373924037
+Q20 bases: 2318806420(97.6782%)
+Q30 bases: 2240136191(94.3643%)
+
+Filtering result:
+reads passed filter: 32163816
+reads failed due to low quality: 366934
+reads failed due to too many N: 1024
+reads failed due to too short: 4210
+reads failed due to low complexity: 17486
+reads with adapter trimmed: 2508606
+bases trimmed due to adapters: 77175861
+
+Duplication rate: 41.367%
+
+Insert size peak (evaluated by paired-end reads): 269
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Otomys-tropicalis/hiseq4000-paired-1/REC15_CKDL190143344-1a-DY0088-AK1545_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 258 seconds

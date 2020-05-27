@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 20507300
+total bases: 3076095000
+Q20 bases: 3026411058(98.3848%)
+Q30 bases: 2955982166(96.0953%)
+
+Read2 before filtering:
+total reads: 20507300
+total bases: 3076095000
+Q20 bases: 2992612810(97.2861%)
+Q30 bases: 2896116766(94.1491%)
+
+Read1 after filtering:
+total reads: 20209841
+total bases: 2932043501
+Q20 bases: 2894885013(98.7327%)
+Q30 bases: 2833707546(96.6462%)
+
+Read2 aftering filtering:
+total reads: 20209841
+total bases: 2932156636
+Q20 bases: 2872976121(97.9817%)
+Q30 bases: 2788636423(95.1053%)
+
+Filtering result:
+reads passed filter: 40419682
+reads failed due to low quality: 532172
+reads failed due to too many N: 368
+reads failed due to too short: 26134
+reads failed due to low complexity: 36244
+reads with adapter trimmed: 5616983
+bases trimmed due to adapters: 200632535
+
+Duplication rate: 43.2757%
+
+Insert size peak (evaluated by paired-end reads): 249
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Dasymys-incomtus/hiseq4000-paired-2/REC29_CKDL190143345-1a-D707-AK1546_H7275BBXX_L4_R.fastp.json 
+fastp v0.20.0, time used: 383 seconds

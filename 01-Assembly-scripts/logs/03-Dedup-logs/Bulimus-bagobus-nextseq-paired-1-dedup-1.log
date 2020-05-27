@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Bulimus-bagobus/nextseq-paired-1/JAE1712_S3_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Bulimus-bagobus/nextseq-paired-1/JAE1712_S3_R2_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Bulimus-bagobus/nextseq-paired-1/JAE1712_S3_001.fastp.decon.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Bulimus-bagobus/nextseq-paired-1/JAE1712_S3_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Bulimus-bagobus/nextseq-paired-1/JAE1712_S3_R2_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Bulimus-bagobus/nextseq-paired-1/JAE1712_S3_001.fastp.decon.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30386m, used=484m
+
+Found 3260161 duplicates.
+Finished exact matches.    Time: 38.091 seconds.
+Memory: max=30870m, total=30870m, free=21458m, used=9412m
+
+Found 4089 contained sequences.
+Finished containment.      Time: 76.897 seconds.
+Memory: max=30870m, total=30870m, free=20662m, used=10208m
+
+Removed 4089 invalid entries.
+Finished invalid removal.  Time: 0.857 seconds.
+Memory: max=30870m, total=30870m, free=20662m, used=10208m
+
+Input:                  	13571364 reads 		1017404774 bases.
+Duplicates:             	3260161 reads (24.02%) 	244421615 bases (24.02%)     	0 collisions.
+Containments:           	4089 reads (0.03%) 	199344 bases (0.02%)    	182052854 collisions.
+Result:                 	10307114 reads (75.95%) 	772783815 bases (75.96%)
+
+Sorted output.             Time: 8.908 seconds.
+Memory: max=30870m, total=30870m, free=20298m, used=10572m
+
+Printed output.            Time: 54.150 seconds.
+Memory: max=30870m, total=30870m, free=17081m, used=13789m
+
+Time:                         	178.930 seconds.
+Reads Processed:      13571k 	75.85k reads/sec
+Bases Processed:       1017m 	5.69m bases/sec

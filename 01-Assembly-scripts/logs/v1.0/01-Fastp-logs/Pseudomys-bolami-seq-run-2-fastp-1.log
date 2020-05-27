@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 4009830
+total bases: 404992830
+Q20 bases: 387781362(95.7502%)
+Q30 bases: 374634882(92.5041%)
+
+Read2 before filtering:
+total reads: 4009830
+total bases: 404992830
+Q20 bases: 364386731(89.9736%)
+Q30 bases: 338705829(83.6325%)
+
+Read1 after filtering:
+total reads: 3867655
+total bases: 388804480
+Q20 bases: 373123124(95.9668%)
+Q30 bases: 361163575(92.8908%)
+
+Read2 aftering filtering:
+total reads: 3867655
+total bases: 388826946
+Q20 bases: 355609261(91.4569%)
+Q30 bases: 333785488(85.8442%)
+
+Filtering result:
+reads passed filter: 7735310
+reads failed due to low quality: 134310
+reads failed due to too many N: 143164
+reads failed due to too short: 2544
+reads failed due to low complexity: 4332
+reads with adapter trimmed: 183888
+bases trimmed due to adapters: 3929407
+
+Duplication rate: 12.3536%
+
+Insert size peak (evaluated by paired-end reads): 169
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-bolami/seq-run-2/53922_HTVLWBCX2_CCGGTAC_S10_L002_R.fastp.json 
+fastp v0.20.0, time used: 90 seconds

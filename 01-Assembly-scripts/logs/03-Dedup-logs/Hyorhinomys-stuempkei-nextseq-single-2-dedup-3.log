@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/nextseq-single-2/JAE4661_S32_L003_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Hyorhinomys-stuempkei/nextseq-single-2/JAE4661_S32_L003_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/nextseq-single-2/JAE4661_S32_L003_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Hyorhinomys-stuempkei/nextseq-single-2/JAE4661_S32_L003_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Found 9388 duplicates.
+Finished exact matches.    Time: 3.622 seconds.
+Memory: max=30870m, total=30870m, free=25877m, used=4993m
+
+Found 1097 contained sequences.
+Finished containment.      Time: 3.421 seconds.
+Memory: max=30870m, total=30870m, free=28457m, used=2413m
+
+Removed 1097 invalid entries.
+Finished invalid removal.  Time: 0.123 seconds.
+Memory: max=30870m, total=30870m, free=28457m, used=2413m
+
+Input:                  	376128 reads 		28408152 bases.
+Duplicates:             	9388 reads (2.50%) 	709513 bases (2.50%)     	0 collisions.
+Containments:           	1097 reads (0.29%) 	81122 bases (0.29%)    	246523 collisions.
+Result:                 	365643 reads (97.21%) 	27617517 bases (97.22%)
+
+Sorted output.             Time: 0.189 seconds.
+Memory: max=30870m, total=30870m, free=28457m, used=2413m
+
+Printed output.            Time: 1.893 seconds.
+Memory: max=30870m, total=30870m, free=28285m, used=2585m
+
+Time:                         	9.308 seconds.
+Reads Processed:        376k 	40.41k reads/sec
+Bases Processed:      28408k 	3.05m bases/sec

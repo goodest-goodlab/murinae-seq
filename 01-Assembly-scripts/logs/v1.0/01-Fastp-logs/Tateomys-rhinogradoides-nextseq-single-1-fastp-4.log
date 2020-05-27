@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 565306
+total bases: 42707883
+Q20 bases: 40446872(94.7059%)
+Q30 bases: 39497162(92.4821%)
+
+Read1 after filtering:
+total reads: 557017
+total bases: 42076157
+Q20 bases: 40117289(95.3445%)
+Q30 bases: 39216128(93.2027%)
+
+Filtering result:
+reads passed filter: 557017
+reads failed due to low quality: 8040
+reads failed due to too many N: 5
+reads failed due to too short: 189
+reads failed due to low complexity: 55
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.76166%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-single-1/Z21785_S52_L003_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-single-1/Z21785_S52_L003_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Tateomys-rhinogradoides/nextseq-single-1/Z21785_S52_L003_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-single-1/Z21785_S52_L003_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-single-1/Z21785_S52_L003_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-rhinogradoides/nextseq-single-1/Z21785_S52_L003_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 7 seconds

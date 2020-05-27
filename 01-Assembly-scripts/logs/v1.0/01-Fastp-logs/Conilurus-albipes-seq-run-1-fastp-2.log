@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 20449940
+total bases: 2065443940
+Q20 bases: 1964704409(95.1226%)
+Q30 bases: 1889392451(91.4763%)
+
+Read2 before filtering:
+total reads: 20449940
+total bases: 2065443940
+Q20 bases: 1881455582(91.0921%)
+Q30 bases: 1756580151(85.0461%)
+
+Read1 after filtering:
+total reads: 20099864
+total bases: 1852136650
+Q20 bases: 1768112429(95.4634%)
+Q30 bases: 1704450935(92.0262%)
+
+Read2 aftering filtering:
+total reads: 20099864
+total bases: 1853729269
+Q20 bases: 1703779602(91.9109%)
+Q30 bases: 1601844598(86.412%)
+
+Filtering result:
+reads passed filter: 40199728
+reads failed due to low quality: 5460
+reads failed due to too many N: 640196
+reads failed due to too short: 44150
+reads failed due to low complexity: 10346
+reads with adapter trimmed: 16634096
+bases trimmed due to adapters: 362503852
+
+Duplication rate: 15.8733%
+
+Insert size peak (evaluated by paired-end reads): 101
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-albipes/seq-run-1/53930_HTVLKBCX2_TGCGTCC_S18_L001_R.fastp.json 
+fastp v0.20.0, time used: 274 seconds

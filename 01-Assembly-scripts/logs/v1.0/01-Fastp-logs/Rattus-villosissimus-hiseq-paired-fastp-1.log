@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 2928309
+total bases: 292830900
+Q20 bases: 288689903(98.5859%)
+Q30 bases: 282451378(96.4555%)
+
+Read2 before filtering:
+total reads: 2928309
+total bases: 292830900
+Q20 bases: 282245962(96.3853%)
+Q30 bases: 274182023(93.6315%)
+
+Read1 after filtering:
+total reads: 2807207
+total bases: 276621061
+Q20 bases: 274403474(99.1983%)
+Q30 bases: 269038783(97.259%)
+
+Read2 aftering filtering:
+total reads: 2807207
+total bases: 276623049
+Q20 bases: 272677926(98.5738%)
+Q30 bases: 265503940(95.9804%)
+
+Filtering result:
+reads passed filter: 5614414
+reads failed due to low quality: 214156
+reads failed due to too many N: 21830
+reads failed due to too short: 4804
+reads failed due to low complexity: 1414
+reads with adapter trimmed: 451472
+bases trimmed due to adapters: 8763797
+
+Duplication rate: 13.6282%
+
+Insert size peak (evaluated by paired-end reads): 153
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-villosissimus/hiseq-paired/vilosissimusWGA_AGATAG_L008_R.fastp.json 
+fastp v0.20.0, time used: 45 seconds

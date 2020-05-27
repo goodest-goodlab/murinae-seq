@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2510117
+total bases: 189594659
+Q20 bases: 181909324(95.9464%)
+Q30 bases: 178609176(94.2058%)
+
+Read2 before filtering:
+total reads: 2510117
+total bases: 189593874
+Q20 bases: 175128335(92.3702%)
+Q30 bases: 169845189(89.5837%)
+
+Read1 after filtering:
+total reads: 2408368
+total bases: 181751576
+Q20 bases: 175737063(96.6908%)
+Q30 bases: 172844909(95.0995%)
+
+Read2 aftering filtering:
+total reads: 2408368
+total bases: 181765117
+Q20 bases: 171258381(94.2196%)
+Q30 bases: 166579901(91.6457%)
+
+Filtering result:
+reads passed filter: 4816736
+reads failed due to low quality: 194190
+reads failed due to too many N: 1340
+reads failed due to too short: 7540
+reads failed due to low complexity: 428
+reads with adapter trimmed: 9918
+bases trimmed due to adapters: 295740
+
+Duplication rate: 6.28066%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paucidentomys-vermidax/nextseq-paired-2/Z21914_S17_L004_R.fastp.json 
+fastp v0.20.0, time used: 37 seconds

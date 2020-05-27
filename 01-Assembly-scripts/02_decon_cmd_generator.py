@@ -14,7 +14,7 @@ import os, argparse, mcore, mfiles, globs
 ############################################################
 # Functions
 def genDeconCmd(decon_path, sfiles, r, baselogfile, step, prev_step):
-    decondir = "/scratch/gregg_thomas/Murinae-seq/Contamination_Genomes/"
+    decondir = os.path.abspath("../01-Assembly-data/Contamination_Genomes/");
     cmd_list = [];
     cmd_num = 0;
     for f in sfiles:
@@ -24,7 +24,7 @@ def genDeconCmd(decon_path, sfiles, r, baselogfile, step, prev_step):
         if r in [0,1]:
             outfile = f.replace(prev_step, step).replace(".fastq.gz", ".decon.fastq.gz");
 
-            decon_cmd = decon_path + " -Xmx10g t=1 in=" + f + " ref=" + decondir + " path=" + decondir + " minid=0.95 outu=" + outfile;
+            decon_cmd = decon_path + " -Xmx15g t=1 in=" + f + " ref=" + decondir + " path=" + decondir + " minid=0.99 outu=" + outfile;
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
             decon_cmd += " &> " + logfile;
@@ -36,7 +36,7 @@ def genDeconCmd(decon_path, sfiles, r, baselogfile, step, prev_step):
             outfile1 = f[0].replace(prev_step, step).replace(".fastq.gz", ".decon.fastq.gz");
             outfile2 = f[1].replace(prev_step, step).replace(".fastq.gz", ".decon.fastq.gz");
 
-            decon_cmd = decon_path + " -Xmx10g t=1 in1=" + f[0] + " in2=" + f[1] + " ref=" + decondir + " path=" + decondir + " minid=0.95 outu1=" + outfile1 + " outu2=" + outfile2;
+            decon_cmd = decon_path + " -Xmx15g t=1 in1=" + f[0] + " in2=" + f[1] + " ref=" + decondir + " path=" + decondir + " minid=0.99 outu1=" + outfile1 + " outu2=" + outfile2;
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
             decon_cmd += " &> " + logfile;
@@ -138,6 +138,7 @@ with open(output_file, "w") as jobfile:
     mcore.PWS(mcore.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
     mcore.PWS(mcore.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
     mcore.PWS("# ----------", jobfile);
+    mcore.PWS("# BEGIN CMDS", jobfile);
 
 ##########################
 # Generating the commands in the job file.
@@ -151,27 +152,36 @@ with open(output_file, "w") as jobfile:
             os.system("mkdir " + spec_dir);
         # Make output directory
 
+        decon_cmds = [];
+
         for r in runtype:
             run_string = runstrs[r];
+            run_dir = os.path.join(spec_dir, run_string);
 
             base_logfile = os.path.join(logdir, s_mod + "-" + run_string + "-decon");
             # Get the base logfile name for this run.
 
             seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
-            if seqfiles: 
-                decon_cmds = genDeconCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
+            if seqfiles:
+                if not os.path.isdir(run_dir):
+                    os.system("mkdir " + run_dir);
+
+                decon_cmds += genDeconCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
 
             if s_mod in ["Rattus-exulans", "Rattus-hoffmanni"]:
-                run_string += "-no-WGA"
+                run_string += "-no-WGA";
+                run_dir = os.path.join(spec_dir, run_string);
 
-                seqfiles, outdir = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
+                seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
                 if seqfiles:
-                    decon_cmds_2 = genDeconCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
-                    decon_cmds += decon_cmds_2;
+                    if not os.path.isdir(run_dir):
+                        os.system("mkdir " + run_dir);
 
-            if decon_cmds:
-                for cmd in sorted(decon_cmds):
-                    mcore.PWS(cmd, jobfile);
+                    decon_cmds += genDeconCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
+
+        if decon_cmds:
+            for cmd in sorted(decon_cmds):
+                mcore.PWS(cmd, jobfile);
 
 ##########################
 # Generating the submit script.

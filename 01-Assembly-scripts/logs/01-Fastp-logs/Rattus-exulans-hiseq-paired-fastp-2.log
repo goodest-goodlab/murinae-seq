@@ -7,44 +7,45 @@ Detecting adapter sequence for read2...
 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 
 Read1 before filtering:
-total reads: 2900885
-total bases: 290088500
-Q20 bases: 285097684(98.2796%)
-Q30 bases: 277801734(95.7645%)
+total reads: 3494497
+total bases: 349449700
+Q20 bases: 344049823(98.4547%)
+Q30 bases: 336405190(96.2671%)
 
 Read2 before filtering:
-total reads: 2900885
-total bases: 290088500
-Q20 bases: 277254266(95.5758%)
-Q30 bases: 267317518(92.1503%)
+total reads: 3494497
+total bases: 349449700
+Q20 bases: 335976736(96.1445%)
+Q30 bases: 325931602(93.27%)
 
 Read1 after filtering:
-total reads: 2756558
-total bases: 274997793
-Q20 bases: 272356926(99.0397%)
-Q30 bases: 266111872(96.7687%)
+total reads: 3336020
+total bases: 330595495
+Q20 bases: 327688060(99.1205%)
+Q30 bases: 321067510(97.1179%)
 
 Read2 aftering filtering:
-total reads: 2756558
-total bases: 274998358
-Q20 bases: 269883088(98.1399%)
-Q30 bases: 260789551(94.8331%)
+total reads: 3336020
+total bases: 330596881
+Q20 bases: 325477865(98.4516%)
+Q30 bases: 316434899(95.7162%)
 
 Filtering result:
-reads passed filter: 5513116
-reads failed due to low quality: 257448
-reads failed due to too many N: 27382
-reads failed due to too short: 2328
-reads failed due to low complexity: 1496
-reads with adapter trimmed: 89373
-bases trimmed due to adapters: 1570652
+reads passed filter: 6672040
+reads failed due to low quality: 279002
+reads failed due to too many N: 33566
+reads failed due to too short: 2586
+reads failed due to low complexity: 1800
+reads with adapter trimmed: 348817
+bases trimmed due to adapters: 6360432
 
-Duplication rate: 11.651%
+Duplication rate: 16.3502%
 
-Insert size peak (evaluated by paired-end reads): 167
+Insert size peak (evaluated by paired-end reads): 168
 
-JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R.fastp.json
-HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R.fastp.html
+JSON report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R.fastp.json
+HTML report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R.fastp.html
 
-fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-exulans/hiseq-paired-no-WGA/exulans_GCATTG_L007_R.fastp.json 
-fastp v0.20.0, time used: 55 seconds
+fastp -i /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R1_001.fastq.gz -I /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R1_001.fastp.fastq.gz -O /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R2_001.fastp.fastq.gz -h /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R.fastp.html -j /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-exulans/hiseq-paired/exulans-WGA_TGACGT_L007_R.fastp.json 
+fastp v0.20.1, time used: 80 seconds
+, time used: 77 seconds

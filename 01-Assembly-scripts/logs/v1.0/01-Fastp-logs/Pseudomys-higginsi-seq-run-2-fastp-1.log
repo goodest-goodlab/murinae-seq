@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 2216555
+total bases: 223872055
+Q20 bases: 218995192(97.8216%)
+Q30 bases: 215163760(96.1101%)
+
+Read2 before filtering:
+total reads: 2216555
+total bases: 223872055
+Q20 bases: 212291203(94.827%)
+Q30 bases: 205263481(91.6879%)
+
+Read1 after filtering:
+total reads: 2202840
+total bases: 221512887
+Q20 bases: 216818199(97.8806%)
+Q30 bases: 213097867(96.2011%)
+
+Read2 aftering filtering:
+total reads: 2202840
+total bases: 221521830
+Q20 bases: 210808940(95.164%)
+Q30 bases: 204023488(92.1008%)
+
+Filtering result:
+reads passed filter: 4405680
+reads failed due to low quality: 12192
+reads failed due to too many N: 4678
+reads failed due to too short: 6556
+reads failed due to low complexity: 4004
+reads with adapter trimmed: 101078
+bases trimmed due to adapters: 2559193
+
+Duplication rate: 10.6665%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-higginsi/seq-run-2/52953_BH7T77BCX2_GTACTAT_S16_L001_R.fastp.json 
+fastp v0.20.0, time used: 56 seconds

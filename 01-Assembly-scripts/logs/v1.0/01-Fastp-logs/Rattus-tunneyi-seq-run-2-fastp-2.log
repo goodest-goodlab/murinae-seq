@@ -1,0 +1,49 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2706855
+total bases: 273392355
+Q20 bases: 268039159(98.0419%)
+Q30 bases: 263612596(96.4228%)
+
+Read2 before filtering:
+total reads: 2706855
+total bases: 273392355
+Q20 bases: 262024111(95.8418%)
+Q30 bases: 254786720(93.1945%)
+
+Read1 after filtering:
+total reads: 2696872
+total bases: 271482935
+Q20 bases: 266270050(98.0798%)
+Q30 bases: 261934669(96.4829%)
+
+Read2 aftering filtering:
+total reads: 2696872
+total bases: 271509281
+Q20 bases: 260942581(96.1082%)
+Q30 bases: 253884867(93.5087%)
+
+Filtering result:
+reads passed filter: 5393744
+reads failed due to low quality: 12564
+reads failed due to too many N: 3956
+reads failed due to too short: 2224
+reads failed due to low complexity: 1222
+reads with adapter trimmed: 86014
+bases trimmed due to adapters: 1885292
+
+Duplication rate: 9.99672%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-tunneyi/seq-run-2/52952_BH7T77BCX2_GACTTCT_S15_L002_R.fastp.json 
+fastp v0.20.0, time used: 51 seconds

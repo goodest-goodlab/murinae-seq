@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 526056
+total bases: 39734028
+Q20 bases: 37873071(95.3165%)
+Q30 bases: 37044585(93.2314%)
+
+Read1 after filtering:
+total reads: 521752
+total bases: 39403786
+Q20 bases: 37696140(95.6663%)
+Q30 bases: 36889257(93.6186%)
+
+Filtering result:
+reads passed filter: 521752
+reads failed due to low quality: 4179
+reads failed due to too many N: 12
+reads failed due to too short: 67
+reads failed due to low complexity: 46
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.95228%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-single-1/JAE4867_S62_L004_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-single-1/JAE4867_S62_L004_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Bunomys-chrysocomus/nextseq-single-1/JAE4867_S62_L004_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-single-1/JAE4867_S62_L004_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-single-1/JAE4867_S62_L004_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bunomys-chrysocomus/nextseq-single-1/JAE4867_S62_L004_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 15 seconds

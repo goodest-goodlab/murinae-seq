@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 20800741
+total bases: 3120111150
+Q20 bases: 3065608072(98.2532%)
+Q30 bases: 2981388055(95.5539%)
+
+Read2 before filtering:
+total reads: 20800741
+total bases: 3120111150
+Q20 bases: 3021737790(96.8471%)
+Q30 bases: 2899881277(92.9416%)
+
+Read1 after filtering:
+total reads: 20508808
+total bases: 3040781183
+Q20 bases: 2994357831(98.4733%)
+Q30 bases: 2917456999(95.9443%)
+
+Read2 aftering filtering:
+total reads: 20508808
+total bases: 3040823169
+Q20 bases: 2962894028(97.4372%)
+Q30 bases: 2851522693(93.7747%)
+
+Filtering result:
+reads passed filter: 41017616
+reads failed due to low quality: 546476
+reads failed due to too many N: 1642
+reads failed due to too short: 7074
+reads failed due to low complexity: 28674
+reads with adapter trimmed: 2852219
+bases trimmed due to adapters: 71625621
+
+Duplication rate: 37.1982%
+
+Insert size peak (evaluated by paired-end reads): 262
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Aethomys-hindei/hiseq4000-paired-1/REC1_CKDL190143343-1a-D708-AK1543_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.0, time used: 411 seconds

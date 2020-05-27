@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 7664286
+total bases: 574821450
+Q20 bases: 563606639(98.049%)
+Q30 bases: 558224017(97.1126%)
+
+Read2 before filtering:
+total reads: 7664286
+total bases: 574821450
+Q20 bases: 545422142(94.8855%)
+Q30 bases: 536278610(93.2948%)
+
+Read1 after filtering:
+total reads: 7397962
+total bases: 554397309
+Q20 bases: 546173311(98.5166%)
+Q30 bases: 541562689(97.6849%)
+
+Read2 aftering filtering:
+total reads: 7397962
+total bases: 554406525
+Q20 bases: 535656499(96.618%)
+Q30 bases: 528113870(95.2575%)
+
+Filtering result:
+reads passed filter: 14795924
+reads failed due to low quality: 477952
+reads failed due to too many N: 3668
+reads failed due to too short: 46366
+reads failed due to low complexity: 4662
+reads with adapter trimmed: 36516
+bases trimmed due to adapters: 887539
+
+Duplication rate: 18.1779%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-1/JAE3632_S38_R.fastp.json 
+fastp v0.20.0, time used: 53 seconds

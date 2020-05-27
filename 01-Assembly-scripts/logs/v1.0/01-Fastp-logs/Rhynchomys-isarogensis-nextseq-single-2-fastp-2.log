@@ -1,0 +1,32 @@
+Detecting adapter sequence for read1...
+>Nextera_LMP_Read1_External_Adapter | >Illumina Multiplexing Index Sequencing Primer
+GATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+
+Read1 before filtering:
+total reads: 462673
+total bases: 34945680
+Q20 bases: 33682722(96.3859%)
+Q30 bases: 33113746(94.7578%)
+
+Read1 after filtering:
+total reads: 458508
+total bases: 34620833
+Q20 bases: 33487254(96.7257%)
+Q30 bases: 32936070(95.1337%)
+
+Filtering result:
+reads passed filter: 458508
+reads failed due to low quality: 2852
+reads failed due to too many N: 7
+reads failed due to too short: 1299
+reads failed due to low complexity: 7
+reads with adapter trimmed: 1660
+bases trimmed due to adapters: 83902
+
+Duplication rate (may be overestimated since this is SE data): 4.91314%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-single-2/JAE2195_S29_L003_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-single-2/JAE2195_S29_L003_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rhynchomys-isarogensis/nextseq-single-2/JAE2195_S29_L003_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-single-2/JAE2195_S29_L003_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-single-2/JAE2195_S29_L003_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rhynchomys-isarogensis/nextseq-single-2/JAE2195_S29_L003_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 15 seconds

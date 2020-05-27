@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 455417
+total bases: 34402246
+Q20 bases: 32783062(95.2934%)
+Q30 bases: 32050025(93.1626%)
+
+Read1 after filtering:
+total reads: 452299
+total bases: 34161382
+Q20 bases: 32652930(95.5843%)
+Q30 bases: 31935647(93.4846%)
+
+Filtering result:
+reads passed filter: 452299
+reads failed due to low quality: 3008
+reads failed due to too many N: 10
+reads failed due to too short: 63
+reads failed due to low complexity: 37
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.81691%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-single-1/JAE169_S24_L004_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-single-1/JAE169_S24_L004_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Apomys-lubangensis/nextseq-single-1/JAE169_S24_L004_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-single-1/JAE169_S24_L004_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-single-1/JAE169_S24_L004_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Apomys-lubangensis/nextseq-single-1/JAE169_S24_L004_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 7 seconds

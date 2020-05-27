@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2858462
+total bases: 215913408
+Q20 bases: 207091534(95.9142%)
+Q30 bases: 203345592(94.1792%)
+
+Read2 before filtering:
+total reads: 2858462
+total bases: 215839761
+Q20 bases: 199329443(92.3507%)
+Q30 bases: 193451528(89.6274%)
+
+Read1 after filtering:
+total reads: 2739001
+total bases: 206734372
+Q20 bases: 199797000(96.6443%)
+Q30 bases: 196522438(95.0604%)
+
+Read2 aftering filtering:
+total reads: 2739001
+total bases: 206749242
+Q20 bases: 194865614(94.2522%)
+Q30 bases: 189674077(91.7411%)
+
+Filtering result:
+reads passed filter: 5478002
+reads failed due to low quality: 226958
+reads failed due to too many N: 2316
+reads failed due to too short: 8380
+reads failed due to low complexity: 1268
+reads with adapter trimmed: 11188
+bases trimmed due to adapters: 285689
+
+Duplication rate: 7.31313%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-paired-2/JAE3632_S32_L002_R.fastp.json 
+fastp v0.20.0, time used: 36 seconds

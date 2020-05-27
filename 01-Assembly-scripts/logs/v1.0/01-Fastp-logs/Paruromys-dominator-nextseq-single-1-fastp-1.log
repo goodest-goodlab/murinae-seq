@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 299204
+total bases: 22600867
+Q20 bases: 21465592(94.9769%)
+Q30 bases: 20964722(92.7607%)
+
+Read1 after filtering:
+total reads: 296753
+total bases: 22413504
+Q20 bases: 21365175(95.3228%)
+Q30 bases: 20876939(93.1445%)
+
+Filtering result:
+reads passed filter: 296753
+reads failed due to low quality: 2378
+reads failed due to too many N: 17
+reads failed due to too short: 34
+reads failed due to low complexity: 22
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.46729%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paruromys-dominator/nextseq-single-1/JAE4870_S66_L002_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paruromys-dominator/nextseq-single-1/JAE4870_S66_L002_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Paruromys-dominator/nextseq-single-1/JAE4870_S66_L002_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paruromys-dominator/nextseq-single-1/JAE4870_S66_L002_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paruromys-dominator/nextseq-single-1/JAE4870_S66_L002_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Paruromys-dominator/nextseq-single-1/JAE4870_S66_L002_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 13 seconds

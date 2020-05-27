@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 11455865
+total bases: 1157042365
+Q20 bases: 1117408893(96.5746%)
+Q30 bases: 1089624826(94.1733%)
+
+Read2 before filtering:
+total reads: 11455865
+total bases: 1157042365
+Q20 bases: 1090193517(94.2224%)
+Q30 bases: 1047855603(90.5633%)
+
+Read1 after filtering:
+total reads: 11433089
+total bases: 1151462307
+Q20 bases: 1112530979(96.619%)
+Q30 bases: 1085149436(94.241%)
+
+Read2 aftering filtering:
+total reads: 11433089
+total bases: 1151488687
+Q20 bases: 1086128633(94.3239%)
+Q30 bases: 1044492048(90.708%)
+
+Filtering result:
+reads passed filter: 22866178
+reads failed due to low quality: 15584
+reads failed due to too many N: 7282
+reads failed due to too short: 18896
+reads failed due to low complexity: 3790
+reads with adapter trimmed: 367365
+bases trimmed due to adapters: 8336386
+
+Duplication rate: 21.2894%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-occidentalis/seq-run-1/52939_BH7T33BCX2_AGCCTTG_S2_L001_R.fastp.json 
+fastp v0.20.0, time used: 186 seconds

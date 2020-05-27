@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3505972
+total bases: 264860327
+Q20 bases: 254460613(96.0735%)
+Q30 bases: 250015380(94.3952%)
+
+Read2 before filtering:
+total reads: 3505972
+total bases: 264769265
+Q20 bases: 244901776(92.4963%)
+Q30 bases: 237802339(89.8149%)
+
+Read1 after filtering:
+total reads: 3363593
+total bases: 253967608
+Q20 bases: 245668832(96.7323%)
+Q30 bases: 241760848(95.1936%)
+
+Read2 aftering filtering:
+total reads: 3363593
+total bases: 253987419
+Q20 bases: 239569942(94.3235%)
+Q30 bases: 233281152(91.8475%)
+
+Filtering result:
+reads passed filter: 6727186
+reads failed due to low quality: 269518
+reads failed due to too many N: 2928
+reads failed due to too short: 9958
+reads failed due to low complexity: 2354
+reads with adapter trimmed: 9106
+bases trimmed due to adapters: 226298
+
+Duplication rate: 8.70816%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/nextseq-paired-2/TCD4175_S3_L002_R.fastp.json 
+fastp v0.20.0, time used: 31 seconds

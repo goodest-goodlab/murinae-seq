@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 10369271
+total bases: 777695325
+Q20 bases: 763727363(98.2039%)
+Q30 bases: 756855755(97.3203%)
+
+Read2 before filtering:
+total reads: 10369271
+total bases: 777695325
+Q20 bases: 740117033(95.168%)
+Q30 bases: 728193934(93.6349%)
+
+Read1 after filtering:
+total reads: 10043132
+total bases: 752765389
+Q20 bases: 742066028(98.5787%)
+Q30 bases: 736074327(97.7827%)
+
+Read2 aftering filtering:
+total reads: 10043132
+total bases: 752776775
+Q20 bases: 728182460(96.7329%)
+Q30 bases: 718214949(95.4088%)
+
+Filtering result:
+reads passed filter: 20086264
+reads failed due to low quality: 579298
+reads failed due to too many N: 4916
+reads failed due to too short: 61986
+reads failed due to low complexity: 6078
+reads with adapter trimmed: 39606
+bases trimmed due to adapters: 915787
+
+Duplication rate: 22.7721%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-1/TCD4560_S15_R.fastp.json 
+fastp v0.20.0, time used: 74 seconds

@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Rhynchomys-isarogensis/miseq-paired/JAE2195_S6_L001_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Rhynchomys-isarogensis/miseq-paired/JAE2195_S6_L001_R2_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Rhynchomys-isarogensis/miseq-paired/JAE2195_S6_L001_001.fastp.decon.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Rhynchomys-isarogensis/miseq-paired/JAE2195_S6_L001_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Rhynchomys-isarogensis/miseq-paired/JAE2195_S6_L001_R2_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Rhynchomys-isarogensis/miseq-paired/JAE2195_S6_L001_001.fastp.decon.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Found 39023 duplicates.
+Finished exact matches.    Time: 3.203 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Found 352 contained sequences.
+Finished containment.      Time: 5.229 seconds.
+Memory: max=30870m, total=30870m, free=27849m, used=3021m
+
+Removed 352 invalid entries.
+Finished invalid removal.  Time: 0.166 seconds.
+Memory: max=30870m, total=30870m, free=27849m, used=3021m
+
+Input:                  	895878 reads 		69848058 bases.
+Duplicates:             	39023 reads (4.36%) 	3039562 bases (4.35%)     	0 collisions.
+Containments:           	352 reads (0.04%) 	19750 bases (0.03%)    	1656885 collisions.
+Result:                 	856503 reads (95.60%) 	66788746 bases (95.62%)
+
+Sorted output.             Time: 0.710 seconds.
+Memory: max=30870m, total=30870m, free=27849m, used=3021m
+
+Printed output.            Time: 6.163 seconds.
+Memory: max=30870m, total=30870m, free=27514m, used=3356m
+
+Time:                         	15.499 seconds.
+Reads Processed:        895k 	57.80k reads/sec
+Bases Processed:      69848k 	4.51m bases/sec

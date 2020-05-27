@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3077651
+total bases: 232476183
+Q20 bases: 222974789(95.913%)
+Q30 bases: 218890974(94.1563%)
+
+Read2 before filtering:
+total reads: 3077651
+total bases: 232396273
+Q20 bases: 215316446(92.6506%)
+Q30 bases: 209028192(89.9447%)
+
+Read1 after filtering:
+total reads: 2962360
+total bases: 223577651
+Q20 bases: 215979231(96.6014%)
+Q30 bases: 212367004(94.9858%)
+
+Read2 aftering filtering:
+total reads: 2962360
+total bases: 223593849
+Q20 bases: 210906344(94.3256%)
+Q30 bases: 205275167(91.8072%)
+
+Filtering result:
+reads passed filter: 5924720
+reads failed due to low quality: 216086
+reads failed due to too many N: 2518
+reads failed due to too short: 10222
+reads failed due to low complexity: 1756
+reads with adapter trimmed: 15124
+bases trimmed due to adapters: 376964
+
+Duplication rate: 7.05896%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mastacomys-fuscus/nextseq-paired-2/ABTC07354_S25_L001_R.fastp.json 
+fastp v0.20.0, time used: 28 seconds

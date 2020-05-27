@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 445691
+total bases: 34763898
+Q20 bases: 34538841(99.3526%)
+Q30 bases: 33922195(97.5788%)
+
+Read2 before filtering:
+total reads: 445691
+total bases: 34763898
+Q20 bases: 34333252(98.7612%)
+Q30 bases: 33517917(96.4159%)
+
+Read1 after filtering:
+total reads: 444042
+total bases: 34625948
+Q20 bases: 34410520(99.3778%)
+Q30 bases: 33805208(97.6297%)
+
+Read2 aftering filtering:
+total reads: 444042
+total bases: 34625948
+Q20 bases: 34258116(98.9377%)
+Q30 bases: 33474649(96.675%)
+
+Filtering result:
+reads passed filter: 888084
+reads failed due to low quality: 3012
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads failed due to low complexity: 286
+reads with adapter trimmed: 834
+bases trimmed due to adapters: 18656
+
+Duplication rate: 1.20726%
+
+Insert size peak (evaluated by paired-end reads): 122
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_R.fastp.json 
+fastp v0.20.0, time used: 22 seconds

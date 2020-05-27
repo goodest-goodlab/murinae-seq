@@ -41,10 +41,10 @@ bases trimmed due to adapters: 96146920
 
 Duplication rate: 38.5276%
 
-Insert size peak (evaluated by paired-end reads): 263
+Insert size peak (evaluated by paired-end reads): 264
 
-JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.json
-HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.html
+JSON report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.json
+HTML report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.html
 
-fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.json 
-fastp v0.20.0, time used: 262 seconds
+fastp -i /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R1_.fastq.gz -I /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R1_.fastp.fastq.gz -O /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R2_.fastp.fastq.gz -h /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.html -j /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.1, time used: 418 seconds

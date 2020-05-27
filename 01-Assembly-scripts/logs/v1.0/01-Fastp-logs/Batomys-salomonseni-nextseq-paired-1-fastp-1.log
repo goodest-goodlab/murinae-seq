@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 8379516
+total bases: 628463700
+Q20 bases: 617121977(98.1953%)
+Q30 bases: 611535599(97.3064%)
+
+Read2 before filtering:
+total reads: 8379516
+total bases: 628463700
+Q20 bases: 598698878(95.2639%)
+Q30 bases: 589191361(93.7511%)
+
+Read1 after filtering:
+total reads: 8117242
+total bases: 608407399
+Q20 bases: 599708508(98.5702%)
+Q30 bases: 594807584(97.7647%)
+
+Read2 aftering filtering:
+total reads: 8117242
+total bases: 608416491
+Q20 bases: 589093261(96.824%)
+Q30 bases: 581164506(95.5208%)
+
+Filtering result:
+reads passed filter: 16234484
+reads failed due to low quality: 461674
+reads failed due to too many N: 4066
+reads failed due to too short: 54974
+reads failed due to low complexity: 3834
+reads with adapter trimmed: 37862
+bases trimmed due to adapters: 753782
+
+Duplication rate: 24.8293%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Batomys-salomonseni/nextseq-paired-1/JAE3320_S2_R.fastp.json 
+fastp v0.20.0, time used: 63 seconds

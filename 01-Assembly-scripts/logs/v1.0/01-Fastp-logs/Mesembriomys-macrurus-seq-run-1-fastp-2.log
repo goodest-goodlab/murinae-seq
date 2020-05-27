@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 2774357
+total bases: 280210057
+Q20 bases: 268378360(95.7776%)
+Q30 bases: 259500124(92.6091%)
+
+Read2 before filtering:
+total reads: 2774357
+total bases: 280210057
+Q20 bases: 250372658(89.3518%)
+Q30 bases: 230875279(82.3936%)
+
+Read1 after filtering:
+total reads: 2743084
+total bases: 275864575
+Q20 bases: 264540035(95.8949%)
+Q30 bases: 255998581(92.7986%)
+
+Read2 aftering filtering:
+total reads: 2743084
+total bases: 275878946
+Q20 bases: 247321387(89.6485%)
+Q30 bases: 228708250(82.9017%)
+
+Filtering result:
+reads passed filter: 5486168
+reads failed due to low quality: 774
+reads failed due to too many N: 56824
+reads failed due to too short: 3146
+reads failed due to low complexity: 1802
+reads with adapter trimmed: 116564
+bases trimmed due to adapters: 2667233
+
+Duplication rate: 5.58723%
+
+Insert size peak (evaluated by paired-end reads): 168
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mesembriomys-macrurus/seq-run-1/53918_HTVLKBCX2_ATGGAGA_S6_L002_R.fastp.json 
+fastp v0.20.0, time used: 66 seconds

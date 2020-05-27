@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/nextseq-single-1/JAE4661_S32_L004_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Hyorhinomys-stuempkei/nextseq-single-1/JAE4661_S32_L004_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/nextseq-single-1/JAE4661_S32_L004_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Hyorhinomys-stuempkei/nextseq-single-1/JAE4661_S32_L004_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Found 10698 duplicates.
+Finished exact matches.    Time: 1.803 seconds.
+Memory: max=30870m, total=30870m, free=25877m, used=4993m
+
+Found 1206 contained sequences.
+Finished containment.      Time: 4.665 seconds.
+Memory: max=30870m, total=30870m, free=28434m, used=2436m
+
+Removed 1206 invalid entries.
+Finished invalid removal.  Time: 0.104 seconds.
+Memory: max=30870m, total=30870m, free=28434m, used=2436m
+
+Input:                  	408616 reads 		30865225 bases.
+Duplicates:             	10698 reads (2.62%) 	808528 bases (2.62%)     	0 collisions.
+Containments:           	1206 reads (0.30%) 	89243 bases (0.29%)    	263473 collisions.
+Result:                 	396712 reads (97.09%) 	29967454 bases (97.09%)
+
+Sorted output.             Time: 0.253 seconds.
+Memory: max=30870m, total=30870m, free=28434m, used=2436m
+
+Printed output.            Time: 2.833 seconds.
+Memory: max=30870m, total=30870m, free=28181m, used=2689m
+
+Time:                         	9.679 seconds.
+Reads Processed:        408k 	42.22k reads/sec
+Bases Processed:      30865k 	3.19m bases/sec

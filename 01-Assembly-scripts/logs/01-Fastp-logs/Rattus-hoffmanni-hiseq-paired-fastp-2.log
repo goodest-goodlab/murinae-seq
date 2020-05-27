@@ -7,44 +7,45 @@ Detecting adapter sequence for read2...
 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 
 Read1 before filtering:
-total reads: 2843705
-total bases: 284370500
-Q20 bases: 280262065(98.5553%)
-Q30 bases: 273913692(96.3228%)
+total reads: 2799362
+total bases: 279936200
+Q20 bases: 275824350(98.5311%)
+Q30 bases: 269737392(96.3567%)
 
 Read2 before filtering:
-total reads: 2843705
-total bases: 284370500
-Q20 bases: 273522438(96.1852%)
-Q30 bases: 264907875(93.1559%)
+total reads: 2799362
+total bases: 279936200
+Q20 bases: 269161794(96.1511%)
+Q30 bases: 261126957(93.2809%)
 
 Read1 after filtering:
-total reads: 2721992
-total bases: 271455949
-Q20 bases: 269217997(99.1756%)
-Q30 bases: 263693699(97.1405%)
+total reads: 2676314
+total bases: 264195907
+Q20 bases: 262033506(99.1815%)
+Q30 bases: 256813310(97.2056%)
 
 Read2 aftering filtering:
-total reads: 2721992
-total bases: 271455821
-Q20 bases: 267146516(98.4125%)
-Q30 bases: 259218291(95.4919%)
+total reads: 2676314
+total bases: 264197578
+Q20 bases: 260254705(98.5076%)
+Q30 bases: 253081774(95.7926%)
 
 Filtering result:
-reads passed filter: 5443984
-reads failed due to low quality: 219976
-reads failed due to too many N: 21226
-reads failed due to too short: 854
-reads failed due to low complexity: 1370
-reads with adapter trimmed: 106263
-bases trimmed due to adapters: 1596019
+reads passed filter: 5352628
+reads failed due to low quality: 217952
+reads failed due to too many N: 20442
+reads failed due to too short: 6258
+reads failed due to low complexity: 1444
+reads with adapter trimmed: 383558
+bases trimmed due to adapters: 7563550
 
-Duplication rate: 8.94261%
+Duplication rate: 13.8346%
 
-Insert size peak (evaluated by paired-end reads): 165
+Insert size peak (evaluated by paired-end reads): 163
 
-JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R.fastp.json
-HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R.fastp.html
+JSON report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R.fastp.json
+HTML report: /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R.fastp.html
 
-fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Rattus-hoffmanni/hiseq-paired-no-WGA/hoffmani_GATCTC_L008_R.fastp.json 
-fastp v0.20.0, time used: 57 seconds
+fastp -i /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R1_001.fastq.gz -I /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/00-RawReads/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R1_001.fastp.fastq.gz -O /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R2_001.fastp.fastq.gz -h /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R.fastp.html -j /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/01-Fastp/Rattus-hoffmanni/hiseq-paired/hoffmaniWGA_CCGATT_L008_R.fastp.json 
+fastp v0.20.1, time used: 68 seconds
+v0.20.1, time used: 70 seconds

@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Phloeomys-pallidus/nextseq-single-1/JEC43_S28_L003_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Phloeomys-pallidus/nextseq-single-1/JEC43_S28_L003_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Phloeomys-pallidus/nextseq-single-1/JEC43_S28_L003_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Phloeomys-pallidus/nextseq-single-1/JEC43_S28_L003_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30064m, used=806m
+
+Found 22578 duplicates.
+Finished exact matches.    Time: 2.180 seconds.
+Memory: max=30870m, total=30870m, free=25877m, used=4993m
+
+Found 3088 contained sequences.
+Finished containment.      Time: 4.659 seconds.
+Memory: max=30870m, total=30870m, free=28369m, used=2501m
+
+Removed 3088 invalid entries.
+Finished invalid removal.  Time: 0.158 seconds.
+Memory: max=30870m, total=30870m, free=28369m, used=2501m
+
+Input:                  	505900 reads 		38207741 bases.
+Duplicates:             	22578 reads (4.46%) 	1705400 bases (4.46%)     	0 collisions.
+Containments:           	3088 reads (0.61%) 	228597 bases (0.60%)    	464015 collisions.
+Result:                 	480234 reads (94.93%) 	36273744 bases (94.94%)
+
+Sorted output.             Time: 0.303 seconds.
+Memory: max=30870m, total=30870m, free=28369m, used=2501m
+
+Printed output.            Time: 3.781 seconds.
+Memory: max=30870m, total=30870m, free=28116m, used=2754m
+
+Time:                         	11.105 seconds.
+Reads Processed:        505k 	45.56k reads/sec
+Bases Processed:      38207k 	3.44m bases/sec

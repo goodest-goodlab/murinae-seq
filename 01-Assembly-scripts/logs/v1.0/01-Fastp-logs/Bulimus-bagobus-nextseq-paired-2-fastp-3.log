@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2741806
+total bases: 207106153
+Q20 bases: 198864123(96.0204%)
+Q30 bases: 195267208(94.2836%)
+
+Read2 before filtering:
+total reads: 2741806
+total bases: 207104485
+Q20 bases: 191440258(92.4366%)
+Q30 bases: 185632063(89.6321%)
+
+Read1 after filtering:
+total reads: 2638890
+total bases: 199231810
+Q20 bases: 192520958(96.6316%)
+Q30 bases: 189315529(95.0227%)
+
+Read2 aftering filtering:
+total reads: 2638890
+total bases: 199247392
+Q20 bases: 187514741(94.1115%)
+Q30 bases: 182313971(91.5013%)
+
+Filtering result:
+reads passed filter: 5277780
+reads failed due to low quality: 196136
+reads failed due to too many N: 1554
+reads failed due to too short: 7026
+reads failed due to low complexity: 1116
+reads with adapter trimmed: 6782
+bases trimmed due to adapters: 174557
+
+Duplication rate: 8.94339%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Bulimus-bagobus/nextseq-paired-2/JAE1712_S23_L004_R.fastp.json 
+fastp v0.20.0, time used: 35 seconds

@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3496476
+total bases: 264104953
+Q20 bases: 253068783(95.8213%)
+Q30 bases: 248411209(94.0578%)
+
+Read2 before filtering:
+total reads: 3496476
+total bases: 264013170
+Q20 bases: 243803915(92.3454%)
+Q30 bases: 236555598(89.5999%)
+
+Read1 after filtering:
+total reads: 3351739
+total bases: 252964862
+Q20 bases: 244155060(96.5174%)
+Q30 bases: 240044754(94.8925%)
+
+Read2 aftering filtering:
+total reads: 3351739
+total bases: 252988116
+Q20 bases: 238330568(94.2062%)
+Q30 bases: 231906899(91.6671%)
+
+Filtering result:
+reads passed filter: 6703478
+reads failed due to low quality: 274012
+reads failed due to too many N: 2842
+reads failed due to too short: 9538
+reads failed due to low complexity: 3082
+reads with adapter trimmed: 15464
+bases trimmed due to adapters: 373531
+
+Duplication rate: 7.0717%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Lorentzimys-nouhuysi/nextseq-paired-2/ABTC46314_S24_L002_R.fastp.json 
+fastp v0.20.0, time used: 30 seconds

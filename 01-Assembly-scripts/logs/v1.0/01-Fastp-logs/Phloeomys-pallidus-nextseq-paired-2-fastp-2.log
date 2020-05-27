@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2925642
+total bases: 221005363
+Q20 bases: 211953786(95.9044%)
+Q30 bases: 208041957(94.1343%)
+
+Read2 before filtering:
+total reads: 2925642
+total bases: 220933845
+Q20 bases: 204580857(92.5982%)
+Q30 bases: 198543097(89.8654%)
+
+Read1 after filtering:
+total reads: 2819530
+total bases: 212863788
+Q20 bases: 205566429(96.5718%)
+Q30 bases: 202094186(94.9406%)
+
+Read2 aftering filtering:
+total reads: 2819530
+total bases: 212875932
+Q20 bases: 200530687(94.2007%)
+Q30 bases: 195093172(91.6464%)
+
+Filtering result:
+reads passed filter: 5639060
+reads failed due to low quality: 199816
+reads failed due to too many N: 2260
+reads failed due to too short: 8312
+reads failed due to low complexity: 1836
+reads with adapter trimmed: 9522
+bases trimmed due to adapters: 256801
+
+Duplication rate: 13.4269%
+
+Insert size peak (evaluated by paired-end reads): 0
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Phloeomys-pallidus/nextseq-paired-2/JEC43_S36_L001_R.fastp.json 
+fastp v0.20.0, time used: 38 seconds

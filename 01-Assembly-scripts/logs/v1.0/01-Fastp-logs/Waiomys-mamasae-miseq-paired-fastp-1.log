@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 444891
+total bases: 34701498
+Q20 bases: 34468796(99.3294%)
+Q30 bases: 33825965(97.477%)
+
+Read2 before filtering:
+total reads: 444891
+total bases: 34701498
+Q20 bases: 34333239(98.9388%)
+Q30 bases: 33588036(96.7913%)
+
+Read1 after filtering:
+total reads: 443645
+total bases: 34584898
+Q20 bases: 34361011(99.3526%)
+Q30 bases: 33727215(97.5201%)
+
+Read2 aftering filtering:
+total reads: 443645
+total bases: 34584898
+Q20 bases: 34267450(99.0821%)
+Q30 bases: 33548502(97.0033%)
+
+Filtering result:
+reads passed filter: 887290
+reads failed due to low quality: 2306
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads failed due to low complexity: 186
+reads with adapter trimmed: 2642
+bases trimmed due to adapters: 38852
+
+Duplication rate: 0.89131%
+
+Insert size peak (evaluated by paired-end reads): 124
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_R.fastp.json 
+fastp v0.20.0, time used: 23 seconds

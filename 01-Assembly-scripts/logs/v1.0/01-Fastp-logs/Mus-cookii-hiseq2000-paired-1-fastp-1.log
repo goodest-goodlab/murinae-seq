@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 12488237
+total bases: 1248823700
+Q20 bases: 1219393917(97.6434%)
+Q30 bases: 1161611008(93.0164%)
+
+Read2 before filtering:
+total reads: 12488237
+total bases: 1248823700
+Q20 bases: 1200710046(96.1473%)
+Q30 bases: 1136816799(91.031%)
+
+Read1 after filtering:
+total reads: 12052065
+total bases: 1200577441
+Q20 bases: 1183004412(98.5363%)
+Q30 bases: 1131183762(94.22%)
+
+Read2 aftering filtering:
+total reads: 12052065
+total bases: 1200573458
+Q20 bases: 1176862570(98.025%)
+Q30 bases: 1117699107(93.0971%)
+
+Filtering result:
+reads passed filter: 24104130
+reads failed due to low quality: 813466
+reads failed due to too many N: 57790
+reads failed due to too short: 192
+reads failed due to low complexity: 896
+reads with adapter trimmed: 715358
+bases trimmed due to adapters: 9417451
+
+Duplication rate: 12.9318%
+
+Insert size peak (evaluated by paired-end reads): 144
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-1/10460X3_131030_SN141_0734_AC2RLAACXX_7_R.fastp.json 
+fastp v0.20.0, time used: 172 seconds

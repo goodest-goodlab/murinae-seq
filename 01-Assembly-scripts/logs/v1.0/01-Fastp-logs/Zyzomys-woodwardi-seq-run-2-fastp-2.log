@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 2311560
+total bases: 233467560
+Q20 bases: 228654486(97.9384%)
+Q30 bases: 224827321(96.2992%)
+
+Read2 before filtering:
+total reads: 2311560
+total bases: 233467560
+Q20 bases: 221789523(94.998%)
+Q30 bases: 214642998(91.937%)
+
+Read1 after filtering:
+total reads: 2297860
+total bases: 231412335
+Q20 bases: 226756440(97.9881%)
+Q30 bases: 223027043(96.3765%)
+
+Read2 aftering filtering:
+total reads: 2297860
+total bases: 231418457
+Q20 bases: 220545309(95.3015%)
+Q30 bases: 213600352(92.3005%)
+
+Filtering result:
+reads passed filter: 4595720
+reads failed due to low quality: 12228
+reads failed due to too many N: 4664
+reads failed due to too short: 8326
+reads failed due to low complexity: 2182
+reads with adapter trimmed: 83541
+bases trimmed due to adapters: 2128634
+
+Duplication rate: 9.12048%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-woodwardi/seq-run-2/52950_BH7T77BCX2_CGTATAT_S13_L001_R.fastp.json 
+fastp v0.20.0, time used: 45 seconds

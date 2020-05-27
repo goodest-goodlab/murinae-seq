@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 603784
+total bases: 45619683
+Q20 bases: 43412407(95.1616%)
+Q30 bases: 42442685(93.0359%)
+
+Read1 after filtering:
+total reads: 599155
+total bases: 45265404
+Q20 bases: 43215992(95.4725%)
+Q30 bases: 42268984(93.3803%)
+
+Filtering result:
+reads passed filter: 599155
+reads failed due to low quality: 4281
+reads failed due to too many N: 50
+reads failed due to too short: 225
+reads failed due to low complexity: 73
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 7.95715%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-single-1/TCD4312_S38_L001_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-single-1/TCD4312_S38_L001_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Praomys-degraaffi/nextseq-single-1/TCD4312_S38_L001_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-single-1/TCD4312_S38_L001_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-single-1/TCD4312_S38_L001_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Praomys-degraaffi/nextseq-single-1/TCD4312_S38_L001_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 17 seconds

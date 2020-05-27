@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 11789715
+total bases: 1190761215
+Q20 bases: 1150221976(96.5955%)
+Q30 bases: 1100700806(92.4367%)
+
+Read2 before filtering:
+total reads: 11789715
+total bases: 1190761215
+Q20 bases: 1126850919(94.6328%)
+Q30 bases: 1068717530(89.7508%)
+
+Read1 after filtering:
+total reads: 11117812
+total bases: 1116045783
+Q20 bases: 1103758177(98.899%)
+Q30 bases: 1063482570(95.2902%)
+
+Read2 aftering filtering:
+total reads: 11117812
+total bases: 1116039664
+Q20 bases: 1097727477(98.3592%)
+Q30 bases: 1047139634(93.8264%)
+
+Filtering result:
+reads passed filter: 22235624
+reads failed due to low quality: 1338032
+reads failed due to too many N: 4044
+reads failed due to too short: 896
+reads failed due to low complexity: 834
+reads with adapter trimmed: 996585
+bases trimmed due to adapters: 14193555
+
+Duplication rate: 17.903%
+
+Insert size peak (evaluated by paired-end reads): 141
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-pahari/hiseq2000-paired-2/lane1_TCGCAG_L001_R.fastp.json 
+fastp v0.20.0, time used: 170 seconds

@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2467368
+total bases: 186371441
+Q20 bases: 178672393(95.869%)
+Q30 bases: 175386101(94.1057%)
+
+Read2 before filtering:
+total reads: 2467368
+total bases: 186363026
+Q20 bases: 173211361(92.943%)
+Q30 bases: 168295064(90.305%)
+
+Read1 after filtering:
+total reads: 2384247
+total bases: 179902218
+Q20 bases: 173754510(96.5828%)
+Q30 bases: 170825801(94.9548%)
+
+Read2 aftering filtering:
+total reads: 2384247
+total bases: 179913619
+Q20 bases: 169930293(94.451%)
+Q30 bases: 165496332(91.9866%)
+
+Filtering result:
+reads passed filter: 4768494
+reads failed due to low quality: 157002
+reads failed due to too many N: 814
+reads failed due to too short: 7608
+reads failed due to low complexity: 818
+reads with adapter trimmed: 13464
+bases trimmed due to adapters: 383262
+
+Duplication rate: 8.33906%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Hyorhinomys-stuempkei/nextseq-paired-2/JAE4661_S40_L003_R.fastp.json 
+fastp v0.20.0, time used: 25 seconds

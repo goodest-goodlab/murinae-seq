@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 3413324
+total bases: 344745724
+Q20 bases: 329972880(95.7149%)
+Q30 bases: 318948029(92.5169%)
+
+Read2 before filtering:
+total reads: 3413324
+total bases: 344745724
+Q20 bases: 310402677(90.0382%)
+Q30 bases: 288061904(83.5578%)
+
+Read1 after filtering:
+total reads: 3383601
+total bases: 340254507
+Q20 bases: 326012820(95.8144%)
+Q30 bases: 315336787(92.6767%)
+
+Read2 aftering filtering:
+total reads: 3383601
+total bases: 340290342
+Q20 bases: 307214785(90.2802%)
+Q30 bases: 285735620(83.9682%)
+
+Filtering result:
+reads passed filter: 6767202
+reads failed due to low quality: 868
+reads failed due to too many N: 51424
+reads failed due to too short: 4362
+reads failed due to low complexity: 2792
+reads with adapter trimmed: 140356
+bases trimmed due to adapters: 3358097
+
+Duplication rate: 6.78562%
+
+Insert size peak (evaluated by paired-end reads): 170
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Conilurus-penicillatus/seq-run-1/53920_HTVLKBCX2_GCTCGAA_S8_L002_R.fastp.json 
+fastp v0.20.0, time used: 61 seconds

@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2565318
+total bases: 193745268
+Q20 bases: 185614082(95.8032%)
+Q30 bases: 182232653(94.0579%)
+
+Read2 before filtering:
+total reads: 2565318
+total bases: 193681090
+Q20 bases: 178435453(92.1285%)
+Q30 bases: 173095320(89.3713%)
+
+Read1 after filtering:
+total reads: 2451712
+total bases: 184968005
+Q20 bases: 178620033(96.5681%)
+Q30 bases: 175654138(94.9646%)
+
+Read2 aftering filtering:
+total reads: 2451712
+total bases: 184982787
+Q20 bases: 174166376(94.1527%)
+Q30 bases: 169459402(91.6082%)
+
+Filtering result:
+reads passed filter: 4903424
+reads failed due to low quality: 215472
+reads failed due to too many N: 2110
+reads failed due to too short: 8678
+reads failed due to low complexity: 952
+reads with adapter trimmed: 14646
+bases trimmed due to adapters: 364652
+
+Duplication rate: 7.37513%
+
+Insert size peak (evaluated by paired-end reads): 111
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-lepturus/nextseq-paired-2/JAE4746_S33_L002_R.fastp.json 
+fastp v0.20.0, time used: 25 seconds

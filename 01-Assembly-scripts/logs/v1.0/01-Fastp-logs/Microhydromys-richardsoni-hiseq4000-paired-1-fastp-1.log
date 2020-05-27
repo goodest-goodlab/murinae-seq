@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 18853421
+total bases: 2828013150
+Q20 bases: 2777717261(98.2215%)
+Q30 bases: 2704659776(95.6382%)
+
+Read2 before filtering:
+total reads: 18853421
+total bases: 2828013150
+Q20 bases: 2745247931(97.0734%)
+Q30 bases: 2645493968(93.546%)
+
+Read1 after filtering:
+total reads: 18592379
+total bases: 2754743368
+Q20 bases: 2712813687(98.4779%)
+Q30 bases: 2646638012(96.0757%)
+
+Read2 aftering filtering:
+total reads: 18592379
+total bases: 2754846441
+Q20 bases: 2689058569(97.6119%)
+Q30 bases: 2598286908(94.3169%)
+
+Filtering result:
+reads passed filter: 37184758
+reads failed due to low quality: 470266
+reads failed due to too many N: 1156
+reads failed due to too short: 2260
+reads failed due to low complexity: 48402
+reads with adapter trimmed: 2712232
+bases trimmed due to adapters: 68736211
+
+Duplication rate: 38.2803%
+
+Insert size peak (evaluated by paired-end reads): 269
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Microhydromys-richardsoni/hiseq4000-paired-1/SM050_CKDL190143344-1a-D705-AK1681_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 372 seconds

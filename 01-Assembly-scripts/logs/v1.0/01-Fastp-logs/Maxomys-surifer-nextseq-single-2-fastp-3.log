@@ -1,0 +1,31 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 454072
+total bases: 34299570
+Q20 bases: 32918406(95.9732%)
+Q30 bases: 32293442(94.1512%)
+
+Read1 after filtering:
+total reads: 450872
+total bases: 34054798
+Q20 bases: 32788127(96.2805%)
+Q30 bases: 32179579(94.4935%)
+
+Filtering result:
+reads passed filter: 450872
+reads failed due to low quality: 3122
+reads failed due to too many N: 1
+reads failed due to too short: 49
+reads failed due to low complexity: 28
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate (may be overestimated since this is SE data): 2.41615%
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-single-2/JAE3632_S64_L002_R1_001.fastp.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-single-2/JAE3632_S64_L002_R1_001.fastp.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Maxomys-surifer/nextseq-single-2/JAE3632_S64_L002_R1_001.fastq.gz --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-single-2/JAE3632_S64_L002_R1_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-single-2/JAE3632_S64_L002_R1_001.fastp.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Maxomys-surifer/nextseq-single-2/JAE3632_S64_L002_R1_001.fastp.fastp.json 
+fastp v0.20.0, time used: 7 seconds

@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Rhynchomys-isarogensis/nextseq-single-1/JAE2195_S29_L004_R1_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Rhynchomys-isarogensis/nextseq-single-1/JAE2195_S29_L004_R1_001.fastp.decon.dedup.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Rhynchomys-isarogensis/nextseq-single-1/JAE2195_S29_L004_R1_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Dedup/Rhynchomys-isarogensis/nextseq-single-1/JAE2195_S29_L004_R1_001.fastp.decon.dedup.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Found 25974 duplicates.
+Finished exact matches.    Time: 2.181 seconds.
+Memory: max=30870m, total=30870m, free=25877m, used=4993m
+
+Found 2123 contained sequences.
+Finished containment.      Time: 3.214 seconds.
+Memory: max=30870m, total=30870m, free=28373m, used=2497m
+
+Removed 2123 invalid entries.
+Finished invalid removal.  Time: 0.136 seconds.
+Memory: max=30870m, total=30870m, free=28373m, used=2497m
+
+Input:                  	504059 reads 		38066250 bases.
+Duplicates:             	25974 reads (5.15%) 	1961054 bases (5.15%)     	0 collisions.
+Containments:           	2123 reads (0.42%) 	156831 bases (0.41%)    	689492 collisions.
+Result:                 	475962 reads (94.43%) 	35948365 bases (94.44%)
+
+Sorted output.             Time: 0.286 seconds.
+Memory: max=30870m, total=30870m, free=28373m, used=2497m
+
+Printed output.            Time: 2.626 seconds.
+Memory: max=30870m, total=30870m, free=28120m, used=2750m
+
+Time:                         	8.467 seconds.
+Reads Processed:        504k 	59.53k reads/sec
+Bases Processed:      38066k 	4.50m bases/sec

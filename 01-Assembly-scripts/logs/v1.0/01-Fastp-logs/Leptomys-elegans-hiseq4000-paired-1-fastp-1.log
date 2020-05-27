@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 16534926
+total bases: 2480238900
+Q20 bases: 2437988811(98.2965%)
+Q30 bases: 2373730372(95.7057%)
+
+Read2 before filtering:
+total reads: 16534926
+total bases: 2480238900
+Q20 bases: 2412093697(97.2525%)
+Q30 bases: 2325529381(93.7623%)
+
+Read1 after filtering:
+total reads: 16342372
+total bases: 2425906875
+Q20 bases: 2389746393(98.5094%)
+Q30 bases: 2330418270(96.0638%)
+
+Read2 aftering filtering:
+total reads: 16342372
+total bases: 2425961026
+Q20 bases: 2370552158(97.716%)
+Q30 bases: 2290640546(94.422%)
+
+Filtering result:
+reads passed filter: 32684744
+reads failed due to low quality: 346936
+reads failed due to too many N: 1362
+reads failed due to too short: 1704
+reads failed due to low complexity: 35106
+reads with adapter trimmed: 1886457
+bases trimmed due to adapters: 51258445
+
+Duplication rate: 37.7163%
+
+Insert size peak (evaluated by paired-end reads): 269
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Leptomys-elegans/hiseq4000-paired-1/SM044_CKDL190143343-1a-D704-AK1681_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.0, time used: 322 seconds

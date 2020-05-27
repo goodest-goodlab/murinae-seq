@@ -1,0 +1,28 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L004_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L004_R2_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L004_001.fastp.decon.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L004_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L004_R2_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hybomys-univittatus/nextseq-paired-2/TCD4026_S2_L004_001.fastp.decon.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Found 956486 duplicates.
+Finished exact matches.    Time: 13.546 seconds.
+Memory: max=30870m, total=30870m, free=23139m, used=7731m
+
+Found 93069 contained sequences.
+Finished containment.      Time: 36.877 seconds.
+Memory: max=30870m, total=30870m, free=24082m, used=6788m
+
+Removed 93069 invalid entries.
+Finished invalid removal.  Time: 1.239 seconds.
+Memory: max=30870m, total=30870m, free=24082m, used=6788m
+
+Input:                  	5117484 reads 		386316962 bases.
+Duplicates:             	956486 reads (18.69%) 	72251185 bases (18.70%)     	0 collisions.
+Containments:           	93069 reads (1.82%) 	6813524 bases (1.76%)    	18375337 collisions.
+Result:                 	4067929 reads (79.49%) 	307252253 bases (79.53%)
+
+Sorted output.             Time: 5.452 seconds.
+Memory: max=30870m, total=30870m, free=24002m, used=6868m
+

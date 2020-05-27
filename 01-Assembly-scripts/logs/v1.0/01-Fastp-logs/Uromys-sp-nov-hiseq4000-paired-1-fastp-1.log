@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 18604055
+total bases: 2790608250
+Q20 bases: 2746202057(98.4087%)
+Q30 bases: 2678144240(95.9699%)
+
+Read2 before filtering:
+total reads: 18604055
+total bases: 2790608250
+Q20 bases: 2720780922(97.4978%)
+Q30 bases: 2633114366(94.3563%)
+
+Read1 after filtering:
+total reads: 18397184
+total bases: 2740639698
+Q20 bases: 2701915126(98.587%)
+Q30 bases: 2638591348(96.2765%)
+
+Read2 aftering filtering:
+total reads: 18397184
+total bases: 2740663024
+Q20 bases: 2684423106(97.9479%)
+Q30 bases: 2603610515(94.9993%)
+
+Filtering result:
+reads passed filter: 36794368
+reads failed due to low quality: 376278
+reads failed due to too many N: 1088
+reads failed due to too short: 1528
+reads failed due to low complexity: 34848
+reads with adapter trimmed: 1796949
+bases trimmed due to adapters: 38129878
+
+Duplication rate: 39.9251%
+
+Insert size peak (evaluated by paired-end reads): 256
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Uromys-sp-nov/hiseq4000-paired-1/REC25_CKDL190143344-1a-DY0088-AK1546_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 368 seconds

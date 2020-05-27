@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 7431219
+total bases: 750553119
+Q20 bases: 724685033(96.5535%)
+Q30 bases: 706630882(94.148%)
+
+Read2 before filtering:
+total reads: 7431219
+total bases: 750553119
+Q20 bases: 700834497(93.3757%)
+Q30 bases: 669873637(89.2507%)
+
+Read1 after filtering:
+total reads: 7410095
+total bases: 746260892
+Q20 bases: 720980313(96.6124%)
+Q30 bases: 703261775(94.2381%)
+
+Read2 aftering filtering:
+total reads: 7410095
+total bases: 746278552
+Q20 bases: 697745520(93.4967%)
+Q30 bases: 667343846(89.4229%)
+
+Filtering result:
+reads passed filter: 14820190
+reads failed due to low quality: 10858
+reads failed due to too many N: 4634
+reads failed due to too short: 23720
+reads failed due to low complexity: 3036
+reads with adapter trimmed: 269713
+bases trimmed due to adapters: 6574029
+
+Duplication rate: 19.4963%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-palatalis/seq-run-1/52949_BH7T33BCX2_TGGCAAT_S12_L001_R.fastp.json 
+fastp v0.20.0, time used: 117 seconds

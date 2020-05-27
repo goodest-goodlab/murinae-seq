@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 6497640
+total bases: 656261640
+Q20 bases: 642819382(97.9517%)
+Q30 bases: 632040227(96.3092%)
+
+Read2 before filtering:
+total reads: 6497640
+total bases: 656261640
+Q20 bases: 632002951(96.3035%)
+Q30 bases: 616229672(93.9%)
+
+Read1 after filtering:
+total reads: 6490547
+total bases: 654834733
+Q20 bases: 641587934(97.9771%)
+Q30 bases: 630906165(96.3459%)
+
+Read2 aftering filtering:
+total reads: 6490547
+total bases: 654834733
+Q20 bases: 630886268(96.3428%)
+Q30 bases: 615251129(93.9552%)
+
+Filtering result:
+reads passed filter: 12981094
+reads failed due to low quality: 1476
+reads failed due to too many N: 2232
+reads failed due to too short: 0
+reads failed due to low complexity: 10478
+reads with adapter trimmed: 62300
+bases trimmed due to adapters: 1422422
+
+Duplication rate: 10.9904%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-johnsoni/seq-run-2/52935_AH7T7NBCX2_TTAACTC_S18_L001_R.fastp.json 
+fastp v0.20.0, time used: 100 seconds

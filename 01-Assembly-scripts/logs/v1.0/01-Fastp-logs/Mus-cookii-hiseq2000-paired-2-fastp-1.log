@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 3101090
+total bases: 313210090
+Q20 bases: 302738186(96.6566%)
+Q30 bases: 290180734(92.6473%)
+
+Read2 before filtering:
+total reads: 3101090
+total bases: 313210090
+Q20 bases: 296417079(94.6384%)
+Q30 bases: 281831681(89.9817%)
+
+Read1 after filtering:
+total reads: 2922434
+total bases: 293969250
+Q20 bases: 290887060(98.9515%)
+Q30 bases: 280708211(95.489%)
+
+Read2 aftering filtering:
+total reads: 2922434
+total bases: 293967840
+Q20 bases: 289497268(98.4792%)
+Q30 bases: 276829462(94.17%)
+
+Filtering result:
+reads passed filter: 5844868
+reads failed due to low quality: 355868
+reads failed due to too many N: 1068
+reads failed due to too short: 68
+reads failed due to low complexity: 308
+reads with adapter trimmed: 186786
+bases trimmed due to adapters: 2474880
+
+Duplication rate: 3.51958%
+
+Insert size peak (evaluated by paired-end reads): 140
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R1_002.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R2_002.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R1_002.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R2_002.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Mus-cookii/hiseq2000-paired-2/lane1_CCTAGG_L001_R.fastp.json 
+fastp v0.20.0, time used: 58 seconds

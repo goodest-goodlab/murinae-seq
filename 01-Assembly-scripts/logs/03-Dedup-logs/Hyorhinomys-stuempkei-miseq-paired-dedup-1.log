@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/miseq-paired/JAE4661_S9_L001_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/miseq-paired/JAE4661_S9_L001_R2_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hyorhinomys-stuempkei/miseq-paired/JAE4661_S9_L001_001.fastp.decon.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/miseq-paired/JAE4661_S9_L001_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hyorhinomys-stuempkei/miseq-paired/JAE4661_S9_L001_R2_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hyorhinomys-stuempkei/miseq-paired/JAE4661_S9_L001_001.fastp.decon.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30064m, used=806m
+
+Found 18131 duplicates.
+Finished exact matches.    Time: 2.425 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Found 212 contained sequences.
+Finished containment.      Time: 5.916 seconds.
+Memory: max=30870m, total=30870m, free=27882m, used=2988m
+
+Removed 212 invalid entries.
+Finished invalid removal.  Time: 0.237 seconds.
+Memory: max=30870m, total=30870m, free=27882m, used=2988m
+
+Input:                  	831308 reads 		64819690 bases.
+Duplicates:             	18131 reads (2.18%) 	1412226 bases (2.18%)     	0 collisions.
+Containments:           	212 reads (0.03%) 	10276 bases (0.02%)    	7225220 collisions.
+Result:                 	812965 reads (97.79%) 	63397188 bases (97.81%)
+
+Sorted output.             Time: 1.435 seconds.
+Memory: max=30870m, total=30870m, free=27882m, used=2988m
+
+Printed output.            Time: 6.477 seconds.
+Memory: max=30870m, total=30870m, free=27467m, used=3403m
+
+Time:                         	16.516 seconds.
+Reads Processed:        831k 	50.33k reads/sec
+Bases Processed:      64819k 	3.92m bases/sec

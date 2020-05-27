@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 3826631
+total bases: 289077486
+Q20 bases: 277457873(95.9805%)
+Q30 bases: 272369884(94.2204%)
+
+Read2 before filtering:
+total reads: 3826631
+total bases: 288983589
+Q20 bases: 267820051(92.6766%)
+Q30 bases: 259985504(89.9655%)
+
+Read1 after filtering:
+total reads: 3692335
+total bases: 278757390
+Q20 bases: 269272083(96.5973%)
+Q30 bases: 264735847(94.97%)
+
+Read2 aftering filtering:
+total reads: 3692335
+total bases: 278778757
+Q20 bases: 262706999(94.2349%)
+Q30 bases: 255628380(91.6958%)
+
+Filtering result:
+reads passed filter: 7384670
+reads failed due to low quality: 251826
+reads failed due to too many N: 3130
+reads failed due to too short: 12176
+reads failed due to low complexity: 1460
+reads with adapter trimmed: 14192
+bases trimmed due to adapters: 361222
+
+Duplication rate: 9.32961%
+
+Insert size peak (evaluated by paired-end reads): 118
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Grammomys-sp/nextseq-paired-2/TCD4560_S7_L001_R.fastp.json 
+fastp v0.20.0, time used: 41 seconds

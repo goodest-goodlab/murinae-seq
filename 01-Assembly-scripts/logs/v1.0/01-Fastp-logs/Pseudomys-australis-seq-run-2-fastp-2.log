@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 6938859
+total bases: 700824759
+Q20 bases: 685927291(97.8743%)
+Q30 bases: 673899701(96.1581%)
+
+Read2 before filtering:
+total reads: 6938859
+total bases: 700824759
+Q20 bases: 674448421(96.2364%)
+Q30 bases: 657266990(93.7848%)
+
+Read1 after filtering:
+total reads: 6898500
+total bases: 695863365
+Q20 bases: 681800031(97.979%)
+Q30 bases: 670288361(96.3247%)
+
+Read2 aftering filtering:
+total reads: 6898500
+total bases: 695874011
+Q20 bases: 670720749(96.3854%)
+Q30 bases: 654160512(94.0056%)
+
+Filtering result:
+reads passed filter: 13797000
+reads failed due to low quality: 1562
+reads failed due to too many N: 2318
+reads failed due to too short: 71568
+reads failed due to low complexity: 5270
+reads with adapter trimmed: 169778
+bases trimmed due to adapters: 8735678
+
+Duplication rate: 13.1463%
+
+Insert size peak (evaluated by paired-end reads): 170
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pseudomys-australis/seq-run-2/52932_AH7T7NBCX2_TAGGCCG_S15_L001_R.fastp.json 
+fastp v0.20.0, time used: 119 seconds

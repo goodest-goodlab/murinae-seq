@@ -1,0 +1,12 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-1/TCD4026_S10_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-1/TCD4026_S10_R2_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hybomys-univittatus/nextseq-paired-1/TCD4026_S10_001.fastp.decon.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-1/TCD4026_S10_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/nextseq-paired-1/TCD4026_S10_R2_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hybomys-univittatus/nextseq-paired-1/TCD4026_S10_001.fastp.decon.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30064m, used=806m
+
+Found 4602131 duplicates.
+Finished exact matches.    Time: 37.180 seconds.
+Memory: max=30870m, total=30870m, free=22062m, used=8808m
+

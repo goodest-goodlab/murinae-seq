@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 15835178
+total bases: 2375276700
+Q20 bases: 2331738975(98.167%)
+Q30 bases: 2267354110(95.4564%)
+
+Read2 before filtering:
+total reads: 15835178
+total bases: 2375276700
+Q20 bases: 2311436323(97.3123%)
+Q30 bases: 2231136076(93.9316%)
+
+Read1 after filtering:
+total reads: 15649312
+total bases: 2299544500
+Q20 bases: 2263244549(98.4214%)
+Q30 bases: 2204921484(95.8851%)
+
+Read2 aftering filtering:
+total reads: 15649312
+total bases: 2299669854
+Q20 bases: 2248975580(97.7956%)
+Q30 bases: 2176182742(94.6302%)
+
+Filtering result:
+reads passed filter: 31298624
+reads failed due to low quality: 338056
+reads failed due to too many N: 1402
+reads failed due to too short: 2202
+reads failed due to low complexity: 30072
+reads with adapter trimmed: 3433395
+bases trimmed due to adapters: 96146920
+
+Duplication rate: 38.5276%
+
+Insert size peak (evaluated by paired-end reads): 263
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Niviventer-rapit/hiseq4000-paired-1/SM056_CKDL190143343-1a-D711-AK1680_H7275BBXX_L2_R.fastp.json 
+fastp v0.20.0, time used: 262 seconds

@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 15904614
+total bases: 2385692100
+Q20 bases: 2347264256(98.3892%)
+Q30 bases: 2287737455(95.8941%)
+
+Read2 before filtering:
+total reads: 15904614
+total bases: 2385692100
+Q20 bases: 2322326237(97.3439%)
+Q30 bases: 2243333990(94.0328%)
+
+Read1 after filtering:
+total reads: 15725157
+total bases: 2340625354
+Q20 bases: 2307036848(98.565%)
+Q30 bases: 2251690632(96.2004%)
+
+Read2 aftering filtering:
+total reads: 15725157
+total bases: 2340639660
+Q20 bases: 2289265165(97.8051%)
+Q30 bases: 2216342708(94.6896%)
+
+Filtering result:
+reads passed filter: 31450314
+reads failed due to low quality: 327342
+reads failed due to too many N: 1032
+reads failed due to too short: 938
+reads failed due to low complexity: 29602
+reads with adapter trimmed: 1624557
+bases trimmed due to adapters: 36512401
+
+Duplication rate: 36.7987%
+
+Insert size peak (evaluated by paired-end reads): 269
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Pogonomelomys-bruijni/hiseq4000-paired-1/REC26_CKDL190143344-1a-D704-AK1546_H7275BBXX_L3_R.fastp.json 
+fastp v0.20.0, time used: 307 seconds

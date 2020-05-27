@@ -1,0 +1,34 @@
+java -ea -Xmx30g -Xms30g -cp /home/gt156213e/anaconda3/envs/biotools/opt/bbmap-38.79-0/current/ jgi.Dedupe -Xmx30g t=1 in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R2_001.fastp.decon.fastq.gz ordered=t overwrite=true minidentity=100 out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_001.fastp.decon.fastq.gz
+Executing jgi.Dedupe [-Xmx30g, t=1, in1=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R1_001.fastp.decon.fastq.gz,/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/02-Decon/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_R2_001.fastp.decon.fastq.gz, ordered=t, overwrite=true, minidentity=100, out=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/03-Reformat/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_001.fastp.decon.fastq.gz]
+Version 38.79
+
+Set threads to 1
+Initial:
+Memory: max=30870m, total=30870m, free=30225m, used=645m
+
+Found 25547 duplicates.
+Finished exact matches.    Time: 2.051 seconds.
+Memory: max=30870m, total=30870m, free=25393m, used=5477m
+
+Found 333 contained sequences.
+Finished containment.      Time: 7.910 seconds.
+Memory: max=30870m, total=30870m, free=28064m, used=2806m
+
+Removed 333 invalid entries.
+Finished invalid removal.  Time: 0.162 seconds.
+Memory: max=30870m, total=30870m, free=28064m, used=2806m
+
+Input:                  	700940 reads 		54645485 bases.
+Duplicates:             	25547 reads (3.64%) 	1990378 bases (3.64%)     	0 collisions.
+Containments:           	333 reads (0.05%) 	17468 bases (0.03%)    	804868 collisions.
+Result:                 	675060 reads (96.31%) 	52637639 bases (96.33%)
+
+Sorted output.             Time: 0.590 seconds.
+Memory: max=30870m, total=30870m, free=28064m, used=2806m
+
+Printed output.            Time: 3.823 seconds.
+Memory: max=30870m, total=30870m, free=27649m, used=3221m
+
+Time:                         	14.559 seconds.
+Reads Processed:        700k 	48.14k reads/sec
+Bases Processed:      54645k 	3.75m bases/sec

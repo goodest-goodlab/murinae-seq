@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 7908474
+total bases: 798755874
+Q20 bases: 733457636(91.825%)
+Q30 bases: 690669706(86.4682%)
+
+Read2 before filtering:
+total reads: 7908474
+total bases: 798755874
+Q20 bases: 692507605(86.6983%)
+Q30 bases: 627254855(78.529%)
+
+Read1 after filtering:
+total reads: 7710931
+total bases: 614483393
+Q20 bases: 572890993(93.2313%)
+Q30 bases: 544514916(88.6134%)
+
+Read2 aftering filtering:
+total reads: 7710931
+total bases: 616658892
+Q20 bases: 550637278(89.2937%)
+Q30 bases: 509090762(82.5563%)
+
+Filtering result:
+reads passed filter: 15421862
+reads failed due to low quality: 5572
+reads failed due to too many N: 213716
+reads failed due to too short: 122058
+reads failed due to low complexity: 53740
+reads with adapter trimmed: 11753332
+bases trimmed due to adapters: 340996366
+
+Duplication rate: 28.7492%
+
+Insert size peak (evaluated by paired-end reads): 76
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Notomys-macrotis/seq-run-1/53929_HTVLKBCX2_AGGTACC_S17_L001_R.fastp.json 
+fastp v0.20.0, time used: 126 seconds

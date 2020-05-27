@@ -1,0 +1,48 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 5238729
+total bases: 392904675
+Q20 bases: 385267017(98.0561%)
+Q30 bases: 381559897(97.1126%)
+
+Read2 before filtering:
+total reads: 5238729
+total bases: 392904675
+Q20 bases: 373217040(94.9892%)
+Q30 bases: 367024603(93.4131%)
+
+Read1 after filtering:
+total reads: 5066345
+total bases: 379704743
+Q20 bases: 373948057(98.4839%)
+Q30 bases: 370730683(97.6366%)
+
+Read2 aftering filtering:
+total reads: 5066345
+total bases: 379709595
+Q20 bases: 366911456(96.6295%)
+Q30 bases: 361752640(95.2709%)
+
+Filtering result:
+reads passed filter: 10132690
+reads failed due to low quality: 308512
+reads failed due to too many N: 2432
+reads failed due to too short: 30710
+reads failed due to low complexity: 3114
+reads with adapter trimmed: 22164
+bases trimmed due to adapters: 534033
+
+Duplication rate: 16.606%
+
+Insert size peak (evaluated by paired-end reads): 119
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Tateomys-macrocercus/nextseq-paired-1/Z21834_S26_R.fastp.json 
+fastp v0.20.0, time used: 40 seconds

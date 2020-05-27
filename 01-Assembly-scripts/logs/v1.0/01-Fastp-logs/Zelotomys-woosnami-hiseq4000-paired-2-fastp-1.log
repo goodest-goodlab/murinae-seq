@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 22779118
+total bases: 3416867700
+Q20 bases: 3364254184(98.4602%)
+Q30 bases: 3284020792(96.112%)
+
+Read2 before filtering:
+total reads: 22779118
+total bases: 3416867700
+Q20 bases: 3334221990(97.5812%)
+Q30 bases: 3231157029(94.5649%)
+
+Read1 after filtering:
+total reads: 22519381
+total bases: 3343189422
+Q20 bases: 3298291972(98.657%)
+Q30 bases: 3224550799(96.4513%)
+
+Read2 aftering filtering:
+total reads: 22519381
+total bases: 3343250243
+Q20 bases: 3277780637(98.0417%)
+Q30 bases: 3183576709(95.224%)
+
+Filtering result:
+reads passed filter: 45038762
+reads failed due to low quality: 466222
+reads failed due to too many N: 434
+reads failed due to too short: 4950
+reads failed due to low complexity: 47868
+reads with adapter trimmed: 3212810
+bases trimmed due to adapters: 70005891
+
+Duplication rate: 40.5475%
+
+Insert size peak (evaluated by paired-end reads): 224
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R1_.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R2_.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R1_.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R2_.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zelotomys-woosnami/hiseq4000-paired-2/SM081_CKDL190143345-1a-D710-AK1780_H7275BBXX_L4_R.fastp.json 
+fastp v0.20.0, time used: 418 seconds

@@ -1,0 +1,50 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+Read1 before filtering:
+total reads: 11776443
+total bases: 1189420743
+Q20 bases: 1147513819(96.4767%)
+Q30 bases: 1118201082(94.0122%)
+
+Read2 before filtering:
+total reads: 11776443
+total bases: 1189420743
+Q20 bases: 1111642569(93.4608%)
+Q30 bases: 1063080191(89.378%)
+
+Read1 after filtering:
+total reads: 11752791
+total bases: 1184016606
+Q20 bases: 1142776574(96.5169%)
+Q30 bases: 1113850246(94.0739%)
+
+Read2 aftering filtering:
+total reads: 11752791
+total bases: 1184040282
+Q20 bases: 1107841656(93.5645%)
+Q30 bases: 1059999807(89.524%)
+
+Filtering result:
+reads passed filter: 23505582
+reads failed due to low quality: 18924
+reads failed due to too many N: 7388
+reads failed due to too short: 14546
+reads failed due to low complexity: 6446
+reads with adapter trimmed: 331028
+bases trimmed due to adapters: 7386405
+
+Duplication rate: 20.4304%
+
+Insert size peak (evaluated by paired-end reads): 171
+
+JSON report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R.fastp.json
+HTML report: /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R.fastp.html
+
+fastp -i /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R1_001.fastq.gz -I /scratch/gregg_thomas/Murinae-seq/00-RawReads/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R2_001.fastq.gz --detect_adapter_for_pe --length_required 30 --low_complexity_filter --complexity_threshold 30 -o /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R1_001.fastp.fastq.gz -O /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R2_001.fastp.fastq.gz -h /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R.fastp.html -j /scratch/gregg_thomas/Murinae-seq/01-Fastp/Zyzomys-maini/seq-run-1/52947_BH7T33BCX2_CCAGCGG_S10_L001_R.fastp.json 
+fastp v0.20.0, time used: 165 seconds

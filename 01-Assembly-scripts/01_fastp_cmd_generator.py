@@ -21,9 +21,9 @@ def genFastpCmd(fastp_path, sfiles, r, baselogfile, step, prev_step):
             sys.exit(" * ERROR: Invalid file extension: " + f);
 
         if r in [0,1]:
-            outfile = f.replace(".fastq.gz", ".fastp.fastq.gz");
-            htmlfile = outfile.replace(".fastq.gz", ".fastp.html");
-            jsonfile = outfile.replace(".fastq.gz", ".fastp.json");
+            outfile = f.replace(prev_step, step).replace(".fastq.gz", ".fastp.fastq.gz");
+            htmlfile = outfile.replace(prev_step, step).replace(".fastq.gz", ".fastp.html");
+            jsonfile = outfile.replace(prev_step, step).replace(".fastq.gz", ".fastp.json");
 
             fastp_cmd = fastp_path + " -i " + f + " --length_required 30 --low_complexity_filter --complexity_threshold 30 -o " + outfile  + " -h " + htmlfile + " -j " + jsonfile;
             cmd_num += 1;
@@ -34,8 +34,8 @@ def genFastpCmd(fastp_path, sfiles, r, baselogfile, step, prev_step):
 
         elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
             f = f.split(";");
-            outfile1 = f[0].replace(".fastq.gz", ".fastp.fastq.gz");
-            outfile2 = f[1].replace(".fastq.gz", ".fastp.fastq.gz");
+            outfile1 = f[0].replace(prev_step, step).replace(".fastq.gz", ".fastp.fastq.gz");
+            outfile2 = f[1].replace(prev_step, step).replace(".fastq.gz", ".fastp.fastq.gz");
 
             c = 0;
             supp_file = "";
@@ -149,6 +149,7 @@ with open(output_file, "w") as jobfile:
     mcore.PWS(mcore.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
     mcore.PWS(mcore.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
     mcore.PWS("# ----------", jobfile);
+    mcore.PWS("# BEGIN CMDS", jobfile);
 
 ##########################
 # Generating the commands in the job file.
@@ -162,27 +163,36 @@ with open(output_file, "w") as jobfile:
             os.system("mkdir " + spec_dir);
         # Make output directory
 
+        fastp_cmds = [];
+
         for r in runtype:
             run_string = runstrs[r];
+            run_dir = os.path.join(spec_dir, run_string);
 
             base_logfile = os.path.join(logdir, s_mod + "-" + run_string + "-fastp");
             # Get the base logfile name for this run.
 
             seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
             if seqfiles:
-                fastp_cmds = genFastpCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
+                if not os.path.isdir(run_dir):
+                    os.system("mkdir " + run_dir);
+
+                fastp_cmds += genFastpCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
 
             if s_mod in ["Rattus-exulans", "Rattus-hoffmanni"]:
-                run_string += "-no-WGA"
+                run_string += "-no-WGA";
+                run_dir = os.path.join(spec_dir, run_string);
 
                 seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
                 if seqfiles:
-                    fastp_cmds_2 = genFastpCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
-                    fastp_cmds += fastp_cmds_2;
+                    if not os.path.isdir(run_dir):
+                        os.system("mkdir " + run_dir);
+                    
+                    fastp_cmds += genFastpCmd(args.path, seqfiles, r, base_logfile, step, prev_step);
 
-            if fastp_cmds:
-                for cmd in sorted(fastp_cmds):
-                    mcore.PWS(cmd, jobfile);
+        if fastp_cmds:
+            for cmd in sorted(fastp_cmds):
+                mcore.PWS(cmd, jobfile);
 
 ##########################
 # Generating the submit script.
