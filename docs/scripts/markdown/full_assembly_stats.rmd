@@ -135,6 +135,8 @@ len_p = ggplot(spades_data, aes(x=type, y=avg.len, fill=type, color=type)) +
 print(len_p)
 ```
 
+## Exome assembly comparisons
+### Assembly length and scaffolds
 
 ```{r fig5, out.width="100%", fig.align="center"}
 ####################
@@ -159,6 +161,36 @@ len_p = ggpaired(in_data, x="Assembly", y="Mean_Len",
          line.color="#b3b3b3", line.size = 0.4,
          width=0.4, point.size=2,
          xlab="Assembly", ylab="Avg. scaffold length (bp)") +
+  stat_compare_means(paired=TRUE, label.x=2) +
+  bartheme() +
+  theme(legend.position="none")
+
+print(len_p)
+
+```
+
+### Coding targets and target lengths
+
+```{r fig6, out.width="100%", fig.align="center", warning=FALSE}
+####################
+# Spades Australian assembly comparisons
+
+scaff_p = ggpaired(in_data, x="Assembly", y="codingTargets",
+                 fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
+                 line.color="#b3b3b3", line.size = 0.4,
+                 width=0.4, point.size=2,
+                 xlab="Assembly", ylab="# coding targets recovered") +
+  stat_compare_means(paired=TRUE, label.x=1) +
+  bartheme() +
+  theme(legend.position="none")
+
+print(scaff_p)
+
+len_p = ggpaired(in_data, x="Assembly", y="coding_meanLen",
+         fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
+         line.color="#b3b3b3", line.size = 0.4,
+         width=0.4, point.size=2,
+         xlab="Assembly", ylab="Avg. coding target length (bp)") +
   stat_compare_means(paired=TRUE, label.x=2) +
   bartheme() +
   theme(legend.position="none")
