@@ -145,37 +145,94 @@ print(len_p)
 in_data = read.csv("../../../data/Hutter_rodent_assembly.csv", header=T, comment.char="#")
 in_data = subset(in_data, !is.na(No_scaffolds))
 
-scaff_p = ggpaired(in_data, x="Assembly", y="No_scaffolds",
-                 fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
-                 line.color="#b3b3b3", line.size = 0.4,
-                 width=0.4, point.size=2,
-                 xlab="Assembly", ylab="# of scaffolds") +
-  stat_compare_means(paired=TRUE, label.x=1) +
-  bartheme() +
-  theme(legend.position="none")
+all_paired = subset(in_data, Assembly %in% c("C","G"))
+
+scaff_p = ggpaired(all_paired, x="Assembly", y="No_scaffolds",
+                fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
+                line.color="#b3b3b3", line.size = 0.4,
+                width=0.4, point.size=2,
+                xlab="Assembly", ylab="# of scaffolds") +
+ stat_compare_means(paired=TRUE, label.x=1) +
+ bartheme() +
+ theme(legend.position="none")
 
 print(scaff_p)
 
-len_p = ggpaired(in_data, x="Assembly", y="Mean_Len",
-         fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
-         line.color="#b3b3b3", line.size = 0.4,
-         width=0.4, point.size=2,
-         xlab="Assembly", ylab="Avg. scaffold length (bp)") +
-  stat_compare_means(paired=TRUE, label.x=2) +
-  bartheme() +
-  theme(legend.position="none")
+len_p = ggpaired(all_paired, x="Assembly", y="Mean_Len",
+        fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
+        line.color="#b3b3b3", line.size = 0.4,
+        width=0.4, point.size=2,
+        xlab="Assembly", ylab="Avg. scaffold length (bp)") +
+ stat_compare_means(paired=TRUE, label.x=2) +
+ bartheme() +
+ theme(legend.position="none")
 
 print(len_p)
-
 ```
 
-### Coding targets and target lengths
+### Assembly length and scaffolds (5 sample assemblies only)
 
-```{r fig6, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig6, out.width="100%", fig.align="center"}
+####################
+# Spades Australian assembly comparisons (Sample assemblies)
+
+samples = subset(in_data, Sample %in% c("Zyzomys_argurus","Zyzomys_maini","Zyzomys_palatalis","Zyzomys_pedunculatus","Zyzomys_woodwardi"))
+
+c_samples = subset(samples, Assembly=="C")
+c_samples$x = 1
+g_samples = subset(samples, Assembly=="G")
+g_samples$x = 2
+n_samples = subset(samples, Assembly=="No dedup")
+n_samples$x = 3
+
+
+
+scaff_p = ggplot(samples, aes(x=Assembly, y=No_scaffolds, fill=Assembly)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(size=2, alpha=0.7, color="#333333")
+
+  for(i in 1:nrow(c_samples)){
+    print(i)
+    scaff_p = scaff_p + geom_segment(x=c_samples[i,]$x, y=c_samples[i,]$No_scaffolds, xend=g_samples[i,]$x, yend=g_samples[i,]$No_scaffolds, color="#999999") +
+      geom_segment(x=g_samples[i,]$x, y=g_samples[i,]$No_scaffolds, xend=n_samples[i,]$x, yend=n_samples[i,]$No_scaffolds, color="#999999")
+  }
+
+  scaff_p = scaff_p + scale_fill_manual(values=corecol(numcol=3, pal="trek")) +
+      xlab("Assembly") +
+    ylab("# of scaffolds") +
+    bartheme() +
+    theme(legend.position="none")
+
+print(scaff_p)
+  
+
+          
+len_p = ggplot(samples, aes(x=Assembly, y=Mean_Len, fill=Assembly)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(size=2, alpha=0.7, color="#333333")
+
+  for(i in 1:nrow(c_samples)){
+    print(i)
+    len_p = len_p + geom_segment(x=c_samples[i,]$x, y=c_samples[i,]$Mean_Len, xend=g_samples[i,]$x, yend=g_samples[i,]$Mean_Len, color="#999999") +
+      geom_segment(x=g_samples[i,]$x, y=g_samples[i,]$Mean_Len, xend=n_samples[i,]$x, yend=n_samples[i,]$Mean_Len, color="#999999")
+  }
+
+  len_p = len_p + scale_fill_manual(values=corecol(numcol=3, pal="trek")) +
+    xlab("Assembly") +
+    ylab("Avg. scaffold length (bp)") +
+    bartheme() +
+    theme(legend.position="none")
+
+print(len_p)
+```
+
+### Coding targets and target lengths (5 sample assemblies only)
+
+```{r fig7, out.width="100%", fig.align="center", warning=FALSE}
 ####################
 # Spades Australian assembly comparisons
 
-scaff_p = ggpaired(in_data, x="Assembly", y="codingTargets",
+scaff_p = ggpaired(all_paired, x="Assembly", y="codingTargets",
                  fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
                  line.color="#b3b3b3", line.size = 0.4,
                  width=0.4, point.size=2,
@@ -186,7 +243,7 @@ scaff_p = ggpaired(in_data, x="Assembly", y="codingTargets",
 
 print(scaff_p)
 
-len_p = ggpaired(in_data, x="Assembly", y="coding_meanLen",
+len_p = ggpaired(all_paired, x="Assembly", y="coding_meanLen",
          fill="Assembly", palette=corecol(pal="trek", numcol=2), color="#333333",
          line.color="#b3b3b3", line.size = 0.4,
          width=0.4, point.size=2,
@@ -198,6 +255,7 @@ len_p = ggpaired(in_data, x="Assembly", y="coding_meanLen",
 print(len_p)
 
 ```
+
 
 ```{r footer}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
