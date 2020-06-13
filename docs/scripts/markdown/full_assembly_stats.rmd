@@ -186,6 +186,9 @@ n_samples = subset(samples, Assembly=="No dedup")
 n_samples$x = 3
 k_samples = subset(samples, Assembly=="No dedup k60")
 k_samples$x = 4
+kc_samples = subset(samples, Assembly=="No dedup k60 cat")
+kc_samples$x = 5
+
 
 scaff_p = ggplot(samples, aes(x=Assembly, y=No_scaffolds, fill=Assembly)) +
   geom_boxplot(outlier.shape=NA) +
@@ -195,10 +198,11 @@ scaff_p = ggplot(samples, aes(x=Assembly, y=No_scaffolds, fill=Assembly)) +
     #print(i)
     scaff_p = scaff_p + geom_segment(x=c_samples[i,]$x, y=c_samples[i,]$No_scaffolds, xend=g_samples[i,]$x, yend=g_samples[i,]$No_scaffolds, color="#999999") +
       geom_segment(x=g_samples[i,]$x, y=g_samples[i,]$No_scaffolds, xend=n_samples[i,]$x, yend=n_samples[i,]$No_scaffolds, color="#999999") +
-          geom_segment(x=n_samples[i,]$x, y=n_samples[i,]$No_scaffolds, xend=k_samples[i,]$x, yend=k_samples[i,]$No_scaffolds, color="#999999")
+          geom_segment(x=n_samples[i,]$x, y=n_samples[i,]$No_scaffolds, xend=k_samples[i,]$x, yend=k_samples[i,]$No_scaffolds, color="#999999") +
+          geom_segment(x=k_samples[i,]$x, y=k_samples[i,]$No_scaffolds, xend=kc_samples[i,]$x, yend=kc_samples[i,]$No_scaffolds, color="#999999")
   }
 
-  scaff_p = scaff_p + scale_fill_manual(values=corecol(numcol=4, pal="trek")) +
+  scaff_p = scaff_p + scale_fill_manual(values=corecol(numcol=5, pal="trek")) +
       xlab("Assembly") +
     ylab("# of scaffolds") +
     bartheme() +
@@ -216,10 +220,11 @@ len_p = ggplot(samples, aes(x=Assembly, y=Mean_Len, fill=Assembly)) +
     #print(i)
     len_p = len_p + geom_segment(x=c_samples[i,]$x, y=c_samples[i,]$Mean_Len, xend=g_samples[i,]$x, yend=g_samples[i,]$Mean_Len, color="#999999") +
       geom_segment(x=g_samples[i,]$x, y=g_samples[i,]$Mean_Len, xend=n_samples[i,]$x, yend=n_samples[i,]$Mean_Len, color="#999999") +
-          geom_segment(x=n_samples[i,]$x, y=n_samples[i,]$Mean_Len, xend=k_samples[i,]$x, yend=k_samples[i,]$Mean_Len, color="#999999")
+      geom_segment(x=n_samples[i,]$x, y=n_samples[i,]$Mean_Len, xend=k_samples[i,]$x, yend=k_samples[i,]$Mean_Len, color="#999999") +
+      geom_segment(x=k_samples[i,]$x, y=k_samples[i,]$Mean_Len, xend=kc_samples[i,]$x, yend=kc_samples[i,]$Mean_Len, color="#999999")
   }
 
-  len_p = len_p + scale_fill_manual(values=corecol(numcol=4, pal="trek")) +
+  len_p = len_p + scale_fill_manual(values=corecol(numcol=5, pal="trek")) +
     xlab("Assembly") +
     ylab("Avg. scaffold length (bp)") +
     bartheme() +
