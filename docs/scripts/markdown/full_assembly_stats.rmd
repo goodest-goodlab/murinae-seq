@@ -37,24 +37,24 @@ htmltools::includeHTML("../html-chunks/nav.html")
 ```{r fig1, out.width="100%", fig.align="center"}
 spades_data = read.csv("../../../data/exome-spades-stats.csv", header=TRUE)
 spades_data = spades_data[!grepl("Mus pos_ctrl", spades_data$Species),]
-spades_data$type = factor(spades_data$type, levels=c("Contig","Scaffold"), ordered=TRUE)
+#spades_data$type = factor(spades_data$type, levels=c("Contig","Scaffold"), ordered=TRUE)
 spades_data$batch = as.character(spades_data$batch)
-spades_scaffs = subset(spades_data, type == "Scaffold")
+#spades_scaffs = subset(spades_data, type == "Scaffold")
 
 ####################
 # Spades contig count distributions by batch
-scaff_batch_p = ggplot(spades_scaffs, aes(x=batch, y=count, fill=batch)) +
+scaff_batch_p = ggplot(spades_data, aes(x=batch, y=count, fill=batch)) +
   geom_hline(yintercept=targets, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tiles, linetype=2, size=1, color="#9494b8") +
   geom_violin(width=1, color="#666666", size=0.3) +
   geom_quasirandom(size=0.75, alpha=0.6, width=0.15, color="#999999") +
-  scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46"),
-                     values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff")) +
+  #scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46"),
+  #                   values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff")) +
   annotate("text", x=0.7, y=targets-10000, label="# targets", color="#666666", size=4) +
   annotate("text", x=0.6, y=tiles-10000, label="# tiles", color="#9494b8", size=4) +
   #ggtitle("Spades assembly counts") +
   labs(x="Sequencing batch", y="# Scaffolds") +
-  scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46")) +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46")) +
   bartheme() + 
   theme(legend.position="none")
 
@@ -88,32 +88,32 @@ print(contig_p)
 ```{r fig3, out.width="100%", fig.align = "center"}
 ####################
 # Spades length distributions, by batch
-len_batch_p = ggplot(spades_scaffs, aes(x=batch, y=avg.len, fill=batch)) +
+len_batch_p2 = ggplot(spades_data, aes(x=batch, y=avg.len, fill=batch)) +
   geom_hline(yintercept=target_avg_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=target_min_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tile_avg_len, linetype=2, size=1, color="#9494b8") +
   geom_hline(yintercept=tile_min_len, linetype=2, size=1, color="#9494b8") +
   geom_violin(width=1, color="#666666", size=0.3) +
   geom_quasirandom(size=1, alpha=0.6, width=0.15, color="#999999") +
-  scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46"),
-                     values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff")) +
+  #scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46"),
+  #                   values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff")) +
   annotate("text", x=0.85, y=target_avg_len-25, label="Avg. target len", color="#666666", size=4) +
   annotate("text", x=0.85, y=target_min_len-20, label="Min. target len", color="#666666", size=4) +
   annotate("text", x=5.0, y=tile_avg_len+35, label="Avg. tile len", color="#9494b8", size=4) +
   annotate("text", x=5.0, y=tile_min_len-15, label="Min. tile len", color="#9494b8", size=4) +
   #ggtitle("Spades assembly counts") +
   labs(x="Sequencing batch", y="Avg. scaffold length") +
-  scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46")) +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46")) +
   bartheme() +
   theme(legend.position="none")
 
-print(len_batch_p)
+print(len_batch_p2)
 ```
 
 ```{r fig4, out.width="100%", fig.align="center", eval=FALSE}
 ####################
 # Spades length distributions, contigs vs scaffolds
-len_p = ggplot(spades_data, aes(x=type, y=avg.len, fill=type, color=type)) +
+len_p2 = ggplot(spades_data, aes(x=type, y=avg.len, fill=type, color=type)) +
   geom_hline(yintercept=target_avg_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=target_min_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tile_avg_len, linetype=2, size=1, color="#9494b8") +
@@ -132,7 +132,7 @@ len_p = ggplot(spades_data, aes(x=type, y=avg.len, fill=type, color=type)) +
   scale_fill_manual(name="Assembly level", labels=c("Contig","Scaffold"), values=c("#ffcd00","#cc1c00")) +
   bartheme()
 
-print(len_p)
+print(len_p2)
 ```
 
 ## Exome assembly comparisons
@@ -274,6 +274,16 @@ len_p = ggpaired(all_paired, x="Assembly", y="coding_meanLen",
   theme(legend.position="none")
 
 print(len_p)
+
+```
+
+```{r fig8, out.width="100%", fig.align="center", warning=FALSE}
+
+blah = ggplot(spades_data, aes(x=batch, y=count)) +
+  geom_boxplot() +
+  geom_boxplot(data=in_data, aes(x=5, y=No_scaffolds)) +
+  bartheme()
+print(blah)
 
 ```
 
