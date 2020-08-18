@@ -15,7 +15,7 @@ parser.add_argument("--summary", dest="summary", help="Without --all: build summ
 parser.add_argument("--summary176", dest="summary176", help="Without --all: build summary_176.html. With --all: exlude summary_176.html", action="store_true", default=False);
 parser.add_argument("--workflows", dest="workflows", help="Without --all: build workflows.html. With --all: exlude workflows.html", action="store_true", default=False);
 parser.add_argument("--wgs", dest="wgs", help="Without --all: build wgs.html. With --all: exlude wgs.html", action="store_true", default=False);
-parser.add_argument("--fullassemblystats", dest="fullassemblystats", help="Without --all: build assembly_stats.html. With --all: exlude full_assembly_stats.html", action="store_true", default=False);
+parser.add_argument("--fullassemblystats", dest="fullassemblystats", help="Without --all: build assembly_stats_2.html. With --all: exlude assembly_stats_2.html", action="store_true", default=False);
 parser.add_argument("--fullmappingstats", dest="fullmappingstats", help="Without --all: build full_mapping_stats.html. With --all: exlude full_mapping_stats.html", action="store_true", default=False);
 parser.add_argument("--filterstats", dest="filterstats", help="Without --all: build fiter_stats.html. With --all: exlude filter_stats.html", action="store_true", default=False);
 parser.add_argument("--mouserat", dest="mouserat", help="Without --all: build mouse_rat_transcripts.html. With --all: exlude mouse_rat_transcripts.html", action="store_true", default=False);
@@ -68,7 +68,7 @@ if pages['wgs']:
     os.system("python wgs_generator.py");
 
 if pages['fullassemblystats']:
-    os.system("Rscript full_assembly_stats_generator.r");
+    os.system("Rscript assembly_stats_generator.r");
 
 if pages['fullmappingstats']:
     os.system("Rscript full_mapping_stats_generator.r");
