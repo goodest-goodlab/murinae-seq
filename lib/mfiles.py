@@ -8,10 +8,12 @@ import sys, os
 
 def getFiles(s, run, run_string, prev_dir, unmerged_flag=False):
     indir = os.path.join(prev_dir, s, run_string);
+    #print(indir);
     if not os.path.isdir(indir):
         return False;
 
     seqfiles = [ f for f in os.listdir(indir) if ".fastq.gz" in f ];
+    #print(seqfiles);
 
     if run in [0,1]:
         seqfiles = [ os.path.join(indir, f) for f in seqfiles ];
@@ -19,6 +21,7 @@ def getFiles(s, run, run_string, prev_dir, unmerged_flag=False):
     elif run in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
         seqfiles = pairUp(seqfiles, indir, unmerged_flag);
 
+    #print(seqfiles);
     return seqfiles;
 
 ############################################################
@@ -28,7 +31,7 @@ def pairUp(sfiles, indir, unmerged_flag=False):
     paired_files = [];
     done = [];
     for f in sfiles:
-        if unmerged_flag and ".unmerged." not in f:
+        if unmerged_flag and "unmerged." not in f:
             paired_files.append(os.path.join(indir, f));
         else:
             if "_R1_" in f:
@@ -91,13 +94,13 @@ def parseRuntypes(input_runtype, run_ids):
 
 ############################################################
 
-def parseSpecs(input_spec, specs_ordered, spec_ids):
+def parseSpecs(input_spec, specs_ordered):
     if input_spec == "all":
         spec = specs_ordered;
     else:
         spec = input_spec.replace(", ", ",").split(",");
         for s in spec:
-            if s not in spec_ids:
+            if s not in specs_ordered:
                 sys.exit(" * ERROR mfiles 3: Cannot find specified species: " + s);
     # Parse the input species.
 
@@ -105,7 +108,7 @@ def parseSpecs(input_spec, specs_ordered, spec_ids):
 
 ############################################################
 
-def genSlurmSubmit(slurm_file, job_name, partition, tasks, cpus, mem, parallel_input):
+def genSlurmSubmit(slurm_file, job_name, partition, nodes, tasks, cpus, mem, parallel_input):
     with open(slurm_file, "w") as sfile:
         submit = '''#!/bin/bash
 #SBATCH --job-name={name}
@@ -113,13 +116,13 @@ def genSlurmSubmit(slurm_file, job_name, partition, tasks, cpus, mem, parallel_i
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=gregg.thomas@umontana.edu
 #SBATCH --partition={partition}
-#SBATCH --nodes=1
+#SBATCH --nodes={nodes}
 #SBATCH --ntasks={tasks}
 #SBATCH --cpus-per-task={cpus}
 #SBATCH --mem={mem}
 
 parallel -j {tasks} < {input_file}'''
 
-        sfile.write(submit.format(name=job_name, partition=partition, tasks=tasks, cpus=cpus, mem=mem, input_file=parallel_input));
+        sfile.write(submit.format(name=job_name, partition=partition, nodes=nodes, tasks=tasks, cpus=cpus, mem=mem, input_file=parallel_input));
 
 ############################################################

@@ -151,7 +151,7 @@ with open(outfilename, "w") as outfile:
     mcore.PWS("# Transcripts with no high confidence rat ortholog:                                      " + str(low_conf), outfile);
     mcore.PWS("# Transcripts with no rat ortholog below dS threshold:                                   " + str(ds_filter), outfile);
     mcore.PWS("# Transcripts filtered for not being, on average between rat and mouse, longest in gene: " + str(len_filter), outfile);
-    mcore.PWS("# Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.");
+    mcore.PWS("# Note: numbers reported are conditional on those transcripts passing the previous filter. Filters reported in order of their coding.");
     mcore.PWS("# --------------", outfile);
     mcore.PWS("# Genes with no passed transcripts:                                                      " + str(no_passed_transcripts), outfile);
     mcore.PWS("# Genes with selected transcript:                                                        " + str(len(selected_transcripts)), outfile);

@@ -156,7 +156,7 @@ else:
 # Reporting run-time info for records.
 
 with open(output_file, "w") as jobfile:
-    mcore.runTime("#!/bin/bash\n# Rodent Spades commands", jobfile);
+    mcore.runTime("#!/bin/bash\n# Rodent read cat commands", jobfile);
     mcore.PWS("# STEP INFO", jobfile);
     mcore.PWS(mcore.spacedOut("# Current step:", pad) + step, jobfile);
     mcore.PWS(mcore.spacedOut("# Previous step:", pad) + prev_step, jobfile);

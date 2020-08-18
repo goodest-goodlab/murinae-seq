@@ -6,5 +6,7 @@ Reference-genomes/
 Targets/
 01-Assembly-data/
 01-Assembly-scripts/submit/
+01-Assembly-scripts/logs/
 02-Annotation-data/transcript-seq*
 tmp.fa
+*.log

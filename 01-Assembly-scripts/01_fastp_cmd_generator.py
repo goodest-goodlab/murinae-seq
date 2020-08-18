@@ -197,5 +197,5 @@ with open(output_file, "w") as jobfile:
 ##########################
 # Generating the submit script.
 if args.part != "none":
-    mfiles.genSlurmSubmit(submit_file, name, args.part, args.tasks, args.cpus, args.mem, output_file)
+    mfiles.genSlurmSubmit(submit_file, name, args.part, 1, args.tasks, args.cpus, args.mem, output_file)
 ##########################           

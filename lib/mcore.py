@@ -47,3 +47,11 @@ def spacedOut(string, totlen, sep=" "):
 # This function generates a random string to add onto the end of tmp files to avoid possible overwrites.
 def getRandStr(strlen=6):
 	return ''.join(random.choice(string.ascii_letters) for m in range(strlen));
+
+############################################################
+# Splits a list l into even chunks of size n.
+def chunks(l, n):
+    n = max(1, n)
+    return (l[i:i+n] for i in range(0, len(l), n))
+
+############################################################
