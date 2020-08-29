@@ -2,6 +2,7 @@
 #title: "Mouse and rat transcript analysis"
 #author: "gwct"
 #date: "04/14/2020"
+# NOTE TO SELF: These figures don't render on the desktop.
 output: 
   html_document:
     includes:
