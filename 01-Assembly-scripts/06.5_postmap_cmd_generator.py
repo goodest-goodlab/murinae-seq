@@ -47,7 +47,7 @@ parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, de
 args = parser.parse_args();
 # Input options.
 
-seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs, spec_ids_new = globs.get();
+seq_run_ids, spec_ids, specs_ordered = globs.get();
 # Get all the meta info for the species and sequencing runs.
 
 if args.ref and args.ref not in ["mouse", "rat"]:
@@ -89,12 +89,11 @@ tile_file = os.path.abspath("../Targets/tiles-mm10-coords.bed");
 # Reference options
 
 runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
-print(runtype, runstrs);
+#print(runtype, runstrs);
 # Parse the input run types.
 
 spec = mfiles.parseSpecs(args.spec, specs_ordered)
 # Parse the input species.
-
 
 with open(output_file, "w") as jobfile:
     mcore.runTime("#!/bin/bash\n# Rodent mapping commands", jobfile);
@@ -129,8 +128,9 @@ with open(output_file, "w") as jobfile:
             continue;
         #print(spec_ids[s])
         s_mod = s.replace(" ", "-");
+        #print(s_mod);
 
-        if not any(r in spec_ids_new[s] for r in runtype):
+        if not any(r in spec_ids[s] for r in runtype):
             continue
 
         # run_status = [];
@@ -173,11 +173,15 @@ with open(output_file, "w") as jobfile:
 
             cur_bamfiles = [os.path.join(dirpath, f) for f in filenames if f.endswith(".bam")];
 
-            merge_bam = os.path.join(specdir, run_name + ".merge.bam");
-            merge_bam = merge_bam.replace("..merge.bam", ".merge.bam");
-            merge_log = os.path.join(logdir, s_mod + "-" + run_name + "-merge" + args.ref + ".log");
-            merge_cmd = "samtools merge -f " + merge_bam + " " + " ".join(cur_bamfiles) + " &> " + merge_log;
-            merge_cmds.append(merge_cmd);
+            if len(cur_bamfiles) == 1:
+                merge_bam = cur_bamfiles[0];
+                merge_cmds.append("#");
+            else:
+                merge_bam = os.path.join(specdir, run_name + ".merge.bam");
+                merge_bam = merge_bam.replace("..merge.bam", ".merge.bam");
+                merge_log = os.path.join(logdir, s_mod + "-" + run_name + "-merge" + args.ref + ".log");
+                merge_cmd = "samtools merge -f " + merge_bam + " " + " ".join(cur_bamfiles) + " &> " + merge_log;
+                merge_cmds.append(merge_cmd);
             # Merge BAM files for this run
 
             mkdup_bam = merge_bam.replace(".bam", ".mkdup.bam");
@@ -194,6 +198,7 @@ with open(output_file, "w") as jobfile:
         mkdup_cmds = "\n".join(mkdup_cmds);
 
         total_bam += len(bamfiles);
+
         # Get all .bam files in a species directory and sub-directories (all seq runs).
 
         # mkdup_cmds, mkdup_bams, i = [], [], 1;
@@ -206,11 +211,15 @@ with open(output_file, "w") as jobfile:
         #     mkdup_cmds.append(mkdup_cmd);
         #     i += 1;
 
-        merge_bam = os.path.join(specdir, s_mod + ".bam");
-        #merge_bam = merge_bam.replace("..sorted.mkdup.bam", ".sorted.mkdup.bam");
-        merge_bam = merge_bam.replace("..bam", ".bam");
-        merge_log = os.path.join(logdir, s_mod + "-merge" + args.ref + ".log");
-        merge_cmd = "samtools merge -f " + merge_bam + " " + " ".join(bamfiles) + " &> " + merge_log;  
+        if total_bam == 1:
+            merge_bam = bamfiles[0];
+            merge_cmd = "#";
+        else:
+            merge_bam = os.path.join(specdir, s_mod + ".bam");
+            #merge_bam = merge_bam.replace("..sorted.mkdup.bam", ".sorted.mkdup.bam");
+            merge_bam = merge_bam.replace("..bam", ".bam");
+            merge_log = os.path.join(logdir, s_mod + "-merge" + args.ref + ".log");
+            merge_cmd = "samtools merge -f " + merge_bam + " " + " ".join(bamfiles) + " &> " + merge_log;  
         # Merge all BAM files.
 
         # mkdup_bam = merge_bam.replace(".bam", ".mkdup.bam");

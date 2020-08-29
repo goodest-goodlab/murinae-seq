@@ -32,7 +32,7 @@ parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, de
 args = parser.parse_args();
 # Input options.
 
-seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
+seq_run_ids, spec_ids, specs_ordered = globs.get();
 # Get all the meta info for the species and sequencing runs.
 
 if not args.name:
@@ -67,35 +67,10 @@ base_logdir = os.path.abspath("logs/");
 logdir = os.path.join(base_logdir, step + "-logs");
 # Step I/O info.
 
-if args.runtype == "all":
-    runtype = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-else:
-    runtype = [];
-    args.runtype = args.runtype.replace(", ", ",").split(",");
-    for r in args.runtype:
-        if r in seq_run_ids:
-            runtype.append(seq_run_ids[r]);
-        elif r in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
-            runtype.append(int(r));
-        else:
-            sys.exit(" * ERROR SF1: Cannot find specified sequencing run: " + str(r));
-# Parse the input runtypes.
+runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
+# Parse the input run types.
 
-runstrs = [];
-for r in runtype:
-    for runstr, runind in seq_run_ids.items():
-        if runind == r:
-            runstrs.append(runstr);
-            args.runtype = runstr;
-# Get the string run type if int is given as input.
-
-if args.spec == "all":
-    spec = specs_ordered;
-else:
-    spec = args.spec.replace(", ", ",").split(",");
-    for s in spec:
-        if s not in spec_ids:
-            sys.exit(" * ERROR SF2: Cannot find specified species: " + s);
+spec = mfiles.parseSpecs(args.spec, specs_ordered)
 # Parse the input species.
 
 ##########################
@@ -148,6 +123,16 @@ with open(output_file, "w") as jobfile:
         s_mod = s.replace(" ", "-");
         #print(s_mod);
 
+        # if any(runs in spec_ids[s] for runs in [11,12,13,14]):
+        #     continue;
+        # Skip the Australian samples
+
+        if not any(runs in spec_ids[s] for runs in runtype):
+            continue;
+        # Skip samples that don't have reads for the specified run.
+
+        #print(s_mod);
+
         spec_indir = os.path.join(prev_step_dir, s_mod);
 
         spec_outdir = os.path.join(step_dir, s_mod);
@@ -187,10 +172,11 @@ with open(output_file, "w") as jobfile:
             spades_cmds.append(spades_cmd);
             #mcore.PWS(spades_cmd, jobfile);
 
-reincar_cmds = spades_cmds[:22];
-spades_cmds = spades_cmds[22:];
-spades_cmds = list(mcore.chunks(spades_cmds, 10));
+reincar_cmds = spades_cmds[:6];
+spades_cmds = spades_cmds[6:];
+spades_cmds = list(mcore.chunks(spades_cmds, 3));
 spades_cmds.insert(0, reincar_cmds);
+#print(len(spades_cmds));
 
 for i in range(len(spades_cmds)):
     file_num = str(i+1);

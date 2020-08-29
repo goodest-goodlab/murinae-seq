@@ -40,11 +40,11 @@ def genBWACmd(bwa_path, sfiles, r, run_string, spec, outdir, baselogfile, ref):
 
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
-            bwa_cmd += " 2> " + logfile;
+            bwa_cmd += " &> " + logfile;
             cmd_list.append(bwa_cmd);
         # Single end runs
 
-        elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
+        elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14,15]:
             basefile = os.path.splitext(os.path.basename(f))[0].replace("_R1_", "_").replace(".fastq", ".bam");
             bamfile = os.path.join(outdir, basefile);
 
@@ -52,7 +52,7 @@ def genBWACmd(bwa_path, sfiles, r, run_string, spec, outdir, baselogfile, ref):
 
             cmd_num += 1;
             logfile = baselogfile + "-" + str(cmd_num) + ".log";
-            bwa_cmd += " 2> " + logfile;
+            bwa_cmd += " &> " + logfile;
             cmd_list.append(bwa_cmd);
         # Paired end runs 
 
@@ -80,7 +80,7 @@ parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, de
 args = parser.parse_args();
 # Input options.
 
-seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
+seq_run_ids, spec_ids, specs_ordered = globs.get();
 # Get all the meta info for the species and sequencing runs.
 
 if args.ref and args.ref not in ["mouse", "rat"]:
@@ -98,7 +98,7 @@ else:
 # Get the job name.
 
 step = "06-Map";
-prev_step = "03-Merged";
+prev_step = "02-Decon";
 # Step vars
 
 pad = 26
@@ -132,7 +132,7 @@ runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
 print(runtype, runstrs);
 # Parse the input run types.
 
-spec = mfiles.parseSpecs(args.spec, specs_ordered, spec_ids)
+spec = mfiles.parseSpecs(args.spec, specs_ordered)
 # Parse the input species.
 
 with open(output_file, "w") as jobfile:
@@ -168,7 +168,13 @@ with open(output_file, "w") as jobfile:
         if "(no WGA)" in s or "pos_ctrl" in s:
             continue;
         s_mod = s.replace(" ", "-");
-        #print(s_mod);
+        print(s_mod);
+        if s_mod != "Carpomys-melanurus":
+            continue;
+
+        if not any(runs in spec_ids[s] for runs in runtype):
+            continue;
+        # Skip samples that don't have reads for the specified run.
 
         spec_dir = os.path.join(step_dir, s_mod + args.ref);
         if not os.path.isdir(spec_dir):
@@ -194,7 +200,7 @@ with open(output_file, "w") as jobfile:
             #print(run_string);
             run_dir = os.path.join(spec_dir, run_string);
 
-            seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir, unmerged_flag=True);
+            seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
             if seqfiles:
                 #print(seqfiles);
                 #sys.exit();
@@ -205,7 +211,7 @@ with open(output_file, "w") as jobfile:
             if s_mod in ["Rattus-exulans", "Rattus-hoffmanni"]:
                 run_string += "-no-WGA"
 
-                seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir, unmerged_flag=True);
+                seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);
                 if seqfiles:
                     if not os.path.isdir(run_dir):
                         os.system("mkdir " + run_dir);

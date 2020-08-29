@@ -21,15 +21,15 @@ assembled_specs = { "Apomys lubangensis" : 1, "Batomys salomonseni" : 1, "Bulimu
     "Maxomys surifer" : 1, "Niviventer lepturus" : 1, "Paruromys dominator" : 1, "Bunomys andrewsi" : 2, "Rattus exulans" : 2, "Rattus hoffmanni" : 2, "Rattus leucopus" : 2, "Rattus lutreolus" : 2, 
     "Maxomys musschenbroekii" : 2, "Rattus praetor" : 2, "Rattus villosissimus" : 2, "Mus musculus reference" : 3, "Mus musculus musculus" : 3, "Mus musculus domesticus" : 3, "Mus musculus castaneus" : 3, 
     "Mus caroli" : 3, "Mus cervicolor" : 3, "Mus cookii" : 3, "Mus macedonicus" : 3, "Mus minutoides" : 3, "Mus molossinus" : 3, "Mus pahari" : 3, "Mus platythrix" : 3, "Mus spicilegus" : 3, "Mus spretus" : 3, 
-    "Coccymys ruemmleri" : 4, "Grammomys dryas" : 4, "Carpomys melanurus" : 4, "Crateromys heaneyi" : 4, "Dasymys montanus" : 4, "Aethomys hindei" : 4, "Hylomyscus stella" : 4, "Anisomys imitator" : 4, 
+    "Coccymys ruemmleri" : 4, "Grammomys dryas" : 4, "Carpomys melanurus" : 6, "Crateromys heaneyi" : 4, "Dasymys montanus" : 4, "Aethomys hindei" : 4, "Hylomyscus stella" : 4, "Anisomys imitator" : 4, 
     "Crunomys melanius" : 4, "Niviventer rapit" : 4, "Phloeomys cumingii" : 4, "Aethomys nyikae" : 4, "Hybomys planifrons" : 4, "Pogonomys macrourus" : 4, "Musseromys anacuao" : 4, "Limnomys sibuanus" : 4, 
-    "Pithecheir melanurus" : 4, "Thamnomys sp." : 4, "Mammelomys lanosus" : 4, "Xenuromys barbatus" : 4, "Hydromys sp nov" : 4, "Xeromys myoides" : 4, "Pseudohydromys ellermani" : 4, "Leptomys elegans" : 4, 
+    "Pithecheir melanurus" : 4, "Thamnomys sp." : 4, "Mammelomys lanosus" : 4, "Xenuromys barbatus" : 4, "Hydromys sp nov" : 4, "Xeromys myoides" : 6, "Pseudohydromys ellermani" : 4, "Leptomys elegans" : 4, 
     "Pelomys isseli" : 4, "Niviventer bukit" : 4, "Genus sp nov" : 4, "Saxatilomys paulinae" : 4, "Crunomys sp." : 4, "Microhydromys richardsoni" : 4, "Uromys caudimaculatus" : 4, "Mirzamys louiseae" : 4, 
     "Papagomys armandvillei" : 4, "Chiromyscus chiropus" : 4, "Pogonomelomys bruijni" : 4, "Paraleptomys sp" : 4, "Oenomys hypoxanthus" : 4, "Bandicota indica" : 4, "Rattus xanthurus" : 4, "Lenomys meyeri" : 4, 
-    "Thamnomys kempi" : 4, "Parahydromys asper" : 4, "Rattus argentiventer" : 4, "Uromys sp nov" : 4, "Otomys tropicalis" : 4, "Niviventer cremoriventer" : 4, "Otomys denti" : 4, "Praomys jacksoni" : 4, 
+    "Thamnomys kempi" : 4, "Parahydromys asper" : 4, "Rattus argentiventer" : 4, "Uromys sp nov" : 4, "Otomys tropicalis" : 6, "Niviventer cremoriventer" : 4, "Otomys denti" : 4, "Praomys jacksoni" : 4, 
     "Margaretamys christinae" : 4, "Dasymys incomtus" : 4, "Taeromys callitrichus" : 4, "Hybomys lunaris" : 4, "Sundamys annandalei" : 4, "Nesokia indica" : 4, "Macruromys major" : 4, "Mus musculoides" : 4, 
-    "Pelomys minor" : 4, "Tarsomys apoensis" : 4, "Batomys russatus" : 4, "Halmaheramys bokimekot" : 4, "Chiruromys vates" : 4, "Chrotomys whiteheadi" : 4, "Abeomelomys sevia" : 4, "Berylmys mackenzii" : 4, 
-    "Solomys salebrosus" : 4, "Zelotomys woosnami" : 4, "Kadarsanomys sodyi" : 4, "Mallomys rothschildi" : 4, "Taeromys taerae" : 4, "Vandeleuria oleracea" : 4, "Conilurus albipes NMV c7585" : 5, 
+    "Pelomys minor" : 4, "Tarsomys apoensis" : 4, "Batomys russatus" : 4, "Halmaheramys bokimekot" : 4, "Chiruromys vates" : 4, "Chrotomys whiteheadi" : 4, "Abeomelomys sevia" : 6, "Berylmys mackenzii" : 4, 
+    "Solomys salebrosus" : 4, "Zelotomys woosnami" : 4, "Kadarsanomys sodyi" : 6, "Mallomys rothschildi" : 4, "Taeromys taerae" : 4, "Vandeleuria oleracea" : 4, "Conilurus albipes NMV c7585" : 5, 
     "Conilurus penicillatus M14056" : 5, "Leggadina forresti WAMM62323" : 5, "Leggadina lakedownensis WAMM21623" : 5, "Leporillus apicalis C90" : 5, "Leporillus conditor ABTC13335" : 5, 
     "Mastacomys fuscus M13957" : 5, "Mastacomys fuscus NMV C37546" : 5, "Mesembriomys gouldii ABTC7449" : 5, "Mesembriomys macrurus ABTC7337" : 5, "Notomys alexis U1308" : 5, "Notomys amplus NMV C512" : 5, 
     "Notomys aquilo M 32455" : 5, "Notomys cervinus M22857" : 5, "Notomys fuscus M22830" : 5, "Notomys longicaudatus C6278" : 5, "Notomys macrotis ZD 1841 1167" : 5, "Notomys mitchelli ABTC94521" : 5, 
@@ -40,7 +40,9 @@ assembled_specs = { "Apomys lubangensis" : 1, "Batomys salomonseni" : 1, "Bulimu
     "Pseudomys johnsoni ABTC08053" : 5, "Pseudomys nanus U1448" : 5, "Pseudomys novaehollandiae ABTC08140" : 5, "Pseudomys novaehollandiae NMV C22127" : 5, "Pseudomys occidentalis ABTC08043" : 5, 
     "Pseudomys oralis RAT7" : 5, "Pseudomys patrius JM10865" : 5, "Pseudomys pilligaensis ABTC18120" : 5, "Pseudomys shortridgei M62127" : 5, "Pseudomys shortridgei M7890" : 5, "Pseudomys shortridgei Z25113" : 5, 
     "Rattus colletti RAT25" : 5, "Rattus tunneyi RAT130" : 5, "Zyzomys argurus ABTC61630" : 5, "Zyzomys maini ABTC07900" : 5, "Zyzomys palatalis ABTC30744" : 5, "Zyzomys pedunculatus Z34925" : 5, 
-    "Zyzomys woodwardi WAMM21724" : 5 };
+    "Zyzomys woodwardi WAMM21724" : 5, "Rattus morotaiensis" : 6, "Hyomys goliath" : 6, "Mastomys natalensis" : 6, "Pithechaeir melanurus" : 6, "Crossomys moncktoni" : 6, "Eropeplus canus" : 6, "Bunomys torajae" : 6,
+    "Taeromys celebensis" : 6, "Taeromys hamatus" : 6, "Thallomys paedulcus" : 6, "Anonymomys mindorensis" : 6, "Arvicanthus neumanni" : 6, "Arvicanthus niloticus" : 6, "Dephomys defua" : 6, "Heimyscus fumosus" : 6,
+    "Lophiomys imhausi" : 6, "Lophuromys woosnami" : 6, "Micaelemys namaquensis" : 6, "Mylomys dybowskii" : 6, "Myomyscus verreauxii" : 6, "Rhabdomys pumilio" : 6, "Stochomys longicaudatus" : 6 };
 # The ordered list of assembled species and their sequencing batch.
 
 ############################################################
@@ -104,10 +106,10 @@ else:
     args.spec = list(assembled_specs.keys());
 if args.runtype != "all":
     args.runtype = [ int(r) for r in args.runtype.replace(", ", ",").split(",") ];
-    if any(r not in [1,2,3,4,5] for r in args.runtype):
+    if any(r not in [1,2,3,4,5,6] for r in args.runtype):
         sys.exit( " * ERROR 4: Invalid run type entered with -r.");
 else:
-    args.runtype = [1,2,3,4,5];
+    args.runtype = [1,2,3,4,5,6];
 
 # parser = argparse.ArgumentParser(description="Gets stats from a bunch of spades assemblies.");
 # parser.add_argument("-i", dest="indir", help="Main directory holding all the abyss subdirectories. Default: ../../01-Assembly-data/04A-Spades/", default="../../01-Assembly-data/04A-Spades/");
@@ -123,7 +125,7 @@ pad = 30;
 
 with open(outfilename, "w") as outfile:
     #if args.long:
-    cols = ["Species","batch","type","count","avg len","N50","L50", "avg depth per base (samtools)", "avg depth per base (mosdepth)", "avg depth per scaff (mosdepth)", "avg depth per base to mouse targets (samtools)", "avg depth per target mouse targets (mosdepth)"];
+    cols = ["Species","batch","type","count","avg len","N50","L50", "number reads mapped", "percent reads mapped", "avg depth per base (samtools)", "avg depth per base (mosdepth)", "avg depth per scaff (mosdepth)", "number reads mapped mouse targets", "percent reads mapped mouse targets", "avg depth per base to mouse targets (samtools)", "avg depth per target mouse targets (mosdepth)"];
     # Long output headers
 
     outfile.write(",".join(cols) + "\n");
@@ -133,6 +135,12 @@ with open(outfilename, "w") as outfile:
             continue;
 
         s_mod = s.replace(" ", "-");
+        # if s_mod != "Xenuromys-barbatus":
+        #     continue;
+
+        if s_mod in ["Carpomys-melanurus","Xeromys-myoides", "Otomys-tropicalis", "Abeomelomys-sevia", "Kadarsanomys-sodyi", "Conilurus-albipes-NMV-c7585"]:
+            continue;
+
         print(str(i) + " " + s);
         i += 1;
 
@@ -141,15 +149,19 @@ with open(outfilename, "w") as outfile:
         spec_samtools_depth = os.path.join(map_dir, s_mod, s_mod + "-depth.tab");
         spec_mosdepth_scaff = os.path.join(map_dir, s_mod, s_mod + ".mosdepth.summary.txt");
         spec_mosdepth_base = os.path.join(map_dir, s_mod, s_mod + ".per-base.bed.gz");
+        spec_flagstat = os.path.join(map_dir, s_mod, s_mod + "-flagstats.txt");
         spec_samtools_depth_mouse = os.path.join(map_dir, s_mod + "-mouse", s_mod + "-depth.tab");
-        spec_mosdepth_mouse = os.path.join(map_dir, s_mod + "-mouse", s_mod + ".regions.bed.gz");
+        spec_mosdepth_mouse = os.path.join(map_dir, s_mod + "-mouse", s_mod + ".regions.bed.gz"); 
+        spec_flagstat_mouse = os.path.join(map_dir, s_mod + "-mouse", s_mod + "-flagstats.txt");
         
         assert os.path.isfile(spec_assembly), "\nCannot find assembly file: " + spec_assembly;
         assert os.path.isfile(spec_samtools_depth), "\nCannot find samtools depth file: " + spec_samtools_depth;
         assert os.path.isfile(spec_mosdepth_scaff), "\nCannot find mosdepth scaffold file: " + spec_mosdepth_scaff;
         assert os.path.isfile(spec_mosdepth_base), "\nCannot find mosdepth base file: " + spec_mosdepth_base;
+        assert os.path.isfile(spec_flagstat), "\nCannot find flagstat file: " + spec_flagstat;
         assert os.path.isfile(spec_samtools_depth_mouse), "\nCannot find samtools mouse depth file: " + spec_samtools_depth_mouse;
         assert os.path.isfile(spec_mosdepth_mouse), "\nCannot find mosdepth mouse base file: " + spec_mosdepth_mouse;
+        assert os.path.isfile(spec_flagstat_mouse), "\nCannot find mouse flagstat file: " + spec_flagstat_mouse;
         #continue;
     
         cur_line = [s_mod, assembled_specs[s], "scaffolds" ];
@@ -193,6 +205,14 @@ with open(outfilename, "w") as outfile:
         cur_line.append(l50);
         # Calculate N50 and L50
 
+        flag_lines = open(spec_flagstat, "r").read().split("\n");
+        reads_line = flag_lines[4].split(" ");
+        num_reads_mapped = reads_line[0]
+        perc_reads_mapped = reads_line[4].replace("(", "").replace("%", "");
+        cur_line.append(num_reads_mapped);
+        cur_line.append(perc_reads_mapped);
+        # Get number of reads mapped from flagstat file
+
         depth_sum, num_bases = 0.0, 0.0;
         for line in open(spec_samtools_depth):
             line = line.strip().split("\t");
@@ -216,6 +236,14 @@ with open(outfilename, "w") as outfile:
         avg_depth = float(sum(mean_depths)) / float(len(mean_depths));
         cur_line.append(avg_depth);
         # Mosdepth per scaffold depth (from reading scaffold file above) to spades assembly
+
+        flag_lines = open(spec_flagstat_mouse, "r").read().split("\n");
+        reads_line = flag_lines[4].split(" ");
+        num_reads_mapped = reads_line[0]
+        perc_reads_mapped = reads_line[4].replace("(", "").replace("%", "");
+        cur_line.append(num_reads_mapped);
+        cur_line.append(perc_reads_mapped);
+        # Get number of reads mapped to mouse targets from flagstat file.
 
         depth_sum, num_bases = 0.0, 0.0;
         for line in open(spec_samtools_depth_mouse):

@@ -18,7 +18,7 @@ def getFiles(s, run, run_string, prev_dir, unmerged_flag=False):
     if run in [0,1]:
         seqfiles = [ os.path.join(indir, f) for f in seqfiles ];
 
-    elif run in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
+    elif run in [2,3,4,5,6,7,8,9,10,11,12,13,14,15]:
         seqfiles = pairUp(seqfiles, indir, unmerged_flag);
 
     #print(seqfiles);
@@ -69,14 +69,14 @@ def getRef(spec):
 
 def parseRuntypes(input_runtype, run_ids):
     if input_runtype == "all":
-        runtype = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+        runtype = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
     else:
         runtype = [];
         input_runtype = input_runtype.replace(", ", ",").split(",");
         for r in input_runtype:
             if r in run_ids:
                 runtype.append(run_ids[r]);
-            elif r in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
+            elif r in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]:
                 runtype.append(int(r));
             else:
                 sys.exit(" * ERROR mfiles 2: Cannot find specified sequencing run: " + str(r));

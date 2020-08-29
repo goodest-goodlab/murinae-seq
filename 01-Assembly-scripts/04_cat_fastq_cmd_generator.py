@@ -29,7 +29,7 @@ def getLibs(s, r, run_string, library_num, prev_dir):
         seqfiles = [ os.path.join(indir, f) for f in seqfiles ];
         cur_libs[library_num] = ['single', seqfiles];
 
-    elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
+    elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14,15]:
         seqfiles = mfiles.pairUp(seqfiles, indir, unmerged_flag=True);
         for f in seqfiles:
             if ";" in f:
@@ -93,7 +93,7 @@ parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, de
 args = parser.parse_args();
 # Input options.
 
-seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
+seq_run_ids, spec_ids, specs_ordered = globs.get();
 # Get all the meta info for the species and sequencing runs.
 
 if not args.name:
@@ -128,35 +128,10 @@ base_logdir = os.path.abspath("logs/");
 logdir = os.path.join(base_logdir, step + "-logs");
 # Step I/O info.
 
-if args.runtype == "all":
-    runtype = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-else:
-    runtype = [];
-    args.runtype = args.runtype.replace(", ", ",").split(",");
-    for r in args.runtype:
-        if r in seq_run_ids:
-            runtype.append(seq_run_ids[r]);
-        elif r in ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]:
-            runtype.append(int(r));
-        else:
-            sys.exit(" * ERROR SF1: Cannot find specified sequencing run: " + str(r));
-# Parse the input runtypes.
+runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
+# Parse the input run types.
 
-runstrs = [];
-for r in runtype:
-    for runstr, runind in seq_run_ids.items():
-        if runind == r:
-            runstrs.append(runstr);
-            args.runtype = runstr;
-# Get the string run type if int is given as input.
-
-if args.spec == "all":
-    spec = specs_ordered;
-else:
-    spec = args.spec.replace(", ", ",").split(",");
-    for s in spec:
-        if s not in spec_ids:
-            sys.exit(" * ERROR SF2: Cannot find specified species: " + s);
+spec = mfiles.parseSpecs(args.spec, specs_ordered)
 # Parse the input species.
 
 ##########################
@@ -202,6 +177,10 @@ with open(output_file, "w") as jobfile:
         s_mod = s.replace(" ", "-");
         #print(s_mod);
 
+        if any(runs in spec_ids[s] for runs in [11,12,13,14]):
+            continue;
+        # Skip the Australian samples
+
         spec_dir = os.path.join(step_dir, s_mod);
         if not os.path.isdir(spec_dir):
             os.system("mkdir " + spec_dir);
@@ -214,9 +193,9 @@ with open(output_file, "w") as jobfile:
         paired2_out = os.path.join(spec_dir, s_mod + "-paired-2.fq.gz");
         merged_out = os.path.join(spec_dir, s_mod + "-merged.fq.gz");
 
-        for r in runtype:
-            run_string = runstrs[r];
-            #print(run_string);
+        for run_ind in range(len(runtype)):
+            r = runtype[run_ind];
+            run_string = runstrs[run_ind];
             cur_libs, library_num = getLibs(s_mod, r, run_string, library_num, prev_step_dir);
             if cur_libs:
                 libraries.update(cur_libs);
@@ -236,22 +215,6 @@ with open(output_file, "w") as jobfile:
 ##########################
 # Generating the submit script.
 if args.part != "none":
-    with open(submit_file, "w") as sfile:
-        submit = '''#!/bin/bash
-#SBATCH --job-name={name}
-#SBATCH --output={name}-%j.out
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=gregg.thomas@umontana.edu
-#SBATCH --partition={partition}
-#SBATCH --nodes=1
-#SBATCH --ntasks={tasks}
-#SBATCH --cpus-per-task={cpus}
-#SBATCH --mem={mem}
-
-parallel -j {tasks} < {output_file}'''
-
-        sfile.write(submit.format(name=name, partition=args.part, tasks=args.tasks, cpus=args.cpus, mem=args.mem, output_file=output_file));
-
-##########################
-
+    mfiles.genSlurmSubmit(submit_file, name, args.part, 1, args.tasks, args.cpus, args.mem, output_file)
+##########################           
 

@@ -30,7 +30,7 @@ def genMergeCmd(merge_path, sfiles, r, baselogfile, step, prev_step, cmd_list):
             cmd_list.append(cp_cmd);
         # Single end runs
 
-        elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
+        elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14,15]:
             f = f.split(";");
             outdir = os.path.dirname(f[0]).replace(prev_step, step);
             basefile = os.path.splitext(os.path.basename(f[0]))[0].replace("fastq","");
@@ -69,7 +69,7 @@ parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, de
 args = parser.parse_args();
 # Input options.
 
-seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
+seq_run_ids, spec_ids, specs_ordered, = globs.get();
 # Get all the meta info for the species and sequencing runs.
 
 if not args.name:
@@ -107,7 +107,7 @@ logdir = os.path.join(base_logdir, step + "-logs");
 runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
 # Parse the input run types.
 
-spec = mfiles.parseSpecs(args.spec, specs_ordered, spec_ids)
+spec = mfiles.parseSpecs(args.spec, specs_ordered)
 # Parse the input species.
 
 ##########################
@@ -150,6 +150,10 @@ with open(output_file, "w") as jobfile:
             continue;
         s_mod = s.replace(" ", "-");
 
+        if any(runs in spec_ids[s] for runs in [11,12,13,14]):
+            continue;
+        # Skip the Australian samples
+
         spec_dir = os.path.join(step_dir, s_mod);
         if not os.path.isdir(spec_dir):
             os.system("mkdir " + spec_dir);
@@ -159,8 +163,9 @@ with open(output_file, "w") as jobfile:
 
         merge_cmds = [];
 
-        for r in runtype:
-            run_string = runstrs[r];
+        for run_ind in range(len(runtype)):
+            r = runtype[run_ind];
+            run_string = runstrs[run_ind];
             run_dir = os.path.join(spec_dir, run_string);
 
             seqfiles = mfiles.getFiles(s_mod, r, run_string, prev_step_dir);

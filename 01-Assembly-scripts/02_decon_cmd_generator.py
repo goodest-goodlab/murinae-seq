@@ -31,7 +31,7 @@ def genDeconCmd(decon_path, sfiles, r, baselogfile, step, prev_step):
             cmd_list.append(decon_cmd);
         # Single end runs
 
-        elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14]:
+        elif r in [2,3,4,5,6,7,8,9,10,11,12,13,14,15]:
             f = f.split(";");
             outfile1 = f[0].replace(prev_step, step).replace(".fastq.gz", ".decon.fastq.gz");
             outfile2 = f[1].replace(prev_step, step).replace(".fastq.gz", ".decon.fastq.gz");
@@ -66,7 +66,7 @@ parser.add_argument("-mem", dest="mem", help="SLURM --mem option.", type=int, de
 args = parser.parse_args();
 # Input options.
 
-seq_run_ids, spec_ids, specs_ordered, spec_abbr, basedirs = globs.get();
+seq_run_ids, spec_ids, specs_ordered = globs.get();
 # Get all the meta info for the species and sequencing runs.
 
 if not args.name:
@@ -104,7 +104,7 @@ logdir = os.path.join(base_logdir, step + "-logs");
 runtype, runstrs = mfiles.parseRuntypes(args.runtype, seq_run_ids);
 # Parse the input run types.
 
-spec = mfiles.parseSpecs(args.spec, specs_ordered, spec_ids)
+spec = mfiles.parseSpecs(args.spec, specs_ordered)
 # Parse the input species.
 
 ##########################
@@ -147,6 +147,12 @@ with open(output_file, "w") as jobfile:
             continue;
         s_mod = s.replace(" ", "-");
 
+        if any(runs in spec_ids[s] for runs in [11,12,13,14]):
+            continue;
+        # Skip the Australian samples
+
+        #print(s_mod);
+
         spec_dir = os.path.join(step_dir, s_mod);
         if not os.path.isdir(spec_dir):
             os.system("mkdir " + spec_dir);
@@ -154,8 +160,9 @@ with open(output_file, "w") as jobfile:
 
         decon_cmds = [];
 
-        for r in runtype:
-            run_string = runstrs[r];
+        for run_ind in range(len(runtype)):
+            r = runtype[run_ind];
+            run_string = runstrs[run_ind];
             run_dir = os.path.join(spec_dir, run_string);
 
             base_logfile = os.path.join(logdir, s_mod + "-" + run_string + "-decon");
@@ -186,5 +193,5 @@ with open(output_file, "w") as jobfile:
 ##########################
 # Generating the submit script.
 if args.part != "none":
-    mfiles.genSlurmSubmit(submit_file, name, args.part, args.tasks, args.cpus, args.mem, output_file)
+    mfiles.genSlurmSubmit(submit_file, name, args.part, 1, args.tasks, args.cpus, args.mem, output_file)
 ##########################           
