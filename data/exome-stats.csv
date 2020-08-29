@@ -1,219 +1,212 @@
-Label,Genus,Species,Sequencing platform,Batch,Prep,Sample ID,NextSeq single IDs,NextSeq paired 1 and MiSeq paired ID,NextSeq paired 2 ID,HiSeq paired ID,HiSeq2500 paired ID,HiSeq2000 paired 1 ID,HiSeq2000 paired 2 ID,HiSeq 4000 ID 1,HiSeq 4000 ID 2,Seq run 1 ID,Seq run 2 ID,Seq run 3 ID,Seq run 4 ID,HiSeq 4000 ID 3
-Apomys-lubangensis,Apomys,lubangensis,NextSeq single + paired; Miseq,1,NA,NA,30,JAE169,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Batomys-salomonseni,Batomys,salomonseni,NextSeq single + paired; Miseq,1,NA,NA,31,JAE3320,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Bulimus-bagobus,Bulimus,bagobus,NextSeq single + paired; Miseq,1,NA,NA,32,JAE1712,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Chrotomys-mindorensis,Chrotomys,mindorensis,NextSeq single + paired; Miseq,1,NA,NA,33,JAE520,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Phloeomys-pallidus,Phloeomys,pallidus,NextSeq single + paired; Miseq,1,NA,NA,34,JEC43,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Rhynchomys-isarogensis,Rhynchomys,isarogensis,NextSeq single + paired; Miseq,1,NA,NA,35,JAE2195,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Sundamys-meulleri,Sundamys,meulleri,NextSeq single + paired; Miseq,1,NA,NA,36,JAE1283,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Taeromys-punicans,Taeromys,punicans,NextSeq single + paired; Miseq; Hiseq4000,1,2,NA,37,JLP25862,8,NA,NA,NA,NA,SM077,NA,NA,NA,NA,NA,NA
-Hyorhinomys-stuempkei,Hyorhinomys,stuempkei,NextSeq single + paired; Miseq,1,NA,NA,38,JAE4661,9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Hybomys-univittatus,Hybomys,univittatus,NextSeq single + paired; Miseq,1,NA,NA,39,TCD4026,10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Colomys-goslingi,Colomys,goslingi,NextSeq single + paired; Miseq,1,NA,NA,40,TCD4175,11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Malacomys-longipes,Malacomys,longipes,NextSeq single + paired; Miseq,1,NA,NA,41,TCD4253,12,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Hylomyscus-vulcanorum,Hylomyscus,vulcanorum,NextSeq single + paired; Miseq,1,NA,NA,42,TCD4382,13,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Praomys-degraaffi,Praomys,degraaffi,NextSeq single + paired; Miseq,1,NA,NA,43,TCD4312,14,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Grammomys-sp,Grammomys,sp,NextSeq single + paired; Miseq,1,NA,NA,44,TCD4560,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Lemniscomys-striatus,Lemniscomys,striatus,NextSeq single + paired; Miseq,1,NA,NA,45,TCD4711,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Berylymys-bowersi,Berylymys,bowersi,NextSeq single + paired; Miseq,1,NA,NA,46,ABTC116431,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Crunomys-celebensis,Crunomys,celebensis,NextSeq single + paired; Miseq,1,NA,NA,47,Z21894,18,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Echiothrix-centrosa,Echiothrix,centrosa,NextSeq single + paired; Miseq,1,NA,NA,48,Z27993,19,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Gracillimus-radix,Gracillimus,radix,NextSeq single + paired; Miseq,1,NA,NA,49,Z08508,20,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Leopoldomys-sabanus,Leopoldomys,sabanus,NextSeq single + paired; Miseq,1,NA,NA,50,Z25191,21,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Margaretamys-parvus,Margaretamys,parvus,NextSeq single + paired; Miseq; Hiseq4000,1,2,NA,51,Z21794,22,NA,NA,NA,NA,SM062,NA,NA,NA,NA,NA,NA
-Melasmothrix-naso,Melasmothrix,naso,NextSeq single + paired; Miseq,1,NA,NA,52,Z21808,23,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Paucidentomys-vermidax,Paucidentomys,vermidax,NextSeq single + paired; Miseq,1,NA,NA,53,Z21914,24,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Sommeromys-macrorhinos,Sommeromys,macrorhinos,NextSeq single + paired; Miseq,1,NA,NA,54,Z21740,25,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Tateomys-macrocercus,Tateomys,macrocercus,NextSeq single + paired; Miseq,1,NA,NA,55,Z21834,26,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Tateomys-rhinogradoides,Tateomys,rhinogradoides,NextSeq single + paired; Miseq,1,NA,NA,56,Z21785,27,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Waiomys-mamasae,Waiomys,mamasae,NextSeq single + paired; Miseq,1,NA,NA,57,Z20624,28,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Chiropodomys-gliroides,Chiropodomys,gliroides,NextSeq single + paired; Miseq,1,NA,NA,58,Z25153,29,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Lorentzimys-nouhuysi,Lorentzimys,nouhuysi,NextSeq single + paired; Miseq,1,NA,NA,59,ABTC-46314,30,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Mastacomys-fuscus,Mastacomys,fuscus,NextSeq single + paired; Miseq,1,NA,NA,60,ABTC-07354,31,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Melomys-rufescens,Melomys,rufescens,NextSeq single + paired; Miseq,1,NA,NA,61,ABTC-44798,32,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Hydromys-chrysogaster,Hydromys,chrysogaster,NextSeq single + paired; Miseq,1,NA,NA,62,Z5248,33,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Apodemus-sylvaticus,Apodemus,sylvaticus,NextSeq single + paired; Miseq,1,NA,NA,63,SMG3823,34,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Archboldomys-luzonensis,Archboldomys,luzonensis,NextSeq single + paired; Miseq,1,NA,NA,64,EAR1826,35,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Bunomys-chrysocomus,Bunomys,chrysocomus,NextSeq single + paired; Miseq,1,NA,NA,65,JAE4867,36,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Haeromys-minahassae,Haeromys,minahassae,NextSeq single + paired; Miseq,1,NA,NA,66,JAE4996,37,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Maxomys-surifer,Maxomys,surifer,NextSeq single + paired; Miseq,1,NA,NA,67,JAE3632,38,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Niviventer-lepturus,Niviventer,lepturus,NextSeq single + paired; Miseq,1,NA,NA,68,JAE4746,39,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Paruromys-dominator,Paruromys,dominator,NextSeq single + paired; Miseq,1,NA,NA,69,JAE4870,40,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Bunomys-andrewsi,Bunomys,andrewsi,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,andrewsii,GATGCC,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Rattus-exulans,Rattus,exulans,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,exulans,TGACGT and GCATTG,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Rattus-hoffmanni,Rattus,hoffmanni,Hiseq; Hiseq2500; Hiseq4000,2,3,NA,NA,NA,NA,hoffmanni,CCGATT and GATCTC,NA,NA,NA,SM074,NA,NA,NA,NA,NA
-Rattus-leucopus,Rattus,leucopus,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,leucopus,ATGCCG,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Rattus-lutreolus,Rattus,lutreolus,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,lutreolus,CAATAT,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Maxomys-musschenbroekii,Maxomys,musschenbroekii,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,musschenbroekii,CAATTA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Rattus-praetor,Rattus,praetor,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,praetor,CAGTAC,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Rattus-villosissimus,Rattus,villosissimus,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,vilosissimus,AGATAG,NA,NA,NA,NA,NA,NA,NA,NA,NA
-Mus-caroli,Mus,caroli,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X9,ACCAAC,NA,NA,NA,NA,NA,NA,NA
-Mus-cervicolor,Mus,cervicolor,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X10,CCGGTA,NA,NA,NA,NA,NA,NA,NA
-Mus-cookii,Mus,cookii,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X3,CCTAGG,NA,NA,NA,NA,NA,NA,NA
-Mus-macedonicus,Mus,macedonicus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X12,TTGAAG,NA,NA,NA,NA,NA,NA,NA
-Mus-minutoides,Mus,minutoides,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X2,CTCTGC,NA,NA,NA,NA,NA,NA,NA
-Mus-molossinus,Mus,molossinus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X8,GCTCGA,NA,NA,NA,NA,NA,NA,NA
-Mus-musculus-castaneus,Mus,musculus castaneus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X7,CTCGAT,NA,NA,NA,NA,NA,NA,NA
-Mus-musculus-domesticus,Mus,musculus domesticus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X15,CGACCT,NA,NA,NA,NA,NA,NA,NA
-Mus-musculus-musculus,Mus,musculus musculus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X14,TTGGAT,NA,NA,NA,NA,NA,NA,NA
-Mus-musculus-reference,Mus,musculus reference,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X5,GCAAGA,NA,NA,NA,NA,NA,NA,NA
-Mus-pahari,Mus,pahari,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X1,TCGCAG,NA,NA,NA,NA,NA,NA,NA
-Mus-platythrix,Mus,platythrix,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X13,ACTATC,NA,NA,NA,NA,NA,NA,NA
-Mus-spicilegus,Mus,spicilegus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X11,AACTCC,NA,NA,NA,NA,NA,NA,NA
-Mus-spretus,Mus,spretus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X4,GGATCA,NA,NA,NA,NA,NA,NA,NA
-Coccymys-ruemmleri,Coccymys,ruemmleri,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM033,NA,NA,NA,NA,NA,NA
-Grammomys-dryas,Grammomys,dryas,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC8,NA,NA,NA,NA,NA,NA
-Carpomys-melanurus,Carpomys,melanurus,Hiseq4000,4;6,1;4,SM085,NA,NA,NA,NA,NA,NA,NA,SM085,NA,NA,NA,NA,NA,SM085
-Crateromys-heaneyi,Crateromys,heaneyi,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC4,NA,NA,NA,NA,NA,NA
-Dasymys-montanus,Dasymys,montanus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM086,NA,NA,NA,NA,NA,NA
-Aethomys-hindei,Aethomys,hindei,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC1,NA,NA,NA,NA,NA,NA
-Hylomyscus-stella,Hylomyscus,stella,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC10,NA,NA,NA,NA,NA,NA
-Anisomys-imitator,Anisomys,imitator,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM008,NA,NA,NA,NA,NA,NA
-Crunomys-melanius,Crunomys,melanius,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC5,NA,NA,NA,NA,NA,NA
-Niviventer-rapit,Niviventer,rapit,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM056,NA,NA,NA,NA,NA,NA
-Phloeomys-cumingii,Phloeomys,cumingii,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM069,NA,NA,NA,NA,NA,NA
-Aethomys-nyikae,Aethomys,nyikae,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM084,NA,NA,NA,NA,NA,NA
-Hybomys-planifrons,Hybomys,planifrons,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM040,NA,NA,NA,NA,NA,NA
-Pogonomys-macrourus,Pogonomys,macrourus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM071,NA,NA,NA,NA,NA,NA
-Musseromys-anacuao,Musseromys,anacuao,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM063,NA,NA,NA,NA,NA,NA
-Limnomys-sibuanus,Limnomys,sibuanus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM089,NA,NA,NA,NA,NA,NA
-Pithecheir-melanurus,Pithecheir,melanurus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM070,NA,NA,NA,NA,NA,NA
-Thamnomys-sp.,Thamnomys,sp.,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC24,NA,NA,NA,NA,NA,NA
-Mammelomys-lanosus,Mammelomys,lanosus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM047,NA,NA,NA,NA,NA,NA
-Xenuromys-barbatus,Xenuromys,barbatus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM010,NA,NA,NA,NA,NA,NA
-Hydromys-sp-nov,Hydromys,sp nov,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC9,NA,NA,NA,NA,NA,NA
-Xeromys-myoides,Xeromys,myoides,Hiseq4000,4;6,1;4,SM080,NA,NA,NA,NA,NA,NA,NA,SM080,NA,NA,NA,NA,NA,SM080
-Pseudohydromys-ellermani,Pseudohydromys,ellermani,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM073,NA,NA,NA,NA,NA,NA
-Leptomys-elegans,Leptomys,elegans,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM044,NA,NA,NA,NA,NA,NA
-Pelomys-isseli,Pelomys,isseli,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM068,NA,NA,NA,NA,NA,NA
-Mus-pos_ctrl_F,Mus,pos_ctrl_F,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,M44_F11,NA,NA,NA,NA,NA,NA
-Mus-pos_ctrl_E,Mus,pos_ctrl_E,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,M44_E11,NA,NA,NA,NA,NA,NA
-Niviventer-bukit,Niviventer,bukit,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM054,NA,NA,NA,NA,NA,NA
-Genus-sp-nov,Genus,sp nov,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM059,NA,NA,NA,NA,NA,NA
-Saxatilomys-paulinae,Saxatilomys,paulinae,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM075,NA,NA,NA,NA,NA,NA
-Crunomys-sp.,Crunomys,sp.,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC6,NA,NA,NA,NA,NA,NA
-Microhydromys-richardsoni,Microhydromys,richardsoni,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM050,NA,NA,NA,NA,NA,NA
-Uromys-caudimaculatus,Uromys,caudimaculatus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM078,NA,NA,NA,NA,NA,NA
-Mirzamys-louiseae,Mirzamys,louiseae,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM051,NA,NA,NA,NA,NA,NA
-Papagomys-armandvillei,Papagomys,armandvillei,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM057,NA,NA,NA,NA,NA,NA
-Chiromyscus-chiropus,Chiromyscus,chiropus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM034,NA,NA,NA,NA,NA,NA
-Pogonomelomys-bruijni,Pogonomelomys,bruijni,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC26,NA,NA,NA,NA,NA,NA
-Paraleptomys-sp,Paraleptomys,sp,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM065,NA,NA,NA,NA,NA,NA
-Oenomys-hypoxanthus,Oenomys,hypoxanthus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC13,NA,NA,NA,NA,NA,NA
-Bandicota-indica,Bandicota,indica,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM009,NA,NA,NA,NA,NA,NA
-Rattus-xanthurus,Rattus,xanthurus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC17,NA,NA,NA,NA,NA,NA
-Lenomys-meyeri,Lenomys,meyeri,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC11,NA,NA,NA,NA,NA,NA
-Thamnomys-kempi,Thamnomys,kempi,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC23,NA,NA,NA,NA,NA,NA
-Parahydromys-asper,Parahydromys,asper,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM058,NA,NA,NA,NA,NA,NA
-Rattus-argentiventer,Rattus,argentiventer,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM042,NA,NA,NA,NA,NA,NA
-Uromys-sp-nov,Uromys,sp nov,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC25,NA,NA,NA,NA,NA,NA
-Otomys-tropicalis,Otomys,tropicalis,Hiseq4000,4;6,2;4,REC15,NA,NA,NA,NA,NA,NA,NA,REC15,NA,NA,NA,NA,NA,REC15
-Niviventer-cremoriventer,Niviventer,cremoriventer,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM055,NA,NA,NA,NA,NA,NA
-Otomys-denti,Otomys,denti,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC14,NA,NA,NA,NA,NA,NA
-Praomys-jacksoni,Praomys,jacksoni,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC31,NA,NA,NA,NA,NA,NA
-Mus-pos_ctrl_C,Mus,pos_ctrl_C,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,M44_C11,NA,NA,NA,NA,NA,NA
-Mus-pos_ctrl_B,Mus,pos_ctrl_B,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,M44_B11,NA,NA,NA,NA,NA,NA
-Mus-pos_ctrl_D1,Mus,pos_ctrl_D1,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,M44_D11,NA,NA,NA,NA,NA,NA
-Margaretamys-christinae,Margaretamys,christinae,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM061,NA,NA,NA,NA,NA
-Dasymys-incomtus,Dasymys,incomtus ,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC29,NA,NA,NA,NA,NA
-Taeromys-callitrichus,Taeromys,callitrichus,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC19,NA,NA,NA,NA,NA
-Hybomys-lunaris,Hybomys,lunaris,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM039,NA,NA,NA,NA,NA
-Sundamys-annandalei,Sundamys,annandalei,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC18,NA,NA,NA,NA,NA
-Nesokia-indica,Nesokia,indica,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM053,NA,NA,NA,NA,NA
-Macruromys-major,Macruromys,major,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM045,NA,NA,NA,NA,NA
-Mus-musculoides,Mus,musculoides,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC30,NA,NA,NA,NA,NA
-Pelomys-minor,Pelomys,minor,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC16,NA,NA,NA,NA,NA
-Tarsomys-apoensis,Tarsomys,apoensis,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC21,NA,NA,NA,NA,NA
-Batomys-russatus,Batomys,russatus,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC28,NA,NA,NA,NA,NA
-Halmaheramys-bokimekot,Halmaheramys,bokimekot,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC22,NA,NA,NA,NA,NA
-Chiruromys-vates,Chiruromys,vates,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM035,NA,NA,NA,NA,NA
-Chrotomys-whiteheadi,Chrotomys,whiteheadi,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC34,NA,NA,NA,NA,NA
-Abeomelomys-sevia,Abeomelomys,sevia,Hiseq4000,4;6,3;4,REC32,NA,NA,NA,NA,NA,NA,NA,NA,REC32,NA,NA,NA,NA,REC32
-Berylmys-mackenzii,Berylmys,mackenzii,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM011,NA,NA,NA,NA,NA
-Solomys-salebrosus,Solomys,salebrosus,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM076,NA,NA,NA,NA,NA
-Zelotomys-woosnami,Zelotomys,woosnami,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM081,NA,NA,NA,NA,NA
-Kadarsanomys-sodyi,Kadarsanomys,sodyi,Hiseq4000,4;6,3;4,REC27,NA,NA,NA,NA,NA,NA,NA,NA,REC 27,NA,NA,NA,NA,REC27
-Mallomys-rothschildi,Mallomys,rothschildi,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM046,NA,NA,NA,NA,NA
-Taeromys-taerae,Taeromys,taerae,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC20,NA,NA,NA,NA,NA
-Vandeleuria-oleracea,Vandeleuria,oleracea,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM079,NA,NA,NA,NA,NA
-Mus-pos_ctrl_A,Mus,pos_ctrl_A,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,M44_A12,NA,NA,NA,NA,NA
-Mus-pos_ctrl_G,Mus,pos_ctrl_G,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,M44_G11,NA,NA,NA,NA,NA
-Mus-pos_ctrl_D2,Mus,pos_ctrl_D2,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,M44_D11,NA,NA,NA,NA,NA
-Conilurus-albipes,Conilurus,albipes,Hiseq2500,5,NA,NMV-c7585,NA, NA, NA, NA, NA, NA, NA, NA, NA,53930_HTVLKBCX2_TGCGTCC,53930_HTVLKBCX2_TGCGTCC,NA,NA,NA
-Conilurus-penicillatus,Conilurus,penicillatus,Hiseq2500,5,NA,M14056,NA, NA, NA, NA, NA, NA, NA, NA, NA,53920_HTVLWBCX2_GCTCGAA,53920_HTVLWBCX2_GCTCGAA,NA,NA,NA
-Leggadina-forresti,Leggadina,forresti,Hiseq2500,5,NA,WAMM62323,NA, NA, NA, NA, NA, NA, NA, NA, NA,52918_AH7T2JBCX2_CTGCGAC,52918_AH7T7NBCX2_CTGCGAC,NA,NA,NA
-Leggadina-lakedownensis,Leggadina,lakedownensis,Hiseq2500,5,NA,WAMM21623,NA, NA, NA, NA, NA, NA, NA, NA, NA,52919_AH7T2JBCX2_ACGTATG,52919_AH7T7NBCX2_ACGTATG,NA,NA,NA
-Leporillus-apicalis,Leporillus,apicalis,Hiseq2500,5,NA,C90,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Leporillus-conditor,Leporillus,conditor,Hiseq2500,5,NA,ABTC13335,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Mastacomys-fuscus,Mastacomys,fuscus,Hiseq2500,5,NA,M13957,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Mastacomys-fuscus,Mastacomys,fuscus,Hiseq2500,5,NA,NMB C37546,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Mesembriomys-gouldii,Mesembriomys,gouldii,Hiseq2500,5,NA,ABTC7449,NA, NA, NA, NA, NA, NA, NA, NA, NA,53919_HTVLKBCX2_CTCGATG,53919_HTVLKBCX2_CTCGATG,NA,NA,NA
-Mesembriomys-macrurus,Mesembriomys,macrurus,Hiseq2500,5,NA,ABTC7337,NA, NA, NA, NA, NA, NA, NA, NA, NA,53918_HTVLWBCX2_ATGGAGA,53918_HTVLWBCX2_ATGGAGA,NA,NA,NA
-Notomys-alexis,Notomys,alexis,Hiseq2500,5,NA,U1308,NA, NA, NA, NA, NA, NA, NA, NA, NA,52920_AH7T2JBCX2_ATACTGA,52920_AH7T7NBCX2_ATACTGA,NA,NA,NA
-Notomys-amplus,Notomys,amplus,Hiseq2500,5,NA,NMV-C512,NA, NA, NA, NA, NA, NA, NA, NA, NA,53926_HTVLWBCX2_TTGGATC,53926_HTVLWBCX2_TTGGATC,NA,NA,NA
-Notomys-aquilo,Notomys,aquilo,Hiseq2500,5,NA,M-32455,NA, NA, NA, NA, NA, NA, NA, NA, NA,52921_AH7T2JBCX2_TACTTAG,52921_AH7T7NBCX2_TACTTAG,NA,NA,NA
-Notomys-cervinus,Notomys,cervinus,Hiseq2500,5,NA,M22857,NA, NA, NA, NA, NA, NA, NA, NA, NA,52922_AH7T2JBCX2_AAGCTAA,52922_AH7T7NBCX2_AAGCTAA,NA,NA,NA
-Notomys-fuscus,Notomys,fuscus,Hiseq2500,5,NA,22830,NA, NA, NA, NA, NA, NA, NA, NA, NA,52924_AH7T2JBCX2_AGAAGAC,52924_AH7T7NBCX2_AGAAGAC,NA,NA,NA
-Notomys-longicaudatus,Notomys,longicaudatus,Hiseq2500,5,NA,C6278,NA, NA, NA, NA, NA, NA, NA, NA, NA,52956_BH7T33BCX2_GGTCAAG,52956_BH7T77BCX2_GGTCAAG,NA,NA,NA
-Notomys-macrotis,Notomys,macrotis,Hiseq2500,5,NA,ZD-1841-1167,NA, NA, NA, NA, NA, NA, NA, NA, NA,53929_HTVLKBCX2_AGGTACC,53929_HTVLKBCX2_AGGTACC,NA,NA,NA
-Notomys-mitcheli,Notomys,mitchelli,Hiseq2500,5,NA,ABTC94521,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Notomys-mitchellii,Notomys,mitchellii,Hiseq2500,5,NA,M21518,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-patrius,Pseudomys,patrius,Hiseq2500,5,NA,JM10865,NA, NA, NA, NA, NA,NA, NA, NA, NA,52940_BH7T33BCX2_CCAACCT,52940_BH7T77BCX2_CCAACCT,NA,NA,NA
-Pseudomys-pilligaensis,Pseudomys,pilligaensis,Hiseq2500,5,NA,ABTC18120,NA, NA, NA, NA, NA, NA, NA, NA, NA,52942_BH7T33BCX2_AGAATTA,52942_BH7T77BCX2_AGAATTA,NA,NA,NA
-Pseudomys-shortridgei,Pseudomys,shortridgei,Hiseq2500,5,NA,M7890,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-shortridgei,Pseudomys,shortridgei,Hiseq2500,5,NA,M62127,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-shortridgei,Pseudomys,shortridgei,Hiseq2500,5,NA,Z25113,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Rattus-colletti,Rattus,colletti,Hiseq2500,5,NA,RAT25,NA, NA, NA, NA, NA, NA, NA, NA, NA,52951_BH7T33BCX2_GCTAATC,52951_BH7T77BCX2_GCTAATC,NA,NA,NA
-Rattus-tunneyi,Rattus,tunneyi,Hiseq2500,5,NA,RAT130,NA, NA, NA, NA, NA, NA, NA, NA, NA,52952_BH7T33BCX2_GACTTCT,52952_BH7T77BCX2_GACTTCT,NA,NA,NA
-Zyzomys-argurus,Zyzomys,argurus,Hiseq2500,5,NA,ABTC61630,NA, NA, NA, NA, NA, NA, NA, NA, NA,52946_BH7T33BCX2_AACGACC,52946_BH7T77BCX2_AACGACC,NA,NA,NA
-Zyzomys-maini,Zyzomys,maini,Hiseq2500,5,NA,ABTC07900,NA, NA, NA, NA, NA, NA, NA, NA, NA,52947_BH7T33BCX2_CCAGCGG,52947_BH7T77BCX2_CCAGCGG,NA,NA,NA
-Zyzomys-palatalis,Zyzomys,palatalis,Hiseq2500,5,NA,ABTC30744,NA, NA, NA, NA, NA, NA, NA, NA, NA,52949_BH7T33BCX2_TGGCAAT,52949_BH7T77BCX2_TGGCAAT,NA,NA,NA
-Zyzomys-pedunculatus,Zyzomys,pedunculatus,Hiseq2500,5,NA,Z34925,NA, NA, NA, NA, NA, NA, NA, NA, NA,52948_BH7T33BCX2_TAGTTCC,52948_BH7T77BCX2_TAGTTCC,NA,NA,NA
-Zyzomys-woodwardi,Zyzomys,woodwardi,Hiseq2500,5,NA,WAMM21724,NA, NA, NA, NA, NA, NA, NA, NA, NA,52950_BH7T33BCX2_CGTATAT,52950_BH7T77BCX2_CGTATAT,NA,NA,NA
-Pseudomys-albocinereus,Pseudomys,albocinereus,Hiseq2500,5,NA,WAMM18855,NA, NA, NA, NA, NA, NA, NA, NA, NA,52930_AH7T2JBCX2_AACCTGC,52930_AH7T7NBCX2_AACCTGC,NA,NA,NA
-Pseudomys-apodemoides,Pseudomys,apodemoides,Hiseq2500,5,NA,M16672,NA, NA, NA, NA, NA, NA, NA, NA, NA,52931_AH7T2JBCX2_GACGATT,52931_AH7T7NBCX2_GACGATT,NA,NA,NA
-Pseudomys-auritus,Pseudomys,auritus,Hiseq2500,5,NA,1846_4_4_67,NA, NA, NA, NA, NA, NA, NA, NA, NA,53928_HTVLKBCX2_TAATGCG,53928_HTVLWBCX2_TAATGCG,NA,NA,NA
-Pseudomys-australis,Pseudomys,australis,Hiseq2500,5,NA,M25541,NA, NA, NA, NA, NA, NA, NA, NA, NA,52932_AH7T2JBCX2_TAGGCCG,52932_AH7T7NBCX2_TAGGCCG,NA,NA,NA
-Pseudomys-bolami,Pseudomys,bolami,Hiseq2500,5,NA,ABTC08077,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-bolami,Pseudomys,bolami,Hiseq2500,5,NA,ABTC107389,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-calabyi,Pseudomys,calabyi,Hiseq2500,5,NA,WAMM56280,NA, NA, NA, NA, NA, NA, NA, NA, NA,52938_BH7T33BCX2_AATAAGC,52938_BH7T77BCX2_AATAAGC,NA,NA,NA
-Pseudomys-chapmani,Pseudomys,chapmani,Hiseq2500,5,NA,WAMM29440,NA, NA, NA, NA, NA, NA, NA, NA, NA,52926_AH7T2JBCX2_TCAGCTT,52926_AH7T7NBCX2_TCAGCTT,NA,NA,NA
-Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,JM18363,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,M29247,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,U1509,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,WAMM29247,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-desertor,Pseudomys,desertor,Hiseq2500,5,NA,ABTC41464,NA, NA, NA, NA, NA, NA, NA, NA, NA,52925_AH7T2JBCX2_GTCCGGC,52925_AH7T7NBCX2_GTCCGGC,NA,NA,NA
-Pseudomys-fieldi,Pseudomys,fieldi,Hiseq2500,5,NA,ABTC08164,NA, NA, NA, NA, NA, NA, NA, NA, NA,52941_BH7T33BCX2_GCAGAAG,52941_BH7T77BCX2_GCAGAAG,NA,NA,NA
-Pseudomys-fumeus,Pseudomys,fumeus,Hiseq2500,5,NA,ABTC08168,NA, NA, NA, NA, NA, NA, NA, NA, NA,52955_BH7T33BCX2_AGCAGGT,52955_BH7T77BCX2_AGCAGGT,NA,NA,NA
-Pseudomys-gouldii,Pseudomys,gouldii,Hiseq2500,5,NA,C955,NA, NA, NA, NA, NA, NA, NA, NA, NA,52955_BH7T33BCX2_AGCAGGT,52955_BH7T77BCX2_AGCAGGT,NA,NA,NA
-Pseudomys-gracilicaudatus,Pseudomys,gracilicaudatus,Hiseq2500,5,NA,ABTC08163,NA, NA, NA, NA, NA, NA, NA, NA, NA,52934_AH7T2JBCX2_TTCAACC,52934_AH7T7NBCX2_TTCAACC,NA,NA,NA
-Pseudomys-hermannsburgensis,Pseudomys,hermannsburgensis,Hiseq2500,5,NA,ABTC08067,NA, NA, NA, NA, NA, NA, NA, NA, NA,52943_BH7T33BCX2_CAGCATC,52943_BH7T77BCX2_CAGCATC,NA,NA,NA
-Pseudomys-higginsi,Pseudomys,higginsi,Hiseq2500,5,NA,UC1421,NA, NA, NA, NA, NA, NA, NA, NA, NA,52953_BH7T33BCX2_GTACTAT,52953_BH7T77BCX2_GTACTAT,53925_HTVLKBCX2_ACTATCA,53925_HTVLWBCX2_ACTATCA,NA
-Pseudomys-johnsoni,Pseudomys,johnsoni,Hiseq2500,5,NA,ABTC08053,NA, NA, NA, NA, NA, NA, NA, NA, NA,52935_AH7T2JBCX2_TTAACTC,52935_AH7T7NBCX2_TTAACTC,NA,NA,NA
-Pseudomys-nanus,Pseudomys,nanus,Hiseq2500,5,NA,U1448,NA, NA, NA, NA, NA, NA, NA, NA, NA,52936_AH7T2JBCX2_TAGTCTA,52936_AH7T7NBCX2_TAGTCTA,NA,NA,NA
-Pseudomys-novaehollandiae,Pseudomys,novaehollandiae,Hiseq2500,5,NA,ABTC08140,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-novaehollandiae,Pseudomys,novaehollandiae,Hiseq2500,5,NA,NMV_C22127,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA
-Pseudomys-occidentalis,Pseudomys,occidentalis,Hiseq2500,5,NA,ABTC08043,NA, NA, NA, NA, NA, NA, NA, NA, NA,52939_BH7T33BCX2_AGCCTTG,52939_BH7T77BCX2_AGCCTTG,NA,NA,NA
-Pseudomys-oralis,Pseudomys,oralis,Hiseq2500,5,NA,RAT7,NA, NA, NA, NA, NA, NA, NA, NA, NA,52928_AH7T2JBCX2_GCCTACG,52928_AH7T7NBCX2_GCCTACG,NA,NA,NA
-Rattus-morotaiensis,Rattus,morotaiensis,Hiseq4000,6,4,A-M29,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,A-M29
-Hyomys-goliath,Hyomys,goliath,Hiseq4000,6,4,A42697,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,A42697
-Mastomys-natalensis,Mastomys,natalensis,Hiseq4000,6,4,T4162,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T4162
-Pithechaeir-melanurus,Pithechaeir,melanurus,Hiseq4000,6,4,SM070,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM070
-Crossomys-moncktoni,Crossomys,moncktoni,Hiseq4000,6,4,SM036,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM036
-Eropeplus-canus,Eropeplus,canus,Hiseq4000,6,4,SM115,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM115
-Bunomys-torajae,Bunomys,torajae,Hiseq4000,6,4,SM093,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM093
-Taeromys-celebensis,Taeromys,celebensis,Hiseq4000,6,4,SM094,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM094
-Taeromys-hamatus,Taeromys,hamatus,Hiseq4000,6,4,SM095,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM095
-Thallomys-paedulcus,Thallomys,paedulcus,Hiseq4000,6,4,SM096,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM096
-Anonymomys-mindorensis,Anonymomys,mindorensis,Hiseq4000,6,4,SM098,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM098
-Arvicanthus-neumanni,Arvicanthus,neumanni,Hiseq4000,6,4,SM099,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM099
-Arvicanthus-niloticus,Arvicanthus,niloticus,Hiseq4000,6,4,SM100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM100
-Dephomys-defua,Dephomys,defua,Hiseq4000,6,4,SM101,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM101
-Heimyscus-fumosus,Heimyscus,fumosus,Hiseq4000,6,4,SM104,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM104
-Lophiomys-imhausi,Lophiomys,imhausi,Hiseq4000,6,4,SM105,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM105
-Lophuromys-woosnami,Lophuromys,woosnami,Hiseq4000,6,4,SM106,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM106
-Micaelemys-namaquensis,Micaelemys,namaquensis,Hiseq4000,6,4,SM108,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM108
-Mylomys-dybowskii,Mylomys,dybowskii,Hiseq4000,6,4,SM109,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM109
-Myomyscus-verreauxii,Myomyscus,verreauxii,Hiseq4000,6,4,SM110,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM110
-Rhabdomys-pumilio,Rhabdomys,pumilio,Hiseq4000,6,4,SM112,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM112
-Stochomys-longicaudatus,Stochomys,longicaudatus,Hiseq4000,6,4,SM113,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM113
+Label,Genus,Species,Sequencing platform,Batch,Prep,Sample ID,NextSeq single IDs,NextSeq paired 1 and MiSeq paired ID,NextSeq paired 2 ID,HiSeq paired ID,HiSeq2500 paired ID,HiSeq2000 paired 1 ID,HiSeq2000 paired 2 ID,HiSeq 4000 ID 1,HiSeq 4000 ID 2,Seq run 1 ID,Seq run 2 ID,Seq run 3 ID,Seq run 4 ID,HiSeq 4000 ID 3,count,avg len,N50,L50,avg depth per base (samtools),avg depth per base (mosdepth),avg depth per scaff (mosdepth),avg depth per base to mouse targets (samtools),avg depth per target mouse targets (mosdepth)
+Apomys-lubangensis,Apomys,lubangensis,NextSeq single + paired; Miseq,1,NA,NA,30,JAE169,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,139345,678.0945854,702,42169,19.03147612,19.0293439,16.46857254,21.32109079,18.39946153
+Batomys-salomonseni,Batomys,salomonseni,NextSeq single + paired; Miseq,1,NA,NA,31,JAE3320,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,143927,649.3323699,668,44090,19.95749883,19.94870834,17.50959591,22.86370852,19.08720165
+Bulimus-bagobus,Bulimus,bagobus,NextSeq single + paired; Miseq,1,NA,NA,32,JAE1712,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,134098,703.8034646,718,41736,19.03591958,19.03577435,15.83595087,21.32996415,17.75164983
+Chrotomys-mindorensis,Chrotomys,mindorensis,NextSeq single + paired; Miseq,1,NA,NA,33,JAE520,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,151999,687.4253383,717,45643,21.12610343,21.11706051,18.66517852,25.63993259,22.5189723
+Phloeomys-pallidus,Phloeomys,pallidus,NextSeq single + paired; Miseq,1,NA,NA,34,JEC43,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,137785,678.0716624,691,42616,18.10113982,18.10495326,16.05390971,19.56528266,16.57120067
+Rhynchomys-isarogensis,Rhynchomys,isarogensis,NextSeq single + paired; Miseq,1,NA,NA,35,JAE2195,6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,151009,584.237913,566,48781,19.59168251,19.59087944,17.5573148,22.20114494,19.03041892
+Sundamys-meulleri,Sundamys,meulleri,NextSeq single + paired; Miseq,1,NA,NA,36,JAE1283,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,128646,664.9439625,689,40140,17.53191387,17.54006716,16.45181685,17.83656014,14.67239168
+Taeromys-punicans,Taeromys,punicans,NextSeq single + paired; Miseq; Hiseq4000,1,2,NA,37,JLP25862,8,NA,NA,NA,NA,SM077,NA,NA,NA,NA,NA,NA,134892,1037.071865,1012,40229,32.71215825,32.72038988,27.87012595,49.19855357,44.51006323
+Hyorhinomys-stuempkei,Hyorhinomys,stuempkei,NextSeq single + paired; Miseq,1,NA,NA,38,JAE4661,9,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,130939,709.0442954,729,39677,17.52308546,17.52324907,14.97605923,19.1883313,16.47023032
+Hybomys-univittatus,Hybomys,univittatus,NextSeq single + paired; Miseq,1,NA,NA,39,TCD4026,10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,139535,611.2046942,631,43898,16.30838975,16.29978016,15.15713957,17.15736181,14.76338993
+Colomys-goslingi,Colomys,goslingi,NextSeq single + paired; Miseq,1,NA,NA,40,TCD4175,11,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,134062,723.5439797,741,39050,25.04955611,25.05077836,21.36619609,29.10258032,26.46001394
+Malacomys-longipes,Malacomys,longipes,NextSeq single + paired; Miseq,1,NA,NA,41,TCD4253,12,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,143150,697.1523926,709,43054,21.25463864,21.29927278,18.83226937,24.12214907,21.83820678
+Hylomyscus-vulcanorum,Hylomyscus,vulcanorum,NextSeq single + paired; Miseq,1,NA,NA,42,TCD4382,13,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,175170,598.8425187,636,52646,25.77971815,25.77150997,25.13948798,31.59729534,28.78822878
+Praomys-degraaffi,Praomys,degraaffi,NextSeq single + paired; Miseq,1,NA,NA,43,TCD4312,14,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,142469,618.3346482,644,42848,17.22836664,17.22189011,16.93237504,18.28542996,16.46985753
+Grammomys-sp,Grammomys,sp,NextSeq single + paired; Miseq,1,NA,NA,44,TCD4560,15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,149255,701.259261,724,45193,24.55932851,24.55439517,21.64342019,29.77472035,26.37121421
+Lemniscomys-striatus,Lemniscomys,striatus,NextSeq single + paired; Miseq,1,NA,NA,45,TCD4711,16,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,137454,683.880571,702,42244,19.21800428,19.22096619,16.70219361,21.32198372,18.51140565
+Berylymys-bowersi,Berylymys,bowersi,NextSeq single + paired; Miseq,1,NA,NA,46,ABTC116431,17,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,159122,615.9141351,614,49513,31.37304161,31.38469886,27.8289092,37.88927142,32.38876771
+Crunomys-celebensis,Crunomys,celebensis,NextSeq single + paired; Miseq,1,NA,NA,47,Z21894,18,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,140165,691.8679057,704,43947,20.49119523,20.48987602,17.92684971,23.13468231,19.66833595
+Echiothrix-centrosa,Echiothrix,centrosa,NextSeq single + paired; Miseq,1,NA,NA,48,Z27993,19,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,130807,643.8486243,652,41307,17.14232207,17.14562291,14.65282447,18.18898297,15.38523629
+Gracillimus-radix,Gracillimus,radix,NextSeq single + paired; Miseq,1,NA,NA,49,Z08508,20,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,152085,696.9547293,708,46449,26.40106863,26.39750446,23.82470835,32.55126842,28.01615708
+Leopoldomys-sabanus,Leopoldomys,sabanus,NextSeq single + paired; Miseq,1,NA,NA,50,Z25191,21,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,142306,691.315714,693,44307,21.37734212,21.3772818,17.98907586,25.13838632,21.23724773
+Margaretamys-parvus,Margaretamys,parvus,NextSeq single + paired; Miseq; Hiseq4000,1,2,NA,51,Z21794,22,NA,NA,NA,NA,SM062,NA,NA,NA,NA,NA,NA,136833,1016.717495,996,40523,34.27333521,34.28766454,29.81897042,52.05671825,47.44664681
+Melasmothrix-naso,Melasmothrix,naso,NextSeq single + paired; Miseq,1,NA,NA,52,Z21808,23,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,137536,693.3107186,699,42160,19.81651302,19.81668019,16.64144529,22.10807797,19.03343063
+Paucidentomys-vermidax,Paucidentomys,vermidax,NextSeq single + paired; Miseq,1,NA,NA,53,Z21914,24,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,141381,695.4176021,707,43753,18.20638276,18.20274106,15.70432222,20.8217993,17.91678637
+Sommeromys-macrorhinos,Sommeromys,macrorhinos,NextSeq single + paired; Miseq,1,NA,NA,54,Z21740,25,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,133130,671.0550815,696,40136,19.34157761,19.33335456,16.84309772,21.1779093,18.01361855
+Tateomys-macrocercus,Tateomys,macrocercus,NextSeq single + paired; Miseq,1,NA,NA,55,Z21834,26,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,125140,655.1206489,668,38848,16.86932407,16.87163984,13.99834617,17.66748604,15.01415248
+Tateomys-rhinogradoides,Tateomys,rhinogradoides,NextSeq single + paired; Miseq,1,NA,NA,56,Z21785,27,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,141567,713.0679254,727,43085,21.70286872,21.70408584,18.11144652,25.94880724,22.81723452
+Waiomys-mamasae,Waiomys,mamasae,NextSeq single + paired; Miseq,1,NA,NA,57,Z20624,28,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,153261,590.1106152,585,48255,31.35864234,31.35956791,27.60726688,37.54188317,31.96304825
+Chiropodomys-gliroides,Chiropodomys,gliroides,NextSeq single + paired; Miseq,1,NA,NA,58,Z25153,29,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,135280,660.175717,667,42107,18.55732319,18.57476101,16.41463335,20.29786034,17.57879094
+Lorentzimys-nouhuysi,Lorentzimys,nouhuysi,NextSeq single + paired; Miseq,1,NA,NA,59,ABTC-46314,30,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,147103,706.838331,731,42990,25.35721028,25.34769809,21.74747544,31.44677155,27.58885384
+Mastacomys-fuscus,Mastacomys,fuscus,NextSeq single + paired; Miseq,1,NA,NA,60,ABTC-07354,31,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,141254,684.9679372,696,42838,22.78145481,22.78447084,19.94018208,26.40221717,23.18245704
+Melomys-rufescens,Melomys,rufescens,NextSeq single + paired; Miseq,1,NA,NA,61,ABTC-44798,32,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,143854,639.0973904,648,43837,22.76628765,22.76976975,19.8250554,25.98957335,22.78442462
+Hydromys-chrysogaster,Hydromys,chrysogaster,NextSeq single + paired; Miseq,1,NA,NA,62,Z5248,33,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,124826,522.9611059,515,40514,14.06333244,14.06272091,13.76533326,13.66521581,11.46978031
+Apodemus-sylvaticus,Apodemus,sylvaticus,NextSeq single + paired; Miseq,1,NA,NA,63,SMG3823,34,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,138655,675.6784826,700,42114,18.86555376,18.86044717,16.91029231,20.79108298,17.85834686
+Archboldomys-luzonensis,Archboldomys,luzonensis,NextSeq single + paired; Miseq,1,NA,NA,64,EAR1826,35,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,135236,699.8938079,717,40872,19.04101321,19.0567505,16.10615095,21.6174318,18.7688985
+Bunomys-chrysocomus,Bunomys,chrysocomus,NextSeq single + paired; Miseq,1,NA,NA,65,JAE4867,36,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,151881,632.9812946,662,45492,21.75798828,21.74913545,19.99275683,25.82638968,21.7939671
+Haeromys-minahassae,Haeromys,minahassae,NextSeq single + paired; Miseq,1,NA,NA,66,JAE4996,37,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,134872,666.457367,680,42437,17.78877316,17.78909008,15.39391942,19.01097899,16.49739454
+Maxomys-surifer,Maxomys,surifer,NextSeq single + paired; Miseq,1,NA,NA,67,JAE3632,38,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,156763,623.9402346,660,47706,20.57825982,20.5624732,18.69326448,24.18632272,20.91734867
+Niviventer-lepturus,Niviventer,lepturus,NextSeq single + paired; Miseq,1,NA,NA,68,JAE4746,39,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,141359,650.1360366,671,43321,19.95446189,19.95097796,17.71298432,22.82350622,18.91553363
+Paruromys-dominator,Paruromys,dominator,NextSeq single + paired; Miseq,1,NA,NA,69,JAE4870,40,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,117764,659.3876567,674,37349,15.44009544,15.5096582,12.92894297,14.73322788,11.88367971
+Bunomys-andrewsi,Bunomys,andrewsi,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,andrewsii,GATGCC,NA,NA,NA,NA,NA,NA,NA,NA,NA,105827,588.649494,593,34418,17.7911747,17.75051461,16.44784743,18.08543907,14.76896846
+Rattus-exulans,Rattus,exulans,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,exulans,TGACGT and GCATTG,NA,NA,NA,NA,NA,NA,NA,NA,NA,142710,670.226228,680,42268,30.19228716,30.16922779,28.69523825,39.9074218,33.92255602
+Rattus-hoffmanni,Rattus,hoffmanni,Hiseq; Hiseq2500; Hiseq4000,2,3,NA,NA,NA,NA,hoffmanni,CCGATT and GATCTC,NA,NA,NA,SM074,NA,NA,NA,NA,NA,170380,846.2431037,900,47192,49.03041047,48.92688555,43.45528043,85.30994766,76.89072673
+Rattus-leucopus,Rattus,leucopus,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,leucopus,ATGCCG,NA,NA,NA,NA,NA,NA,NA,NA,NA,94191,658.3489505,631,30398,19.61077508,19.60332186,18.1436546,20.3156377,16.11551648
+Rattus-lutreolus,Rattus,lutreolus,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,lutreolus,CAATAT,NA,NA,NA,NA,NA,NA,NA,NA,NA,105397,636.9018473,621,33146,22.04681362,22.06061213,20.80479881,24.13950162,19.49532048
+Maxomys-musschenbroekii,Maxomys,musschenbroekii,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,musschenbroekii,CAATTA,NA,NA,NA,NA,NA,NA,NA,NA,NA,103330,624.9898577,612,32974,20.12538669,20.10213359,18.9512491,21.11413732,17.47969741
+Rattus-praetor,Rattus,praetor,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,praetor,CAGTAC,NA,NA,NA,NA,NA,NA,NA,NA,NA,105015,573.5469123,583,32999,17.86712453,17.80924277,16.30008037,18.2925956,14.34816746
+Rattus-villosissimus,Rattus,villosissimus,Hiseq; Hiseq2500,2,NA,NA,NA,NA,NA,vilosissimus,AGATAG,NA,NA,NA,NA,NA,NA,NA,NA,NA,118897,580.6568038,598,36109,21.90404389,21.83572459,19.93857423,24.58716769,19.91037819
+Mus-caroli,Mus,caroli,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X9,ACCAAC,NA,NA,NA,NA,NA,NA,NA,135483,730.7811386,713,37241,22.48235532,22.4650262,20.77005004,29.26240443,28.65390837
+Mus-cervicolor,Mus,cervicolor,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X10,CCGGTA,NA,NA,NA,NA,NA,NA,NA,135828,723.4412419,695,36583,41.90797354,41.92203604,38.72865035,56.56845148,55.66159789
+Mus-cookii,Mus,cookii,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X3,CCTAGG,NA,NA,NA,NA,NA,NA,NA,145337,741.261303,715,39354,37.52901309,37.51411691,33.94239726,53.17099314,52.34763793
+Mus-macedonicus,Mus,macedonicus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X12,TTGAAG,NA,NA,NA,NA,NA,NA,NA,130945,785.6194433,757,35765,24.40136457,24.47123326,21.76832204,32.29575655,31.70358923
+Mus-minutoides,Mus,minutoides,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X2,CTCTGC,NA,NA,NA,NA,NA,NA,NA,138313,692.0317758,678,37655,32.01631703,31.99012225,29.69196988,42.78580753,41.791736
+Mus-molossinus,Mus,molossinus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X8,GCTCGA,NA,NA,NA,NA,NA,NA,NA,168088,701.2841666,711,45360,38.19198454,38.1573142,34.48532911,58.23867539,57.12159973
+Mus-musculus-castaneus,Mus,musculus castaneus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X7,CTCGAT,NA,NA,NA,NA,NA,NA,NA,161926,704.2479034,694,44262,41.0799674,41.03776833,37.28285507,60.91218035,59.8230099
+Mus-musculus-domesticus,Mus,musculus domesticus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X15,CGACCT,NA,NA,NA,NA,NA,NA,NA,158958,678.7702475,684,42234,25.06095502,25.01989816,22.20649341,34.90856742,34.24949353
+Mus-musculus-musculus,Mus,musculus musculus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X14,TTGGAT,NA,NA,NA,NA,NA,NA,NA,155499,667.2718796,670,43565,34.89237057,34.90363472,31.84963099,48.8986456,47.38750176
+Mus-musculus-reference,Mus,musculus reference,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X5,GCAAGA,NA,NA,NA,NA,NA,NA,NA,130598,684.5260494,678,35014,26.26725703,26.23409097,24.97619267,32.71071449,32.05923882
+Mus-pahari,Mus,pahari,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X1,TCGCAG,NA,NA,NA,NA,NA,NA,NA,134692,649.0169275,649,38318,30.42464113,30.39573869,28.5830278,38.13897266,36.58809216
+Mus-platythrix,Mus,platythrix,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X13,ACTATC,NA,NA,NA,NA,NA,NA,NA,155522,556.0441995,595,40720,44.56695469,44.40256001,39.7837886,58.87222323,57.26535442
+Mus-spicilegus,Mus,spicilegus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X11,AACTCC,NA,NA,NA,NA,NA,NA,NA,112773,735.4638522,708,30917,28.74054052,28.87965797,26.43101948,34.1641395,33.4130106
+Mus-spretus,Mus,spretus,Hiseq2000,3,NA,NA,NA,NA,NA,NA,NA,10460X4,GGATCA,NA,NA,NA,NA,NA,NA,NA,124507,776.4834106,744,34199,23.62566515,23.62929123,20.74631772,30.49700734,29.84397237
+Coccymys-ruemmleri,Coccymys,ruemmleri,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM033,NA,NA,NA,NA,NA,NA,128027,1078.461504,1055,37306,18.81619514,18.81555585,16.05131191,28.01845057,26.07467535
+Grammomys-dryas,Grammomys,dryas,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC8,NA,NA,NA,NA,NA,NA,155206,963.5583934,1057,41579,17.70861177,17.53020203,14.74364902,28.16547054,25.87935789
+Carpomys-melanurus,Carpomys,melanurus,Hiseq4000,4,1;4,SM085,NA,NA,NA,NA,NA,NA,NA,SM085,NA,NA,NA,NA,NA,SM085,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Crateromys-heaneyi,Crateromys,heaneyi,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC4,NA,NA,NA,NA,NA,NA,162340,924.1215474,1058,42677,19.31828843,19.09238462,15.84937107,31.19500283,27.56789325
+Dasymys-montanus,Dasymys,montanus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM086,NA,NA,NA,NA,NA,NA,156863,958.0894029,1037,42346,18.85665774,18.70150653,16.45881514,29.35479647,27.22283342
+Aethomys-hindei,Aethomys,hindei,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC1,NA,NA,NA,NA,NA,NA,162750,935.1070108,1013,44571,22.14145292,22.02455197,19.27291889,36.14979433,33.56345697
+Hylomyscus-stella,Hylomyscus,stella,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC10,NA,NA,NA,NA,NA,NA,138928,1148.049033,1174,40023,21.70458064,21.70364489,18.68266044,34.82259228,32.83836521
+Anisomys-imitator,Anisomys,imitator,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM008,NA,NA,NA,NA,NA,NA,185352,848.9492479,958,47887,24.97552674,24.61036852,19.75338917,42.37299117,39.89793883
+Crunomys-melanius,Crunomys,melanius,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC5,NA,NA,NA,NA,NA,NA,146065,964.8651491,1031,40988,18.09984501,17.99164791,15.63014918,27.4484876,24.65620155
+Niviventer-rapit,Niviventer,rapit,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM056,NA,NA,NA,NA,NA,NA,164849,765.0202003,838,46391,19.331232,19.05407374,16.22331813,28.74830682,24.93794979
+Phloeomys-cumingii,Phloeomys,cumingii,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM069,NA,NA,NA,NA,NA,NA,129118,1019.752908,973,39317,19.60449185,19.62547593,16.86937011,28.24073054,25.41516616
+Aethomys-nyikae,Aethomys,nyikae,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM084,NA,NA,NA,NA,NA,NA,127946,1139.346373,1137,36731,21.20757803,21.2166885,17.52014772,32.89990916,30.56207521
+Hybomys-planifrons,Hybomys,planifrons,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM040,NA,NA,NA,NA,NA,NA,160698,898.6560878,931,45424,21.98725633,21.95660967,19.39882699,33.96813149,31.50448486
+Pogonomys-macrourus,Pogonomys,macrourus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM071,NA,NA,NA,NA,NA,NA,130705,1039.182832,1014,38069,25.30256171,25.45636946,22.41349933,38.33925662,36.12494308
+Musseromys-anacuao,Musseromys,anacuao,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM063,NA,NA,NA,NA,NA,NA,144034,937.0180235,960,41502,17.63873067,17.51805163,15.16416672,26.16598145,23.03581702
+Limnomys-sibuanus,Limnomys,sibuanus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM089,NA,NA,NA,NA,NA,NA,137124,1026.285355,1096,37864,18.20955068,18.11322601,15.435518,28.25932741,24.89659206
+Pithecheir-melanurus,Pithecheir,melanurus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM070,NA,NA,NA,NA,NA,NA,164070,823.5223502,885,45008,16.13199563,15.8900517,13.90938886,22.66190741,21.03534282
+Thamnomys-sp.,Thamnomys,sp.,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC24,NA,NA,NA,NA,NA,NA,171420,892.5647707,955,47028,21.77908104,21.5697312,18.31966427,35.73779173,33.25528703
+Mammelomys-lanosus,Mammelomys,lanosus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM047,NA,NA,NA,NA,NA,NA,173228,750.2214249,827,47510,19.04873949,18.74811439,16.01679578,28.44503997,25.93702698
+Xenuromys-barbatus,Xenuromys,barbatus,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM010,NA,NA,NA,NA,NA,NA,131780,1026.720663,994,38431,24.80095006,24.80599318,21.24987593,38.25218661,35.56320627
+Hydromys-sp-nov,Hydromys,sp nov,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,REC9,NA,NA,NA,NA,NA,NA,134163,1011.467856,1072,37649,21.98958052,21.93648977,18.98941511,33.69462942,30.93134677
+Xeromys-myoides,Xeromys,myoides,Hiseq4000,4,1;4,SM080,NA,NA,NA,NA,NA,NA,NA,SM080,NA,NA,NA,NA,NA,SM080,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudohydromys-ellermani,Pseudohydromys,ellermani,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM073,NA,NA,NA,NA,NA,NA,149407,871.7365652,912,41319,24.70260294,24.58804011,21.93831534,36.34867941,33.49532564
+Leptomys-elegans,Leptomys,elegans,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM044,NA,NA,NA,NA,NA,NA,164612,827.4496756,897,45170,19.72854581,19.53544405,17.64022398,28.71029288,26.5190284
+Pelomys-isseli,Pelomys,isseli,Hiseq4000,4,1,NA,NA,NA,NA,NA,NA,NA,NA,SM068,NA,NA,NA,NA,NA,NA,169656,852.6613441,923,45976,20.44754211,20.19978903,17.41737162,31.41046003,29.01050127
+Niviventer-bukit,Niviventer,bukit,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM054,NA,NA,NA,NA,NA,NA,157457,843.9653937,881,45301,22.23721218,22.09934085,19.44496326,34.10768109,29.89745126
+Genus-sp-nov,Genus,sp nov,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM059,NA,NA,NA,NA,NA,NA,176846,797.6237235,878,48854,21.19916689,20.88722013,17.20587777,34.1731195,30.33755846
+Saxatilomys-paulinae,Saxatilomys,paulinae,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM075,NA,NA,NA,NA,NA,NA,158010,857.4402759,901,44762,18.97590952,18.78446671,15.94117948,29.23299183,25.96307135
+Crunomys-sp.,Crunomys,sp.,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC6,NA,NA,NA,NA,NA,NA,125256,1085.89646,1089,37092,17.89663219,17.90810521,15.41264171,26.56867864,23.87483459
+Microhydromys-richardsoni,Microhydromys,richardsoni,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM050,NA,NA,NA,NA,NA,NA,171635,831.5607423,912,46453,20.62258559,20.39663132,17.71767693,32.10332978,29.44758798
+Uromys-caudimaculatus,Uromys,caudimaculatus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM078,NA,NA,NA,NA,NA,NA,129179,1013.79091,997,37406,21.59644575,21.60663251,18.85273024,31.15419834,28.77949325
+Mirzamys-louiseae,Mirzamys,louiseae,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM051,NA,NA,NA,NA,NA,NA,131127,1030.712416,1008,37950,23.14816534,23.14734507,19.97316266,35.02997168,32.48855375
+Papagomys-armandvillei,Papagomys,armandvillei,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM057,NA,NA,NA,NA,NA,NA,157163,877.504069,913,44691,22.78562807,22.64667252,19.5047641,36.02968903,32.03522967
+Chiromyscus-chiropus,Chiromyscus,chiropus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM034,NA,NA,NA,NA,NA,NA,159949,810.0159613,850,46571,19.95112399,19.80225089,17.52575283,30.57453063,26.7155832
+Pogonomelomys-bruijni,Pogonomelomys,bruijni,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC26,NA,NA,NA,NA,NA,NA,128031,957.792105,937,38130,20.49299105,20.51164237,18.47307824,26.85958145,24.64239585
+Paraleptomys-sp,Paraleptomys,sp,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM065,NA,NA,NA,NA,NA,NA,170616,820.2771721,886,46240,23.41548989,23.18640223,20.1305333,36.69809955,34.00341741
+Oenomys-hypoxanthus,Oenomys,hypoxanthus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC13,NA,NA,NA,NA,NA,NA,163485,865.6621831,916,45193,21.13610635,20.96786637,18.02562657,33.29332185,30.88990149
+Bandicota-indica,Bandicota,indica,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM009,NA,NA,NA,NA,NA,NA,129591,850.7431226,860,38823,20.79652638,20.73133252,18.69349623,28.49810212,24.62974308
+Rattus-xanthurus,Rattus,xanthurus,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC17,NA,NA,NA,NA,NA,NA,164911,881.647998,948,46081,20.8366746,20.66591361,17.85374923,33.94775026,30.16147468
+Lenomys-meyeri,Lenomys,meyeri,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC11,NA,NA,NA,NA,NA,NA,154527,905.0742524,1021,41675,21.43455538,21.33269117,19.6447914,32.86741518,29.34687154
+Thamnomys-kempi,Thamnomys,kempi,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC23,NA,NA,NA,NA,NA,NA,210008,679.0805065,791,55140,18.84990138,18.3315271,15.21927708,29.34922692,27.16887466
+Parahydromys-asper,Parahydromys,asper,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM058,NA,NA,NA,NA,NA,NA,159728,802.0797481,861,44167,20.5727962,20.37754213,17.99142248,30.75203348,28.13183812
+Rattus-argentiventer,Rattus,argentiventer,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM042,NA,NA,NA,NA,NA,NA,125117,929.0827785,888,39216,19.85381796,19.85990335,17.81624224,27.81559846,24.20018124
+Uromys-sp-nov,Uromys,sp nov,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC25,NA,NA,NA,NA,NA,NA,125294,966.3421153,945,36753,22.63794988,22.67681969,20.13947763,31.42056857,28.92985472
+Otomys-tropicalis,Otomys,tropicalis,Hiseq4000,4,2;4,REC15,NA,NA,NA,NA,NA,NA,NA,REC15,NA,NA,NA,NA,NA,REC15,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Niviventer-cremoriventer,Niviventer,cremoriventer,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,SM055,NA,NA,NA,NA,NA,NA,200912,720.2120033,819,55002,25.34047639,24.98949635,21.07667327,42.15002849,37.24206694
+Otomys-denti,Otomys,denti,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC14,NA,NA,NA,NA,NA,NA,197089,739.2509272,867,51577,19.90452239,19.5971802,17.2188354,31.31974429,29.09548269
+Praomys-jacksoni,Praomys,jacksoni,Hiseq4000,4,2,NA,NA,NA,NA,NA,NA,NA,NA,REC31,NA,NA,NA,NA,NA,NA,167369,788.9976399,868,45410,21.24446743,21.07901255,19.02822452,31.33166121,29.43998242
+Margaretamys-christinae,Margaretamys,christinae,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM061,NA,NA,NA,NA,NA,129380,949.7187278,928,38298,24.11552763,24.14890939,22.22381311,33.21394054,30.170688
+Dasymys-incomtus,Dasymys,incomtus ,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC29,NA,NA,NA,NA,NA,172204,744.216923,834,46279,20.84610194,20.63547119,18.20103041,30.94865284,28.62698546
+Taeromys-callitrichus,Taeromys,callitrichus,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC19,NA,NA,NA,NA,NA,126834,1031.984145,1037,37504,23.74381195,23.75239478,20.24625487,36.03649344,32.13858522
+Hybomys-lunaris,Hybomys,lunaris,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM039,NA,NA,NA,NA,NA,161159,789.1895892,849,44423,23.24118748,23.08458279,20.86389851,35.19272259,32.16403565
+Sundamys-annandalei,Sundamys,annandalei,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC18,NA,NA,NA,NA,NA,130083,958.8963354,937,39284,23.46584683,23.48184688,20.97661324,34.64067479,30.81125856
+Nesokia-indica,Nesokia,indica,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM053,NA,NA,NA,NA,NA,146100,746.1911841,798,42057,23.59368412,23.40058869,21.12937789,32.44133351,28.23923052
+Macruromys-major,Macruromys,major,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM045,NA,NA,NA,NA,NA,131377,874.4897204,887,38156,29.4413833,29.41812401,26.88313145,39.78806207,37.12903458
+Mus-musculoides,Mus,musculoides,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC30,NA,NA,NA,NA,NA,225709,734.9194715,865,57744,32.69002967,32.58986212,27.25444679,58.2738322,58.01303078
+Pelomys-minor,Pelomys,minor,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC16,NA,NA,NA,NA,NA,134887,1037.365061,1016,40056,25.7547627,25.76100031,22.24540704,39.76067284,36.78913797
+Tarsomys-apoensis,Tarsomys,apoensis,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC21,NA,NA,NA,NA,NA,124300,965.129292,942,37725,22.9747081,22.98781276,20.4166321,33.16470288,29.18218522
+Batomys-russatus,Batomys,russatus,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC28,NA,NA,NA,NA,NA,121532,970.6681944,941,37188,19.73519044,19.76609378,17.44672745,27.32414296,23.91387231
+Halmaheramys-bokimekot,Halmaheramys,bokimekot,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC22,NA,NA,NA,NA,NA,124860,968.1841502,945,38114,21.48235789,21.48605294,18.9009984,31.29968529,27.78243743
+Chiruromys-vates,Chiruromys,vates,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM035,NA,NA,NA,NA,NA,126017,974.2020362,952,37129,28.07482878,28.08260559,24.67366879,40.67855906,37.91084262
+Chrotomys-whiteheadi,Chrotomys,whiteheadi,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC34,NA,NA,NA,NA,NA,119838,935.6263623,910,36578,23.08415919,23.08734342,20.81283583,31.71568775,28.83005628
+Abeomelomys-sevia,Abeomelomys,sevia,Hiseq4000,4,3;4,REC32,NA,NA,NA,NA,NA,NA,NA,NA,REC32,NA,NA,NA,NA,REC32,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Berylmys-mackenzii,Berylmys,mackenzii,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM011,NA,NA,NA,NA,NA,105947,874.3354696,842,33493,26.68426458,26.7161073,24.60405457,31.28083026,27.27617109
+Solomys-salebrosus,Solomys,salebrosus,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM076,NA,NA,NA,NA,NA,153978,786.625479,837,42888,26.16754115,25.98989459,23.09058554,37.43201759,34.30653847
+Zelotomys-woosnami,Zelotomys,woosnami,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM081,NA,NA,NA,NA,NA,164818,790.6894089,854,44512,25.35588357,25.38875171,22.32414014,37.55812392,35.55785572
+Kadarsanomys-sodyi,Kadarsanomys,sodyi,Hiseq4000,4,3;4,REC27,NA,NA,NA,NA,NA,NA,NA,NA,REC 27,NA,NA,NA,NA,REC27,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mallomys-rothschildi,Mallomys,rothschildi,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM046,NA,NA,NA,NA,NA,129458,853.5511903,875,37051,25.4447763,25.38150122,23.29364852,33.78448262,31.32782332
+Taeromys-taerae,Taeromys,taerae,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,REC20,NA,NA,NA,NA,NA,118974,959.6234976,946,36067,23.86625843,23.88927979,21.56701582,33.24616317,29.63587852
+Vandeleuria-oleracea,Vandeleuria,oleracea,Hiseq4000,4,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM079,NA,NA,NA,NA,NA,151790,750.6268661,812,42391,24.38318908,24.19535625,21.48288958,35.04701804,31.65771055
+Conilurus-albipes,Conilurus,albipes,Hiseq2500,5,NA,NMV-c7585,NA, NA, NA, NA, NA, NA, NA, NA, NA,53930_HTVLKBCX2_TGCGTCC,53930_HTVLKBCX2_TGCGTCC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Conilurus-penicillatus,Conilurus,penicillatus,Hiseq2500,5,NA,M14056,NA, NA, NA, NA, NA, NA, NA, NA, NA,53920_HTVLWBCX2_GCTCGAA,53920_HTVLWBCX2_GCTCGAA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Leggadina-forresti,Leggadina,forresti,Hiseq2500,5,NA,WAMM62323,NA, NA, NA, NA, NA, NA, NA, NA, NA,52918_AH7T2JBCX2_CTGCGAC,52918_AH7T7NBCX2_CTGCGAC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Leggadina-lakedownensis,Leggadina,lakedownensis,Hiseq2500,5,NA,WAMM21623,NA, NA, NA, NA, NA, NA, NA, NA, NA,52919_AH7T2JBCX2_ACGTATG,52919_AH7T7NBCX2_ACGTATG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Leporillus-apicalis,Leporillus,apicalis,Hiseq2500,5,NA,C90,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Leporillus-conditor,Leporillus,conditor,Hiseq2500,5,NA,ABTC13335,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mastacomys-fuscus,Mastacomys,fuscus,Hiseq2500,5,NA,M13957,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mastacomys-fuscus,Mastacomys,fuscus,Hiseq2500,5,NA,NMB C37546,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mesembriomys-gouldii,Mesembriomys,gouldii,Hiseq2500,5,NA,ABTC7449,NA, NA, NA, NA, NA, NA, NA, NA, NA,53919_HTVLKBCX2_CTCGATG,53919_HTVLKBCX2_CTCGATG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mesembriomys-macrurus,Mesembriomys,macrurus,Hiseq2500,5,NA,ABTC7337,NA, NA, NA, NA, NA, NA, NA, NA, NA,53918_HTVLWBCX2_ATGGAGA,53918_HTVLWBCX2_ATGGAGA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-alexis,Notomys,alexis,Hiseq2500,5,NA,U1308,NA, NA, NA, NA, NA, NA, NA, NA, NA,52920_AH7T2JBCX2_ATACTGA,52920_AH7T7NBCX2_ATACTGA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-amplus,Notomys,amplus,Hiseq2500,5,NA,NMV-C512,NA, NA, NA, NA, NA, NA, NA, NA, NA,53926_HTVLWBCX2_TTGGATC,53926_HTVLWBCX2_TTGGATC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-aquilo,Notomys,aquilo,Hiseq2500,5,NA,M-32455,NA, NA, NA, NA, NA, NA, NA, NA, NA,52921_AH7T2JBCX2_TACTTAG,52921_AH7T7NBCX2_TACTTAG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-cervinus,Notomys,cervinus,Hiseq2500,5,NA,M22857,NA, NA, NA, NA, NA, NA, NA, NA, NA,52922_AH7T2JBCX2_AAGCTAA,52922_AH7T7NBCX2_AAGCTAA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-fuscus,Notomys,fuscus,Hiseq2500,5,NA,22830,NA, NA, NA, NA, NA, NA, NA, NA, NA,52924_AH7T2JBCX2_AGAAGAC,52924_AH7T7NBCX2_AGAAGAC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-longicaudatus,Notomys,longicaudatus,Hiseq2500,5,NA,C6278,NA, NA, NA, NA, NA, NA, NA, NA, NA,52956_BH7T33BCX2_GGTCAAG,52956_BH7T77BCX2_GGTCAAG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-macrotis,Notomys,macrotis,Hiseq2500,5,NA,ZD-1841-1167,NA, NA, NA, NA, NA, NA, NA, NA, NA,53929_HTVLKBCX2_AGGTACC,53929_HTVLKBCX2_AGGTACC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-mitcheli,Notomys,mitchelli,Hiseq2500,5,NA,ABTC94521,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Notomys-mitchellii,Notomys,mitchellii,Hiseq2500,5,NA,M21518,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-patrius,Pseudomys,patrius,Hiseq2500,5,NA,JM10865,NA, NA, NA, NA, NA,NA, NA, NA, NA,52940_BH7T33BCX2_CCAACCT,52940_BH7T77BCX2_CCAACCT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-pilligaensis,Pseudomys,pilligaensis,Hiseq2500,5,NA,ABTC18120,NA, NA, NA, NA, NA, NA, NA, NA, NA,52942_BH7T33BCX2_AGAATTA,52942_BH7T77BCX2_AGAATTA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-shortridgei,Pseudomys,shortridgei,Hiseq2500,5,NA,M7890,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-shortridgei,Pseudomys,shortridgei,Hiseq2500,5,NA,M62127,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-shortridgei,Pseudomys,shortridgei,Hiseq2500,5,NA,Z25113,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Rattus-colletti,Rattus,colletti,Hiseq2500,5,NA,RAT25,NA, NA, NA, NA, NA, NA, NA, NA, NA,52951_BH7T33BCX2_GCTAATC,52951_BH7T77BCX2_GCTAATC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Rattus-tunneyi,Rattus,tunneyi,Hiseq2500,5,NA,RAT130,NA, NA, NA, NA, NA, NA, NA, NA, NA,52952_BH7T33BCX2_GACTTCT,52952_BH7T77BCX2_GACTTCT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Zyzomys-argurus,Zyzomys,argurus,Hiseq2500,5,NA,ABTC61630,NA, NA, NA, NA, NA, NA, NA, NA, NA,52946_BH7T33BCX2_AACGACC,52946_BH7T77BCX2_AACGACC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Zyzomys-maini,Zyzomys,maini,Hiseq2500,5,NA,ABTC07900,NA, NA, NA, NA, NA, NA, NA, NA, NA,52947_BH7T33BCX2_CCAGCGG,52947_BH7T77BCX2_CCAGCGG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Zyzomys-palatalis,Zyzomys,palatalis,Hiseq2500,5,NA,ABTC30744,NA, NA, NA, NA, NA, NA, NA, NA, NA,52949_BH7T33BCX2_TGGCAAT,52949_BH7T77BCX2_TGGCAAT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Zyzomys-pedunculatus,Zyzomys,pedunculatus,Hiseq2500,5,NA,Z34925,NA, NA, NA, NA, NA, NA, NA, NA, NA,52948_BH7T33BCX2_TAGTTCC,52948_BH7T77BCX2_TAGTTCC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Zyzomys-woodwardi,Zyzomys,woodwardi,Hiseq2500,5,NA,WAMM21724,NA, NA, NA, NA, NA, NA, NA, NA, NA,52950_BH7T33BCX2_CGTATAT,52950_BH7T77BCX2_CGTATAT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-albocinereus,Pseudomys,albocinereus,Hiseq2500,5,NA,WAMM18855,NA, NA, NA, NA, NA, NA, NA, NA, NA,52930_AH7T2JBCX2_AACCTGC,52930_AH7T7NBCX2_AACCTGC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-apodemoides,Pseudomys,apodemoides,Hiseq2500,5,NA,M16672,NA, NA, NA, NA, NA, NA, NA, NA, NA,52931_AH7T2JBCX2_GACGATT,52931_AH7T7NBCX2_GACGATT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-auritus,Pseudomys,auritus,Hiseq2500,5,NA,1846_4_4_67,NA, NA, NA, NA, NA, NA, NA, NA, NA,53928_HTVLKBCX2_TAATGCG,53928_HTVLWBCX2_TAATGCG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-australis,Pseudomys,australis,Hiseq2500,5,NA,M25541,NA, NA, NA, NA, NA, NA, NA, NA, NA,52932_AH7T2JBCX2_TAGGCCG,52932_AH7T7NBCX2_TAGGCCG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-bolami,Pseudomys,bolami,Hiseq2500,5,NA,ABTC08077,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-bolami,Pseudomys,bolami,Hiseq2500,5,NA,ABTC107389,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-calabyi,Pseudomys,calabyi,Hiseq2500,5,NA,U4324,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-calabyi,Pseudomys,calabyi,Hiseq2500,5,NA,WAMM56280,NA, NA, NA, NA, NA, NA, NA, NA, NA,52938_BH7T33BCX2_AATAAGC,52938_BH7T77BCX2_AATAAGC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-chapmani,Pseudomys,chapmani,Hiseq2500,5,NA,WAMM29440,NA, NA, NA, NA, NA, NA, NA, NA, NA,52926_AH7T2JBCX2_TCAGCTT,52926_AH7T7NBCX2_TCAGCTT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,JM18363,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,M29247,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,U1509,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-delicatulus,Pseudomys,delicatulus,Hiseq2500,5,NA,WAMM29247,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-desertor,Pseudomys,desertor,Hiseq2500,5,NA,ABTC41464,NA, NA, NA, NA, NA, NA, NA, NA, NA,52925_AH7T2JBCX2_GTCCGGC,52925_AH7T7NBCX2_GTCCGGC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-fieldi,Pseudomys,fieldi,Hiseq2500,5,NA,ABTC08164,NA, NA, NA, NA, NA, NA, NA, NA, NA,52941_BH7T33BCX2_GCAGAAG,52941_BH7T77BCX2_GCAGAAG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-fumeus,Pseudomys,fumeus,Hiseq2500,5,NA,ABTC08168,NA, NA, NA, NA, NA, NA, NA, NA, NA,52955_BH7T33BCX2_AGCAGGT,52955_BH7T77BCX2_AGCAGGT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-gouldii,Pseudomys,gouldii,Hiseq2500,5,NA,C955,NA, NA, NA, NA, NA, NA, NA, NA, NA,52955_BH7T33BCX2_AGCAGGT,52955_BH7T77BCX2_AGCAGGT,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-gracilicaudatus,Pseudomys,gracilicaudatus,Hiseq2500,5,NA,ABTC08163,NA, NA, NA, NA, NA, NA, NA, NA, NA,52934_AH7T2JBCX2_TTCAACC,52934_AH7T7NBCX2_TTCAACC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-hermannsburgensis,Pseudomys,hermannsburgensis,Hiseq2500,5,NA,ABTC08067,NA, NA, NA, NA, NA, NA, NA, NA, NA,52943_BH7T33BCX2_CAGCATC,52943_BH7T77BCX2_CAGCATC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-higginsi,Pseudomys,higginsi,Hiseq2500,5,NA,UC1421,NA, NA, NA, NA, NA, NA, NA, NA, NA,52953_BH7T33BCX2_GTACTAT,52953_BH7T77BCX2_GTACTAT,53925_HTVLKBCX2_ACTATCA,53925_HTVLWBCX2_ACTATCA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-johnsoni,Pseudomys,johnsoni,Hiseq2500,5,NA,ABTC08053,NA, NA, NA, NA, NA, NA, NA, NA, NA,52935_AH7T2JBCX2_TTAACTC,52935_AH7T7NBCX2_TTAACTC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-nanus,Pseudomys,nanus,Hiseq2500,5,NA,U1448,NA, NA, NA, NA, NA, NA, NA, NA, NA,52936_AH7T2JBCX2_TAGTCTA,52936_AH7T7NBCX2_TAGTCTA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-novaehollandiae,Pseudomys,novaehollandiae,Hiseq2500,5,NA,ABTC08140,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-novaehollandiae,Pseudomys,novaehollandiae,Hiseq2500,5,NA,NMV_C22127,NA, NA, NA, NA, NA, NA, NA, NA, NA,Placeholder,Placeholder,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-occidentalis,Pseudomys,occidentalis,Hiseq2500,5,NA,ABTC08043,NA, NA, NA, NA, NA, NA, NA, NA, NA,52939_BH7T33BCX2_AGCCTTG,52939_BH7T77BCX2_AGCCTTG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pseudomys-oralis,Pseudomys,oralis,Hiseq2500,5,NA,RAT7,NA, NA, NA, NA, NA, NA, NA, NA, NA,52928_AH7T2JBCX2_GCCTACG,52928_AH7T7NBCX2_GCCTACG,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Rattus-morotaiensis,Rattus,morotaiensis,Hiseq4000,6,4,A-M29,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,A-M29,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Hyomys-goliath,Hyomys,goliath,Hiseq4000,6,4,A42697,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,A42697,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mastomys-natalensis,Mastomys,natalensis,Hiseq4000,6,4,T4162,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,T4162,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Pithechaeir-melanurus,Pithechaeir,melanurus,Hiseq4000,6,4,SM070,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM070,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Crossomys-moncktoni,Crossomys,moncktoni,Hiseq4000,6,4,SM036,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM036,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Eropeplus-canus,Eropeplus,canus,Hiseq4000,6,4,SM115,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM115,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Bunomys-torajae,Bunomys,torajae,Hiseq4000,6,4,SM093,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM093,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Taeromys-celebensis,Taeromys,celebensis,Hiseq4000,6,4,SM094,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM094,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Taeromys-hamatus,Taeromys,hamatus,Hiseq4000,6,4,SM095,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM095,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Thallomys-paedulcus,Thallomys,paedulcus,Hiseq4000,6,4,SM096,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM096,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Anonymomys-mindorensis,Anonymomys,mindorensis,Hiseq4000,6,4,SM098,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM098,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Arvicanthus-neumanni,Arvicanthus,neumanni,Hiseq4000,6,4,SM099,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM099,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Arvicanthus-niloticus,Arvicanthus,niloticus,Hiseq4000,6,4,SM100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM100,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Dephomys-defua,Dephomys,defua,Hiseq4000,6,4,SM101,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM101,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Heimyscus-fumosus,Heimyscus,fumosus,Hiseq4000,6,4,SM104,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM104,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lophiomys-imhausi,Lophiomys,imhausi,Hiseq4000,6,4,SM105,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM105,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lophuromys-woosnami,Lophuromys,woosnami,Hiseq4000,6,4,SM106,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM106,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Micaelemys-namaquensis,Micaelemys,namaquensis,Hiseq4000,6,4,SM108,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM108,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mylomys-dybowskii,Mylomys,dybowskii,Hiseq4000,6,4,SM109,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM109,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Myomyscus-verreauxii,Myomyscus,verreauxii,Hiseq4000,6,4,SM110,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM110,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Rhabdomys-pumilio,Rhabdomys,pumilio,Hiseq4000,6,4,SM112,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM112,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Stochomys-longicaudatus,Stochomys,longicaudatus,Hiseq4000,6,4,SM113,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,SM113,NA,NA,NA,NA,NA,NA,NA,NA,NA

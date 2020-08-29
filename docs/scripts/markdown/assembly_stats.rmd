@@ -1,7 +1,7 @@
 ---
 #title: "Exome assembly stats"
 #author: "gwct"
-#date: "11/21/2019"
+#date: "08/28/2020"
 output: 
   html_document:
     includes:
@@ -10,10 +10,13 @@ output:
     code_folding: hide
 ---
 
-```{r setup}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
+library(ggbeeswarm)
+library(ggpubr)
+source("../lib/design.r")
 
 targets = 203198
 target_avg_len = 267.5448577249776
@@ -29,162 +32,150 @@ tile_total_len = 51679441
 htmltools::includeHTML("../html-chunks/nav.html")
 ```
 
-# Exome assembly stats
+# Exome assembly stats with Spades
+### Number of scaffolds by batch
 
-Comparison between Abyss and Spades assemblies for 48 exomes made up of a myriad of sequence types (NextSeq, MiSeq, HiSeq, etc). Average read lengths range from 75-100bp. See MultiQC reports [here](summary_48.html).
-
-### Abyss
-
-```{r fig1, out.width="100%", fig.align = "center"}
-abyss_data = read.csv("../../data/exome-48-abyss-stats.csv", header=TRUE)
-abyss_data$type = factor(abyss_data$type, levels=c("Unitig","Contig","Scaffold"), ordered=TRUE)
+```{r fig1, out.width="100%", fig.align="center"}
+spades_data = read.csv("../../../data/exome-stats.csv", header=TRUE)
+#spades_data = subset(spades_data, "Mus pos_ctrl" !%in% Species)
+#spades_data$batch = as.character(spades_data$batch)
+spades_data$Batch = factor(spades_data$Batch, levels=c("1", "2", "3", "4", "5", "6"))
 
 ####################
-# Abyss contig count distributions
-contig_p = ggplot(abyss_data, aes(x=as.factor(k), y=count, fill=type, color=type)) +
+# Spades contig count distributions by batch
+scaff_batch_p = ggplot(spades_data, aes(x=Batch, y=count, fill=Batch)) +
   geom_hline(yintercept=targets, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tiles, linetype=2, size=1, color="#9494b8") +
-  geom_boxplot(outlier.colour="transparent", color="#666666", size=0.3) +
-  geom_point(size=0.75, position=position_jitterdodge() , alpha=0.4, color="#999999") +
-  annotate("text", x=1, y=targets-200000, label="# targets", color="#666666", size=4) +
-  annotate("text", x=6, y=tiles+200000, label="# tiles", color="#9494b8", size=4) +
-  ggtitle("Abyss assembly counts") +
-  labs(x="kmer length", y="# Contigs") +
-  scale_fill_manual(name="Assembly level", labels=c("Unitig","Contig","Scaffold"), values=c("#5c88da","#ffcd00","#cc1c00")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12), 
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="right",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=18),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+  geom_violin(width=1, color="#666666", size=0.3) +
+  geom_quasirandom(size=0.75, alpha=0.6, width=0.15, color="#999999") +
+  scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
+                     values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
+  annotate("text", x=1.1, y=targets-10000, label="# targets", color="#666666", size=4) +
+  annotate("text", x=0.9, y=tiles-10000, label="# tiles", color="#9494b8", size=4) +
+  #ggtitle("Spades assembly counts") +
+  labs(x="Sequencing batch", y="# Scaffolds") +
+  scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27")) +
+  bartheme() + 
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
 
-print(contig_p)
+print(scaff_batch_p)
 ```
+
+### Scaffold length by batch
 
 ```{r fig2, out.width="100%", fig.align = "center"}
 ####################
-# Abyss contig length distributions
-len_p = ggplot(abyss_data, aes(x=as.factor(k), y=avg.len, fill=type, color=type)) +
+# Spades length distributions, by batch
+len_batch_p2 = ggplot(spades_data, aes(x=Batch, y=avg.len, fill=Batch)) +
   geom_hline(yintercept=target_avg_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=target_min_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tile_avg_len, linetype=2, size=1, color="#9494b8") +
   geom_hline(yintercept=tile_min_len, linetype=2, size=1, color="#9494b8") +
-  geom_boxplot(outlier.colour="transparent", color="#666666", size=0.3) +
-  geom_point(size=0.5, position=position_jitterdodge() , alpha=0.4, color="#999999") +
-  annotate("text", x=1.4, y=target_avg_len-5, label="Avg. target len", color="#666666", size=4) +
-  annotate("text", x=5.4, y=target_min_len-5, label="Min. target len", color="#666666", size=4) +
-  annotate("text", x=5.5, y=tile_avg_len+10, label="Avg. tile len", color="#9494b8", size=4) +
-  annotate("text", x=5.5, y=tile_min_len-5, label="Min. tile len", color="#9494b8", size=4) +
-  ggtitle("Abyss assembly lengths") +
-  labs(x="kmer length", y="Average length") +
-  scale_fill_manual(name="Assembly level", labels=c("Unitig","Contig","Scaffold"), values=c("#5c88da","#ffcd00","#cc1c00")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12), 
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="right",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=18),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+  geom_violin(width=1, color="#666666", size=0.3) +
+  geom_quasirandom(size=1, alpha=0.6, width=0.15, color="#999999") +
+  scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
+                     values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
+  annotate("text", x=1.4, y=target_avg_len-25, label="Avg. target len", color="#666666", size=4) +
+  annotate("text", x=1.4, y=target_min_len-20, label="Min. target len", color="#666666", size=4) +
+  annotate("text", x=5.5, y=tile_avg_len+35, label="Avg. tile len", color="#9494b8", size=4) +
+  annotate("text", x=5.5, y=tile_min_len-15, label="Min. tile len", color="#9494b8", size=4) +
+  #ggtitle("Spades assembly counts") +
+  labs(x="Sequencing batch", y="Avg. scaffold length") +
+  scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27")) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
 
-print(len_p)
+print(len_batch_p2)
 ```
 
-### Spades
+### Read depth to assembly by batch
 
-```{r fig3, out.width="100%", fig.align = "center"}
-spades_data = read.csv("../../data/exome-48-spades-stats.csv", header=TRUE)
-spades_data$type = factor(spades_data$type, levels=c("Contig","Scaffold"), ordered=TRUE)
-
+```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
 ####################
-# Abyss contig count distributions
-contig_p = ggplot(spades_data, aes(x=1, y=count, fill=type, color=type)) +
-  geom_hline(yintercept=targets, linetype=2, size=1, color="#666666") +
-  geom_hline(yintercept=tiles, linetype=2, size=1, color="#9494b8") +
-  geom_boxplot(outlier.colour="transparent", color="#666666", size=0.3) +
-  geom_point(size=2, position=position_jitterdodge() , alpha=0.4, color="#999999") +
-  annotate("text", x=0.6, y=targets-10000, label="# targets", color="#666666", size=4) +
-  annotate("text", x=0.6, y=tiles-10000, label="# tiles", color="#9494b8", size=4) +
-  ggtitle("Spades assembly counts") +
-  labs(x="", y="# Contigs") +
-  scale_fill_manual(name="Assembly level", labels=c("Contig","Scaffold"), values=c("#ffcd00","#cc1c00")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="right",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=20),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+# Spades length distributions, by batch
+depth_p = ggplot(spades_data, aes(x=Batch, y=avg.depth.per.base..samtools., fill=Batch)) +
+  geom_violin(width=1, color="#666666", size=0.3) +
+  geom_quasirandom(size=1, alpha=0.6, width=0.15, color="#999999") +
+  scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
+                     values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
+  #ggtitle("Spades assembly counts") +
+  labs(x="Sequencing batch", y="Avg. depth to assembly") +
+  scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27")) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
 
-print(contig_p)
+print(depth_p)
 ```
 
-```{r fig4, out.width="100%", fig.align = "center"}
-len_p = ggplot(spades_data, aes(x=1, y=avg.len, fill=type, color=type)) +
-  geom_hline(yintercept=target_avg_len, linetype=2, size=1, color="#666666") +
-  geom_hline(yintercept=target_min_len, linetype=2, size=1, color="#666666") +
-  geom_hline(yintercept=tile_avg_len, linetype=2, size=1, color="#9494b8") +
-  geom_hline(yintercept=tile_min_len, linetype=2, size=1, color="#9494b8") +
-  geom_boxplot(outlier.colour="transparent", color="#666666", size=0.3) +
-  geom_point(size=2, position=position_jitterdodge() , alpha=0.4, color="#999999") +
-  annotate("text", x=0.65, y=target_avg_len-10, label="Avg. target len", color="#666666", size=4) +
-  annotate("text", x=0.65, y=target_min_len-10, label="Min. target len", color="#666666", size=4) +
-  annotate("text", x=0.65, y=tile_avg_len+15, label="Avg. tile len", color="#9494b8", size=4) +
-  annotate("text", x=0.65, y=tile_min_len-10, label="Min. tile len", color="#9494b8", size=4) +
-  ggtitle("Spades assembly lengths") +
-  labs(x="", y="Average length") +
-  scale_fill_manual(name="Assembly level", labels=c("Contig","Scaffold"), values=c("#ffcd00","#cc1c00")) +
-  theme_classic() +
-  theme(axis.text=element_text(size=12), 
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.title=element_text(size=16), 
-        axis.title.y=element_text(margin=margin(t=0,r=10,b=0,l=0),color="black"), 
-        axis.title.x=element_text(margin=margin(t=10,r=0,b=0,l=0),color="black"),
-        axis.line=element_line(colour='#595959',size=0.75),
-        axis.ticks=element_line(colour="#595959",size = 1),
-        axis.ticks.length=unit(0.2,"cm"),
-        legend.position="right",
-        legend.key.width = unit(0.75,  unit = "cm"),
-        legend.spacing.x = unit(0.25, 'cm'),
-        #legend.title = element_blank(),
-        legend.text=element_text(size=12),
-        plot.title = element_text(size=18),
-        plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")
-  )
+### Read depth to mouse by batch
 
-print(len_p)
+```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+####################
+# Spades length distributions, by batch
+depth_p = ggplot(spades_data, aes(x=Batch, y=avg.depth.per.base.to.mouse.targets..samtools., fill=Batch)) +
+  geom_violin(width=1, color="#666666", size=0.3) +
+  geom_quasirandom(size=1, alpha=0.6, width=0.15, color="#999999") +
+  scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
+                     values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
+  #ggtitle("Spades assembly counts") +
+  labs(x="Sequencing batch", y="Avg. depth to assembly") +
+  scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27")) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(depth_p)
 ```
 
+### Comparison of read depth mapped to assembly vs. to mouse
+
+```{r fig5, out.width="100%", fig.align="center", warning=FALSE}
+####################
+# Read depth
+
+asm_depth = subset(spades_data, select=c(Label, avg.depth.per.base..samtools.))
+names(asm_depth)[2] = "Depth"
+asm_depth$Mapping = "Assembly"
+asm_avg = signif(mean(asm_depth$Depth, na.rm=T), 3)
+
+mouse_depth = subset(spades_data, select=c(Label, avg.depth.per.base.to.mouse.targets..samtools.))
+names(mouse_depth)[2] = "Depth"
+mouse_depth$Mapping = "Mouse targets"
+mouse_avg = signif(mean(mouse_depth$Depth, na.rm=T), 3)
+
+paired_depth = rbind(asm_depth, mouse_depth)
+
+# depth_p = ggpaired(paired_depth, x="Mapping", y="Depth",
+#                  fill="Mapping", palette=corecol(pal="trek", numcol=2), color="#333333",
+#                  line.color="#b3b3b3", line.size = 0.4,
+#                  width=0.4, point.size=2,
+#                  xlab="Mapping", ylab="Average read depth") +
+#   stat_compare_means(paired=TRUE, label.x=1) +
+#   bartheme() +
+#   theme(legend.position="none")
+# 
+# print(depth_p)
+
+cols = corecol(pal="trek", numcol=2, offset=1)
+
+depth_p = ggplot(paired_depth, aes(x=Mapping, y=Depth, fill=Mapping)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  xlab("Mapping") +
+  ylab("Average read depth") +
+  scale_fill_manual(limits=c("Assembly", "Mouse targets"), values=cols) +
+  geom_hline(yintercept=asm_avg, linetype=2, size=1, color=cols[1]) +
+  annotate("text", x=2.4, y=asm_avg-3, label=asm_avg, color=cols[1], size=4) +
+  geom_hline(yintercept=mouse_avg, linetype=2, size=1, color=cols[2]) +
+  annotate("text", x=2.4, y=mouse_avg+4, label=mouse_avg, color=cols[2], size=4) +
+  bartheme() +
+  theme(legend.position="none")
+print(depth_p)
+
+```
 
 ```{r footer}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))

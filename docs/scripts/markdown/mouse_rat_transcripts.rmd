@@ -80,13 +80,13 @@ Genes with selected transcript:                                                 
 ```
 
 ```{r readdata, echo=FALSE, warning=FALSE}
-pre_data = read.csv("../../../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt", header=T, sep="\t")
+pre_data = read.csv("../../../data/mouse-rat-orths-ens99.txt", header=T, sep="\t")
 pre_data$dnds = pre_data$dN.with.Rat / pre_data$dS.with.Rat
 pre_data = subset(pre_data, dS.with.Rat < 1)
 pre_data = subset(pre_data, dN.with.Rat < 1)
 
 
-filter_data = read.csv("../../../02-Annotation-data/selected-transcripts.txt", header=T, sep="\t", comment.char='#')
+filter_data = read.csv("../../../data/selected-transcripts.txt", header=T, sep="\t", comment.char='#')
 filter_data$dnds = filter_data$dN.with.Rat / filter_data$dS.with.Rat
 filter_data = subset(filter_data, dS.with.Rat < 1)
 filter_data = subset(filter_data, dN.with.Rat < 1)
