@@ -177,6 +177,100 @@ print(depth_p)
 
 ```
 
+### Comparison of # of reads mapped to assembly vs. to mouse
+
+```{r fig6, out.width="100%", fig.align="center", warning=FALSE}
+####################
+# Read depth
+
+asm_reads = subset(spades_data, select=c(Label, number.reads.mapped))
+names(asm_reads)[2] = "Num.reads"
+asm_reads$Mapping = "Assembly"
+asm_avg_reads = signif(mean(asm_reads$Num.reads, na.rm=T), 3)
+
+mouse_reads = subset(spades_data, select=c(Label, number.reads.mapped.mouse.targets))
+names(mouse_reads)[2] = "Num.reads"
+mouse_reads$Mapping = "Mouse targets"
+mouse_avg_reads = signif(mean(mouse_reads$Num.reads, na.rm=T), 3)
+
+paired_reads = rbind(asm_reads, mouse_reads)
+
+# depth_p = ggpaired(paired_depth, x="Mapping", y="Depth",
+#                  fill="Mapping", palette=corecol(pal="trek", numcol=2), color="#333333",
+#                  line.color="#b3b3b3", line.size = 0.4,
+#                  width=0.4, point.size=2,
+#                  xlab="Mapping", ylab="Average read depth") +
+#   stat_compare_means(paired=TRUE, label.x=1) +
+#   bartheme() +
+#   theme(legend.position="none")
+# 
+# print(depth_p)
+
+cols = corecol(pal="trek", numcol=2, offset=1)
+
+reads_p = ggplot(paired_reads, aes(x=Mapping, y=Num.reads, fill=Mapping)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  xlab("Mapping") +
+  ylab("# reads mapped") +
+  scale_fill_manual(limits=c("Assembly", "Mouse targets"), values=cols) +
+  geom_hline(yintercept=asm_avg_reads, linetype=2, size=1, color=cols[1]) +
+  annotate("text", x=2.4, y=asm_avg_reads-2000000, label=asm_avg_reads, color=cols[1], size=4) +
+  geom_hline(yintercept=mouse_avg_reads, linetype=2, size=1, color=cols[2]) +
+  annotate("text", x=2.4, y=mouse_avg_reads+3000000, label=mouse_avg_reads, color=cols[2], size=4) +
+  bartheme() +
+  theme(legend.position="none")
+print(reads_p)
+
+```
+
+### Comparison of % of reads mapped to assembly vs. to mouse
+
+```{r fig7, out.width="100%", fig.align="center", warning=FALSE}
+####################
+# Read depth
+
+asm_perc_reads = subset(spades_data, select=c(Label, percent.reads.mapped))
+names(asm_perc_reads)[2] = "Perc.reads"
+asm_perc_reads$Mapping = "Assembly"
+asm_avg_perc = signif(mean(asm_perc_reads$Perc.reads, na.rm=T), 3)
+
+mouse_perc_reads = subset(spades_data, select=c(Label, percent.reads.mapped.mouse.targets))
+names(mouse_perc_reads)[2] = "Perc.reads"
+mouse_perc_reads$Mapping = "Mouse targets"
+mouse_avg_perc = signif(mean(mouse_perc_reads$Perc.reads, na.rm=T), 3)
+
+paired_perc = rbind(asm_perc_reads, mouse_perc_reads)
+
+# depth_p = ggpaired(paired_depth, x="Mapping", y="Depth",
+#                  fill="Mapping", palette=corecol(pal="trek", numcol=2), color="#333333",
+#                  line.color="#b3b3b3", line.size = 0.4,
+#                  width=0.4, point.size=2,
+#                  xlab="Mapping", ylab="Average read depth") +
+#   stat_compare_means(paired=TRUE, label.x=1) +
+#   bartheme() +
+#   theme(legend.position="none")
+# 
+# print(depth_p)
+
+cols = corecol(pal="trek", numcol=2, offset=1)
+
+perc_p = ggplot(paired_perc, aes(x=Mapping, y=Perc.reads, fill=Mapping)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  xlab("Mapping") +
+  ylab("% reads mapped") +
+  scale_fill_manual(limits=c("Assembly", "Mouse targets"), values=cols) +
+  geom_hline(yintercept=asm_avg_perc, linetype=2, size=1, color=cols[1]) +
+  annotate("text", x=2.4, y=asm_avg_perc-1, label=asm_avg_perc, color=cols[1], size=4) +
+  geom_hline(yintercept=mouse_avg_perc, linetype=2, size=1, color=cols[2]) +
+  annotate("text", x=2.4, y=mouse_avg_perc+1, label=mouse_avg_perc, color=cols[2], size=4) +
+  bartheme() +
+  theme(legend.position="none")
+print(perc_p)
+
+```
+
 ```{r footer}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
 htmltools::includeHTML("../html-chunks/rmd_footer.html")

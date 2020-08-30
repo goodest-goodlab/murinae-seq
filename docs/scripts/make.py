@@ -12,7 +12,7 @@ parser.add_argument("--notes", dest="notes", help="Without --all: build notes.ht
 parser.add_argument("--people", dest="people", help="Without --all: build people.html. With --all: exlude people.html", action="store_true", default=False);
 parser.add_argument("--samples", dest="samples", help="Without --all: build samples.html. With --all: exlude samples.html", action="store_true", default=False);
 parser.add_argument("--summary", dest="summary", help="Without --all: build summary.html. With --all: exlude summary.html", action="store_true", default=False);
-parser.add_argument("--summary211", dest="summary211", help="Without --all: build summary_211.html. With --all: exlude summary_211.html", action="store_true", default=False);
+parser.add_argument("--summary210", dest="summary210", help="Without --all: build summary_210.html. With --all: exlude summary_210.html", action="store_true", default=False);
 parser.add_argument("--workflows", dest="workflows", help="Without --all: build workflows.html. With --all: exlude workflows.html", action="store_true", default=False);
 parser.add_argument("--wgs", dest="wgs", help="Without --all: build wgs.html. With --all: exlude wgs.html", action="store_true", default=False);
 parser.add_argument("--assembly", dest="assembly", help="Without --all: build assembly_stats.html. With --all: exlude assembly_stats.html", action="store_true", default=False);
@@ -32,7 +32,7 @@ pages = {
     'people' : args.people,
     'samples' : args.samples,
     'summary' : args.summary,
-    'summary211' : args.summary211,
+    'summary210' : args.summary210,
     'workflows' : args.workflows,
     'wgs' : args.wgs,
     'assembly' : args.assembly,
@@ -60,8 +60,8 @@ if pages['samples']:
 if pages['summary']:
     os.system("python sample_summary_generator.py");
 
-if pages['summary211']:
-    os.system("python summary_211_generator.py");    
+if pages['summary210']:
+    os.system("python summary_210_generator.py");    
 
 if pages['workflows']:
     os.system("python workflows_generator.py");

@@ -1,6 +1,6 @@
 ############################################################
 # For murinae website, 04.2020
-# This generates the file "summary-211.html"
+# This generates the file "summary_210.html"
 ############################################################
 
 import sys, os
@@ -61,15 +61,15 @@ html_template = """
 ######################
 # Main block
 ######################
-pagefile = "summary_211.html";
+pagefile = "summary_210.html";
 print("Generating " + pagefile + "...");
-title = "211 exome summary"
+title = "210 exome summary"
 
 head = RC.readHead(title);
 nav = RC.readNav(pagefile);
 footer = RC.readFooter();
 
-page_title = "Summary of 211 exome samples"
+page_title = "Summary of 210 exome samples"
 
 infilename = "../../../data/exome-stats.csv";
 outfilename = "../../" + pagefile;
