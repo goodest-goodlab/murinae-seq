@@ -58,7 +58,7 @@ footer = RC.readFooter();
 
 page_title = "Complete Murine sampling"
 
-infilename = "../../../data/2019-Muridae-NSF-Genomics-Status-11.19.19.csv";
+infilename = "../../data/2019-Muridae-NSF-Genomics-Status-11.19.19.csv";
 outfilename = "../../" + pagefile;
 
 first = True;

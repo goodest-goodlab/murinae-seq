@@ -61,8 +61,9 @@ footer = RC.readFooter();
 
 page_title = "Summary of Murine sampling"
 
-infilename = "../../../data/sample-summary.csv";
+infilename = "../../data/sample-summary.csv";
 outfilename = "../../" + pagefile;
+csvdatafile = "data/sample-summary.csv";
 
 first = True;
 node_table = "";
@@ -90,4 +91,4 @@ for line in open(infilename):
         node_table += "</tr>\n";
 node_table += "\t\t</table>\n";
 with open(outfilename, "w") as outfile:
-    outfile.write(html_template.format(head=head, nav=nav, node_table=node_table, page_title=page_title, csvdatafile=infilename, footer=footer));
+    outfile.write(html_template.format(head=head, nav=nav, node_table=node_table, page_title=page_title, csvdatafile=csvdatafile, footer=footer));

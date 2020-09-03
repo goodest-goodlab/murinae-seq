@@ -71,7 +71,7 @@ footer = RC.readFooter();
 
 page_title = "Summary of 210 exome samples"
 
-infilename = "../../../data/exome-stats.csv";
+infilename = "../../data/exome-stats.csv";
 outfilename = "../../" + pagefile;
 csvdatafile = "data/exome-stats.csv"
 
