@@ -43,7 +43,7 @@ spades_data$Batch = factor(spades_data$Batch, levels=c("1", "2", "3", "4", "5", 
 
 ####################
 # Spades contig count distributions by batch
-scaff_batch_p = ggplot(spades_data, aes(x=Batch, y=count, fill=Batch)) +
+scaff_batch_p = ggplot(spades_data, aes(x=Batch, y=num.scaffs, fill=Batch)) +
   geom_hline(yintercept=targets, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tiles, linetype=2, size=1, color="#9494b8") +
   geom_violin(width=1, color="#666666", size=0.3) +
@@ -67,7 +67,7 @@ print(scaff_batch_p)
 ```{r fig2, out.width="100%", fig.align = "center"}
 ####################
 # Spades length distributions, by batch
-len_batch_p2 = ggplot(spades_data, aes(x=Batch, y=avg.len, fill=Batch)) +
+len_batch_p2 = ggplot(spades_data, aes(x=Batch, y=avg.scaff.len, fill=Batch)) +
   geom_hline(yintercept=target_avg_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=target_min_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tile_avg_len, linetype=2, size=1, color="#9494b8") +
