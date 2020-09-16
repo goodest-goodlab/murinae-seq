@@ -14,6 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
+library(cowplot)
 library(ggbeeswarm)
 library(ggpubr)
 source("../lib/design.r")
@@ -258,6 +259,129 @@ perc_p = ggplot(paired_perc, aes(x=Mapping, y=Perc.reads, fill=Mapping)) +
   bartheme() +
   theme(legend.position="none")
 print(perc_p)
+
+```
+
+### Read stats
+
+```{r fig8, out.width="100%", fig.align="center", warning=FALSE}
+
+####################
+# Read depth
+
+raw_reads = subset(spades_data, select=c(Label, raw.reads))
+names(raw_reads)[2] = "num.reads"
+raw_reads$step = "Raw reads"
+
+fastp_reads = subset(spades_data, select=c(Label, fastp.reads))
+names(fastp_reads)[2] = "num.reads"
+fastp_reads$step = "Fastp reads"
+
+decon_reads = subset(spades_data, select=c(Label, decon.reads))
+names(decon_reads)[2] = "num.reads"
+decon_reads$step = "Decon reads"
+
+asm_reads = subset(spades_data, select=c(Label, asm.reads.mapped))
+names(asm_reads)[2] = "num.reads"
+asm_reads$step = "Asm reads mapped"
+
+asm_dups = subset(spades_data, select=c(Label, asm.duplicate.reads))
+names(asm_dups)[2] = "num.reads"
+asm_dups$step = "Asm duplicate reads"
+
+mouse_reads = subset(spades_data, select=c(Label, mouse.reads.mapped))
+names(mouse_reads)[2] = "num.reads"
+mouse_reads$step = "Mouse reads mapped"
+
+mouse_dups = subset(spades_data, select=c(Label, mouse.duplicate.reads))
+names(mouse_dups)[2] = "num.reads"
+mouse_dups$step = "Mouse duplicate reads"
+
+reads_data = rbind(raw_reads, fastp_reads, decon_reads, asm_reads, asm_dups, mouse_reads, mouse_dups)
+cols = corecol(pal="trek", numcol=7)
+reads_data$step = factor(reads_data$step, levels=c("Raw reads", "Fastp reads", "Decon reads", "Asm reads mapped", "Asm duplicate reads", "Mouse reads mapped", "Mouse duplicate reads"))
+
+
+
+reads_p = ggplot(reads_data, aes(x=step, y=num.reads, fill=step)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  xlab("Step") +
+  ylab("# reads") +
+  scale_fill_manual(values=cols) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=45, hjust=1, size=8))
+print(reads_p)
+
+```
+
+### Referee stats
+
+```{r fig9, out.width="100%", fig.align="center", warning=FALSE}
+
+####################
+# Referee
+# Low scores are -1, -2, -3, probably mostly unmapped (-2)
+# Errors corrected matches 0 scores
+
+corrected_p = ggplot(spades_data, aes(x="Errors corrected", y=referee.errors.corrected)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5, fill=corecol(pal="trekdark", numcol=1)) +
+  xlab("") +
+  ylab("# positions") +
+  scale_fill_manual(values=cols) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title.y=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(angle=90, hjust=0.5))
+#print(corrected_p)
+
+rate_p = ggplot(spades_data, aes(x="Errors per base", y=referee.error.rate)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5, fill=corecol(pal="trekdark", numcol=1, offset=1)) +
+  xlab("") +
+  ylab("Errors per base") +
+  scale_fill_manual(values=cols) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title.y=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(angle=90, hjust=0.5))
+#print(rate_p)
+
+low_p = ggplot(spades_data, aes(x="Low quality positions", y=referee.low.scores)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5, fill=corecol(pal="trekdark", numcol=1, offset=2)) +
+  xlab("") +
+  ylab("# positions") +
+  scale_fill_manual(values=cols) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title.y=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(angle=90, hjust=0.5))
+#print(low_p)
+
+unmapped_p = ggplot(spades_data, aes(x="Unmapped positions", y=referee.unmapped.pos)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5, fill=corecol(pal="trekdark", numcol=1, offset=3)) +
+  xlab("") +
+  ylab("# positions") +
+  scale_fill_manual(values=cols) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title.y=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(angle=90, hjust=0.5))
+#print(unmapped_p)
+
+p_title = ggdraw() + draw_label("Referee stats", size=18, fontface="bold", x=0, hjust=0) + theme(plot.margin=margin(0,0,0,7))
+p_row = plot_grid(corrected_p, rate_p, low_p, unmapped_p, ncol=4)
+p = plot_grid(p_title, p_row, ncol=1, rel_heights=c(0.05,1))
+print(p)
+
 
 ```
 
