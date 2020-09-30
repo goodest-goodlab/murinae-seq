@@ -47,8 +47,8 @@ spades_data$Batch = factor(spades_data$Batch, levels=c("1", "2", "3", "4", "5", 
 scaff_batch_p = ggplot(spades_data, aes(x=Batch, y=num.scaffs, fill=Batch)) +
   geom_hline(yintercept=targets, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tiles, linetype=2, size=1, color="#9494b8") +
-  geom_violin(width=1, color="#666666", size=0.3) +
-  geom_quasirandom(size=0.75, alpha=0.6, width=0.15, color="#999999") +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
   scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 57", "New 21"),
                      values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
   annotate("text", x=1.1, y=targets-10000, label="# targets", color="#666666", size=4) +
@@ -73,8 +73,8 @@ len_batch_p2 = ggplot(spades_data, aes(x=Batch, y=avg.scaff.len, fill=Batch)) +
   geom_hline(yintercept=target_min_len, linetype=2, size=1, color="#666666") +
   geom_hline(yintercept=tile_avg_len, linetype=2, size=1, color="#9494b8") +
   geom_hline(yintercept=tile_min_len, linetype=2, size=1, color="#9494b8") +
-  geom_violin(width=1, color="#666666", size=0.3) +
-  geom_quasirandom(size=1, alpha=0.6, width=0.15, color="#999999") +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
   scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
                      values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
   annotate("text", x=1.4, y=target_avg_len-25, label="Avg. target len", color="#666666", size=4) +
@@ -91,16 +91,42 @@ len_batch_p2 = ggplot(spades_data, aes(x=Batch, y=avg.scaff.len, fill=Batch)) +
 print(len_batch_p2)
 ```
 
-### Read depth to assembly by batch (no flanking regions)
+### Total assembly length
 
-```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig3, out.width="100%", fig.align = "center"}
 ####################
 # Spades length distributions, by batch
-spades_data = subset(spades_data, Label != "Pseudomys-auritus")
+asm_batch_p2 = ggplot(spades_data, aes(x=Batch, y=asm.len, fill=Batch)) +
+  geom_hline(yintercept=target_total_len, linetype=2, size=1, color="#666666") +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
+                     values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
+  annotate("text", x=1., y=target_total_len-5000000, label="Total target len", color="#666666", size=4) +
+  #ggtitle("Spades assembly counts") +
+  labs(x="Sequencing batch", y="Total assembly length") +
+  scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27")) +
+  bartheme() +
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(asm_batch_p2)
+
+short_asm = subset(spades_data, asm.len<target_total_len)
+print("Assemblies shorter than total target length:")
+print(as.character(short_asm$Label))
+```
+
+### Read depth to assembly by batch (no flanking regions)
+
+```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+####################
+# Spades length distributions, by batch
+#spades_data = subset(spades_data, Label != "Pseudomys-auritus")
 
 depth_p = ggplot(spades_data, aes(x=Batch, y=asm.avg.mid.depth, fill=Batch)) +
-  geom_violin(width=1, color="#666666", size=0.3) +
-  geom_quasirandom(size=1, alpha=0.6, width=0.15, color="#999999") +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
   scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
                      values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
   #ggtitle("Spades assembly counts") +
@@ -111,20 +137,25 @@ depth_p = ggplot(spades_data, aes(x=Batch, y=asm.avg.mid.depth, fill=Batch)) +
         axis.text.x = element_text(angle=25, hjust=1))
 
 print(depth_p)
+
+high_depth = subset(spades_data, asm.avg.mid.depth > 70)
+print("Assemblies with avg. depth > 70:")
+print(as.character(high_depth$Label))
+
 ```
 
 ### Read depth to mouse by batch
 
-```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig5, out.width="100%", fig.align = "center", warning=FALSE}
 ####################
 # Spades length distributions, by batch
 depth_p = ggplot(spades_data, aes(x=Batch, y=mouse.target.avg.depth, fill=Batch)) +
-  geom_violin(width=1, color="#666666", size=0.3) +
-  geom_quasirandom(size=1, alpha=0.6, width=0.15, color="#999999") +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
   scale_fill_manual(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27"),
                      values=c("#920000", "#333333", "#006ddb", "#db6d00", "#b66dff", "#db6d00")) +
   #ggtitle("Spades assembly counts") +
-  labs(x="Sequencing batch", y="Avg. depth to assembly") +
+  labs(x="Sequencing batch", y="Avg. depth to mouse") +
   scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 46", "New 27")) +
   bartheme() +
   theme(legend.position="none",
@@ -135,7 +166,7 @@ print(depth_p)
 
 ### Comparison of read depth mapped to assembly vs. to mouse
 
-```{r fig5, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig6, out.width="100%", fig.align="center", warning=FALSE}
 ####################
 # Read depth
 
@@ -190,7 +221,7 @@ print(depth_p)
 
 ### Comparison of # of reads mapped to assembly vs. to mouse
 
-```{r fig6, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig7, out.width="100%", fig.align="center", warning=FALSE}
 
 ####################
 # Read depth
@@ -223,11 +254,15 @@ reads_p = ggplot(paired_reads, aes(x=Mapping, y=Num.reads, fill=Mapping)) +
   theme(legend.position="none")
 print(reads_p)
 
+
+high_reads = subset(spades_data, asm.reads.mapped > 80000000)
+print("Assemblies with reads mapped > 80000000:")
+print(as.character(high_reads$Label))
 ```
 
 ### Comparison of % of reads mapped to assembly vs. to mouse
 
-```{r fig7, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig8, out.width="100%", fig.align="center", warning=FALSE}
 
 ####################
 # Read depth
@@ -260,11 +295,15 @@ perc_p = ggplot(paired_perc, aes(x=Mapping, y=Perc.reads, fill=Mapping)) +
   theme(legend.position="none")
 print(perc_p)
 
+low_perc_reads = subset(spades_data, asm.perc.reads.mapped < 75) 
+print("Assemblies with < 75% reads mapped:")
+print(as.character(low_perc_reads$Label))
+
 ```
 
 ### Read stats
 
-```{r fig8, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig9, out.width="100%", fig.align="center", warning=FALSE}
 
 ####################
 # Read depth
@@ -297,9 +336,17 @@ mouse_dups = subset(spades_data, select=c(Label, mouse.duplicate.reads))
 names(mouse_dups)[2] = "num.reads"
 mouse_dups$step = "Mouse duplicate reads"
 
-reads_data = rbind(raw_reads, fastp_reads, decon_reads, asm_reads, asm_dups, mouse_reads, mouse_dups)
-cols = corecol(pal="trek", numcol=7)
-reads_data$step = factor(reads_data$step, levels=c("Raw reads", "Fastp reads", "Decon reads", "Asm reads mapped", "Asm duplicate reads", "Mouse reads mapped", "Mouse duplicate reads"))
+ref_reads = subset(spades_data, select=c(Label, referee.reads.mapped))
+names(ref_reads)[2] = "num.reads"
+ref_reads$step = "Referee reads mapped"
+
+ref_dups = subset(spades_data, select=c(Label, referee.duplicate.reads))
+names(ref_dups)[2] = "num.reads"
+ref_dups$step = "Referee duplicate reads" 
+
+reads_data = rbind(raw_reads, fastp_reads, decon_reads, asm_reads, asm_dups, mouse_reads, mouse_dups, ref_reads, ref_dups)
+cols = corecol(numcol=9)
+reads_data$step = factor(reads_data$step, levels=c("Raw reads", "Fastp reads", "Decon reads", "Asm reads mapped", "Asm duplicate reads", "Mouse reads mapped", "Mouse duplicate reads", "Referee reads mapped", "Referee duplicate reads"))
 
 
 
@@ -318,7 +365,7 @@ print(reads_p)
 
 ### Referee stats
 
-```{r fig9, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig10, out.width="100%", fig.align="center", warning=FALSE}
 
 ####################
 # Referee
