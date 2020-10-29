@@ -53,9 +53,6 @@ output_file = os.path.join(cwd, "jobs", name + ".sh");
 submit_file = os.path.join(cwd, "submit", name + "_submit.sh");
 # Job files
 
-if not args.part:
-    sys.exit( " * ERROR 1: Please specify a SLURM partition (-part) or submit -part none to not generate the submit script.");
-
 if (os.path.isfile(output_file) or os.path.isfile(submit_file)) and not args.overwrite:
     sys.exit( " * ERROR 2: Job and submit files already exist! Explicity specify --overwrite to overwrite them.");
 
@@ -96,14 +93,14 @@ with open(output_file, "w") as jobfile:
         mcore.PWS("# Creating logfile directory.", jobfile);
         os.system("mkdir " + logdir);
     mcore.PWS(mcore.spacedOut("# Job file:", pad) + output_file, jobfile);
-    mcore.PWS("# ----------", jobfile);
-    mcore.PWS("# SLURM OPTIONS", jobfile);
-    mcore.PWS(mcore.spacedOut("# Submit file:", pad) + submit_file, jobfile);
-    mcore.PWS(mcore.spacedOut("# SLURM partition:", pad) + args.part, jobfile);
-    mcore.PWS(mcore.spacedOut("# SLURM nodes:", pad) + str(args.nodes), jobfile);
-    mcore.PWS(mcore.spacedOut("# SLURM ntasks:", pad) + str(args.tasks), jobfile);
-    mcore.PWS(mcore.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
-    mcore.PWS(mcore.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
+    # mcore.PWS("# ----------", jobfile);
+    # mcore.PWS("# SLURM OPTIONS", jobfile);
+    # mcore.PWS(mcore.spacedOut("# Submit file:", pad) + submit_file, jobfile);
+    # mcore.PWS(mcore.spacedOut("# SLURM partition:", pad) + args.part, jobfile);
+    # mcore.PWS(mcore.spacedOut("# SLURM nodes:", pad) + str(args.nodes), jobfile);
+    # mcore.PWS(mcore.spacedOut("# SLURM ntasks:", pad) + str(args.tasks), jobfile);
+    # mcore.PWS(mcore.spacedOut("# SLURM cpus-per-task:", pad) + str(args.cpus), jobfile);
+    # mcore.PWS(mcore.spacedOut("# SLURM mem:", pad) + str(args.mem), jobfile);
     mcore.PWS("# ----------", jobfile);
     mcore.PWS("# BEGIN CMDS", jobfile);
 

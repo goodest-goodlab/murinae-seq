@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/nextseq-paired-1/Z25153_S29_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/miseq-paired/Z25153_S29_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Chiropodomys-gliroides-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Chiropodomys-gliroides/Chiropodomys-gliroides.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chiropodomys-gliroides/Chiropodomys-gliroides.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Chiropodomys-gliroides-mosdepth.log
+#
+
+#
+

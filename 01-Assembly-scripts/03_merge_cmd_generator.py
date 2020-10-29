@@ -150,8 +150,8 @@ with open(output_file, "w") as jobfile:
             continue;
         s_mod = s.replace(" ", "-");
 
-        if any(runs in spec_ids[s] for runs in [11,12,13,14]):
-            continue;
+        # if any(runs in spec_ids[s] for runs in [11,12,13,14]):
+        #     continue;
         # Skip the Australian samples
 
         spec_dir = os.path.join(step_dir, s_mod);

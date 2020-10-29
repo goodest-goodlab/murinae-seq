@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/nextseq-paired-1/ABTC-44798_S32_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/miseq-paired/ABTC-44798_S32_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Melomys-rufescens-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Melomys-rufescens/Melomys-rufescens.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Melomys-rufescens/Melomys-rufescens.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Melomys-rufescens-mosdepth.log
+#
+
+#
+

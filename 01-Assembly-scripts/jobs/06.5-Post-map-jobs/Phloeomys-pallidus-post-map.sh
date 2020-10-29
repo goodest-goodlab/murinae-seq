@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/nextseq-paired-1/JEC43_S5_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/miseq-paired/JEC43_S5_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Phloeomys-pallidus-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Phloeomys-pallidus/Phloeomys-pallidus.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Phloeomys-pallidus/Phloeomys-pallidus.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Phloeomys-pallidus-mosdepth.log
+#
+
+#
+

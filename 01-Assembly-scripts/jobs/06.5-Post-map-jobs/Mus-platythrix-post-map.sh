@@ -6,6 +6,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/hiseq2000-paired-1/10460X13_131030_SN141_0734_AC2RLAACXX_7_.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/hiseq2000-paired-2.merge.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Mus-platythrix-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Mus-platythrix/Mus-platythrix.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mus-platythrix/Mus-platythrix.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Mus-platythrix-mosdepth.log
+#
+
+#
+

@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/nextseq-paired-1/JAE1712_S3_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/miseq-paired/JAE1712_S3_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Bulimus-bagobus-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Bulimus-bagobus/Bulimus-bagobus.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Bulimus-bagobus/Bulimus-bagobus.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Bulimus-bagobus-mosdepth.log
+#
+
+#
+

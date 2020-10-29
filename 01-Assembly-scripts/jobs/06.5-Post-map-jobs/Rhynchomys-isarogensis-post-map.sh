@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/nextseq-paired-1/JAE2195_S6_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/miseq-paired/JAE2195_S6_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Rhynchomys-isarogensis-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Rhynchomys-isarogensis/Rhynchomys-isarogensis.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Rhynchomys-isarogensis/Rhynchomys-isarogensis.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Rhynchomys-isarogensis-mosdepth.log
+#
+
+#
+

@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/nextseq-paired-1/SMG3823_S34_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/miseq-paired/SMG3823_S34_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Apodemus-sylvaticus-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Apodemus-sylvaticus/Apodemus-sylvaticus.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apodemus-sylvaticus/Apodemus-sylvaticus.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Apodemus-sylvaticus-mosdepth.log
+#
+
+#
+

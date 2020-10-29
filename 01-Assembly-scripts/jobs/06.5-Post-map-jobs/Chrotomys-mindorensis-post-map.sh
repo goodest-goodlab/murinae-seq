@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/nextseq-paired-1/JAE520_S4_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/miseq-paired/JAE520_S4_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Chrotomys-mindorensis-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Chrotomys-mindorensis/Chrotomys-mindorensis.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Chrotomys-mindorensis/Chrotomys-mindorensis.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Chrotomys-mindorensis-mosdepth.log
+#
+
+#
+

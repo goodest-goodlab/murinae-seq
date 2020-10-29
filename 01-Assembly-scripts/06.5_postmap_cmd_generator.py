@@ -19,9 +19,12 @@ script_template = '''#!/bin/bash
 {merge_cmd}
 {index_cmd}
 {depth_cmd}
+{samtools_bedcov_cmd}
 {stats_cmd}
 {flagstat_cmd}
 {mosdepth_cmd}
+{view_cmd}
+{flagstat_cmd_2}
 '''
 
 ############################################################
@@ -85,6 +88,7 @@ step_dir = os.path.abspath("../01-Assembly-data/06-Map/");
 assembly_dir = os.path.abspath("../01-Assembly-data/05-Scaffolds/");
 logdir = os.path.abspath("logs/06.5-Post-map-logs/");
 target_file = os.path.abspath("../Targets/targets-mm10-coords.bed");
+target_regions = os.path.abspath("../Targets/targets-mm10-coords.regions");
 tile_file = os.path.abspath("../Targets/tiles-mm10-coords.bed");
 # Reference options
 
@@ -171,7 +175,7 @@ with open(output_file, "w") as jobfile:
             if run_name == "tmp":
                 continue;
 
-            cur_bamfiles = [os.path.join(dirpath, f) for f in filenames if f.endswith(".bam")];
+            cur_bamfiles = [os.path.join(dirpath, f) for f in filenames if f.endswith(".bam") and ".mkdup." not in f];
 
             if len(cur_bamfiles) == 1:
                 merge_bam = cur_bamfiles[0];
@@ -198,7 +202,6 @@ with open(output_file, "w") as jobfile:
         mkdup_cmds = "\n".join(mkdup_cmds);
 
         total_bam += len(bamfiles);
-
         # Get all .bam files in a species directory and sub-directories (all seq runs).
 
         # mkdup_cmds, mkdup_bams, i = [], [], 1;
@@ -239,6 +242,12 @@ with open(output_file, "w") as jobfile:
             depth_cmd = "samtools depth -b " + target_file + " " + merge_bam + " > " + depth_file;
         # Samtools depth
 
+        if args.ref != "":
+            bedcov_file = os.path.join(specdir, s_mod + "-bedcov.tab");
+            bedcov_cmd = "samtools bedcov " + target_file + " " + merge_bam + " > " + bedcov_file;
+        else:
+            bedcov_cmd = "#\n";
+
         # avg_target_depth = os.path.join(specdir, s_mod + "-avg-target-depth.txt");
         # avg_target_depth_cmd = "awk '{ sum += $3; n++ } END { if (n > 0) print sum / n; }' " + target_depth + " > " + avg_target_depth;
         # # Get depth of targets.
@@ -267,8 +276,19 @@ with open(output_file, "w") as jobfile:
             mosdepth_cmd = "mosdepth -x -b " + target_file + " " + out_prefix + " " + merge_bam + " &> " + mosdepth_log;
         # Mosdepth
 
+        if args.ref != "":
+            target_bam_file = os.path.join(specdir, s_mod + "-targets.bam");
+            view_cmd = "samtools view -bh " + merge_bam + " -L " + target_file + " > " + target_bam_file;
+
+            target_flagstat_out = os.path.join(specdir, s_mod + "-targets-flagstats.txt");
+            flagstat_cmd_2 = "samtools flagstat " + target_bam_file + " > " + target_flagstat_out;
+        else:
+            view_cmd = "#\n";
+            flagstat_cmd_2 = "#\n";
+
+
         with open(job_script, "w") as outfile:
-            outfile.write(script_template.format(merge_cmds=merge_cmds, mkdup_cmds=mkdup_cmds, merge_cmd=merge_cmd, index_cmd=index_cmd, depth_cmd=depth_cmd, stats_cmd=stats_cmd, flagstat_cmd=flagstat_cmd, mosdepth_cmd=mosdepth_cmd));
+            outfile.write(script_template.format(merge_cmds=merge_cmds, mkdup_cmds=mkdup_cmds, merge_cmd=merge_cmd, index_cmd=index_cmd, depth_cmd=depth_cmd, samtools_bedcov_cmd=bedcov_cmd, stats_cmd=stats_cmd, flagstat_cmd=flagstat_cmd, mosdepth_cmd=mosdepth_cmd, view_cmd=view_cmd, flagstat_cmd_2=flagstat_cmd_2));
         # Write the script for this species.
 
         os.system("chmod +x " + job_script);

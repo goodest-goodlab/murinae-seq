@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/nextseq-paired-1/TCD4175_S11_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/miseq-paired/TCD4175_S11_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Colomys-goslingi-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Colomys-goslingi/Colomys-goslingi.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Colomys-goslingi/Colomys-goslingi.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Colomys-goslingi-mosdepth.log
+#
+
+#
+

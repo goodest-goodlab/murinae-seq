@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/nextseq-paired-1/ABTC-07354_S31_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/miseq-paired/ABTC-07354_S31_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Mastacomys-fuscus-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Mastacomys-fuscus/Mastacomys-fuscus.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Mastacomys-fuscus/Mastacomys-fuscus.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Mastacomys-fuscus-mosdepth.log
+#
+
+#
+

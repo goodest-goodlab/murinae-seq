@@ -168,9 +168,7 @@ with open(output_file, "w") as jobfile:
         if "(no WGA)" in s or "pos_ctrl" in s:
             continue;
         s_mod = s.replace(" ", "-");
-        print(s_mod);
-        if s_mod != "Carpomys-melanurus":
-            continue;
+        #print(s_mod);
 
         if not any(runs in spec_ids[s] for runs in runtype):
             continue;

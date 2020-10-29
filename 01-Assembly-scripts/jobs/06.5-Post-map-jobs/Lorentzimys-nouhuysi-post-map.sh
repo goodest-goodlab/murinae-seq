@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/nextseq-paired-1/ABTC-46314_S30_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/miseq-paired/ABTC-46314_S30_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Lorentzimys-nouhuysi-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Lorentzimys-nouhuysi/Lorentzimys-nouhuysi.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Lorentzimys-nouhuysi-mosdepth.log
+#
+
+#
+

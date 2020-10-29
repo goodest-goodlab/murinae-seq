@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/nextseq-paired-1/EAR1826_S35_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/miseq-paired/EAR1826_S35_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Archboldomys-luzonensis-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Archboldomys-luzonensis/Archboldomys-luzonensis.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Archboldomys-luzonensis/Archboldomys-luzonensis.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Archboldomys-luzonensis-mosdepth.log
+#
+
+#
+

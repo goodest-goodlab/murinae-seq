@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/nextseq-paired-1/Z20624_S28_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/miseq-paired/Z20624_S28_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Waiomys-mamasae-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Waiomys-mamasae/Waiomys-mamasae.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Waiomys-mamasae/Waiomys-mamasae.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Waiomys-mamasae-mosdepth.log
+#
+
+#
+

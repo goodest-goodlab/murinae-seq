@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/nextseq-paired-1/JAE4870_S40_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/miseq-paired/JAE4870_S40_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Paruromys-dominator-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Paruromys-dominator/Paruromys-dominator.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Paruromys-dominator/Paruromys-dominator.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Paruromys-dominator-mosdepth.log
+#
+
+#
+

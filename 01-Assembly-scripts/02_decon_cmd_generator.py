@@ -146,11 +146,6 @@ with open(output_file, "w") as jobfile:
         if "(no WGA)" in s:
             continue;
         s_mod = s.replace(" ", "-");
-
-        if any(runs in spec_ids[s] for runs in [11,12,13,14]):
-            continue;
-        # Skip the Australian samples
-
         #print(s_mod);
 
         spec_dir = os.path.join(step_dir, s_mod);

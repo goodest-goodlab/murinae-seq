@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/nextseq-paired-1/TCD4382_S13_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/miseq-paired/TCD4382_S13_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Hylomyscus-vulcanorum-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hylomyscus-vulcanorum/Hylomyscus-vulcanorum.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Hylomyscus-vulcanorum-mosdepth.log
+#
+
+#
+

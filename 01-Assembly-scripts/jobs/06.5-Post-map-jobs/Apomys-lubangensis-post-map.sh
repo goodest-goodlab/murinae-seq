@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/nextseq-paired-1/JAE169_S1_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/miseq-paired/JAE169_S1_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Apomys-lubangensis-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Apomys-lubangensis/Apomys-lubangensis.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Apomys-lubangensis/Apomys-lubangensis.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Apomys-lubangensis-mosdepth.log
+#
+
+#
+

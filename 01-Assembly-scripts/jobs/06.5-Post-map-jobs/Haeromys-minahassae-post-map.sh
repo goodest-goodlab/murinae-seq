@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/nextseq-paired-1/JAE4996_S37_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/miseq-paired/JAE4996_S37_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Haeromys-minahassae-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Haeromys-minahassae/Haeromys-minahassae.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Haeromys-minahassae/Haeromys-minahassae.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Haeromys-minahassae-mosdepth.log
+#
+
+#
+

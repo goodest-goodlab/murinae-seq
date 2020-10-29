@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/nextseq-paired-1/TCD4026_S10_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/miseq-paired/TCD4026_S10_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Hybomys-univittatus-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Hybomys-univittatus/Hybomys-univittatus.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Hybomys-univittatus/Hybomys-univittatus.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Hybomys-univittatus-mosdepth.log
+#
+
+#
+

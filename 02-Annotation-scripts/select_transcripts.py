@@ -9,7 +9,7 @@ import sys
 sys.path.append("../lib/");
 # Add the repo's lib dir to the path.
 
-import os, core, gzip, re
+import os, mcore, gzip, re
 from collections import defaultdict
 
 ############################################################

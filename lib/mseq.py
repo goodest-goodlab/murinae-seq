@@ -47,3 +47,22 @@ def writeSeq(o_name, seq, title):
     outfile.close();
 
 ############################################################
+
+def fastaGetDict(i_name):
+#fastaGetDict reads a FASTA file and returns a dictionary containing all sequences in the file with 
+#the key:value format as title:sequence.
+
+	seqdict = {};
+	for line in open(i_name, "r"):
+		if line == "\n":
+			continue;
+		line = line.replace("\n", "");
+		if line[0] == '>':
+			curkey = line;
+			seqdict[curkey] = "";
+		else:
+			seqdict[curkey] = seqdict[curkey] + line;
+
+	return seqdict;
+
+############################################################

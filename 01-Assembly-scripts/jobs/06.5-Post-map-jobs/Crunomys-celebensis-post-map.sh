@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/nextseq-paired-1/Z21894_S18_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/miseq-paired/Z21894_S18_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Crunomys-celebensis-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Crunomys-celebensis/Crunomys-celebensis.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Crunomys-celebensis/Crunomys-celebensis.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Crunomys-celebensis-mosdepth.log
+#
+
+#
+

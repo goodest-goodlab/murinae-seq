@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/nextseq-paired-1/Z25191_S21_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/miseq-paired/Z25191_S21_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Leopoldomys-sabanus-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Leopoldomys-sabanus/Leopoldomys-sabanus.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Leopoldomys-sabanus/Leopoldomys-sabanus.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Leopoldomys-sabanus-mosdepth.log
+#
+
+#
+

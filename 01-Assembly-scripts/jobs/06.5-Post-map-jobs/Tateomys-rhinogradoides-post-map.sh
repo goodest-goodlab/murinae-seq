@@ -12,6 +12,12 @@ picard -Xmx10g MarkDuplicates I=/mnt/beegfs/gt156213e/murinae-seq/01-Assembly-da
 samtools merge -f /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/nextseq-single-1.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/nextseq-single-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/nextseq-paired-1/Z21785_S27_001.fastp.decon.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/nextseq-paired-2.merge.mkdup.bam /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/miseq-paired/Z21785_S27_L001_001.fastp.decon.mkdup.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Tateomys-rhinogradoides-merge.log
 samtools index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides.bam
 samtools depth /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides-depth.tab
+#
+
 samtools stats -d -r /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05-Scaffolds/Tateomys-rhinogradoides/Tateomys-rhinogradoides.fa /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides-stats.txt
 samtools flagstat /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides.bam > /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides-flagstats.txt
 mosdepth -x /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/06-Map/Tateomys-rhinogradoides/Tateomys-rhinogradoides.bam &> /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-scripts/logs/06.5-Post-map-logs/Tateomys-rhinogradoides-mosdepth.log
+#
+
+#
+
