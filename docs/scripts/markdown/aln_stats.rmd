@@ -1,0 +1,78 @@
+---
+#title: "Exome assembly stats"
+#author: "gwct"
+#date: "08/28/2020"
+output: 
+  html_document:
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(cowplot)
+library(ggbeeswarm)
+library(ggpubr)
+library(dplyr)
+source("../lib/design.r")
+
+htmltools::includeHTML("../html-chunks/nav.html")
+```
+
+# Exonerate CDS diff between mouse and target seqs
+
+```{r read, out.width="100%", fig.align="center"}
+mus_data = read.csv("../../data/Mus_best_cds_metadata.csv", header=TRUE)
+aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
+names(aln_data) = c("pid", "sample", "num.cds", "cds.len")
+```
+
+```{r parse, out.width="100%", fig.align="center"}
+#aln_data$num.diff = NA
+#num_data = data.frame("sample"=c(), "num.diff"=c())
+
+mm10_data = subset(aln_data, sample=="mm10")
+aln_data = merge(aln_data, mm10_data, by="pid")
+aln_data = subset(aln_data, sample.x!="mm10")
+aln_data$is.rat = "NO"
+aln_data$is.rat[aln_data$sample.x=="rnor6"] = "YES"
+
+aln_data$cds.diff = aln_data$num.cds.x - aln_data$num.cds.y
+aln_data$len.diff = aln_data$cds.len.x - aln_data$cds.len.y
+```
+
+
+```{r fig1, out.width="100%", fig.align="center"}
+
+cds_p = ggplot(subset(aln_data, cds.diff < 25 & cds.diff > -25), aes(x=cds.diff)) +
+  #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
+  geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1)) +
+  xlab("# predicted CDS - # mouse CDS") +
+  ylab("# sequences") +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(cds_p)
+
+```
+
+```{r fig2, out.width="100%", fig.align="center"}
+
+len_p = ggplot(subset(aln_data, len.diff < 2500 & len.diff > -2500), aes(x=len.diff)) +
+  #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
+  geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1, offset=1)) +
+  xlab("predicted CDS length - mouse CDS length") +
+  ylab("# sequences") +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(len_p)
+
+```
+
+```{r footer}
+cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
+htmltools::includeHTML("../html-chunks/rmd_footer.html")
+```

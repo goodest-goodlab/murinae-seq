@@ -1,6 +1,7 @@
 *.RHistory
 *.pyc
 __pycache__
+*__pycache__*
 
 Reference-genomes/
 Targets/
