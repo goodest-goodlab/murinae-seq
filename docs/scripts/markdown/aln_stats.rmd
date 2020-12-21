@@ -45,6 +45,7 @@ aln_data$cds.diff = aln_data$num.cds.x - aln_data$num.cds.y
 aln_data$len.diff = aln_data$cds.len.x - aln_data$cds.len.y
 ```
 
+# Exonerate predictions vs. mouse
 
 ```{r fig1, out.width="100%", fig.align="center"}
 
@@ -65,6 +66,24 @@ len_p = ggplot(subset(aln_data, len.diff < 2500 & len.diff > -2500), aes(x=len.d
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
   geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1, offset=1)) +
   xlab("predicted CDS length - mouse CDS length") +
+  ylab("# sequences") +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(len_p)
+
+```
+
+# MACSE pre-trimming
+
+```{r fig3, out.width="100%", fig.align="center"}
+
+trim_data = read.csv("../../data/06-cds-trim-stats.csv", header=TRUE, sep=";", stringsAsFactors=F)
+trim_data$perc.kept = as.numeric(trim_data$nbKeep) / as.numeric(trim_data$initialSeqLength)
+
+len_p = ggplot(subset(trim_data, perc.kept >= 0.9), aes(x=perc.kept)) +
+  #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
+  geom_histogram(color="#333333", fill=corecol(numcol=1, offset=1)) +
+  xlab("% sequence kept") +
   ylab("# sequences") +
   scale_y_continuous(expand=c(0,0)) +
   bartheme()
