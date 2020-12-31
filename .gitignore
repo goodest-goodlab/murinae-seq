@@ -13,6 +13,7 @@ Targets/
 03-Alignment-scripts/test/
 03-Alignment-scripts/tmp/
 03-Alignment-scripts/old/
+03-Alignment-scripts/logs/
 tmp.fa
 *.log
 *.out
