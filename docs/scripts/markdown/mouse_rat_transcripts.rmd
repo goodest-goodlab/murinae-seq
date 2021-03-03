@@ -87,7 +87,7 @@ pre_data = subset(pre_data, dS.with.Rat < 1)
 pre_data = subset(pre_data, dN.with.Rat < 1)
 
 
-filter_data = read.csv("../../data/selected-transcripts.txt", header=T, sep="\t", comment.char='#')
+filter_data = read.csv("../../data/selected-transcripts-target-check.txt", header=T, sep="\t", comment.char='#')
 filter_data$dnds = filter_data$dN.with.Rat / filter_data$dS.with.Rat
 filter_data = subset(filter_data, dS.with.Rat < 1)
 filter_data = subset(filter_data, dN.with.Rat < 1)
@@ -101,22 +101,33 @@ Data from Ensembl release 99.
 #####################
 # Mouse-rat dS for transcripts
 #####################\
-pre_binned = binData(pre_data, "dS.with.Rat", 1)
-pre_binned$filter = "Pre-filter"
+# pre_binned = binData(pre_data, "dS.with.Rat", 1)
+# pre_binned$filter = "Pre-filter"
+# 
+# filter_binned = binData(filter_data, "dS.with.Rat", 1)
+# filter_binned$filter = "Post-filter"
 
-filter_binned = binData(filter_data, "dS.with.Rat", 1)
-filter_binned$filter = "Post-filter"
+bins = seq(0,1,by=0.01)
+bin_labels = seq(0.01,1,by=0.01)
+pre_counts = hist(pre_data$dS.with.Rat, breaks=bins, include.lowest=T, plot=F)$counts
+pre_binned = data.frame("bin"=bin_labels, "count"=pre_counts, filter="Pre-filter")
+
+
+filter_counts = hist(filter_data$dS.with.Rat, breaks=bins, include.lowest=T, plot=F)$counts
+filter_binned = data.frame("bin"=bin_labels, "count"=filter_counts, filter="Post-filter")
+
 
 binned_data = rbind.fill(pre_binned, filter_binned)
 col = corecol(numcol=2)
 lab = c("Pre-filter", "Post-filter")
-ylabels = c("1200", as.character(seq(from=0, to=7000, by=1000)))
+#ylabels = c("1200", as.character(seq(from=0, to=7000, by=1000)))
+ylabels = as.character(seq(from=-10000, to=10000, by=1000))
 
 dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 1)*count, fill = filter)) + 
   geom_col(width=0.01) +
   geom_hline(yintercept=0) +
   scale_x_continuous(name = "dS", limits = c(-0.02, 1), expand = c(0, 0)) +
-  scale_y_continuous(name = "# Transcripts", limits=c(-1200,7000), breaks = 1000*(-1:7), labels=ylabels) +
+  scale_y_continuous(name = "# Transcripts", limits=c(-10000,10000), breaks = 1000*(-10:10), labels=ylabels) +
   scale_fill_manual(name="", limits=lab, values=col) +
   bartheme()
 print(dualp)
