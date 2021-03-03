@@ -11,12 +11,24 @@ output:
 ---
 
 ```{r setup, warning=FALSE, message=FALSE}
+binData <- function(df, column, max_bin){
+# Function to pre-bin SVs by length
+  binned_df = data.frame("bin"=seq(from=0,to=max_bin,by=10), count=0)
+  for(i in 1:nrow(df)) {
+    row <- df[i,]
+    bin = floor(row[[column]]/10)*10
+    binned_df[binned_df$bin==bin,]$count = binned_df[binned_df$bin==bin,]$count + 1
+  }
+  return(binned_df) 
+}
+
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
 library(cowplot)
 library(ggbeeswarm)
 library(ggpubr)
+library(plyr)
 library(dplyr)
 source("../lib/design.r")
 
@@ -27,29 +39,194 @@ htmltools::includeHTML("../html-chunks/nav.html")
 
 ```{r read, out.width="100%", fig.align="center"}
 mus_data = read.csv("../../data/Mus_best_cds_metadata.csv", header=TRUE)
-aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
-names(aln_data) = c("pid", "sample", "num.cds", "cds.len")
+#aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
+#in_data = read.csv("../../data/exonerate-indiv-target-test-seq-exonerate-to-cds-indiv.log", sep="\t", comment.char="#",
+in_data = read.csv("../../data/exonerate-to-cds-p2g-concat.log", sep="\t", comment.char="#",header=TRUE)
+#names(aln_data) = c("pid", "sample", "num.cds", "cds.len")
 ```
+
+```{r sim-dists, out.width="100%", fig.align="center"}
+
+target_data = filter(in_data, sample != "mm10" & sample != "rnor6")
+
+orig_p = ggplot(target_data, aes(x=orig.seg.sim)) +
+  geom_histogram() +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(orig_p)
+
+final_p = ggplot(target_data, aes(x=final.seg.sim)) +
+  geom_histogram() +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(final_p)
+
+bins = seq(0,100,by=1)
+bin_labels = seq(1,100,by=1)
+orig_counts = hist(target_data$orig.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+orig_binned = data.frame("bin"=bin_labels, "count"=orig_counts, filter="With stop codons")
+
+
+final_counts = hist(target_data$final.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+final_binned = data.frame("bin"=bin_labels, "count"=final_counts, filter="Without stop codons")
+
+# orig_binned = binData(target_data, "orig.seg.sim", 100)
+# orig_binned$filter = "With stop codons"
+# 
+# final_binned = binData(target_data, "final.seg.sim", 100)
+# final_binned$filter = "Without stop codons"
+
+binned_data = rbind.fill(orig_binned, final_binned)
+col = corecol(pal="wilke", numcol=2)
+lab = c("With stop codons", "Without stop codons")
+ylabels = as.character(seq(from=-50000, to=50000, by=10000))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Without stop codons",-1, 1)*count, fill = filter)) + 
+  geom_col(width=1) +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "% AA similarity", limits = c(60, 105), expand = c(0, 0)) +
+  scale_y_continuous(name = "# of segments", limits=c(-50000,50000), breaks = 10000*(-5:5), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+
+
+
+
+orig_sim_data = select(target_data, pid, target, sample, orig.seg.sim)
+names(orig_sim_data)[4] = "sim"
+orig_sim_data$label = "With stop codons"
+
+final_sim_data =select(target_data, pid, target, sample, final.seg.sim)
+names(final_sim_data)[4] = "sim"
+final_sim_data$label = "Without stop codons"
+
+sim_data = rbind(orig_sim_data, final_sim_data)
+
+scaff_batch_p = ggplot(sim_data, aes(x=label, y=sim, fill=label)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  scale_fill_manual(labels=c("With stop codons", "Without stop codons"),
+                     values=c("#920000", "#333333")) +
+
+  labs(x="", y="% AA similarity") +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 57", "New 21")) +
+  bartheme() + 
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(scaff_batch_p)
+
+
+
+no_stop_data = subset(target_data, seg.stops==0)
+stop_data = subset(target_data, seg.stops > 0)
+
+bins = seq(0,100,by=1)
+bin_labels = seq(1,100,by=1)
+orig_counts = hist(stop_data$orig.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+orig_binned = data.frame("bin"=bin_labels, "count"=orig_counts, filter="With stop codons")
+
+
+final_counts = hist(no_stop_data$orig.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+final_binned = data.frame("bin"=bin_labels, "count"=final_counts, filter="Without stop codons")
+
+# orig_binned = binData(target_data, "orig.seg.sim", 100)
+# orig_binned$filter = "With stop codons"
+# 
+# final_binned = binData(target_data, "final.seg.sim", 100)
+# final_binned$filter = "Without stop codons"
+
+binned_data = rbind.fill(orig_binned, final_binned)
+col = corecol(pal="wilke", numcol=2)
+lab = c("With stop codons", "Without stop codons")
+ylabels = as.character(seq(from=-50000, to=50000, by=10000))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Without stop codons",-1, 1)*count, fill = filter)) + 
+  geom_col(width=1) +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "% AA similarity", limits = c(60, 105), expand = c(0, 0)) +
+  scale_y_continuous(name = "# of segments", limits=c(-50000,50000), breaks = 10000*(-5:5), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+
+
+
+
+
+
+stop_sim_data = select(stop_data, pid, target, sample, orig.seg.sim, orig.seg.len)
+names(stop_sim_data)[4] = "sim"
+names(stop_sim_data)[5] = "len"
+stop_sim_data$label = "With stop codons"
+
+stop_sim_data_final = select(stop_data, pid, target, sample, final.seg.sim, final.seg.len)
+names(stop_sim_data_final)[4] = "sim"
+names(stop_sim_data_final)[5] = "len"
+stop_sim_data_final$label = "With stop codons (final)"
+
+no_stop_sim_data =select(no_stop_data, pid, target, sample, orig.seg.sim, orig.seg.len)
+names(no_stop_sim_data)[4] = "sim"
+names(no_stop_sim_data)[5] = "len"
+no_stop_sim_data$label = "Without stop codons"
+
+sim_data = rbind(stop_sim_data, stop_sim_data_final, no_stop_sim_data)
+
+sim_p = ggplot(sim_data, aes(x=label, y=sim, fill=label)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  scale_fill_manual(labels=c("With stop codons", "With stop codons (final)", "Without stop codons"),
+                     values=corecol(numcol=3, offset=2)) +
+
+  labs(x="", y="% AA similarity") +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 57", "New 21")) +
+  bartheme() + 
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(sim_p)
+
+
+
+len_p = ggplot(sim_data, aes(x=label, y=len, fill=label)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  scale_fill_manual(labels=c("With stop codons", "With stop codons (final)", "Without stop codons"),
+                     values=corecol(numcol=3, offset=2)) +
+
+  labs(x="", y="% AA similarity") +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 57", "New 21")) +
+  bartheme() + 
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(len_p)
+```
+
 
 ```{r parse, out.width="100%", fig.align="center"}
 #aln_data$num.diff = NA
 #num_data = data.frame("sample"=c(), "num.diff"=c())
 
-mm10_data = subset(aln_data, sample=="mm10")
-aln_data = merge(aln_data, mm10_data, by="pid")
-aln_data = subset(aln_data, sample.x!="mm10")
-aln_data$is.rat = "NO"
-aln_data$is.rat[aln_data$sample.x=="rnor6"] = "YES"
+sample_data = select(in_data, pid, sample, num.cds.protein, final.segs, cds.protein.len, final.full.len)
+sample_data = unique(sample_data)
 
-aln_data$cds.diff = aln_data$num.cds.x - aln_data$num.cds.y
-aln_data$len.diff = aln_data$cds.len.x - aln_data$cds.len.y
+mm10_data = subset(sample_data, sample=="mm10")
+sample_data = merge(sample_data, mm10_data, by="pid")
+sample_data = subset(sample_data, sample.x!="mm10")
+sample_data$is.rat = "NO"
+sample_data$is.rat[sample_data$sample.x=="rnor6"] = "YES"
+
+sample_data$cds.diff = sample_data$final.segs.x - sample_data$num.cds.protein.y
+sample_data$len.diff = sample_data$final.full.len.x - sample_data$cds.protein.len.y
 ```
 
 # Exonerate predictions vs. mouse
 
 ```{r fig1, out.width="100%", fig.align="center"}
 
-cds_p = ggplot(subset(aln_data, cds.diff < 25 & cds.diff > -25), aes(x=cds.diff)) +
+cds_p = ggplot(sample_data, aes(x=cds.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
   geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1)) +
   xlab("# predicted CDS - # mouse CDS") +
@@ -62,7 +239,7 @@ print(cds_p)
 
 ```{r fig2, out.width="100%", fig.align="center"}
 
-len_p = ggplot(subset(aln_data, len.diff < 2500 & len.diff > -2500), aes(x=len.diff)) +
+len_p = ggplot(sample_data, aes(x=len.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
   geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1, offset=1)) +
   xlab("predicted CDS length - mouse CDS length") +
