@@ -19,7 +19,7 @@ parser.add_argument("--assembly", dest="assembly", help="Without --all: build as
 parser.add_argument("--aln", dest="aln", help="Without --all: build aln_stats.html. With --all: exlude aln_stats.html", action="store_true", default=False);
 # parser.add_argument("--fullassemblystats", dest="fullassemblystats", help="Without --all: build assembly_stats_2.html. With --all: exlude assembly_stats_2.html", action="store_true", default=False);
 # parser.add_argument("--fullmappingstats", dest="fullmappingstats", help="Without --all: build full_mapping_stats.html. With --all: exlude full_mapping_stats.html", action="store_true", default=False);
-parser.add_argument("--filterstats", dest="filterstats", help="Without --all: build fiter_stats.html. With --all: exlude filter_stats.html", action="store_true", default=False);
+parser.add_argument("--filterstats", dest="filterstats", help="Without --all: build filter_stats.html. With --all: exlude filter_stats.html", action="store_true", default=False);
 parser.add_argument("--mouserat", dest="mouserat", help="Without --all: build mouse_rat_transcripts.html. With --all: exlude mouse_rat_transcripts.html", action="store_true", default=False);
 args = parser.parse_args();
 # Input options.

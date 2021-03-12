@@ -35,9 +35,47 @@ source("../lib/design.r")
 htmltools::includeHTML("../html-chunks/nav.html")
 ```
 
+## BLAST hits vs. exonerate hits
+
+```{r fig1, out.width="100%", fig.align = "center", warning=FALSE}
+
+sample_targets = read.csv("../../data/aln-stats/targets-exonerate.csv", header=T)
+
+bhits_v_ehits = ggplot(sample_targets, aes(x=init.sample.hits, y=exonerate.sample.hits)) +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=4)) +
+  geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
+  xlab("# of samples with BLAST hits") + 
+  ylab("# of samples with\nexonerate hits") +
+  scale_color_manual(values=c("1:1"="#999999", "Fit"=corecol(pal="wilke", numcol=1, offset=4))) +
+  bartheme() +
+  theme(legend.position="right")
+print(bhits_v_ehits)
+
+```
+
+# Mouse exons vs exonerate hits
+
+```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
+
+sample_targets = read.csv("../../data/aln-stats/sample-targets-exonerate.csv", header=T)
+
+exons_v_hits = ggplot(sample_targets, aes(x=mm.exons, y=exonerate.hits)) +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=5)) +
+  geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
+  xlab("# of exons in mouse protein") + 
+  ylab("# of exonerate hits\nper sample per protein") +
+  scale_color_manual(values=c("1:1"="#999999", "Fit"="#000000")) +
+  bartheme() + 
+  theme(legend.position="right")
+print(exons_v_hits)
+
+```
+
 # Exonerate CDS diff between mouse and target seqs
 
-```{r read, out.width="100%", fig.align="center"}
+```{r read, out.width="100%", fig.align="center", eval=F}
 mus_data = read.csv("../../data/Mus_best_cds_metadata.csv", header=TRUE)
 #aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
 #in_data = read.csv("../../data/exonerate-indiv-target-test-seq-exonerate-to-cds-indiv.log", sep="\t", comment.char="#",
@@ -45,7 +83,7 @@ in_data = read.csv("../../data/exonerate-to-cds-p2g-concat.log", sep="\t", comme
 #names(aln_data) = c("pid", "sample", "num.cds", "cds.len")
 ```
 
-```{r sim-dists, out.width="100%", fig.align="center"}
+```{r sim-dists, out.width="100%", fig.align="center", eval=F}
 
 target_data = filter(in_data, sample != "mm10" & sample != "rnor6")
 
@@ -205,7 +243,7 @@ print(len_p)
 ```
 
 
-```{r parse, out.width="100%", fig.align="center"}
+```{r parse, out.width="100%", fig.align="center", eval=F}
 #aln_data$num.diff = NA
 #num_data = data.frame("sample"=c(), "num.diff"=c())
 
@@ -224,7 +262,7 @@ sample_data$len.diff = sample_data$final.full.len.x - sample_data$cds.protein.le
 
 # Exonerate predictions vs. mouse
 
-```{r fig1, out.width="100%", fig.align="center"}
+```{r fig3, out.width="100%", fig.align="center", eval=F}
 
 cds_p = ggplot(sample_data, aes(x=cds.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
@@ -237,7 +275,7 @@ print(cds_p)
 
 ```
 
-```{r fig2, out.width="100%", fig.align="center"}
+```{r fig4, out.width="100%", fig.align="center", eval=F}
 
 len_p = ggplot(sample_data, aes(x=len.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
@@ -252,7 +290,7 @@ print(len_p)
 
 # MACSE pre-trimming
 
-```{r fig3, out.width="100%", fig.align="center"}
+```{r fig5, out.width="100%", fig.align="center", eval=F}
 
 trim_data = read.csv("../../data/06-cds-trim-stats.csv", header=TRUE, sep=";", stringsAsFactors=F)
 trim_data$perc.kept = as.numeric(trim_data$nbKeep) / as.numeric(trim_data$initialSeqLength)
