@@ -35,13 +35,45 @@ source("../lib/design.r")
 htmltools::includeHTML("../html-chunks/nav.html")
 ```
 
-## BLAST hits vs. exonerate hits
+```
+Alignment and filtering steps:
+1. BLAST mouse exons to all assembled contigs.
+2. Exonerate mouse exons (as trimmed AA sequences) to matching contig for each sample.
+3. Remove exons that have fewer than 175 samples with a matching BLAST hit.
+4. Align exonerate hits with MAFFT.
+5. Backtranslate to nucleotide sequences.
+6. For each alignment, remove sequences that are >20% gaps.
+7. For each alignment, remove 3-codon windows in which 2 or more codons have 2 or more gaps in >20% of sequences.
+```
+
+
+## Exons vs. BLAST hits
 
 ```{r fig1, out.width="100%", fig.align = "center", warning=FALSE}
 
-sample_targets = read.csv("../../data/aln-stats/targets-exonerate.csv", header=T)
+blast_data = read.csv("../../data/aln-stats/sample-hits-exons.csv", header=T)
 
-bhits_v_ehits = ggplot(sample_targets, aes(x=init.sample.hits, y=exonerate.sample.hits)) +
+exons_v_bhits = ggplot(blast_data, aes(x=exons, y=blast.hits)) +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=6)) +
+  geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
+  ylab("# of BLAST hits per sample") + 
+  xlab("# of mouse exons") +
+  scale_color_manual(values=c("1:1"="#999999", "Fit"=corecol(pal="wilke", numcol=1, offset=6))) +
+  bartheme() +
+  theme(legend.position="right")
+print(exons_v_bhits)
+
+```
+
+
+## BLAST hits vs. exonerate hits (no 175 hit threshold)
+
+```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
+
+targets_exonerate = read.csv("../../data/aln-stats/targets-exonerate.csv", header=T)
+
+bhits_v_ehits = ggplot(targets_exonerate, aes(x=init.sample.hits, y=exonerate.sample.hits)) +
   geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
   geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=4)) +
   geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
@@ -54,13 +86,13 @@ print(bhits_v_ehits)
 
 ```
 
-# Mouse exons vs exonerate hits
+# Mouse exons vs exonerate hits (no 175 hit threshold)
 
-```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
 
-sample_targets = read.csv("../../data/aln-stats/sample-targets-exonerate.csv", header=T)
+sample_targets_exonerate = read.csv("../../data/aln-stats/sample-targets-exonerate.csv", header=T)
 
-exons_v_hits = ggplot(sample_targets, aes(x=mm.exons, y=exonerate.hits)) +
+exons_v_hits = ggplot(sample_targets_exonerate, aes(x=mm.exons, y=exonerate.hits)) +
   geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
   geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=5)) +
   geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
@@ -73,9 +105,161 @@ print(exons_v_hits)
 
 ```
 
-# Exonerate CDS diff between mouse and target seqs
+# Alignment filtering
+
+## Number of sequences per alignment
+
+```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+
+aln_data = read.csv("../../data/aln-stats/aln-stats.tab", header=T, sep="\t", comment.char="#")
+
+filter_col = corecol(numcol=2)
+
+pre_seqs = select(aln_data, align, pre.num.seqs)
+pre_seqs$label = "Pre-filter"
+names(pre_seqs)[2] = "num.seqs"
+
+post_seqs = select(aln_data, align, post.num.seqs)
+post_seqs$label = "Post-filter"
+names(post_seqs)[2] = "num.seqs"
+
+num_seqs = rbind(pre_seqs, post_seqs)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter"))
+
+aln_seqs = ggplot(num_seqs, aes(x=label, y=num.seqs, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
+  ylab("# of aligned sequences per protein") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(aln_seqs)
+
+```
+
+## Length of alignment
+
+```{r fig5, out.width="100%", fig.align = "center", warning=FALSE}
+pre_seqs = select(aln_data, align, pre.codon.aln.length)
+pre_seqs$label = "Pre-filter"
+names(pre_seqs)[2] = "aln.len"
+
+post_seqs = select(aln_data, align, post.codon.aln.length)
+post_seqs$label = "Post-filter"
+names(post_seqs)[2] = "aln.len"
+
+num_seqs = rbind(pre_seqs, post_seqs)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter"))
+
+aln_len = ggplot(num_seqs, aes(x=label, y=aln.len, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
+  ylab("# of aligned sequences per protein") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(aln_len)
+
+# bin_width = 100
+# 
+# bins = seq(0,6000,by=bin_width)
+# bin_labels = seq(1,6000,by=bin_width)
+# pre_counts = hist(aln_data$pre.codon.aln.length, breaks=bins, include.lowest=T, plot=F)$counts
+# pre_binned = data.frame("bin"=bin_labels, "count"=pre_counts, filter="Pre-filter")
+# 
+# filter_counts = hist(aln_data$post.codon.aln.length, breaks=bins, include.lowest=T, plot=F)$counts
+# filter_binned = data.frame("bin"=bin_labels, "count"=filter_counts, filter="Post-filter")
+# 
+# binned_data = rbind.fill(pre_binned, filter_binned)
+# col = corecol(numcol=2)
+# lab = c("Pre-filter", "Post-filter")
+# #ylabels = c("1200", as.character(seq(from=0, to=7000, by=1000)))
+# ylabels = as.character(seq(from=-200, to=200, by=100))
+# 
+# dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 1)*count, fill = filter)) + 
+#   geom_col(width=bin_width) +
+#   geom_hline(yintercept=0) +
+#   scale_x_continuous(name = "dS", limits = c(-bin_width, 7000), expand = c(0, 0)) +
+#   scale_y_continuous(name = "# Transcripts", limits=c(-200,200), breaks = 100*(-2:2), labels=ylabels) +
+#   scale_fill_manual(name="", limits=lab, values=col) +
+#   bartheme()
+# print(dualp)
+
+```
+
+## Number of sequences per alignment that are >20% gap (pre-filter)
+
+```{r fig6, out.width="100%", fig.align = "center", warning=FALSE}
+
+aln_data$pre.percent.20.gap.seqs = (aln_data$pre.20.gap.seqs / aln_data$pre.num.seqs) * 100
+aln_20_gaps_seqs = ggplot(aln_data, aes(x=pre.percent.20.gap.seqs)) +
+  geom_histogram(fill=filter_col[1], color="#333333", bins=50) +
+  scale_x_continuous(expand=c(0,0)) +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("% of sequences that are\n>20% gap") +
+  ylab("# of alignments") +
+  bartheme()
+print(aln_20_gaps_seqs)
+
+```
+
+## Number of sites that are >20% gap (pre-filter)
+
+```{r fig7, out.width="100%", fig.align = "center", warning=FALSE}
+
+pre_sites = select(aln_data, align, pre.percent.sites.20.gap)
+pre_sites$label = "Pre-filter"
+names(pre_sites)[2] = "perc.sites"
+
+post_sites = select(aln_data, align, post.percent.sites.20.gap)
+post_sites$label = "Post-filter"
+names(post_sites)[2] = "perc.sites"
+
+num_sites = rbind(pre_sites, post_sites)
+
+num_sites$label = factor(num_sites$label, levels=c("Pre-filter", "Post-filter"))
+
+aln_20_gap_sites = ggplot(num_sites, aes(x=label, y=perc.sites, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  ylab("# of aligned sequences per protein") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(aln_20_gap_sites)
+
+
+
+
+# aln_20_gap_sites = ggplot(aln_data, aes(x=1, y=pre.percent.sites.20.gap)) +
+#   geom_quasirandom(size=2, width=0.25) +
+#   geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+#   geom_quasirandom(data=aln_data, aes(x=2, y=post.percent.sites.20.gap), size=2, width=0.25) +
+#   geom_boxplot(data=aln_data, aes(x=2, y=post.percent.sites.20.gap), outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+#   #scale_y_continuous(expand=c(0,0)) +
+#   bartheme()
+# print(aln_20_gap_sites)
+
+```
+
+
+
+
+
 
 ```{r read, out.width="100%", fig.align="center", eval=F}
+# Exonerate CDS diff between mouse and target seqs
 mus_data = read.csv("../../data/Mus_best_cds_metadata.csv", header=TRUE)
 #aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
 #in_data = read.csv("../../data/exonerate-indiv-target-test-seq-exonerate-to-cds-indiv.log", sep="\t", comment.char="#",
@@ -260,10 +444,10 @@ sample_data$cds.diff = sample_data$final.segs.x - sample_data$num.cds.protein.y
 sample_data$len.diff = sample_data$final.full.len.x - sample_data$cds.protein.len.y
 ```
 
+
+
+```{r fig3x, out.width="100%", fig.align="center", eval=F}
 # Exonerate predictions vs. mouse
-
-```{r fig3, out.width="100%", fig.align="center", eval=F}
-
 cds_p = ggplot(sample_data, aes(x=cds.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
   geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1)) +
@@ -275,7 +459,7 @@ print(cds_p)
 
 ```
 
-```{r fig4, out.width="100%", fig.align="center", eval=F}
+```{r fig4x, out.width="100%", fig.align="center", eval=F}
 
 len_p = ggplot(sample_data, aes(x=len.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
@@ -288,10 +472,10 @@ print(len_p)
 
 ```
 
+
+
+```{r fig5x, out.width="100%", fig.align="center", eval=F}
 # MACSE pre-trimming
-
-```{r fig5, out.width="100%", fig.align="center", eval=F}
-
 trim_data = read.csv("../../data/06-cds-trim-stats.csv", header=TRUE, sep=";", stringsAsFactors=F)
 trim_data$perc.kept = as.numeric(trim_data$nbKeep) / as.numeric(trim_data$initialSeqLength)
 

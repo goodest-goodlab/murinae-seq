@@ -18,3 +18,4 @@ tmp.fa
 *.log
 *.out
 docs/data/06-cds-trim-stats.csv
+docs/data/count-ns.csv
