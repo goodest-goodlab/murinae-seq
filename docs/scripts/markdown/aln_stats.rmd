@@ -159,7 +159,7 @@ num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter"))
 aln_len = ggplot(num_seqs, aes(x=label, y=aln.len, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
-  ylab("# of aligned sequences per protein") +
+  ylab("Alignment length (codons)") +
   xlab("") +
   scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
   scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
@@ -230,7 +230,7 @@ num_sites$label = factor(num_sites$label, levels=c("Pre-filter", "Post-filter"))
 aln_20_gap_sites = ggplot(num_sites, aes(x=label, y=perc.sites, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
-  ylab("# of aligned sequences per protein") +
+  ylab("# of sites ") +
   xlab("") +
   scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
   scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
