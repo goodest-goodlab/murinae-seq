@@ -112,8 +112,9 @@ print(exons_v_hits)
 ```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
 
 aln_data = read.csv("../../data/aln-stats/aln-stats.tab", header=T, sep="\t", comment.char="#")
+gbe_data = read.csv("../../data/aln-stats/roycroft-aln-stats.tab", header=T, sep="\t", comment.char="#")
 
-filter_col = corecol(numcol=2)
+filter_col = corecol(numcol=3)
 
 pre_seqs = select(aln_data, align, pre.num.seqs)
 pre_seqs$label = "Pre-filter"
@@ -152,17 +153,23 @@ post_seqs = select(aln_data, align, post.codon.aln.length)
 post_seqs$label = "Post-filter"
 names(post_seqs)[2] = "aln.len"
 
-num_seqs = rbind(pre_seqs, post_seqs)
+gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_seqs$label = "GBE"
+names(gbe_seqs)[2] = "aln.len"
+gbe_seqs = subset(gbe_seqs, aln.len < 10000)
 
-num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter"))
+
+num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE"))
 
 aln_len = ggplot(num_seqs, aes(x=label, y=aln.len, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
   ylab("Alignment length (codons)") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter", "GBE"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter", "GBE")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
   theme(legend.position="none")
@@ -195,9 +202,53 @@ print(aln_len)
 
 ```
 
-## Number of sequences per alignment that are >20% gap (pre-filter)
+## Avg. non-gapped sequence length per protein
 
 ```{r fig6, out.width="100%", fig.align = "center", warning=FALSE}
+mus_data = read.csv("../../data/Mus_best-transcript_all-counts_metadata.csv", header=TRUE)
+mus_data = subset(mus_data, feature_type=="CDS")
+mus_lens = select(mus_data, transcript_id, target_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(nongap.len=sum(target_length))
+mus_lens$nongap.len = mus_lens$nongap.len / 3
+mus_lens$label = "Mus CDS"
+names(mus_lens)[1] = "align"
+mus_lens = subset(mus_lens, nongap.len < 5000)
+
+pre_seqs = select(aln_data, align, pre.avg.nongap.length)
+pre_seqs$label = "Pre-filter"
+names(pre_seqs)[2] = "nongap.len"
+
+post_seqs = select(aln_data, align, post.avg.nongap.length)
+post_seqs$label = "Post-filter"
+names(post_seqs)[2] = "nongap.len"
+
+gbe_seqs = select(gbe_data, align, pre.avg.nongap.length)
+gbe_seqs$label = "GBE"
+names(gbe_seqs)[2] = "nongap.len"
+gbe_seqs = subset(gbe_seqs, nongap.len < 10000)
+
+
+num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs, mus_lens)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS"))
+
+nongap_len = ggplot(num_seqs, aes(x=label, y=nongap.len, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
+  ylab("Avg. ungapped\nsequence length (codons)") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS"), values=corecol()) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(nongap_len)
+```
+
+
+## Number of sequences per alignment that are >20% gap (pre-filter)
+
+```{r fig7, out.width="100%", fig.align = "center", warning=FALSE}
 
 aln_data$pre.percent.20.gap.seqs = (aln_data$pre.20.gap.seqs / aln_data$pre.num.seqs) * 100
 aln_20_gaps_seqs = ggplot(aln_data, aes(x=pre.percent.20.gap.seqs)) +
@@ -213,7 +264,7 @@ print(aln_20_gaps_seqs)
 
 ## Number of sites that are >20% gap (pre-filter)
 
-```{r fig7, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig8, out.width="100%", fig.align = "center", warning=FALSE}
 
 pre_sites = select(aln_data, align, pre.percent.sites.20.gap)
 pre_sites$label = "Pre-filter"
