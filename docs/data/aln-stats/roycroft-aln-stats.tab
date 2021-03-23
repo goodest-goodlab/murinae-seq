@@ -1,16 +1,18 @@
 # CDS alignment filter
 # PYTHON VERSION: 3.8.8
-# Script call:    06_aln_filter.py -i ../03-Alignments/roycroft/original_used_for_analysis-fa/ -o roycroft-stats/ --count
-# Runtime:        03/16/2021 22:22:47
+# Script call:    06_aln_filter.py -i ../03-Alignments/roycroft/original_used_for_analysis-fa/ -f NA --count -o roycroft-stats-2
+# Runtime:        03/23/2021 11:15:58
 # ----------------
 # IO OPTIONS
 # Input CDS directory:    /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/roycroft/original_used_for_analysis-fa
-# Output directory:       /mnt/beegfs/gt156213e/murinae-seq/03-Alignment-scripts/roycroft-stats
+# Sequence gappiness threshold:20
+# Codon site gappiness threshold:50
+# Output directory:       /mnt/beegfs/gt156213e/murinae-seq/03-Alignment-scripts/roycroft-stats-2-fNA-seq20-site50
 # --count set:            Will not output sequences.
-# Log file:               /mnt/beegfs/gt156213e/murinae-seq/03-Alignment-scripts/roycroft-stats/aln-stats.tab
+# Log file:               /mnt/beegfs/gt156213e/murinae-seq/03-Alignment-scripts/roycroft-stats-2-fNA-seq20-site50/aln-stats-fNA-seq20-site50.tab
 # ----------------
-# 03.16.2021 | 22:22:47 Beginning filter.
-align	pre num seqs	pre codon aln length	pre avg nongap length	pre uniq seqs	pre ident seqs	pre 20 gap seqs	pre invariant sites	pre stop codons	pre percent sites with gap	pre percent sites 20 gap
+# 03.23.2021 | 11:15:58 Beginning filter.
+align	pre num seqs	pre codon aln length	pre avg nongap length	pre uniq seqs	pre ident seqs	pre gappy seqs	pre invariant sites	pre stop codons	pre percent sites with gap	pre gappy sites
 CCDS174581Mm106chr3.fa	38	313	289.4736842105263	38	0	2	43	0	169	169
 CCDS365671Mm106chr12.fa	38	306	260.13157894736844	38	0	14	20	0	216	216
 CCDS384692Mm106chr3.fa	38	572	535.0526315789474	38	0	2	65	0	291	291
