@@ -11,44 +11,856 @@ output:
 ---
 
 ```{r setup, warning=FALSE, message=FALSE}
+binData <- function(df, column, max_bin){
+# Function to pre-bin SVs by length
+  binned_df = data.frame("bin"=seq(from=0,to=max_bin,by=10), count=0)
+  for(i in 1:nrow(df)) {
+    row <- df[i,]
+    bin = floor(row[[column]]/10)*10
+    binned_df[binned_df$bin==bin,]$count = binned_df[binned_df$bin==bin,]$count + 1
+  }
+  return(binned_df) 
+}
+
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
 library(cowplot)
 library(ggbeeswarm)
 library(ggpubr)
+#library(plyr)
 library(dplyr)
+library(kableExtra)
 source("../lib/design.r")
 
 htmltools::includeHTML("../html-chunks/nav.html")
 ```
 
-# Exonerate CDS diff between mouse and target seqs
-
-```{r read, out.width="100%", fig.align="center"}
-mus_data = read.csv("../../data/Mus_best_cds_metadata.csv", header=TRUE)
-aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
-names(aln_data) = c("pid", "sample", "num.cds", "cds.len")
+```
+Alignment and filtering steps:
+1. BLAST mouse exons to all assembled contigs.
+2. Exonerate mouse exons (as trimmed AA sequences) to matching contig for each sample.
+3. Remove exons that have fewer than 175 samples with a matching BLAST hit.
+4. Align exonerate hits with MAFFT.
+5. Backtranslate to nucleotide sequences.
+6. For each alignment, remove sequences that are >20% gaps.
+7. For each alignment, remove 3-codon windows in which 2 or more codons have 2 or more gaps in >50% of sequences.
 ```
 
-```{r parse, out.width="100%", fig.align="center"}
+
+## Exons vs. BLAST hits
+
+```{r fig1, out.width="100%", fig.align = "center", warning=FALSE}
+
+blast_data = read.csv("../../data/aln-stats/sample-hits-exons.csv", header=T)
+
+exons_v_bhits = ggplot(blast_data, aes(x=exons, y=blast.hits)) +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=6)) +
+  geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
+  ylab("# of BLAST hits per sample") + 
+  xlab("# of mouse exons") +
+  scale_color_manual(values=c("1:1"="#999999", "Fit"=corecol(pal="wilke", numcol=1, offset=6))) +
+  bartheme() +
+  theme(legend.position="right")
+print(exons_v_bhits)
+
+```
+
+
+## BLAST hits vs. exonerate hits (no 175 hit threshold)
+
+```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
+
+targets_exonerate = read.csv("../../data/aln-stats/targets-exonerate.csv", header=T)
+
+bhits_v_ehits = ggplot(targets_exonerate, aes(x=init.sample.hits, y=exonerate.sample.hits)) +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=4)) +
+  geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
+  xlab("# of samples with BLAST hits") + 
+  ylab("# of samples with\nexonerate hits") +
+  scale_color_manual(values=c("1:1"="#999999", "Fit"=corecol(pal="wilke", numcol=1, offset=4))) +
+  bartheme() +
+  theme(legend.position="right")
+print(bhits_v_ehits)
+
+```
+
+# Mouse exons vs exonerate hits (no 175 hit threshold)
+
+```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
+
+sample_targets_exonerate = read.csv("../../data/aln-stats/sample-targets-exonerate.csv", header=T)
+
+exons_v_hits = ggplot(sample_targets_exonerate, aes(x=mm.exons, y=exonerate.hits)) +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=5)) +
+  geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
+  xlab("# of exons in mouse protein") + 
+  ylab("# of exonerate hits\nper sample per protein") +
+  scale_color_manual(values=c("1:1"="#999999", "Fit"="#000000")) +
+  bartheme() + 
+  theme(legend.position="right")
+print(exons_v_hits)
+
+```
+
+# Alignment filtering
+
+## Number of sequences per alignment
+
+```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+
+aln_data = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site50.tab", header=T, sep="\t", comment.char="#")
+gbe_data = read.csv("../../data/aln-stats/roycroft-aln-stats.tab", header=T, sep="\t", comment.char="#")
+
+filter_col = corecol(numcol=3)
+
+pre_seqs = select(aln_data, align, pre.num.seqs)
+pre_seqs$label = "Pre-filter"
+names(pre_seqs)[2] = "num.seqs"
+
+post_seqs = select(aln_data, align, post.num.seqs)
+post_seqs$label = "Post-filter"
+names(post_seqs)[2] = "num.seqs"
+
+num_seqs = rbind(pre_seqs, post_seqs)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter"))
+
+aln_seqs = ggplot(num_seqs, aes(x=label, y=num.seqs, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
+  ylab("# of aligned sequences per protein") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(aln_seqs)
+
+```
+
+## Length of alignment
+
+```{r fig5, out.width="100%", fig.align = "center", warning=FALSE}
+pre_seqs = select(aln_data, align, pre.codon.aln.length)
+pre_seqs$label = "Pre-filter"
+names(pre_seqs)[2] = "aln.len"
+
+post_seqs = select(aln_data, align, post.codon.aln.length)
+post_seqs$label = "Post-filter"
+names(post_seqs)[2] = "aln.len"
+
+gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_seqs$label = "GBE"
+names(gbe_seqs)[2] = "aln.len"
+gbe_seqs = subset(gbe_seqs, aln.len < 10000)
+
+
+num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE"))
+
+aln_len = ggplot(num_seqs, aes(x=label, y=aln.len, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
+  ylab("Alignment length (codons)") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter", "GBE"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter", "GBE")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(aln_len)
+
+# bin_width = 100
+# 
+# bins = seq(0,6000,by=bin_width)
+# bin_labels = seq(1,6000,by=bin_width)
+# pre_counts = hist(aln_data$pre.codon.aln.length, breaks=bins, include.lowest=T, plot=F)$counts
+# pre_binned = data.frame("bin"=bin_labels, "count"=pre_counts, filter="Pre-filter")
+# 
+# filter_counts = hist(aln_data$post.codon.aln.length, breaks=bins, include.lowest=T, plot=F)$counts
+# filter_binned = data.frame("bin"=bin_labels, "count"=filter_counts, filter="Post-filter")
+# 
+# binned_data = rbind.fill(pre_binned, filter_binned)
+# col = corecol(numcol=2)
+# lab = c("Pre-filter", "Post-filter")
+# #ylabels = c("1200", as.character(seq(from=0, to=7000, by=1000)))
+# ylabels = as.character(seq(from=-200, to=200, by=100))
+# 
+# dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 1)*count, fill = filter)) + 
+#   geom_col(width=bin_width) +
+#   geom_hline(yintercept=0) +
+#   scale_x_continuous(name = "dS", limits = c(-bin_width, 7000), expand = c(0, 0)) +
+#   scale_y_continuous(name = "# Transcripts", limits=c(-200,200), breaks = 100*(-2:2), labels=ylabels) +
+#   scale_fill_manual(name="", limits=lab, values=col) +
+#   bartheme()
+# print(dualp)
+
+```
+
+## Avg. non-gapped sequence length per protein
+
+```{r fig6, out.width="100%", fig.align = "center", warning=FALSE}
+mus_data = read.csv("../../data/Mus_best-transcript_all-counts_metadata.csv", header=TRUE)
+mus_data = subset(mus_data, feature_type=="CDS")
+mus_lens = select(mus_data, transcript_id, target_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(nongap.len=sum(target_length))
+mus_lens$nongap.len = mus_lens$nongap.len / 3
+mus_lens$label = "Mus CDS"
+names(mus_lens)[1] = "align"
+mus_lens = subset(mus_lens, nongap.len < 5000)
+
+pre_seqs = select(aln_data, align, pre.avg.nongap.length)
+pre_seqs$label = "Pre-filter"
+names(pre_seqs)[2] = "nongap.len"
+
+post_seqs = select(aln_data, align, post.avg.nongap.length)
+post_seqs$label = "Post-filter"
+names(post_seqs)[2] = "nongap.len"
+
+gbe_seqs = select(gbe_data, align, pre.avg.nongap.length)
+gbe_seqs$label = "GBE"
+names(gbe_seqs)[2] = "nongap.len"
+gbe_seqs = subset(gbe_seqs, nongap.len < 10000)
+
+
+num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs, mus_lens)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS"))
+
+nongap_len = ggplot(num_seqs, aes(x=label, y=nongap.len, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
+  ylab("Avg. ungapped\nsequence length (codons)") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS"), values=corecol()) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(nongap_len)
+```
+
+
+## Number of sequences per alignment that are >20% gap (pre-filter)
+
+```{r fig7, out.width="100%", fig.align = "center", warning=FALSE}
+
+aln_data$pre.gappy.seqs = (aln_data$pre.gappy.seqs / aln_data$pre.num.seqs) * 100
+aln_20_gaps_seqs = ggplot(aln_data, aes(x=pre.gappy.seqs)) +
+  geom_histogram(fill=filter_col[1], color="#333333", bins=50) +
+  scale_x_continuous(expand=c(0,0)) +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("% of sequences that are\n>20% gap") +
+  ylab("# of alignments") +
+  bartheme()
+print(aln_20_gaps_seqs)
+
+```
+
+## Number of sites that are >20% gap (pre-filter)
+
+```{r fig8, out.width="100%", fig.align = "center", warning=FALSE}
+
+pre_sites = select(aln_data, align, pre.gappy.sites)
+pre_sites$label = "Pre-filter"
+names(pre_sites)[2] = "perc.sites"
+
+post_sites = select(aln_data, align, post.gappy.sites)
+post_sites$label = "Post-filter"
+names(post_sites)[2] = "perc.sites"
+
+num_sites = rbind(pre_sites, post_sites)
+
+num_sites$label = factor(num_sites$label, levels=c("Pre-filter", "Post-filter"))
+
+aln_20_gap_sites = ggplot(num_sites, aes(x=label, y=perc.sites, fill=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  ylab("# of sites ") +
+  xlab("") +
+  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none")
+print(aln_20_gap_sites)
+
+
+
+
+# aln_20_gap_sites = ggplot(aln_data, aes(x=1, y=pre.percent.sites.20.gap)) +
+#   geom_quasirandom(size=2, width=0.25) +
+#   geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+#   geom_quasirandom(data=aln_data, aes(x=2, y=post.percent.sites.20.gap), size=2, width=0.25) +
+#   geom_boxplot(data=aln_data, aes(x=2, y=post.percent.sites.20.gap), outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+#   #scale_y_continuous(expand=c(0,0)) +
+#   bartheme()
+# print(aln_20_gap_sites)
+
+```
+
+# Alignment filter data
+
+A look at the effects of varying all three filters:
+
+1. Filtering the required number of samples present for exonerate. Targets with fewer than [0, 50, 100, 150, 175, 200] sample hits will be filtered. This is the presence filter denoted "P".
+2. Filtering sequences that are more than [20, 40, 60, 80, 100]% gaps. This is the sequence filter denoted as "S".
+3. Filtering codon sites that, among sliding windows of 3 codons, have at least 2 gaps in at least 2 codons in [25, 50, 75, 100]% of samples. This is the codon site filter denoted as "C".
+
+```{r read-filter, out.width="100%", fig.align = "center", warning=FALSE}
+p0s20c50 = read.csv("../../data/aln-filters/aln-stats-f0-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p0s20c50$label = "P0S20C50"
+
+p0s40c50 = read.csv("../../data/aln-filters/aln-stats-f0-seq40-site50.tab", header=T, comment.char="#", sep="\t")
+p0s40c50$label = "P0S40C50"
+
+p0s60c50 = read.csv("../../data/aln-filters/aln-stats-f0-seq60-site50.tab", header=T, comment.char="#", sep="\t")
+p0s60c50$label = "P0S60C50"
+
+p0s80c50 = read.csv("../../data/aln-filters/aln-stats-f0-seq80-site50.tab", header=T, comment.char="#", sep="\t")
+p0s80c50$label = "P0S80C50"
+
+p0s100c50 = read.csv("../../data/aln-filters/aln-stats-f0-seq100-site50.tab", header=T, comment.char="#", sep="\t")
+p0s100c50$label = "P0S100C50"
+
+
+p0s20c25 = read.csv("../../data/aln-filters/aln-stats-f0-seq20-site25.tab", header=T, comment.char="#", sep="\t")
+p0s20c25$label = "P0S20C25"
+
+p0s20c75 = read.csv("../../data/aln-filters/aln-stats-f0-seq20-site75.tab", header=T, comment.char="#", sep="\t")
+p0s20c75$label = "P0S20C75"
+
+p0s20c100 = read.csv("../../data/aln-filters/aln-stats-f0-seq20-site100.tab", header=T, comment.char="#", sep="\t")
+p0s20c100$label = "P0S20C100"
+
+
+p50s20c50 = read.csv("../../data/aln-filters/aln-stats-f50-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p50s20c50$label = "P50S20C50"
+
+p100s20c50 = read.csv("../../data/aln-filters/aln-stats-f100-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p100s20c50$label = "P100S20C50"
+
+p150s20c50 = read.csv("../../data/aln-filters/aln-stats-f150-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p150s20c50$label = "P150S20C50"
+
+
+p175s20c50 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p175s20c50$label = "P175S20C50"
+
+p175s40c50 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p175s40c50$label = "P175S40C50"
+
+p175s60c50 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p175s60c50$label = "P175S60C50"
+
+p175s80c50 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p175s80c50$label = "P175S80C50"
+
+p175s100c50 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p175s100c50$label = "P175S100C50"
+
+
+p175s20c25 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site25.tab", header=T, comment.char="#", sep="\t")
+p175s20c25$label = "P175S20C25"
+
+p175s20c75 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site75.tab", header=T, comment.char="#", sep="\t")
+p175s20c75$label = "P175S20C75"
+
+p175s20c100 = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site100.tab", header=T, comment.char="#", sep="\t")
+p175s20c100$label = "P175S20C100"
+
+
+p200s20c50 = read.csv("../../data/aln-filters/aln-stats-f200-seq20-site50.tab", header=T, comment.char="#", sep="\t")
+p200s20c50$label = "P200S20C50"
+```
+
+
+## Varying the Presence (P) filter
+Filtering targets with exonerate matches in less than [0, 50, 100, 150, 175, 200] samples
+
+Alignment length (codons)
+```{r fig9, out.width="100%", fig.align = "center", warning=FALSE}
+#gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_data$label = "GBE"
+names(gbe_data)[3] = "post.codon.aln.length"
+gbe_lens = select(gbe_data, align, label, post.codon.aln.length)
+gbe_lens = subset(gbe_lens, post.codon.aln.length < 10000)
+
+
+p_data = rbind(p0s20c50, p50s20c50, p100s20c50, p150s20c50, p175s20c50, p200s20c50)
+p_data = select(p_data, align, label, post.codon.aln.length)
+
+p_data = rbind(p_data, gbe_lens)
+
+p_means = select(p_data, label, post.codon.aln.length)
+p_means = p_means %>% group_by(label) %>% summarize(post.codon.aln.length=mean(post.codon.aln.length, na.rm=T))
+
+p_data$label = factor(p_data$label, levels=c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE"), ordered=T)
+#levels(p_data$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE"), ordered=T)
+
+
+p_means$label = factor(p_means$label, levels=c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE"), ordered=T)
+#p_means$label = as.factor(p_means$label)
+#levels(p_means$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50")
+
+p_lens = ggplot(p_data, aes(x=label, y=post.codon.aln.length, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+  geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+  ylab("Alignment length (codons)") +
+  xlab("") +
+  #scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  #scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(p_lens)
+
+p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+```
+
+Ungapped alignment length (codons)
+```{r fig10, out.width="100%", fig.align = "center", warning=FALSE}
+#gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_data$label = "GBE"
+names(gbe_data)[4] = "post.avg.nongap.length"
+gbe_lens = select(gbe_data, align, label, post.avg.nongap.length)
+gbe_lens = subset(gbe_lens, post.avg.nongap.length < 10000)
+
+mus_lens = select(mus_data, transcript_id, target_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(target_length))
+mus_lens$post.avg.nongap.length = mus_lens$post.avg.nongap.length / 3
+mus_lens$label = "Mus CDS"
+names(mus_lens)[1] = "align"
+mus_lens = subset(mus_lens, post.avg.nongap.length < 5000)
+
+
+p_data = rbind(p0s20c50, p50s20c50, p100s20c50, p150s20c50, p175s20c50, p200s20c50)
+p_data = select(p_data, align, label, post.avg.nongap.length)
+
+p_data = rbind(p_data, gbe_lens, mus_lens)
+
+p_means = select(p_data, label, post.avg.nongap.length)
+p_means = p_means %>% group_by(label) %>% summarize(post.avg.nongap.length=mean(post.avg.nongap.length, na.rm=T))
+
+p_data$label = factor(p_data$label, levels=c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE", "Mus CDS"), ordered=T)
+#levels(p_data$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE"), ordered=T)
+
+
+p_means$label = factor(p_means$label, levels=c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE", "Mus CDS"), ordered=T)
+#p_means$label = as.factor(p_means$label)
+#levels(p_means$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50")
+
+p_lens = ggplot(p_data, aes(x=label, y=post.avg.nongap.length, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  geom_point(data=p_means, aes(x=label, y=post.avg.nongap.length), size=2, color="red") +
+  geom_line(data=p_means, aes(x=label, y=post.avg.nongap.length), size=2, color="blue") +
+  ylab("Avg. ungapped sequence\nlength (codons)") +
+  xlab("") +
+  #scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  #scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(p_lens)
+
+p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+```
+
+
+## Varying the gappy sequence (S) filter
+Filtering sequences with % gaps larger than [20, 40, 60, 80, 100] samples
+
+Alignment length (codons)
+```{r fig12, out.width="100%", fig.align = "center", warning=FALSE}
+#gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_data$label = "GBE"
+names(gbe_data)[3] = "post.codon.aln.length"
+gbe_lens = select(gbe_data, align, label, post.codon.aln.length)
+gbe_lens = subset(gbe_lens, post.codon.aln.length < 10000)
+
+
+p_data = rbind(p175s20c50, p175s40c50, p175s60c50, p175s80c50, p175s100c50)
+p_data = select(p_data, align, label, post.codon.aln.length)
+
+p_data = rbind(p_data, gbe_lens)
+
+p_means = select(p_data, label, post.codon.aln.length)
+p_means = p_means %>% group_by(label) %>% summarize(post.codon.aln.length=mean(post.codon.aln.length, na.rm=T))
+
+p_data$label = factor(p_data$label, levels=c("P175S20C50", "P175S40C50", "P175S60C50", "P175S80C50", "P175S100C50", "GBE"), ordered=T)
+#levels(p_data$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P0S20C50", "P200S20C50", "GBE"), ordered=T)
+
+
+p_means$label = factor(p_means$label, levels=c("P175S20C50", "P175S40C50", "P175S60C50", "P175S80C50", "P175S100C50", "GBE"), ordered=T)
+#p_means$label = as.factor(p_means$label)
+#levels(p_means$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P0S20C50", "P200S20C50")
+
+p_lens = ggplot(p_data, aes(x=label, y=post.codon.aln.length, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+  geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+  ylab("Alignment length (codons)") +
+  xlab("") +
+  #scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  #scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(p_lens)
+
+p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+```
+
+Ungapped alignment length (codons)
+```{r fig13, out.width="100%", fig.align = "center", warning=FALSE}
+#gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_data$label = "GBE"
+names(gbe_data)[4] = "post.avg.nongap.length"
+gbe_lens = select(gbe_data, align, label, post.avg.nongap.length)
+gbe_lens = subset(gbe_lens, post.avg.nongap.length < 10000)
+
+mus_lens = select(mus_data, transcript_id, target_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(target_length))
+mus_lens$post.avg.nongap.length = mus_lens$post.avg.nongap.length / 3
+mus_lens$label = "Mus CDS"
+names(mus_lens)[1] = "align"
+mus_lens = subset(mus_lens, post.avg.nongap.length < 5000)
+
+
+p_data = rbind(p175s20c50, p175s40c50, p175s60c50, p175s80c50, p175s100c50)
+p_data = select(p_data, align, label, post.avg.nongap.length)
+
+p_data = rbind(p_data, gbe_lens, mus_lens)
+
+p_means = select(p_data, label, post.avg.nongap.length)
+p_means = p_means %>% group_by(label) %>% summarize(post.avg.nongap.length=mean(post.avg.nongap.length, na.rm=T))
+
+p_data$label = factor(p_data$label, levels=c("P175S20C50", "P175S40C50", "P175S60C50", "P175S80C50", "P175S100C50", "GBE", "Mus CDS"), ordered=T)
+#levels(p_data$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE"), ordered=T)
+
+
+p_means$label = factor(p_means$label, levels=c("P175S20C50", "P175S40C50", "P175S60C50", "P175S80C50", "P175S100C50", "GBE", "Mus CDS"), ordered=T)
+#p_means$label = as.factor(p_means$label)
+#levels(p_means$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50")
+
+p_lens = ggplot(p_data, aes(x=label, y=post.avg.nongap.length, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  geom_point(data=p_means, aes(x=label, y=post.avg.nongap.length), size=2, color="red") +
+  geom_line(data=p_means, aes(x=label, y=post.avg.nongap.length), size=2, color="blue") +
+  ylab("Avg. ungapped sequence\nlength (codons)") +
+  xlab("") +
+  #scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  #scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(p_lens)
+
+p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+```
+
+
+## Varying the codon site (C) filter
+Filtering three-codon windows where at least 2 codons have at least 2 gaps in greater than [25, 50, 75, 100]% of samples
+
+Alignment length (codons)
+```{r fig14, out.width="100%", fig.align = "center", warning=FALSE}
+#gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_data$label = "GBE"
+names(gbe_data)[3] = "post.codon.aln.length"
+gbe_lens = select(gbe_data, align, label, post.codon.aln.length)
+gbe_lens = subset(gbe_lens, post.codon.aln.length < 10000)
+
+
+p_data = rbind(p175s20c25, p175s20c50, p175s20c75, p175s20c100)
+p_data = select(p_data, align, label, post.codon.aln.length)
+
+p_data = rbind(p_data, gbe_lens)
+
+p_means = select(p_data, label, post.codon.aln.length)
+p_means = p_means %>% group_by(label) %>% summarize(post.codon.aln.length=mean(post.codon.aln.length, na.rm=T))
+
+p_data$label = factor(p_data$label, levels=c("P175S20C25", "P175S20C50", "P175S20C75", "P175S20C100", "GBE"), ordered=T)
+#levels(p_data$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P0S20C50", "P200S20C50", "GBE"), ordered=T)
+
+
+p_means$label = factor(p_means$label, levels=c("P175S20C25", "P175S20C50", "P175S20C75", "P175S20C100", "GBE"), ordered=T)
+#p_means$label = as.factor(p_means$label)
+#levels(p_means$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P0S20C50", "P200S20C50")
+
+p_lens = ggplot(p_data, aes(x=label, y=post.codon.aln.length, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+  geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+  ylab("Alignment length (codons)") +
+  xlab("") +
+  #scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  #scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(p_lens)
+
+p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+```
+
+Ungapped alignment length (codons)
+```{r fig15, out.width="100%", fig.align = "center", warning=FALSE}
+#gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
+gbe_data$label = "GBE"
+names(gbe_data)[4] = "post.avg.nongap.length"
+gbe_lens = select(gbe_data, align, label, post.avg.nongap.length)
+gbe_lens = subset(gbe_lens, post.avg.nongap.length < 10000)
+
+mus_lens = select(mus_data, transcript_id, target_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(target_length))
+mus_lens$post.avg.nongap.length = mus_lens$post.avg.nongap.length / 3
+mus_lens$label = "Mus CDS"
+names(mus_lens)[1] = "align"
+mus_lens = subset(mus_lens, post.avg.nongap.length < 5000)
+
+
+p_data = rbind(p175s20c25, p175s20c50, p175s20c75, p175s20c100)
+p_data = select(p_data, align, label, post.avg.nongap.length)
+
+p_data = rbind(p_data, gbe_lens, mus_lens)
+
+p_means = select(p_data, label, post.avg.nongap.length)
+p_means = p_means %>% group_by(label) %>% summarize(post.avg.nongap.length=mean(post.avg.nongap.length, na.rm=T))
+
+p_data$label = factor(p_data$label, levels=c("P175S20C25", "P175S20C50", "P175S20C75", "P175S20C100", "GBE", "Mus CDS"), ordered=T)
+#levels(p_data$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50", "GBE"), ordered=T)
+
+
+p_means$label = factor(p_means$label, levels=c("P175S20C25", "P175S20C50", "P175S20C75", "P175S20C100", "GBE", "Mus CDS"), ordered=T)
+#p_means$label = as.factor(p_means$label)
+#levels(p_means$label) = c("P0S20C50", "P50S20C50", "P100S20C50", "P150S20C50", "P175S20C50", "P200S20C50")
+
+p_lens = ggplot(p_data, aes(x=label, y=post.avg.nongap.length, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  geom_point(data=p_means, aes(x=label, y=post.avg.nongap.length), size=2, color="red") +
+  geom_line(data=p_means, aes(x=label, y=post.avg.nongap.length), size=2, color="blue") +
+  ylab("Avg. ungapped sequence\nlength (codons)") +
+  xlab("") +
+  #scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
+  #scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  #scale_y_continuous(expand=c(0,0)) +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(p_lens)
+
+p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+```
+
+
+```{r read, out.width="100%", fig.align="center", eval=F}
+# Exonerate CDS diff between mouse and target seqs
+mus_data = read.csv("../../data/Mus_best_cds_metadata.csv", header=TRUE)
+#aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
+#in_data = read.csv("../../data/exonerate-indiv-target-test-seq-exonerate-to-cds-indiv.log", sep="\t", comment.char="#",
+in_data = read.csv("../../data/exonerate-to-cds-p2g-concat.log", sep="\t", comment.char="#",header=TRUE)
+#names(aln_data) = c("pid", "sample", "num.cds", "cds.len")
+```
+
+```{r sim-dists, out.width="100%", fig.align="center", eval=F}
+
+target_data = filter(in_data, sample != "mm10" & sample != "rnor6")
+
+orig_p = ggplot(target_data, aes(x=orig.seg.sim)) +
+  geom_histogram() +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(orig_p)
+
+final_p = ggplot(target_data, aes(x=final.seg.sim)) +
+  geom_histogram() +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(final_p)
+
+bins = seq(0,100,by=1)
+bin_labels = seq(1,100,by=1)
+orig_counts = hist(target_data$orig.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+orig_binned = data.frame("bin"=bin_labels, "count"=orig_counts, filter="With stop codons")
+
+
+final_counts = hist(target_data$final.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+final_binned = data.frame("bin"=bin_labels, "count"=final_counts, filter="Without stop codons")
+
+# orig_binned = binData(target_data, "orig.seg.sim", 100)
+# orig_binned$filter = "With stop codons"
+# 
+# final_binned = binData(target_data, "final.seg.sim", 100)
+# final_binned$filter = "Without stop codons"
+
+binned_data = rbind.fill(orig_binned, final_binned)
+col = corecol(pal="wilke", numcol=2)
+lab = c("With stop codons", "Without stop codons")
+ylabels = as.character(seq(from=-50000, to=50000, by=10000))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Without stop codons",-1, 1)*count, fill = filter)) + 
+  geom_col(width=1) +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "% AA similarity", limits = c(60, 105), expand = c(0, 0)) +
+  scale_y_continuous(name = "# of segments", limits=c(-50000,50000), breaks = 10000*(-5:5), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+
+
+
+
+orig_sim_data = select(target_data, pid, target, sample, orig.seg.sim)
+names(orig_sim_data)[4] = "sim"
+orig_sim_data$label = "With stop codons"
+
+final_sim_data =select(target_data, pid, target, sample, final.seg.sim)
+names(final_sim_data)[4] = "sim"
+final_sim_data$label = "Without stop codons"
+
+sim_data = rbind(orig_sim_data, final_sim_data)
+
+scaff_batch_p = ggplot(sim_data, aes(x=label, y=sim, fill=label)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  scale_fill_manual(labels=c("With stop codons", "Without stop codons"),
+                     values=c("#920000", "#333333")) +
+
+  labs(x="", y="% AA similarity") +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 57", "New 21")) +
+  bartheme() + 
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(scaff_batch_p)
+
+
+
+no_stop_data = subset(target_data, seg.stops==0)
+stop_data = subset(target_data, seg.stops > 0)
+
+bins = seq(0,100,by=1)
+bin_labels = seq(1,100,by=1)
+orig_counts = hist(stop_data$orig.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+orig_binned = data.frame("bin"=bin_labels, "count"=orig_counts, filter="With stop codons")
+
+
+final_counts = hist(no_stop_data$orig.seg.sim, breaks=bins, include.lowest=T, plot=F)$counts
+final_binned = data.frame("bin"=bin_labels, "count"=final_counts, filter="Without stop codons")
+
+# orig_binned = binData(target_data, "orig.seg.sim", 100)
+# orig_binned$filter = "With stop codons"
+# 
+# final_binned = binData(target_data, "final.seg.sim", 100)
+# final_binned$filter = "Without stop codons"
+
+binned_data = rbind.fill(orig_binned, final_binned)
+col = corecol(pal="wilke", numcol=2)
+lab = c("With stop codons", "Without stop codons")
+ylabels = as.character(seq(from=-50000, to=50000, by=10000))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Without stop codons",-1, 1)*count, fill = filter)) + 
+  geom_col(width=1) +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "% AA similarity", limits = c(60, 105), expand = c(0, 0)) +
+  scale_y_continuous(name = "# of segments", limits=c(-50000,50000), breaks = 10000*(-5:5), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+
+
+
+
+
+
+stop_sim_data = select(stop_data, pid, target, sample, orig.seg.sim, orig.seg.len)
+names(stop_sim_data)[4] = "sim"
+names(stop_sim_data)[5] = "len"
+stop_sim_data$label = "With stop codons"
+
+stop_sim_data_final = select(stop_data, pid, target, sample, final.seg.sim, final.seg.len)
+names(stop_sim_data_final)[4] = "sim"
+names(stop_sim_data_final)[5] = "len"
+stop_sim_data_final$label = "With stop codons (final)"
+
+no_stop_sim_data =select(no_stop_data, pid, target, sample, orig.seg.sim, orig.seg.len)
+names(no_stop_sim_data)[4] = "sim"
+names(no_stop_sim_data)[5] = "len"
+no_stop_sim_data$label = "Without stop codons"
+
+sim_data = rbind(stop_sim_data, stop_sim_data_final, no_stop_sim_data)
+
+sim_p = ggplot(sim_data, aes(x=label, y=sim, fill=label)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  scale_fill_manual(labels=c("With stop codons", "With stop codons (final)", "Without stop codons"),
+                     values=corecol(numcol=3, offset=2)) +
+
+  labs(x="", y="% AA similarity") +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 57", "New 21")) +
+  bartheme() + 
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(sim_p)
+
+
+
+len_p = ggplot(sim_data, aes(x=label, y=len, fill=label)) +
+  geom_quasirandom(size=2, alpha=0.7, width=0.25, color="#d3d3d3") +
+  geom_boxplot(outlier.shape=NA, alpha=0.7, width=0.5) +
+  scale_fill_manual(labels=c("With stop codons", "With stop codons (final)", "Without stop codons"),
+                     values=corecol(numcol=3, offset=2)) +
+
+  labs(x="", y="% AA similarity") +
+  #scale_x_discrete(labels=c("Original 40", "Rattus 8", "Mus 14", "New 70", "Aussie 57", "New 21")) +
+  bartheme() + 
+  theme(legend.position="none",
+        axis.text.x = element_text(angle=25, hjust=1))
+
+print(len_p)
+```
+
+
+```{r parse, out.width="100%", fig.align="center", eval=F}
 #aln_data$num.diff = NA
 #num_data = data.frame("sample"=c(), "num.diff"=c())
 
-mm10_data = subset(aln_data, sample=="mm10")
-aln_data = merge(aln_data, mm10_data, by="pid")
-aln_data = subset(aln_data, sample.x!="mm10")
-aln_data$is.rat = "NO"
-aln_data$is.rat[aln_data$sample.x=="rnor6"] = "YES"
+sample_data = select(in_data, pid, sample, num.cds.protein, final.segs, cds.protein.len, final.full.len)
+sample_data = unique(sample_data)
 
-aln_data$cds.diff = aln_data$num.cds.x - aln_data$num.cds.y
-aln_data$len.diff = aln_data$cds.len.x - aln_data$cds.len.y
+mm10_data = subset(sample_data, sample=="mm10")
+sample_data = merge(sample_data, mm10_data, by="pid")
+sample_data = subset(sample_data, sample.x!="mm10")
+sample_data$is.rat = "NO"
+sample_data$is.rat[sample_data$sample.x=="rnor6"] = "YES"
+
+sample_data$cds.diff = sample_data$final.segs.x - sample_data$num.cds.protein.y
+sample_data$len.diff = sample_data$final.full.len.x - sample_data$cds.protein.len.y
 ```
 
 
-```{r fig1, out.width="100%", fig.align="center"}
 
-cds_p = ggplot(subset(aln_data, cds.diff < 25 & cds.diff > -25), aes(x=cds.diff)) +
+```{r fig3x, out.width="100%", fig.align="center", eval=F}
+# Exonerate predictions vs. mouse
+cds_p = ggplot(sample_data, aes(x=cds.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
   geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1)) +
   xlab("# predicted CDS - # mouse CDS") +
@@ -59,12 +871,30 @@ print(cds_p)
 
 ```
 
-```{r fig2, out.width="100%", fig.align="center"}
+```{r fig4x, out.width="100%", fig.align="center", eval=F}
 
-len_p = ggplot(subset(aln_data, len.diff < 2500 & len.diff > -2500), aes(x=len.diff)) +
+len_p = ggplot(sample_data, aes(x=len.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
   geom_histogram(bins=50, color="#333333", fill=corecol(numcol=1, offset=1)) +
   xlab("predicted CDS length - mouse CDS length") +
+  ylab("# sequences") +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(len_p)
+
+```
+
+
+
+```{r fig5x, out.width="100%", fig.align="center", eval=F}
+# MACSE pre-trimming
+trim_data = read.csv("../../data/06-cds-trim-stats.csv", header=TRUE, sep=";", stringsAsFactors=F)
+trim_data$perc.kept = as.numeric(trim_data$nbKeep) / as.numeric(trim_data$initialSeqLength)
+
+len_p = ggplot(subset(trim_data, perc.kept >= 0.9), aes(x=perc.kept)) +
+  #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
+  geom_histogram(color="#333333", fill=corecol(numcol=1, offset=1)) +
+  xlab("% sequence kept") +
   ylab("# sequences") +
   scale_y_continuous(expand=c(0,0)) +
   bartheme()
