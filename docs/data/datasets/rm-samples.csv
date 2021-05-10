@@ -1,0 +1,15 @@
+Species,Sample,Extinct,Reason(s)
+Mus-molossinus,NA,N,Unknown sample ID
+Mus-musculus-reference,NA,N,Unknown sample ID; redundant with mm10
+Mus-musculus-castaneus,NA,N,Unknown sample ID
+Notomys-amplus,NMV-C512,Y,Assembly shorter than sum of total target lengths; Average read depth > 70; Less than 75% reads mapped
+Notomys-longicaudatus,C6278,Y,Assembly shorter than sum of total target lengths; Average read depth > 70; Less than 75% reads mapped
+Notomys-macrotis,ZD-1841-1167,Y,Assembly shorter than sum of total target lengths; Average read depth > 70; Less than 75% reads mapped
+Pseudomys-auritus,1846_4_4_67,N,Assembly shorter than sum of total target lengths; Average read depth > 70
+Pseudomys-gouldii,C955,Y,Assembly shorter than sum of total target lengths; Average read depth > 70; Too many reads mapped; Less than 75% reads mapped
+# Conilurus-albipes,NMV-c7585,Y,Average read depth > 70; Too many reads mapped
+# Leporillus-apicalis,C90,Y,Average read depth > 70; Too many reads mapped
+# Pseudomys-novaehollandiae,ABTC08140,N,Average read depth > 70; Too many reads mapped
+# Rattus-hoffmanni,LSUMZ39187,N,Too many reads mapped
+Chiromyscus-chiropus,ABTC 69097,N,Mislabeled? Wrong position in phylo
+Niviventer-cremoriventer,LSUMZ38141,N,Mislabeled? Wrong position in phylo

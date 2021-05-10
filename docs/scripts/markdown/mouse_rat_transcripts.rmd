@@ -11,7 +11,7 @@ output:
     code_folding: hide
 ---
 
-```{r setup, warning=F}
+```{r setup, warning=F, message=F}
 binData <- function(df, column, max_bin){
 # Function to pre-bin SVs by length
   binned_df = data.frame("bin"=seq(from=0,to=max_bin,by=0.01), count=0)
@@ -26,7 +26,9 @@ binData <- function(df, column, max_bin){
 knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
-library(plyr)
+#library(plyr)
+library(tidyr)
+library(dplyr)
 library(eulerr)
 source("../lib/design.r")
 
@@ -41,44 +43,93 @@ htmltools::includeHTML("../html-chunks/nav.html")
 2. Transcript must have one-to-one relationship between mouse and rat.
 3. Orthology confidence must be high (1).
 4. Transcript must have dS below 0.5 (see distibutions below).
-5. If multiple transcripts from a gene pass all above filters, the one with the average longest length between mouse and rat is selected.
+5. If multiple transcripts from a gene pass all above filters, the one with the max number of probe targets is selected.
+
+## Transcript selection based on length or probe targets
+
+```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+
+len_transcripts = scan("../../data/transcript-selection/selected-transcripts-list.txt", what=character())
+target_transcripts = scan("../../data/transcript-selection/selected-transcripts-target-check-list.txt", what=character())
+transcript_lists = list("Length"=len_transcripts, "Targets"=target_transcripts)
+
+plot(euler(transcript_lists, shape="ellipse"), quantities=T, fill=corecol(numcol=2, pal="wilke"), 
+     main="Last step of transcript selection based on max...")
+
+```
 
 ## Filter script log
 
+```{r eval=F}
+# Rodent exomes -- select mouse trancsripts
+# PYTHON VERSION: 3.6.6
+# Script call: select_transcripts.py
+# Runtime: 04/14/2020 21:09:10
+# ----------
+# Mouse GTF file:        ../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz
+# Rat GTF file:          ../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
+# Ensembl ortholog file: ../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt
+# Output file:           ../02-Annotation-data/selected-transcripts.txt
+# --------------
+# dS threshold:          0.5
+# --------------
+# 04.14.2020 | 21:09:10 Reading mouse feature lengths...
+# Mouse transcripts read: 142647
+# 04.14.2020 | 21:09:20 Reading rat feature lengths...
+# Rat transcripts read:   41078
+# --------------
+# 04.14.2020 | 21:09:27 Reading orthologs...
+# Genes read:      56289
+# Transcipts read: 170971
+# --------------
+# 04.14.2020 | 21:09:28 Filtering transcripts...
+# Transcripts with no rat ortholog:                                                      44696
+# Transcripts with no one2one rat ortholog:                                              37291
+# Transcripts with no high confidence rat ortholog:                                      11069
+# Transcripts with no rat ortholog below dS threshold:                                   1204
+# Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
+# Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
+# --------------
+# Genes with no passed transcripts:                                                      41857
+# Genes with selected transcript:                                                        14432
+# --------------
+# 04.14.2020 | 21:09:28 Writing selected transcripts to output file...
 ```
-Rodent exomes -- select mouse trancsripts
-PYTHON VERSION: 3.6.6
-Script call: select_transcripts.py
-Runtime: 04/14/2020 21:09:10
-----------
-Mouse GTF file:        ../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz
-Rat GTF file:          ../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
-Ensembl ortholog file: ../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt
-Output file:           ../02-Annotation-data/selected-transcripts.txt
---------------
-dS threshold:          0.5
---------------
-04.14.2020 | 21:09:10 Reading mouse feature lengths...
-Mouse transcripts read: 142647
-04.14.2020 | 21:09:20 Reading rat feature lengths...
-Rat transcripts read:   41078
---------------
-04.14.2020 | 21:09:27 Reading orthologs...
-Genes read:      56289
-Transcipts read: 170971
---------------
-04.14.2020 | 21:09:28 Filtering transcripts...
-Transcripts with no rat ortholog:                                                      44696
-Transcripts with no one2one rat ortholog:                                              37291
-Transcripts with no high confidence rat ortholog:                                      11069
-Transcripts with no rat ortholog below dS threshold:                                   1204
-Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
-Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
---------------
-Genes with no passed transcripts:                                                      41857
-Genes with selected transcript:                                                        14432
---------------
-04.14.2020 | 21:09:28 Writing selected transcripts to output file...
+
+```
+# Rodent exomes -- select mouse trancsripts
+# PYTHON VERSION: 3.8.8
+# Script call:    select_transcripts.py
+# Runtime:        03/17/2021 09:58:48
+# ----------------
+# Mouse GTF file:        ../Reference-genomes/mm10/Mus_musculus.GRCm38.99.gtf.gz
+# Rat GTF file:          ../Reference-genomes/Rnor6/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
+# Ensembl ortholog file: ../02-Annotation-data/mouse-rat-orths-ens99.txt
+# Target overlaps file:  ../Targets/bed/mm10-targets-to-exons-0.9.bed
+# Output file:           ../02-Annotation-data/selected-transcripts-targets.txt
+# --------------
+# dS threshold:          0.5
+# --------------
+# 03.17.2021 | 09:58:48 Reading target overlaps...
+# 03.17.2021 | 09:58:50 Reading mouse feature lengths...
+# Mouse transcripts read: 142647
+# Rat transcripts read:   41078
+# --------------
+# 03.17.2021 | 09:59:02 Reading orthologs...
+# Genes read:      56289
+# Transcipts read: 170971
+# --------------
+# 03.17.2021 | 09:59:02 Filtering transcripts...
+# Transcripts that do not overlap any targets:                                 36075
+# Transcripts with no rat ortholog:                                            6960
+# Transcripts with no one2one rat ortholog:                                    15496
+# Transcripts with no high confidence rat ortholog:                            9487
+# Transcripts with no rat ortholog below dS threshold:                         545
+# Transcripts filtered for not having max target hits within gene:             55369
+# --------------
+# Genes with no passed transcripts:                                            7084
+# Genes with selected transcript:                                              13130
+# --------------
 ```
 
 ```{r readdata, echo=FALSE, warning=FALSE}
@@ -88,7 +139,7 @@ pre_data = subset(pre_data, dS.with.Rat < 1)
 pre_data = subset(pre_data, dN.with.Rat < 1)
 
 
-filter_data = read.csv("../../data/selected-transcripts.txt", header=T, sep="\t", comment.char='#')
+filter_data = read.csv("../../data/transcript-selection/selected-transcripts-targets.txt", header=T, sep="\t", comment.char='#')
 filter_data$dnds = filter_data$dN.with.Rat / filter_data$dS.with.Rat
 filter_data = subset(filter_data, dS.with.Rat < 1)
 filter_data = subset(filter_data, dN.with.Rat < 1)
@@ -116,7 +167,7 @@ pre_binned = data.frame("bin"=bin_labels, "count"=pre_counts, filter="Pre-filter
 filter_counts = hist(filter_data$dS.with.Rat, breaks=bins, include.lowest=T, plot=F)$counts
 filter_binned = data.frame("bin"=bin_labels, "count"=filter_counts, filter="Post-filter")
 
-binned_data = rbind.fill(pre_binned, filter_binned)
+binned_data = bind_rows(pre_binned, filter_binned)
 col = corecol(numcol=2)
 lab = c("Pre-filter", "Post-filter")
 #ylabels = c("1200", as.character(seq(from=0, to=7000, by=1000)))
@@ -154,7 +205,7 @@ pre_binned = data.frame("bin"=bin_labels, "count"=pre_counts, filter="Pre-filter
 filter_counts = hist(filter_data$dN.with.Rat, breaks=bins, include.lowest=T, plot=F)$counts
 filter_binned = data.frame("bin"=bin_labels, "count"=filter_counts, filter="Post-filter")
 
-binned_data = rbind.fill(pre_binned, filter_binned)
+binned_data = bind_rows(pre_binned, filter_binned)
 col = corecol(numcol=2)
 lab = c("Pre-filter", "Post-filter")
 ylabels = c("5000", as.character(seq(from=0, to=30000, by=5000)))
@@ -197,7 +248,7 @@ filter_data_f = subset(filter_data, dnds <= 2)
 filter_counts = hist(filter_data_f$dnds, breaks=bins, include.lowest=T, plot=F)$counts
 filter_binned = data.frame("bin"=bin_labels, "count"=filter_counts, filter="Post-filter")
 
-binned_data = rbind.fill(pre_binned, filter_binned)
+binned_data = bind_rows(pre_binned, filter_binned)
 col = corecol(numcol=2)
 lab = c("Pre-filter", "Post-filter")
 ylabels = c(as.character(seq(from=-1000, to=6000, by=1000)))
@@ -212,25 +263,47 @@ dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 
 print(dualp)
 ```
 
-## Transcript selection based on length or probe targets
 
-```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
 
-len_transcripts = scan("../../data/selected-transcripts-list.txt", what=character())
-target_transcripts = scan("../../data/selected-transcripts-target-check-list.txt", what=character())
-transcript_lists = list("Length"=len_transcripts, "Targets"=target_transcripts)
+## Total transcript length vs. total probe target length
 
-plot(euler(transcript_lists, shape="ellipse"), quantities=T, fill=corecol(numcol=2, pal="wilke"), 
-     main="Last step of transcript selection based on max...")
+Sum length of all probe targets in a given transcript
+
+```{r fig5, out.width="100%", fig.align = "center", warning=FALSE, message=F}
+
+ann_data = read.csv("../../data/Mus-selected-sequences_metadata_samp-counts_ratids.csv", header=T)
+ts_lens = unique(select(ann_data, transcript_id, transcript_length))
+names(ts_lens) = c("tid", "ts.len")
+
+target_data = read.csv("../../data/target-bed/mm10-targets-to-exons-0.9.bed", sep="\t", header=F)
+names(target_data) = c("target.chrome", "target.start", "target.end", "target.id", "exon.chrome", "exon.start", "exon.end", "exon.ids", "exon.score", "exon.strand", "overlap")
+target_data$target.len = target_data$target.end - target_data$target.start
+target_data$exon.len = target_data$exon.end - target_data$exon.start
+
+target_data = target_data %>% separate(exon.ids, c("gid", "tid", "eid"), ";")
+target_data = subset(target_data, !is.na(eid))
+target_data = subset(target_data, tid %in% ts_lens$tid)
+target_data$tid = as.factor(target_data$tid)
+#target_data_final = target_data %>% select(tid, target.len) %>% group_by(tid) #%>% summarize(target.len=sum(target.len))
+target_data_final = target_data %>% group_by(tid) %>% summarize(target.len=sum(target.len))
+#mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(nongap.len=sum(target_length))
+
+ts_target_lens = merge(ts_lens, target_data_final, by="tid")
+ts_target_lens = subset(ts_target_lens, ts.len < 10000 & target.len < 10000)
+ts_targ_len_p = ggplot(ts_target_lens, aes(x=ts.len, y=target.len)) +
+  geom_point(alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=2)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  xlab("Total transcript length") +
+  ylab("Sum of length of all probe targets\nin transcript") +
+  bartheme()
+print(ts_targ_len_p)
 
 ```
 
 ## Number of samples matching each coding exon
 
-```{r fig5, out.width="100%", fig.align = "center", warning=FALSE, message=F}
-
-ann_data = read.csv("../../data/Mus_best-transcript_all-counts_metadata.csv", header=T)
-ann_data = subset(ann_data, coding=="Yes")
+```{r fig6, out.width="100%", fig.align = "center", warning=FALSE, message=F}
+ann_data = subset(ann_data, protein_coding=="TRUE")
 
 exon_count_dist = ggplot(ann_data, aes(x=matching_sample_count)) +
   geom_histogram(identity="count", fill=corecol(numcol=1, offset=1)) +
@@ -242,7 +315,22 @@ print(exon_count_dist)
 
 ```
 
+## Assembly read depth vs. number of BLAST hits to probe targets
 
+```{r fig7, out.width="100%", fig.align = "center", warning=FALSE, message=F}
+asm_data = read.csv("../../data/exome-stats.csv", header=T)
+asm_data = subset(asm_data, referee.avg.depth < 60)
+
+targs_depth_p = ts_targ_len_p = ggplot(asm_data, aes(x=referee.avg.depth, y=blast.hits.to.targets)) +
+  geom_point(alpha=0.5, color=corecol(pal="wilke", numcol=1, offset=4)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  xlab("Avg. read depth") +
+  ylab("# of BLAST hits") +
+  bartheme()
+print(targs_depth_p)
+
+
+```
 
 ```{r footer}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))

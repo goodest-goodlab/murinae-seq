@@ -1,17 +1,17 @@
 # CDS alignment filter
 # PYTHON VERSION: 3.8.8
-# Script call:    06_aln_filter.py -i ../03-Alignments/roycroft/original_used_for_analysis-fa/ -f NA --count -o roycroft-stats-2
-# Runtime:        03/23/2021 11:15:58
+# Script call:    06_aln_filter.py -i ../03-Alignments/roycroft/original_used_for_analysis-fa/ -f NA --count -o ../03-Alignments/roycroft/original_used_for_analysis-aln-stats
+# Runtime:        05/10/2021 14:34:55
 # ----------------
 # IO OPTIONS
 # Input CDS directory:    /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/roycroft/original_used_for_analysis-fa
 # Sequence gappiness threshold:20
 # Codon site gappiness threshold:50
-# Output directory:       /mnt/beegfs/gt156213e/murinae-seq/03-Alignment-scripts/roycroft-stats-2-fNA-seq20-site50
+# Output directory:       /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/roycroft/original_used_for_analysis-aln-stats-fNA-seq20-site50
 # --count set:            Will not output sequences.
-# Log file:               /mnt/beegfs/gt156213e/murinae-seq/03-Alignment-scripts/roycroft-stats-2-fNA-seq20-site50/aln-stats-fNA-seq20-site50.tab
+# Log file:               /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/roycroft/original_used_for_analysis-aln-stats-fNA-seq20-site50/aln-stats-fNA-seq20-site50.tab
 # ----------------
-# 03.23.2021 | 11:15:58 Beginning filter.
+# 05.10.2021 | 14:34:55 Beginning filter.
 align	pre num seqs	pre codon aln length	pre avg nongap length	pre uniq seqs	pre ident seqs	pre gappy seqs	pre invariant sites	pre stop codons	pre percent sites with gap	pre gappy sites
 CCDS174581Mm106chr3.fa	38	313	289.4736842105263	38	0	2	43	0	169	169
 CCDS365671Mm106chr12.fa	38	306	260.13157894736844	38	0	14	20	0	216	216
@@ -14991,3 +14991,11 @@ CCDS270881Mm106chr14.fa	38	71	63.76315789473684	36	1	6	0	0	49	48
 CCDS243541Mm106chr11.fa	38	57	49.578947368421055	26	5	7	0	0	57	56
 CCDS226291Mm106chr8.fa	38	659	596.421052631579	38	0	5	82	0	352	349
 CCDS790341Mm106chr11.fa	38	610	528.0	38	0	8	45	9	374	373
+# ----------------
+# Pre-filter proteins: 14978
+# Pre-filter samples : 569164
+# Samples removed with premature stops: 0
+# Samples removed above gappy threshold: 99848
+# Proteins removed because of too few sequences post-filter: 0
+# Post-filter proteins: 0
+# Post-filter samples : 0

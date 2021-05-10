@@ -54,7 +54,7 @@ Alignment and filtering steps:
 
 blast_data = read.csv("../../data/aln-stats/sample-hits-exons.csv", header=T)
 
-exons_v_bhits = ggplot(blast_data, aes(x=exons, y=blast.hits)) +
+exons_v_bhits = ggplot(blast_data, aes(x=total.exons, y=blast.hits)) +
   geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
   geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=6)) +
   geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
@@ -72,7 +72,7 @@ print(exons_v_bhits)
 
 ```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
 
-targets_exonerate = read.csv("../../data/aln-stats/targets-exonerate.csv", header=T)
+targets_exonerate = read.csv("../../data/aln-stats/targets-exonerate-f0.csv", header=T)
 
 bhits_v_ehits = ggplot(targets_exonerate, aes(x=init.sample.hits, y=exonerate.sample.hits)) +
   geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
@@ -91,9 +91,11 @@ print(bhits_v_ehits)
 
 ```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
 
-sample_targets_exonerate = read.csv("../../data/aln-stats/sample-targets-exonerate.csv", header=T)
+sample_targets_exonerate = read.csv("../../data/aln-stats/sample-targets-exonerate-f0.csv", header=T)
+## HEADERS ARE OFF
 
-exons_v_hits = ggplot(sample_targets_exonerate, aes(x=mm.exons, y=exonerate.hits)) +
+
+exons_v_hits = ggplot(sample_targets_exonerate, aes(x=pid.1, y=mm.exons)) +
   geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
   geom_point(size=2, alpha=0.1, color=corecol(pal="wilke", numcol=1, offset=5)) +
   geom_smooth(aes(color="Fit"), method="lm", linetype="dashed", se=F) +
@@ -206,10 +208,10 @@ print(aln_len)
 ## Avg. non-gapped sequence length per protein
 
 ```{r fig6, out.width="100%", fig.align = "center", warning=FALSE}
-mus_data = read.csv("../../data/Mus_best-transcript_all-counts_metadata.csv", header=TRUE)
+mus_data = read.csv("../../data/Mus-selected-sequences_metadata_samp-counts_ratids.csv", header=TRUE)
 mus_data = subset(mus_data, feature_type=="CDS")
-mus_lens = select(mus_data, transcript_id, target_length)
-mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(nongap.len=sum(target_length))
+mus_lens = select(mus_data, transcript_id, exon_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(nongap.len=sum(exon_length))
 mus_lens$nongap.len = mus_lens$nongap.len / 3
 mus_lens$label = "Mus CDS"
 names(mus_lens)[1] = "align"
@@ -435,8 +437,8 @@ names(gbe_data)[4] = "post.avg.nongap.length"
 gbe_lens = select(gbe_data, align, label, post.avg.nongap.length)
 gbe_lens = subset(gbe_lens, post.avg.nongap.length < 10000)
 
-mus_lens = select(mus_data, transcript_id, target_length)
-mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(target_length))
+mus_lens = select(mus_data, transcript_id, exon_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(exon_length))
 mus_lens$post.avg.nongap.length = mus_lens$post.avg.nongap.length / 3
 mus_lens$label = "Mus CDS"
 names(mus_lens)[1] = "align"
@@ -532,8 +534,8 @@ names(gbe_data)[4] = "post.avg.nongap.length"
 gbe_lens = select(gbe_data, align, label, post.avg.nongap.length)
 gbe_lens = subset(gbe_lens, post.avg.nongap.length < 10000)
 
-mus_lens = select(mus_data, transcript_id, target_length)
-mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(target_length))
+mus_lens = select(mus_data, transcript_id, exon_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(exon_length))
 mus_lens$post.avg.nongap.length = mus_lens$post.avg.nongap.length / 3
 mus_lens$label = "Mus CDS"
 names(mus_lens)[1] = "align"
@@ -628,8 +630,8 @@ names(gbe_data)[4] = "post.avg.nongap.length"
 gbe_lens = select(gbe_data, align, label, post.avg.nongap.length)
 gbe_lens = subset(gbe_lens, post.avg.nongap.length < 10000)
 
-mus_lens = select(mus_data, transcript_id, target_length)
-mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(target_length))
+mus_lens = select(mus_data, transcript_id, exon_length)
+mus_lens = mus_lens %>% group_by(transcript_id) %>% summarize(post.avg.nongap.length=sum(exon_length))
 mus_lens$post.avg.nongap.length = mus_lens$post.avg.nongap.length / 3
 mus_lens$label = "Mus CDS"
 names(mus_lens)[1] = "align"

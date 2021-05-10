@@ -1,0 +1,28 @@
+Carl_sample_name,Tribe,Division,Genus,Species,Notes
+Apodemus_sylvaticus_SMG3823,Apodemini,Apodemus,Apodemus,sp. (sylvaticus),genus-level pheno data
+Lemniscomys_striatus_TCD4711,Arvicanthini,Arvicanthis,Lemniscomys,sp. (striatus),genus-level pheno data
+Rhabdomys_pumilio_MNHN1995065,Arvicanthini,Arvicanthis,Rhabdomys,sp. (pumilio),genus-level pheno data
+Hybomys_univittatus_TCD4026,Arvicanthini,Hybomys,Hybomys,univittatus,
+Grammomys_dryas_LSUMZ37716,Arvicanthini?,Oenomys?,Grammomys,sp. (dryas),genus-level pheno data
+Chiropodomys_gliroides_Z25153,Hydromyini,Chiropodomys,Chiropodomys,gliroides,
+Apomys_lubangensis_JAE169,Hydromyini,Chrotomys,Apomys,lubangensis,
+Rhynchomys_isarogensis_JAE2195,Hydromyini,Chrotomys,Rhynchomys,isarogensis,
+Mesembriomys_gouldii_ABTC7449,Hydromyini,Conilurus,Mesembriomys,gouldii,
+Leptomys_elegans_ABTC45741,Hydromyini,Hydromys,Leptomys,elegans,
+Coccymys_ruemmleri_ABTC49489,Hydromyini,incertae sedis,Coccymys,sp. (ruemmleri),genus-level pheno data
+Pseudohydromys_pumehanae_ABTC43920,Hydromyini,Hydromys,Pseudohydromys,ellermani,"pheno data for same genus, different species - USE FOR SPERM MORPHO ONLY"
+Pseudomys_fumeus_ABTC08168,Hydromyini,Pseudomys,Pseudomys,fumeus,
+Solomys_salebrosus_ABTC64864,Hydromyini,Uromys,Solomys,sp. (salebrosus),genus-level pheno data
+Vandeleuria_oleracea_ABTC116404,incertae sedis,incertae sedis,Vandeleuria,oleracea,
+Mus_caroli_10460X9,Murini,Mus,Mus,caroli,
+Mus_minutoides_10460X2,Murini,Mus,Mus,minutoides,
+Mus_musculus-musculus_10460X14,Murini,Mus,Mus,musculus musculus,
+Otomys_denti_LSUMZ37840,Otomyini,Otomys,Otomys,denti,
+Batomys_russatus_KU165776,Phloeomyini,Phloeomys,Batomys,salomonseni,
+Praomys_jacksoni_REC31,Praomyini,Stenocephalemys,Praomys,jacksoni,
+Taeromys_callitrichus_LSUMZ37153,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_punicans_MVZ225815,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_taerae_LSUMZ39224,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Rattus_praetor_sample1,Rattini,Rattus,Rattus,praetor,
+NA,Rattini,Rattus,Rattus,norvegicus,rnor6 reference; NOT in Carl alignments
+NA,Murini,Mus,Mus,musculus,mm10 reference; NOT in Carl alignments
