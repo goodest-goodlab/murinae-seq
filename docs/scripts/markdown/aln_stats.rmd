@@ -40,7 +40,7 @@ htmltools::includeHTML("../html-chunks/nav.html")
 Alignment and filtering steps:
 1. BLAST mouse exons to all assembled contigs.
 2. Exonerate mouse exons (as trimmed AA sequences) to matching contig for each sample.
-3. Remove exons that have fewer than 175 samples with a matching BLAST hit.
+3. Remove exons that have fewer than 150 samples with a matching BLAST hit.
 4. Align exonerate hits with MAFFT.
 5. Backtranslate to nucleotide sequences.
 6. For each alignment, remove sequences that are >20% gaps.
@@ -68,11 +68,11 @@ print(exons_v_bhits)
 ```
 
 
-## BLAST hits vs. exonerate hits (no 175 hit threshold)
+## BLAST hits vs. exonerate hits (no hit threshold)
 
 ```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
 
-targets_exonerate = read.csv("../../data/aln-stats/targets-exonerate-f0.csv", header=T)
+targets_exonerate = read.csv("../../data/aln-stats/targets-exonerate-f0-TEST.csv", header=T)
 
 bhits_v_ehits = ggplot(targets_exonerate, aes(x=init.sample.hits, y=exonerate.sample.hits)) +
   geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
@@ -87,11 +87,11 @@ print(bhits_v_ehits)
 
 ```
 
-# Mouse exons vs exonerate hits (no 175 hit threshold)
+# Mouse exons vs exonerate hits (no hit threshold)
 
 ```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
 
-sample_targets_exonerate = read.csv("../../data/aln-stats/sample-targets-exonerate-f0.csv", header=T)
+sample_targets_exonerate = read.csv("../../data/aln-stats/sample-targets-exonerate-f0-TEST.csv", header=T)
 ## HEADERS ARE OFF
 
 
@@ -114,7 +114,7 @@ print(exons_v_hits)
 
 ```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
 
-aln_data = read.csv("../../data/aln-filters/aln-stats-f175-seq20-site50.tab", header=T, sep="\t", comment.char="#")
+aln_data = read.csv("../../data/aln-stats/aln-stats-f150-seq20-site50.tab", header=T, sep="\t", comment.char="#")
 gbe_data = read.csv("../../data/aln-stats/roycroft-aln-stats.tab", header=T, sep="\t", comment.char="#")
 
 filter_col = corecol(numcol=3)
@@ -163,6 +163,7 @@ gbe_seqs = subset(gbe_seqs, aln.len < 10000)
 
 
 num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs)
+num_seqs = subset(num_seqs, aln.len <= 1000)
 
 num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE"))
 
@@ -232,6 +233,7 @@ gbe_seqs = subset(gbe_seqs, nongap.len < 10000)
 
 
 num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs, mus_lens)
+num_seqs = subset(num_seqs, nongap.len <= 1000)
 
 num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS"))
 

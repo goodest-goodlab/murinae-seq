@@ -33,5 +33,7 @@ docs/data/all-samples_contig-match.txt
 docs/data/06-cds-trim-stats.csv
 docs/data/count-ns.csv
 docs/data/aln-stats/sample-hits-exons.csv
-docs/data/aln-stats/sample-segments-exonerate-f0.csv
-docs/data/aln-stats/sample-segments-exonerate-f175.csv
+docs/data/aln-stats/sample-segments-exonerate-f0-TEST.csv
+docs/data/aln-stats/sample-segments-exonerate-f175-TEST.csv
+docs/data/aln-stats/sample-segments-exonerate-f150.csv
+docs/data/aln-stats/sample-targets-exonerate-f150.csv
