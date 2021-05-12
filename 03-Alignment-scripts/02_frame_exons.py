@@ -89,12 +89,16 @@ def getExons(pid_list, pid_dict, out_dir_nt, out_dir_aa, debug=False):
         # Sort the exons depending on strand.
 
         first_exon = True;
+        last_exon = False;
         running_len = 0;
         prev_trim = 0;
         next_trim = 0;
         # These variables keep track of things between exons.
         for i in sorted_indices:
         # Go through every exon in the protein.
+            
+            if i == sorted_indices[-1]:
+                last_exon = True;
 
             cur_id, cur_start, cur_end = pid_dict[pid]['eids'][i], str(pid_dict[pid]['estarts'][i]), str(pid_dict[pid]['eends'][i]);
             # Get info for the current exon.
@@ -179,6 +183,13 @@ def getExons(pid_list, pid_dict, out_dir_nt, out_dir_aa, debug=False):
                 print("\t\tAA SEQ         :", cur_seq_aa);
             # Debug statements.
 
+            if len(cur_seq) > 3 and last_exon and cur_seq_aa[-1] == "*":
+                if debug:
+                    print("\t\tFINAL POS STOP CODON... REMOVING")
+                cur_seq = cur_seq[:-3];
+                cur_seq_aa = cur_seq_aa[:-1];
+            # CHECK LAST POS FOR STOP HERE #####
+
             final_header = pid_header + "|" + cur_id + "|" + cur_header.replace(">", "");
             # Add exon info to output header
 
@@ -213,10 +224,11 @@ def getExons(pid_list, pid_dict, out_dir_nt, out_dir_aa, debug=False):
 ###########################################################
 # Main block
 
-annotation_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids-TESTSET.csv";
+#annotation_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids-TESTSET.csv";
+annotation_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids.csv";
 #indir = "../Targets/seq/mm10-target-exon-overlaps/";
-outdir_nt = "../02-Annotation-data/mm10-selected-cds-nt-trimmed/";
-outdir_aa = "../02-Annotation-data/mm10-selected-cds-aa-trimmed/";
+outdir_nt = "../02-Annotation-data/seq/mm10-selected-cds-nt-trimmed/";
+outdir_aa = "../02-Annotation-data/seq/mm10-selected-cds-aa-trimmed/";
 # Input and output directories.
 
 #seqfiles = os.listdir(indir);
@@ -275,7 +287,7 @@ with open(logfilename, "w") as logfile:
 
     stop_codon_prots_main = [];    
 
-    for result in pool.starmap(getExons, ( (pl, mus_pids, outdir_nt, outdir_aa, False) for pl in pid_lists )):
+    for result in pool.starmap(getExons, ( (pl, mus_pids, outdir_nt, outdir_aa, True) for pl in pid_lists )):
         if result == "exit":
             sys.exit();
         stop_codon_prots_main += result;

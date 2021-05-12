@@ -789,11 +789,12 @@ pad = 55;
 cwd = os.getcwd();
 # Job vars
 
-annotation_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids-TESTSET.csv";
+annotation_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids.csv";
+#annotation_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids-TESTSET.csv";
 # Carl's file with basic annotation info -- matches each target to a mouse protein.
 
-mouse_nt_dir = "../02-Annotation-data/mm10-selected-cds-nt-trimmed/";
-mouse_aa_dir = "../02-Annotation-data/mm10-selected-cds-aa-trimmed/";
+mouse_nt_dir = "../02-Annotation-data/seq/mm10-selected-cds-nt-trimmed/";
+mouse_aa_dir = "../02-Annotation-data/seq/mm10-selected-cds-aa-trimmed/";
 # The mouse trimmed exon sequences.
 
 if not os.path.isdir(args.output):
@@ -839,7 +840,7 @@ with open(log_file, "w") as logfile:
 
     ##########################
     # Reading annotation info.
-    transcripts_file = "../02-Annotation-data/selected-transcripts.txt";
+    transcripts_file = "../02-Annotation-data/selected-transcripts-targets.txt";
     # The selected transcripts file based on the mouse and rat references.
 
     mus_transcripts = "../02-Annotation-data/mm10-cds.tab";
@@ -951,7 +952,7 @@ with open(log_file, "w") as logfile:
     # Starting the pool of processes
 
     core.PWS(core.spacedOut("# " + core.getDateTime() + " Start exonerate parse.", pad), logfile);
-    for result in pool.starmap(parseExonerate, ( (pl, mus_pids, args.input, args.output, args.filter, args.noseq, False) for pl in pid_lists )):
+    for result in pool.starmap(parseExonerate, ( (pl, mus_pids, args.input, args.output, args.filter, args.noseq, True) for pl in pid_lists )):
         if result == "exit":
             sys.exit();
         target_tracker_main.update(result[0]);

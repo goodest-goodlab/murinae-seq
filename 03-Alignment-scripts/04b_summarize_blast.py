@@ -11,7 +11,7 @@ import sys, os, core, coreseq, argparse
 
 annotation_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids.csv";
 blast_file = "../02-Annotation-data/all-samples_contig-match.txt";
-outfilename, = "etc/sample-hits-exons.csv";
+outfilename = "etc/sample-hits-exons.csv";
 #exonerate_dir = "../03-Alignments/exonerate-tests-rat/f0/seq-f0/";
 #outfilename = os.path.join(exonerate_dir, "sample-hits-exons.csv");
 

@@ -117,7 +117,7 @@ with open(output_file, "w") as outfile:
 ##########################
 # Generating the commands in the job file.
 
-    mouse_aa_dir = "/mnt/beegfs/gt156213e/murinae-seq/02-Annotation-data/mm10-selected-cds-aa-trimmed/";
+    mouse_aa_dir = "/mnt/beegfs/gt156213e/murinae-seq/02-Annotation-data/seq/mm10-selected-cds-aa-trimmed/";
     skip_file = "mm10-exons-w-stops.txt";
     seqfiles = os.listdir(mouse_aa_dir);
     #targets_file = "../02-Annotation-data/Mus-selected-sequences_metadata_samp-counts_ratids-TESTSET.csv";
@@ -169,8 +169,9 @@ with open(output_file, "w") as outfile:
 
         #query_file_path = os.path.abspath(os.path.join(mouse_seq_dir, query_id + "-aa-trimmed.fa"));
 
-        print(num_proteins, query_id, query_pid, target_id);
+        #print(num_proteins, query_id, query_pid, target_id);
         if query_pid != last_protein:
+            print(num_proteins, query_pid);
             last_protein = query_pid;
             num_proteins += 1;
 
