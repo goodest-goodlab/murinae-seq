@@ -114,30 +114,39 @@ print(exons_v_hits)
 
 ```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
 
-aln_data = read.csv("../../data/aln-stats/aln-stats-f150-seq20-site50.tab", header=T, sep="\t", comment.char="#")
+aln_data_150 = read.csv("../../data/aln-stats/aln-stats-f150-seq20-site50.tab", header=T, sep="\t", comment.char="#")
+aln_data_175 = read.csv("../../data/aln-stats/aln-stats-f175-seq20-site50.tab", header=T, sep="\t", comment.char="#")
 gbe_data = read.csv("../../data/aln-stats/roycroft-aln-stats.tab", header=T, sep="\t", comment.char="#")
 
-filter_col = corecol(numcol=3)
+filter_col = corecol(numcol=6)
 
-pre_seqs = select(aln_data, align, pre.num.seqs)
-pre_seqs$label = "Pre-filter"
-names(pre_seqs)[2] = "num.seqs"
+pre_seqs_150 = select(aln_data_150, align, pre.num.seqs)
+pre_seqs_150$label = "Pre-filter (150)"
+names(pre_seqs_150)[2] = "num.seqs"
 
-post_seqs = select(aln_data, align, post.num.seqs)
-post_seqs$label = "Post-filter"
-names(post_seqs)[2] = "num.seqs"
+post_seqs_150 = select(aln_data_150, align, post.num.seqs)
+post_seqs_150$label = "Post-filter (150)"
+names(post_seqs_150)[2] = "num.seqs"
 
-num_seqs = rbind(pre_seqs, post_seqs)
+pre_seqs_175 = select(aln_data_175, align, pre.num.seqs)
+pre_seqs_175$label = "Pre-filter (175)"
+names(pre_seqs_175)[2] = "num.seqs"
 
-num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter"))
+post_seqs_175 = select(aln_data_175, align, post.num.seqs)
+post_seqs_175$label = "Post-filter (175)"
+names(post_seqs_175)[2] = "num.seqs"
+
+num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"))
 
 aln_seqs = ggplot(num_seqs, aes(x=label, y=num.seqs, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
   ylab("# of aligned sequences per protein") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
   theme(legend.position="none")
@@ -148,13 +157,21 @@ print(aln_seqs)
 ## Length of alignment
 
 ```{r fig5, out.width="100%", fig.align = "center", warning=FALSE}
-pre_seqs = select(aln_data, align, pre.codon.aln.length)
-pre_seqs$label = "Pre-filter"
-names(pre_seqs)[2] = "aln.len"
+pre_seqs_150 = select(aln_data_150, align, pre.codon.aln.length)
+pre_seqs_150$label = "Pre-filter (150)"
+names(pre_seqs_150)[2] = "aln.len"
 
-post_seqs = select(aln_data, align, post.codon.aln.length)
-post_seqs$label = "Post-filter"
-names(post_seqs)[2] = "aln.len"
+post_seqs_150 = select(aln_data_150, align, post.codon.aln.length)
+post_seqs_150$label = "Post-filter (150)"
+names(post_seqs_150)[2] = "aln.len"
+
+pre_seqs_175 = select(aln_data_175, align, pre.codon.aln.length)
+pre_seqs_175$label = "Pre-filter (175)"
+names(pre_seqs_175)[2] = "aln.len"
+
+post_seqs_175 = select(aln_data_175, align, post.codon.aln.length)
+post_seqs_175$label = "Post-filter (175)"
+names(post_seqs_175)[2] = "aln.len"
 
 gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_seqs$label = "GBE"
@@ -162,21 +179,22 @@ names(gbe_seqs)[2] = "aln.len"
 gbe_seqs = subset(gbe_seqs, aln.len < 10000)
 
 
-num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs)
+num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175, gbe_seqs)
 num_seqs = subset(num_seqs, aln.len <= 1000)
 
-num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE"))
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE"))
 
 aln_len = ggplot(num_seqs, aes(x=label, y=aln.len, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
   ylab("Alignment length (codons)") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter", "Post-filter", "GBE"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter", "Post-filter", "GBE")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
-  theme(legend.position="none")
+  theme(legend.position="none",
+        axis.text.x=element_text(angle=45, hjust=1))
 print(aln_len)
 
 # bin_width = 100
@@ -208,7 +226,7 @@ print(aln_len)
 
 ## Avg. non-gapped sequence length per protein
 
-```{r fig6, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig6, fig.align="center", warning=FALSE, out.width="100%"}
 mus_data = read.csv("../../data/Mus-selected-sequences_metadata_samp-counts_ratids.csv", header=TRUE)
 mus_data = subset(mus_data, feature_type=="CDS")
 mus_lens = select(mus_data, transcript_id, exon_length)
@@ -218,13 +236,21 @@ mus_lens$label = "Mus CDS"
 names(mus_lens)[1] = "align"
 mus_lens = subset(mus_lens, nongap.len < 5000)
 
-pre_seqs = select(aln_data, align, pre.avg.nongap.length)
-pre_seqs$label = "Pre-filter"
-names(pre_seqs)[2] = "nongap.len"
+pre_seqs_150 = select(aln_data_150, align, pre.avg.nongap.length)
+pre_seqs_150$label = "Pre-filter (150)"
+names(pre_seqs_150)[2] = "nongap.len"
 
-post_seqs = select(aln_data, align, post.avg.nongap.length)
-post_seqs$label = "Post-filter"
-names(post_seqs)[2] = "nongap.len"
+post_seqs_150 = select(aln_data_150, align, post.avg.nongap.length)
+post_seqs_150$label = "Post-filter (150)"
+names(post_seqs_150)[2] = "nongap.len"
+
+pre_seqs_175 = select(aln_data_175, align, pre.avg.nongap.length)
+pre_seqs_175$label = "Pre-filter (175)"
+names(pre_seqs_175)[2] = "nongap.len"
+
+post_seqs_175 = select(aln_data_175, align, post.avg.nongap.length)
+post_seqs_175$label = "Post-filter (175)"
+names(post_seqs_175)[2] = "nongap.len"
 
 gbe_seqs = select(gbe_data, align, pre.avg.nongap.length)
 gbe_seqs$label = "GBE"
@@ -232,21 +258,22 @@ names(gbe_seqs)[2] = "nongap.len"
 gbe_seqs = subset(gbe_seqs, nongap.len < 10000)
 
 
-num_seqs = rbind(pre_seqs, post_seqs, gbe_seqs, mus_lens)
+num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175, gbe_seqs, mus_lens)
 num_seqs = subset(num_seqs, nongap.len <= 1000)
 
-num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS"))
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE", "Mus CDS"))
 
 nongap_len = ggplot(num_seqs, aes(x=label, y=nongap.len, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
   ylab("Avg. ungapped\nsequence length (codons)") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS"), values=corecol()) +
-  scale_x_discrete(labels=c("Pre-filter", "Post-filter", "GBE", "Mus CDS")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE", "Mus CDS"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE", "Mus CDS")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
-  theme(legend.position="none")
+  theme(legend.position="none",
+        axis.text.x=element_text(angle=45, hjust=1))
 print(nongap_len)
 ```
 
@@ -255,15 +282,41 @@ print(nongap_len)
 
 ```{r fig7, out.width="100%", fig.align = "center", warning=FALSE}
 
-aln_data$pre.gappy.seqs = (aln_data$pre.gappy.seqs / aln_data$pre.num.seqs) * 100
-aln_20_gaps_seqs = ggplot(aln_data, aes(x=pre.gappy.seqs)) +
-  geom_histogram(fill=filter_col[1], color="#333333", bins=50) +
-  scale_x_continuous(expand=c(0,0)) +
-  scale_y_continuous(expand=c(0,0)) +
-  xlab("% of sequences that are\n>20% gap") +
-  ylab("# of alignments") +
+aln_data_150$pre.gappy.seqs.perc = (aln_data_150$pre.gappy.seqs / aln_data_150$pre.num.seqs) * 100
+bins = seq(0,100,by=1)
+bin_labels = seq(1,100,by=1)
+gappy_counts_150 = hist(aln_data_150$pre.gappy.seqs.perc, breaks=bins, include.lowest=T, plot=F)$counts
+gappy_binned_150 = data.frame("bin"=bin_labels, "count"=gappy_counts_150, filter="F150")
+
+aln_data_175$pre.gappy.seqs.perc = (aln_data_175$pre.gappy.seqs / aln_data_175$pre.num.seqs) * 100
+bins = seq(0,100,by=1)
+bin_labels = seq(1,100,by=1)
+gappy_counts_175 = hist(aln_data_175$pre.gappy.seqs.perc, breaks=bins, include.lowest=T, plot=F)$counts
+gappy_binned_175 = data.frame("bin"=bin_labels, "count"=gappy_counts_175, filter="F175")
+
+binned_data = bind_rows(gappy_binned_150, gappy_binned_175)
+col = corecol(numcol=2)
+lab = c("F150", "F175")
+ylabels = as.character(abs(seq(from=-700, to=700, by=100)))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "F175",-1, 1)*count, fill = filter)) + 
+  geom_col(width=1) +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "% of sequences that are\n>20% gap", limits = c(0, 100), expand = c(0, 0)) +
+  scale_y_continuous(name = "# of alignments", limits=c(-700,700), breaks = 100*(-7:7), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
   bartheme()
-print(aln_20_gaps_seqs)
+print(dualp)
+
+# aln_data$pre.gappy.seqs = (aln_data$pre.gappy.seqs / aln_data$pre.num.seqs) * 100
+# aln_20_gaps_seqs = ggplot(aln_data, aes(x=pre.gappy.seqs)) +
+#   geom_histogram(fill=filter_col[1], color="#333333", bins=50) +
+#   scale_x_continuous(expand=c(0,0)) +
+#   scale_y_continuous(expand=c(0,0)) +
+#   xlab("% of sequences that are\n>20% gap") +
+#   ylab("# of alignments") +
+#   bartheme()
+# print(aln_20_gaps_seqs)
 
 ```
 
@@ -271,25 +324,34 @@ print(aln_20_gaps_seqs)
 
 ```{r fig8, out.width="100%", fig.align = "center", warning=FALSE}
 
-pre_sites = select(aln_data, align, pre.gappy.sites)
-pre_sites$label = "Pre-filter"
-names(pre_sites)[2] = "perc.sites"
+pre_sites_150 = select(aln_data_150, align, pre.gappy.sites)
+pre_sites_150$label = "Pre-filter (150)"
+names(pre_sites_150)[2] = "perc.sites"
 
-post_sites = select(aln_data, align, post.gappy.sites)
-post_sites$label = "Post-filter"
-names(post_sites)[2] = "perc.sites"
+post_sites_150 = select(aln_data_150, align, post.gappy.sites)
+post_sites_150$label = "Post-filter (150)"
+names(post_sites_150)[2] = "perc.sites"
 
-num_sites = rbind(pre_sites, post_sites)
+pre_sites_175 = select(aln_data_175, align, pre.gappy.sites)
+pre_sites_175$label = "Pre-filter (175)"
+names(pre_sites_175)[2] = "perc.sites"
 
-num_sites$label = factor(num_sites$label, levels=c("Pre-filter", "Post-filter"))
+post_sites_175 = select(aln_data_175, align, post.gappy.sites)
+post_sites_175$label = "Post-filter (175)"
+names(post_sites_175)[2] = "perc.sites"
+
+num_sites = rbind(pre_sites_150, post_sites_150, pre_sites_175, post_sites_175)
+num_sites = subset(num_sites, perc.sites < 1000)
+num_sites$label = factor(num_sites$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"))
+
 
 aln_20_gap_sites = ggplot(num_sites, aes(x=label, y=perc.sites, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
   ylab("# of sites ") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter", "Post-filter"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter", "Post-filter")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
   theme(legend.position="none")
