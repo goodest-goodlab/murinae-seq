@@ -116,9 +116,10 @@ print(exons_v_hits)
 
 aln_data_150 = read.csv("../../data/aln-stats/aln-stats-f150-seq20-site50.tab", header=T, sep="\t", comment.char="#")
 aln_data_175 = read.csv("../../data/aln-stats/aln-stats-f175-seq20-site50.tab", header=T, sep="\t", comment.char="#")
+aln_data_mcl = read.csv("../../data/aln-stats/aln-stats-mclennan-f0-seq20-site50.tab", header=T, sep="\t", comment.char="#")
 gbe_data = read.csv("../../data/aln-stats/roycroft-aln-stats.tab", header=T, sep="\t", comment.char="#")
 
-filter_col = corecol(numcol=6)
+filter_col = corecol(numcol=8)
 
 pre_seqs_150 = select(aln_data_150, align, pre.num.seqs)
 pre_seqs_150$label = "Pre-filter (150)"
@@ -136,20 +137,29 @@ post_seqs_175 = select(aln_data_175, align, post.num.seqs)
 post_seqs_175$label = "Post-filter (175)"
 names(post_seqs_175)[2] = "num.seqs"
 
-num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175)
+pre_seqs_mcl = select(aln_data_mcl, align, pre.num.seqs)
+pre_seqs_mcl$label = "Pre-filter (McL F0)"
+names(pre_seqs_mcl)[2] = "num.seqs"
 
-num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"))
+post_seqs_mcl = select(aln_data_mcl, align, post.num.seqs)
+post_seqs_mcl$label = "Post-filter (McL F0)"
+names(post_seqs_mcl)[2] = "num.seqs"
+
+num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175, pre_seqs_mcl, post_seqs_mcl)
+
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)"))
 
 aln_seqs = ggplot(num_seqs, aes(x=label, y=num.seqs, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
-  ylab("# of aligned sequences per protein") +
+  ylab("# of aligned sequences\nper protein") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
-  theme(legend.position="none")
+  theme(legend.position="none",
+        axis.text.x=element_text(angle=45, hjust=1))
 print(aln_seqs)
 
 ```
@@ -173,24 +183,32 @@ post_seqs_175 = select(aln_data_175, align, post.codon.aln.length)
 post_seqs_175$label = "Post-filter (175)"
 names(post_seqs_175)[2] = "aln.len"
 
+pre_seqs_mcl = select(aln_data_mcl, align, pre.codon.aln.length)
+pre_seqs_mcl$label = "Pre-filter (McL F0)"
+names(pre_seqs_mcl)[2] = "aln.len"
+
+post_seqs_mcl = select(aln_data_mcl, align, post.codon.aln.length)
+post_seqs_mcl$label = "Post-filter (McL F0)"
+names(post_seqs_mcl)[2] = "aln.len"
+
 gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_seqs$label = "GBE"
 names(gbe_seqs)[2] = "aln.len"
 gbe_seqs = subset(gbe_seqs, aln.len < 10000)
 
 
-num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175, gbe_seqs)
+num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175, pre_seqs_mcl, post_seqs_mcl, gbe_seqs)
 num_seqs = subset(num_seqs, aln.len <= 1000)
 
-num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE"))
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)", "GBE"))
 
 aln_len = ggplot(num_seqs, aes(x=label, y=aln.len, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
   ylab("Alignment length (codons)") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)", "GBE"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)", "GBE")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
   theme(legend.position="none",
@@ -252,24 +270,32 @@ post_seqs_175 = select(aln_data_175, align, post.avg.nongap.length)
 post_seqs_175$label = "Post-filter (175)"
 names(post_seqs_175)[2] = "nongap.len"
 
+pre_seqs_mcl = select(aln_data_mcl, align, pre.avg.nongap.length)
+pre_seqs_mcl$label = "Pre-filter (McL F0)"
+names(pre_seqs_mcl)[2] = "nongap.len"
+
+post_seqs_mcl = select(aln_data_mcl, align, post.avg.nongap.length)
+post_seqs_mcl$label = "Post-filter (McL F0)"
+names(post_seqs_mcl)[2] = "nongap.len"
+
 gbe_seqs = select(gbe_data, align, pre.avg.nongap.length)
 gbe_seqs$label = "GBE"
 names(gbe_seqs)[2] = "nongap.len"
 gbe_seqs = subset(gbe_seqs, nongap.len < 10000)
 
 
-num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175, gbe_seqs, mus_lens)
+num_seqs = rbind(pre_seqs_150, post_seqs_150, pre_seqs_175, post_seqs_175, pre_seqs_mcl, post_seqs_mcl, gbe_seqs, mus_lens)
 num_seqs = subset(num_seqs, nongap.len <= 1000)
 
-num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE", "Mus CDS"))
+num_seqs$label = factor(num_seqs$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)", "GBE", "Mus CDS"))
 
 nongap_len = ggplot(num_seqs, aes(x=label, y=nongap.len, fill=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
   geom_boxplot(outlier.shape=NA, alpha=0.5, width=0.5, color="#666666") +
   ylab("Avg. ungapped\nsequence length (codons)") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE", "Mus CDS"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "GBE", "Mus CDS")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)", "GBE", "Mus CDS"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)", "GBE", "Mus CDS")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
   theme(legend.position="none",
@@ -340,9 +366,17 @@ post_sites_175 = select(aln_data_175, align, post.gappy.sites)
 post_sites_175$label = "Post-filter (175)"
 names(post_sites_175)[2] = "perc.sites"
 
-num_sites = rbind(pre_sites_150, post_sites_150, pre_sites_175, post_sites_175)
+pre_sites_mcl = select(aln_data_mcl, align, pre.gappy.sites)
+pre_sites_mcl$label = "Pre-filter (McL F0)"
+names(pre_sites_mcl)[2] = "perc.sites"
+
+post_sites_mcl = select(aln_data_mcl, align, post.gappy.sites)
+post_sites_mcl$label = "Post-filter (McL F0)"
+names(post_sites_mcl)[2] = "perc.sites"
+
+num_sites = rbind(pre_sites_150, post_sites_150, pre_sites_175, post_sites_175, pre_sites_mcl, post_sites_mcl)
 num_sites = subset(num_sites, perc.sites < 1000)
-num_sites$label = factor(num_sites$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"))
+num_sites$label = factor(num_sites$label, levels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)"))
 
 
 aln_20_gap_sites = ggplot(num_sites, aes(x=label, y=perc.sites, fill=label)) +
@@ -350,11 +384,12 @@ aln_20_gap_sites = ggplot(num_sites, aes(x=label, y=perc.sites, fill=label)) +
   geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
   ylab("# of sites ") +
   xlab("") +
-  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)"), values=filter_col) +
-  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)")) +
+  scale_fill_manual(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)"), values=filter_col) +
+  scale_x_discrete(labels=c("Pre-filter (150)", "Post-filter (150)", "Pre-filter (175)", "Post-filter (175)", "Pre-filter (McL F0)", "Post-filter (McL F0)")) +
   #scale_y_continuous(expand=c(0,0)) +
   bartheme() +
-  theme(legend.position="none")
+  theme(legend.position="none",
+        axis.text.x=element_text(angle=45, hjust=1))
 print(aln_20_gap_sites)
 
 
