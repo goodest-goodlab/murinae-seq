@@ -77,7 +77,7 @@ datasets = ["australian-full-all", "australian-full-coding", "australian-reduced
             "reproductive-mclennan-all", "reproductive-mclennan-coding", "reproductive-pahl-all", "reproductive-pahl-coding", "reproductive-testes-mass-all", "reproductive-testes-mass-coding", 
             "reproductive-sperm-img-all", "reproductive-sperm-img-coding", "reproductive-sperm-morpho-all", "reproductive-sperm-morpho-coding", "full-all", "full-coding"]
 
-dataset = "full-coding";
+dataset = "reproductive-testes-mass-coding";
 if dataset not in datasets:
     sys.exit(" * ERROR: check dataset.");
 
@@ -90,11 +90,12 @@ exclude_samples = [];
 add_rat = False;
 add_mouse = False;
 rm_samples = False;
+rmdir = "../03-Alignments/samples-to-rm/";
 # Job variables
 
 ####
 
-orthfile = "master-transcript-id-table.tab";
+orthfile = "../02-Annotation-data/mm10-rnor6-master-transcript-id-table.tab";
 # The ortholog file between mouse and rat.
 core.PWS("# " + core.getDateTime() + " Reading selected transcript IDs: " + orthfile);
 orth_tids = {};
@@ -228,28 +229,32 @@ if dataset == "reproductive-coding":
 ##
 
 if dataset == "reproductive-mclennan-all":
-    rm_file = "rm-samples/REMOVE_McLennanEtAl_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_McLennanEtAl_set_30April2021.csv");
     infilename = "../03-Alignments/raw/emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, coding
 
 ##
 
 if dataset == "reproductive-mclennan-coding":
-    rm_file = "rm-samples/REMOVE_McLennanEtAl_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_McLennanEtAl_set_30April2021.csv");
     infilename = "../03-Alignments/raw/coding_emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, noncoding
 
 ##
 
 if dataset == "reproductive-pahl-all":
-    rm_file = "rm-samples/REMOVE_PahlEtAl_set_30April2021.csv";
+    rm_file = os.path.join(rmdir, "REMOVE_PahlEtAl_set_30April2021.csv");
+    rm_samples = True;
     infilename = "../03-Alignments/raw/emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, coding
 
 ##
 
 if dataset == "reproductive-pahl-coding":
-    rm_file = "rm-samples/REMOVE_PahlEtAl_set_30April2021.csv";
+    rm_file = os.path.join(rmdir, "REMOVE_PahlEtAl_set_30April2021.csv");
+    rm_samples = True;
     infilename = "../03-Alignments/raw/coding_emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, noncoding
 
@@ -258,7 +263,8 @@ if dataset == "reproductive-pahl-coding":
 if dataset == "reproductive-testes-mass-all":
     add_mouse = True;
     add_rat = True;
-    rm_file = "rm-samples/REMOVE_relative_testes_mass_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_relative_testes_mass_set_30April2021.csv");
     infilename = "../03-Alignments/raw/emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, coding
 
@@ -266,35 +272,40 @@ if dataset == "reproductive-testes-mass-all":
 
 if dataset == "reproductive-testes-mass-coding":
     add_rat = True;
-    rm_file = "rm-samples/REMOVE_relative_testes_mass_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_relative_testes_mass_set_30April2021.csv");
     infilename = "../03-Alignments/raw/coding_emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, noncoding
 
 ##
 
 if dataset == "reproductive-sperm-img-all":
-    rm_file = "rm-samples/REMOVE_sperm_image_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_sperm_image_set_30April2021.csv");
     infilename = "../03-Alignments/raw/emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, coding
 
 ##
 
 if dataset == "reproductive-sperm-img-coding":
-    rm_file = "rm-samples/REMOVE_sperm_image_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_sperm_image_set_30April2021.csv");
     infilename = "../03-Alignments/raw/coding_emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, noncoding
 
 ##
 
 if dataset == "reproductive-sperm-morpho-all":
-    rm_file = "rm-samples/REMOVE_sperm_morpho_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_sperm_morpho_set_30April2021.csv");
     infilename = "../03-Alignments/raw/emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, coding
 
 ##
 
 if dataset == "reproductive-sperm-morpho-coding":
-    rm_file = "rm-samples/REMOVE_sperm_morpho_set_30April2021.csv";
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "REMOVE_sperm_morpho_set_30April2021.csv");
     infilename = "../03-Alignments/raw/coding_emily-dataset_unaligned-contigs.fa";
 # Emily's dataset, noncoding
 
@@ -304,7 +315,7 @@ if dataset == "full-all":
     add_mouse = True;
     add_rat = True;
     rm_samples = True;
-    rm_file = "rm-samples/full-dataset-rm-samples.csv";
+    rm_file = os.path.join(rmdir, "full-dataset-rm-samples.csv");
     # A CSV file with samples to exclude in the first column.
 
     infilename = "../03-Alignments/raw/full-dataset_unaligned-contigs.fa";
@@ -315,7 +326,7 @@ if dataset == "full-all":
 if dataset == "full-coding":
     add_rat = True;
     rm_samples = True;
-    rm_file = "rm-samples/full-dataset-rm-samples.csv";
+    rm_file = os.path.join(rmdir, "full-dataset-rm-samples.csv");
     # A CSV file with samples to exclude in the first column.
 
     infilename = "../03-Alignments/raw/coding_full-dataset_unaligned-contigs.fa";
@@ -334,7 +345,7 @@ if add_rat:
 # Read the rat reference seqs
 if rm_samples:
     exclude_samples = { line.split(",")[0].replace("-", "_") : 0 for line in open(rm_file) if not line.startswith("#") };
-    del(exclude_samples['Species']);
+    #del(exclude_samples['Species']);
 # Read the samples to exclude   
 
 ####
@@ -351,7 +362,6 @@ if not os.path.isdir(outdir):
 if exclude_samples != []:
     mcore.PWS("# " + mcore.getDateTime() + " Excluding samples: " + ",".join(exclude_samples));
 # I/O info, including creation of output directory.
-
 ####
 
 mcore.PWS("# " + mcore.getDateTime() + " Reading sequences...");
