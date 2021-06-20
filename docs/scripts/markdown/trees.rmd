@@ -1,0 +1,88 @@
+---
+#title: "Exome trees"
+#author: "gwct"
+#date: "06/19/2021"
+output: 
+  html_document:
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+#library(cowplot)
+#library(ggbeeswarm)
+#library(ggpubr)
+library(dplyr)
+#library(kableExtra)
+library(tidyr)
+library(ggtree)
+library(phytools)
+#source("../lib/design.r")
+source("C:/bin/core/corelib/design.r")
+source("C:/bin/core/get_tree_info.r")
+
+htmltools::includeHTML("../html-chunks/rmd_nav.html")
+```
+
+```{r read, out.width="100%", fig.align = "center", warning=FALSE}
+tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
+#tree_file = "../data/trees/test.tre"
+rodent_tree = read.tree(tree_file)
+
+tree_info = treeToDF(rodent_tree)
+tree_info = tree_info %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
+tree_info$astral[tree_info$node.type=="tip"] = NA
+tree_info$astral = as.numeric(tree_info$astral)
+tree_info$gcf = as.numeric(tree_info$gcf)
+tree_info$scf = as.numeric(tree_info$scf)
+
+#write.csv(tree_info, "../data/trees/full-coding-astral-cf-rooted.csv", row.names=F)
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+```
+
+```{r fig1, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+gcf_tree = ggtree(rodent_tree, ladderize=F, aes(color=tree_info$gcf)) +
+  scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
+  xlim(0, 31) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9))
+#geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
+#geom_nodepoint(color="#666666", alpha=0.85, size=4)
+print(gcf_tree)
+#ggsave("../data/trees/gcf-tree.pdf", gcf_tree, width=8, height=16, unit="in")
+# gCF tree
+```
+
+```{r fig2, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+scf_tree = ggtree(rodent_tree, ladderize=F, aes(color=tree_info$scf)) +
+  scale_color_continuous(name='sCF', low=l, high=h, limits=c(0,100)) +
+  xlim(0, 31) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9))
+#geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
+#geom_nodepoint(color="#666666", alpha=0.85, size=4)
+print(scf_tree)
+#ggsave("../data/trees/scf-tree.pdf", scf_tree, width=8, height=16, unit="in")
+# sCF tree
+```
+
+```{r fig3, out.width="50%", fig.align = "center", warning=FALSE}
+p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) + 
+  geom_point() +
+  scale_color_continuous(name='Astral', low=l, high=h, limits=c(0,1)) +
+  bartheme()
+print(p)
+```
+
+```{r footer}
+cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
+htmltools::includeHTML("../html-chunks/rmd_footer.html")
+```

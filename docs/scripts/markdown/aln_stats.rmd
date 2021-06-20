@@ -33,7 +33,7 @@ library(dplyr)
 library(kableExtra)
 source("../lib/design.r")
 
-htmltools::includeHTML("../html-chunks/nav.html")
+htmltools::includeHTML("../html-chunks/rmd_nav.html")
 ```
 
 ```
@@ -50,7 +50,7 @@ Alignment and filtering steps:
 
 ## Exons vs. BLAST hits
 
-```{r fig1, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig1, out.width="75%", fig.align = "center", warning=FALSE}
 
 blast_data = read.csv("../../data/aln-stats/sample-hits-exons.csv", header=T)
 
@@ -70,7 +70,7 @@ print(exons_v_bhits)
 
 ## BLAST hits vs. exonerate hits (no hit threshold)
 
-```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig2, out.width="75%", fig.align = "center", warning=FALSE}
 
 targets_exonerate = read.csv("../../data/aln-stats/targets-exonerate-f0-TEST.csv", header=T)
 
@@ -89,7 +89,7 @@ print(bhits_v_ehits)
 
 # Mouse exons vs exonerate hits (no hit threshold)
 
-```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig3, out.width="75%", fig.align = "center", warning=FALSE}
 
 sample_targets_exonerate = read.csv("../../data/aln-stats/sample-targets-exonerate-f0-TEST.csv", header=T)
 ## HEADERS ARE OFF
@@ -112,7 +112,7 @@ print(exons_v_hits)
 
 ## Number of sequences per alignment
 
-```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig4, out.width="75%", fig.align = "center", warning=FALSE}
 
 aln_data_150 = read.csv("../../data/aln-stats/aln-stats-f150-seq20-site50.tab", header=T, sep="\t", comment.char="#")
 aln_data_175 = read.csv("../../data/aln-stats/aln-stats-f175-seq20-site50.tab", header=T, sep="\t", comment.char="#")
@@ -175,7 +175,7 @@ print(aln_seqs)
 
 ## Length of alignment
 
-```{r fig5, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig5, out.width="75%", fig.align = "center", warning=FALSE}
 pre_seqs_150 = select(aln_data_150, align, pre.codon.aln.length)
 pre_seqs_150$label = "Pre-filter (F150)"
 names(pre_seqs_150)[2] = "aln.len"
@@ -261,7 +261,7 @@ print(aln_len)
 
 ## Avg. non-gapped sequence length per protein
 
-```{r fig6, fig.align="center", warning=FALSE, out.width="100%"}
+```{r fig6, fig.align="center", warning=FALSE, out.width="75%"}
 mus_data = read.csv("../../data/Mus-selected-sequences_metadata_samp-counts_ratids.csv", header=TRUE)
 mus_data = subset(mus_data, feature_type=="CDS")
 mus_lens = select(mus_data, transcript_id, exon_length)
@@ -331,7 +331,7 @@ print(nongap_len)
 
 ## Number of sequences per alignment that are >20% gap (pre-filter)
 
-```{r fig7, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig7, out.width="75%", fig.align = "center", warning=FALSE}
 
 aln_data_150$pre.gappy.seqs.perc = (aln_data_150$pre.gappy.seqs / aln_data_150$pre.num.seqs) * 100
 bins = seq(0,100,by=1)
@@ -373,7 +373,7 @@ print(dualp)
 
 ## Number of sites that are >20% gap (pre-filter)
 
-```{r fig8, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig8, out.width="75%", fig.align = "center", warning=FALSE}
 
 pre_sites_150 = select(aln_data_150, align, pre.gappy.sites)
 pre_sites_150$label = "Pre-filter (F150)"
@@ -444,7 +444,7 @@ A look at the effects of varying all three filters:
 2. Filtering sequences that are more than [20, 40, 60, 80, 100]% gaps. This is the sequence filter denoted as "S".
 3. Filtering codon sites that, among sliding windows of 3 codons, have at least 2 gaps in at least 2 codons in [25, 50, 75, 100]% of samples. This is the codon site filter denoted as "C".
 
-```{r read-filter, out.width="100%", fig.align = "center", warning=FALSE}
+```{r read-filter, out.width="75%", fig.align = "center", warning=FALSE}
 p0s20c50 = read.csv("../../data/aln-filters/aln-stats-f0-seq20-site50.tab", header=T, comment.char="#", sep="\t")
 p0s20c50$label = "P0S20C50"
 
@@ -516,7 +516,7 @@ p200s20c50$label = "P200S20C50"
 Filtering targets with exonerate matches in less than [0, 50, 100, 150, 175, 200] samples
 
 Alignment length (codons)
-```{r fig9, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig9, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
 names(gbe_data)[3] = "post.codon.aln.length"
@@ -559,7 +559,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 ```
 
 Ungapped alignment length (codons)
-```{r fig10, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig10, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
 names(gbe_data)[4] = "post.avg.nongap.length"
@@ -613,7 +613,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 Filtering sequences with % gaps larger than [20, 40, 60, 80, 100] samples
 
 Alignment length (codons)
-```{r fig12, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig12, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
 names(gbe_data)[3] = "post.codon.aln.length"
@@ -656,7 +656,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 ```
 
 Ungapped alignment length (codons)
-```{r fig13, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig13, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
 names(gbe_data)[4] = "post.avg.nongap.length"
@@ -709,7 +709,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 Filtering three-codon windows where at least 2 codons have at least 2 gaps in greater than [25, 50, 75, 100]% of samples
 
 Alignment length (codons)
-```{r fig14, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig14, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
 names(gbe_data)[3] = "post.codon.aln.length"
@@ -752,7 +752,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 ```
 
 Ungapped alignment length (codons)
-```{r fig15, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig15, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
 names(gbe_data)[4] = "post.avg.nongap.length"
@@ -801,7 +801,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 ```
 
 
-```{r read, out.width="100%", fig.align="center", eval=F}
+```{r read, out.width="75%", fig.align="center", eval=F}
 # Exonerate CDS diff between mouse and target seqs
 mus_data = read.csv("../../data/Mus_best_cds_metadata.csv", header=TRUE)
 #aln_data = read.csv("../../data/full-2-exonerate-to-cds-2.log", sep="\t", comment.char="#", header=F)
@@ -810,7 +810,7 @@ in_data = read.csv("../../data/exonerate-to-cds-p2g-concat.log", sep="\t", comme
 #names(aln_data) = c("pid", "sample", "num.cds", "cds.len")
 ```
 
-```{r sim-dists, out.width="100%", fig.align="center", eval=F}
+```{r sim-dists, out.width="75%", fig.align="center", eval=F}
 
 target_data = filter(in_data, sample != "mm10" & sample != "rnor6")
 
@@ -970,7 +970,7 @@ print(len_p)
 ```
 
 
-```{r parse, out.width="100%", fig.align="center", eval=F}
+```{r parse, out.width="75%", fig.align="center", eval=F}
 #aln_data$num.diff = NA
 #num_data = data.frame("sample"=c(), "num.diff"=c())
 
@@ -989,7 +989,7 @@ sample_data$len.diff = sample_data$final.full.len.x - sample_data$cds.protein.le
 
 
 
-```{r fig3x, out.width="100%", fig.align="center", eval=F}
+```{r fig3x, out.width="75%", fig.align="center", eval=F}
 # Exonerate predictions vs. mouse
 cds_p = ggplot(sample_data, aes(x=cds.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
@@ -1002,7 +1002,7 @@ print(cds_p)
 
 ```
 
-```{r fig4x, out.width="100%", fig.align="center", eval=F}
+```{r fig4x, out.width="75%", fig.align="center", eval=F}
 
 len_p = ggplot(sample_data, aes(x=len.diff)) +
   #geom_quasirandom(aes(color=is.rat), size=2, alpha=0.7, width=0.25) +
@@ -1017,7 +1017,7 @@ print(len_p)
 
 
 
-```{r fig5x, out.width="100%", fig.align="center", eval=F}
+```{r fig5x, out.width="75%", fig.align="center", eval=F}
 # MACSE pre-trimming
 trim_data = read.csv("../../data/06-cds-trim-stats.csv", header=TRUE, sep=";", stringsAsFactors=F)
 trim_data$perc.kept = as.numeric(trim_data$nbKeep) / as.numeric(trim_data$initialSeqLength)

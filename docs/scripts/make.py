@@ -17,6 +17,7 @@ parser.add_argument("--workflows", dest="workflows", help="Without --all: build 
 parser.add_argument("--wgs", dest="wgs", help="Without --all: build wgs.html. With --all: exlude wgs.html", action="store_true", default=False);
 parser.add_argument("--assembly", dest="assembly", help="Without --all: build assembly_stats.html. With --all: exlude assembly_stats.html", action="store_true", default=False);
 parser.add_argument("--aln", dest="aln", help="Without --all: build aln_stats.html. With --all: exlude aln_stats.html", action="store_true", default=False);
+parser.add_argument("--trees", dest="trees", help="Without --all: build trees.html. With --all: exlude trees.html", action="store_true", default=False);
 # parser.add_argument("--fullassemblystats", dest="fullassemblystats", help="Without --all: build assembly_stats_2.html. With --all: exlude assembly_stats_2.html", action="store_true", default=False);
 # parser.add_argument("--fullmappingstats", dest="fullmappingstats", help="Without --all: build full_mapping_stats.html. With --all: exlude full_mapping_stats.html", action="store_true", default=False);
 parser.add_argument("--filterstats", dest="filterstats", help="Without --all: build filter_stats.html. With --all: exlude filter_stats.html", action="store_true", default=False);
@@ -38,6 +39,7 @@ pages = {
     'wgs' : args.wgs,
     'assembly' : args.assembly,
     'aln' : args.aln,
+    'trees' : args.trees,
     # 'fullassemblystats' : args.fullassemblystats,
     # 'fullmappingstats' : args.fullmappingstats,
     'filterstats' : args.filterstats,
@@ -76,6 +78,9 @@ if pages['assembly']:
 
 if pages['aln']:
     os.system("Rscript aln_stats_generator.r");
+
+if pages['trees']:
+    os.system("Rscript trees_generator.r");
 
 # if pages['fullassemblystats']:
 #     os.system("Rscript assembly_stats_generator.r");
