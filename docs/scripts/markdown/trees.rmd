@@ -29,6 +29,10 @@ source("C:/bin/core/get_tree_info.r")
 htmltools::includeHTML("../html-chunks/rmd_nav.html")
 ```
 
+# Full coding species tree
+
+188 species. 11,775 coding loci. Gene trees reconstructed with IQ-tree and species topology with ASTRAL (no tip branch lengths).
+
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
 tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
 #tree_file = "../data/trees/test.tre"
@@ -49,7 +53,7 @@ l = corecol(numcol=1, offset=3)
 ```
 
 ```{r fig1, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
-gcf_tree = ggtree(rodent_tree, ladderize=F, aes(color=tree_info$gcf)) +
+gcf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$gcf)) +
   scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
   xlim(0, 31) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
@@ -62,7 +66,7 @@ print(gcf_tree)
 ```
 
 ```{r fig2, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
-scf_tree = ggtree(rodent_tree, ladderize=F, aes(color=tree_info$scf)) +
+scf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$scf)) +
   scale_color_continuous(name='sCF', low=l, high=h, limits=c(0,100)) +
   xlim(0, 31) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
@@ -77,8 +81,9 @@ print(scf_tree)
 ```{r fig3, out.width="50%", fig.align = "center", warning=FALSE}
 p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) + 
   geom_point() +
-  scale_color_continuous(name='Astral', low=l, high=h, limits=c(0,1)) +
-  bartheme()
+  scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0,1)) +
+  bartheme() +
+  theme(legend.title=element_text(size=12))
 print(p)
 ```
 
