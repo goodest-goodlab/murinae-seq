@@ -1,0 +1,190 @@
+# sources: Supplemental_Appendix_II.csv; murine_repro_pheno_data.csv; Murinae Locomotory Checklist - Murinae Locomotory Checklist.csv
+species,sample,Locomotor_State,Adult_Mass(g),Total_Length(mm),Head-Body_Length(mm),Tail_Length(mm),Hind_Foot_Length(mm),Relative_Tail_Length,Relative_Hind_Foot_Length,RTM (%),Head length (um),Head width (um),Head area (um�),Apical hook length (um),Apical hook angle (�),Ventral process length (um),Ventral process angle (�),Midpiece length (um),Principal and end piece length (um),Tail length (um),# hooks/ventral processes,Geographic Region
+Lophiomys_imhausi,Lophiomys_imhausi_UM5152,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lophuromys_woosnami,Lophuromys_woosnami_LSUMZ37793,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Phloeomys_cumingi,Phloeomys_cumingi_FMNH198472,Arboreal,1896.23,711.5,417.5,294,79.5,0.413211525,0.704191617,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Phloeomys_pallidus,Phloeomys_pallidus_JEC43,Arboreal,2097.07,738.5,404,334.5,85,0.452945159,0.827970297,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Crateromys_heaneyi,Crateromys_heaneyi_KU165014,Arboreal,124,599.5,279.5,320,63.5,0.533778148,1.14490161,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Batomys_russatus,Batomys_russatus_KU165776,Terrestrial,115,256,146,110,30,0.4296875,0.753424658,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Carpomys_melanurus,Carpomys_melanurus_FMNH198723,Arboreal,165,363.5,182,181.5,33,0.499312242,0.997252747,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Musseromys_anacuao,Musseromys_anacuao_FMNH209523,Arboreal,19,162.5,78.5,84,18,0.516923077,1.070063694,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Maxomys_surifer,Maxomys_surifer_JAE3632,Terrestrial,154.44,363.8,182.5,181.3,41,0.498350742,0.993424658,2.02,10.5,NA,26+-2.5,3.0+-0.3,294+-17,NA,NA,35,70,100+-1,NA,Thailand;southern Burma;Indochina;Malay Peninsula;Sumatra;Java;Borneo;many islands off the East Indies
+Maxomys_musschenbroekii,Maxomys_musschenbroekii_sample1,Terrestrial,84.8,274,145.5,128.5,34.5,0.468978102,0.883161512,2.63,NA,NA,26+-2.0,7+-0.8,287+-17,NA,NA,NA,NA,151+-2,NA,Sulawesi
+Crunomys_melanius,Crunomys_melanius_KU168558,Terrestrial,54.5,190.8,110,80.8,26,0.423480084,0.734545455,NA,NA,NA,43+-5.7,5+-0.9,283+-21,NA,NA,NA,NA,105+-4,NA,Mindanao
+Crunomys_celebensis,Crunomys_celebensis_Z21894,Terrestrial,48.3,193.6,112.6,81,25,0.41838843,0.719360568,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,central Sulawesi 
+Hyorhinomys_stuempkei,Hyorhinomys_stuempkei_JAE4661,Terrestrial,235,403.5,193.5,210,53,0.520446097,1.085271318,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Sommeromys_macrorhinos,Sommeromys_macrorhinos_Z21740,Arboreal,26.83,282.5,100,182.5,30,0.646017699,1.825,1,NA,NA,18+-1.9,7.4+-0.3,298+-11,NA,NA,NA,NA,161+-1,NA,Sulawesi
+Gracilimus_radix,Gracilimus_radix_Z08508,Terrestrial,41,277,118,159,29,0.57400722,1.347457627,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Waiomys_mamasae,Waiomys_mamasae_Z20624,Amphibious,64,288,129,159,36,0.552083333,1.23255814,2.01,NA,NA,25+-2.0,5.5+-0.6,301+-9,NA,NA,NA,NA,106+-7,NA,Sulawesi
+Paucidentomys_vermidax,Paucidentomys_vermidax_Z21914,Terrestrial,103.5,362.5,163.5,199,37.5,0.548965517,1.217125382,3.03,NA,NA,19+-1.3,9.4+-0.4,324+-8,NA,NA,NA,NA,132+-2,NA,Sulawesi
+Echiothrix_centrosa,Echiothrix_centrosa_Z27993,Terrestrial,253,447,205,242,51,0.541387025,1.180487805,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Tateomys_rhinogradoides,Tateomys_rhinogradoides_Z21785,Terrestrial,86.5,308.5,145.5,163,37.25,0.528363047,1.120274914,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,central Sulawesi
+Melasmothrix_naso,Melasmothrix_naso_Z21808,Terrestrial,47.5,206.8,118,88.8,27.5,0.429400387,0.752542373,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,central Sulawesi
+Tateomys_macrocercus,Tateomys_macrocercus_Z21834,Terrestrial,40,278,112,166,30.67,0.597122302,1.482142857,1.97,NA,NA,15+-2.1,5.3+-0.5,303+-12,NA,NA,NA,NA,125+-3,NA,central Sulawesi
+Saxatilomys_paulinae,Saxatilomys_paulinae_ABTC116266,Terrestrial,116,318,150,168,32,0.528301887,1.12,NA,NA,NA,28+-3,12+-0.6,294+-9,NA,NA,NA,NA,158+-3,NA,Asia;Laos
+Margaretamys_parvus,Margaretamys_parvus_NMVZ21833,Arboreal,40,258,100,158,20,0.612403101,1.58,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Margaretamys_christinae,Margaretamys_christinae_TMar1,Arboreal,49,286,111,175,20,0.611888112,1.576576577,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Leopoldomys_sabanus,Leopoldomys_sabanus_Z25191,NA,NA,NA,NA,NA,NA,NA,NA,2.48,12,NA,18+-1.7,8+-0.8,266+-14,NA,NA,65,105,175+-5,NA,NA
+Anonymomys_mindorensis,Anonymomys_mindorensis_FMNH2222010,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ilong Peak;northeastern Mindoro Island;Philippines
+Niviventer_lepturus,Niviventer_lepturus_JAE4746,General,84.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,18+-1.2,6+-0.4,308+-9,NA,NA,NA,NA,115+-10,NA,Java
+Niviventer_rapit,Niviventer_rapit_LSUMZ38196,General,79.73,354,143,211,32,0.596045198,1.475524476,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;Malay Peninsula;Sumatra;Borneo
+Niviventer_bukit,Niviventer_bukit_LSUMZ38136,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Berylmys_bowersi,Berylmys_bowersi_ABTC116431,General,382.69,544.6,266.3,278.3,58.8,0.51101726,1.04506196,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;Assam to southeastern China and Malay Peninsula;Sumatra
+Berylmys_mackenziei,Berylmys_mackenziei_ABTC116402,Terrestrial,265,454,210,244,49,0.537444934,1.161904762,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;Assam;Burma;China;Vietnam
+Nesokia_indica,Nesokia_indica_ABTC117074,Terrestrial,211.04,304,183,121,39,0.398026316,0.661202186,0.29,NA,NA,12+-1.0,0,0,NA,NA,NA,NA,76+-4,NA,Africa;Egypt to Sinkiang and northern India;China
+Bandicota_indica,Bandicota_indica_ABTC119185,Terrestrial,415.03,520,276,244,56,0.469230769,0.884057971,0.46,5,NA,9+-2.6,0,0,NA,NA,15,43,58+-11,NA,Thailand;India to China and Indochina;northern Malay Peninsula;Sri Lanka;Taiwan;Sumatra;Java;Vietnam
+Rattus_exulans,Rattus_exulans_sample1,General,62.915,286.7,135.8,150.9,26.1,0.526334147,1.111192931,2.76,NA,NA,33+-2.3,10+-0.8,296+-9,NA,NA,NA,NA,172+-1,NA,Philippines;Thailand
+Rattus_norvegicus,rnor6,General,335.7133333,390.5,213.5,177,39,0.453265045,0.829039813,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa;Australia;Philippines;Thailand;northern China
+Rattus_argentiventer,Rattus_argentiventer_LSUMZ38199,General,156.1233333,375,194.5,180.5,37.5,0.481333333,0.928020566,1.47,NA,NA,22+-2,9+-0.6,291+-3,NA,NA,NA,NA,172+-2,NA,Philippines;Thailand;Vietnam;New Guinea
+Rattus_hoffmanni,Rattus_hoffmanni_LSUMZ39187,General,147,339.6,170.1,169.5,38.2,0.499116608,0.996472663,1.01,NA,NA,32+-3.5,8+-0.7,286+-9,NA,NA,NA,NA,149+-2,NA,Sulawesi
+Kadarsanomys_sodyi,Kadarsanomys_sodyi_MZB-Sample,Arboreal,79.09,480,196,284,39.5,0.591666667,1.448979592,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gunang Pangrango-Gede;volcanic massif in western Java
+Tarsomys_apoensis,Tarsomys_apoensis_KU167148,Terrestrial,76.7,286.8,145.5,141.3,31.5,0.492677824,0.971134021,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Limnomys_sibuanus,Limnomys_sibuanus_FMNH147948,General,64.3,283.5,127,156.5,29.5,0.552028219,1.232283465,NA,NA,NA,17+-0.9,7+-0.4,278+-5,NA,NA,NA,NA,147+-4,NA,Philippines
+Rattus_xanthurus,Rattus_xanthurus_LSUMZ39196,Terrestrial,303,559,247.3,311.7,46.7,0.557602862,1.260412455,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi and nearby Peleng Island
+Rattus_morotaiensis,Rattus_morotaiensis_ASAM29,Arboreal,151.125,406.5,194.5,212,37.6,0.521525215,1.089974293,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Halmahera Group;Morotai Island in the northern Moluccas
+Rattus_leucopus,Rattus_leucopus_sample1,Terrestrial,205.845,377.6,201.3,176.3,38.8,0.466896186,0.875807253,2.99,NA,NA,24+-4.2,8+-0.6,290+-18,NA,NA,NA,NA,146+-2,NA,New Guinea;Australia;Wokam;northern Queensland
+Rattus_praetor,Rattus_praetor_sample1,Terrestrial,196.565,363,196.7,166.3,35.5,0.458126722,0.845449924,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea ;New Ireland;the Solomon Islands;New Britain
+Rattus_lutreolus,Rattus_lutreolus_sample2,Terrestrial,107.5,271.95,158.45,113.5,30,0.417356132,0.716314295,3.69,NA,NA,33+-2.5,10+-1.0,302+-14,NA,NA,NA,NA,155+-1,NA,Australia;Tasmania
+Rattus_tunneyi,Rattus_tunneyi_RAT130,Terrestrial,169.29,270,146,124,29.5,0.459259259,0.849315068,2.63,NA,NA,34+-1.5,10+-0.7,289+-13,NA,NA,NA,NA,150+-1,NA,Australia
+Rattus_colletti,Rattus_colletti_RAT25,Terrestrial,146.48,286.5,161.38,125.12,30.11,0.436719023,0.775312926,1.48,NA,NA,25+-2.6,7.0+-1.0,308+-26,NA,NA,NA,NA,154+-4,NA,Australia
+Rattus_villosissimus,Rattus_villosissimus_sample1,Terrestrial,207.03,303.5,158,145.5,32,0.479406919,0.920886076,1.08,NA,NA,25+-2.0,8+-0.7,313+-13,NA,NA,NA,NA,150+-2,NA,Australia
+Sundamys_annandalei,Sundamys_annandalei_YS118,General,197.49,397.5,182.5,215,37.5,0.540880503,1.178082192,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Malay Peninsula;Sumatra;and nearby islands
+Sundamys_muelleri,Sundamys_muelleri_JAE1283,General,300.44,547.5,243.8,303.7,47,0.554703196,1.245693191,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;Malay Peninsula;Sumatra;Borneo;Palawan (Philippines);and many small nearby islands
+Bullimus_bagobus,Bullimus_bagobus_JAE1712,Terrestrial,423.09,462,278.3,183.7,53.5,0.397619048,0.660079051,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Papagomys_armandvillei,Papagomys_armandvillei_WAMM32592,Terrestrial,73.8,773.5,428.5,345,85,0.446024564,0.805134189,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Flores Island in the East Indies
+Halmaheramys_bokimekot,Halmaheramys_bokimekot_33262-WD225,Terrestrial,89.7,275,149,126,29.6,0.458181818,0.845637584,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Indonesia 
+Bunomys_andrewsi,Bunomys_andrewsi_sample1,Terrestrial,135,304.1,161.7,142.4,37.75,0.468267017,0.880643166,1.82,NA,NA,19+-2,7+-0.9,268+-13,NA,NA,NA,NA,146+-3,NA,Sulawesi
+Bunomys_torajae,Bunomys_torajae_NMVZ21736,Terrestrial,116.8,343.1,177.8,165.3,37.6,0.481783737,0.929696288,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Bunomys_chrysocomus,Bunomys_chrysocomus_JAE4867,Terrestrial,106.045,301,160,141,34.8,0.468438538,0.88125,3,10,NA,25+-3.4,8+-1.0,296+-13,NA,NA,45,100,162+-4,NA,Sulawesi
+Taeromys_callitrichus,Taeromys_callitrichus_LSUMZ37153,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Taeromys_punicans,Taeromys_punicans_MVZ225815,Terrestrial,138,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Taeromys_hamatus,Taeromys_hamatus_NMVZ63317,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Taeromys_taerae,Taeromys_taerae_LSUMZ39224,Terrestrial,247,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Genus_sp-nov,Genus_sp-nov_NMVZ21816,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Taeromys_celebensis,Taeromys_celebensis_NMVZ20637,General,252.7,498.6,224,274.6,50.1,0.550742078,1.225892857,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Paruromys_dominator,Paruromys_dominator_JAE4870,General,304.605,486.5,223.5,263,51.9,0.540596095,1.176733781,0.51,11,NA,37+-2.5,7.0+-1.0,274+-18,NA,NA,32,105,122+-3,NA,Sulawesi
+Eropeplus_canus,Eropeplus_canus_NMVZ21733,General,275,543,266,277,48,0.510128913,1.041353383,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,middle Sulawesi
+Lenomys_meyeri,Lenomys_meyeri_LSUMZ39079,General,325,530.625,264.125,266.5,47,0.502237927,1.008991955,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sangihe;Sulawesi
+Chiropodomys_gliroides,Chiropodomys_gliroides_Z25153,Arboreal,23.89,215.9,89.2,126.7,18.5,0.586845762,1.420403587,0.6,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;Assam to southeastern China and Malay Peninsula;Sumatra;Java;Bali;Borneo;Natuna Islands
+Haeromys_minahassae,Haeromys_minahassae_JAE4996,Arboreal,14.7,182,72,110,20,0.604395604,1.527777778,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sulawesi
+Apomys_lubangensis,Apomys_lubangensis_JAE169,Terrestrial,110,291,151,140,40,0.481099656,0.927152318,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lubang;Philippines
+Archboldomys_luzonensis,Archboldomys_luzonensis_EAR1826,Terrestrial,36.22,178.5,89.3,70,27.5,0.392156863,0.78387458,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Rhynchomys_isarogensis,Rhynchomys_isarogensis_JAE2195,Terrestrial,122.395,287.5,187,105,37,0.365217391,0.561497326,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
+Chrotomys_whiteheadi,Chrotomys_whiteheadi_KU168311,Terrestrial,149.74,282,167,115,38,0.407801418,0.688622754,1.43 (0.76-2.24),9.1+-0.2,2.3+-0.4,NA,4.0+-0.2,NA,0,NA,NA,NA,135+-5,NA,Philippines
+Chrotomys_mindorensis,Chrotomys_mindorensis_JAE520,Terrestrial,163.74,284.5,173.5,111,38,0.390158172,0.639769452,NA,8.6+-0.1,2.2+-0.2,NA,3.5+-0.4,NA,0,NA,41+-2,NA,141+-5,NA,Philippines;Mindoro
+Anisomys_imitator,Anisomys_imitator_ABTC45107,Arboreal,502.25,585.8,264.6,321.2,61.1,0.548310003,1.213907785,0.8,8,4.1,NA,7.4,321,0,NA,26,117,NA,NA,New Guinea
+Lorentzimys_nouhuysi,Lorentzimys_nouhuysi_ABTC-46314,Arboreal,14.97,186.6,74.2,112.4,18.6,0.602357985,1.514824798,4.3,6.2,1.9,NA,6.9,308,0,NA,34,101,NA,NA,New Guinea
+Macruromys_major,Macruromys_major_ABTC43909,Terrestrial,353.625,568.3,240.8,327.5,52.7,0.576280134,1.360049834,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Chiruromys_vates,Chiruromys_vates_ABTC43096,Arboreal,45.73,272.5,110,162.5,24.3,0.596330275,1.477272727,3.3,8.3,1.7,NA,7,337,5.9,336,55,102,NA,NA,New Guinea
+Hyomys_goliath,Hyomys_goliath_ABTC42697,General,844.62,636.5,324.5,312,59.4,0.490180676,0.961479199,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea 
+Pogonomys_macrourus,Pogonomys_macrourus_ABTC43144,General,47.19,277.5,120.5,157,20.9,0.565765766,1.302904564,4.8,5.3,2,NA,4.6,318,3.1,316,28,83,NA,NA,New Guinea;Japen;New Britain
+Coccymys_ruemmleri,Coccymys_ruemmleri_ABTC49489,General,31.55,268,109,159,24.8,0.593283582,1.458715596,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Mammelomys_lanosus,Mammelomys_lanosus_ABTC47208,Terrestrial,116.8,286,162.3,123.7,36.6,0.432517483,0.762168823,2.4,7.9,1.8,NA,10,307,0,NA,26,109,NA,NA,New Guinea
+Xenuromys_barbatus,Xenuromys_barbatus_ABTC129204,Terrestrial,987.65,578,316,262,62.9,0.453287197,0.829113924,1.4,6.3,2.2,NA,11.1,305,0,NA,32,117,NA,NA,New Guinea
+Mallomys_rothschildi,Mallomys_rothschildi_ABTC47402,Arboreal,1157.9,759.7,380,379.7,65.1,0.499802554,0.999210526,1.4,6.9,1.6,NA,8.3,314,5.5,335,34,117,NA,NA,New Guinea
+Abeomelomys_sevia,Abeomelomys_sevia_KUM161018,Arboreal,55.69,300.5,127.5,173,24.8,0.575707155,1.356862745,1.7,9.2,3.9,NA,14.4,315,0,NA,39,126,NA,NA,New Guinea
+Pogonomelomys_mayeri,Pogonomelomys_mayeri_AMM21849,Arboreal,110.835,336,147,189,29.3,0.5625,1.285714286,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Crossomys_moncktoni,Crossomys_moncktoni_ABTC46614,Amphibious,166.71,404,188,216,51.2,0.534653465,1.14893617,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Parahydromys_asper,Parahydromys_asper_ABTC45798,Amphibious,533.33,479.3,225,254.3,53.1,0.530565408,1.130222222,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Hydromys_sp-nov,Hydromys_sp-nov_YS391,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Hydromys_chrysogaster,Hydromys_chrysogaster_Z5248,NA,NA,NA,NA,NA,NA,NA,NA,2,5,2.3,NA,5.6,322,4.1,320,20,92,NA,NA,New Guinea and surrounding islands;Australia 
+Xeromys_myoides,Xeromys_myoides_ABTC30709,Terrestrial,45.45,217.3,117.3,100,25,0.460193281,0.852514919,1.2,5.6,2.6,NA,6.4,299,4.6,296,23,79,NA,NA,Australia
+Microhydromys_richardsoni,Microhydromys_richardsoni_ANWCM35851,Terrestrial,9.625,169.3,83,86.3,19.7,0.509746013,1.039759036,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Pseudohydromys_pumehanae,Pseudohydromys_pumehanae_ABTC43920,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Paraleptomys_wilhelmina,Paraleptomys_wilhelmina_H126-ABTC133716,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Mirzamys_louiseae,Mirzamys_louiseae_ABTC133754,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea
+Leptomys_elegans,Leptomys_elegans_ABTC45741,Terrestrial,85.46,299.4,151.8,147.6,38.5,0.492985972,0.972332016,1.78,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,New Guinea 
+Solomys_salebrosus,Solomys_salebrosus_ABTC64864,Arboreal,397,520.5,276.5,244,48.6,0.468780019,0.882459313,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Bougainville;Buka (fossil);Choiseul
+Melomys_rufescens,Melomys_rufescens_ABTC44798,Arboreal,64,273.3,136.3,137,27.2,0.501280644,1.00513573,2.5,5.7,2.3,NA,6.6,327,5,326,24,88,NA,NA,New Guinea and surrounding islands ;New Britain;New Ireland 
+Uromys_sp-nov,Uromys_sp-nov_YS380,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Uromys_caudimaculatus,Uromys_caudimaculatus_DT10Uc01,General,633.36,571.7,267.7,304,54.8,0.53174742,1.135599552,1.1,7,3,NA,8.1,322,6.7,322,21,71,NA,NA,New Guinea;Australia;Aru Islands;Fergusson;Japen;Kai Islands;Normanby;Sideia?;Waigeo
+Leporillus_conditor,Leporillus_conditor_ABTC13335,General,339.41,375,197,178,44,0.474666667,0.903553299,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Leporillus_apicalis,Leporillus_apicalis_C90,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Conilurus_albipes,Conilurus_albipes_NMV-c7585,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia;Queensland;New South Wales;Victoria
+Conilurus_penicillatus,Conilurus_penicillatus_M14056,Arboreal,190.54,371.5,188.5,183,48,0.492597577,0.970822281,2.4,4.8,2.6,NA,6,329,4.3,324,22,103,NA,NA,New Guinea;Australia
+Mesembriomys_macrurus,Mesembriomys_macrurus_ABTC7337,Arboreal,300,577,250,327,50,0.566724437,1.308,2.4,5.7,2.8,NA,6.5,332,4.9,325,21,92,NA,NA,Australia
+Mesembriomys_gouldii,Mesembriomys_gouldii_ABTC7449,Arboreal,800,675,300,375,67,0.555555556,1.25,0.99,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia;Cape York Peninsula of northern Queensland;Melville;and Bathurst islands
+Zyzomys_pedunculatus,Zyzomys_pedunculatus_Z34925,NA,NA,NA,NA,NA,NA,NA,NA,0.38,NA,NA,NA,NA,NA,NA,NA,15,NA,82-85,NA,Australia
+Zyzomys_woodwardi,Zyzomys_woodwardi_WAMM21724,Terrestrial,135,265,150,117,30,0.441509434,0.78,1.7,5,2.6,NA,5.9,318,4.1,317,21,110,60.1+-1.9,NA,Australia
+Zyzomys_maini,Zyzomys_maini_ABTC07900,Terrestrial,93.995,296,150,146,NA,0.493243243,0.973333333,1.21,NA,NA,NA,NA,NA,NA,NA,NA,NA,132.1+-2.3,NA,Australia
+Zyzomys_palatalis,Zyzomys_palatalis_ABTC30744,Terrestrial,115,257,126,131,NA,0.509727626,1.03968254,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Zyzomys_argurus,Zyzomys_argurus_ABTC61630,Terrestrial,60,245,120,125,25,0.510204082,1.041666667,0.9,5.5,2.4,NA,6.1,311,4.4,312,24,119,132-137,NA,Australia;Queensland
+Leggadina_lakedownensis,Leggadina_lakedownensis_WAMM21623,Terrestrial,18.75,113,70,43,15,0.380530973,0.614285714,1.8,4.7,2.4,NA,5.5,312,3.8,304,24,97,NA,NA,Australia;Queensland
+Leggadina_forresti,Leggadina_forresti_WAMM62323,Terrestrial,21.94,176,104,72,19,0.409090909,0.692307692,1.8,5.7,2.6,NA,5.1,300,2.5,250,24,96,NA,NA,Australia;Queensland;New South Wales
+Pseudomys_calabyi,Pseudomys_calabyi_U4324,Terrestrial,16.7,162.8,84.4,78.4,18,0.481572482,0.928909953,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Pseudomys_chapmani,Pseudomys_chapmani_WAMM29440,Terrestrial,11.475,122.8,59.2,63.6,15,0.517915309,1.074324324,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Pseudomys_johnsoni,Pseudomys_johnsoni_ABTC08053,Terrestrial,16,171,76,95,17.4,0.555555556,1.25,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Pseudomys_patrius,Pseudomys_patrius_JM10865,Terrestrial,14,135,63,72,NA,0.533333333,1.142857143,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Notomys_cervinus,Notomys_cervinus_M22857,Terrestrial,42.395,260,110,150,36,0.576923077,1.363636364,0.8,5.6,2.7,NA,8.4,303,6.1,301,26,79,103.7+-1.1,NA,Australia
+Notomys_mitchellii,Notomys_mitchellii_M21518,Terrestrial,50,280,125,155,37,0.553571429,1.24,0.2,5.5,2.1,NA,6.2,303,4,298,25,83,85.8+-3.6 (104.1+-4.7?),NA,Australia
+Notomys_fuscus,Notomys_fuscus_M22830,Terrestrial,37.14,228,106.5,121.5,33.3,0.532894737,1.14084507,0.2,6.5,4.1,NA,4.4,262,2.5,270,26,70,98.6+-7.9,NA,Australia;Queensland
+Notomys_aquilo,Notomys_aquilo_M-32455,Terrestrial,41.495,285,112,173,40,0.607017544,1.544642857,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Notomys_alexis,Notomys_alexis_U1308,Terrestrial,50,255,115,140,36,0.549019608,1.217391304,0.1,5.6,3.5,NA,2,218,0.9,204,26,80,102.7+-2.8,NA,Australia
+Pseudomys_occidentalis,Pseudomys_occidentalis_ABTC08043,Terrestrial,45,218,89,129,27,0.591743119,1.449438202,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Pseudomys_fumeus,Pseudomys_fumeus_ABTC08168,Terrestrial,80,270,120,150,29,0.555555556,1.25,3.41,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia;Victoria;subfossil remains from New South Wales
+Pseudomys_albocinereus,Pseudomys_albocinereus_WAMM18855,Terrestrial,32.75,215,105,110,25,0.511627907,1.047619048,1.3,4.9,2.4,NA,5.7,297,3.5,294,22,93,NA,NA,Australia
+Pseudomys_apodemoides,Pseudomys_apodemoides_M16672,Terrestrial,17,200,90,110,23,0.55,1.222222222,0.7,5,2.6,NA,6.2,304,4.2,298,22,90,110.0+-2.7,NA,Australia
+Pseudomys_gracilicaudatus,Pseudomys_gracilicaudatus_ABTC08163,Terrestrial,90,240,130,110,28,0.458333333,0.846153846,1,7.7,3.8,NA,9.6,334,6.4,314,23,105,127.8+-2.5,NA,Australia
+Pseudomys_nanus,Pseudomys_nanus_U1448,Terrestrial,52.19,207,107,100,25,0.483091787,0.934579439,2.6,6,2.9,NA,8.3,318,5.4,306,23,89,113.5+-8.7,NA,Australia
+Pseudomys_oralis,Pseudomys_oralis_RAT7,Terrestrial,95,270,140,130,34,0.481481481,0.928571429,3,6.4,2.7,NA,8.3,322,5.2,307,22,94,NA,NA,Australia
+Pseudomys_desertor,Pseudomys_desertor_ABTC41464,Terrestrial,30,190,100,90,22,0.473684211,0.9,1.4,6,3.3,NA,9.3,308,7.3,305,22,88,110.4+-2.8,NA,Australia
+Pseudomys_shortridgei,Pseudomys_shortridgei_Z25113,Terrestrial,65,245,140,105,28,0.428571429,0.75,0.4,5.1,3.3,NA,0,NA,0,NA,22,67,88.6+-6.7,NA,Australia
+Pseudomys_australis,Pseudomys_australis_M25541,Terrestrial,75,260,140,120,30,0.461538462,0.857142857,2,5.2,2.4,NA,8.8,304,6.9,301,22,95,118.8+-3.1,NA,Australia
+Mastacomys_fuscus,Mastacomys_fuscus_M13957,Terrestrial,125.36,270,161.7,108.3,34,0.401111111,0.669758813,3.2,6.7,3.1,NA,9.2,328,7.2,327,22,86,108.0+-2.9,NA,Australia;New South Wales;Victoria;Tasmania
+Pseudomys_higginsi,Pseudomys_higginsi_UC1421,Terrestrial,65.08,295,133,162,35,0.549152542,1.218045113,1.7,4.7,2.6,NA,7.7,305,6.4,304,20,91,NA,NA,Australia;Tasmania
+Pseudomys_hermannsburgensis,Pseudomys_hermannsburgensis_ABTC08067,Terrestrial,13.94,155,75,80,19,0.516129032,1.066666667,1.5,5.3,2.6,NA,8.3,304,5.5,292,23,92,NA,NA,Australia
+Pseudomys_delicatulus,Pseudomys_delicatulus_U1509,Terrestrial,11.78,155,75,80,18,0.516129032,1.066666667,0.54,NA,NA,NA,NA,NA,NA,NA,NA,NA,91.2+-4.4,NA,New Guinea;Australia
+Pseudomys_bolami,Pseudomys_bolami_ABTC107389,Terrestrial,15.75,183,80,103,NA,0.56284153,1.2875,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Australia
+Pseudomys_novaehollandiae,Pseudomys_novaehollandiae_ABTC08140,Terrestrial,19.9,195,90,105,22,0.538461538,1.166666667,0.4,4.5,3.3,NA,4.5,274,0,NA,21,77,NA,NA,Australia
+Vandeleuria_oleracea,Vandeleuria_oleracea_ABTC116404,Arboreal,13.3,186.3,75,111.3,17.8,0.59742351,1.484,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;Vietnam;Myanmar;Cambodia;India;Sri Lanka;Nepal;China;Laos
+Pithecheir_melanurus,Pithecheir_melanurus_LSUMZ38198,Arboreal,108,369,167.5,201.5,30,0.546070461,1.202985075,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Java;Malay Peninsula;Sumatra 
+Otomys_tropicalis,Otomys_tropicalis_LSUMZ37841,Terrestrial,111.3,259.5,178,81.5,28.7,0.314065511,0.457865169,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Otomys_denti,Otomys_denti_LSUMZ37840,General,140,267,162.5,104.5,28.8,0.391385768,0.643076923,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Oenomys_hypoxanthus,Oenomys_hypoxanthus_LSUMZ37838,General,88.42,330.1,158.8,171.3,32,0.518933656,1.078715365,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Hybomys_planifrons,Hybomys_planifrons_R24117,Terrestrial,50.3,221,124,97,30.6,0.438914027,0.782258065,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Hybomys_univittatus,Hybomys_univittatus_TCD4026,Terrestrial,52.43,224.7,121.4,103.3,27.9,0.459724077,0.850906096,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Hybomys_lunaris,Hybomys_lunaris_LSUMZ37734,Terrestrial,54.1,223,108,115,25,0.515695067,1.064814815,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Stochomys_longicaudatus,Stochomys_longicaudatus_MNHN1999459,General,73.475,356.6,145.1,211.5,29.3,0.593101514,1.457615438,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Dephomys_defua,Dephomys_defua_MNHNR24062,Arboreal,45.025,320.9,126.3,194.6,26.5,0.606419445,1.54077593,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Micaelemys_namaquensis,Micaelemys_namaquensis_MNHN1987009,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Aethomys_hindei,Aethomys_hindei_MVZ196257,Terrestrial,149.075,314,158,156,32,0.496815287,0.987341772,1.94,NA,NA,NA,NA,NA,NA,NA,NA,NA,118.4+-2.0,NA,Africa
+Aethomys_nyikae,Aethomys_nyikae_FMNH196708,Terrestrial,90.2,309.2,143.4,165.8,28.6,0.53622251,1.156206416,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Thallomys_paedulcus,Thallomys_paedulcus_FMNH158089,Arboreal,75,306.5,140.3,166.2,25.3,0.542251223,1.184604419,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Grammomys_dryas,Grammomys_dryas_LSUMZ37716,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Thamnomys_venustus,Thamnomys_venustus_LSUMZ37935,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Thamnomys_kempi,Thamnomys_kempi_TCD4437,Arboreal,79.5,357,155,202,29.3,0.565826331,1.303225806,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Dasymys_montanus,Dasymys_montanus_FMNH144389,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Dasymys_incomtus,Dasymys_incomtus_LSUMZ37702,Terrestrial,131.525,299.1,154.3,144.8,33.8,0.484119024,0.938431627,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Rhabdomys_pumilio,Rhabdomys_pumilio_MNHN1995065,General,39.97666667,231,115.8,115.2,24,0.498701299,0.994818653,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Mylomys_dybowskii,Mylomys_dybowskii_MNHN1997072,Terrestrial,110.48,338.2,198.4,139.8,34.6,0.413364873,0.704637097,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Pelomys_isseli,Pelomys_isseli_FMNH137886,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Pelomys_minor,Pelomys_minor_FMNH219213,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Lemniscomys_striatus,Lemniscomys_striatus_TCD4711,Terrestrial,42.225,247.1,114.3,132.8,27.1,0.537434237,1.161854768,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Arvicanthus_niloticus,Arvicanthus_niloticus_MNHN1999201,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Arvicanthus_neumanni,Arvicanthus_neumanni_FMNH158037,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Malacomys_longipes,Malacomys_longipes_TCD4253,Amphibious,96.27,334.4,156.7,177.7,39.7,0.531399522,1.13401404,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Apodemus_sylvaticus,Apodemus_sylvaticus_SMG3823,General,23.33333333,188.7,96.5,92.2,22,0.488606253,0.955440415,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa;Europe;parts of central and southwestern Asia;Himalayas;northwestern Africa;British Isles and many nearby islands;Iceland
+Praomys_jacksoni,Praomys_jacksoni_REC31,General,39.905,262.5,120,142.5,22.3,0.542857143,1.1875,2.22,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Praomys_degraaffi,Praomys_degraaffi_TCD4312,Terrestrial,39.1,246,110.4,135.6,25.8,0.551219512,1.22826087,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Mastomys_natalensis,Mastomys_natalensis_T4162,Terrestrial,90.425,216,108,108,22.3,0.5,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Myomyscus_verreauxii,Myomyscus_verreauxii_MNHN1999102,Terrestrial,42.5,249,106,143,24,0.574297189,1.349056604,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Zelotomys_woosnami,Zelotomys_woosnami_TTU-M115260,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Colomys_goslingi,Colomys_goslingi_TCD4175,Amphibious,61.5,282.4,122.4,160,37.9,0.566572238,1.307189542,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Heimyscus_fumosus,Heimyscus_fumosus_FMNH167810,Terrestrial,15.75,181.3,76.8,104.5,17.5,0.576392719,1.360677083,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Hylomyscus_stella,Hylomyscus_stella_LSUMZ37742,General,19.395,222,91.5,130.5,18,0.587837838,1.426229508,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Hylomyscus_vulcanorum,Hylomyscus_vulcanorum_TCD4382,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Mus_pahari,Mus_pahari_10460X1,Terrestrial,23.6,175,90,85,20.3,0.485714286,0.944444444,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;China
+Mus_minutoides,Mus_minutoides_10460X2,Terrestrial,6.876666667,95.8,54.8,41,12.5,0.427974948,0.748175182,0.85,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Mus_musculoides,Mus_musculoides_LSUMZ37820,Terrestrial,9.876666667,160.9,83.7,77.2,18,0.479801119,0.922341697,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Mus_platythrix,Mus_platythrix_10460X13,Terrestrial,29.08,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,India
+Mus_caroli,Mus_caroli_10460X9,Terrestrial,14.30333333,154,76,78,18,0.506493506,1.026315789,0.74,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;China
+Mus_cookii,Mus_cookii_10460X3,Terrestrial,21.6,174.7,89.7,85,19,0.486548369,0.947603122,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;China
+Mus_cervicolor,Mus_cervicolor_10460X10,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Thailand;China;Vietnam
+Mus_spretus,Mus_spretus_10460X4,Terrestrial,15.61,201.8,139.7,62.1,16,0.307730426,0.44452398,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa
+Mus_spicilegus,Mus_spicilegus_10460X11,Terrestrial,16.65,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Mediterranean region;steppe country from Austria to western Iran
+Mus_macedonicus,Mus_macedonicus_10460X12,Terrestrial,16.65,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Eurasia
+Mus_musculus-castaneus,Mus_musculus-castaneus_10460X7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mus_musculus-musculus,Mus_musculus-musculus_10460X14,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mus_musculus-reference,Mus_musculus-reference_10460X5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mus_musculus-domesticus,Mus_musculus-domesticus_10460X15,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Mus_musculus,mm10,General,17.05,161.5,81.4,80.1,17.8,0.495975232,0.984029484,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Africa;Australia;Philippines;Thailand;Vietnam

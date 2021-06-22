@@ -1,5 +1,4 @@
-﻿Species,Locomotor_State,"Adult_Mass(g)
-",Total_Length(mm),Head-Body_Length(mm),Tail_Length(mm),Hind_Foot_Length(mm),Relative_Tail_Length,Relative_Hind_Foot_Length,Source (Author; Title; Year),,,,,,,,,,,
+﻿Species,Locomotor_State,"Adult_Mass(g)",Total_Length(mm),Head-Body_Length(mm),Tail_Length(mm),Hind_Foot_Length(mm),Relative_Tail_Length,Relative_Hind_Foot_Length,Source (Author; Title; Year),,,,,,,,,,,
 Abditomys_latidens,Arboreal,268.545,480.5,224,256.5,46,0.533818939,1.145089286,"Heaney et al 2016,  Nowak 1991",,,,,,,,,,,
 Abeomelomys_sevia,Arboreal,55.69,300.5,127.5,173,24.8,0.575707155,1.356862745,"Flannery 1995a, Musser & Newcomb 1983",,,,,,,,,,,
 Aethomys_bocagei,Terrestrial,79.89,354,165,189,36,0.533898305,1.145454545,"Kingdon et al 2013, Wilman et al 2014",,,,,,,,,,,
@@ -15,10 +14,8 @@ Aethomys_stannarius,Terrestrial,92,300,148,152,31,0.506666667,1.027027027,"Kingd
 Aethomys_thomasi,Terrestrial,84.69,274,150,124,29,0.452554745,0.826666667,"Kingdon et al 2013, IUCN 2017, Wilman et al 2014",,,,,,,,,,,
 Anisomys_imitator,Arboreal,502.25,585.8,264.6,321.2,61.1,0.548310003,1.213907785,"Flannery 1995a,  Nowak 1991",,,,,,,,,,,
 Apodemus_agrarius,Terrestrial,21.505,169.2,96.3,72.9,19.4,0.430851064,0.757009346,Kuncová & Frynta 2009,,,,,,,,,,,
-Apodemus_alpicola,General,28.3,NA,NA,NA,NA,,,"Reutter et al 2005
-",,,,,,,,,,,
-Apodemus_argenteus,Arboreal,23.8,NA,NA,NA,NA,,," Sekijima 1995
-",,,,,,,,,,,
+Apodemus_alpicola,General,28.3,NA,NA,NA,NA,,,"Reutter et al 2005",,,,,,,,,,,
+Apodemus_argenteus,Arboreal,23.8,NA,NA,NA,NA,,," Sekijima 1995",,,,,,,,,,,
 Apodemus_chevrieri,General,32.9,193,99,94,23.5,0.487046632,0.949494949,"Nowak 1991, Wilman et al 2014",,,,,,,,,,,
 Apodemus_draco,General,23.8,202.5,92.5,110,22.5,0.543209877,1.189189189,"Nowak 1991,  Francis & Barrett 2008",,,,,,,,,,,
 Apodemus_flavicollis,General,29.95,NA,NA,NA,NA,,,Kuncová & Frynta 2009,,,,,,,,,,,
@@ -179,8 +176,7 @@ Mallomys_istapantap,General,1970.215,747,411,336,70.5,0.449799197,0.817518248,"F
 Mallomys_rothschildi,Arboreal,1157.9,759.7,380,379.7,65.1,0.499802554,0.999210526,"Flannery 1995a, Nowak 1991",,,,,,,,,,,
 Malpaisomys_insularis,Terrestrial,71.33,NA,NA,NA,NA,,,"Nowak 1991, Wilman et al 2014",,,,,,,,,,,
 Mammelomys_lanosus,Terrestrial,116.8,286,162.3,123.7,36.6,0.432517483,0.762168823,"Flannery 1995a, Wilman et al 2014",,,,,,,,,,,
-Mammelomys_rattoides,Terrestrial,212.245,326,200,126,38,0.386503067,0.63,"Flannery 1995a, Flannery 1995b
-",,,,,,,,,,,
+Mammelomys_rattoides,Terrestrial,212.245,326,200,126,38,0.386503067,0.63,"Flannery 1995a, Flannery 1995b",,,,,,,,,,,
 Margaretamys_beccarii,Arboreal,65.4,317,132,185,28,0.583596215,1.401515152,"Nowak 1991, Musser 1981",,,,,,,,,,,
 Margaretamys_christinae,Arboreal,49,286,111,175,20,0.611888112,1.576576577,Mortelliti et al 2012,,,,,,,,,,,
 Margaretamys_elegans,Arboreal,121,439.8,180,259.8,36.5,0.590723056,1.443333333,"Nowak 1991, Musser 1981",,,,,,,,,,,

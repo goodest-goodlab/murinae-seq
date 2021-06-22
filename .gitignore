@@ -39,3 +39,5 @@ docs/data/aln-stats/sample-segments-exonerate-f150.csv
 docs/data/aln-stats/sample-targets-exonerate-f150.csv
 docs/data/aln-stats/sample-segments-exonerate-f175.csv
 docs/data/aln-stats/sample-targets-exonerate-f175.csv
+
+docs/data/rates/full-coding-mg94-local.csv.gz

@@ -22,6 +22,7 @@ library(dplyr)
 library(tidyr)
 library(ggtree)
 library(phytools)
+library(vroom)
 #source("../lib/design.r")
 source("C:/bin/core/corelib/design.r")
 source("C:/bin/core/get_tree_info.r")
@@ -81,10 +82,105 @@ print(scf_tree)
 ```{r fig3, out.width="50%", fig.align = "center", warning=FALSE}
 p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) + 
   geom_point() +
-  scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0,1)) +
+  scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0.8,1)) +
   bartheme() +
   theme(legend.title=element_text(size=12))
 print(p)
+```
+```{r read-mg94local, out.width="50%", fig.align = "center", warning=FALSE}
+mg94_local_file_gz = gzfile("../../data/rates/full-coding-mg94-local.csv.gz")
+mg94_local = vroom(mg94_local_file_gz, comment="#")
+
+mg94_local_gene = group_by(mg94_local, file) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean("dn/ds", na.rm=T), nonsynonymous.bl=mean("nonsynonymous bl", na.rm=T), synonymous.bl=mean("synonymous bl", na.rm=T))
+
+```
+
+```{r fig4, out.width="50%", fig.align = "center", warning=FALSE}
+ds_p = ggplot(subset(mg94_local_gene, ds < 0.05), aes(x=ds)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("dS") +
+  ylab("# of genes") +
+  bartheme()
+print(ds_p)
+# Distribution of dS when using concatenated tree
+```
+
+```{r fig5, out.width="50%", fig.align = "center", warning=FALSE}
+dn_p = ggplot(mg94_local_gene, aes(x=dn)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("dN") +
+  ylab("# of genes") +
+  bartheme()
+print(dn_p)
+# Distribution of dS when using gene trees
+```
+```{r ds_filter, out.width="50%", fig.align = "center", warning=FALSE}
+ds_filter_level = 0.03
+print(paste("Removing genes with dS above ", ds_filter_level, " from subsequent analyses."))
+
+ds_filter = subset(mg94_local_gene, ds > ds_filter_level)$file
+# Get a list of genes to filter out in subsequent analyses based on dS
+```
+
+```{r ds_branch_avgs, out.width="50%", fig.align = "center", warning=FALSE}
+### I THINK I SHOULD DO THIS IN PYTHON
+tree_info$avg.ds = "NA"
+tree_info$avg.dn = "NA"
+tree_info$avg.dn.ds = "NA"
+tree_info$avg.synonymous.bl = "NA"
+tree_info$avg.nonsynonymous.bl = "NA"
+tree_info$num.genes.full = 0
+tree_info$num.genes.partial = 0
+
+for(i in 1:nrow(tree_info)) {
+  cur_clade = strsplit(tree_info[i,]$clade, ";")
+  print(cur_clade)
+  if(tree_info[i,]$node.type == 'tip'){
+    next
+  }
+  
+  for(j in 1:nrow(mg94_local)){
+    row = mg94_local[j,]
+    if(row$file %in% ds_filter){
+      break
+    }
+    
+    split1 = strsplit(row$split1, ";")
+    split2 = strsplit(row$split2, ";")
+    
+
+    
+    if(all(split1 %in% cur_clade)){
+
+      if(length(split1) == length(cur_clade)){
+        tree_info[i,]$num.genes.full = tree_info[i,]$num.genes.full + 1
+
+      }else{
+        not_in_split1 = setdiff(cur_clade, split1)
+        
+        if(!any(not_in_split1 %in% split2)){
+          print(split1)
+          print(split2)        
+          stop("eya")
+          tree_info[i,]$num.genes.partial = tree_info[i,]$num.genes.partial + 1
+        }
+        
+        
+      }
+      
+      
+      
+    }
+    
+    
+    
+  }
+  
+  
+}
+
 ```
 
 ```{r footer}
