@@ -38,11 +38,11 @@ def parseHeaderIds(seqdict, seq_mode, selected_ts):
 
 def readSeqs(spec, tid_list, utr=False):
     if spec == "mouse":
-        exons_file = "../Reference-genomes/mm10/Mus_musculus.GRCm38.exon.all.500flank.fa";
+        exons_file = "../Reference-genomes/mm10/Mus_musculus.GRCm38.exon.all.200flank.fa";
         utr5_file = "../Reference-genomes/mm10/Mus_musculus.GRCm38.5utr.fa";
         utr3_file = "../Reference-genomes/mm10/Mus_musculus.GRCm38.3utr.fa";
     elif spec == "rat":
-        exons_file = "../Reference-genomes/Rnor6/Rattus_norvegicus.Rnor_6.0.exon.all.500flank.fa";
+        exons_file = "../Reference-genomes/Rnor6/Rattus_norvegicus.Rnor_6.0.exon.all.200flank.fa";
         utr5_file = "../Reference-genomes/Rnor6/Rattus_norvegicus.Rnor_6.0.5utr.fa";
         utr3_file = "../Reference-genomes/Rnor6/Rattus_norvegicus.Rnor_6.0.3utr.fa";
     # Sequences downloaded from Ensembl Biomart 99
@@ -77,7 +77,7 @@ datasets = ["australian-full-all", "australian-full-coding", "australian-reduced
             "reproductive-mclennan-all", "reproductive-mclennan-coding", "reproductive-pahl-all", "reproductive-pahl-coding", "reproductive-testes-mass-all", "reproductive-testes-mass-coding", 
             "reproductive-sperm-img-all", "reproductive-sperm-img-coding", "reproductive-sperm-morpho-all", "reproductive-sperm-morpho-coding", "full-all", "full-coding"]
 
-dataset = "reproductive-testes-mass-coding";
+dataset = "reproductive-all";
 if dataset not in datasets:
     sys.exit(" * ERROR: check dataset.");
 

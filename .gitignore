@@ -28,6 +28,7 @@ Targets/
 03-Alignment-scripts/submit/
 03-Alignment-scripts/logs/
 04-Phylo/
+05-MolEvol/
 
 docs/data/all-samples_contig-match.txt
 docs/data/06-cds-trim-stats.csv
