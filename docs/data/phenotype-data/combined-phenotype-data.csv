@@ -1,5 +1,5 @@
-# sources: Supplemental_Appendix_II.csv; murine_repro_pheno_data.csv; Murinae Locomotory Checklist - Murinae Locomotory Checklist.csv
-species,sample,Locomotor_State,Adult_Mass(g),Total_Length(mm),Head-Body_Length(mm),Tail_Length(mm),Hind_Foot_Length(mm),Relative_Tail_Length,Relative_Hind_Foot_Length,RTM (%),Head length (um),Head width (um),Head area (um�),Apical hook length (um),Apical hook angle (�),Ventral process length (um),Ventral process angle (�),Midpiece length (um),Principal and end piece length (um),Tail length (um),# hooks/ventral processes,Geographic Region
+# sources: Supplemental_Appendix_II.csv; murine_repro_pheno_data.csv; Murinae Locomotory Checklist - Murinae Locomotory Checklist.csv,,,,,,,,,,,,,,,,,,,,,,
+species,sample,Locomotor_State,Adult_Mass(g),Total_Length(mm),Head-Body_Length(mm),Tail_Length(mm),Hind_Foot_Length(mm),Relative_Tail_Length,Relative_Hind_Foot_Length,RTM (%),Head length (um),Head width (um),Head area (um),Apical hook length (um),Apical hook angle (um),Ventral process length (um),Ventral process angle (um),Midpiece length (um),Principal and end piece length (um),Tail length (um),Num hooks/ventral processes,Geographic Region
 Lophiomys_imhausi,Lophiomys_imhausi_UM5152,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 Lophuromys_woosnami,Lophuromys_woosnami_LSUMZ37793,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
 Phloeomys_cumingi,Phloeomys_cumingi_FMNH198472,Arboreal,1896.23,711.5,417.5,294,79.5,0.413211525,0.704191617,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Philippines
