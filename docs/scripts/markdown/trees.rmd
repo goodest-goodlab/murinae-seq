@@ -15,13 +15,14 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
 #library(cowplot)
-#library(ggbeeswarm)
+library(ggbeeswarm)
 #library(ggpubr)
 library(dplyr)
 #library(kableExtra)
 library(tidyr)
 library(ggtree)
 library(phytools)
+library(phangorn)
 library(reshape2)
 library(ggExtra)
 library(ggrepel)
@@ -38,33 +39,54 @@ htmltools::includeHTML("../html-chunks/rmd_nav.html")
 188 species. 11,775 coding loci. Gene trees reconstructed with IQ-tree and species topology with ASTRAL (no tip branch lengths).
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
-#tree_file = "../data/trees/test.tre"
-rodent_tree = read.tree(tree_file)
+tree_type = "astral"
 
-tree_info = treeToDF(rodent_tree)
-tree_info = tree_info %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
-tree_info$astral[tree_info$node.type=="tip"] = NA
-tree_info$astral = as.numeric(tree_info$astral)
-tree_info$gcf = as.numeric(tree_info$gcf)
-tree_info$scf = as.numeric(tree_info$scf)
+tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
+astral_tree = read.tree(tree_file)
+
+tree_info_astral = treeToDF(astral_tree)
+tree_info_astral = tree_info_astral %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
+tree_info_astral$astral[tree_info_astral$node.type=="tip"] = NA
+tree_info_astral$astral = as.numeric(tree_info_astral$astral)
+tree_info_astral$gcf = as.numeric(tree_info_astral$gcf)
+tree_info_astral$scf = as.numeric(tree_info_astral$scf)
+# Read astral tree data
 
 concat_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
 concat_tree = read.tree(concat_file)
 
-rf = RF.dist(concat_tree, rodent_tree)
+tree_info_concat = treeToDF(concat_tree)
+tree_info_concat = tree_info_concat %>% separate(label, c("bootstrap", "gcf", "scf"), sep="/", remove=F)
+tree_info_concat$bootstrap[tree_info_concat$node.type=="tip"] = NA
+tree_info_concat$bootstrap = as.numeric(tree_info_concat$bootstrap)
+tree_info_concat$gcf = as.numeric(tree_info_concat$gcf)
+tree_info_concat$scf = as.numeric(tree_info_concat$scf)
+# Read concat tree data
 
-#write.csv(tree_info, "../data/trees/full-coding-astral-cf-rooted.csv", row.names=F)
+rf = RF.dist(concat_tree, astral_tree)
 
-h = corecol(numcol=1, pal="wilke", offset=3)
-l = corecol(numcol=1, offset=3)
-# Colors
+#write.csv(tree_info, "../../data/trees/full-coding-concat-cf-rooted.csv", row.names=F)
+
+if(tree_type == "astral"){
+  tree_info = tree_info_astral
+  rodent_tree = astral_tree
+  xmax = 31
+}else if(tree_type == "concat"){
+  tree_info = tree_info_concat
+  rodent_tree = concat_tree
+  xmax = 0.125
+}
+
 ```
 
 ```{r fig1, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
 gcf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$gcf)) +
   scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
-  xlim(0, 31) +
+  xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9))
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
@@ -75,9 +97,13 @@ print(gcf_tree)
 ```
 
 ```{r fig2, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
 scf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$scf)) +
   scale_color_continuous(name='sCF', low=l, high=h, limits=c(0,100)) +
-  xlim(0, 31) +
+  xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9))
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
@@ -88,13 +114,24 @@ print(scf_tree)
 ```
 
 ```{r fig3, out.width="50%", fig.align = "center", warning=FALSE}
-p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) + 
-  geom_point() +
-  scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0.8,1)) +
-  bartheme() +
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+if(tree_type == "astral"){
+  p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) + 
+    geom_point() +
+    scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0.8,1))
+}else if(tree_type == "concat"){
+  p = ggplot(tree_info, aes(x=gcf, y=scf, color=bootstrap)) + 
+    geom_point() +
+    scale_color_continuous(name='Bootstrap', low=l, high=h, limits=c(0,100))
+}
+p = p + bartheme() +
   theme(legend.title=element_text(size=12))
 print(p)
 ```
+
 # Average rates per gene with basic model fit (mg94-local)
 
 ```{r read-mg94local, out.width="50%", fig.align = "center", warning=FALSE}
@@ -146,7 +183,11 @@ print(paste("Removing", length(ds_filter), "genes with dS above", ds_filter_leve
 ```
 ## Average rates per branch with basic model fit
 ```{r ds_branch_avgs, out.width="50%", fig.align = "center", warning=FALSE}
-tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-rates-3.csv", header=T)
+if(tree_type == "astral"){
+  tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-rates.csv", header=T)
+}else if(tree_type == "concat"){
+  tree_rates = read.csv("../../data/rates/full-coding-concat-cf-rooted-rates.csv", header=T)
+}
 p = ggplot(tree_rates, aes(x=avg.ds, y=avg.dn)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),''))) +
@@ -161,14 +202,42 @@ tree_rates$ds.outlier = ifelse(tree_rates$avg.ds>0.2,tree_rates$node,'')
 tree_rates$dn.outlier = ifelse(tree_rates$avg.dn>0.01,tree_rates$node,'')
 ```
 
+```{r fig6, out.width="50%", fig.align = "center", warning=FALSE}
 
-```{r fig6, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+full_clade = select(tree_rates, clade, node.type, num.genes.full)
+full_clade$label = "Full clade"
+names(full_clade)[3] = "num.genes"
+
+partial_clade = select(tree_rates, clade, node.type, num.genes.partial)
+partial_clade$label = "Partial clade"
+names(partial_clade)[3] = "num.genes"
+
+no_clade = select(tree_rates, clade, node.type, num.genes.no.clade)
+no_clade$label = "Discordant/missing clade"
+names(no_clade)[3] = "num.genes"
+
+clade_counts = rbind(full_clade, partial_clade, no_clade)
+
+branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  #geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+  #geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+  ylab("Sequence length (bp)") +
+  xlab("") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1))
+print(branch_counts)
+```
+
+
+```{r fig7, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
 rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.ds)) +
   scale_color_continuous(name='Avg. dS', low=l, high=h, limits=c(0,0.9)) +
-  xlim(0, 31) +
+  xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
   geom_label(aes(x=branch, label=ifelse(tree_rates$avg.ds>0.2,as.character(node),'')), label.size=NA, fill="transparent")
@@ -177,13 +246,13 @@ rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.
 print(rate_tree)
 ```
 
-```{r fig7, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig8, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
 rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.dn)) +
   scale_color_continuous(name='Avg. dN', low=l, high=h, limits=c(0,0.015)) +
-  xlim(0, 31) +
+  xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
   geom_label(aes(x=branch, label=ifelse(tree_rates$avg.dn>0.01,as.character(node),'')), label.size=NA, fill="transparent")
@@ -207,7 +276,7 @@ pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "avg.dn", "avg.ds", "av
 #pheno_rates_long = gather(pheno_rates, sample, value, Adult_Mass.g., Total_Length.mm., Head.Body_Length.mm., Tail_Length.mm., Hind_Foot_Length.mm., Relative_Tail_Length, Relative_Hind_Foot_Length)
 ```
 
-```{r fig8, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r fig9, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=value, y=avg.ds)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
@@ -218,7 +287,7 @@ p = ggplot(pheno_rates_long, aes(x=value, y=avg.ds)) +
 print(p)
 ```
 
-```{r fig9, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r fig10, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=value, y=avg.dn)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
