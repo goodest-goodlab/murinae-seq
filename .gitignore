@@ -44,4 +44,19 @@ docs/data/aln-stats/sample-targets-exonerate-f175.csv
 
 docs/data/rates/full-coding-mg94-local.csv.gz
 
+docs/data/noncoding-aln-stats/full-all-alnlens-200.csv
+docs/data/noncoding-aln-stats/full-all-alnlens-500.csv
+docs/data/noncoding-aln-stats/full-all-alnlens-norefs.csv
+docs/data/noncoding-aln-stats/full-all-seqlens-200.csv
+docs/data/noncoding-aln-stats/full-all-seqlens-500.csv
+docs/data/noncoding-aln-stats/mm10-exons-lens-200.csv
+docs/data/noncoding-aln-stats/mm10-exons-lens-500.csv
+docs/data/noncoding-aln-stats/mm10-exons-lens-noflank.csv
+
+docs/data/noncoding-aln-stats/reproductive-all-alnlens-200.csv
+docs/data/noncoding-aln-stats/reproductive-all-alnlens-500.csv
+docs/data/noncoding-aln-stats/reproductive-all-seqlens-200.csv
 docs/data/noncoding-aln-stats/reproductive-all-seqlens-500.csv
+docs/data/noncoding-aln-stats/rnor6-exons-lens-200.csv
+docs/data/noncoding-aln-stats/rnor6-exons-lens-500.csv
+docs/data/noncoding-aln-stats/rnor6-exons-lens-noflank.csv

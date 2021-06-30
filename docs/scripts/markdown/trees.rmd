@@ -49,6 +49,11 @@ tree_info$astral = as.numeric(tree_info$astral)
 tree_info$gcf = as.numeric(tree_info$gcf)
 tree_info$scf = as.numeric(tree_info$scf)
 
+concat_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
+concat_tree = read.tree(concat_file)
+
+rf = RF.dist(concat_tree, rodent_tree)
+
 #write.csv(tree_info, "../data/trees/full-coding-astral-cf-rooted.csv", row.names=F)
 
 h = corecol(numcol=1, pal="wilke", offset=3)

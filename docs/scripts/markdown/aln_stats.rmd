@@ -47,6 +47,7 @@ Alignment and filtering steps:
 7. For each alignment, remove 3-codon windows in which 2 or more codons have 2 or more gaps in >50% of sequences.
 ```
 
+# Coding alignments
 
 ## Exons vs. BLAST hits
 
@@ -108,7 +109,7 @@ print(exons_v_hits)
 
 ```
 
-# Alignment filtering
+# Coding alignment filtering
 
 ## Number of sequences per alignment
 
@@ -515,7 +516,7 @@ p200s20c50$label = "P200S20C50"
 ## Varying the Presence (P) filter
 Filtering targets with exonerate matches in less than [0, 50, 100, 150, 175, 200] samples
 
-Alignment length (codons)
+### Alignment length (codons)
 ```{r fig9, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
@@ -558,7 +559,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 
 ```
 
-Ungapped alignment length (codons)
+### Ungapped alignment length (codons)
 ```{r fig10, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
@@ -612,7 +613,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 ## Varying the gappy sequence (S) filter
 Filtering sequences with % gaps larger than [20, 40, 60, 80, 100] samples
 
-Alignment length (codons)
+### Alignment length (codons)
 ```{r fig12, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
@@ -655,7 +656,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 
 ```
 
-Ungapped alignment length (codons)
+### Ungapped alignment length (codons)
 ```{r fig13, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
@@ -708,7 +709,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 ## Varying the codon site (C) filter
 Filtering three-codon windows where at least 2 codons have at least 2 gaps in greater than [25, 50, 75, 100]% of samples
 
-Alignment length (codons)
+### Alignment length (codons)
 ```{r fig14, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
@@ -751,7 +752,7 @@ p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended"
 
 ```
 
-Ungapped alignment length (codons)
+### Ungapped alignment length (codons)
 ```{r fig15, out.width="75%", fig.align = "center", warning=FALSE}
 #gbe_seqs = select(gbe_data, align, pre.codon.aln.length)
 gbe_data$label = "GBE"
@@ -799,6 +800,161 @@ print(p_lens)
 
 p_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
 ```
+
+# Noncoding+coding alignments
+
+```{r read-nc, out.width="75%", fig.align="center"}
+
+noref_full_alns = read.csv("../../data/noncoding-aln-stats/full-all-alnlens-norefs.csv", header=F)
+names(noref_full_alns) = c("file", "sample", "aln.len")
+noref_full_alns = noref_full_alns %>% group_by(file) %>% summarize(aln.len=mean(aln.len, na.rm=T))
+noref_full_alns$label = "No ref"
+
+f500_full_alns = read.csv("../../data/noncoding-aln-stats/full-all-alnlens-500.csv", header=F)
+names(f500_full_alns) = c("file", "sample", "aln.len")
+f500_full_alns = f500_full_alns %>% group_by(file) %>% summarize(aln.len=mean(aln.len, na.rm=T))
+f500_full_alns$label = "500bp flank refs"
+
+f200_full_alns = read.csv("../../data/noncoding-aln-stats/full-all-alnlens-500.csv", header=F)
+names(f200_full_alns) = c("file", "sample", "aln.len")
+f200_full_alns = f200_full_alns %>% group_by(file) %>% summarize(aln.len=mean(aln.len, na.rm=T))
+f200_full_alns$label = "200bp flank refs"
+
+##
+
+f500_rep_alns = read.csv("../../data/noncoding-aln-stats/reproductive-all-alnlens-500.csv", header=F)
+names(f500_rep_alns) = c("file", "sample", "aln.len")
+f500_rep_alns = f500_rep_alns %>% group_by(file) %>% summarize(aln.len=mean(aln.len, na.rm=T))
+f500_rep_alns$label = "500bp flank refs"
+
+f200_rep_alns = read.csv("../../data/noncoding-aln-stats/reproductive-all-alnlens-500.csv", header=F)
+names(f200_rep_alns) = c("file", "sample", "aln.len")
+f200_rep_alns = f200_rep_alns %>% group_by(file) %>% summarize(aln.len=mean(aln.len, na.rm=T))
+f200_rep_alns$label = "200bp flank refs"
+
+##
+
+#noref_full_seqs = read.csv("../../data/noncoding-aln-stats/full-all-seqlens-norefs.csv", header=F)
+#names(noref_full_seqs) = c("file", "sample", "aln.len")
+#noref_full_seqs = noref_full_seqs %>% group_by(file) %>% summarize(aln.len=mean(aln.len, na.rm=T))
+#noref_full_seqs$label = "No ref"
+
+f500_full_seqs = read.csv("../../data/noncoding-aln-stats/full-all-seqlens-500.csv", header=F)
+names(f500_full_seqs) = c("file", "sample", "seq.len")
+
+f200_full_seqs = read.csv("../../data/noncoding-aln-stats/full-all-seqlens-200.csv", header=F)
+names(f200_full_seqs) = c("file", "sample", "seq.len")
+
+##
+
+f500_rep_seqs = read.csv("../../data/noncoding-aln-stats/reproductive-all-seqlens-500.csv", header=F)
+names(f500_rep_seqs) = c("file", "sample", "seq.len")
+
+
+f200_rep_seqs = read.csv("../../data/noncoding-aln-stats/reproductive-all-seqlens-200.csv", header=F)
+names(f200_rep_seqs) = c("file", "sample", "seq.len")
+
+##
+
+f200_mm_seqs = read.csv("../../data/noncoding-aln-stats/mm10-exons-lens-200.csv", header=F)
+names(f200_mm_seqs) = c("sample", "avg.seq.len")
+f200_mm_seqs$label = "mm10 200bp flank"
+
+f500_mm_seqs = read.csv("../../data/noncoding-aln-stats/mm10-exons-lens-500.csv", header=F)
+names(f500_mm_seqs) = c("sample", "avg.seq.len")
+f500_mm_seqs$label = "mm10 500bp flank"
+
+mm_seqs = read.csv("../../data/noncoding-aln-stats/mm10-exons-lens-noflank.csv", header=F)
+names(mm_seqs) = c("sample", "avg.seq.len")
+mm_seqs$label = "mm10 no flank"
+
+```
+
+Full dataset - unaligned sequence length
+```{r fig16, out.width="75%", fig.align="center", warning=FALSE}
+
+s1 = subset(f500_full_seqs, sample==">mm10" | sample==">rnor6")
+s1 = s1 %>% group_by(file) %>% summarize(avg.seq.len=mean(seq.len))
+s1$label = "Ref seqs 500bp flank"
+s2 = subset(f200_full_seqs, sample==">mm10" | sample==">rnor6")
+s2 = s2 %>% group_by(file) %>% summarize(avg.seq.len=mean(seq.len))
+s2$label = "Ref seqs 200bp flank"
+s3 = subset(f500_full_seqs, sample!=">mm10" & sample!=">rnor6")
+s3 = s3 %>% group_by(file) %>% summarize(avg.seq.len=mean(seq.len))
+s3$label = "Non-ref seqs"
+full_seq_lens = rbind(s1, s2, s3)
+full_seq_lens = select(full_seq_lens, avg.seq.len, label)
+full_seq_lens = rbind(full_seq_lens, select(f200_mm_seqs, avg.seq.len, label), 
+                      select(f500_mm_seqs, avg.seq.len, label), select(mm_seqs, avg.seq.len, label))
+#full_seq_lens = rbind(full_seq_lens, s3)
+
+seq_lens = ggplot(subset(full_seq_lens, avg.seq.len < 2000), aes(x=label, y=avg.seq.len, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  #geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+  #geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+  ylab("Sequence length (bp)") +
+  xlab("") +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(seq_lens)
+
+
+
+# full_aln_lens = rbind(noref_full_alns, f500_full_alns, f200_full_alns)
+
+# full_lens = ggplot(subset(full_aln_lens, aln.len <= 4000), aes(x=label, y=aln.len, group=label)) +
+#   geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+#   geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+#   #geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+#   #geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+#   ylab("Alignment length (bp)") +
+#   xlab("") +
+#   bartheme() +
+#   theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+# print(full_lens)
+
+```
+
+Full dataset - alignment length
+```{r fig17, out.width="75%", fig.align="center", warning=FALSE}
+
+full_aln_lens = rbind(noref_full_alns, f500_full_alns, f200_full_alns)
+
+full_lens = ggplot(subset(full_aln_lens, aln.len <= 4000), aes(x=label, y=aln.len, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  #geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+  #geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+  ylab("Alignment length (bp)") +
+  xlab("") +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(full_lens)
+
+```
+
+Reproductive dataset - alignment length
+```{r fig18, out.width="75%", fig.align="center", warning=FALSE}
+
+rep_aln_lens = rbind(f500_rep_alns, f200_rep_alns)
+
+rep_lens = ggplot(subset(rep_aln_lens, aln.len <= 4000), aes(x=label, y=aln.len, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  #geom_point(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="red") +
+  #geom_line(data=p_means, aes(x=label, y=post.codon.aln.length), size=2, color="blue") +
+  ylab("Alignment length (bp)") +
+  xlab("") +
+  bartheme() +
+  theme(legend.position="none", axis.text.x = element_text(angle=45, hjust=1))
+print(rep_lens)
+
+```
+
+
+
+
 
 
 ```{r read, out.width="75%", fig.align="center", eval=F}
