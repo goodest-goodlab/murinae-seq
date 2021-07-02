@@ -26,7 +26,7 @@ html_template = """
                 <div id="node_links_cont">
                     <h1>{page_title}</h1>
 
-                    <p><h4><a href="../data/multiqc/multiqc-full.html", target="_blank">MultiQC report after Fastp</a></h4></p>
+                    <p><h4><a href="data/multiqc/multiqc-full.html", target="_blank">MultiQC report after Fastp</a></h4></p>
                     <!-- <p><h4><a href="filter_stats.html">Read filtering stats</a></h4></p> -->
                     <p><h4><a href="assembly_stats.html">Assembly with Spades</a></h4></p>
                     <!-- <p><h4><a href="full_mapping_stats.html">Mapping with BWA to Mouse and Rat reference genomes</a></h4></p> -->

@@ -40,7 +40,7 @@ htmltools::includeHTML("../html-chunks/rmd_nav.html")
 
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-#tree_type = "concat"
+tree_type = "concat"
 save_tree_fig = F
 
 if(tree_type == "astral"){
