@@ -60,3 +60,5 @@ docs/data/noncoding-aln-stats/reproductive-all-seqlens-500.csv
 docs/data/noncoding-aln-stats/rnor6-exons-lens-200.csv
 docs/data/noncoding-aln-stats/rnor6-exons-lens-500.csv
 docs/data/noncoding-aln-stats/rnor6-exons-lens-noflank.csv
+
+docs/scripts/generators/tmp/

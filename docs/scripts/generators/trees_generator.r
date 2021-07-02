@@ -3,8 +3,10 @@
 # This generates the file "trees.html"
 ############################################################
 
-#options(nwarnings = 100000)  
-cat("Rendering trees.rmd/html\n")
+#options(nwarnings = 100000)
+tree_type = "astral"
+
+cat("Rendering trees-", tree_type, ".rmd/html\n", sep="")
 
 setwd("C:/bin/murinae-seq/docs/scripts/generators/")
 # Set the working directory.
@@ -24,7 +26,9 @@ library(rmarkdown)
 output_dir = "../.."
 # Set the output directory to be the docs directory, two up
 
-render("../markdown/trees.rmd", output_dir = output_dir, params = list(output_dir = output_dir), quiet = TRUE)
+output_file = paste("trees-", tree_type, ".html", sep="")
+
+render("../markdown/trees.rmd", output_dir = output_dir, output_file = output_file, params = list(output_dir = output_dir, output_file = output_file, tree_type = tree_type), quiet = TRUE)
 # Knit the html page
 
 f = list.files(vroom_tmp_dir, include.dirs = F, full.names = T, recursive = T)

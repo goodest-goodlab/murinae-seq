@@ -38,11 +38,16 @@ htmltools::includeHTML("../html-chunks/rmd_nav.html")
 
 # Full coding species tree
 
-188 species. 11,775 coding loci. Gene trees reconstructed with IQ-tree and species topology with ASTRAL (no tip branch lengths).
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-tree_type = "astral"
+#tree_type = "concat"
 save_tree_fig = F
+
+if(tree_type == "astral"){
+  cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred with ASTRAL (no branch lengths shown).\n")
+}else if(tree_type == "concat"){
+  cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred with by concatenation of all loci with IQtree.\n")
+}
 
 tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
 astral_tree = read.tree(tree_file)
@@ -68,6 +73,9 @@ tree_info_concat$scf = as.numeric(tree_info_concat$scf)
 
 rf = RF.dist(concat_tree, astral_tree)
 nrf = RF.dist(concat_tree, astral_tree, normalize=T)
+
+#treecomp = comparePhylo(concat_tree, astral_tree, plot=T)
+# Stores node ids of common clades between trees!
 
 #write.csv(tree_info, "../../data/trees/full-coding-concat-cf-rooted.csv", row.names=F)
 
@@ -254,9 +262,29 @@ branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, colo
 print(branch_counts)
 ```
 
-### This results in the following distributions for average rates across branches:
+These measures are highly correlated with gene concordance factors:
+
+### Correlation between gCF and the % of genes that contain the descending clade for each species tree branch
 
 ```{r fig6, out.width="50%", fig.align = "center", warning=FALSE}
+
+tree_rates$clade.perc = (tree_rates$num.genes.full + tree_rates$num.genes.partial) / (tree_rates$num.genes.full + tree_rates$num.genes.partial + tree_rates$num.genes.no.clade)
+
+
+p = ggplot(tree_rates, aes(x=gcf, y=clade.perc)) +
+  geom_point(size=2, alpha=0.4, color="#333333") +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#920000") +
+  xlab("gCF") + 
+  ylab("% of genes with clade present") + 
+  bartheme() +
+  theme(legend.position="none")
+print(p)
+
+```
+
+### This results in the following distributions for average rates across branches:
+
+```{r fig7, out.width="50%", fig.align = "center", warning=FALSE}
 
 p = ggplot(subset(tree_rates, node.type!="ROOT"), aes(x=avg.ds, y=avg.dn, color=node.type)) +
   geom_point(size=2, alpha=0.2) +
@@ -276,7 +304,7 @@ tree_rates$dn.outlier = ifelse(tree_rates$avg.dn>0.01,tree_rates$node,'')
 
 ### The tree with branches colored by dS and outliers labeled:
 
-```{r fig7, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig8, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
@@ -293,7 +321,7 @@ print(rate_tree)
 
 ### The tree with branches colored by dN and outliers labeled:
 
-```{r fig8, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig9, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
@@ -325,7 +353,7 @@ pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "avg.dn", "avg.ds", "av
 
 ### Avg. dS per tip vs phenotype
 
-```{r fig9, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r fig10, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=value, y=avg.ds)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
@@ -338,7 +366,7 @@ print(p)
 
 ### Avg. dN per tip vs phenotype
 
-```{r fig10, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r fig11, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=value, y=avg.dn)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
