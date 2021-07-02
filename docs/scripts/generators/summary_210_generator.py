@@ -77,7 +77,7 @@ infilename = "../../data/exome-stats.csv";
 outfilename = "../../" + pagefile;
 csvdatafile = "data/exome-stats.csv"
 
-to_include = ['Species', 'Sequencing platform', 'Batch']#, 'Total reads', 'Avg read len', 'Total bases']
+to_include = ['Species', 'Sample ID', 'Sequencing platform', 'Batch']#, 'Total reads', 'Avg read len', 'Total bases']
 
 first = True;
 node_table = "";
@@ -89,6 +89,7 @@ for line in open(infilename):
     if first:
         node_table += "\t\t\t\t<thead>\n\t\t\t\t\t";
         ind_include = [ x for x in range(len(line)) if line[x] in to_include ];
+        #print(ind_include);
     else:
         node_table += "\t\t\t<tr>";
 
@@ -99,8 +100,8 @@ for line in open(infilename):
                 node_table += "<th>" + line[x] + "</th>";
             else:
                 if line[x] != "NA":
-                    if x == 2:
-                        line[x] = "<em>" + line[1] + " " + line[2] + "</em>";
+                    if x == 4:
+                        line[x] = "<em>" + line[x-1] + " " + line[x] + "</em>";
 
                     node_table += "<td>" + line[x] + "</td>";
                 else:
