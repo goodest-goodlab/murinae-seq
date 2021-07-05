@@ -1,0 +1,753 @@
+---
+title: "Positive selection tree comparisons"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+#knitr::opts_chunk$set(echo = FALSE)
+#this.dir <- dirname(parent.frame(2)$ofile)
+#setwd(this.dir)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggtree)
+library(ggplot2)
+library(ggbeeswarm)
+library(cowplot)
+library(ggsignif)
+library(dplyr)
+library(tidyr)
+library(kableExtra)
+library(ggVennDiagram)
+library(eulerr)
+source("C:/Users/Gregg/.RProfile")
+```
+
+# Coding alignments
+
+Coding sequences from mm10 were lifted over to the 6 new rodent genomes from the longest mouse transcript. These sequences were trimmed and aligned with MACSE for in-frame alignments. These alignments were filtered as follows:
+
+```{r read-data-aligns}
+aln_stats = read.csv("../../data/wgs-ps-comps/04_penn_7spec_filter_cds.log", sep="\t", comment.char="#", stringsAsFactors=F)
+aln_stats = subset(aln_stats, Short.seq == FALSE & Percent.ident.seqs.high == FALSE & Percent.no.info.high == FALSE & Premature.stop.codons == 0)
+print(paste("Number of alignments: ", nrow(aln_stats)))
+## Read the alignment filter data data
+```
+
+```
+# CDS alignment filter
+# PYTHON VERSION: 2.7.5
+# Script call:    /home/gt156213e/bin/core/generators/cds-aln/04_codon_filter.py -i ../aln/03_penn-7spec-trim/ -o ../aln/04_penn-7spec-filter/ -n 04_penn_7spec_filter_cds -e 7
+# Runtime:        11/23/2020 14:18:01
+# ----------------
+# IO OPTIONS
+# Input CDS directory:    /mnt/beegfs/gt156213e/penn-genomes/cds/aln/03_penn-7spec-trim
+# Input sequence type:    codon
+# Job name:               04_penn_7spec_filter_cds
+# Output directory:       /mnt/beegfs/gt156213e/penn-genomes/cds/aln/04_penn-7spec-filter
+# Creating output directory.
+# Log file:               logs/04_penn_7spec_filter_cds.log
+# ----------------
+# Total aligns                                         21733
+# Files skipped:          0
+# Aligns written                                       16773.0
+# Aligns shorter than 100bp                            62.0
+# Aligns with >50% identical sequences                 1758.0
+# Aligns with >20% of gappy/Ny sites                   0.0
+# Aligns with at least one premature stop:             3214.0
+# Aligns with >20% of seqs with premature stops        962.0
+# ----------------
+# Spec	Number >20% gappy	Number premature stop
+# >mnat	122	884
+# >pdel	115	808
+# >gdol	127	752
+# >mmus	12	9
+# >hall	127	780
+# >rsor	130	767
+# >rdil	83	608
+# ----------------
+```
+## Alignment lengths
+
+```{r fig1}
+aln_len_filter = subset(aln_stats, Seq.length > 5000)
+aln_stats = subset(aln_stats, Seq.length <= 5000)
+print(paste("Removing ", nrow(aln_len_filter), " alignments over 5000bp"))
+raw_len_p = ggplot(aln_stats, aes(x=Seq.length)) +
+  geom_histogram(bins=50, color="#999999") +
+  scale_y_continuous(expand=c(0,0)) +
+  bartheme()
+print(raw_len_p)
+# Simple distribution of alignment lengths
+```
+
+# Gene and species trees
+
+Gene and species trees for this set of species were constructed with IQtree and ASTRAL. Both a concatenated and ASTRAL species tree were inferred The same topology was recovered with both methods. Below is the concatenated topology and branch lengths with gene and site concordance factors calculated with IQtree.
+
+```{r read-tree, out.width="50%", fig.align="center"}
+tree_file = "../../data/wgs-ps-comps/05_penn_7spec_iqtree.cf.rooted.tree"
+concat_tree = read.tree(tree_file)
+
+tree_info_concat = treeToDF(concat_tree)
+tree_info_concat = tree_info_concat %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
+tree_info_concat$bootstrap[tree_info_concat$node.type=="tip"] = NA
+tree_info_concat$bootstrap = as.numeric(tree_info_concat$astral)
+tree_info_concat$gcf = as.numeric(tree_info_concat$gcf)
+tree_info_concat$scf = as.numeric(tree_info_concat$scf)
+# Read astral tree data
+
+tree_info_concat$species = c("Rhynchomys soricoides", "Grammomys dolichurus", "Rhabdomys dilectus", "Hylomyscus alleni", "Mastomys natalensis", "Praomys delectorum", "Mus musculus", NA, NA, NA, NA, NA, NA)
+```
+
+## Species tree with branches colored by gene concordance factor
+
+```{r fig2, out.width="50%", fig.align="center"}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+gcf_tree = ggtree(concat_tree, size=2, ladderize=F, aes(color=tree_info_concat$gcf)) +
+  scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
+  xlim(0, 0.055) +
+  geom_tiplab(aes(label=tree_info_concat$species), color="#333333", fontface='italic', size=5) +
+  theme(legend.position="right")
+#geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
+#geom_nodepoint(color="#666666", alpha=0.85, size=4)
+print(gcf_tree)
+# gCF tree
+```
+
+## Species tree with branches colored by site concordance factor
+
+```{r fig3, out.width="50%", fig.align="center"}
+scf_tree = ggtree(concat_tree, size=2, ladderize=F, aes(color=tree_info_concat$scf)) +
+  scale_color_continuous(name='sCF', low=l, high=h, limits=c(0,100)) +
+  xlim(0, 0.055) +
+  geom_tiplab(aes(label=tree_info_concat$species), color="#333333", fontface='italic', size=5) +
+  theme(legend.position="right")
+  #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
+  #geom_nodepoint(color="#666666", alpha=0.85, size=4)
+print(scf_tree)
+# sCF tree
+```
+
+## Discordance among gene trees and the species tree
+
+Only 14% of gene trees are completely concordant with the species topology. Most gene trees do not match the topology of the species tree.
+
+```{r read-data-windows}
+transcript_windows = read.csv("../../data/wgs-ps-comps/mm10-cds-windows.csv", header=T, comment.char="#", stringsAsFactors=F)
+# The 10kb windows that overlap with mouse transcripts
+
+longest_transcripts = read.csv("../../data/wgs-ps-comps/mm10-transcripts-longest.tab", sep="\t", header=T, comment.char="#", stringsAsFactors=F)
+# The transcripts used for gene trees and dN/dS/
+
+twin = subset(transcript_windows, Transcript.ID %in% longest_transcripts$feature.id)
+# Only take windows that have one of the transcripts we used in them.
+
+concordant_gt = subset(twin, Gene.tree.match.concat.tree==TRUE)
+concordant_gt = unique(select(concordant_gt, Gene.ID, chr, CDS.start, CDS.end))
+# Get the concordant gene trees
+
+discordant_gt = subset(twin, Gene.tree.match.concat.tree==FALSE)
+discordant_gt = unique(select(discordant_gt, Gene.ID, chr, CDS.start, CDS.end))
+# Get the discordant gene trees
+
+## Read the windowed phylogeny and trancript data
+```
+
+```{r fig4, out.width="50%", fig.align="center"}
+
+#twin_uniq = unique(select(twin, Gene.ID, chr, CDS.start, CDS.end, Gene.tree.match.concat.tree))
+# Get only a single row from each gene
+
+concordance = data.frame("type"=c("Concordant", "Discordant"), "count"=c(nrow(concordant_gt), nrow(discordant_gt)))
+# Combine the concordant and discordant gene trees into a single table
+
+concordant_p = ggplot(concordance, aes(x=1, y=count, fill=type)) +
+  geom_bar(stat="identity") +
+  ylab("# of gene trees") +
+  scale_y_continuous(expand=c(0,0)) +
+  scale_x_continuous(limits=c(0,2)) +
+  scale_fill_manual(values=corecol(numcol=2)) +
+  bartheme() +
+  theme(legend.position="bottom",
+        axis.line.y=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+print(concordant_p)
+# Simple barplot of the proportion of concordant and discordant genes
+
+```
+
+# Genes and 10kb window overlap
+
+Most coding regions of genes only overlap a few 10kb windows.
+
+```{r fig5, out.width="50%", fig.align="center"}
+twin$cds.len = (twin$CDS.end - twin$CDS.start) / 1000000
+mean_cds_len = mean(twin$cds.len)
+# Calculate CDS length in Mb
+
+cds_len = unique(select(twin, Transcript.ID, CDS.start, CDS.end, cds.len))
+# Take only one window entry per CDS
+
+#ts_counts = count(twin$Transcript.ID)
+ts_counts = as.data.frame(table(twin$Transcript.ID))
+# Count the number of times a transcript overlaps a window.
+
+cds_win_p = ggplot(subset(ts_counts, Freq<=30), aes(x=Freq)) +
+  geom_histogram(bins=30, fill=corecol(pal="trek", numcol=1, offset=2), color="#ececec") +
+  scale_x_continuous(expand=c(0,0)) +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("# of 10kb windows overlapped by CDS") +
+  ylab("# of genes") +
+  bartheme()
+print(cds_win_p)
+
+print(paste("Average distance from start to end of CDS: ", mean(cds_len$cds.len) * 1000000))
+print(paste("Median distance from start to end of CDS:  ", median(cds_len$cds.len) * 1000000))
+```
+
+# Rate estimates and tree misspecification
+
+## MG94-local model fit
+
+First, a basic fit with HyPhy's MG94 model to estimate dN and dS per gene.
+
+```{r read-data-mg94-local}
+concat_mg_local = read.csv("../../data/wgs-ps-comps/penn-7spec-mg94-local-concat.csv", header=T, comment.char="#", stringsAsFactors=F)
+#concat_mg_local$id = as.string(concat_mg_local$id)
+concat_mg_local_gene = group_by(concat_mg_local, id) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean(dn.ds, na.rm=T))
+# Average dn and ds across all branches for each gene
+
+gt_mg_local = read.csv("../../data/wgs-ps-comps/penn-7spec-mg94-local-gt.csv", header=T, comment.char="#", stringsAsFactors=F)
+gt_mg_local_gene = group_by(gt_mg_local, id) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean(dn.ds, na.rm=T))
+# Average dn and ds across all branches for each gene
+
+## Read the results from the LOCAL MG94 model (dN and dS estimated for each branch)
+```
+
+Average dS distributions are similar to both the concatenated tree and gene trees
+
+### Distributions of avg dS per gene
+
+```{r fig6, out.width="50%", fig.align="center"}
+
+bins = seq(0,0.2,by=0.001)
+bin_labels = seq(0.001,0.2,by=0.001)
+concat_counts = hist(concat_mg_local_gene$ds, breaks=bins, include.lowest=T, plot=F)$counts
+concat_binned = data.frame("bin"=bin_labels, "count"=concat_counts, filter="To concat tree")
+
+gt_counts = hist(gt_mg_local_gene$ds, breaks=bins, include.lowest=T, plot=F)$counts
+gt_binned = data.frame("bin"=bin_labels, "count"=gt_counts, filter="To gene trees")
+
+binned_data = bind_rows(concat_binned, gt_binned)
+col = corecol(numcol=2)
+lab = c("To concat tree", "To gene trees")
+#ylabels = c("1200", as.character(seq(from=0, to=7000, by=1000)))
+ylabels = as.character(seq(from=-1000, to=1000, by=100))
+
+dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "To gene trees",-1, 1)*count, fill = filter)) + 
+  geom_col(width=0.001) +
+  geom_hline(yintercept=0) +
+  scale_x_continuous(name = "Avg. dS", limits = c(0, 0.2), expand = c(0, 0)) +
+  scale_y_continuous(name = "# genes", limits=c(-1000,1000), breaks = seq(from=-1000, to=1000, by=100), labels=ylabels) +
+  scale_fill_manual(name="", limits=lab, values=col) +
+  bartheme()
+print(dualp)
+# Distributions of dS
+
+ds_filter_level = 0.0575
+print(paste("Removing genes with dS above ", ds_filter_level, " from subsequent analyses."))
+
+concat_ds_filter = subset(concat_mg_local_gene, ds > ds_filter_level)
+gt_ds_filter = subset(gt_mg_local_gene, ds > ds_filter_level)
+ds_filter = intersect(concat_ds_filter$id, gt_ds_filter$id)
+# Get a list of genes to filter out in subsequent analyses based on dS
+
+
+```
+
+## BUSTED
+
+Next, each gene was run through HyPhy's BUSTED test to see whether "a gene has experienced positive selection at at least one site on at least one branch." No target branches were specified.
+
+BUSTED estimates 3 omega categories, with one allowed to be larger than 1. It then estimates the same model but restricting the third omega to equal 1. These two models are compared with a likelihood ratio test and evidence ratios for each site.
+
+Below, I plot the number of genes the where the p-value for the LRT is less than 0.01, adjusting pvalues with FDR.
+
+### BUSTED genes under positive selection with concatenation vs gene trees
+
+```{r read-data-busted}
+concat_busted = read.csv("../../data/wgs-ps-comps/penn-7spec-busted-concat.csv", header=T, comment.char="#", stringsAsFactors=F)
+concat_busted = concat_busted[!concat_busted$id %in% ds_filter,]
+gt_busted = read.csv("../../data/wgs-ps-comps/penn-7spec-busted-gt.csv", header=T, comment.char="#", stringsAsFactors=F)
+gt_busted = gt_busted[!gt_busted$id %in% ds_filter,]
+
+#concat_busted_ps = subset(concat_busted, pval < 1 - ( 1-0.01)^(1/nrow(concat_busted)))
+#gt_busted_ps = subset(gt_busted, pval < 1 - ( 1-0.01)^(1/nrow(gt_busted)))
+# Dunn-Sidak correction: Genes with p-value less than corrected threshold inferred as PS
+
+concat_busted$pval = p.adjust(concat_busted$pval, "fdr")
+gt_busted$pval = p.adjust(gt_busted$pval, "fdr")
+# Adjust p-values for multiple testing
+
+concat_busted_ps = subset(concat_busted, pval < 0.01)
+gt_busted_ps = subset(gt_busted, pval < 0.01)
+# No multi-test correction: Genes with p-values less than 0.01 inferred as PS
+## Read the BUSTED data for both concat and gene trees.
+```
+
+```{r fig7, out.width="50%", fig.align = "center"}
+busted_comp = list("gt.ids"=gt_busted_ps$id, "concat.ids"=concat_busted_ps$id)
+#ggVennDiagram(busted_comp)
+plot(euler(busted_comp, shape = "ellipse"), quantities=TRUE, fill=corecol(numcol=2, pal="wilke"), legend=list(labels=c("Gene trees", "Concat tree")))
+## Venn diagrams for genes under PS in the concat and gt analyses
+```
+
+Here, we find more positively selected genes when using the correct gene tree. This is opposite to our expectation, indicating that this test is prone to false negatives when using the wrong (concatenated) tree.
+
+### CDS length for BUSTED PS categories
+
+There is no difference in length of coding regons between categories.
+
+```{r fig8, out.width="50%", fig.align="center"}
+concat_busted_ps_m = merge(x=concat_busted_ps, y=twin, by.x="id", by.y="Gene.ID")
+concat_busted_ps_m$cds.len = concat_busted_ps_m$CDS.end - concat_busted_ps_m$CDS.start
+gt_busted_ps_m = merge(x=gt_busted_ps, y=twin, by.x="id", by.y="Gene.ID")
+gt_busted_ps_m$cds.len = gt_busted_ps_m$CDS.end - gt_busted_ps_m$CDS.start
+## Get CDS lengths for both concat and gt genes
+
+concat_uniq = subset(concat_busted_ps_m, !id %in% gt_busted_ps_m$id)
+concat_uniq = unique(select(concat_uniq, id, lrt, pval, cds.len))
+concat_uniq$type = "Concat only"
+# Get genes unique to the concat dataset and label
+## Concat genes
+
+gt_uniq = subset(gt_busted_ps_m, !id %in% concat_busted_ps_m$id)
+gt_uniq = unique(select(gt_uniq, id, lrt, pval, cds.len))
+gt_uniq$type = "GT only"
+# Get genes unique to the gt dataset and label
+## Gene tree genes
+
+gt_concat_shared = subset(gt_busted_ps_m, id %in% concat_busted_ps_m$id)
+gt_concat_shared = unique(select(gt_concat_shared, id, lrt, pval, cds.len))
+gt_concat_shared$type = "Shared"
+# Get genes shared between the two datasets.
+
+ps_lens = rbind(gt_uniq, concat_uniq, gt_concat_shared)
+ps_lens = subset(ps_lens, cds.len < 50000)
+# Combine data and filter for length
+
+x_comps = list(c("Concat only", "Shared"), c("Concat only", "GT only"))
+# Set up comparisons for significance testing with Wilcox
+
+ps_len_p = ggplot(ps_lens, aes(x=type, y=cds.len)) +
+  geom_quasirandom(size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  xlab("") +
+  ylab("CDS length (bp)") +
+  bartheme() +
+  theme(legend.position="none")
+print(ps_len_p)
+# Plot CDS lengths of each category
+## CDS length distributions of positively selected genes
+```
+
+### dS for BUSTED PS categories
+
+There is a slight increase in dS for concatenated genes compared to those found in both analyses, but power may be an issue.
+
+```{r fig9, out.width="50%", fig.align="center"}
+concat_busted_ps_mg = merge(x=concat_busted_ps, y=concat_mg_local_gene, by.x="id", by.y="id")
+gt_busted_ps_mg = merge(x=gt_busted_ps, y=gt_mg_local_gene, by.x="id", by.y="id")
+# Get dS estimates from the MG94 local fit for each gene in the BUSTED analysis
+
+concat_busted_ps_mg_u = subset(concat_busted_ps_mg, !id %in% gt_busted_ps_mg$id)
+concat_busted_ps_mg_u = unique(select(concat_busted_ps_mg_u, id, dn.ds, dn, ds))
+concat_busted_ps_mg_u$type = "Concat only"
+# Select the genes with evidence for PS in concatenated analysis only
+
+gt_busted_ps_mg_u = subset(gt_busted_ps_mg, !id %in% concat_busted_ps_mg$id)
+gt_busted_ps_mg_u = unique(select(gt_busted_ps_mg_u, id, dn.ds, dn, ds))
+gt_busted_ps_mg_u$type = "GT only"
+# Select the genes with evidence for PS in gene tree analysis only
+
+gt_concat_shared_u = subset(gt_busted_ps_mg, id %in% concat_busted_ps_mg$id)
+gt_concat_shared_u = unique(select(gt_concat_shared_u, id, dn.ds, dn, ds))
+gt_concat_shared_u$type = "Shared"
+# Get genes shared between the two datasets.
+
+ps_dnds = rbind(gt_busted_ps_mg_u, concat_busted_ps_mg_u, gt_concat_shared_u)
+ps_dnds = subset(ps_dnds, dn.ds < 10)
+# Combine data and filter for length
+
+x_comps = list(c("Concat only", "Shared"), c("GT only", "Shared"), c("Concat only", "GT only"))
+# Set up comparisons for significance testing with Wilcox
+
+dnds_p = ggplot(ps_dnds, aes(x=type, y=ds)) +
+  geom_quasirandom(size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  xlab("") +
+  ylab("dS") +
+  bartheme() +
+  theme(legend.position="none")
+print(dnds_p)
+# Plot dS of each category
+## CDS length distributions of positively selected genes
+```
+
+### CDS length for BUSTED genes with gene trees 
+
+For the gene tree analysis, coding regions from genes under positive selection are slightly longer than those not under positive selection.
+
+```{r fig10, out.width="50%", fig.align="center"}
+twin$cds.len = twin$CDS.end - twin$CDS.start
+twin_uniq = unique(select(twin, Gene.ID, cds.len))
+twin_uniq = subset(twin_uniq, !Gene.ID %in% ps_lens$id)
+twin_uniq$type2 = "All other CDS"
+names(twin_uniq)[1] = "id"
+# Get lengths of all CDS not under positive selection
+
+ps_lens_sub = subset(ps_lens, type!="Concat only")
+ps_lens_sub$type2 = "PS CDS"
+# Add another label tot he PS genes
+
+all_cds = rbind(twin_uniq, select(ps_lens_sub, id, cds.len, type2))
+all_cds = subset(all_cds, cds.len < 50000)
+# Combine data and filter for length
+
+x_comps = list(c("All other CDS", "PS CDS"))
+all_len_p = ggplot(all_cds, aes(x=type2, y=cds.len)) +
+  geom_quasirandom(size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  xlab("") +
+  ylab("CDS length (bp)") +
+  bartheme() +
+  theme(legend.position="none")
+print(all_len_p)
+# Plot CDS lengths of each category
+
+print(paste("Average distance from start to end of PS CDS    : ", mean(ps_lens$cds.len)))
+print(paste("Average distance from start to end of non-PS CDS: ", mean(all_cds$cds.len)))
+## CDS length distributions of positively selected genes vs non-positively selected genes
+```
+
+```{r read-data-fubar, eval=F, echo=F}
+## FUBAR
+
+Next, we did the same analysis with the FUBAR test in HyPhy. FUBAR is a Bayesian estimate of dN and dS on a per-site basis, and produces posterior probabilities for omega > 1. Below are genes with PP > 1 in at least 1 site:
+
+concat_fubar = read.csv("../../hyphy/penn-7spec-fubar-concat.csv", header=T, comment.char="#", stringsAsFactors=F)
+concat_fubar = concat_fubar[!concat_fubar$id %in% ds_filter,]
+#concat_fubar$label = "Concat"
+gt_fubar = read.csv("../../hyphy/penn-7spec-fubar-gt.csv", header=T, comment.char="#", stringsAsFactors=F)
+gt_fubar = gt_fubar[!gt_fubar$id %in% ds_filter,]
+#gt_fubar$label = "GT"
+
+concat_fubar_ps = subset(concat_fubar, num.ps.sites > 0)
+gt_fubar_ps = subset(gt_fubar, num.ps.sites > 0)
+## Read the FUBAR data
+```
+
+```{r fig-fubar-venn, out.width="50%", fig.align="center", eval=F, echo=F}
+fubar_comp = list("gt.ids"=gt_fubar_ps$id, "concat.ids"=concat_fubar_ps$id)
+#ggVennDiagram(fubar_comp)
+plot(euler(fubar_comp, shape = "ellipse"), quantities=TRUE, fill=corecol(numcol=2, pal="wilke"), legend=list(labels=c("Gene trees", "Concat tree")))
+## Venn diagrams for genes under PS in the concat and gt analyses
+```
+
+```{r fig-fubar-lens, out.width="50%", fig.align="center", eval=F, echo=F}
+
+A surprising(?) number of genes have at least one site with evidence for positive selection in both analyses, with use of the concatenated tree resulting in more genes inferred.
+
+With FUBAR, we find that genes under positive selection unique to one analysis are generally slightly shorter than those found in both analyses:
+
+concat_fubar_ps_m = merge(x=concat_fubar_ps, y=twin, by.x="id", by.y="Gene.ID")
+concat_fubar_ps_m$cds.len = concat_fubar_ps_m$CDS.end - concat_fubar_ps_m$CDS.start
+
+gt_fubar_ps_m = merge(x=gt_fubar_ps, y=twin, by.x="id", by.y="Gene.ID")
+gt_fubar_ps_m$cds.len = gt_fubar_ps_m$CDS.end - gt_fubar_ps_m$CDS.start
+# Get CDS lengths
+
+concat_uniq = subset(concat_fubar_ps_m, !id %in% gt_fubar_ps_m$id)
+concat_uniq = unique(select(concat_uniq, id, num.ps.sites, cds.len))
+concat_uniq$type = "Concat only"
+# Get genes unique to the concat dataset and label
+## Concat genes
+
+gt_uniq = subset(gt_fubar_ps_m, !id %in% concat_fubar_ps_m$id)
+gt_uniq = unique(select(gt_uniq, id, num.ps.sites, cds.len))
+gt_uniq$type = "GT only"
+# Get genes unique to the gt dataset and label
+## Gene tree genes
+
+gt_concat_shared = subset(gt_fubar_ps_m, id %in% concat_fubar_ps_m$id)
+gt_concat_shared = unique(select(gt_concat_shared, id, num.ps.sites, cds.len))
+gt_concat_shared$type = "Shared"
+# Get genes shared between the two datasets.
+
+ps_lens = rbind(gt_uniq, concat_uniq, gt_concat_shared)
+ps_lens = subset(ps_lens, cds.len < 50000)
+# Combine data and filter for length
+
+x_comps = list(c("Concat only", "Shared"), c("GT only", "Shared"), c("Concat only", "GT only"))
+# Set up comparisons for significance testing with Wilcox
+
+ps_len_p = ggplot(ps_lens, aes(x=type, y=cds.len)) +
+  geom_quasirandom(size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  xlab("") +
+  ylab("CDS length (bp)") +
+  bartheme() +
+  theme(legend.position="none")
+print(ps_len_p)
+# Plot CDS lengths of each category
+## CDS length distributions of positively selected genes
+```
+
+```{r fig-fubar-sites, out.width="50%", fig.align="center", eval=F, echo=F}
+# Must run block above first!
+
+But genes found to be under positive selection in both analyses tend to have more sites under positive selection:
+
+x_comps = list(c("Concat only", "Shared"), c("GT only", "Shared"), c("Concat only", "GT only"))
+# Set up comparisons for significance testing with Wilcox
+
+ps_sites_p = ggplot(ps_lens, aes(x=type, y=num.ps.sites)) +
+  geom_quasirandom(size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  xlab("") +
+  ylab("# of positively selected sites per gene") +
+  bartheme() +
+  theme(legend.position="none")
+print(ps_sites_p)
+# Plot PS sites of each category
+## Distributions of sites with evidence for PS
+```
+
+```{r fig-concordant-sites, out.width="50%", fig.align="center", echo=F, eval=F}
+concat_concordant_ps = concat_uniq[concat_uniq$id %in% concordant_gt$Gene.ID,]
+concat_concordant_ps$type = "Concordant"
+concat_discordant_ps = concat_uniq[!concat_uniq$id %in% concordant_gt$Gene.ID,]
+concat_discordant_ps$type = "Discordant"
+
+concat_ps_combined = rbind(concat_concordant_ps, concat_discordant_ps)
+
+
+x_comps = list(c("Concordant", "Discordant"))
+# Set up comparisons for significance testing with Wilcox
+
+ps_sites_p = ggplot(concat_ps_combined, aes(x=type, y=num.ps.sites)) +
+  geom_quasirandom(size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  xlab("") +
+  #ylab("dN/dS") +
+  #scale_color_manual(values=c("TRUE"="#000000", "FALSE"="#ececec")) +
+  #scale_alpha_manual(values=c("TRUE"=1, "FALSE"=0.25)) +
+  bartheme() +
+  theme(legend.position="none")
+print(ps_sites_p)
+# Plot CDS lengths of each category
+## Distributions of sites with evidence for PS
+```
+
+## aBSREL
+
+Next, we did the same analysis using HyPhy's aBSREL test. aBSREL is a "branch-site" model, but does not test for selection at specific sites. "Instead, aBSREL will test, for each branch (or branch of interest) in the phylogeny, whether a proportion of sites have evolved under positive selection." aBSREL infers the number of omega classes for each branch and uses a LRT against a model where branches are not allowed to have omega classes > 1. Below are the results without setting a foreground branch (testing the whole phylogeny per gene). P-values are corrected for multiple testing by aBSREL for multiple tests per gene, and I probably need to correct again for multiple gene tests with FDR.
+
+```{r read-data-absrel}
+concat_absrel = read.csv("../../data/wgs-ps-comps/penn-7spec-absrel-concat.csv", header=T, comment.char="#", stringsAsFactors=F)
+concat_absrel = concat_absrel[!concat_absrel$id %in% ds_filter,]
+
+gt_absrel = read.csv("../../data/wgs-ps-comps/penn-7spec-absrel-gt.csv", header=T, comment.char="#", stringsAsFactors=F)
+gt_absrel = gt_absrel[!gt_absrel$id %in% ds_filter,]
+
+
+concat_absrel_ps = subset(concat_absrel, num.ps.branches > 0)
+gt_absrel_ps = subset(gt_absrel, num.ps.branches > 0)
+## Read the aBSREL data
+```
+
+```{r fig11, out.width="50%", fig.align="center"}
+absrel_comp = list("gt.ids"=gt_absrel_ps$id, "concat.ids"=concat_absrel_ps$id)
+#ggVennDiagram(absrel_comp)
+plot(euler(absrel_comp, shape = "ellipse"), quantities=TRUE, fill=corecol(numcol=2, pal="wilke"), legend=list(labels=c("Gene trees", "Concat tree")))
+## Venn diagrams for genes under PS in the concat and gt analyses
+```
+
+With this test we see very similar results whether using concatenated or gene trees.
+
+### dS for aBSREL PS categories
+
+We see no difference in dS between categories.
+
+```{r absrel-ds, out.width="50%", fig.align = "center"}
+concat_absrel_ps_mg = merge(x=concat_absrel_ps, y=concat_mg_local_gene, by.x="id", by.y="id")
+gt_absrel_ps_mg = merge(x=gt_absrel_ps, y=gt_mg_local_gene, by.x="id", by.y="id")
+
+
+concat_absrel_ps_mg_u = subset(concat_absrel_ps_mg, !id %in% gt_absrel_ps_mg$id)
+concat_absrel_ps_mg_u = unique(select(concat_absrel_ps_mg_u, id, dn.ds, dn, ds))
+concat_absrel_ps_mg_u$type = "Concat only"
+
+gt_absrel_ps_mg_u = subset(gt_absrel_ps_mg, !id %in% concat_absrel_ps_mg$id)
+gt_absrel_ps_mg_u = unique(select(gt_absrel_ps_mg_u, id, dn.ds, dn, ds))
+gt_absrel_ps_mg_u$type = "GT only"
+
+gt_concat_shared_u = subset(gt_absrel_ps_mg, id %in% concat_absrel_ps_mg$id)
+gt_concat_shared_u = unique(select(gt_concat_shared_u, id, dn.ds, dn, ds))
+gt_concat_shared_u$type = "Shared"
+# Get genes shared between the two datasets.
+
+ps_dnds = rbind(gt_absrel_ps_mg_u, concat_absrel_ps_mg_u, gt_concat_shared_u)
+ps_dnds = subset(ps_dnds, dn.ds < 10)
+# Combine data and filter for length
+
+x_comps = list(c("Concat only", "Shared"), c("GT only", "Shared"), c("Concat only", "GT only"))
+# Set up comparisons for significance testing with Wilcox
+
+dnds_p = ggplot(ps_dnds, aes(x=type, y=ds)) +
+  geom_quasirandom(size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  xlab("") +
+  ylab("dS") +
+  bartheme() +
+  theme(legend.position="none")
+print(dnds_p)
+# Plot CDS lengths of each category
+## CDS length distributions of positively selected genes
+```
+
+## PAML's M1a vs M2a
+
+Finally, we ran PAML's M1a vs M2a. This is a site model, meaning omega can vary among sites. M1a allows for 2 omega categories while M2a allows a third category to be estimated > 1. These two models are compared with a LRT and the p-values have been corrected with FDR.
+
+```{r read-data-paml}
+concat_m1a = read.csv("../../data/wgs-ps-comps/penn-7spec-m1a-concat.csv", header=T, comment.char="#", stringsAsFactors=F)
+concat_m1a = unique(select(concat_m1a, id, chr, start, end, lnl, k))
+concat_m1a = concat_m1a[!concat_m1a$id %in% ds_filter,]
+concat_m2a = read.csv("../../data/wgs-ps-comps//penn-7spec-m2a-concat.csv", header=T, comment.char="#", stringsAsFactors=F)
+concat_m2a = unique(select(concat_m2a, id, chr, start, end, lnl, k))
+concat_m2a = concat_m2a[!concat_m2a$id %in% ds_filter,]
+# Read and filter the data
+
+concat_paml = merge(x=concat_m1a, y=concat_m2a, by="id")
+concat_paml$lrt = 2 * (concat_paml$lnl.y - concat_paml$lnl.x)
+concat_paml$pval = pchisq(concat_paml$lrt, 2, lower.tail=F)
+concat_paml$pval = p.adjust(concat_paml$pval, "fdr")
+concat_paml_ps = subset(concat_paml, concat_paml$pval < 0.01)
+# Perform the likelihood ratio test and p-value adjustment
+## CONCAT DATA
+
+
+gt_m1a = read.csv("../../data/wgs-ps-comps/penn-7spec-m1a-gt.csv", header=T, comment.char="#", stringsAsFactors=F)
+gt_m1a = unique(select(gt_m1a, id, chr, start, end, lnl, k))
+gt_m1a = gt_m1a[!gt_m1a$id %in% ds_filter,]
+gt_m2a = read.csv("../../data/wgs-ps-comps/penn-7spec-m2a-gt.csv", header=T, comment.char="#", stringsAsFactors=F)
+gt_m2a = unique(select(gt_m2a, id, chr, start, end, lnl, k))
+gt_m2a = gt_m2a[!gt_m2a$id %in% ds_filter,]
+# Read and filter the data
+
+gt_paml = merge(x=gt_m1a, y=gt_m2a, by="id")
+gt_paml$lrt = 2 * (gt_paml$lnl.y - gt_paml$lnl.x)
+gt_paml$pval = pchisq(gt_paml$lrt, 2, lower.tail=F)
+gt_paml$pval = p.adjust(gt_paml$pval, "fdr")
+gt_paml_ps = subset(gt_paml, gt_paml$pval < 0.01)
+# Perform the likelihood ratio test and p-value adjustment
+## GT DATA
+```
+
+```{r fig12, out.width="50%", fig.align="center"}
+paml_comp = list("gt.ids"=gt_paml_ps$id, "concat.ids"=concat_paml_ps$id)
+#ggVennDiagram(paml_comp)
+plot(euler(paml_comp, shape = "ellipse"), quantities=TRUE, fill=corecol(numcol=2, pal="wilke"), legend=list(labels=c("Gene trees", "Concat tree")))
+## Venn diagrams for genes under PS in the concat and gt analyses
+```
+
+Here we find a large excess of genes inferred to be under positive selection when using the concatenated tree.
+
+
+
+
+```{r echo=FALSE, eval=FALSE}
+####################################################################################################
+```
+
+```{r read-data-mg94, echo=FALSE, eval=FALSE}
+## MG94 data
+concat_mg94 = read.csv("../../hyphy/penn-7spec-mg94-concat.csv", header=T, comment.char="#")
+concat_mg94 = concat_mg94[!concat_mg94$id %in% ds_filter,]
+
+gt_mg94 = read.csv("../../hyphy/penn-7spec-mg94-gt.csv", header=T, comment.char="#")
+gt_mg94 = gt_mg94[!gt_mg94$id %in% ds_filter,]
+# Read the results from the MG94 model.
+```
+
+```{r fig-mg-ps, out.width="50%", fig.align="center", echo=FALSE, eval=FALSE}
+## MG94 plots
+concat_mg94$type = "Concat tree"
+concat_mg94 = subset(concat_mg94, dn.ds < 5)
+concat_mg94$ps = "FALSE"
+concat_mg94$ps[concat_mg94$dn.ds>1 & concat_mg94$pval < 0.01] = "TRUE"
+# Concat data: label, remove genes with dN/dS > 5, label genes with pval < 0.01
+
+gt_mg94$type = "Gene tree"
+gt_mg94 = subset(gt_mg94, dn.ds < 5)
+gt_mg94$ps = "FALSE"
+gt_mg94$ps[gt_mg94$dn.ds>1 & gt_mg94$pval < 0.01] = "TRUE"
+# Gene tree data: label, remove genes with dN/dS > 5, label genes with pval < 0.01
+
+mg94 = rbind(concat_mg94, gt_mg94)
+# Combine concat and gt data
+
+mg94_p = ggplot(mg94, aes(x=type, y=dn.ds)) +
+  geom_quasirandom(aes(color=ps, alpha=ps), size=2, width=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.3, width=0.5, fill="transparent", color="#666666") +
+  xlab("") +
+  ylab("dN/dS") +
+  scale_color_manual(values=c("TRUE"="#000000", "FALSE"="#ececec")) +
+  scale_alpha_manual(values=c("TRUE"=1, "FALSE"=0.25)) +
+  bartheme() +
+  theme(legend.position="none")
+print(mg94_p)
+# dN/dS distributions of concat and gt data.
+
+#outfile = "../../figs/mg94.png"
+#ggsave(outfile, concat_p, width=6, height=4, unit="in")
+    
+cat("Mean dN/dS using concat tree     : ", mean(concat_mg94$dn.ds), "\n")
+cat("Mean dN/dS using gene trees      : ", mean(gt_mg94$dn.ds), "\n")
+cat("Number PS genes using concat tree: ", nrow(subset(concat_mg94, ps=="TRUE")), "\n")
+cat("Number PS genes using gene trees : ", nrow(subset(gt_mg94, ps=="TRUE")), "\n")
+## Number of genes inferred under positive selection using basic MG94 fit and LRT
+```
+

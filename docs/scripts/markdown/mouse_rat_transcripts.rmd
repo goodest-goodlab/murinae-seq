@@ -1,14 +1,24 @@
 ---
-#title: "Mouse and rat transcript analysis"
-#author: "gwct"
-#date: "04/14/2020"
-# NOTE TO SELF: These figures don't render on the desktop.
-output: 
-  html_document:
+title: "Exome transcript selection"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
     includes:
       in_header: '../html-chunks/rmd_header.html'
     df_print: paged
     code_folding: hide
+    number_sections: true
+    toc_depth: 3
 ---
 
 ```{r setup, warning=F, message=F}
@@ -32,22 +42,21 @@ library(dplyr)
 library(eulerr)
 source("../lib/design.r")
 
-htmltools::includeHTML("../html-chunks/nav.html")
+#htmltools::includeHTML("../html-chunks/nav.html")
 ```
 
 # Exome transcript selection
 
-## Filtering criteria:
+## Filtering criteria
 
-1. Transcript must be present in both mouse and rat.
-2. Transcript must have one-to-one relationship between mouse and rat.
-3. Orthology confidence must be high (1).
-4. Transcript must have dS below 0.5 (see distibutions below).
-5. If multiple transcripts from a gene pass all above filters, the one with the max number of probe targets is selected.
+Two possible strategies arise for selecting transcripts if multiple isoforms exist after other filtering steps:
 
-## Transcript selection based on length or probe targets
+1. Select the longest remaining transcript.
+2. Select the transcript with the most probe target hits.
 
-```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+### Comparisons of selection criteria
+
+```{r fig4, out.width="50%", fig.align = "center", warning=FALSE}
 
 len_transcripts = scan("../../data/transcript-selection/selected-transcripts-list.txt", what=character())
 target_transcripts = scan("../../data/transcript-selection/selected-transcripts-target-check-list.txt", what=character())
@@ -58,43 +67,18 @@ plot(euler(transcript_lists, shape="ellipse"), quantities=T, fill=corecol(numcol
 
 ```
 
-## Filter script log
+Because we do not lose too many transcripts when selecting by max number of prode target hits, we proceed with that as the final filter criteria.
 
-```{r eval=F}
-# Rodent exomes -- select mouse trancsripts
-# PYTHON VERSION: 3.6.6
-# Script call: select_transcripts.py
-# Runtime: 04/14/2020 21:09:10
-# ----------
-# Mouse GTF file:        ../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz
-# Rat GTF file:          ../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
-# Ensembl ortholog file: ../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt
-# Output file:           ../02-Annotation-data/selected-transcripts.txt
-# --------------
-# dS threshold:          0.5
-# --------------
-# 04.14.2020 | 21:09:10 Reading mouse feature lengths...
-# Mouse transcripts read: 142647
-# 04.14.2020 | 21:09:20 Reading rat feature lengths...
-# Rat transcripts read:   41078
-# --------------
-# 04.14.2020 | 21:09:27 Reading orthologs...
-# Genes read:      56289
-# Transcipts read: 170971
-# --------------
-# 04.14.2020 | 21:09:28 Filtering transcripts...
-# Transcripts with no rat ortholog:                                                      44696
-# Transcripts with no one2one rat ortholog:                                              37291
-# Transcripts with no high confidence rat ortholog:                                      11069
-# Transcripts with no rat ortholog below dS threshold:                                   1204
-# Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
-# Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
-# --------------
-# Genes with no passed transcripts:                                                      41857
-# Genes with selected transcript:                                                        14432
-# --------------
-# 04.14.2020 | 21:09:28 Writing selected transcripts to output file...
+These are the transcript filtering steps:
+
 ```
+1. Transcript must be present in both mouse and rat.
+2. Transcript must have one-to-one relationship between mouse and rat.
+3. Orthology confidence must be high (1).
+4. Transcript must have dS below 0.5 (see distibutions below).
+5. If multiple transcripts from a gene pass all above filters, the one with the max number of probe targets is selected.
+```
+## Filter script log
 
 ```
 # Rodent exomes -- select mouse trancsripts
@@ -145,11 +129,11 @@ filter_data = subset(filter_data, dS.with.Rat < 1)
 filter_data = subset(filter_data, dN.with.Rat < 1)
 ```
 
-## Mouse-rat dS for orthologous transcripts -- All transcripts
+## Mouse-rat dS for orthologous transcripts
 
-Data from Ensembl release 99.
+All data from Ensembl release 99.
 
-```{r fig1, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig1, out.width="50%", fig.align = "center", warning=FALSE}
 #####################
 # Mouse-rat dS for transcripts
 #####################\
@@ -185,9 +169,9 @@ print(dualp)
 
 ## Mouse-rat dN for orthologous transcripts
 
-Data from Ensembl release 99.
+All data from Ensembl release 99.
 
-```{r fig2, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig2, out.width="50%", fig.align = "center", warning=FALSE}
 #####################
 # Mouse-rat dN for transcripts
 #####################\
@@ -222,9 +206,9 @@ print(dualp)
 
 ## Mouse-rat dN/dS for orthologous transcripts
 
-Data from Ensembl release 99.
+All data from Ensembl release 99.
 
-```{r fig3, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig3, out.width="50%", fig.align = "center", warning=FALSE}
 #####################
 # Mouse-rat dN/dS for transcripts
 #####################
@@ -263,13 +247,11 @@ dualp = ggplot(binned_data, aes(x = bin, y = ifelse(filter == "Post-filter",-1, 
 print(dualp)
 ```
 
-
-
-## Total transcript length vs. total probe target length
+## Total transcript length vs total probe target length
 
 Sum length of all probe targets in a given transcript
 
-```{r fig5, out.width="100%", fig.align = "center", warning=FALSE, message=F}
+```{r fig5, out.width="50%", fig.align = "center", warning=FALSE, message=F}
 
 ann_data = read.csv("../../data/Mus-selected-sequences_metadata_samp-counts_ratids.csv", header=T)
 ts_lens = unique(select(ann_data, transcript_id, transcript_length))
@@ -302,7 +284,7 @@ print(ts_targ_len_p)
 
 ## Number of samples matching each coding exon
 
-```{r fig6, out.width="100%", fig.align = "center", warning=FALSE, message=F}
+```{r fig6, out.width="50%", fig.align = "center", warning=FALSE, message=F}
 ann_data = subset(ann_data, protein_coding=="TRUE")
 
 exon_count_dist = ggplot(ann_data, aes(x=matching_sample_count)) +
@@ -315,9 +297,9 @@ print(exon_count_dist)
 
 ```
 
-## Assembly read depth vs. number of BLAST hits to probe targets
+## Assembly read depth vs number of BLAST hits to probe targets
 
-```{r fig7, out.width="100%", fig.align = "center", warning=FALSE, message=F}
+```{r fig7, out.width="50%", fig.align = "center", warning=FALSE, message=F}
 asm_data = read.csv("../../data/exome-stats.csv", header=T)
 asm_data = subset(asm_data, referee.avg.depth < 60)
 
@@ -332,7 +314,45 @@ print(targs_depth_p)
 
 ```
 
-```{r footer}
+```{r footer, echo=F, eval=F}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
 htmltools::includeHTML("../html-chunks/rmd_footer.html")
+```
+
+```{r echo=F, eval=F}
+## This is the log for max length as the final filter criteria
+
+# Rodent exomes -- select mouse trancsripts
+# PYTHON VERSION: 3.6.6
+# Script call: select_transcripts.py
+# Runtime: 04/14/2020 21:09:10
+# ----------
+# Mouse GTF file:        ../02-Annotation-data/reference-data/Mus_musculus.GRCm38.99.gtf.gz
+# Rat GTF file:          ../02-Annotation-data/reference-data/Rattus_norvegicus.Rnor_6.0.99.gtf.gz
+# Ensembl ortholog file: ../02-Annotation-data/reference-data/mouse-rat-orths-ens99.txt
+# Output file:           ../02-Annotation-data/selected-transcripts.txt
+# --------------
+# dS threshold:          0.5
+# --------------
+# 04.14.2020 | 21:09:10 Reading mouse feature lengths...
+# Mouse transcripts read: 142647
+# 04.14.2020 | 21:09:20 Reading rat feature lengths...
+# Rat transcripts read:   41078
+# --------------
+# 04.14.2020 | 21:09:27 Reading orthologs...
+# Genes read:      56289
+# Transcipts read: 170971
+# --------------
+# 04.14.2020 | 21:09:28 Filtering transcripts...
+# Transcripts with no rat ortholog:                                                      44696
+# Transcripts with no one2one rat ortholog:                                              37291
+# Transcripts with no high confidence rat ortholog:                                      11069
+# Transcripts with no rat ortholog below dS threshold:                                   1204
+# Transcripts filtered for not being, on average between rat and mouse, longest in gene: 56413
+# Note: numbers reported are conditional on those trancsripts passing the previous filter. Filters reported in order of their coding.
+# --------------
+# Genes with no passed transcripts:                                                      41857
+# Genes with selected transcript:                                                        14432
+# --------------
+# 04.14.2020 | 21:09:28 Writing selected transcripts to output file...
 ```

@@ -24,7 +24,9 @@ html_template = """
 		<div class="pure-u-18-24" id="main_col">
 			<div id="main_content">
                 <h1>{page_title}</h1>
-                
+                    <p><h4><a href="wgs_ps_comps.html">Positive selection tests</a></h4></p>
+
+                <h2>Conceptual figure</h2>				
                 <img class="pure-img" id="logo_main" src="figs/nih-fig2.png">
                 <center>Bold text indicates proposed species for WGS. Clade colors represent geographical regions (see Kevin's map).</center>
 			</div>

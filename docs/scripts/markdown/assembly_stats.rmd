@@ -1,13 +1,24 @@
 ---
-#title: "Exome assembly stats"
-#author: "gwct"
-#date: "08/28/2020"
-output: 
-  html_document:
+title: "Exome assembly"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
     includes:
       in_header: '../html-chunks/rmd_header.html'
     df_print: paged
     code_folding: hide
+    number_sections: true
+    toc_depth: 3
 ---
 
 ```{r setup, warning=FALSE, message=FALSE}
@@ -30,13 +41,14 @@ tile_min_len = 57
 tile_total_len = 51679441
 # Target and tile info
 
-htmltools::includeHTML("../html-chunks/nav.html")
+#htmltools::includeHTML("../html-chunks/nav.html")
 ```
 
 # Exome assembly stats with Spades
-### Number of scaffolds by batch
 
-```{r fig1, out.width="100%", fig.align="center"}
+## Number of scaffolds by batch
+
+```{r fig1, out.width="50%", fig.align="center"}
 spades_data = read.csv("../../data/exome-stats.csv", header=TRUE)
 #spades_data = subset(spades_data, "Mus pos_ctrl" !%in% Species)
 #spades_data$batch = as.character(spades_data$batch)
@@ -63,9 +75,9 @@ scaff_batch_p = ggplot(spades_data, aes(x=Batch, y=num.scaffs, fill=Batch)) +
 print(scaff_batch_p)
 ```
 
-### Scaffold length by batch
+## Scaffold length by batch
 
-```{r fig2, out.width="100%", fig.align = "center"}
+```{r fig2, out.width="50%", fig.align = "center"}
 ####################
 # Spades length distributions, by batch
 len_batch_p2 = ggplot(spades_data, aes(x=Batch, y=avg.scaff.len, fill=Batch)) +
@@ -91,9 +103,9 @@ len_batch_p2 = ggplot(spades_data, aes(x=Batch, y=avg.scaff.len, fill=Batch)) +
 print(len_batch_p2)
 ```
 
-### Total assembly length
+## Total assembly length
 
-```{r fig3, out.width="100%", fig.align = "center"}
+```{r fig3, out.width="50%", fig.align = "center"}
 ####################
 # Spades length distributions, by batch
 asm_batch_p2 = ggplot(spades_data, aes(x=Batch, y=asm.len, fill=Batch)) +
@@ -117,9 +129,9 @@ print("Assemblies shorter than total target length:")
 print(as.character(short_asm$Label))
 ```
 
-### Read depth to assembly by batch (no flanking regions)
+## Read depth to assembly by batch (no flanking regions)
 
-```{r fig4, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig4, out.width="50%", fig.align = "center", warning=FALSE}
 ####################
 # Spades length distributions, by batch
 #spades_data = subset(spades_data, Label != "Pseudomys-auritus")
@@ -144,9 +156,9 @@ print(as.character(high_depth$Label))
 
 ```
 
-### Read depth to mouse by batch
+## Read depth to mouse by batch
 
-```{r fig5, out.width="100%", fig.align = "center", warning=FALSE}
+```{r fig5, out.width="50%", fig.align = "center", warning=FALSE}
 ####################
 # Spades length distributions, by batch
 depth_p = ggplot(spades_data, aes(x=Batch, y=mouse.target.avg.depth, fill=Batch)) +
@@ -164,9 +176,9 @@ depth_p = ggplot(spades_data, aes(x=Batch, y=mouse.target.avg.depth, fill=Batch)
 print(depth_p)
 ```
 
-### Comparison of read depth mapped to assembly vs. to mouse
+## Comparison of read depth mapped to assembly vs to mouse
 
-```{r fig6, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig6, out.width="50%", fig.align="center", warning=FALSE}
 ####################
 # Read depth
 
@@ -219,9 +231,9 @@ print(depth_p)
 
 ```
 
-### Comparison of # of reads mapped to assembly vs. to mouse
+## Comparison of # of reads mapped to assembly vs to mouse
 
-```{r fig7, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig7, out.width="50%", fig.align="center", warning=FALSE}
 
 ####################
 # Read depth
@@ -260,9 +272,9 @@ print("Assemblies with reads mapped > 80000000:")
 print(as.character(high_reads$Label))
 ```
 
-### Comparison of % of reads mapped to assembly vs. to mouse
+## Comparison of % of reads mapped to assembly vs to mouse
 
-```{r fig8, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig8, out.width="50%", fig.align="center", warning=FALSE}
 
 ####################
 # Read depth
@@ -301,9 +313,9 @@ print(as.character(low_perc_reads$Label))
 
 ```
 
-### Read stats
+## Read stats
 
-```{r fig9, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig9, out.width="50%", fig.align="center", warning=FALSE}
 
 ####################
 # Read depth
@@ -363,9 +375,9 @@ print(reads_p)
 
 ```
 
-### Referee stats
+## Referee stats
 
-```{r fig10, out.width="100%", fig.align="center", warning=FALSE}
+```{r fig10, out.width="50%", fig.align="center", warning=FALSE}
 
 ####################
 # Referee
@@ -432,9 +444,9 @@ print(p)
 
 ```
 
-### Other stats
+## Other stats
 
-```{r fig11, out.width="100%", fig.align="center", warning=FALSE, eval=F}
+```{r fig11, out.width="50%", fig.align="center", warning=FALSE, eval=F}
 
 contig_data = read.csv("../../data/count-ns.csv", header=T)
 #contig_data$Ns.per.site = contig_data$Ns / contig_data$length
@@ -455,7 +467,7 @@ print(hets_p)
 
 ```
 
-```{r footer}
+```{r footer, echo=F, eval=F}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
 htmltools::includeHTML("../html-chunks/rmd_footer.html")
 ```
