@@ -25,7 +25,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
-#library(cowplot)
+library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
 #library(kableExtra)
@@ -49,7 +49,7 @@ source("C:/bin/core/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-#tree_type = "concat"
+tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -61,18 +61,23 @@ if(tree_type == "astral"){
 tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
 astral_tree = read.tree(tree_file)
 
-tree_info_astral = treeToDF(astral_tree)
+tree_to_df_list = treeToDF(astral_tree)
+tree_info_astral = tree_to_df_list[["info"]]
+#tree_info_astral = treeToDF(astral_tree)
 tree_info_astral = tree_info_astral %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
 tree_info_astral$astral[tree_info_astral$node.type=="tip"] = NA
 tree_info_astral$astral = as.numeric(tree_info_astral$astral)
 tree_info_astral$gcf = as.numeric(tree_info_astral$gcf)
 tree_info_astral$scf = as.numeric(tree_info_astral$scf)
+
 # Read astral tree data
 
 concat_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
 concat_tree = read.tree(concat_file)
 
-tree_info_concat = treeToDF(concat_tree)
+tree_to_df_list = treeToDF(concat_tree)
+tree_info_concat = tree_to_df_list[["info"]]
+#tree_info_concat = treeToDF(concat_tree)
 tree_info_concat = tree_info_concat %>% separate(label, c("bootstrap", "gcf", "scf"), sep="/", remove=F)
 tree_info_concat$bootstrap[tree_info_concat$node.type=="tip"] = NA
 tree_info_concat$bootstrap = as.numeric(tree_info_concat$bootstrap)
@@ -92,11 +97,15 @@ if(tree_type == "astral"){
   tree_info = tree_info_astral
   rodent_tree = astral_tree
   xmax = 31
+  cf_stat_file = "../../data/trees/full_coding_iqtree_astral.cf.stat"
 }else if(tree_type == "concat"){
   tree_info = tree_info_concat
   rodent_tree = concat_tree
   xmax = 0.125
+  cf_stat_file = "../../data/trees/full_coding_iqtree_concat.cf.stat"
 }
+
+cf_stats = read.table(cf_stat_file, header=T)
 
 ```
 
@@ -261,14 +270,16 @@ print(dn_p)
 ```
 
 ```{r ds_filter, out.width="50%", fig.align = "center", warning=FALSE}
-ds_filter_level = 0.03
+
+ds_filter_level = quantile(mg94_local_gene$ds, 0.98)
+#ds_filter_level = 0.03
 
 ds_filter = subset(mg94_local_gene, ds > ds_filter_level)$file
 # Get a list of genes to filter out in subsequent analyses based on dS
 
 print(paste("Removing", length(ds_filter), "genes with dS above", ds_filter_level, "from subsequent analyses."))
 
-#write.csv(ds_filter, file="../../data/rates/mg94-local-ds-filter-0.03.csv", row.names=F)
+#write.csv(ds_filter, file="../../data/rates/full-coding-mg94-local-ds-filter-0.95quant.csv", row.names=F)
 ```
 
 [< Back to summary](summary_210.html)
@@ -403,6 +414,104 @@ rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.
 print(rate_tree)
 ```
 
+# Rates and discordance
+
+### dS vs. concordance factors
+
+Only branches with avg. dS < 0.05
+
+```{r fig12, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
+
+ds_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.ds < 0.05), aes(x=avg.ds, y=gcf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Avg. dS per branch") + 
+  ylab("gCF per branch") + 
+  bartheme()
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+ds_gcf_p = ggExtra::ggMarginal(ds_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
+
+ds_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.ds < 0.05), aes(x=avg.ds, y=scf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Avg. dS per branch") + 
+  ylab("sCF per branch") + 
+  bartheme()
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+ds_scf_p = ggExtra::ggMarginal(ds_scf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=5), color="#666666")
+
+p = plot_grid(ds_gcf_p, ds_scf_p, ncol=2)
+print(p)
+```
+
+### dN vs. concordance factors
+
+Only branches with avg. dN < 0.01
+
+```{r fig13, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
+
+dn_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn < 0.01), aes(x=avg.dn, y=gcf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Avg. dN per branch") + 
+  ylab("gCF per branch") + 
+  bartheme()
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+dn_gcf_p = ggExtra::ggMarginal(dn_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
+
+dn_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn < 0.01), aes(x=avg.dn, y=scf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Avg. dN per branch") + 
+  ylab("sCF per branch") + 
+  bartheme()
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+dn_scf_p = ggExtra::ggMarginal(dn_scf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=5), color="#666666")
+
+p = plot_grid(dn_gcf_p, dn_scf_p, ncol=2)
+print(p)
+```
+
+### dN/dS vs. concordance factors
+
+Only branches with avg. dN/dS < 0.5
+
+```{r fig14, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
+
+dnds_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn.ds < 0.5), aes(x=avg.dn.ds, y=gcf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Avg. dN/dS per branch") + 
+  ylab("gCF per branch") + 
+  bartheme()
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+dnds_gcf_p = ggExtra::ggMarginal(dnds_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
+
+dnds_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn.ds < 0.5), aes(x=avg.dn.ds, y=scf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Avg. dN/dS per branch") + 
+  ylab("sCF per branch") + 
+  bartheme()
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+dnds_scf_p = ggExtra::ggMarginal(dnds_scf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=5), color="#666666")
+
+p = plot_grid(dnds_gcf_p, dnds_scf_p, ncol=2)
+print(p)
+```
+
 [< Back to summary](summary_210.html)
 
 # Basic rate and phenotype correlations with tip branches
@@ -422,7 +531,7 @@ pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "avg.dn", "avg.ds", "av
 
 ### Avg dS per tip vs phenotype
 
-```{r fig12, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r fig15, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=value, y=avg.ds)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
@@ -435,7 +544,7 @@ print(p)
 
 ### Avg dN per tip vs phenotype
 
-```{r fig13, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r fig16, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=value, y=avg.dn)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
