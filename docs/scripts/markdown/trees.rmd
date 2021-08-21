@@ -49,7 +49,7 @@ source("C:/bin/core/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-tree_type = "astral"
+# tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -97,16 +97,47 @@ if(tree_type == "astral"){
   tree_info = tree_info_astral
   rodent_tree = astral_tree
   xmax = 31
+  iq_tree_labels = "../../data/trees/full_coding_iqtree_astral.cf.branch.rooted"
   cf_stat_file = "../../data/trees/full_coding_iqtree_astral.cf.stat"
+  cf_rep_dir = "../../data/trees/astral-cf-reps/"
+  delta_outfile = "../../data/trees/astral-delta.tab"
 }else if(tree_type == "concat"){
   tree_info = tree_info_concat
   rodent_tree = concat_tree
   xmax = 0.125
+  iq_tree_labels = "../../data/trees/full_coding_iqtree_concat.cf.branch.rooted"
   cf_stat_file = "../../data/trees/full_coding_iqtree_concat.cf.stat"
+  cf_rep_dir = "../../data/trees/concat-cf-reps/"
+  delta_outfile = "../../data/trees/concat-delta.tab"
 }
 
 cf_stats = read.table(cf_stat_file, header=T)
 
+```
+
+```{r match-labels, out.width="100%", fig.align = "center", warning=FALSE}
+# The node/branch labels in R and IQtree differ. IQtree uses a nice, logical post-ordering
+# of internal nodes while R does something random and assigns labels to tips as well. This 
+# chunk matches those up for the delta analysis later
+
+iq_tree = read.tree(iq_tree_labels)
+iqtree_to_df_list = treeToDF(iq_tree)
+iqtree_info = iqtree_to_df_list[["info"]]
+# Read the IQ tree tree with branch labels in and parse with get_tree_info
+
+#node_convert = matchNodes(tree_to_df_list[["labeled.tree"]], iqtree_to_df_list[["labeled.tree"]], method="descendants")
+
+tree_info$iqtree.node = NA
+# Add a column to the main tree table about IQ tree labels
+
+for(i in 1:nrow(tree_info)){
+  cur_node = tree_info[i,]$node
+  iqtree_row = subset(iqtree_info, node==cur_node)
+  iqtree_label = iqtree_row$label
+  tree_info[i,]$iqtree.node = iqtree_label
+}
+# For every row in the main tree table, add in the IQ tree node label given that
+# we've read the same tree in R and can use the node.labels
 ```
 
 ### Species tree with branches colored by gene concordance factor
@@ -171,6 +202,43 @@ p = p + bartheme() +
 print(p)
 ```
 
+### Concordance factors vs. branch lengths
+
+```{r fig-bl-v-cf, out.width="75%", fig.align = "center", warning=FALSE}
+
+bl_gcf_p = ggplot(tree_info, aes(x=branch.length, y=gcf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Branch length") + 
+  ylab("gCF per branch") + 
+  bartheme()
+  if(tree_type=="concat"){
+    bl_gcf_p = bl_gcf_p + scale_x_continuous(limits=c(0,0.035))
+  }
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+bl_gcf_p = ggExtra::ggMarginal(bl_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
+
+bl_scf_p = ggplot(tree_info, aes(x=branch.length, y=scf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("Branch length") + 
+  ylab("sCF per branch") + 
+  bartheme()
+  if(tree_type=="concat"){
+    bl_gcf_p = bl_gcf_p + scale_x_continuous(limits=c(0,0.035))
+  }
+  #theme(legend.position="bottom") +
+  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
+bl_scf_p = ggExtra::ggMarginal(bl_scf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=5), color="#666666")
+
+p = plot_grid(bl_gcf_p, bl_scf_p, ncol=2)
+print(p)
+
+```
+
 # Gene trees
 
 The 11,774 gene trees contain varying numbers of taxa due to filtering on the alignment and filtering by IQtree for identical sequences.
@@ -210,7 +278,7 @@ print(p)
 
 Since RF cannot handle missing taxa, the species tree is pruned for each gene tree to calculate Robinson-Foulds distance. We use the normalized metric since there are varying numbers of tips per gene tree.
 
-```{r fig5, out.width="50%", fig.align = "center", warning=FALSE}
+```{r gt-st-rf, out.width="50%", fig.align = "center", warning=FALSE}
 p = ggplot(gt_data, aes(x=rfs)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666") +
   #geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
@@ -222,6 +290,115 @@ p = ggplot(gt_data, aes(x=rfs)) +
 print(p)
 ```
 
+### Delta
+
+#### Brief introduction
+
+For each lineage in the species tree with gCF < 95% we calculated the $\Delta$ statistic ([Huson et al. 2005](. https://doi.org/10.1007/11415770_18)). This statistic follows the same logic as the ABBA-BABA site patterns used to calculate D-statistics, but uses gene tree topologies instead of alignment sites. Briefly, a given branch in an unrooted tree is defined by a quartet of species groupings with two possible discordant topologies, $D_1$ and $D_2$ (see Figure 1 from [Minh et al. 2020](https://doi.org/10.1093/molbev/msaa106)). Under assumptions that discordance is caused by ILS, both discordant topologies should be present in equal proportions. However, if introgression has occurred one discordant topology will appear more frequently than the other. $\Delta$ is calculated for a branch as follows, using the frequency of each discordant topology ([Vanderpool et al. 2020](https://doi.org/10.1371/journal.pbio.3000954)):
+
+$$\Delta = \frac{D_1 - D_2}{D_1 + D_2}$$
+
+This normalized $\Delta$ calculation ensures that all values are scaled between 0 and 1, with larger values indicating a larger skew towards one topology, and a higher chance that introgression has occurred.
+
+To test whether the observed $\Delta$ values are skewed significantly from 0 to imply introgression, we performed concordance factor analysis on 1,000 bootstrap replicates of our inferred gene trees to generate a null distribution of $\Delta$ values. We then calculated Z-scores and p-values and assessed significance for each branch at a threshold of 0.01.
+
+#### Results
+
+Nodes with p < 0.01:
+
+```{r delta-dists, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
+cf_stats$delta = (abs(cf_stats$gDF1_N - cf_stats$gDF2_N)) / (cf_stats$gDF1_N + cf_stats$gDF2_N)
+# Calculate the delta values on the actual data
+
+low_cf_nodes = subset(cf_stats, gCF < 95)
+# Get the low concordance factor nodes from the data to test with delta
+
+delta_null = c()
+for(i in 0:999){
+  cur_rep_str = as.character(i)
+  #print(cur_rep_str)
+  while(nchar(cur_rep_str) < 4){
+    cur_rep_str = paste("0", cur_rep_str, sep="")
+  }
+  # Handling the string of the rep
+  
+  cur_cf_file = paste(cf_rep_dir, "rep", cur_rep_str, ".cf.stat", sep="")
+  cf_rep = read.table(cur_cf_file, header=T, fill=T)
+  # Read the current reps cf file
+  
+  cf_rep$delta = (abs(cf_rep$gDF1_N - cf_rep$gDF2_N)) / (cf_rep$gDF1_N + cf_rep$gDF2_N)
+  delta_null = c(delta_null, cf_rep$delta)
+  # Calculate delta for this rep and save values in vector
+}
+# Read concordance factors from bootstrap samples of gene trees and calculate delta to generate
+# null distribution
+
+delta_null_df = data.frame("delta"=delta_null, y="duh")
+delta_null_df = subset(delta_null_df, !is.nan(delta))
+# Convert the delta values to a data frame for ggplot
+
+delta_mu = mean(delta_null_df$delta, na.rm=T)
+delta_sd = sd(delta_null_df$delta, na.rm=T)
+# Calculate the mean and sd of the null distribution to get z-scores and p-values
+
+delta_out = data.frame("node"=c(), "delta"=c(), "z-score"=c(), "p-value"=c())
+# Initialize output data frame
+
+tree_info$delta.sig = F
+# Add a column to the tree info table about significant delta values
+
+for(i in 1:nrow(low_cf_nodes)){
+  row = low_cf_nodes[i,]
+  z = (row$delta - delta_mu) / delta_sd
+  p = pnorm(-abs(z))
+  if(p < 0.01){
+    print(paste(row$ID, row$delta, z, p, sep=" "))
+    tree_info$delta.sig[tree_info$iqtree.node==row$ID] = T
+    # Set the delta significant to TRUE in the main tree info table
+  }
+  delta_out = rbind(delta_out, data.frame("node"=row$ID, "delta"=row$delta, "z-score"=z, "p-value"=p))
+}
+# Calculate z and p for each low gCF node in the species tree and save to output data frame
+
+write.table(file=delta_outfile, delta_out, sep="\t", row.names=F)
+
+delta_null_p = ggplot(delta_null_df, aes(x=delta)) +
+  geom_histogram(color="#ececec", bins=50) +
+  scale_x_continuous(limits=c(0,1)) +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("Delta") + 
+  ylab("# nodes") +
+  bartheme()
+
+delta_actual_p = ggplot(low_cf_nodes, aes(x=delta)) +
+  geom_histogram(fill="#920000", color="#ececec") +
+  scale_x_continuous(limits=c(0,1)) +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("Delta") +
+  ylab("# nodes") +
+  bartheme()
+
+delta_p = plot_grid(delta_null_p, delta_actual_p, ncol=2, labels=c("Null distribution", "Actual distribution"), label_size=12)
+print(delta_p)
+```
+
+### Branches with evidence for introgression
+
+```{r delta-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=1)
+l = corecol(numcol=1, offset=1)
+
+intro_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$delta.sig)) +
+  scale_color_manual(name="Significant Delta", labels=c("True", "False"), values=corecol(pal="trek", numcol=2)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9)) +
+  geom_label(aes(x=branch, label=ifelse(tree_info$delta.sig,as.character(node),'')), label.size=NA, fill="transparent")
+#geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
+#geom_nodepoint(color="#666666", alpha=0.85, size=4)
+print(intro_tree)
+```
+
 [< Back to summary](summary_210.html)
 
 # Average rates per gene with basic model fit (mg94-local)
@@ -231,8 +408,8 @@ We ran each of the 11,775 coding loci through [HyPhy's standard MG94 fit](https:
 For input trees we used the gene tree estimated from each individual alignment to reduce false inferences of substitutions that result from tree misspecification.
 
 ```{r read-mg94local, out.width="50%", fig.align = "center", warning=FALSE}
-mg94_local_file = "../../data/rates/full-coding-mg94-local.csv.gz"
-#mg94_local_file = "../../data/rates/full-coding-mg94-local.csv"
+#mg94_local_file = "../../data/rates/full-coding-mg94-local.csv.gz"
+mg94_local_file = "../../data/rates/full-coding-mg94-local.csv"
 mg94_local = vroom(mg94_local_file, comment="#")
 
 mg94_local_gene = group_by(mg94_local, file) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean("dn/ds", na.rm=T), nonsynonymous.bl=mean("nonsynonymous bl", na.rm=T), synonymous.bl=mean("synonymous bl", na.rm=T))
@@ -267,7 +444,9 @@ dn_p = ggplot(mg94_local_gene, aes(x=dn)) +
   bartheme()
 print(dn_p)
 # Distribution of dS when using gene trees
+
 ```
+
 
 ```{r ds_filter, out.width="50%", fig.align = "center", warning=FALSE}
 
