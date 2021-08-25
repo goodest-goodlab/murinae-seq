@@ -183,18 +183,18 @@ print(scf_tree)
 
 ### Gene vs site concordance factors colored by branch support
 
-```{r fig3, out.width="50%", fig.align = "center", warning=FALSE}
+```{r gcf-scf-supp, out.width="50%", fig.align = "center", warning=FALSE}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
 
 if(tree_type == "astral"){
   p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) + 
-    geom_point() +
+    geom_point(size=2, alpha=0.5) +
     scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0.8,1))
 }else if(tree_type == "concat"){
   p = ggplot(tree_info, aes(x=gcf, y=scf, color=bootstrap)) + 
-    geom_point() +
+    geom_point(size=2, alpha=0.5) +
     scale_color_continuous(name='Bootstrap', low=l, high=h, limits=c(0,100))
 }
 p = p + bartheme() +
@@ -310,6 +310,14 @@ Nodes with p < 0.01:
 cf_stats$delta = (abs(cf_stats$gDF1_N - cf_stats$gDF2_N)) / (cf_stats$gDF1_N + cf_stats$gDF2_N)
 # Calculate the delta values on the actual data
 
+iqtree_delta = select(cf_stats, ID, delta)
+names(iqtree_delta) = c("iqtree.node", "delta")
+tree_info = merge(x = tree_info, y = iqtree_delta, by = "iqtree.node", all.x=TRUE)
+# Adding the delta values to the main tree info table
+
+tree_info = tree_info[order(tree_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
 low_cf_nodes = subset(cf_stats, gCF < 95)
 # Get the low concordance factor nodes from the data to test with delta
 
@@ -389,14 +397,31 @@ h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
 intro_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$delta.sig)) +
-  scale_color_manual(name="Significant Delta", labels=c("True", "False"), values=corecol(pal="trek", numcol=2)) +
+  scale_color_manual(name="Significant Delta", labels=c("False", "True"), values=corecol(pal="trek", numcol=2)) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
-  geom_label(aes(x=branch, label=ifelse(tree_info$delta.sig,as.character(node),'')), label.size=NA, fill="transparent")
+  geom_label(aes(x=branch, label=ifelse(tree_info$delta.sig,as.character(node),'')), label.size=NA, fill="transparent", show.legend=F, vjust=-0.1)
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(intro_tree)
+```
+
+### CF and Delta
+
+```{r gcf-scf-delta, out.width="50%", fig.align = "center", warning=FALSE}
+l = corecol(numcol=1, pal="wilke", offset=3)
+h = corecol(numcol=1, offset=3)
+# Colors
+
+p = ggplot(tree_info, aes(x=gcf, y=scf, color=delta)) + 
+  geom_point(size=2, alpha=0.5) +
+  geom_text_repel(aes(label=ifelse(delta.sig,as.character(node),'')), show_guide=F, min.segment.length=0) +
+  scale_color_continuous(name='Delta', low=l, high=h) +
+  bartheme() +
+  theme(legend.title=element_text(size=12))
+
+print(p)
 ```
 
 [< Back to summary](summary_210.html)
@@ -446,7 +471,6 @@ print(dn_p)
 # Distribution of dS when using gene trees
 
 ```
-
 
 ```{r ds_filter, out.width="50%", fig.align = "center", warning=FALSE}
 
@@ -576,6 +600,7 @@ rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.
 print(rate_tree)
 ```
 
+
 ### The tree with branches colored by dN and outliers labeled:
 
 ```{r fig11, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
@@ -588,6 +613,37 @@ rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
   geom_label(aes(x=branch, label=ifelse(tree_rates$avg.dn>0.01,as.character(node),'')), label.size=NA, fill="transparent")
+#geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
+#geom_nodepoint(color="#666666", alpha=0.85, size=4)
+print(rate_tree)
+```
+
+### Average dN/dS per branch
+
+```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
+dnds_p = ggplot(tree_rates, aes(x=avg.dn.ds)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("dN/dS") +
+  ylab("# of branches") +
+  bartheme()
+print(dnds_p)
+# Distribution of dN/dS when using gene trees
+
+```
+
+### The tree with branches colored by dN/dS:
+
+```{r dn-ds-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=1)
+l = corecol(numcol=1, offset=1)
+
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.dn.ds)) +
+  scale_color_continuous(name='Avg. dN/dS', low=l, high=h) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9))
+  #geom_label(aes(x=branch, label=ifelse(tree_rates$avg.dn>0.01,as.character(node),'')), label.size=NA, fill="transparent")
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(rate_tree)
