@@ -38,10 +38,10 @@ library(ggExtra)
 library(ggrepel)
 library(vroom)
 library(ggdist)
-#source("C:/bin/core/corelib/design.r")
-#source("C:/bin/core/get_tree_info.r")
-source("C:/Users/grt814/bin/core/corelib/design.r")
-source("C:/Users/grt814/bin/core/get_tree_info.r")
+source("C:/bin/core/corelib/design.r")
+source("C:/bin/core/get_tree_info.r")
+#source("C:/Users/grt814/bin/core/corelib/design.r")
+#source("C:/Users/grt814/bin/core/get_tree_info.r")
 
 #htmltools::includeHTML("../html-chunks/rmd_nav.html")
 ```
@@ -51,7 +51,7 @@ source("C:/Users/grt814/bin/core/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-tree_type = "astral"
+#tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -467,7 +467,7 @@ print(ds_p)
 ```
 
 ```{r fig7, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
-dn_p = ggplot(mg94_local_gene, aes(x=dn)) +
+dn_p = ggplot(gene_rates, aes(x=dn)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
   scale_y_continuous(expand=c(0,0)) +
   xlab("dN") +
@@ -480,10 +480,10 @@ print(dn_p)
 
 ```{r ds_filter, out.width="50%", fig.align = "center", warning=FALSE}
 
-ds_filter_level = quantile(mg94_local_gene$ds, 0.98)
+ds_filter_level = quantile(gene_rates$ds, 0.98)
 #ds_filter_level = 0.03
 
-ds_filter = subset(mg94_local_gene, ds > ds_filter_level)$file
+ds_filter = subset(gene_rates, ds > ds_filter_level)$file
 # Get a list of genes to filter out in subsequent analyses based on dS
 
 print(paste("Removing", length(ds_filter), "genes with dS above", ds_filter_level, "from subsequent analyses."))
@@ -515,7 +515,8 @@ Where:
 
 ```{r ds_branch_avgs, out.width="50%", fig.align="center", warning=FALSE}
 if(tree_type == "astral"){
-  tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-rates.csv", header=T)
+  #tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-rates.csv", header=T)
+  tree_rates = read.csv("../../data/rates/full-coding-astral-rooted-slac.csv", header=T)
 }else if(tree_type == "concat"){
   tree_rates = read.csv("../../data/rates/full-coding-concat-cf-rooted-rates.csv", header=T)
 }
@@ -569,7 +570,24 @@ print(p)
 
 ```
 
-### This results in the following distributions for average rates across branches:
+### Averaging rates across branches
+
+To control for the fact that different branches will be present in different numbers of genes, we can calculat average rates per branch by summing the raw counts of the number of sites and the number of substitutions across all genes in which that branch is present as a full or partial clade.
+
+For a given branch, $b$:
+
+$$dN_b = \frac{\sum_{g \in G_b}N_g}{\sum_{g \in G_b}EN_g}$$
+
+and
+
+$$dS_b = \frac{\sum_{g \in G_b}S_g}{\sum_{g \in G_b}ES_g}$$
+
+where $G_b$ is the set of genes that contain branch $b$. Then,
+
+$$\omega_b = \frac{dN_b}{dS_b}$$
+
+
+This results in the following distributions for average rates across branches:
 
 ```{r fig9, out.width="50%", fig.align = "center", warning=FALSE}
 

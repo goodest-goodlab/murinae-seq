@@ -106,7 +106,8 @@ Gene and species trees for this set of species were constructed with IQtree and 
 tree_file = "../../data/wgs-ps-comps/05_penn_7spec_iqtree.cf.rooted.tree"
 concat_tree = read.tree(tree_file)
 
-tree_info_concat = treeToDF(concat_tree)
+tree_to_df_list = treeToDF(concat_tree)
+tree_info_concat = tree_to_df_list[["info"]]
 tree_info_concat = tree_info_concat %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
 tree_info_concat$bootstrap[tree_info_concat$node.type=="tip"] = NA
 tree_info_concat$bootstrap = as.numeric(tree_info_concat$astral)
