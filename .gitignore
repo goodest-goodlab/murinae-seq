@@ -44,6 +44,7 @@ docs/data/aln-stats/sample-targets-exonerate-f175.csv
 
 docs/data/rates/full-coding-mg94-local.csv.gz
 docs/data/rates/full-coding-mg94-local.csv
+docs/data/rates/full-coding-slac.csv.gz
 
 docs/data/noncoding-aln-stats/full-all-alnlens-200.csv
 docs/data/noncoding-aln-stats/full-all-alnlens-500.csv

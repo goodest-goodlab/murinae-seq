@@ -8,10 +8,10 @@ tree_type = "astral"
 
 cat("Rendering trees-", tree_type, ".rmd/html\n", sep="")
 
-setwd("C:/bin/murinae-seq/docs/scripts/generators/")
+setwd("../generators/")
 # Set the working directory.
 
-vroom_tmp_dir = "C:/bin/murinae-seq/docs/scripts/generators/tmp/"
+vroom_tmp_dir = "../generators/tmp/"
 cat(" -> Creating vroom tmp dir:", vroom_tmp_dir, "\n")
 dir.create(vroom_tmp_dir)
 Sys.setenv(VROOM_TEMP_PATH = vroom_tmp_dir)

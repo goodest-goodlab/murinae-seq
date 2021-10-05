@@ -38,8 +38,10 @@ library(ggExtra)
 library(ggrepel)
 library(vroom)
 library(ggdist)
-source("C:/bin/core/corelib/design.r")
-source("C:/bin/core/get_tree_info.r")
+#source("C:/bin/core/corelib/design.r")
+#source("C:/bin/core/get_tree_info.r")
+source("C:/Users/grt814/bin/core/corelib/design.r")
+source("C:/Users/grt814/bin/core/get_tree_info.r")
 
 #htmltools::includeHTML("../html-chunks/rmd_nav.html")
 ```
@@ -49,7 +51,7 @@ source("C:/bin/core/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-# tree_type = "astral"
+tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -433,13 +435,17 @@ We ran each of the 11,775 coding loci through [HyPhy's standard MG94 fit](https:
 For input trees we used the gene tree estimated from each individual alignment to reduce false inferences of substitutions that result from tree misspecification.
 
 ```{r read-mg94local, out.width="50%", fig.align = "center", warning=FALSE}
-#mg94_local_file = "../../data/rates/full-coding-mg94-local.csv.gz"
-mg94_local_file = "../../data/rates/full-coding-mg94-local.csv"
-mg94_local = vroom(mg94_local_file, comment="#")
+rates_file = "../../data/rates/full-coding-slac.csv.gz"
+#mg94_local_file = "../../data/rates/full-coding-mg94-local.csv"
+rates = vroom(rates_file, comment="#")
 
-mg94_local_gene = group_by(mg94_local, file) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean("dn/ds", na.rm=T), nonsynonymous.bl=mean("nonsynonymous bl", na.rm=T), synonymous.bl=mean("synonymous bl", na.rm=T))
+rates$dn = rates$N / rates$EN
+rates$ds = rates$S / rates$ES
+rates$dn.ds = rates$dn / rates$ds
 
-p = ggplot(subset(mg94_local_gene, ds < 0.05), aes(x=ds, y=dn)) +
+gene_rates = group_by(rates, file) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean("dn/ds", na.rm=T))
+
+p = ggplot(subset(gene_rates, ds < 0.05), aes(x=ds, y=dn)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   #geom_smooth(method="lm", se=F, ) +
   xlab("Avg. dS per gene") + 
@@ -450,7 +456,7 @@ print(p)
 ```
 
 ```{r fig6, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
-ds_p = ggplot(subset(mg94_local_gene, ds < 0.05), aes(x=ds)) +
+ds_p = ggplot(subset(gene_rates, ds < 0.05), aes(x=ds)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
   scale_y_continuous(expand=c(0,0)) +
   xlab("dS") +
