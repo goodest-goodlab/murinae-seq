@@ -230,7 +230,7 @@ bl_scf_p = ggplot(tree_info, aes(x=branch.length, y=scf)) +
   ylab("sCF per branch") + 
   bartheme()
   if(tree_type=="concat"){
-    bl_gcf_p = bl_gcf_p + scale_x_continuous(limits=c(0,0.035))
+    bl_scf_p = bl_scf_p + scale_x_continuous(limits=c(0,0.035))
   }
   #theme(legend.position="bottom") +
   #guides(colour = guide_legend(override.aes = list(alpha = 1)))
