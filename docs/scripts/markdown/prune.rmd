@@ -23,244 +23,367 @@ output:
 
 ```{r setup, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+# Set markdown knitting options
 
 library(ggplot2)
 library(cowplot)
-library(ggbeeswarm)
-library(dplyr)
-#library(kableExtra)
-library(tidyr)
 library(ggtree)
 library(phytools)
-library(phangorn)
-library(reshape2)
 library(ggExtra)
-library(ggrepel)
-library(vroom)
-library(ggdist)
+library(readr)
+library(here)
 source("C:/bin/core/corelib/design.r")
 source("C:/bin/core/get_tree_info.r")
 #source("C:/Users/grt814/bin/core/corelib/design.r")
 #source("C:/Users/grt814/bin/core/get_tree_info.r")
+# Load required packages
 
-#htmltools::includeHTML("../html-chunks/rmd_nav.html")
+
+#tree_type = "astral"
+cat(toupper(tree_type), "TREE\n\n")
+# Print out tree type (passed from generator)
 ```
 
 [< Back to summary](summary_210.html)
 
-# Full coding species tree
+# Tree pruning algorithm
+
+### Setup: 
+1. Select a branch length percentile and support threshold.
+2. Set a maximum number of iterations to perform and a maximum number of species to remove.
+
+### Algorithm:
+1. Identify branches with length below the selected quantile of all branches AND below the selected support level.
+2. Of the two branches descending from this branch, select one to remove. Selection criteria could be: 
+   - Random, possibly with some sort of bootstrapping
+   - Minimize species removed
+   - Maximize support retained
+   - Other?
+3. Repeat until one of the stopping conditions are met: 
+   - No branches that fall below the selected percentile are also below the selected support level
+   - The maximum number of iterations has been reached
+   - The current iteration would result in more than the maximum allowed species to be removed
+
+### Notes:
+1. Currently, only internal branches are considered since no support is assigned to the tips. But we could calculate support on the tips as number of genes in which they are present. However, ASTRAL trees also don't have branch lengths on the tips, so it wouldn't work for them anyways.
+2. The branch length threshold is re-calculated each iteration.
+3. The new branches inherit the support level from the retained clade. It is not currently recalculated.
+
+# Example output using the minimize species removed selection criterion
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-tree_type = "concat"
-save_tree_fig = F
+infile = here("docs", "data", "trees", "paring", paste("min-spec-paring-", tree_type, sep=""), paste("min-spec-paring-", tree_type, ".log", sep=""))
+# Path to the paring log file for the current tree type
 
-if(tree_type == "astral"){
-  cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred with ASTRAL (no branch lengths shown).\n")
-}else if(tree_type == "concat"){
-  cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred by concatenation of all loci with IQtree.\n")
-}
+in_data = read.csv(infile, header=T, sep="\t", comment.char="#")
+# Read the data from the log file
 
-tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
-astral_tree = read.tree(tree_file)
-
-tree_to_df_list = treeToDF(astral_tree)
-tree_info_astral = tree_to_df_list[["info"]]
-#tree_info_astral = treeToDF(astral_tree)
-tree_info_astral = tree_info_astral %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
-tree_info_astral$astral[tree_info_astral$node.type=="tip"] = NA
-tree_info_astral$astral = as.numeric(tree_info_astral$astral)
-tree_info_astral$gcf = as.numeric(tree_info_astral$gcf)
-tree_info_astral$scf = as.numeric(tree_info_astral$scf)
-
-# Read astral tree data
-
-concat_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
-concat_tree = read.tree(concat_file)
-
-tree_to_df_list = treeToDF(concat_tree)
-tree_info_concat = tree_to_df_list[["info"]]
-#tree_info_concat = treeToDF(concat_tree)
-tree_info_concat = tree_info_concat %>% separate(label, c("bootstrap", "gcf", "scf"), sep="/", remove=F)
-tree_info_concat$bootstrap[tree_info_concat$node.type=="tip"] = NA
-tree_info_concat$bootstrap = as.numeric(tree_info_concat$bootstrap)
-tree_info_concat$gcf = as.numeric(tree_info_concat$gcf)
-tree_info_concat$scf = as.numeric(tree_info_concat$scf)
-# Read concat tree data
-
-rf = RF.dist(concat_tree, astral_tree)
-nrf = RF.dist(concat_tree, astral_tree, normalize=T)
-
-#treecomp = comparePhylo(concat_tree, astral_tree, plot=T)
-# Stores node ids of common clades between trees!
-
-#write.csv(tree_info, "../../data/trees/full-coding-concat-cf-rooted.csv", row.names=F)
-
-if(tree_type == "astral"){
-  tree_info = tree_info_astral
-  rodent_tree = astral_tree
-  xmax = 31
-  iq_tree_labels = "../../data/trees/full_coding_iqtree_astral.cf.branch.rooted"
-  cf_stat_file = "../../data/trees/full_coding_iqtree_astral.cf.stat"
-  cf_rep_dir = "../../data/trees/astral-cf-reps/"
-  delta_outfile = "../../data/trees/astral-delta.tab"
-}else if(tree_type == "concat"){
-  tree_info = tree_info_concat
-  rodent_tree = concat_tree
-  xmax = 0.125
-  iq_tree_labels = "../../data/trees/full_coding_iqtree_concat.cf.branch.rooted"
-  cf_stat_file = "../../data/trees/full_coding_iqtree_concat.cf.stat"
-  cf_rep_dir = "../../data/trees/concat-cf-reps/"
-  delta_outfile = "../../data/trees/concat-delta.tab"
-}
-
-cf_stats = read.table(cf_stat_file, header=T)
-
+in_str = read_file(infile)
+cat(in_str)
+# Read the whole logfile as raw text and print
 ```
 
-```{r match-labels, out.width="100%", fig.align = "center", warning=FALSE}
-# The node/branch labels in R and IQtree differ. IQtree uses a nice, logical post-ordering
-# of internal nodes while R does something random and assigns labels to tips as well. This 
-# chunk matches those up for the delta analysis later
 
-iq_tree = read.tree(iq_tree_labels)
-iqtree_to_df_list = treeToDF(iq_tree)
-iqtree_info = iqtree_to_df_list[["info"]]
-# Read the IQ tree tree with branch labels in and parse with get_tree_info
+# Visualization of iterations using ASTRAL tree and the minimize species removed selection criterion
 
-#node_convert = matchNodes(tree_to_df_list[["labeled.tree"]], iqtree_to_df_list[["labeled.tree"]], method="descendants")
+## Trees
 
-tree_info$iqtree.node = NA
-# Add a column to the main tree table about IQ tree labels
+```{r bl-v-cf, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+plist = list()
+tlist = list()
+# Lists for figures per iteration
 
-for(i in 1:nrow(tree_info)){
-  cur_node = tree_info[i,]$node
-  iqtree_row = subset(iqtree_info, node==cur_node)
-  iqtree_label = iqtree_row$label
-  tree_info[i,]$iqtree.node = iqtree_label
-}
-# For every row in the main tree table, add in the IQ tree node label given that
-# we've read the same tree in R and can use the node.labels
-```
+for(i in 1:nrow(in_data)){
+# Loop over every pruning iteration in the input data
+  
+  iter_tree = read.tree(text=in_data[i,]$tree)
+  # Read the tree into R
 
-### Species tree with branches colored by gene concordance factor
-
-```{r gcf-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
-h = corecol(numcol=1, pal="wilke", offset=3)
-l = corecol(numcol=1, offset=3)
-# Colors
-
-gcf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$gcf)) +
-  scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
-  xlim(0, xmax) +
-  geom_tiplab(color="#333333", fontface='italic', size=2) +
-  #geom_label(aes(x=branch, label=as.character(node), label.size=NA, fill="white")) +
-  theme(legend.position=c(0.05,0.9))
-print(gcf_tree)
-
-if(save_tree_fig){
-  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
-  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree.pdf", sep="")
-  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
-}
-# gCF tree
-```
-
-### Gene vs site concordance factors colored by branch support
-
-```{r gcf-scf-supp, out.width="50%", fig.align = "center", warning=FALSE}
-h = corecol(numcol=1, pal="wilke", offset=3)
-l = corecol(numcol=1, offset=3)
-# Colors
-
-if(tree_type == "astral"){
-  p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) + 
-    geom_point(size=2, alpha=0.5) +
-    scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0.8,1))
-}else if(tree_type == "concat"){
-  p = ggplot(tree_info, aes(x=gcf, y=scf, color=bootstrap)) + 
-    geom_point(size=2, alpha=0.5) +
-    scale_color_continuous(name='Bootstrap', low=l, high=h, limits=c(0,100))
-}
-p = p + bartheme() +
-  theme(legend.title=element_text(size=12))
-print(p)
-```
-
-### Concordance factors vs. branch lengths
-
-```{r bl-v-cf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
-
-bl_quant_10 = quantile(tree_info$branch.length, 0.10, na.rm=T)
-gcf_thresh = 25
-scf_thresh = 40
-#gcf_quant_05 = quantile(tree_info$gcf, 0.05, na.rm=T)
-#scf_quant_05 = quantile(tree_info$scf, 0.05, na.rm=T)
-
-bl_gcf_p = ggplot(tree_info, aes(x=branch.length, y=gcf)) +
-  geom_point(size=3, alpha=0.5) +
-  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
-  #geom_smooth(method="lm", se=F, ) +
-  geom_vline(xintercept=bl_quant_10, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) +
-  geom_hline(yintercept=gcf_thresh, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) +
-  xlab("Branch length") + 
-  ylab("gCF per branch") + 
-  bartheme()
-  if(tree_type=="concat"){
-    bl_gcf_p = bl_gcf_p + scale_x_continuous(limits=c(0,0.035))
-  }
-  #theme(legend.position="bottom") +
-  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
-bl_gcf_p = ggExtra::ggMarginal(bl_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
-
-bl_scf_p = ggplot(tree_info, aes(x=branch.length, y=scf)) +
-  geom_point(size=3, alpha=0.5) +
-  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
-  #geom_smooth(method="lm", se=F, ) +
+  tree_to_df_list = treeToDF(iter_tree)
+  iter_tree_info = tree_to_df_list[["info"]]
+  # Parse the tree to a data frame
+  
+  bl_quant_10 = quantile(iter_tree_info$branch.length, 0.10, na.rm=T)
+  gcf_thresh = 25
+  scf_thresh = 40
+  # Set the thresholds for pruning that were used
+  
+  iter_tree_info$supp = as.numeric(iter_tree_info$label)
+  # Convert the internal labels to numeric as the support values
+  
+  bl_gcf_p = ggplot(iter_tree_info, aes(x=branch.length, y=supp)) +
+    geom_point(size=3, alpha=0.5) +
     geom_vline(xintercept=bl_quant_10, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) +
-  geom_hline(yintercept=scf_thresh, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) +
-  xlab("Branch length") + 
-  ylab("sCF per branch") + 
-  bartheme()
-  if(tree_type=="concat"){
-    bl_scf_p = bl_scf_p + scale_x_continuous(limits=c(0,0.035))
+    geom_hline(yintercept=gcf_thresh, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) +
+    xlab("Branch length") + 
+    ylab("gCF") + 
+    ggtitle(paste("Iteration", i-1)) +
+    bartheme()
+    if(tree_type=="concat"){
+      bl_gcf_p = bl_gcf_p + scale_x_continuous(limits=c(0,0.035))
+    }
+  # Generate the plot of branch length vs. support
+  
+  bl_gcf_p = ggExtra::ggMarginal(bl_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
+  # Add the distributions to the plot
+  
+  plist[[i]] = bl_gcf_p
+  # Save the plot to the list
+  
+  ##########
+  
+  iter_tree_info$low.b = ifelse(iter_tree_info$branch.length < bl_quant_10 & iter_tree_info$supp < gcf_thresh, "Y", "N")
+  # Categorize each branch as being pruned or not
+  
+  if(tree_type == "astral"){
+    xmax = 31
+  }else if(tree_type == "concat"){
+    xmax = 0.125
   }
-  #theme(legend.position="bottom") +
-  #guides(colour = guide_legend(override.aes = list(alpha = 1)))
-bl_scf_p = ggExtra::ggMarginal(bl_scf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=5), color="#666666")
+  # Set the max value for the x-axis in the tree figure based on the tree type
+  
+  b_tree = ggtree(iter_tree, size=0.8, ladderize=F, aes(color=iter_tree_info$low.b)) +
+    scale_color_discrete(name = "Prune?") +
+    xlim(0, xmax) +
+    geom_tiplab(color="#333333", fontface='italic', size=2) +
+    ggtitle(paste("Iteration", i-1)) +
+    #geom_label(aes(x=branch, label=as.character(node), label.size=NA, fill="white")) +
+    theme(legend.position=c(0.075,0.95)) 
+  print(b_tree)
+  #tlist[[i]] = b_tree
+  # Generate and print the tree figure for the current iteration
+}
 
-p = plot_grid(bl_gcf_p, bl_scf_p, ncol=2)
+```
+
+## Branch length and gCF distributions
+
+```{r prune-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+
+p = plot_grid(plotlist=plist, ncol=2)
 print(p)
+# Combine the bl and support figures and print
 
 ```
 
-# Example: branches to prune
 
-```{r prune-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
 
-#low_b = subset(tree_info, branch.length < bl_quant_05 & gcf < gcf_quant_05)
 
-tree_info$low.b = ifelse(tree_info$branch.length < bl_quant_10 & tree_info$gcf < gcf_thresh, "Y", "N")
 
-h = corecol(numcol=1, pal="wilke", offset=3)
-l = corecol(numcol=1, offset=3)
-# Colors
 
-b_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$low.b)) +
-  #scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
-  xlim(0, xmax) +
-  geom_tiplab(color="#333333", fontface='italic', size=2) +
-  #geom_label(aes(x=branch, label=as.character(node), label.size=NA, fill="white")) +
-  theme(legend.position=c(0.05,0.9))
-print(b_tree)
+<!-- # Full coding species tree -->
 
-# low b tree
-```
+<!-- ```{r read, out.width="100%", fig.align = "center", warning=FALSE} -->
+<!-- tree_type = "concat" -->
+<!-- save_tree_fig = F -->
 
-# Algorithm outline
+<!-- if(tree_type == "astral"){ -->
+<!--   cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred with ASTRAL (no branch lengths shown).\n") -->
+<!-- }else if(tree_type == "concat"){ -->
+<!--   cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred by concatenation of all loci with IQtree.\n") -->
+<!-- } -->
 
--1. Somehow need to get branch lengths for the tips in Astral tree... or we just never prune tips?
+<!-- tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree" -->
+<!-- astral_tree = read.tree(tree_file) -->
 
-0. Compute presence frequency of tip labels as "concordance factor" of tips.
-1. Identify branches with length below some quantile of all branches AND below some threshold of concordance factor
-2. Prune these branches by ... a post-order traversal. When a branch to prune is found, select one of the two lineages descending from it to join with and removing the sub-tree descending from the other lineage. Select the lineage with the most descendants to keep.
-3. Repeat until all branches that fall in the lower quartile of branch length are above the concordance factor threshold.
+<!-- tree_to_df_list = treeToDF(astral_tree) -->
+<!-- tree_info_astral = tree_to_df_list[["info"]] -->
+<!-- #tree_info_astral = treeToDF(astral_tree) -->
+<!-- tree_info_astral = tree_info_astral %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F) -->
+<!-- tree_info_astral$astral[tree_info_astral$node.type=="tip"] = NA -->
+<!-- tree_info_astral$astral = as.numeric(tree_info_astral$astral) -->
+<!-- tree_info_astral$gcf = as.numeric(tree_info_astral$gcf) -->
+<!-- tree_info_astral$scf = as.numeric(tree_info_astral$scf) -->
+
+<!-- # Read astral tree data -->
+
+<!-- concat_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree" -->
+<!-- concat_tree = read.tree(concat_file) -->
+
+<!-- tree_to_df_list = treeToDF(concat_tree) -->
+<!-- tree_info_concat = tree_to_df_list[["info"]] -->
+<!-- #tree_info_concat = treeToDF(concat_tree) -->
+<!-- tree_info_concat = tree_info_concat %>% separate(label, c("bootstrap", "gcf", "scf"), sep="/", remove=F) -->
+<!-- tree_info_concat$bootstrap[tree_info_concat$node.type=="tip"] = NA -->
+<!-- tree_info_concat$bootstrap = as.numeric(tree_info_concat$bootstrap) -->
+<!-- tree_info_concat$gcf = as.numeric(tree_info_concat$gcf) -->
+<!-- tree_info_concat$scf = as.numeric(tree_info_concat$scf) -->
+<!-- # Read concat tree data -->
+
+<!-- rf = RF.dist(concat_tree, astral_tree) -->
+<!-- nrf = RF.dist(concat_tree, astral_tree, normalize=T) -->
+
+<!-- #treecomp = comparePhylo(concat_tree, astral_tree, plot=T) -->
+<!-- # Stores node ids of common clades between trees! -->
+
+<!-- #write.csv(tree_info, "../../data/trees/full-coding-concat-cf-rooted.csv", row.names=F) -->
+
+<!-- if(tree_type == "astral"){ -->
+<!--   tree_info = tree_info_astral -->
+<!--   rodent_tree = astral_tree -->
+<!--   xmax = 31 -->
+<!--   iq_tree_labels = "../../data/trees/full_coding_iqtree_astral.cf.branch.rooted" -->
+<!--   cf_stat_file = "../../data/trees/full_coding_iqtree_astral.cf.stat" -->
+<!--   cf_rep_dir = "../../data/trees/astral-cf-reps/" -->
+<!--   delta_outfile = "../../data/trees/astral-delta.tab" -->
+<!-- }else if(tree_type == "concat"){ -->
+<!--   tree_info = tree_info_concat -->
+<!--   rodent_tree = concat_tree -->
+<!--   xmax = 0.125 -->
+<!--   iq_tree_labels = "../../data/trees/full_coding_iqtree_concat.cf.branch.rooted" -->
+<!--   cf_stat_file = "../../data/trees/full_coding_iqtree_concat.cf.stat" -->
+<!--   cf_rep_dir = "../../data/trees/concat-cf-reps/" -->
+<!--   delta_outfile = "../../data/trees/concat-delta.tab" -->
+<!-- } -->
+
+<!-- cf_stats = read.table(cf_stat_file, header=T) -->
+
+<!-- ``` -->
+
+<!-- ```{r match-labels, out.width="100%", fig.align = "center", warning=FALSE} -->
+<!-- # The node/branch labels in R and IQtree differ. IQtree uses a nice, logical post-ordering -->
+<!-- # of internal nodes while R does something random and assigns labels to tips as well. This  -->
+<!-- # chunk matches those up for the delta analysis later -->
+
+<!-- iq_tree = read.tree(iq_tree_labels) -->
+<!-- iqtree_to_df_list = treeToDF(iq_tree) -->
+<!-- iqtree_info = iqtree_to_df_list[["info"]] -->
+<!-- # Read the IQ tree tree with branch labels in and parse with get_tree_info -->
+
+<!-- #node_convert = matchNodes(tree_to_df_list[["labeled.tree"]], iqtree_to_df_list[["labeled.tree"]], method="descendants") -->
+
+<!-- tree_info$iqtree.node = NA -->
+<!-- # Add a column to the main tree table about IQ tree labels -->
+
+<!-- for(i in 1:nrow(tree_info)){ -->
+<!--   cur_node = tree_info[i,]$node -->
+<!--   iqtree_row = subset(iqtree_info, node==cur_node) -->
+<!--   iqtree_label = iqtree_row$label -->
+<!--   tree_info[i,]$iqtree.node = iqtree_label -->
+<!-- } -->
+<!-- # For every row in the main tree table, add in the IQ tree node label given that -->
+<!-- # we've read the same tree in R and can use the node.labels -->
+<!-- ``` -->
+
+<!-- ### Species tree with branches colored by gene concordance factor -->
+
+<!-- ```{r gcf-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16} -->
+<!-- h = corecol(numcol=1, pal="wilke", offset=3) -->
+<!-- l = corecol(numcol=1, offset=3) -->
+<!-- # Colors -->
+
+<!-- gcf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$gcf)) + -->
+<!--   scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) + -->
+<!--   xlim(0, xmax) + -->
+<!--   geom_tiplab(color="#333333", fontface='italic', size=2) + -->
+<!--   #geom_label(aes(x=branch, label=as.character(node), label.size=NA, fill="white")) + -->
+<!--   theme(legend.position=c(0.05,0.9)) -->
+<!-- print(gcf_tree) -->
+
+<!-- if(save_tree_fig){ -->
+<!--   gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2) -->
+<!--   tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree.pdf", sep="") -->
+<!--   ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in") -->
+<!-- } -->
+<!-- # gCF tree -->
+<!-- ``` -->
+
+<!-- ### Gene vs site concordance factors colored by branch support -->
+
+<!-- ```{r gcf-scf-supp, out.width="50%", fig.align = "center", warning=FALSE} -->
+<!-- h = corecol(numcol=1, pal="wilke", offset=3) -->
+<!-- l = corecol(numcol=1, offset=3) -->
+<!-- # Colors -->
+
+<!-- if(tree_type == "astral"){ -->
+<!--   p = ggplot(tree_info, aes(x=gcf, y=scf, color=astral)) +  -->
+<!--     geom_point(size=2, alpha=0.5) + -->
+<!--     scale_color_continuous(name='Astral support', low=l, high=h, limits=c(0.8,1)) -->
+<!-- }else if(tree_type == "concat"){ -->
+<!--   p = ggplot(tree_info, aes(x=gcf, y=scf, color=bootstrap)) +  -->
+<!--     geom_point(size=2, alpha=0.5) + -->
+<!--     scale_color_continuous(name='Bootstrap', low=l, high=h, limits=c(0,100)) -->
+<!-- } -->
+<!-- p = p + bartheme() + -->
+<!--   theme(legend.title=element_text(size=12)) -->
+<!-- print(p) -->
+<!-- ``` -->
+
+<!-- ### Concordance factors vs. branch lengths -->
+
+<!-- ```{r bl-v-cf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4} -->
+
+<!-- bl_quant_10 = quantile(tree_info$branch.length, 0.10, na.rm=T) -->
+<!-- gcf_thresh = 25 -->
+<!-- scf_thresh = 40 -->
+<!-- #gcf_quant_05 = quantile(tree_info$gcf, 0.05, na.rm=T) -->
+<!-- #scf_quant_05 = quantile(tree_info$scf, 0.05, na.rm=T) -->
+
+<!-- bl_gcf_p = ggplot(tree_info, aes(x=branch.length, y=gcf)) + -->
+<!--   geom_point(size=3, alpha=0.5) + -->
+<!--   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) + -->
+<!--   #geom_smooth(method="lm", se=F, ) + -->
+<!--   geom_vline(xintercept=bl_quant_10, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) + -->
+<!--   geom_hline(yintercept=gcf_thresh, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) + -->
+<!--   xlab("Branch length") +  -->
+<!--   ylab("gCF per branch") +  -->
+<!--   bartheme() -->
+<!--   if(tree_type=="concat"){ -->
+<!--     bl_gcf_p = bl_gcf_p + scale_x_continuous(limits=c(0,0.035)) -->
+<!--   } -->
+<!--   #theme(legend.position="bottom") + -->
+<!--   #guides(colour = guide_legend(override.aes = list(alpha = 1))) -->
+<!-- bl_gcf_p = ggExtra::ggMarginal(bl_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666") -->
+
+<!-- bl_scf_p = ggplot(tree_info, aes(x=branch.length, y=scf)) + -->
+<!--   geom_point(size=3, alpha=0.5) + -->
+<!--   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) + -->
+<!--   #geom_smooth(method="lm", se=F, ) + -->
+<!--     geom_vline(xintercept=bl_quant_10, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) + -->
+<!--   geom_hline(yintercept=scf_thresh, linetype="dashed", color=corecol(numcol=1, offset=6), size=1) + -->
+<!--   xlab("Branch length") +  -->
+<!--   ylab("sCF per branch") +  -->
+<!--   bartheme() -->
+<!--   if(tree_type=="concat"){ -->
+<!--     bl_scf_p = bl_scf_p + scale_x_continuous(limits=c(0,0.035)) -->
+<!--   } -->
+<!--   #theme(legend.position="bottom") + -->
+<!--   #guides(colour = guide_legend(override.aes = list(alpha = 1))) -->
+<!-- bl_scf_p = ggExtra::ggMarginal(bl_scf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=5), color="#666666") -->
+
+<!-- p = plot_grid(bl_gcf_p, bl_scf_p, ncol=2) -->
+<!-- print(p) -->
+
+<!-- ``` -->
+
+<!-- # Example: branches to prune -->
+
+<!-- ```{r prune-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16} -->
+
+<!-- #low_b = subset(tree_info, branch.length < bl_quant_05 & gcf < gcf_quant_05) -->
+
+<!-- tree_info$low.b = ifelse(tree_info$branch.length < bl_quant_10 & tree_info$gcf < gcf_thresh, "Y", "N") -->
+
+<!-- h = corecol(numcol=1, pal="wilke", offset=3) -->
+<!-- l = corecol(numcol=1, offset=3) -->
+<!-- # Colors -->
+
+<!-- b_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$low.b)) + -->
+<!--   #scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) + -->
+<!--   xlim(0, xmax) + -->
+<!--   geom_tiplab(color="#333333", fontface='italic', size=2) + -->
+<!--   #geom_label(aes(x=branch, label=as.character(node), label.size=NA, fill="white")) + -->
+<!--   theme(legend.position=c(0.05,0.9)) -->
+<!-- print(b_tree) -->
+
+<!-- # low b tree -->
+<!-- ``` -->
+
+<!-- # Algorithm outline -->
+
+<!-- -1. Somehow need to get branch lengths for the tips in Astral tree... or we just never prune tips? -->
+
+<!-- 0. Compute presence frequency of tip labels as "concordance factor" of tips. -->
+<!-- 1. Identify branches with length below some quantile of all branches AND below some threshold of concordance factor -->
+<!-- 2. Prune these branches by ... a post-order traversal. When a branch to prune is found, select one of the two lineages descending from it to join with and removing the sub-tree descending from the other lineage. Select the lineage with the most descendants to keep. -->
+<!-- 3. Repeat until all branches that fall in the lower quartile of branch length are above the concordance factor threshold. -->

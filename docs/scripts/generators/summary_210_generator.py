@@ -33,6 +33,7 @@ html_template = """
                     <p><h4><a href="mouse_rat_transcripts.html">Transcript selection from mouse and rat references</a></h4></p>
                     <p><h4><a href="aln_stats.html">CDS alignment stats</a></h4></p>
                     <p><h4>Initial tree stats: <a href="trees-concat.html">Concatenation</a> // <a href="trees-astral.html">ASTRAL</a></h4></p>
+                    <p><h4>Tree pruning: <a href="prune-concat.html">Concatenation</a> // <a href="prune-astral.html">ASTRAL</a></h4></p>
 
                     <h2>Sample summary table</h2>
                     
