@@ -51,7 +51,7 @@ source("C:/bin/core/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-#tree_type = "astral"
+#tree_type = "concat"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -516,9 +516,9 @@ Where:
 ```{r ds_branch_avgs, out.width="50%", fig.align="center", warning=FALSE}
 if(tree_type == "astral"){
   #tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-rates.csv", header=T)
-  tree_rates = read.csv("../../data/rates/full-coding-astral-rooted-slac.csv", header=T)
+  tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-slac.csv", header=T)
 }else if(tree_type == "concat"){
-  tree_rates = read.csv("../../data/rates/full-coding-concat-cf-rooted-rates.csv", header=T)
+  tree_rates = read.csv("../../data/rates/full-coding-concat-cf-rooted-slac.csv", header=T)
 }
 # Read the branch average rate data
 
@@ -558,7 +558,6 @@ These measures are highly correlated with gene concordance factors:
 
 tree_rates$clade.perc = (tree_rates$num.genes.full + tree_rates$num.genes.partial) / (tree_rates$num.genes.full + tree_rates$num.genes.partial + tree_rates$num.genes.no.clade)
 
-
 p = ggplot(tree_rates, aes(x=gcf, y=clade.perc)) +
   geom_point(size=2, alpha=0.4, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color="#920000") +
@@ -572,7 +571,7 @@ print(p)
 
 ### Averaging rates across branches
 
-To control for the fact that different branches will be present in different numbers of genes, we can calculat average rates per branch by summing the raw counts of the number of sites and the number of substitutions across all genes in which that branch is present as a full or partial clade.
+To control for the fact that different branches will be present in different numbers of genes, we can calculate average rates per branch by summing the raw counts of the number of sites and the number of substitutions across all genes in which that branch is present as a full or partial clade.
 
 For a given branch, $b$:
 
@@ -587,24 +586,34 @@ where $G_b$ is the set of genes that contain branch $b$. Then,
 $$\omega_b = \frac{dN_b}{dS_b}$$
 
 
-This results in the following distributions for average rates across branches:
+This results in the following distributions for average rates across branches (green lines indicating 95th percentile of each rate):
 
 ```{r fig9, out.width="50%", fig.align = "center", warning=FALSE}
 
-p = ggplot(subset(tree_rates, node.type!="ROOT"), aes(x=avg.ds, y=avg.dn, color=node.type)) +
+tree_rates$dS = tree_rates$S.sum / tree_rates$ES.sum
+tree_rates$dN = tree_rates$N.sum / tree_rates$EN.sum
+tree_rates$dNdS = tree_rates$dN / tree_rates$dS
+
+ds_95_perc = quantile(tree_rates$dS, 0.95, na.rm=T)
+dn_95_perc = quantile(tree_rates$dN, 0.95, na.rm=T)
+
+p = ggplot(subset(tree_rates, node.type!="ROOT"), aes(x=dS, y=dN, color=node.type)) +
   geom_point(size=2, alpha=0.2) +
-  geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  geom_text_repel(aes(label=ifelse(dS>ds_95_perc | dN>dn_95_perc, as.character(node), '')), show_guide=F) +
+  #(aes(label=ifelse(avg.dN>dn_95_perc, as.character(node), '')), show_guide=F) +
+  geom_vline(xintercept=ds_95_perc, linetype="dashed", color=corecol(numcol=1, offset=6)) +
+  geom_hline(yintercept=dn_95_perc, linetype="dashed", color=corecol(numcol=1, offset=6)) +
   #geom_smooth(method="lm", se=F, ) +
-  xlab("Avg. dS per branch") + 
-  ylab("Avg. dN per branch") + 
+  xlab("dS per branch") + 
+  ylab("dN per branch") + 
   bartheme() +
   theme(legend.position="bottom") +
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 p = ggExtra::ggMarginal(p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=1), color="#666666")
 print(p)
 
-tree_rates$ds.outlier = ifelse(tree_rates$avg.ds>0.2,tree_rates$node,'')
-tree_rates$dn.outlier = ifelse(tree_rates$avg.dn>0.01,tree_rates$node,'')
+tree_rates$ds.outlier = ifelse(tree_rates$dS>ds_95_perc,tree_rates$node,'')
+tree_rates$dn.outlier = ifelse(tree_rates$dN>dn_95_perc,tree_rates$node,'')
 ```
 
 ### The tree with branches colored by dS and outliers labeled:
@@ -613,12 +622,12 @@ tree_rates$dn.outlier = ifelse(tree_rates$avg.dn>0.01,tree_rates$node,'')
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.ds)) +
-  scale_color_continuous(name='Avg. dS', low=l, high=h, limits=c(0,0.9)) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$dS)) +
+  scale_color_continuous(name='dS', low=l, high=h, limits=c(0,0.9)) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
-  geom_label(aes(x=branch, label=ifelse(tree_rates$avg.ds>0.2,as.character(node),'')), label.size=NA, fill="transparent")
+  geom_label(aes(x=branch, label=ifelse(tree_rates$dS>ds_95_perc,as.character(node),'')), label.size=NA, fill="transparent")
   #geom_text(aes(label=node), hjust=-.1, color="#006ddb")
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(rate_tree)
@@ -631,12 +640,12 @@ print(rate_tree)
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.dn)) +
-  scale_color_continuous(name='Avg. dN', low=l, high=h, limits=c(0,0.015)) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$dN)) +
+  scale_color_continuous(name='dN', low=l, high=h, limits=c(0,0.015)) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
-  geom_label(aes(x=branch, label=ifelse(tree_rates$avg.dn>0.01,as.character(node),'')), label.size=NA, fill="transparent")
+  geom_label(aes(x=branch, label=ifelse(tree_rates$dN > dn_95_perc, as.character(node) ,'')), label.size=NA, fill="transparent")
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(rate_tree)
@@ -644,8 +653,8 @@ print(rate_tree)
 
 ### Average dN/dS per branch
 
-```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
-dnds_p = ggplot(tree_rates, aes(x=avg.dn.ds)) +
+```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE}
+dnds_p = ggplot(tree_rates, aes(x=dNdS)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
   scale_y_continuous(expand=c(0,0)) +
   xlab("dN/dS") +
@@ -654,6 +663,8 @@ dnds_p = ggplot(tree_rates, aes(x=avg.dn.ds)) +
 print(dnds_p)
 # Distribution of dN/dS when using gene trees
 
+dnds_95_perc = quantile(tree_rates$dNdS, 0.95, na.rm=T)
+tree_rates$dnds.outlier = ifelse(tree_rates$dNdS>dnds_95_perc,tree_rates$node,'')
 ```
 
 ### The tree with branches colored by dN/dS:
@@ -662,12 +673,12 @@ print(dnds_p)
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$avg.dn.ds)) +
-  scale_color_continuous(name='Avg. dN/dS', low=l, high=h) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$dNdS)) +
+  scale_color_continuous(name='dN/dS', low=l, high=h) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
-  theme(legend.position=c(0.05,0.9))
-  #geom_label(aes(x=branch, label=ifelse(tree_rates$avg.dn>0.01,as.character(node),'')), label.size=NA, fill="transparent")
+  theme(legend.position=c(0.05,0.9)) +
+  geom_label(aes(x=branch, label=ifelse(tree_rates$dNdS>dnds_95_perc ,as.character(node), '')), label.size=NA, fill="transparent")
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(rate_tree)
@@ -681,22 +692,22 @@ Only branches with avg. dS < 0.05
 
 ```{r fig12, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
 
-ds_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.ds < 0.05), aes(x=avg.ds, y=gcf)) +
+ds_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & dS < ds_95_perc), aes(x=dS, y=gcf)) +
   geom_point(size=3, alpha=0.5) +
   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
   #geom_smooth(method="lm", se=F, ) +
-  xlab("Avg. dS per branch") + 
+  xlab("dS per branch") + 
   ylab("gCF per branch") + 
   bartheme()
   #theme(legend.position="bottom") +
   #guides(colour = guide_legend(override.aes = list(alpha = 1)))
 ds_gcf_p = ggExtra::ggMarginal(ds_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
 
-ds_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.ds < 0.05), aes(x=avg.ds, y=scf)) +
+ds_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & dS < ds_95_perc), aes(x=dS, y=scf)) +
   geom_point(size=3, alpha=0.5) +
   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
   #geom_smooth(method="lm", se=F, ) +
-  xlab("Avg. dS per branch") + 
+  xlab("dS per branch") + 
   ylab("sCF per branch") + 
   bartheme()
   #theme(legend.position="bottom") +
@@ -713,22 +724,22 @@ Only branches with avg. dN < 0.01
 
 ```{r fig13, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
 
-dn_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn < 0.01), aes(x=avg.dn, y=gcf)) +
+dn_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & dN < dn_95_perc), aes(x=dN, y=gcf)) +
   geom_point(size=3, alpha=0.5) +
   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
   #geom_smooth(method="lm", se=F, ) +
-  xlab("Avg. dN per branch") + 
+  xlab("dN per branch") + 
   ylab("gCF per branch") + 
   bartheme()
   #theme(legend.position="bottom") +
   #guides(colour = guide_legend(override.aes = list(alpha = 1)))
 dn_gcf_p = ggExtra::ggMarginal(dn_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
 
-dn_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn < 0.01), aes(x=avg.dn, y=scf)) +
+dn_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & dN < dn_95_perc), aes(x=dN, y=scf)) +
   geom_point(size=3, alpha=0.5) +
   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
   #geom_smooth(method="lm", se=F, ) +
-  xlab("Avg. dN per branch") + 
+  xlab("dN per branch") + 
   ylab("sCF per branch") + 
   bartheme()
   #theme(legend.position="bottom") +
@@ -745,22 +756,22 @@ Only branches with avg. dN/dS < 0.5
 
 ```{r fig14, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
 
-dnds_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn.ds < 0.5), aes(x=avg.dn.ds, y=gcf)) +
+dnds_gcf_p = ggplot(subset(tree_rates, node.type!="ROOT" & dNdS < 0.5), aes(x=dNdS, y=gcf)) +
   geom_point(size=3, alpha=0.5) +
   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
   #geom_smooth(method="lm", se=F, ) +
-  xlab("Avg. dN/dS per branch") + 
+  xlab("dN/dS per branch") + 
   ylab("gCF per branch") + 
   bartheme()
   #theme(legend.position="bottom") +
   #guides(colour = guide_legend(override.aes = list(alpha = 1)))
 dnds_gcf_p = ggExtra::ggMarginal(dnds_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
 
-dnds_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & avg.dn.ds < 0.5), aes(x=avg.dn.ds, y=scf)) +
+dnds_scf_p = ggplot(subset(tree_rates, node.type!="ROOT" & dNdS < 0.5), aes(x=dNdS, y=scf)) +
   geom_point(size=3, alpha=0.5) +
   #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
   #geom_smooth(method="lm", se=F, ) +
-  xlab("Avg. dN/dS per branch") + 
+  xlab("dN/dS per branch") + 
   ylab("sCF per branch") + 
   bartheme()
   #theme(legend.position="bottom") +
@@ -781,9 +792,9 @@ tips = subset(tree_rates, node.type=="tip")
 names(tips)[2] = "sample"
 pheno_rates = merge(pheno, tips, by="sample")
 
-pheno_rates = select(pheno_rates, sample, Adult_Mass.g., Total_Length.mm., Head.Body_Length.mm., Tail_Length.mm., Hind_Foot_Length.mm., Relative_Tail_Length, Relative_Hind_Foot_Length, avg.dn, avg.ds, avg.dn.ds)
+pheno_rates = select(pheno_rates, sample, Adult_Mass.g., Total_Length.mm., Head.Body_Length.mm., Tail_Length.mm., Hind_Foot_Length.mm., Relative_Tail_Length, Relative_Hind_Foot_Length, dN, dS, dNdS)
 
-pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "avg.dn", "avg.ds", "avg.dn.ds"))
+pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "dN", "dS", "dNdS"))
 
 #pheno_rates_long = gather(pheno_rates, sample, value, Adult_Mass.g., Total_Length.mm., Head.Body_Length.mm., Tail_Length.mm., Hind_Foot_Length.mm., Relative_Tail_Length, Relative_Hind_Foot_Length)
 ```
@@ -791,11 +802,11 @@ pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "avg.dn", "avg.ds", "av
 ### Avg dS per tip vs phenotype
 
 ```{r fig15, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=avg.ds)) +
+p = ggplot(pheno_rates_long, aes(x=value, y=dS)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
   xlab("Avg. trait value per tip") +
-  ylab("Avg. dS per tip") +
+  ylab("dS per tip") +
   facet_wrap(~variable, scales="free_x") +
   bartheme()
 print(p)
@@ -804,16 +815,30 @@ print(p)
 ### Avg dN per tip vs phenotype
 
 ```{r fig16, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=avg.dn)) +
+p = ggplot(pheno_rates_long, aes(x=value, y=dN)) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
   xlab("Avg. trait value per tip") +
-  ylab("Avg. dN per tip") +
+  ylab("dN per tip") +
   facet_wrap(~variable, scales="free_x") +
   bartheme()
 print(p)
 ```
 
+### Avg dN/dS per tip vs phenotype
+
+```{r fig17, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+p = ggplot(pheno_rates_long, aes(x=value, y=dNdS)) +
+  geom_point(size=2, alpha=0.2, color="#333333") +
+  geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
+  xlab("Avg. trait value per tip") +
+  ylab("dN/dS per tip") +
+  facet_wrap(~variable, scales="free_x") +
+  bartheme()
+print(p)
+
+```  
+  
 [< Back to summary](summary_210.html)
 
 ```{r footer, echo=FALSE, eval=FALSE}
