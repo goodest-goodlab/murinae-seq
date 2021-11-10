@@ -28,7 +28,7 @@ library(ggplot2)
 library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
-#library(kableExtra)
+library(kableExtra)
 library(tidyr)
 library(ggtree)
 library(phytools)
@@ -51,7 +51,7 @@ source("C:/bin/core/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-#tree_type = "concat"
+#tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -548,7 +548,38 @@ branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, colo
   theme(axis.text.x = element_text(angle=25, hjust=1)) +
   guides(colour=guide_legend(override.aes=list(alpha=1)))
 print(branch_counts)
+
 ```
+
+### Distribution of genes per branch
+
+```{r branch_presence_dist, out.width="50%", fig.align="center", warning=FALSE}
+tree_rates$num.genes.present = tree_rates$num.genes.full + tree_rates$num.genes.partial
+
+presence_dist = ggplot(tree_rates, aes(x=num.genes.present)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=1), color="#ececec") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("Genes per branch") +
+  ylab("# of branches") +
+  bartheme()
+print(presence_dist)
+
+
+t_data = data.frame("Stat"=c("Branch with most genes", "Branch with fewest genes", "Median genes per branch", "Mean genes per branch"), 
+                    "Branch label"=c(tree_rates$clade[tree_rates$num.genes.present==max(tree_rates$num.genes.present, na.rm=T)][2],
+                                     tree_rates$node[tree_rates$num.genes.present==min(tree_rates$num.genes.present, na.rm=T)][2],
+                                     "NA", "NA"), 
+                    "Num genes"=c(tree_rates$num.genes.present[tree_rates$num.genes.present==max(tree_rates$num.genes.present, na.rm=T)][2],
+                                  tree_rates$num.genes.present[tree_rates$num.genes.present==min(tree_rates$num.genes.present, na.rm=T)][2],
+                                  median(tree_rates$num.genes.present, na.rm=T),
+                                  mean(tree_rates$num.genes.present, na.rm=T)
+                                  )
+                    )
+
+
+t_data %>% kable(caption="Branch statistics") %>% kable_styling(bootstrap_options=c("striped", "condensed", "responsive"), full_width=F)
+```
+
 
 These measures are highly correlated with gene concordance factors:
 
