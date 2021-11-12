@@ -32,25 +32,33 @@ library(phytools)
 library(ggExtra)
 library(readr)
 library(here)
-source("C:/bin/core/corelib/design.r")
-source("C:/bin/core/get_tree_info.r")
+library(tidyr)
+library(dplyr)
+source("C:/bin/core/r/design.r")
+source("C:/bin/core/r/get_tree_info.r")
 #source("C:/Users/grt814/bin/core/corelib/design.r")
 #source("C:/Users/grt814/bin/core/get_tree_info.r")
 # Load required packages
 
 
-#tree_type = "astral"
+tree_type = "astral"
 cat(toupper(tree_type), "TREE\n\n")
 # Print out tree type (passed from generator)
 ```
 
 [< Back to summary](summary_210.html)
 
-# Tree pruning algorithm
+# Definitions
+
+1. Pruning: Removing a branch from a tree
+2. Paring: Pruning one of the two descending branches from a selected branch to increase its length/support
+
+# Tree paring algorithm
 
 ### Setup: 
 1. Select a branch length percentile and support threshold.
-2. Set a maximum number of iterations to perform and a maximum number of species to remove.
+2. Set a maximum number of iterations to perform and a maximum number of tips to remove in total. Also set a max number of tips to remove during any singly PRUNE.
+3. Provide branches to be exempt from PRUNING.
 
 ### Algorithm:
 1. Identify branches with length below the selected quantile of all branches AND below the selected support level.
@@ -72,11 +80,14 @@ cat(toupper(tree_type), "TREE\n\n")
 # Example output using the minimize species removed selection criterion
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-infile = here("docs", "data", "trees", "paring", paste("min-spec-paring-", tree_type, sep=""), paste("min-spec-paring-", tree_type, ".log", sep=""))
+infile = here("docs", "data", "trees", "paring", paste("min-spec-paring-", tree_type, "-exempt", sep=""), paste("min-spec-paring-", tree_type, "-exempt.log", sep=""))
 # Path to the paring log file for the current tree type
 
 in_data = read.csv(infile, header=T, sep="\t", comment.char="#")
 # Read the data from the log file
+
+exempt_branches = read.csv(here("docs", "data", "trees", "paring", paste(tree_type, "-exempt-branches.txt", sep="")), comment.char="#")
+names(exempt_branches) = c("branch")
 
 in_str = read_file(infile)
 cat(in_str)
@@ -84,7 +95,7 @@ cat(in_str)
 ```
 
 
-# Visualization of iterations using ASTRAL tree and the minimize species removed selection criterion
+# Visualization of iterations using the minimize species removed selection criterion
 
 ## Trees
 
@@ -96,6 +107,11 @@ tlist = list()
 for(i in 1:nrow(in_data)){
 # Loop over every pruning iteration in the input data
   
+  print(paste("Iteration", i-1))
+  if(i==1){
+    print("Branches exempt from PRUNING labeled.")
+  }
+  
   iter_tree = read.tree(text=in_data[i,]$tree)
   # Read the tree into R
 
@@ -103,12 +119,21 @@ for(i in 1:nrow(in_data)){
   iter_tree_info = tree_to_df_list[["info"]]
   # Parse the tree to a data frame
   
+  iter_tree_info = iter_tree_info %>% 
+                    filter(node.type == "internal") %>% 
+                    tidyr::separate(label, c("label","supp"), sep="_") %>%
+                    bind_rows(filter(iter_tree_info, !node.type == "internal")) %>%
+                    arrange(node)
+  # Separates the node label from the support of the internal nodes
+  
+  #stop()
+  
   bl_quant_10 = quantile(iter_tree_info$branch.length, 0.10, na.rm=T)
-  gcf_thresh = 25
+  gcf_thresh = 50
   scf_thresh = 40
   # Set the thresholds for pruning that were used
   
-  iter_tree_info$supp = as.numeric(iter_tree_info$label)
+  iter_tree_info$supp = as.numeric(iter_tree_info$supp)
   # Convert the internal labels to numeric as the support values
   
   bl_gcf_p = ggplot(iter_tree_info, aes(x=branch.length, y=supp)) +
@@ -139,16 +164,24 @@ for(i in 1:nrow(in_data)){
     xmax = 31
   }else if(tree_type == "concat"){
     xmax = 0.125
+    iter_tree_info$low.b[iter_tree_info$node.type=='tip'] = "N"
   }
   # Set the max value for the x-axis in the tree figure based on the tree type
   
   b_tree = ggtree(iter_tree, size=0.8, ladderize=F, aes(color=iter_tree_info$low.b)) +
-    scale_color_discrete(name = "Prune?") +
+    scale_color_discrete(name = "Pare?") +
     xlim(0, xmax) +
     geom_tiplab(color="#333333", fontface='italic', size=2) +
     ggtitle(paste("Iteration", i-1)) +
     #geom_label(aes(x=branch, label=as.character(node), label.size=NA, fill="white")) +
-    theme(legend.position=c(0.075,0.95)) 
+    theme(legend.position=c(0.075,0.95))
+  
+  if(i==1){
+    iter_tree_info$exempt = ifelse(iter_tree_info$label %in% exempt_branches$branch, "Y", "N")
+    b_tree = b_tree + geom_text(aes(x=branch, label=ifelse(iter_tree_info$label %in% exempt_branches$branch, as.character(iter_tree_info$label), "")), size=2, vjust=-0.3, show.legend=F)
+  }
+  # Add the exempt branches as labels for the first iteration
+  
   print(b_tree)
   #tlist[[i]] = b_tree
   # Generate and print the tree figure for the current iteration
@@ -158,7 +191,7 @@ for(i in 1:nrow(in_data)){
 
 ## Branch length and gCF distributions
 
-```{r prune-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r prune-tree, out.width="66%", fig.align = "center", warning=FALSE, fig.height=12}
 
 p = plot_grid(plotlist=plist, ncol=2)
 print(p)

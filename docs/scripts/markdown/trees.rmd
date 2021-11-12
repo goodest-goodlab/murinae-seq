@@ -38,8 +38,8 @@ library(ggExtra)
 library(ggrepel)
 library(vroom)
 library(ggdist)
-source("C:/bin/core/corelib/design.r")
-source("C:/bin/core/get_tree_info.r")
+source("C:/bin/core/r/design.r")
+source("C:/bin/core/r/get_tree_info.r")
 #source("C:/Users/grt814/bin/core/corelib/design.r")
 #source("C:/Users/grt814/bin/core/get_tree_info.r")
 
@@ -51,7 +51,7 @@ source("C:/bin/core/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-#tree_type = "astral"
+tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -61,6 +61,7 @@ if(tree_type == "astral"){
 }
 
 tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
+#tree_file = "../../data/trees/full_coding_iqtree_astral_PARED_gcf50.tree"
 astral_tree = read.tree(tree_file)
 
 tree_to_df_list = treeToDF(astral_tree)
@@ -87,8 +88,8 @@ tree_info_concat$gcf = as.numeric(tree_info_concat$gcf)
 tree_info_concat$scf = as.numeric(tree_info_concat$scf)
 # Read concat tree data
 
-rf = RF.dist(concat_tree, astral_tree)
-nrf = RF.dist(concat_tree, astral_tree, normalize=T)
+#rf = RF.dist(concat_tree, astral_tree)
+#nrf = RF.dist(concat_tree, astral_tree, normalize=T)
 
 #treecomp = comparePhylo(concat_tree, astral_tree, plot=T)
 # Stores node ids of common clades between trees!
@@ -99,6 +100,9 @@ if(tree_type == "astral"){
   tree_info = tree_info_astral
   rodent_tree = astral_tree
   xmax = 31
+  # For unpared
+  #xmax = 24
+  # For pared
   iq_tree_labels = "../../data/trees/full_coding_iqtree_astral.cf.branch.rooted"
   cf_stat_file = "../../data/trees/full_coding_iqtree_astral.cf.stat"
   cf_rep_dir = "../../data/trees/astral-cf-reps/"
@@ -149,7 +153,7 @@ h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
 
-gcf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$gcf)) +
+gcf_tree = ggtree(rodent_tree, size=0.8, ladderize=F) +#, aes(color=tree_info$gcf)) +
   scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
@@ -158,7 +162,7 @@ print(gcf_tree)
 
 if(save_tree_fig){
   gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
-  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree.pdf", sep="")
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree-PARED-gcf50.pdf", sep="")
   ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
 }
 # gCF tree
