@@ -28,6 +28,7 @@ Targets/
 03-Alignment-scripts/submit/
 03-Alignment-scripts/logs/
 03-Alignment-scripts/etc/reproductive-all-seqlens.csv
+03-Alignment-scripts/etc/
 04-Phylo/
 05-MolEvol/
 
