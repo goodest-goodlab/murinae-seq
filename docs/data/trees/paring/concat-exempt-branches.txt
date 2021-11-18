@@ -27,3 +27,5 @@ rnor6
 #Maxomys_musschenbroekii_sample1
 #Maxomys_surifer_JAE3632
 <6>
+Rattus_praetor_sample1
+<32>

@@ -3,7 +3,7 @@
 # This generates the file "prune.html"
 ############################################################
 
-tree_type = "astral"
+tree_type = "concat"
 
 cat("Rendering prune-", tree_type, ".rmd/html\n", sep="")
 

@@ -41,7 +41,7 @@ source("C:/bin/core/r/get_tree_info.r")
 # Load required packages
 
 
-tree_type = "astral"
+#tree_type = "astral"
 cat(toupper(tree_type), "TREE\n\n")
 # Print out tree type (passed from generator)
 ```
@@ -80,7 +80,7 @@ cat(toupper(tree_type), "TREE\n\n")
 # Example output using the minimize species removed selection criterion
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-infile = here("docs", "data", "trees", "paring", paste("min-spec-paring-", tree_type, "-exempt", sep=""), paste("min-spec-paring-", tree_type, "-exempt.log", sep=""))
+infile = here("docs", "data", "trees", "paring", paste("min-spec-paring-", tree_type, "-exempt-2", sep=""), paste("min-spec-paring-", tree_type, "-exempt-2.log", sep=""))
 # Path to the paring log file for the current tree type
 
 in_data = read.csv(infile, header=T, sep="\t", comment.char="#")
