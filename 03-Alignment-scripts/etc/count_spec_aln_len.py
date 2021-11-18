@@ -6,15 +6,28 @@
 
 import sys, os, core
 
-indir = sys.argv[1];
+inp = sys.argv[1];
 
-for f in os.listdir(indir):
-    if not f.endswith(".fa"):
-        continue;
 
-    alnfile = os.path.join(indir, f);
+if os.path.isdir(inp):
+    for f in os.listdir(inp):
+        alnfile = os.path.join(inp, f);
+        #print(alnfile);
 
-    seqs = core.fastaGetDict(alnfile);
+        if f.endswith(".phy"):
+            seqs = core.phylipGetDict(alnfile)[0];
+        elif f.endswith(".fa"):
+            seqs = core.fastaGetDict(alnfile);
+        else:
+            continue;
 
+        for title in seqs:
+            print(",".join([f,title.replace("_R_", ""),str(len(seqs[title]))]));
+
+elif os.path.isfile(inp):
+    if inp.endswith(".phy"):
+        seqs = core.phylipGetDict(inp)[0];
+    elif inp.endswith(".fa"):
+        seqs = core.fastaGetDict(inp);
     for title in seqs:
-        print(",".join([f,title.replace("_R_", ""),str(len(seqs[title]))]));
+        print(",".join([title.replace("_R_", ""),str(len(seqs[title]))]));
