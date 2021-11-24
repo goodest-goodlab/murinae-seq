@@ -51,7 +51,7 @@ source("C:/bin/core/r/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="100%", fig.align = "center", warning=FALSE}
-tree_type = "astral"
+#tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -657,8 +657,8 @@ tree_rates$dn.outlier = ifelse(tree_rates$dN>dn_95_perc,tree_rates$node,'')
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$dS)) +
-  scale_color_continuous(name='dS', low=l, high=h, limits=c(0,0.9)) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates$dS))) +
+  scale_color_continuous(name='dS', low=l, high=h) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
@@ -675,7 +675,7 @@ print(rate_tree)
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$dN)) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(log(color=tree_rates$dN))) +
   scale_color_continuous(name='dN', low=l, high=h, limits=c(0,0.015)) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
@@ -708,7 +708,7 @@ tree_rates$dnds.outlier = ifelse(tree_rates$dNdS>dnds_95_perc,tree_rates$node,''
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_rates$dNdS)) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates$dNdS))) +
   scale_color_continuous(name='dN/dS', low=l, high=h) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
@@ -837,7 +837,7 @@ pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "dN", "dS", "dNdS"))
 ### Avg dS per tip vs phenotype
 
 ```{r fig15, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=dS)) +
+p = ggplot(pheno_rates_long, aes(x=value, y=log(dS))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
   xlab("Avg. trait value per tip") +
@@ -850,7 +850,7 @@ print(p)
 ### Avg dN per tip vs phenotype
 
 ```{r fig16, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=dN)) +
+p = ggplot(pheno_rates_long, aes(x=value, y=log(dN))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
   xlab("Avg. trait value per tip") +
@@ -863,7 +863,7 @@ print(p)
 ### Avg dN/dS per tip vs phenotype
 
 ```{r fig17, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=dNdS)) +
+p = ggplot(pheno_rates_long, aes(x=value, y=log(dNdS))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
   xlab("Avg. trait value per tip") +
