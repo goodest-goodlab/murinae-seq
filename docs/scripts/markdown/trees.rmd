@@ -38,6 +38,7 @@ library(ggExtra)
 library(ggrepel)
 library(vroom)
 library(ggdist)
+library(stringr)
 source("C:/bin/core/r/design.r")
 source("C:/bin/core/r/get_tree_info.r")
 #source("C:/Users/grt814/bin/core/corelib/design.r")
@@ -51,7 +52,7 @@ source("C:/bin/core/r/get_tree_info.r")
 # Full coding species tree
 
 ```{r read, out.width="75%", fig.align = "center", warning=FALSE}
-#tree_type = "astral"
+tree_type = "astral"
 save_tree_fig = F
 
 if(tree_type == "astral"){
@@ -252,20 +253,28 @@ The 11,774 gene trees contain varying numbers of taxa due to filtering on the al
 ### Distribution of taxa per gene tree
 
 ```{r fig4, out.width="50%", fig.align = "center", warning=FALSE}
-gt_file = "../../data/trees/loci.treefile"
-gt = read.tree(gt_file)
-gt_data = data.frame("rfs"=c(), "num.tips"=c(), "rf.zeros"=c(), "num.tips.zeros"=c())
-for(i in 1:length(gt)){
-  cur_tips = gt[[i]]$tip.label
+gt_file = "../../data/trees/loci-labeled.treefile"
+gene_trees = read.table(gt_file, sep="\t")
+names(gene_trees) = c("gene", "tree")
+
+gene_trees$gene = word(gene_trees$gene, 1, sep="-")
+gene_trees$gene = word(gene_trees$gene, 2, sep="/")
+
+#gt = read.tree(gt_file)
+gt_data = data.frame("gene"=c(), "rf"=c(), "num.tips"=c(), "rf.zeros"=c(), "num.tips.zeros"=c())
+for(i in 1:nrow(gene_trees)){
+  gt = read.tree(text=gene_trees[i,]$tree)
+  
+  cur_tips = gt$tip.label
 
   pruned_tree = drop.tip(rodent_tree, rodent_tree$tip.label[-match(cur_tips, rodent_tree$tip.label)])
   
-  cur_rf = RF.dist(pruned_tree, gt[[i]], normalize=T)
+  cur_rf = RF.dist(pruned_tree, gt, normalize=T)
   
   if(cur_rf==0){
-    gt_data = rbind(gt_data, data.frame("rfs"=cur_rf, "num.tips"=length(cur_tips), "rf.zeros"=cur_rf, "num.tips.zeros"=length(cur_tips)))
+    gt_data = rbind(gt_data, data.frame("gene"=gene_trees[i,]$gene, "rf"=cur_rf, "num.tips"=length(cur_tips), "rf.zeros"=cur_rf, "num.tips.zeros"=length(cur_tips)))
   }else{
-    gt_data = rbind(gt_data, data.frame("rfs"=cur_rf, "num.tips"=length(cur_tips), "rf.zeros"=NA, "num.tips.zeros"=NA))
+    gt_data = rbind(gt_data, data.frame("gene"=gene_trees[i,]$gene, "rf"=cur_rf, "num.tips"=length(cur_tips), "rf.zeros"=NA, "num.tips.zeros"=NA))
   }
 }
 
@@ -278,6 +287,9 @@ p = ggplot(gt_data, aes(x=num.tips)) +
   ylab("# of gene trees") +
   bartheme()
 print(p)
+
+#write.table(subset(gt_data, rf>=0.75), file="../../data/trees/loci-nrf-above-0.75.txt", row.names=F, quote=F, sep="\t")
+
 ```
 
 ### Tree distance (RF) distribution between gene trees and species tree

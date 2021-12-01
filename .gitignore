@@ -65,6 +65,7 @@ docs/data/noncoding-aln-stats/rnor6-exons-lens-500.csv
 docs/data/noncoding-aln-stats/rnor6-exons-lens-noflank.csv
 
 docs/data/trees/loci.treefile
+docs/data/trees/loci-labeled.treefile
 docs/data/trees/astral-cf-reps/
 docs/data/trees/concat-cf-reps/
 
