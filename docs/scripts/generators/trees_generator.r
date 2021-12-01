@@ -4,7 +4,7 @@
 ############################################################
 
 #options(nwarnings = 100000)
-tree_type = "astral"
+tree_type = "concat"
 
 cat("Rendering trees-", tree_type, ".rmd/html\n", sep="")
 

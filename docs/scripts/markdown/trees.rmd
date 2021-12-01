@@ -50,7 +50,7 @@ source("C:/bin/core/r/get_tree_info.r")
 
 # Full coding species tree
 
-```{r read, out.width="100%", fig.align = "center", warning=FALSE}
+```{r read, out.width="75%", fig.align = "center", warning=FALSE}
 #tree_type = "astral"
 save_tree_fig = F
 
@@ -121,7 +121,7 @@ cf_stats = read.table(cf_stat_file, header=T)
 
 ```
 
-```{r match-labels, out.width="100%", fig.align = "center", warning=FALSE}
+```{r match-labels, out.width="75%", fig.align = "center", warning=FALSE}
 # The node/branch labels in R and IQtree differ. IQtree uses a nice, logical post-ordering
 # of internal nodes while R does something random and assigns labels to tips as well. This 
 # chunk matches those up for the delta analysis later
@@ -148,7 +148,7 @@ for(i in 1:nrow(tree_info)){
 
 ### Species tree with branches colored by gene concordance factor
 
-```{r fig1, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -170,7 +170,7 @@ if(save_tree_fig){
 
 ### Species tree with branches colored by site concordance factor
 
-```{r fig2, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig2, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -398,7 +398,7 @@ print(delta_p)
 
 ### Branches with evidence for introgression
 
-```{r delta-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r delta-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
@@ -517,14 +517,27 @@ Where:
 
 ### Species tree branch presence/absence per gene
 
-```{r ds_branch_avgs, out.width="50%", fig.align="center", warning=FALSE}
+```{r gt_branch_categories, out.width="50%", fig.align="center", warning=FALSE}
 if(tree_type == "astral"){
   #tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-rates.csv", header=T)
-  tree_rates = read.csv("../../data/rates/full-coding-astral-cf-rooted-slac.csv", header=T)
+  tree_rates_w_root = read.csv("../../data/rates/full-coding-astral-slac-branch-rates.csv", header=T)
 }else if(tree_type == "concat"){
-  tree_rates = read.csv("../../data/rates/full-coding-concat-cf-rooted-slac.csv", header=T)
+  tree_rates_w_root = read.csv("../../data/rates/full-coding-concat-slac-branch-rates.csv", header=T)
 }
 # Read the branch average rate data
+
+uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(tree_rates_w_root))] # get non common names
+uniq_info_cols = c(uniq_info_cols,"clade") # appending key parameter
+# Get a list of columns from the tree_info df to join to the tree rates df
+
+tree_rates_w_root = tree_rates_w_root %>% left_join((tree_info %>% select(uniq_info_cols)), by="clade")
+# Select the columns from tree_info and join to tree_rates, merging by clade
+# https://stackoverflow.com/a/61628157
+
+tree_rates_w_root = tree_rates_w_root[order(tree_rates_w_root$node), ]
+# Re-order the rows by the R node
+
+tree_rates = subset(tree_rates_w_root, node.type != "root")
 
 full_clade = select(tree_rates, clade, node.type, num.genes.full)
 full_clade$label = "Full clade"
@@ -534,14 +547,22 @@ partial_clade = select(tree_rates, clade, node.type, num.genes.partial)
 partial_clade$label = "Partial clade"
 names(partial_clade)[3] = "num.genes"
 
-no_clade = select(tree_rates, clade, node.type, num.genes.no.clade)
-no_clade$label = "Discordant/missing clade"
+descendant_counted = select(tree_rates, clade, node.type, num.genes.descendant.counted)
+descendant_counted$label = "Descendant counted"
+names(descendant_counted)[3] = "num.genes"
+
+discordant_clade = select(tree_rates, clade, node.type, num.genes.discordant)
+discordant_clade$label = "Discordant clade"
+names(discordant_clade)[3] = "num.genes"
+
+no_clade = select(tree_rates, clade, node.type, num.genes.missing)
+no_clade$label = "Missing clade"
 names(no_clade)[3] = "num.genes"
 
-clade_counts = rbind(full_clade, partial_clade, no_clade)
+clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
 # Convert branch categories to long format
 
-clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Discordant/missing clade"))
+clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
 
 branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25) +
@@ -591,7 +612,7 @@ These measures are highly correlated with gene concordance factors:
 
 ```{r fig8, out.width="50%", fig.align = "center", warning=FALSE}
 
-tree_rates$clade.perc = (tree_rates$num.genes.full + tree_rates$num.genes.partial) / (tree_rates$num.genes.full + tree_rates$num.genes.partial + tree_rates$num.genes.no.clade)
+tree_rates$clade.perc = (tree_rates$num.genes.full + tree_rates$num.genes.partial) / (tree_rates$num.genes.full + tree_rates$num.genes.partial + tree_rates$num.genes.descendant.counted + tree_rates$num.genes.discordant + tree_rates$num.genes.missing)
 
 p = ggplot(tree_rates, aes(x=gcf, y=clade.perc)) +
   geom_point(size=2, alpha=0.4, color="#333333") +
@@ -625,14 +646,10 @@ This results in the following distributions for average rates across branches (g
 
 ```{r fig9, out.width="50%", fig.align = "center", warning=FALSE}
 
-tree_rates$dS = tree_rates$S.sum / tree_rates$ES.sum
-tree_rates$dN = tree_rates$N.sum / tree_rates$EN.sum
-tree_rates$dNdS = tree_rates$dN / tree_rates$dS
-
 ds_95_perc = quantile(tree_rates$dS, 0.95, na.rm=T)
 dn_95_perc = quantile(tree_rates$dN, 0.95, na.rm=T)
 
-p = ggplot(subset(tree_rates, node.type!="ROOT"), aes(x=dS, y=dN, color=node.type)) +
+p = ggplot(tree_rates, aes(x=dS, y=dN, color=node.type)) +
   geom_point(size=2, alpha=0.2) +
   geom_text_repel(aes(label=ifelse(dS>ds_95_perc | dN>dn_95_perc, as.character(node), '')), show_guide=F) +
   #(aes(label=ifelse(avg.dN>dn_95_perc, as.character(node), '')), show_guide=F) +
@@ -653,16 +670,16 @@ tree_rates$dn.outlier = ifelse(tree_rates$dN>dn_95_perc,tree_rates$node,'')
 
 ### The tree with branches colored by dS and outliers labeled:
 
-```{r fig10, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig10, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates$dS))) +
-  scale_color_continuous(name='dS', low=l, high=h) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates_w_root$dS))) +
+  scale_color_continuous(name='log dS', low=l, high=h) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
-  geom_label(aes(x=branch, label=ifelse(tree_rates$dS>ds_95_perc,as.character(node),'')), label.size=NA, fill="transparent")
+  geom_label(aes(x=branch, label=ifelse(tree_rates_w_root$dS>ds_95_perc,as.character(node),'')), label.size=NA, fill="transparent")
   #geom_text(aes(label=node), hjust=-.1, color="#006ddb")
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(rate_tree)
@@ -671,16 +688,16 @@ print(rate_tree)
 
 ### The tree with branches colored by dN and outliers labeled:
 
-```{r fig11, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig11, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates$dN))) +
-  scale_color_continuous(name='dN', low=l, high=h, limits=c(0,0.015)) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates_w_root$dN))) +
+  scale_color_continuous(name='log dN', low=l, high=h) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
-  geom_label(aes(x=branch, label=ifelse(tree_rates$dN > dn_95_perc, as.character(node) ,'')), label.size=NA, fill="transparent")
+  geom_label(aes(x=branch, label=ifelse(tree_rates_w_root$dN > dn_95_perc, as.character(node) ,'')), label.size=NA, fill="transparent")
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(rate_tree)
@@ -704,16 +721,16 @@ tree_rates$dnds.outlier = ifelse(tree_rates$dNdS>dnds_95_perc,tree_rates$node,''
 
 ### The tree with branches colored by dN/dS:
 
-```{r dn-ds-tree, out.width="100%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r dn-ds-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
-rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates$dNdS))) +
-  scale_color_continuous(name='dN/dS', low=l, high=h) +
+rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(tree_rates_w_root$dNdS))) +
+  scale_color_continuous(name='log dN/dS', low=l, high=h) +
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
-  geom_label(aes(x=branch, label=ifelse(tree_rates$dNdS>dnds_95_perc ,as.character(node), '')), label.size=NA, fill="transparent")
+  geom_label(aes(x=branch, label=ifelse(tree_rates_w_root$dNdS>dnds_95_perc ,as.character(node), '')), label.size=NA, fill="transparent")
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(rate_tree)
@@ -821,7 +838,7 @@ print(p)
 
 # Basic rate and phenotype correlations with tip branches
 
-```{r read_pheno, out.width="100%", fig.align = "center", warning=FALSE}
+```{r read_pheno, out.width="75%", fig.align = "center", warning=FALSE}
 pheno = read.csv("../../data/phenotype-data/combined-phenotype-data.csv", header=T, comment.char="#")
 tips = subset(tree_rates, node.type=="tip")
 names(tips)[2] = "sample"
@@ -837,11 +854,11 @@ pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "dN", "dS", "dNdS"))
 ### Avg dS per tip vs phenotype
 
 ```{r fig15, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=log(dS))) +
+p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dS))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
-  xlab("Avg. trait value per tip") +
-  ylab("dS per tip") +
+  xlab("log avg. trait value per tip") +
+  ylab("log dS per tip") +
   facet_wrap(~variable, scales="free_x") +
   bartheme()
 print(p)
@@ -850,11 +867,11 @@ print(p)
 ### Avg dN per tip vs phenotype
 
 ```{r fig16, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=log(dN))) +
+p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dN))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
-  xlab("Avg. trait value per tip") +
-  ylab("dN per tip") +
+  xlab("log avg. trait value per tip") +
+  ylab("log dN per tip") +
   facet_wrap(~variable, scales="free_x") +
   bartheme()
 print(p)
@@ -863,11 +880,11 @@ print(p)
 ### Avg dN/dS per tip vs phenotype
 
 ```{r fig17, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
-p = ggplot(pheno_rates_long, aes(x=value, y=log(dNdS))) +
+p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dNdS))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
-  xlab("Avg. trait value per tip") +
-  ylab("dN/dS per tip") +
+  xlab("log avg. trait value per tip") +
+  ylab("log dN/dS per tip") +
   facet_wrap(~variable, scales="free_x") +
   bartheme()
 print(p)
