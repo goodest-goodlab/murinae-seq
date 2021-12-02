@@ -28,7 +28,7 @@ library(ggplot2)
 library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
-library(kableExtra)
+#library(kableExtra)
 library(tidyr)
 library(ggtree)
 library(phytools)
@@ -288,7 +288,7 @@ p = ggplot(gt_data, aes(x=num.tips)) +
   bartheme()
 print(p)
 
-#write.table(subset(gt_data, rf>=0.75), file="../../data/trees/loci-nrf-above-0.75.txt", row.names=F, quote=F, sep="\t")
+write.table(subset(gt_data, rf<=0.25), file="../../data/trees/loci-nrf-below-0.25.txt", row.names=F, quote=F, sep="\t")
 
 ```
 
