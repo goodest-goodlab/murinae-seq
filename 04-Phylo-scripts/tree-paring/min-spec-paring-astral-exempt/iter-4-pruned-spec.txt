@@ -1,4 +1,5 @@
-Rattus_praetor_sample1
+Rattus_villosissimus_sample1
 Rhynchomys_isarogensis_JAE2195
-Malacomys_longipes_TCD4253
+Rattus_colletti_RAT25
+Rattus_lutreolus_sample2
 Mus_spretus_10460X4

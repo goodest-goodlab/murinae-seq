@@ -1,0 +1,207 @@
+# From 05-MolEvol folder:
+
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -o full-coding-slac/full-coding-astral-slac-branch-rates -n 64
+# ASTRAL dn/ds
+
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_concat.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -o full-coding-slac/full-coding-concat-slac-branch-rates -n 64
+# Concat dn/ds
+
+####################
+
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-mg94-local-rooted-anc/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -o full-coding-astral-mg94-local-branch-ancs -n 64 --rooted
+# ASTRAL ancestral subs
+
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_concat.cf.rooted.tree -r full-coding-mg94-local-rooted-anc/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -o full-coding-concat-mg94-local-branch-ancs -n 64 --rooted
+# Concat ancestral subs
+
+####################
+
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/DNDS_BY_SPERM_STAGE/HYPHY/SLAC/prot_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-LZinduced -n 64
+# ASTRAL dn/ds - LZInduced subset
+
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/DNDS_BY_SPERM_STAGE/HYPHY/SLAC/prot_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-RSinduced -n 64
+# ASTRAL dn/ds - RSInduced subset
+
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/DNDS_BY_SPERM_STAGE/HYPHY/SLAC/prot_list_testisSpecific.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-testisSpecific -n 64
+# ASTRAL dn/ds - TestisSpecific subset
+
+####################
+
+set="BD.any"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="BD.strict"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="BU.any"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="BU.strict"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="CG.any"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="CG.strict"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="DP.any"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="DP.strict"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################
+
+set="GCcluster1"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster2"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster3"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster4"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster5"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster6"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster7"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster8"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster9"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster10"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster11"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster12"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster13"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster14"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster15"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster16"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="GCcluster17"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################
+
+set="greenEtal2018.elongating"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="greenEtal2018.prelep"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="greenEtal2018.somatic"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="greenEtal2018.spermatids"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="greenEtal2018.spermatocytes"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="greenEtal2018.spermatogonia"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################
+
+set="hermannEtal2018.dip_rs"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="hermannEtal2018.lz_pac"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="hermannEtal2018.pac_dip"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="hermannEtal2018.peri"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="hermannEtal2018.prelep"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="hermannEtal2018.rs"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="hermannEtal2018.sert"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="hermannEtal2018.spermatogonia"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################
+
+set="SomaticEndothelial"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SomaticInnateLymphoid"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SomaticLeydig"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+# NO LOCI
+
+set="SomaticMyoid"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SomaticSertoli"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SomaticUnknown"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################
+
+set="spermatogonia"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################
+
+set="SPGcluster1"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SPGcluster2"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SPGcluster3"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SPGcluster4"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################
+
+set="SV.any"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="SV.strict"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="VP.any"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+set="VP.strict"
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.$set.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-$set
+
+####################

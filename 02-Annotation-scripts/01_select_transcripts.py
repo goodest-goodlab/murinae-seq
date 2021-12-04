@@ -27,6 +27,24 @@ if mode == "targets":
 elif mode == "length":
     outfilename = "../02-Annotation-data/selected-transcripts-length.txt"
 
+outfilename = "test.txt";
+
+#id_file = "../Reference-genomes/mm10/mm10-ens99-ids.tab";
+pid_to_tid = {};
+for line in open(infile):
+    line = line.strip().split("\t");
+    if line[2]:
+        pid_to_tid[line[2]] = line[1];
+#print(len(pid_to_gid));
+
+overlap_check_file = "/mnt/beegfs/ek112884/murinae/REPRO_PROTEIN_LISTS/prot_list.greenEtal2018.elongating.txt"
+overlap_check = open(overlap_check_file, "r").read().split("\n");
+subset_len = len(overlap_check);
+overlap_check = [ pid_to_tid[pid] for pid in overlap_check if pid in pid_to_tid ];
+present_subset_len = len(overlap_check);
+master_id_table = "../02-Annotation-data/mm10-rnor6-master-transcript-id-table.tab"
+
+
 ds_thresh = 0.5
 
 with open(outfilename, "w") as outfile:
@@ -41,6 +59,10 @@ with open(outfilename, "w") as outfile:
     mcore.PWS("# dS threshold:          " + str(ds_thresh), outfile);
 
     mcore.PWS("# --------------", outfile);
+
+    mcore.PWS("# Checking subset: " + overlap_check_file, outfile);
+    mcore.PWS("# Subset genes read : " + str(subset_len), outfile);
+    mcore.PWS("# Subset genes found : " + str(present_subset_len), outfile);
 
     if mode == "targets":
         mcore.PWS("# " + mcore.getDateTime() + " Reading target overlaps...", outfile);
@@ -129,6 +151,8 @@ with open(outfilename, "w") as outfile:
     no_overlap = 0;
     no_passed_transcripts = 0;
 
+    subset_rm = { 'no-orth' : 0, 'not-one-2-one' : 0, 'low-conf' : 0, 'high-ds' : 0, 'not-targeted' : 0 }
+
     for gid in genes:
         # print(gid);
         # print(genes[gid]);
@@ -141,18 +165,30 @@ with open(outfilename, "w") as outfile:
         for transcript in genes[gid]:
             if len(transcript) < 14:
                 no_orth += 1;
+
+                if transcript[0] in overlap_check:
+                    subset_rm['no-orth'] += 1
                 continue;
 
             if transcript[6] != "ortholog_one2one":
                 no_one2one += 1;
+
+                if transcript[0] in overlap_check:
+                    subset_rm['not-one-2-one'] += 1                
                 continue;
 
             if transcript[13] != "1":
                 low_conf += 1;
+
+                if transcript[0] in overlap_check:
+                    subset_rm['low-conf'] += 1                
                 continue;
 
             if transcript[12] == '' or float(transcript[12]) > ds_thresh:
                 ds_filter += 1;
+
+                if transcript[0] in overlap_check:
+                    subset_rm['high-ds'] += 1                
                 continue;
 
             passed_transcripts.append(transcript);
@@ -172,6 +208,8 @@ with open(outfilename, "w") as outfile:
                         max_targets = mouse_transcript_overlaps[gid][tid];
                         max_transcript = passed_transcript;
                     else:
+                        if tid in overlap_check:
+                            subset_rm['not-targeted'] += 1;
                         last_filter += 1;
                 selected_transcripts[gid] = max_transcript;
             # Final selection by target
@@ -193,6 +231,8 @@ with open(outfilename, "w") as outfile:
                         max_len = avg_len;
                         max_transcript = transcript;
                     else:
+                        if mouse_tid in overlap_check:
+                            subset_rm['not-targeted'] += 1;
                         last_filter += 1;
                 selected_transcripts[gid] = max_transcript;
             # Final selection by length
@@ -245,4 +285,4 @@ with open(outfilename, "w") as outfile:
 
         outfile.write(outline + "\n");
 
-
+print(subset_rm);

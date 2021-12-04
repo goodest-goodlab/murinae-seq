@@ -278,6 +278,12 @@ if __name__ == '__main__':
             outline = [ iter_str, str(globs['bl-thresholds'][i-1]), str(len(globs['pared-branches'][i-1])), str(len(globs['pruned-tips'][i-1])), iter_tree ];
         CORE.printWrite(globs['logfilename'], 3, "\t".join(outline));
 
+    tips_file = os.path.join(globs['outdir'], "all-pruned-tips.txt");
+    with open(tips_file, "w") as tipsfile:
+        for iter_tips in globs['pruned-tips']:
+            for tip in iter_tips:
+                tipsfile.write(tip + "\n");
+
     step_start_time = CORE.report_step(globs, step, step_start_time, "Success");
     # Status update
 
