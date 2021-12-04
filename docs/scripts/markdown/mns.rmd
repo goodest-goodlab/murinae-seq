@@ -1,0 +1,256 @@
+---
+title: "Murine multi-nucleotide substitutions"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(cowplot)
+library(ggbeeswarm)
+library(dplyr)
+#library(kableExtra)
+library(tidyr)
+library(ggtree)
+library(phytools)
+library(phangorn)
+library(reshape2)
+library(ggExtra)
+library(ggrepel)
+#library(vroom)
+library(ggdist)
+#library(stringr)
+source("../lib/design.r")
+source("../lib/get_tree_info.r")
+
+```
+
+[< Back to summary](summary_210.html)
+
+# Multi-nucleotide substitutions
+
+Here defined as two or more substitutions inferred along a branch in the same codon
+
+```{r read, out.width="75%", fig.align = "center", warning=FALSE}
+#tree_type = "astral"
+save_tree_fig = F
+
+cat(tree_type, " tree\n")
+cat("188 species targeted capture to mouse exons assembled with SPADES.\n")
+cat("11,775 coding loci aligned with exonerate+mafft\n")
+cat("Gene trees inferred with IQtree.\n")
+
+
+if(tree_type == "astral"){
+  cat("Species tree inferred with ASTRAL.\n")
+  cat("Branch lengths estimated using 865 loci with normalized RF distance <= 0.25.\n")
+  tree_file = "../../data/trees/full_coding_iqtree_astral.cf.bl.nrf25.rooted.treefile"
+  anc_file = "../../data/rates/full-coding-astral-mg94-local-branch-ancs.csv"
+  xmax = 0.125
+  
+  
+}else if(tree_type == "concat"){
+  cat("Species tree inferred by concatenation of all loci with IQtree.\n")
+  tree_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
+  anc_file = "../../data/rates/full-coding-concat-mg94-local-branch-ancs.csv"
+  xmax = 0.125
+  
+}
+
+cat("Ancestral sequences inferred with HyPhy\n")
+
+tree = read.tree(tree_file)
+tree_to_df_list = treeToDF(tree)
+tree_info = tree_to_df_list[["info"]]
+
+if(tree_type == "astral"){
+  tree_info = tree_info %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
+  tree_info$astral[tree_info$node.type=="tip"] = NA
+  tree_info$astral = as.numeric(tree_info$astral)
+  tree_info$gcf = as.numeric(tree_info$gcf)
+  tree_info$scf = as.numeric(tree_info$scf)
+}else if(tree_type == "concat"){
+  tree_info = tree_info %>% separate(label, c("bootstrap", "gcf", "scf"), sep="/", remove=F)
+  tree_info$bootstrap[tree_info$node.type=="tip"] = NA
+  tree_info$bootstrap = as.numeric(tree_info$bootstrap)
+  tree_info$gcf = as.numeric(tree_info$gcf)
+  tree_info$scf = as.numeric(tree_info$scf)
+}
+
+```
+
+```{r read-ancs, out.width="75%", fig.align = "center", warning=FALSE}
+
+anc_info_w_root = read.csv(anc_file, header=T)
+
+uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(anc_info_w_root))] 
+# Get non common names
+
+uniq_info_cols = c(uniq_info_cols, "clade") # appending key parameter
+# Get a list of columns from the tree_info df to join to the tree rates df
+
+anc_info_w_root = anc_info_w_root %>% left_join((tree_info %>% select(uniq_info_cols)), by="clade")
+# Select the columns from tree_info and join to tree_rates, merging by clade
+# https://stackoverflow.com/a/61628157
+
+anc_info_w_root = anc_info_w_root[order(anc_info_w_root$node), ]
+# Re-order the rows by the R node
+
+anc_info_w_root$total.mns = anc_info_w_root$mS + anc_info_w_root$mN + anc_info_w_root$mA
+anc_info_w_root$mn.ms = anc_info_w_root$mN / anc_info_w_root$mS
+```
+
+# Species tree branch presence/absence per gene
+
+Following the [same procedure as before](https://goodest-goodlab.github.io/murinae-seq/trees-astral.html#average-rates-per-branch-with-basic-model-fit-mg94-local), we count multi-nucleotdie substitutions per species tree branch only in genes that contain that branch (full clade or partial clade):
+
+```{r gt_branch_categories, out.width="50%", fig.align="center", warning=FALSE}
+
+anc_info = subset(anc_info_w_root, node.type != "root")
+
+full_clade = select(anc_info, clade, node.type, num.genes.full)
+full_clade$label = "Full clade"
+names(full_clade)[3] = "num.genes"
+
+partial_clade = select(anc_info, clade, node.type, num.genes.partial)
+partial_clade$label = "Partial clade"
+names(partial_clade)[3] = "num.genes"
+
+descendant_counted = select(anc_info, clade, node.type, num.genes.descendant.counted)
+descendant_counted$label = "Descendant counted"
+names(descendant_counted)[3] = "num.genes"
+
+discordant_clade = select(anc_info, clade, node.type, num.genes.discordant)
+discordant_clade$label = "Discordant clade"
+names(discordant_clade)[3] = "num.genes"
+
+no_clade = select(anc_info, clade, node.type, num.genes.missing)
+no_clade$label = "Missing clade"
+names(no_clade)[3] = "num.genes"
+
+clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
+# Convert branch categories to long format
+
+clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
+
+branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  ylab("# of genes") +
+  xlab("Species tree\nbranch classification") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_counts)
+
+```
+
+# Synonymous and non-synonymous convergent substitutions
+
+This results in the following distributions for number of convergent substitutions across branches (green lines indicating 95th percentile of each rate):
+
+```{r fig9, out.width="50%", fig.align = "center", warning=FALSE}
+
+ms_95_perc = quantile(anc_info$mS, 0.95, na.rm=T)
+mn_95_perc = quantile(anc_info$mN, 0.95, na.rm=T)
+
+p = ggplot(anc_info, aes(x=mS, y=mN, color=node.type)) +
+  geom_point(size=2, alpha=0.2) +
+  geom_text_repel(aes(label=ifelse(mS>ms_95_perc | mN>mn_95_perc, as.character(node), '')), show_guide=F) +
+  #(aes(label=ifelse(avg.dN>dn_95_perc, as.character(node), '')), show_guide=F) +
+  geom_vline(xintercept=ms_95_perc, linetype="dashed", color=corecol(numcol=1, offset=6)) +
+  geom_hline(yintercept=mn_95_perc, linetype="dashed", color=corecol(numcol=1, offset=6)) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("mS per branch") + 
+  ylab("mN per branch") + 
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
+p = ggExtra::ggMarginal(p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=1), color="#666666")
+print(p)
+
+anc_info$ms.outlier = ifelse(anc_info$mS>ms_95_perc,anc_info$node,'')
+anc_info$mn.outlier = ifelse(anc_info$mN>mn_95_perc,anc_info$node,'')
+```
+
+# Species tree with branches colored # of convergent substitutions to any other branch
+
+```{r mns-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+mns_tree = ggtree(tree, size=0.8, ladderize=F, aes(color=anc_info_w_root$total.mns)) +
+  scale_color_continuous(name='Multi-nucleotide subs', low=l, high=h) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9))
+print(mns_tree)
+
+``` 
+
+# Ratio of non-synyonymous to synonymous MNS (mN/mS)
+
+```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE}
+
+mnms_p = ggplot(anc_info, aes(x=mn.ms)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("cN/cS") +
+  ylab("# of branches") +
+  bartheme()
+print(mnms_p)
+# Distribution of dN/dS when using gene trees
+
+mnms_95_perc = quantile(anc_info$mn.ms, 0.95, na.rm=T)
+anc_info$mnms.outlier = ifelse(anc_info$mn.ms>mnms_95_perc,anc_info$node,'')
+```
+
+# Species tree with branches colored by mN/mS
+
+```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+mnms_tree = ggtree(tree, size=0.8, ladderize=F, aes(color=anc_info_w_root$mn.ms)) +
+  scale_color_continuous(name='mN/mS', low=l, high=h) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9))
+print(mnms_tree)
+
+
+``` 
+
+
+[< Back to summary](summary_210.html)
+
+```{r footer, echo=FALSE, eval=FALSE}
+cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
+htmltools::includeHTML("../html-chunks/rmd_footer.html")
+```
+
+
+
+
+  

@@ -18,6 +18,8 @@ parser.add_argument("--wgs", dest="wgs", help="Without --all: build wgs.html. Wi
 parser.add_argument("--assembly", dest="assembly", help="Without --all: build assembly_stats.html. With --all: exlude assembly_stats.html", action="store_true", default=False);
 parser.add_argument("--aln", dest="aln", help="Without --all: build aln_stats.html. With --all: exlude aln_stats.html", action="store_true", default=False);
 parser.add_argument("--trees", dest="trees", help="Without --all: build trees.html. With --all: exlude trees.html", action="store_true", default=False);
+parser.add_argument("--convergence", dest="convergence", help="Without --all: build convergence.html. With --all: exlude convergence.html", action="store_true", default=False);
+parser.add_argument("--mns", dest="mns", help="Without --all: build mns.html. With --all: exlude mns.html", action="store_true", default=False);
 parser.add_argument("--prune", dest="prune", help="Without --all: build prune.html. With --all: exlude prune.html", action="store_true", default=False);
 parser.add_argument("--wgsps", dest="wgsps", help="Without --all: build wgs_ps_comps.html. With --all: exlude wgs_ps_comps.html", action="store_true", default=False);
 # parser.add_argument("--fullassemblystats", dest="fullassemblystats", help="Without --all: build assembly_stats_2.html. With --all: exlude assembly_stats_2.html", action="store_true", default=False);
@@ -42,6 +44,8 @@ pages = {
     'assembly' : args.assembly,
     'aln' : args.aln,
     'trees' : args.trees,
+    'convergence' : args.convergence,
+    'mns' : args.mns,
     'prune' : args.prune,
     'wgsps' : args.wgsps,
     # 'fullassemblystats' : args.fullassemblystats,
@@ -85,6 +89,12 @@ if pages['aln']:
 
 if pages['trees']:
     os.system("Rscript trees_generator.r");
+    
+if pages['convergence']:
+    os.system("Rscript convergence_generator.r");
+    
+if pages['mns']:
+    os.system("Rscript mns_generator.r");
 
 if pages['prune']:
     os.system("Rscript prune_generator.r");
