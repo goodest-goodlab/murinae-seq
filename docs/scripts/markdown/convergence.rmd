@@ -239,6 +239,25 @@ print(cncs_tree)
 
 ``` 
 
+# Pairwise convergent substitutions
+
+Convergent and divergent substitutions between every pair of branches in the tree
+
+```{r pairwise-conv, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+
+pairwise_data = read.csv("../../data/rates/")
+
+pairwise_data$convergent = pairwise_data$con.syn + pairwise_data$con.one.each + pairwise_data$con.non.syn
+pairwise_data$divergent = pairwise_data$div.syn + pairwise_data$div.one.each + pairwise_data$div.non.syn
+
+pairwise_p = ggplot(pairwise_data, aes(x=divergent, y=convergent)) +
+  geom_point(size=2, alpha=0.3, color="#920000") +
+  geom_smooth(method="lm", se=F, size=2, linetype="dashed", color="#333333") +
+  bartheme()
+print(pairwise_p)
+
+``` 
+
 
 [< Back to summary](summary_210.html)
 
