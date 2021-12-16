@@ -64,16 +64,15 @@ if(tree_type == "astral"){
   cat("Species tree inferred with ASTRAL.\n")
   cat("Branch lengths estimated using 865 loci with normalized RF distance <= 0.25.\n")
   tree_file = "../../data/trees/full_coding_iqtree_astral.cf.bl.nrf25.rooted.treefile"
-  anc_file = "../../data/rates/full-coding-astral-mg94-local-branch-ancs.csv"
+  anc_file = "../../data/rates/full-coding-astral-mg94-local-branch-mns.csv"
+  exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 0.125
-  
-  
 }else if(tree_type == "concat"){
   cat("Species tree inferred by concatenation of all loci with IQtree.\n")
   tree_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
-  anc_file = "../../data/rates/full-coding-concat-mg94-local-branch-ancs.csv"
+  anc_file = "../../data/rates/full-coding-concat-mg94-local-branch-mns.csv"
+  exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 0.125
-  
 }
 
 cat("Ancestral sequences inferred with HyPhy\n")
@@ -101,6 +100,11 @@ if(tree_type == "astral"){
 ```{r read-ancs, out.width="75%", fig.align = "center", warning=FALSE}
 
 anc_info_w_root = read.csv(anc_file, header=T)
+
+cols_to_na = c("total.subs", "total.mns", "S", "N", "A", "mS", "mN", "mA")
+for(col in cols_to_na){
+  anc_info_w_root[anc_info_w_root$node.label %in% exclude_branches,][[col]] = NA
+}
 
 uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(anc_info_w_root))] 
 # Get non common names
@@ -164,7 +168,7 @@ print(branch_counts)
 
 ```
 
-# Synonymous and non-synonymous convergent substitutions
+# Synonymous and non-synonymous multi-nucleotide substitutions
 
 This results in the following distributions for number of convergent substitutions across branches (green lines indicating 95th percentile of each rate):
 
@@ -192,7 +196,7 @@ anc_info$ms.outlier = ifelse(anc_info$mS>ms_95_perc,anc_info$node,'')
 anc_info$mn.outlier = ifelse(anc_info$mN>mn_95_perc,anc_info$node,'')
 ```
 
-# Species tree with branches colored # of convergent substitutions to any other branch
+# Species tree with branches colored # of multi-nucleotide substitutions
 
 ```{r mns-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=3)
@@ -215,7 +219,7 @@ print(mns_tree)
 mnms_p = ggplot(anc_info, aes(x=mn.ms)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
   scale_y_continuous(expand=c(0,0)) +
-  xlab("cN/cS") +
+  xlab("mN/mS") +
   ylab("# of branches") +
   bartheme()
 print(mnms_p)

@@ -48,7 +48,7 @@ source("../lib/get_tree_info.r")
 
 
 ```{r read, out.width="75%", fig.align = "center", warning=FALSE}
-#tree_type = "astral"
+tree_type = "concat"
 save_tree_fig = F
 
 cat(tree_type, " tree\n")
@@ -61,16 +61,15 @@ if(tree_type == "astral"){
   cat("Species tree inferred with ASTRAL.\n")
   cat("Branch lengths estimated using 865 loci with normalized RF distance <= 0.25.\n")
   tree_file = "../../data/trees/full_coding_iqtree_astral.cf.bl.nrf25.rooted.treefile"
-  anc_file = "../../data/rates/full-coding-astral-mg94-local-branch-ancs.csv"
+  anc_file = "../../data/rates/full-coding-astral-pairwise-convergence.csv"
+  exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 0.125
-  
-  
 }else if(tree_type == "concat"){
   cat("Species tree inferred by concatenation of all loci with IQtree.\n")
   tree_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
-  anc_file = "../../data/rates/full-coding-concat-mg94-local-branch-ancs.csv"
+  anc_file = "../../data/rates/full-coding-concat-pairwise-convergence.csv"
+  exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 0.125
-  
 }
 
 cat("Ancestral sequences inferred with HyPhy\n")
@@ -94,25 +93,32 @@ if(tree_type == "astral"){
 }
 
 ```
+
 ```{r read-ancs, out.width="75%", fig.align = "center", warning=FALSE}
 
-anc_info_w_root = read.csv(anc_file, header=T)
+anc_info_w_root = read.csv(anc_file, header=T, comment.char="#")
 
-uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(anc_info_w_root))] 
-# Get non common names
+cols_to_na = names(anc_info_w_root)[3:80]
+for(col in cols_to_na){
+  anc_info_w_root[anc_info_w_root$node1 %in% exclude_branches,][[col]] = NA
+  anc_info_w_root[anc_info_w_root$node2 %in% exclude_branches,][[col]] = NA
+}
 
-uniq_info_cols = c(uniq_info_cols, "clade") # appending key parameter
-# Get a list of columns from the tree_info df to join to the tree rates df
-
-anc_info_w_root = anc_info_w_root %>% left_join((tree_info %>% select(uniq_info_cols)), by="clade")
-# Select the columns from tree_info and join to tree_rates, merging by clade
-# https://stackoverflow.com/a/61628157
-
-anc_info_w_root = anc_info_w_root[order(anc_info_w_root$node), ]
-# Re-order the rows by the R node
-
-anc_info_w_root$total.c = anc_info_w_root$cS + anc_info_w_root$cN + anc_info_w_root$cA
-anc_info_w_root$cn.cs = anc_info_w_root$cN / anc_info_w_root$cS
+# uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(anc_info_w_root))] 
+# # Get non common names
+# 
+# uniq_info_cols = c(uniq_info_cols, "clade") # appending key parameter
+# # Get a list of columns from the tree_info df to join to the tree rates df
+# 
+# anc_info_w_root = anc_info_w_root %>% left_join((tree_info %>% select(uniq_info_cols)), by="clade")
+# # Select the columns from tree_info and join to tree_rates, merging by clade
+# # https://stackoverflow.com/a/61628157
+# 
+# anc_info_w_root = anc_info_w_root[order(anc_info_w_root$node), ]
+# # Re-order the rows by the R node
+# 
+# anc_info_w_root$total.c = anc_info_w_root$cS + anc_info_w_root$cN + anc_info_w_root$cA
+# anc_info_w_root$cn.cs = anc_info_w_root$cN / anc_info_w_root$cS
 ```
 
 # Species tree branch presence/absence per gene
@@ -160,11 +166,75 @@ print(branch_counts)
 
 ```
 
+# Amino acid convergence
+
+```{r aa-conv, out.width="50%", fig.align = "center", warning=FALSE}
+
+anc_info_w_root = anc_info_w_root %>% mutate(aa.div = rowSums(select(., ends_with(".div")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(aa.par = rowSums(select(., ends_with(".par")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(aa.con = rowSums(select(., ends_with(".con")), na.rm=T))
+
+aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  bartheme()
+
+print(aa_p)
+
+
+
+
+anc_info_w_root = anc_info_w_root %>% mutate(syn.con = rowSums(select(., starts_with("s.s.con")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(non.con = rowSums(select(., starts_with("n.n.con") | starts_with("s.n.con")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(non.div = rowSums(select(., starts_with("n.n.div") | starts_with("s.n.div")), na.rm=T))
+
+codon_p = ggplot(anc_info_w_root, aes(x=non.div, y=non.con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  bartheme()
+
+print(codon_p)
+
+```
+
+
+```{r, eval=FALSE}
+cs_95_perc = quantile(anc_info$cS, 0.95, na.rm=T)
+cn_95_perc = quantile(anc_info$cN, 0.95, na.rm=T)
+
+p = ggplot(anc_info, aes(x=cS, y=cN, color=node.type)) +
+  geom_point(size=2, alpha=0.2) +
+  geom_text_repel(aes(label=ifelse(cS>cs_95_perc | cN>cn_95_perc, as.character(node), '')), show_guide=F) +
+  #(aes(label=ifelse(avg.dN>dn_95_perc, as.character(node), '')), show_guide=F) +
+  geom_vline(xintercept=cs_95_perc, linetype="dashed", color=corecol(numcol=1, offset=6)) +
+  geom_hline(yintercept=cn_95_perc, linetype="dashed", color=corecol(numcol=1, offset=6)) +
+  #geom_smooth(method="lm", se=F, ) +
+  xlab("cS per branch") + 
+  ylab("cN per branch") + 
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
+p = ggExtra::ggMarginal(p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=1), color="#666666")
+print(p)
+
+anc_info$cs.outlier = ifelse(anc_info$cS>cs_95_perc,anc_info$node,'')
+anc_info$cn.outlier = ifelse(anc_info$cN>cn_95_perc,anc_info$node,'')
+```
+
+
+
+
+
+
+
+
+
+
 # Synonymous and non-synonymous convergent substitutions
 
 This results in the following distributions for number of convergent substitutions across branches (green lines indicating 95th percentile of each rate):
 
-```{r fig9, out.width="50%", fig.align = "center", warning=FALSE}
+```{r fig9, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
 
 cs_95_perc = quantile(anc_info$cS, 0.95, na.rm=T)
 cn_95_perc = quantile(anc_info$cN, 0.95, na.rm=T)
@@ -190,7 +260,7 @@ anc_info$cn.outlier = ifelse(anc_info$cN>cn_95_perc,anc_info$node,'')
 
 # Species tree with branches colored # of convergent substitutions to any other branch
 
-```{r convergent-subs-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r convergent-subs-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16, eval=FALSE}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -206,7 +276,7 @@ print(c_tree)
 
 # Ratio of non-synyonymous to synonymous convergent substitutions (cN/cS)
 
-```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE}
+```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
 
 
 cncs_p = ggplot(anc_info, aes(x=cn.cs)) +
@@ -224,7 +294,7 @@ anc_info$cncs.outlier = ifelse(anc_info$cn.cs>cncs_95_perc,anc_info$node,'')
 
 # Species tree with branches colored by cN/cS
 
-```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16, eval=FALSE}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -243,7 +313,7 @@ print(cncs_tree)
 
 Convergent and divergent substitutions between every pair of branches in the tree
 
-```{r pairwise-conv, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r pairwise-conv, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16, eval=FALSE}
 
 pairwise_data = read.csv("../../data/rates/")
 
