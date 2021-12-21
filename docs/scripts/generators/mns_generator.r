@@ -3,7 +3,7 @@
 # This generates the file "mns.html"
 ############################################################
 
-tree_type = "concat"
+tree_type = "astral"
 
 cat("Rendering mns-", tree_type, ".rmd/html\n", sep="")
 

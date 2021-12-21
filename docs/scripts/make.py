@@ -21,6 +21,7 @@ parser.add_argument("--trees", dest="trees", help="Without --all: build trees.ht
 parser.add_argument("--convergence", dest="convergence", help="Without --all: build convergence.html. With --all: exlude convergence.html", action="store_true", default=False);
 parser.add_argument("--mns", dest="mns", help="Without --all: build mns.html. With --all: exlude mns.html", action="store_true", default=False);
 parser.add_argument("--prune", dest="prune", help="Without --all: build prune.html. With --all: exlude prune.html", action="store_true", default=False);
+parser.add_argument("--ps", dest="ps", help="Without --all: build ps.html. With --all: exlude ps.html", action="store_true", default=False);
 parser.add_argument("--wgsps", dest="wgsps", help="Without --all: build wgs_ps_comps.html. With --all: exlude wgs_ps_comps.html", action="store_true", default=False);
 # parser.add_argument("--fullassemblystats", dest="fullassemblystats", help="Without --all: build assembly_stats_2.html. With --all: exlude assembly_stats_2.html", action="store_true", default=False);
 # parser.add_argument("--fullmappingstats", dest="fullmappingstats", help="Without --all: build full_mapping_stats.html. With --all: exlude full_mapping_stats.html", action="store_true", default=False);
@@ -47,6 +48,7 @@ pages = {
     'convergence' : args.convergence,
     'mns' : args.mns,
     'prune' : args.prune,
+    'ps' : args.ps,
     'wgsps' : args.wgsps,
     # 'fullassemblystats' : args.fullassemblystats,
     # 'fullmappingstats' : args.fullmappingstats,
@@ -98,6 +100,9 @@ if pages['mns']:
 
 if pages['prune']:
     os.system("Rscript prune_generator.r");
+
+if pages['ps']:
+    os.system("Rscript ps_generator.r");
 
 if pages['wgsps']:
     os.system("Rscript wgs_ps_comps_generator.r");

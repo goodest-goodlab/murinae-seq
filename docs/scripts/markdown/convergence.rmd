@@ -46,9 +46,8 @@ source("../lib/get_tree_info.r")
 
 [< Back to summary](summary_210.html)
 
-
 ```{r read, out.width="75%", fig.align = "center", warning=FALSE}
-tree_type = "concat"
+tree_type = "astral"
 save_tree_fig = F
 
 cat(tree_type, " tree\n")
@@ -59,15 +58,17 @@ cat("Gene trees inferred with IQtree.\n")
 
 if(tree_type == "astral"){
   cat("Species tree inferred with ASTRAL.\n")
-  cat("Branch lengths estimated using 865 loci with normalized RF distance <= 0.25.\n")
-  tree_file = "../../data/trees/full_coding_iqtree_astral.cf.bl.nrf25.rooted.treefile"
+  cat("Branch lengths estimated using 865 loci with normalized RF distance to species tree <= 0.25.\n")
+  tree_file = "../../data/trees/full_coding_iqtree_astral.cf.bl.nrf25.rooted.labeled.treefile"
   anc_file = "../../data/rates/full-coding-astral-pairwise-convergence.csv"
+  branch_count_file = "../../data/rates/full-coding-astral-mg94-local-branch-mns.csv"
   exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 0.125
 }else if(tree_type == "concat"){
   cat("Species tree inferred by concatenation of all loci with IQtree.\n")
   tree_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
   anc_file = "../../data/rates/full-coding-concat-pairwise-convergence.csv"
+  branch_count_file = ""
   exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 0.125
 }
@@ -79,7 +80,7 @@ tree_to_df_list = treeToDF(tree)
 tree_info = tree_to_df_list[["info"]]
 
 if(tree_type == "astral"){
-  tree_info = tree_info %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
+  tree_info = tree_info %>% separate(label, c("tp", "astral", "gcf", "scf"), sep="/", remove=F)
   tree_info$astral[tree_info$node.type=="tip"] = NA
   tree_info$astral = as.numeric(tree_info$astral)
   tree_info$gcf = as.numeric(tree_info$gcf)
@@ -94,108 +95,354 @@ if(tree_type == "astral"){
 
 ```
 
-```{r read-ancs, out.width="75%", fig.align = "center", warning=FALSE}
+# Definitions
+
+1. Divergent substitution: A substitution at the same site on two branches of the tree to a different derived state regardless of ancestral state (e.g. A,A -> C,G or A,T -> C,G).
+2. Convergent substitution: A substitution at the same site on two branches of the tree that differ in their ancestral state to an identical derived state (e.g. A,G -> C,C).
+3. Parllel substitution: A substitution at the same site on two branches of the tree that share the same ancestral state to an identical derived state (e.g. A,A -> C,C).
+
+For all pairwise analyses, comparisons between branches where one is the direct descendant of the other are excluded.
+
+# Species tree branch presence/absence per gene
+
+Following the [same procedure as before](https://goodest-goodlab.github.io/murinae-seq/trees-astral.html#average-rates-per-branch-with-basic-model-fit-mg94-local), we count convergent substitutions per species tree branch only in genes that contain that branch (full clade or partial clade).
+
+# Pairwise amino acid convergence
+
+Convergent and divergent amino acid substitutions were counted on each pair of branches in the species tree in every gene where both branches were present, excluding pairs where one branch is the direct descendant of the other.
+
+We find a strong correlation between divergent and convergent amino acid substitutions -- with a secondary correlation (orange points).
+
+```{r aa-conv, out.width="50%", fig.align = "center", warning=FALSE}
 
 anc_info_w_root = read.csv(anc_file, header=T, comment.char="#")
+# Read the pairwise counts
 
 cols_to_na = names(anc_info_w_root)[3:80]
 for(col in cols_to_na){
   anc_info_w_root[anc_info_w_root$node1 %in% exclude_branches,][[col]] = NA
   anc_info_w_root[anc_info_w_root$node2 %in% exclude_branches,][[col]] = NA
 }
-
-# uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(anc_info_w_root))] 
-# # Get non common names
-# 
-# uniq_info_cols = c(uniq_info_cols, "clade") # appending key parameter
-# # Get a list of columns from the tree_info df to join to the tree rates df
-# 
-# anc_info_w_root = anc_info_w_root %>% left_join((tree_info %>% select(uniq_info_cols)), by="clade")
-# # Select the columns from tree_info and join to tree_rates, merging by clade
-# # https://stackoverflow.com/a/61628157
-# 
-# anc_info_w_root = anc_info_w_root[order(anc_info_w_root$node), ]
-# # Re-order the rows by the R node
-# 
-# anc_info_w_root$total.c = anc_info_w_root$cS + anc_info_w_root$cN + anc_info_w_root$cA
-# anc_info_w_root$cn.cs = anc_info_w_root$cN / anc_info_w_root$cS
-```
-
-# Species tree branch presence/absence per gene
-
-Following the [same procedure as before](https://goodest-goodlab.github.io/murinae-seq/trees-astral.html#average-rates-per-branch-with-basic-model-fit-mg94-local), we count convergent substitutions per species tree branch only in genes that contain that branch (full clade or partial clade):
-
-```{r gt_branch_categories, out.width="50%", fig.align="center", warning=FALSE}
-
-anc_info = subset(anc_info_w_root, node.type != "root")
-
-full_clade = select(anc_info, clade, node.type, num.genes.full)
-full_clade$label = "Full clade"
-names(full_clade)[3] = "num.genes"
-
-partial_clade = select(anc_info, clade, node.type, num.genes.partial)
-partial_clade$label = "Partial clade"
-names(partial_clade)[3] = "num.genes"
-
-descendant_counted = select(anc_info, clade, node.type, num.genes.descendant.counted)
-descendant_counted$label = "Descendant counted"
-names(descendant_counted)[3] = "num.genes"
-
-discordant_clade = select(anc_info, clade, node.type, num.genes.discordant)
-discordant_clade$label = "Discordant clade"
-names(discordant_clade)[3] = "num.genes"
-
-no_clade = select(anc_info, clade, node.type, num.genes.missing)
-no_clade$label = "Missing clade"
-names(no_clade)[3] = "num.genes"
-
-clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
-# Convert branch categories to long format
-
-clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
-
-branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
-  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
-  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
-  ylab("# of genes") +
-  xlab("Species tree\nbranch classification") +
-  bartheme() +
-  theme(axis.text.x = element_text(angle=25, hjust=1)) +
-  guides(colour=guide_legend(override.aes=list(alpha=1)))
-print(branch_counts)
-
-```
-
-# Amino acid convergence
-
-```{r aa-conv, out.width="50%", fig.align = "center", warning=FALSE}
+# This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
 
 anc_info_w_root = anc_info_w_root %>% mutate(aa.div = rowSums(select(., ends_with(".div")), na.rm=T))
 anc_info_w_root = anc_info_w_root %>% mutate(aa.par = rowSums(select(., ends_with(".par")), na.rm=T))
 anc_info_w_root = anc_info_w_root %>% mutate(aa.con = rowSums(select(., ends_with(".con")), na.rm=T))
 
+second_cor = subset(anc_info_w_root, aa.con > 200)
+#second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 3000 & aa.con > 200))
+second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 1000 & aa.con > 100))
+second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 400 & aa.con > 50))
+second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 200 & aa.con > 30))
+
 aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.con)) +
   geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_point(data=second_cor, aes(x=aa.div, y=aa.con), size=2, alpha=0.3, color=corecol(numcol=1)) +
   geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  geom_smooth(data=second_cor, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
   bartheme()
 
 print(aa_p)
 
+```
 
+## Divergent vs parallel substitutions
 
+No secondary correlation between divergent and parallel (same ancestral state) substitutions, though those pairs seem to cluster on the lower end of parallel substitutions.
 
-anc_info_w_root = anc_info_w_root %>% mutate(syn.con = rowSums(select(., starts_with("s.s.con")), na.rm=T))
-anc_info_w_root = anc_info_w_root %>% mutate(non.con = rowSums(select(., starts_with("n.n.con") | starts_with("s.n.con")), na.rm=T))
-anc_info_w_root = anc_info_w_root %>% mutate(non.div = rowSums(select(., starts_with("n.n.div") | starts_with("s.n.div")), na.rm=T))
+```{r aa-par, out.width="50%", fig.align = "center", warning=FALSE}
 
-codon_p = ggplot(anc_info_w_root, aes(x=non.div, y=non.con)) +
+second_cor_par = subset(anc_info_w_root, aa.con > 200)
+#second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 3000 & aa.con > 200))
+second_cor_par = rbind(second_cor_par, subset(anc_info_w_root, aa.div < 1000 & aa.con > 100))
+second_cor_par = rbind(second_cor_par, subset(anc_info_w_root, aa.div < 400 & aa.con > 50))
+second_cor_par = rbind(second_cor_par, subset(anc_info_w_root, aa.div < 200 & aa.con > 30))
+
+aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.par)) +
   geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_point(data=second_cor_par, aes(x=aa.div, y=aa.par), size=2, alpha=0.3, color=corecol(numcol=1)) +
   geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=second_cor_par, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Divergent AA substitutions") +
+  ylab("Parallel AA substitutions") +
   bartheme()
 
-print(codon_p)
+print(aa_p)
 
 ```
+
+```{r count-secondary-br, out.width="50%", fig.align = "center", warning=FALSE}
+second_cor_br = select(second_cor, node1, node2)
+second_cor_br_counts = data.frame(table(unlist(second_cor_br)))
+names(second_cor_br_counts) = c("tp", "conv.pair.count")
+
+#second_cor_p = ggplot(second_cor_br_counts, aes(x=tp, y=conv.pair.count)) + 
+#  geom_bar(stat="identity") +
+#  bartheme()
+#print(second_cor_p)
+
+uniq_info_cols = names(second_cor_br_counts)[!(names(second_cor_br_counts) %in% names(tree_info))] 
+# # Get non common names
+ 
+uniq_info_cols = c(uniq_info_cols, "tp") # appending key parameter
+# Get a list of columns from the tree_info df to join to the tree rates df
+ 
+tree_info = tree_info %>% left_join((second_cor_br_counts %>% select(uniq_info_cols)), by="tp")
+# Select the columns from tree_info and join to tree_rates, merging by clade
+# https://stackoverflow.com/a/61628157
+
+tree_info = tree_info[order(tree_info$node), ]
+# Re-order the rows by the R node
+
+tree_info$conv.pair.count[is.na(tree_info$conv.pair.count)] = 0
+
+```
+
+
+## Branches involved in secondary correlation
+
+Remember that each point above is a count between a PAIR of branches. This tree displays the number of times each branch in the tree is involved in one of the pairings in the secondary correlation (orange points).
+
+```{r second-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+conv_tree = ggtree(tree, size=0.8, ladderize=F, aes(color=tree_info$conv.pair.count)) +
+  scale_color_continuous(name='Times in secondary pair', low=l, high=h) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  geom_label(aes(x=branch, label=ifelse(tree_info$conv.pair.count>0,as.character(tree_info$conv.pair.count),'')), label.size=NA, fill="transparent") +
+  theme(legend.position=c(0.15,0.9))
+print(conv_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree-PARED-gcf50.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# conv tree
+```
+
+## Secondary correlation and branch length
+
+No correlation between branch length and the number of times a branch is on this secondary correlation.
+
+Note: ALL branches plotted, but still no correlation if only those with at least 1 pairing in the secondary correlation are used
+
+```{r secondary-bl, out.width="50%", fig.align = "center", warning=FALSE}
+
+secondary_tree_info = subset(tree_info, conv.pair.count > 0)
+
+conv_bl_p = ggplot(tree_info, aes(x=branch.length, y=conv.pair.count)) +
+  geom_point(size=2, alpha=0.3, color=corecol(numcol=1)) +
+  xlab("Branch length") +
+  ylab("# of times in second correlation") +
+  bartheme()
+print(conv_bl_p)
+
+
+```
+
+## Secondary correlation and number of loci branch present in
+
+No correlation between branch presence and the number of times a branch is on this secondary correlation.
+
+Note: ALL branches plotted, but still no correlation if only those with at least 1 pairing in the secondary correlation are used
+
+TODO: MAYBE NEED TO COUNT PAIR PRESENCE
+
+```{r secondary-bp, out.width="50%", fig.align = "center", warning=FALSE}
+
+branch_presence = read.csv(branch_count_file, header=T)
+names(branch_presence)[1] = "tp"
+
+uniq_info_cols = names(branch_presence)[!(names(branch_presence) %in% names(tree_info))] 
+# # Get non common names
+ 
+uniq_info_cols = c(uniq_info_cols, "tp") # appending key parameter
+# Get a list of columns from the tree_info df to join to the tree rates df
+ 
+tree_info = tree_info %>% left_join((branch_presence %>% select(uniq_info_cols)), by="tp")
+# Select the columns from tree_info and join to tree_rates, merging by clade
+# https://stackoverflow.com/a/61628157
+
+tree_info = tree_info[order(tree_info$node), ]
+# Re-order the rows by the R node
+
+
+secondary_tree_info = subset(tree_info, conv.pair.count > 0)
+
+conv_bp_p = ggplot(tree_info, aes(x=num.genes.full+num.genes.partial, y=conv.pair.count)) +
+  geom_point(size=2, alpha=0.3, color=corecol(numcol=1)) +
+  xlab("# of times branch in gene") +
+  ylab("# of times in second correlation") +
+  bartheme()
+print(conv_bp_p)
+
+
+```
+
+## Excluding convergent AA substitutions that are divergent at the codon level
+
+This pattern, and actually most convergent amino acid substitutions, are actually driven by divergent substitutions at the codon level:
+
+```{r aa-conv-conv, out.width="50%", fig.align = "center", warning=FALSE}
+
+anc_info_w_root = read.csv(anc_file, header=T, comment.char="#")
+# Read the pairwise counts
+
+cols_to_na = names(anc_info_w_root)[3:80]
+for(col in cols_to_na){
+  anc_info_w_root[anc_info_w_root$node1 %in% exclude_branches,][[col]] = NA
+  anc_info_w_root[anc_info_w_root$node2 %in% exclude_branches,][[col]] = NA
+}
+# This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
+
+anc_info_w_root = anc_info_w_root %>% mutate(aa.div = rowSums(select(., ends_with(".div.div")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(aa.par = rowSums(select(., ends_with(".par.par")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(aa.con = rowSums(select(., ends_with(".con.con")), na.rm=T))
+
+#second_cor = subset(anc_info_w_root, aa.con > 200)
+
+aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  #geom_point(data=second_cor, aes(x=aa.div, y=aa.con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=second_cor, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
+  bartheme()
+
+print(aa_p)
+
+```
+
+## Including only convergent amino acid substitutions that are divergent at the codon level
+
+```{r aa-div-conv, out.width="50%", fig.align = "center", warning=FALSE}
+
+anc_info_w_root = read.csv(anc_file, header=T, comment.char="#")
+# Read the pairwise counts
+
+cols_to_na = names(anc_info_w_root)[3:80]
+for(col in cols_to_na){
+  anc_info_w_root[anc_info_w_root$node1 %in% exclude_branches,][[col]] = NA
+  anc_info_w_root[anc_info_w_root$node2 %in% exclude_branches,][[col]] = NA
+}
+# This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
+
+anc_info_w_root = anc_info_w_root %>% mutate(aa.div = rowSums(select(., ends_with(".div.div")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(aa.con = rowSums(select(., ends_with(".div.con")), na.rm=T))
+
+#second_cor = subset(anc_info_w_root, aa.con > 200)
+
+aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  #geom_point(data=second_cor, aes(x=aa.div, y=aa.con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=second_cor, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
+  bartheme()
+
+print(aa_p)
+
+```
+
+# Codon convergence
+
+## Non-synonymous codon convergence
+
+```{r codon-conv-ns, out.width="50%", fig.align = "center", warning=FALSE}
+anc_info_w_root = anc_info_w_root %>% mutate(syn.con = rowSums(select(., starts_with("s.s.con")), na.rm=T))
+#anc_info_w_root = anc_info_w_root %>% mutate(non.con = rowSums(select(., starts_with("n.n.con") | starts_with("s.n.con")), na.rm=T))
+#anc_info_w_root = anc_info_w_root %>% mutate(non.div = rowSums(select(., starts_with("n.n.div") | starts_with("s.n.div")), na.rm=T))
+
+anc_info_w_root = anc_info_w_root %>% mutate(non.con = rowSums(select(., starts_with("n.n.con")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(non.div = rowSums(select(., starts_with("n.n.div")), na.rm=T))
+
+ns_codon_p = ggplot(anc_info_w_root, aes(x=non.div, y=non.con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Divergent non-synonymous codon substitutions") +
+  ylab("Convergent non-synonymous codon substitutions") +
+  bartheme()
+
+print(ns_codon_p)
+
+```
+
+## Non-synonymous codon convergence / synonymous codon convergence
+
+For each pair, counts where both convergent substitutions are non-synonymous vs. both are synonymous
+
+```{r cn-cs, out.width="50%", fig.align = "center", warning=FALSE}
+
+cncs_set = subset(anc_info_w_root, syn.con > 4)
+
+cncs_set$cncs = cncs_set$non.con / cncs_set$syn.con
+#cncs_set$cncs[is.na(cncs_set$cncs)] = NA
+#cncs_set$cncs[is.infinite(cncs_set$cncs)] = NA
+
+cncs_p = ggplot(cncs_set, aes(x=cncs)) +
+  geom_histogram(fill=corecol(numcol=1, offset=1), color="#ececec") +
+  scale_x_continuous(expand=c(0,0)) +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("cN/cS") +
+  ylab("Branch pairs") +
+  bartheme()
+
+print(cncs_p)
+
+cat("Avg. cN/cS: ", mean(cncs_set$cncs, na.rm=T), "\n")
+cat("Median cN/cS: ", median(cncs_set$cncs, na.rm=T), "\n")
+
+
+cncs_subset = select(cncs_set, node1, node2, non.con, syn.con, cncs)
+cncs_subset = cncs_subset[order(-cncs_subset$cncs), ]
+
+head(cncs_subset, n=20)
+
+cncs_95_perc = quantile(cncs_set$cncs, 0.95, na.rm=T)
+
+cat("cN/cS 95th percentile: ", cncs_95_perc, "\n")
+
+
+```
+
+## Synonymous vs. non-synonymous codon convergence
+
+Y = above 95th percentile of cN/cS
+
+N = below 95th percentile of cN/cS
+
+```{r codon-conv-s-ns, out.width="50%", fig.align = "center", warning=FALSE}
+
+cncs_subset$cncs.95 = ifelse(cncs_subset$cncs > cncs_95_perc, "Y", "N")
+
+s_ns_codon_p = ggplot(cncs_subset, aes(x=syn.con, y=non.con, color=cncs.95)) +
+  geom_point(size=2, alpha=0.3) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Convergent synonymous codon substitutions") +
+  ylab("Convergent non-synonymous\ncodon substitutions") +
+  bartheme()
+
+print(s_ns_codon_p)
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 ```{r, eval=FALSE}
@@ -230,12 +477,14 @@ anc_info$cn.outlier = ifelse(anc_info$cN>cn_95_perc,anc_info$node,'')
 
 
 
-# Synonymous and non-synonymous convergent substitutions
 
-This results in the following distributions for number of convergent substitutions across branches (green lines indicating 95th percentile of each rate):
 
 ```{r fig9, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
+# Synonymous and non-synonymous convergent substitutions
 
+#This results in the following distributions for number of convergent substitutions across branches (green lines indicating 95th percentile of each rate):
+  
+  
 cs_95_perc = quantile(anc_info$cS, 0.95, na.rm=T)
 cn_95_perc = quantile(anc_info$cN, 0.95, na.rm=T)
 
@@ -258,9 +507,11 @@ anc_info$cs.outlier = ifelse(anc_info$cS>cs_95_perc,anc_info$node,'')
 anc_info$cn.outlier = ifelse(anc_info$cN>cn_95_perc,anc_info$node,'')
 ```
 
-# Species tree with branches colored # of convergent substitutions to any other branch
+
 
 ```{r convergent-subs-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16, eval=FALSE}
+# Species tree with branches colored # of convergent substitutions to any other branch
+
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -274,10 +525,10 @@ print(c_tree)
 
 ``` 
 
-# Ratio of non-synyonymous to synonymous convergent substitutions (cN/cS)
+
 
 ```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
-
+# Ratio of non-synyonymous to synonymous convergent substitutions (cN/cS)
 
 cncs_p = ggplot(anc_info, aes(x=cn.cs)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
@@ -292,9 +543,11 @@ cncs_95_perc = quantile(anc_info$cn.cs, 0.95, na.rm=T)
 anc_info$cncs.outlier = ifelse(anc_info$cn.cs>cncs_95_perc,anc_info$node,'')
 ```
 
-# Species tree with branches colored by cN/cS
+
 
 ```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16, eval=FALSE}
+# Species tree with branches colored by cN/cS
+
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -309,11 +562,13 @@ print(cncs_tree)
 
 ``` 
 
-# Pairwise convergent substitutions
 
-Convergent and divergent substitutions between every pair of branches in the tree
 
 ```{r pairwise-conv, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16, eval=FALSE}
+# Pairwise convergent substitutions
+
+# Convergent and divergent substitutions between every pair of branches in the tree
+
 
 pairwise_data = read.csv("../../data/rates/")
 

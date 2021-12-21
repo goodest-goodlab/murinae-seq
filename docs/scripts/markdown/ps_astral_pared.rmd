@@ -1,0 +1,309 @@
+---
+title: "Murine positive selection"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(cowplot)
+library(ggbeeswarm)
+library(dplyr)
+#library(kableExtra)
+library(tidyr)
+library(ggtree)
+library(phytools)
+library(phangorn)
+library(reshape2)
+library(ggExtra)
+library(ggrepel)
+#library(vroom)
+library(ggdist)
+#library(stringr)
+library(ggsignif)
+source("../lib/design.r")
+source("../lib/get_tree_info.r")
+
+```
+
+[< Back to summary](summary_210.html)
+
+```{r read, out.width="75%", fig.align = "center", warning=FALSE}
+tree_type = "astral"
+save_tree_fig = F
+
+cat(tree_type, " tree\n")
+cat("188 species targeted capture to mouse exons assembled with SPADES.\n")
+cat("Pared to 109 species based on paring algorithm")
+cat("11,775 coding loci aligned with exonerate+mafft\n")
+cat("Gene trees inferred with IQtree.\n")
+
+if(tree_type == "astral"){
+  cat("Species tree inferred with ASTRAL.\n")
+  cat("Branch lengths estimated by ASTRAL.\n")
+  tree_file = "../../data/trees/paring/min-spec-paring-astral-exempt-2/iter-8-pared.tre"
+  gene_ps_file = "../../data/ps/full-coding-absrel-pared.csv"
+  branch_ps_file = "../../data/ps/full-coding-absrel-pared-branch-ps.csv"
+  col_file = "../../data/trees/paring/astral-pared-2-colonization-branches.txt"
+  exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<108>", "<107>")
+  xmax = 22
+}else if(tree_type == "concat"){
+  cat("Species tree inferred by concatenation of all loci with IQtree.\n")
+  tree_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
+  gene_ps_file = ""
+  branch_ps_file = ""
+  col_file = ""
+  exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
+  xmax = 0.125
+}
+
+tree = read.tree(tree_file)
+tree_to_df_list = treeToDF(tree)
+tree_info = tree_to_df_list[["info"]]
+
+if(tree_type == "astral"){
+  tree_info = tree_info %>% separate(label, c("tp", "gcf"), sep=">_", remove=F)
+
+  for(i in 1:nrow(tree_info)){
+    if(tree_info[i,]$node.type == "internal"){
+      if(substring(tree_info[i,]$tp, nchar(tree_info[i,]$tp)) != ">"){
+        tree_info[i,]$tp = paste0(tree_info[i,]$tp, ">")
+      }
+    }
+    
+  }
+  
+  tree_info$astral[tree_info$node.type=="tip"] = NA
+  tree_info$astral = as.numeric(tree_info$astral)
+  tree_info$gcf = as.numeric(tree_info$gcf)
+}else if(tree_type == "concat"){
+  tree_info = tree_info %>% separate(label, c("tp", "bootstrap"), sep="/", remove=F)
+  tree_info$bootstrap[tree_info$node.type=="tip"] = NA
+  tree_info$bootstrap = as.numeric(tree_info$bootstrap)
+  tree_info$gcf = as.numeric(tree_info$gcf)
+  tree_info$scf = as.numeric(tree_info$scf)
+}
+
+```
+
+```{r read-col, out.width="75%", fig.align = "center", warning=FALSE}
+
+col_branches = read.csv(col_file, header=F)
+names(col_branches) = c("tp", "region")
+
+tree_info$col.branch = "Other"
+
+tree_info$col.branch[tree_info$tp %in% col_branches$tp] = "Colonization"
+
+#tree_info$col.desc.branch = "N"
+
+for(i in 1:nrow(tree_info)){
+  if(tree_info[i,]$node.type == "internal" && tree_info[i,]$col.branch == "Colonization"){
+    cur_desc = getDescendants(tree, tree_info[i,]$node)
+    tree_info$col.branch[tree_info$node==cur_desc[1]] = "Descendant"
+    tree_info$col.branch[tree_info$node==cur_desc[2]] = "Descendant"
+  }
+}
+
+```
+
+
+```{r read-ps, out.width="75%", fig.align = "center", warning=FALSE}
+
+ps_genes = read.csv(gene_ps_file, header=T, comment.char="#")
+
+ps_branches = read.csv(branch_ps_file, header=T, comment.char="#")
+names(ps_branches)[1] = "tp"
+cols_to_na = names(ps_branches)[5:11]
+for(col in cols_to_na){
+  ps_branches[ps_branches$tp %in% exclude_branches,][[col]] = NA
+}
+# This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
+
+
+#ps_branches = subset(ps_branches, !(tp %in% exclude_branches) )
+
+
+```
+
+# Positive selection by gene
+
+(aBSREL)[http://www.hyphy.org/methods/selection-methods/#absrel] was run on all genes. aBSREL optimizes the number of rate categories per branch and then runs both a free-rate model and a model where it restricts the max rate to be 1 (no positive selection). It compares theses models with a likelihood ratio test and computes a p-value using a mixture of chi-squared distributions. All branches are tested, and aBSREL corrects the p-values for multiple testing within a gene using the Holm-Bonferroni method. After correcting p-values, branches are said to have evidence for positive selection if p < 0.05.
+
+Subsequently, we correct for multiple testing again between genes by adjusting our siginficance level from 0.01 to (0.01 / the number of genes tested) (again a Bonferroni correction).
+
+## Percent of branches with significant p-value per gene
+
+Since each gene may have a different number of branches tested, we report the percent of genes with evidence for positive selection per gene.
+
+```{r gene-ps, out.width="33%", fig.align = "center", warning=FALSE}
+
+ps_genes$perc.br.ps = ps_genes$num.branches.pval.less.than.alpha / ps_genes$num.branches
+
+gene_p = ggplot(ps_genes, aes(x=1, y=perc.br.ps)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25, color=corecol(numcol=1, offset=2)) +
+  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666", width=0.25) +
+  scale_x_continuous(limits=c(0.5,1.5)) +
+  xlab("") +
+  ylab("% of branches with evidence\nfor positive selection per gene") +
+  bartheme() +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+print(gene_p)
+
+```
+
+# Positive selection by branch
+
+## Species tree branch presence/absence per gene
+
+Following the [same procedure as before](https://goodest-goodlab.github.io/murinae-seq/trees-astral.html#average-rates-per-branch-with-basic-model-fit-mg94-local), we count multi-nucleotdie substitutions per species tree branch only in genes that contain that branch (full clade or partial clade).
+
+NOTE: These distributions are for the PARED tree.
+
+```{r gt_branch_categories, out.width="50%", fig.align="center", warning=FALSE}
+
+#anc_info = subset(anc_info_w_root, node.type != "root")
+
+full_clade = select(ps_branches, clade, node.type, num.genes.full)
+full_clade$label = "Full clade"
+names(full_clade)[3] = "num.genes"
+
+partial_clade = select(ps_branches, clade, node.type, num.genes.partial)
+partial_clade$label = "Partial clade"
+names(partial_clade)[3] = "num.genes"
+
+descendant_counted = select(ps_branches, clade, node.type, num.genes.descendant.counted)
+descendant_counted$label = "Descendant counted"
+names(descendant_counted)[3] = "num.genes"
+
+discordant_clade = select(ps_branches, clade, node.type, num.genes.discordant)
+discordant_clade$label = "Discordant clade"
+names(discordant_clade)[3] = "num.genes"
+
+no_clade = select(ps_branches, clade, node.type, num.genes.missing)
+no_clade$label = "Missing clade"
+names(no_clade)[3] = "num.genes"
+
+clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
+# Convert branch categories to long format
+
+clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
+
+branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  ylab("# of genes") +
+  xlab("Species tree\nbranch classification") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_counts)
+
+```
+
+```{r merge-get-col, out.width="50%", fig.align="center", warning=FALSE}
+
+uniq_info_cols = names(ps_branches)[!(names(ps_branches) %in% names(tree_info))] 
+# # Get non common names
+ 
+uniq_info_cols = c(uniq_info_cols, "tp") # appending key parameter
+# Get a list of columns from the tree_info df to join to the tree rates df
+ 
+tree_info = tree_info %>% left_join((ps_branches %>% select(uniq_info_cols)), by="tp")
+# Select the columns from tree_info and join to tree_rates, merging by clade
+# https://stackoverflow.com/a/61628157
+
+tree_info = tree_info[order(tree_info$node), ]
+# Re-order the rows by the R node
+
+```
+
+
+## Tree with branch categorizations
+
+```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+col_tree = ggtree(tree, size=0.8, ladderize=F, aes(color=tree_info$col.branch)) +
+  scale_color_manual(name='Branch partition', values=corecol(pal="wilke", numcol=3)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.15,0.9))
+print(col_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree-PARED-gcf50.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# Colonization branch tree
+```
+
+## Branches under positive selection by partition
+
+```{r ps_branch_partitions, out.width="50%", fig.align="center", warning=FALSE}
+
+#anc_info = subset(anc_info_w_root, node.type != "root")
+
+col_ps = subset(select(tree_info, clade, node.type, col.branch, num.ps.genes), col.branch == "Colonization")
+col_ps$label = "Colonization"
+#names(full_clade)[3] = "num.genes"
+
+desc_ps = subset(select(tree_info, clade, node.type, col.branch, num.ps.genes), col.branch == "Descendant")
+desc_ps$label = "Descendant"
+
+other_ps = subset(select(tree_info, clade, node.type, col.branch, num.ps.genes), col.branch == "Other")
+other_ps$label = "Other"
+
+
+
+ps_counts = rbind(col_ps, desc_ps, other_ps)
+# Convert branch categories to long format
+
+ps_counts$label = factor(ps_counts$label, levels=c("Colonization", "Descendant", "Other"))
+
+x_comps = list(c("Colonization", "Descendant"), c("Colonization", "Other"), c("Descendant", "Other"))
+
+branch_ps_counts = ggplot(ps_counts, aes(x=label, y=num.ps.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("# of genes") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_ps_counts)
+
+```
+
+[< Back to summary](summary_210.html)
+
+```{r footer, echo=FALSE, eval=FALSE}
+cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
+htmltools::includeHTML("../html-chunks/rmd_footer.html")
+```
+
