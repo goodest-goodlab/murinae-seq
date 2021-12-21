@@ -1,0 +1,7 @@
+
+-----------------------------------------------------------------
+**Error OPC1: Cannot find -r: full-coding-slac-morphometrics/csv/
+-----------------------------------------------------------------
+
+
+Script call: /home/gt156213e/bin/hyphy-interface/branch-rates/branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.bl.nrf25.morphometrics.rooted.treefile -r full-coding-slac-morphometrics/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -o full-coding-slac-morphometrics-branch-rates -n 64

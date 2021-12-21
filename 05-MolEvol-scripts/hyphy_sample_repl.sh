@@ -5,7 +5,9 @@
 # back to their original name with the hyphen.
 # Uses sed.
 
-indir="../05-MolEvol/full-coding-mg94-local-rooted-anc/csv"
+indir="../05-MolEvol/full-coding-absrel-pared/csv"
+#indir="../05-MolEvol/full-coding-mg94-local-rooted-anc/csv"
+#indir="../05-MolEvol/full-coding-slac-morphometrics/csv"
 # Use the csv file to preserve original Hyphy outputs.
 
 sed -i -e 's/Kadarsanomys_sodyi_MZB_Sample/Kadarsanomys_sodyi_MZB-Sample/g' \

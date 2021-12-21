@@ -16,6 +16,16 @@ time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_concat.cf.roote
 
 ####################
 
+time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.bl.nrf25.morphometrics.rooted.treefile -r full-coding-slac-morphometrics/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -o full-coding-slac-morphometrics-branch-rates -n 64
+# Morphometrics subset
+
+####################
+
+time -p branch_rates.py -i ../04-Phylo-scripts/tree-paring/min-spec-paring-astral-exempt/iter-8-pared.tre -r full-coding-absrel-pared/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -m absrel -o full-coding-absrel-pared-branch-ps -n 64
+# ASTRAL absrel
+
+####################
+
 time -p branch_rates.py -i ../docs/data/trees/full_coding_iqtree_astral.cf.rooted.tree -r full-coding-slac/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -s /mnt/beegfs/ek112884/murinae/DNDS_BY_SPERM_STAGE/HYPHY/SLAC/prot_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.txt -o full-coding-slac/full-coding-astral-slac-branch-rates-LZinduced -n 64
 # ASTRAL dn/ds - LZInduced subset
 
