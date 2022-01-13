@@ -352,6 +352,117 @@ print(aa_p)
 
 ```
 
+# Pairwise amino acid convergence without descendant branches
+
+Excluding descendant branches removes the secondary correlation
+
+```{r no-desc-aa-conv, out.width="50%", fig.align = "center", warning=FALSE}
+anc_file = "../../data/rates/full-coding-astral-pairwise-convergence-nodesc.csv"
+anc_info_w_root = read.csv(anc_file, header=T, comment.char="#")
+# Read the pairwise counts
+
+cols_to_na = names(anc_info_w_root)[3:80]
+for(col in cols_to_na){
+  anc_info_w_root[anc_info_w_root$node1 %in% exclude_branches,][[col]] = NA
+  anc_info_w_root[anc_info_w_root$node2 %in% exclude_branches,][[col]] = NA
+}
+# This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
+
+anc_info_w_root = anc_info_w_root %>% mutate(aa.div = rowSums(select(., ends_with(".div")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(aa.par = rowSums(select(., ends_with(".par")), na.rm=T))
+anc_info_w_root = anc_info_w_root %>% mutate(aa.con = rowSums(select(., ends_with(".con")), na.rm=T))
+
+second_cor = subset(anc_info_w_root, aa.con > 200)
+#second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 3000 & aa.con > 200))
+second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 1000 & aa.con > 100))
+second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 400 & aa.con > 50))
+second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 200 & aa.con > 30))
+
+aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_point(data=second_cor, aes(x=aa.div, y=aa.con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  geom_smooth(data=second_cor, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
+  bartheme()
+
+print(aa_p)
+
+```
+
+## Divergent vs parallel substitutions
+
+```{r no-desc-aa-par, out.width="50%", fig.align = "center", warning=FALSE}
+
+second_cor_par = subset(anc_info_w_root, aa.con > 200)
+#second_cor = rbind(second_cor, subset(anc_info_w_root, aa.div < 3000 & aa.con > 200))
+second_cor_par = rbind(second_cor_par, subset(anc_info_w_root, aa.div < 1000 & aa.con > 100))
+second_cor_par = rbind(second_cor_par, subset(anc_info_w_root, aa.div < 400 & aa.con > 50))
+second_cor_par = rbind(second_cor_par, subset(anc_info_w_root, aa.div < 200 & aa.con > 30))
+
+aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.par)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_point(data=second_cor_par, aes(x=aa.div, y=aa.par), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=second_cor_par, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("Divergent AA substitutions") +
+  ylab("Parallel AA substitutions") +
+  bartheme()
+
+print(aa_p)
+
+```
+
+## Amino acid convergence on the phylogeny
+
+```{r merge-counts-phylo, out.width="50%", fig.align = "center", warning=FALSE}
+conv_counts = data.frame("tp"=tree_info$tp)
+conv_counts$aa.con.sum = 0
+conv_counts$aa.div.sum = 0
+
+for(i in 1:nrow(anc_info_w_root)){
+  row = anc_info_w_root[i,]
+  n1 = row$node1
+  n2 = row$node2
+  conv_counts[conv_counts$tp==n1,]$aa.con.sum = conv_counts[conv_counts$tp==n1,]$aa.con.sum + row$aa.con
+  conv_counts[conv_counts$tp==n1,]$aa.div.sum = conv_counts[conv_counts$tp==n1,]$aa.div.sum + row$aa.div
+  
+  conv_counts[conv_counts$tp==n2,]$aa.con.sum = conv_counts[conv_counts$tp==n2,]$aa.con.sum + row$aa.con
+  conv_counts[conv_counts$tp==n2,]$aa.div.sum = conv_counts[conv_counts$tp==n2,]$aa.div.sum + row$aa.div
+}
+
+tree_info = merge(tree_info, conv_counts, by="tp")
+
+tree_info = tree_info[order(tree_info$node), ]
+# Re-order the rows by the R node
+
+```
+
+```{r no-desc-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+tree_info$cd.ratio = tree_info$aa.con.sum / tree_info$aa.div.sum
+tree_info[is.nan(tree_info$cd.ratio),]$cd.ratio = NA
+
+conv_tree = ggtree(tree, size=0.8, ladderize=F, aes(color=tree_info$cd.ratio)) +
+  scale_color_continuous(name='# convergent subs / # divergent subs', low=l, high=h) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  #geom_label(aes(x=branch, label=ifelse(tree_info$conv.pair.count>0,as.character(tree_info$conv.pair.count),'')), label.size=NA, fill="transparent") +
+  theme(legend.position=c(0.15,0.9))
+print(conv_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree-PARED-gcf50.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# conv tree
+```
+
 # Codon convergence
 
 ## Non-synonymous codon convergence
