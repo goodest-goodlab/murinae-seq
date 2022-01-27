@@ -252,7 +252,6 @@ No correlation between branch presence and the number of times a branch is on th
 
 Note: ALL branches plotted, but still no correlation if only those with at least 1 pairing in the secondary correlation are used
 
-TODO: MAYBE NEED TO COUNT PAIR PRESENCE
 
 ```{r secondary-bp, out.width="50%", fig.align = "center", warning=FALSE}
 
@@ -284,6 +283,27 @@ print(conv_bp_p)
 
 
 ```
+
+## Convergent substitutions and number of time branch pairs are present in gene trees
+
+
+```{r secondary-pairs, out.width="50%", fig.align = "center", warning=FALSE}
+
+#secondary_tree_info = subset(tree_info, conv.pair.count > 0)
+
+conv_pairs_p = ggplot(anc_info_w_root, aes(x=count, y=aa.con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  geom_point(data=second_cor, aes(x=count, y=aa.con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  #geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=second_cor, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
+  xlab("# of times branches appear together") +
+  ylab("Convergent AA substitutions") +
+  bartheme()
+
+print(conv_pairs_p)
+
+```
+
 
 ## Excluding convergent AA substitutions that are divergent at the codon level
 
@@ -319,6 +339,8 @@ aa_p = ggplot(anc_info_w_root, aes(x=aa.div, y=aa.con)) +
 print(aa_p)
 
 ```
+
+
 
 ## Including only convergent amino acid substitutions that are divergent at the codon level
 
