@@ -74,7 +74,10 @@ if(tree_type == "astral"){
   cf_rep_dir = "../../data/trees/astral-cf-reps/"
   delta_outfile = "../../data/trees/astral-delta.tab"
   branch_rates_file = "../../data/rates/full-coding-astral-slac-branch-rates.csv"
+  branch_rates_file_arid = "../../data/rates/full-coding-astral-slac-branch-rates-arid.csv"
+  branch_rates_file_mf = "../../data/rates/full-coding-astral-slac-branch-rates-morphofacial.csv"
   col_file = "../../data/trees/astral-colonization-branches.txt"
+  morpho_file = "../../data/trees/astral-moprho-ou-shift-branches.txt"
   exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 31
 }else if(tree_type == "concat"){
@@ -158,9 +161,9 @@ for(i in 1:nrow(tree_info)){
 # we've read the same tree in R and can use the node.labels
 ```
 
-### Species tree with branches colored by gene concordance factor
+## Branches colored by gCF
 
-```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r species-tree-gcf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -180,9 +183,9 @@ if(save_tree_fig){
 # gCF tree
 ```
 
-### Species tree with branches colored by site concordance factor
+## Branches colored by sCF
 
-```{r fig2, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r species-tree-scf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -199,7 +202,7 @@ print(scf_tree)
 # sCF tree
 ```
 
-### Gene vs site concordance factors colored by branch support
+## Gene vs site concordance factors colored by branch support
 
 ```{r gcf-scf-supp, out.width="50%", fig.align = "center", warning=FALSE}
 h = corecol(numcol=1, pal="wilke", offset=3)
@@ -220,9 +223,9 @@ p = p + bartheme() +
 print(p)
 ```
 
-### Concordance factors vs. branch lengths
+## Concordance factors vs. branch lengths
 
-```{r fig-bl-v-cf, out.width="75%", fig.align = "center", warning=FALSE}
+```{r bl-v-cf, out.width="75%", fig.align = "center", warning=FALSE}
 
 bl_gcf_p = ggplot(tree_info, aes(x=branch.length, y=gcf)) +
   geom_point(size=3, alpha=0.5) +
@@ -261,9 +264,9 @@ print(p)
 
 The 11,774 gene trees contain varying numbers of taxa due to filtering on the alignment and filtering by IQtree for identical sequences.
 
-### Distribution of taxa per gene tree
+## Taxa per gene tree
 
-```{r fig4, out.width="50%", fig.align = "center", warning=FALSE}
+```{r taxa-per-gene, out.width="50%", fig.align = "center", warning=FALSE}
 gene_trees = read.table(gt_file, sep="\t")
 names(gene_trees) = c("gene", "tree")
 # Read the geen tree file
@@ -310,7 +313,7 @@ print(p)
 
 ```
 
-### Tree distance (RF) distribution between gene trees and species tree
+## Tree distance (RF) between gene trees and species tree
 
 Since RF cannot handle missing taxa, the species tree is pruned for each gene tree to calculate Robinson-Foulds distance. We use the normalized metric since there are varying numbers of tips per gene tree.
 
@@ -326,9 +329,9 @@ p = ggplot(gt_data, aes(x=rf)) +
 print(p)
 ```
 
-### Delta
+# Delta
 
-#### Brief introduction
+## Introduction
 
 For each lineage in the species tree with gCF < 95% we calculated the $\Delta$ statistic ([Huson et al. 2005](. https://doi.org/10.1007/11415770_18)). This statistic follows the same logic as the ABBA-BABA site patterns used to calculate D-statistics, but uses gene tree topologies instead of alignment sites. Briefly, a given branch in an unrooted tree is defined by a quartet of species groupings with two possible discordant topologies, $D_1$ and $D_2$ (see Figure 1 from [Minh et al. 2020](https://doi.org/10.1093/molbev/msaa106)). Under assumptions that discordance is caused by ILS, both discordant topologies should be present in equal proportions. However, if introgression has occurred one discordant topology will appear more frequently than the other. $\Delta$ is calculated for a branch as follows, using the frequency of each discordant topology ([Vanderpool et al. 2020](https://doi.org/10.1371/journal.pbio.3000954)):
 
@@ -338,7 +341,7 @@ This normalized $\Delta$ calculation ensures that all values are scaled between 
 
 To test whether the observed $\Delta$ values are skewed significantly from 0 to imply introgression, we performed concordance factor analysis on 1,000 bootstrap replicates of our inferred gene trees to generate a null distribution of $\Delta$ values. We then calculated Z-scores and p-values and assessed significance for each branch at a threshold of 0.01.
 
-#### Results
+## Null and actual distributions
 
 Nodes with p < 0.01:
 
@@ -426,7 +429,7 @@ delta_p = plot_grid(delta_null_p, delta_actual_p, ncol=2, labels=c("Null distrib
 print(delta_p)
 ```
 
-### Branches with evidence for introgression
+## Branches with evidence for introgression
 
 ```{r delta-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
@@ -437,13 +440,13 @@ intro_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$delt
   xlim(0, xmax) +
   geom_tiplab(color="#333333", fontface='italic', size=2) +
   theme(legend.position=c(0.05,0.9)) +
-  geom_label(aes(x=branch, label=ifelse(tree_info$delta.sig,as.character(node),'')), label.size=NA, fill="transparent", show.legend=F, vjust=-0.1)
+  geom_label(aes(x=branch, label=ifelse(tree_info$delta.sig,as.character(tree_info$tp),'')), label.size=NA, fill="transparent", show.legend=F, vjust=-0.1)
 #geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
 #geom_nodepoint(color="#666666", alpha=0.85, size=4)
 print(intro_tree)
 ```
 
-### CF and Delta
+## Concordance factors and Delta
 
 ```{r gcf-scf-delta, out.width="50%", fig.align = "center", warning=FALSE}
 l = corecol(numcol=1, pal="wilke", offset=3)
@@ -454,6 +457,8 @@ p = ggplot(tree_info, aes(x=gcf, y=scf, color=delta)) +
   geom_point(size=2, alpha=0.5) +
   geom_text_repel(aes(label=ifelse(delta.sig,as.character(tp),'')), show_guide=F, min.segment.length=0) +
   scale_color_continuous(name='Delta', low=l, high=h) +
+  xlab("gCF") +
+  ylab("sCF") +
   bartheme() +
   theme(legend.title=element_text(size=12))
 
@@ -462,7 +467,7 @@ print(p)
 
 [< Back to summary](summary_210.html)
 
-# Average rates per gene with basic model fit (mg94-local)
+# Substitution rates by gene (mg94-local)
 
 We ran each of the 11,775 coding loci through [HyPhy's standard MG94 fit](https://github.com/veg/hyphy-analyses/tree/master/FitMG94) with the `-local` option to estimate a rate for each branch in the input tree. 
 
@@ -470,29 +475,40 @@ For input trees we used the gene tree estimated from each individual alignment t
 
 ```{r read-mg94local, out.width="50%", fig.align = "center", warning=FALSE}
 
-#mg94_local_file = "../../data/rates/full-coding-mg94-local.csv"
 rates = vroom(gene_rates_file, comment="#")
 # Use vroom to unzip and read the gene rates file
 # NOTE: vroom does a bad job cleaning up huge tmp files, so be sure to check manually
 
 rates$dn = rates$N / rates$EN
+rates[is.nan(rates$dn),]$dn = NA
 rates$ds = rates$S / rates$ES
+rates[is.nan(rates$ds),]$ds = NA
 rates$dn.ds = rates$dn / rates$ds
 
-gene_rates = group_by(rates, file) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean("dn/ds", na.rm=T))
-# Average rates for eacn branch by gene
+gene_rates = group_by(rates, file) %>% summarize(dn=mean(dn, na.rm=T), ds=mean(ds, na.rm=T), dn.ds=mean(dn.ds, na.rm=T))
+# Average rates for each branch by gene
 
-p = ggplot(subset(gene_rates, ds < 0.05), aes(x=ds, y=dn)) +
-  geom_point(size=2, alpha=0.2, color="#333333") +
+gene_rates$high.dn.ds = "N"
+gene_rates[gene_rates$dn / gene_rates$ds > 1,]$high.dn.ds = "Y"
+
+```
+
+
+```{r dn-ds-gene-dists, out.width="50%", fig.align = "center", warning=FALSE}
+p = ggplot(subset(gene_rates, ds < 0.05), aes(x=ds, y=dn, color=high.dn.ds)) +
+  geom_point(size=2, alpha=0.2) +
   #geom_smooth(method="lm", se=F, ) +
   xlab("Avg. dS per gene") + 
   ylab("Avg. dN per gene") + 
-  bartheme()
+  scale_color_manual(name="dN/dS>1", values=c("#333333", corecol(numcol=1, offset=2))) +
+  bartheme() +
+  theme(legend.position="bottom",
+        legend.title = element_text(size=14))
 p = ggExtra::ggMarginal(p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666")
 print(p)
 ```
 
-```{r fig6, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
+```{r ds-gene-dists, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
 ds_p = ggplot(subset(gene_rates, ds < 0.05), aes(x=ds)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
   scale_y_continuous(expand=c(0,0)) +
@@ -503,7 +519,7 @@ print(ds_p)
 # Distribution of dS when using gene trees
 ```
 
-```{r fig7, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
+```{r dn-gene-dist, out.width="50%", fig.align = "center", warning=FALSE, eval=FALSE}
 dn_p = ggplot(gene_rates, aes(x=dn)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
   scale_y_continuous(expand=c(0,0)) +
@@ -515,7 +531,7 @@ print(dn_p)
 
 ```
 
-```{r ds_filter, out.width="50%", fig.align = "center", warning=FALSE}
+```{r ds-filter, out.width="50%", fig.align = "center", warning=FALSE}
 
 ds_filter_level = quantile(gene_rates$ds, 0.98)
 #ds_filter_level = 0.03
@@ -530,7 +546,9 @@ print(paste("Removing", length(ds_filter), "genes with dS above", ds_filter_leve
 
 [< Back to summary](summary_210.html)
 
-# Average rates per branch with basic model fit (mg94-local)
+# Calculation substitution rates per branch in the presence of gene tree discordance
+
+## Branch presence
 
 Because we used the gene trees, in order to quantify rates on species tree branches we first needed to check whether branches in the species tree exist in a given gene tree.
 
@@ -550,7 +568,7 @@ Where:
 
 ### Species tree branch presence/absence per gene
 
-```{r gt_branch_categories, out.width="50%", fig.align="center", warning=FALSE}
+```{r gt-branch-presence, out.width="50%", fig.align="center", warning=FALSE}
 branch_rates = read.csv(branch_rates_file, header=T)
 # Read the branch rates data
 
@@ -612,9 +630,9 @@ print(branch_counts)
 
 ```
 
-### Distribution of genes per branch
+### Number of genes per branch
 
-```{r branch_presence_dist, out.width="50%", fig.align="center", warning=FALSE}
+```{r branch-presence-dist, out.width="50%", fig.align="center", warning=FALSE}
 branch_rates$num.genes.present = branch_rates$num.genes.full + branch_rates$num.genes.partial
 # Sum the two columns that indicate a clade is present in a gene
 
@@ -639,12 +657,11 @@ t_data = data.frame("Stat"=c("Branch with most genes", "Branch with fewest genes
 t_data %>% kable(caption="Branch statistics") %>% kable_styling(bootstrap_options=c("striped", "condensed", "responsive"), full_width=F)
 ```
 
+### gCF and branch presence
 
 These measures are highly correlated with gene concordance factors:
 
-### Correlation between gCF and the % of genes that contain the descending clade for each species tree branch
-
-```{r fig8, out.width="50%", fig.align = "center", warning=FALSE}
+```{r gcf-presence, out.width="50%", fig.align = "center", warning=FALSE}
 
 branch_rates$clade.perc = (branch_rates$num.genes.full + branch_rates$num.genes.partial) / (branch_rates$num.genes.full + branch_rates$num.genes.partial + branch_rates$num.genes.descendant.counted + branch_rates$num.genes.discordant + branch_rates$num.genes.missing)
 
@@ -659,7 +676,7 @@ print(p)
 
 ```
 
-### Averaging rates across branches
+## Calculating branch rates
 
 To control for the fact that different branches will be present in different numbers of genes, we can calculate average rates per branch by summing the raw counts of the number of sites and the number of substitutions across all genes in which that branch is present as a full or partial clade.
 
@@ -675,10 +692,13 @@ where $G_b$ is the set of genes that contain branch $b$. Then,
 
 $$\omega_b = \frac{dN_b}{dS_b}$$
 
+# Substitution rates per branch (all genes)
+
+## dN and dS by branch
 
 This results in the following distributions for average rates across branches (green lines indicating 95th percentile of each rate):
 
-```{r fig9, out.width="50%", fig.align = "center", warning=FALSE}
+```{r dn-ds-branch-dists, out.width="50%", fig.align = "center", warning=FALSE}
 
 ds_95_perc = quantile(branch_rates$dS, 0.95, na.rm=T)
 dn_95_perc = quantile(branch_rates$dN, 0.95, na.rm=T)
@@ -702,9 +722,9 @@ branch_rates$ds.outlier = ifelse(branch_rates$dS>ds_95_perc,branch_rates$tp,'')
 branch_rates$dn.outlier = ifelse(branch_rates$dN>dn_95_perc,branch_rates$tp,'')
 ```
 
-### The tree with branches colored by dS and outliers labeled:
+## dS tree
 
-```{r fig10, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r ds-tree-all, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
@@ -720,9 +740,9 @@ print(rate_tree)
 ```
 
 
-### The tree with branches colored by dN and outliers labeled:
+## dN tree
 
-```{r fig11, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r dn-tree-all, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
@@ -737,9 +757,9 @@ rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(branch_rate
 print(rate_tree)
 ```
 
-### Average dN/dS per branch
+## dN/dS distribution
 
-```{r dn-ds-dist, out.width="50%", fig.align = "center", warning=FALSE}
+```{r dn-ds-branch-dist-all, out.width="50%", fig.align = "center", warning=FALSE}
 dnds_p = ggplot(branch_rates, aes(x=dNdS)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1), color="#666666") +
   scale_y_continuous(expand=c(0,0)) +
@@ -753,9 +773,9 @@ dnds_95_perc = quantile(branch_rates$dNdS, 0.95, na.rm=T)
 branch_rates$dnds.outlier = ifelse(branch_rates$dNdS>dnds_95_perc,branch_rates$node,'')
 ```
 
-### The tree with branches colored by dN/dS:
+## dN/dS tree
 
-```{r dn-ds-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r dn-ds-tree-all, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=1)
 l = corecol(numcol=1, offset=1)
 
@@ -770,13 +790,13 @@ rate_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=log(branch_rate
 print(rate_tree)
 ```
 
-# Rates and discordance
+## Substitution rates and discordance
 
 ### dS vs. concordance factors
 
 Only branches with avg. dS < 0.05
 
-```{r fig12, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r ds-cf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
 
 ds_gcf_p = ggplot(subset(branch_rates, node.type!="ROOT" & dS < ds_95_perc), aes(x=dS, y=gcf)) +
   geom_point(size=3, alpha=0.5) +
@@ -808,7 +828,7 @@ print(p)
 
 Only branches with avg. dN < 0.01
 
-```{r fig13, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r dn-cf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
 
 dn_gcf_p = ggplot(subset(branch_rates, node.type!="ROOT" & dN < dn_95_perc), aes(x=dN, y=gcf)) +
   geom_point(size=3, alpha=0.5) +
@@ -840,7 +860,7 @@ print(p)
 
 Only branches with avg. dN/dS < 0.5
 
-```{r fig14, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r dn-ds-cf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=4}
 
 dnds_gcf_p = ggplot(subset(branch_rates, node.type!="ROOT" & dNdS < 0.5), aes(x=dNdS, y=gcf)) +
   geom_point(size=3, alpha=0.5) +
@@ -870,7 +890,7 @@ print(p)
 
 [< Back to summary](summary_210.html)
 
-# Rates and branch partitions by colonization
+## Substitution rates and colonization branches (all genes)
 
 ```{r read-col, out.width="75%", fig.align = "center", warning=FALSE}
 
@@ -917,7 +937,7 @@ if(save_tree_fig){
 
 ### dS by colonization branch
 
-```{r ds_branch_partitions, out.width="50%", fig.align="center", warning=FALSE}
+```{r ds-col-branches-all, out.width="50%", fig.align="center", warning=FALSE}
 
 #anc_info = subset(anc_info_w_root, node.type != "root")
 
@@ -953,7 +973,7 @@ print(branch_ps_counts)
 
 ### dN by colonization branch
 
-```{r dn_branch_partitions, out.width="50%", fig.align="center", warning=FALSE}
+```{r dn-col-branches-all, out.width="50%", fig.align="center", warning=FALSE}
 
 #anc_info = subset(anc_info_w_root, node.type != "root")
 
@@ -989,7 +1009,7 @@ print(branch_ps_counts)
 
 ### dN/dS by colonization branch
 
-```{r dnds_branch_partitions, out.width="50%", fig.align="center", warning=FALSE}
+```{r dn-ds-col-branches-all, out.width="50%", fig.align="center", warning=FALSE}
 
 #anc_info = subset(anc_info_w_root, node.type != "root")
 
@@ -1025,9 +1045,446 @@ print(branch_ps_counts)
 
 [< Back to summary](summary_210.html)
 
+# Substitution rates (1072 morphofacial genes)
+
+## Branch presence
+
+```{r branch-presence-mf, out.width="50%", fig.align="center", warning=FALSE}
+
+#anc_info = subset(anc_info_w_root, node.type != "root")
+
+branch_rates_mf = read.csv(branch_rates_file_mf, header=T, comment.char="#")
+
+names(branch_rates_mf)[1] = "tp"
+cols_to_na = names(branch_rates_mf)[5:20]
+for(col in cols_to_na){
+  branch_rates_mf[branch_rates_mf$tp %in% exclude_branches,][[col]] = NA
+}
+# For branches that we want to exclude for counting, convert
+# columns with counts to NA
+
+uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(branch_rates_mf))] # get non common names
+uniq_info_cols = c(uniq_info_cols,"tp") # appending key parameter
+# Get a list of columns from the tree_info df to join to the tree rates df
+
+branch_rates_mf = branch_rates_mf %>% left_join((tree_info %>% select(uniq_info_cols)), by="tp")
+# Select the columns from tree_info and join to tree_rates, merging by clade
+# https://stackoverflow.com/a/61628157
+
+branch_rates_mf = branch_rates_mf[order(branch_rates_mf$node), ]
+# Re-order the rows by the R node
+
+full_clade = select(branch_rates_mf, clade, node.type, num.genes.full)
+full_clade$label = "Full clade"
+names(full_clade)[3] = "num.genes"
+
+partial_clade = select(branch_rates_mf, clade, node.type, num.genes.partial)
+partial_clade$label = "Partial clade"
+names(partial_clade)[3] = "num.genes"
+
+descendant_counted = select(branch_rates_mf, clade, node.type, num.genes.descendant.counted)
+descendant_counted$label = "Descendant counted"
+names(descendant_counted)[3] = "num.genes"
+
+discordant_clade = select(branch_rates_mf, clade, node.type, num.genes.discordant)
+discordant_clade$label = "Discordant clade"
+names(discordant_clade)[3] = "num.genes"
+
+no_clade = select(branch_rates_mf, clade, node.type, num.genes.missing)
+no_clade$label = "Missing clade"
+names(no_clade)[3] = "num.genes"
+# Subset each clade count column to add a label
+
+clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
+# Convert branch categories to long format
+
+clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
+# Factorize the labels in order
+
+branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  ylab("# of genes") +
+  xlab("Species tree\nbranch classification") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_counts)
+
+```
+
+## Tree with OU shift branches labeled
+
+```{r ou-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+morpho_branches = read.csv(morpho_file, header=F, comment.char="#")
+names(morpho_branches) = c("tp")
+
+branch_rates$morpho.branch = "No OU shift"
+branch_rates$morpho.branch[branch_rates$tp %in% morpho_branches$tp] = "OU shift"
+
+branch_rates_mf$morpho.branch = "No OU shift"
+branch_rates_mf$morpho.branch[branch_rates_mf$tp %in% morpho_branches$tp] = "OU shift"
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+col_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=branch_rates_mf$morpho.branch)) +
+  scale_color_manual(name='Branch partition', values=corecol(numcol=2)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.15,0.9))
+print(col_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(branch_rates$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree-PARED-gcf50.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# OU shift branch tree
+```
+
+## dS
+
+```{r ds-mf, out.width="50%", fig.align="center", warning=FALSE}
+
+morpho_ds_mf = subset(select(branch_rates_mf, clade, node.type, morpho.branch, dS), morpho.branch == "OU shift")
+morpho_ds_mf$label = "OU shift (MF genes)"
+#names(full_clade)[3] = "num.genes"
+
+other_ds_mf = subset(select(branch_rates_mf, clade, node.type, morpho.branch, dS), morpho.branch == "No OU shift")
+other_ds_mf$label = "No OU shift (MF genes)"
+
+morpho_ds_all = subset(select(branch_rates, clade, node.type, morpho.branch, dS), morpho.branch == "OU shift")
+morpho_ds_all$label = "OU shift (All genes)"
+#names(full_clade)[3] = "num.genes"
+
+other_ds_all = subset(select(branch_rates, clade, node.type, morpho.branch, dS), morpho.branch == "No OU shift")
+other_ds_all$label = "No OU shift (All genes)"
+
+ds_df = rbind(morpho_ds_all, other_ds_all, morpho_ds_mf, other_ds_mf)
+# Convert branch categories to long format
+
+ds_df$label = factor(ds_df$label, levels=c("OU shift (All genes)", "No OU shift (All genes)", "OU shift (MF genes)", "No OU shift (MF genes)"))
+
+x_comps = list(c("OU shift (All genes)", "No OU shift (All genes)"), c("OU shift (MF genes)", "No OU shift (MF genes)"), c("OU shift (All genes)", "OU shift (MF genes)"))
+
+morpho_branch_ds = ggplot(ds_df, aes(x=label, y=dS, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("dS") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(morpho_branch_ds)
+
+```
+
+## dN
+
+```{r dn-mf, out.width="50%", fig.align="center", warning=FALSE}
+
+morpho_dn_mf = subset(select(branch_rates_mf, clade, node.type, morpho.branch, dN), morpho.branch == "OU shift")
+morpho_dn_mf$label = "OU shift (MF genes)"
+#names(full_clade)[3] = "num.genes"
+
+other_dn_mf = subset(select(branch_rates_mf, clade, node.type, morpho.branch, dN), morpho.branch == "No OU shift")
+other_dn_mf$label = "No OU shift (MF genes)"
+
+morpho_dn_all = subset(select(branch_rates, clade, node.type, morpho.branch, dN), morpho.branch == "OU shift")
+morpho_dn_all$label = "OU shift (All genes)"
+#names(full_clade)[3] = "num.genes"
+
+other_dn_all = subset(select(branch_rates, clade, node.type, morpho.branch, dN), morpho.branch == "No OU shift")
+other_dn_all$label = "No OU shift (All genes)"
+
+dn_df = rbind(morpho_dn_all, other_dn_all, morpho_dn_mf, other_dn_mf)
+# Convert branch categories to long format
+
+dn_df$label = factor(dn_df$label, levels=c("OU shift (All genes)", "No OU shift (All genes)", "OU shift (MF genes)", "No OU shift (MF genes)"))
+
+x_comps = list(c("OU shift (All genes)", "No OU shift (All genes)"), c("OU shift (MF genes)", "No OU shift (MF genes)"), c("OU shift (All genes)", "OU shift (MF genes)"))
+
+morpho_branch_dn = ggplot(dn_df, aes(x=label, y=dN, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("dN") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(morpho_branch_dn)
+
+```
+
+## dN/dS
+
+```{r dn-ds-mf, out.width="50%", fig.align="center", warning=FALSE}
+
+morpho_dnds_mf = subset(select(branch_rates_mf, clade, node.type, morpho.branch, dNdS), morpho.branch == "OU shift")
+morpho_dnds_mf$label = "OU shift (MF genes)"
+#names(full_clade)[3] = "num.genes"
+
+other_dnds_mf = subset(select(branch_rates_mf, clade, node.type, morpho.branch, dNdS), morpho.branch == "No OU shift")
+other_dnds_mf$label = "No OU shift (MF genes)"
+
+morpho_dnds_all = subset(select(branch_rates, clade, node.type, morpho.branch, dNdS), morpho.branch == "OU shift")
+morpho_dnds_all$label = "OU shift (All genes)"
+#names(full_clade)[3] = "num.genes"
+
+other_dnds_all = subset(select(branch_rates, clade, node.type, morpho.branch, dNdS), morpho.branch == "No OU shift")
+other_dnds_all$label = "No OU shift (All genes)"
+
+dnds_df = rbind(morpho_dnds_all, other_dnds_all, morpho_dnds_mf, other_dnds_mf)
+# Convert branch categories to long format
+
+dnds_df$label = factor(dnds_df$label, levels=c("OU shift (All genes)", "No OU shift (All genes)", "OU shift (MF genes)", "No OU shift (MF genes)"))
+
+x_comps = list(c("OU shift (All genes)", "No OU shift (All genes)"), c("OU shift (MF genes)", "No OU shift (MF genes)"), c("OU shift (All genes)", "OU shift (MF genes)"), c("No OU shift (All genes)", "No OU shift (MF genes)"))
+
+morpho_branch_dnds = ggplot(dnds_df, aes(x=label, y=dNdS, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("dN/dS") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(morpho_branch_dnds)
+
+```
+
+[< Back to summary](summary_210.html)
+
+# Substitution rates (108 arid genes)
+
+## Branch presence
+
+```{r branch-presence-arid, out.width="50%", fig.align="center", warning=FALSE}
+
+#anc_info = subset(anc_info_w_root, node.type != "root")
+
+branch_rates_arid = read.csv(branch_rates_file_arid, header=T, comment.char="#")
+
+names(branch_rates_arid)[1] = "tp"
+cols_to_na = names(branch_rates_arid)[5:20]
+for(col in cols_to_na){
+  branch_rates_arid[branch_rates_arid$tp %in% exclude_branches,][[col]] = NA
+}
+# For branches that we want to exclude for counting, convert
+# columns with counts to NA
+
+uniq_info_cols = names(tree_info)[!(names(tree_info) %in% names(branch_rates_arid))] # get non common names
+uniq_info_cols = c(uniq_info_cols,"tp") # appending key parameter
+# Get a list of columns from the tree_info df to join to the tree rates df
+
+branch_rates_arid = branch_rates_arid %>% left_join((tree_info %>% select(uniq_info_cols)), by="tp")
+# Select the columns from tree_info and join to tree_rates, merging by clade
+# https://stackoverflow.com/a/61628157
+
+branch_rates_arid = branch_rates_arid[order(branch_rates_arid$node), ]
+# Re-order the rows by the R node
+
+full_clade = select(branch_rates_arid, clade, node.type, num.genes.full)
+full_clade$label = "Full clade"
+names(full_clade)[3] = "num.genes"
+
+partial_clade = select(branch_rates_arid, clade, node.type, num.genes.partial)
+partial_clade$label = "Partial clade"
+names(partial_clade)[3] = "num.genes"
+
+descendant_counted = select(branch_rates_arid, clade, node.type, num.genes.descendant.counted)
+descendant_counted$label = "Descendant counted"
+names(descendant_counted)[3] = "num.genes"
+
+discordant_clade = select(branch_rates_arid, clade, node.type, num.genes.discordant)
+discordant_clade$label = "Discordant clade"
+names(discordant_clade)[3] = "num.genes"
+
+no_clade = select(branch_rates_arid, clade, node.type, num.genes.missing)
+no_clade$label = "Missing clade"
+names(no_clade)[3] = "num.genes"
+# Subset each clade count column to add a label
+
+clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
+# Convert branch categories to long format
+
+clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
+# Factorize the labels in order
+
+branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  ylab("# of genes") +
+  xlab("Species tree\nbranch classification") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_counts)
+
+```
+
+## dS
+
+```{r ds-arid, out.width="50%", fig.align="center", warning=FALSE}
+
+# col_branches = read.csv(col_file, header=F, comment.char="#")
+# names(col_branches) = c("tp")
+
+branch_rates_arid$col.branch = "Other"
+
+branch_rates_arid$col.branch[branch_rates_arid$tp %in% col_branches$tp] = "Colonization"
+
+#tree_info$col.desc.branch = "N"
+
+for(i in 1:nrow(branch_rates_arid)){
+  if(branch_rates[i,]$node.type == "internal" && branch_rates_arid[i,]$col.branch == "Colonization"){
+    cur_desc = getDescendants(rodent_tree, branch_rates_arid[i,]$node)
+    branch_rates_arid$col.branch[branch_rates_arid$node==cur_desc[1]] = "Descendant"
+    branch_rates_arid$col.branch[branch_rates_arid$node==cur_desc[2]] = "Descendant"
+  }
+}
+
+col_ds_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dS), col.branch == "Colonization")
+col_ds_arid$label = "Colonization (arid genes)"
+#names(full_clade)[3] = "num.genes"
+
+desc_ds_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dS), col.branch == "Descendant")
+desc_ds_arid$label = "Descendant (arid genes)"
+
+other_ds_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dS), col.branch == "Other")
+other_ds_arid$label = "Other (arid genes)"
+
+col_ds = subset(select(branch_rates, clade, node.type, col.branch, dS), col.branch == "Colonization")
+col_ds$label = "Colonization (All genes)"
+#names(full_clade)[3] = "num.genes"
+
+desc_ds = subset(select(branch_rates, clade, node.type, col.branch, dS), col.branch == "Descendant")
+desc_ds$label = "Descendant (All genes)"
+
+other_ds = subset(select(branch_rates, clade, node.type, col.branch, dS), col.branch == "Other")
+other_ds$label = "Other (All genes)"
+
+
+ds_df = rbind(col_ds, desc_ds, other_ds, col_ds_arid, desc_ds_arid, other_ds_arid)
+# Convert branch categories to long format
+
+ds_df$label = factor(ds_df$label, levels=c("Colonization (All genes)", "Descendant (All genes)", "Other (All genes)", "Colonization (arid genes)", "Descendant (arid genes)", "Other (arid genes)"))
+
+x_comps = list(c("Other (All genes)", "Other (arid genes)"), c("Colonization (All genes)", "Colonization (arid genes)"), c("Descendant (All genes)", "Descendant (arid genes)"))
+
+branch_ps_counts = ggplot(ds_df, aes(x=label, y=dS, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("dS") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_ps_counts)
+
+```
+
+## dN
+
+```{r dn-arid, out.width="50%", fig.align="center", warning=FALSE}
+
+col_dn_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dN), col.branch == "Colonization")
+col_dn_arid$label = "Colonization (arid genes)"
+#names(full_clade)[3] = "num.genes"
+
+desc_dn_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dN), col.branch == "Descendant")
+desc_dn_arid$label = "Descendant (arid genes)"
+
+other_dn_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dN), col.branch == "Other")
+other_dn_arid$label = "Other (arid genes)"
+
+col_dn = subset(select(branch_rates, clade, node.type, col.branch, dN), col.branch == "Colonization")
+col_dn$label = "Colonization (All genes)"
+#names(full_clade)[3] = "num.genes"
+
+desc_dn = subset(select(branch_rates, clade, node.type, col.branch, dN), col.branch == "Descendant")
+desc_dn$label = "Descendant (All genes)"
+
+other_dn = subset(select(branch_rates, clade, node.type, col.branch, dN), col.branch == "Other")
+other_dn$label = "Other (All genes)"
+
+
+dn_df = rbind(col_dn, desc_dn, other_dn, col_dn_arid, desc_dn_arid, other_dn_arid)
+# Convert branch categories to long format
+
+dn_df$label = factor(ds_df$label, levels=c("Colonization (All genes)", "Descendant (All genes)", "Other (All genes)", "Colonization (arid genes)", "Descendant (arid genes)", "Other (arid genes)"))
+
+x_comps = list(c("Other (All genes)", "Other (arid genes)"), c("Colonization (All genes)", "Colonization (arid genes)"), c("Descendant (All genes)", "Descendant (arid genes)"))
+
+branch_ps_counts = ggplot(dn_df, aes(x=label, y=dN, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("dN") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_ps_counts)
+
+```
+
+## dN/dS
+
+```{r dn-ds-arid, out.width="50%", fig.align="center", warning=FALSE}
+
+col_dnds_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dNdS), col.branch == "Colonization")
+col_dnds_arid$label = "Colonization (arid genes)"
+#names(full_clade)[3] = "num.genes"
+
+desc_dnds_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dNdS), col.branch == "Descendant")
+desc_dnds_arid$label = "Descendant (arid genes)"
+
+other_dnds_arid = subset(select(branch_rates_arid, clade, node.type, col.branch, dNdS), col.branch == "Other")
+other_dnds_arid$label = "Other (arid genes)"
+
+col_dnds = subset(select(branch_rates, clade, node.type, col.branch, dNdS), col.branch == "Colonization")
+col_dnds$label = "Colonization (All genes)"
+#names(full_clade)[3] = "num.genes"
+
+desc_dnds = subset(select(branch_rates, clade, node.type, col.branch, dNdS), col.branch == "Descendant")
+desc_dnds$label = "Descendant (All genes)"
+
+other_dnds = subset(select(branch_rates, clade, node.type, col.branch, dNdS), col.branch == "Other")
+other_dnds$label = "Other (All genes)"
+
+
+dnds_df = rbind(col_dnds, desc_dnds, other_dnds, col_dnds_arid, desc_dnds_arid, other_dnds_arid)
+# Convert branch categories to long format
+
+dnds_df$label = factor(ds_df$label, levels=c("Colonization (All genes)", "Descendant (All genes)", "Other (All genes)", "Colonization (arid genes)", "Descendant (arid genes)", "Other (arid genes)"))
+
+x_comps = list(c("Other (All genes)", "Other (arid genes)"), c("Colonization (All genes)", "Colonization (arid genes)"), c("Descendant (All genes)", "Descendant (arid genes)"))
+
+branch_ps_counts = ggplot(dnds_df, aes(x=label, y=dNdS, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("dN/dS") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_ps_counts)
+
+```
+
+[< Back to summary](summary_210.html)
+
 # Basic rate and phenotype correlations with tip branches
 
-```{r read_pheno, out.width="75%", fig.align = "center", warning=FALSE}
+```{r read-pheno, out.width="75%", fig.align = "center", warning=FALSE}
 pheno = read.csv("../../data/phenotype-data/combined-phenotype-data.csv", header=T, comment.char="#")
 tips = subset(branch_rates, node.type=="tip")
 names(tips)[2] = "sample"
@@ -1040,9 +1497,9 @@ pheno_rates_long = melt(pheno_rates, id.vars=c("sample", "dN", "dS", "dNdS"))
 #pheno_rates_long = gather(pheno_rates, sample, value, Adult_Mass.g., Total_Length.mm., Head.Body_Length.mm., Tail_Length.mm., Hind_Foot_Length.mm., Relative_Tail_Length, Relative_Hind_Foot_Length)
 ```
 
-### Avg dS per tip vs phenotype
+## Avg dS per tip vs phenotype
 
-```{r fig15, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r ds-pheno, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dS))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
@@ -1053,9 +1510,9 @@ p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dS))) +
 print(p)
 ```
 
-### Avg dN per tip vs phenotype
+## Avg dN per tip vs phenotype
 
-```{r fig16, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r dn-pheno, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dN))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +
@@ -1066,9 +1523,9 @@ p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dN))) +
 print(p)
 ```
 
-### Avg dN/dS per tip vs phenotype
+## Avg dN/dS per tip vs phenotype
 
-```{r fig17, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+```{r dn-ds-pheno, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
 p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dNdS))) +
   geom_point(size=2, alpha=0.2, color="#333333") +
   geom_smooth(method="lm", se=F, linetype="dashed", color=corecol(numcol=1, pal="wilke", offset=2)) +

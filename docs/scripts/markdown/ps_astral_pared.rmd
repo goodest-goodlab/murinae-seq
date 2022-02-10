@@ -28,7 +28,7 @@ library(ggplot2)
 library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
-#library(kableExtra)
+library(kableExtra)
 library(tidyr)
 library(ggtree)
 library(phytools)
@@ -48,7 +48,7 @@ source("../lib/get_tree_info.r")
 [< Back to summary](summary_210.html)
 
 ```{r read, out.width="75%", fig.align = "center", warning=FALSE}
-tree_type = "astral"
+#tree_type = "astral"
 save_tree_fig = F
 
 cat(tree_type, " tree\n")
@@ -61,9 +61,16 @@ if(tree_type == "astral"){
   cat("Species tree inferred with ASTRAL.\n")
   cat("Branch lengths estimated by ASTRAL.\n")
   tree_file = "../../data/trees/paring/min-spec-paring-astral-exempt-2/iter-8-pared.tre"
-  gene_ps_file = "../../data/ps/full-coding-absrel-pared.csv"
+  #gene_ps_file = "../../data/ps/full-coding-absrel-pared.csv"
+  gene_ps_file = "../../data/ps/full-coding-busted-pared.csv"
   branch_ps_file = "../../data/ps/full-coding-absrel-pared-branch-ps.csv"
+  priori_branch_ps_file = "../../data/ps/full-coding-absrel-pared-branch-ps-priori.csv"
+  site_ps_file = "../../data/ps/full-coding-fel-pared.csv"
+  morpho_branch_ps_file = "../../data/ps/full-coding-absrel-pared-branch-ps-morphofacial.csv"
   col_file = "../../data/trees/paring/astral-pared-2-colonization-branches.txt"
+  morpho_file = "../../data/trees/astral-pared-morpho-ou-shift-branches.txt"
+  morpho_genes_file = "../../data/datasets/subset_morphofacial_genes.txt"
+  arid_genes_file = "../../data/datasets/arid-genes-giorello-2018-pid.txt"
   exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<108>", "<107>")
   xmax = 22
 }else if(tree_type == "concat"){
@@ -71,6 +78,7 @@ if(tree_type == "astral"){
   tree_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
   gene_ps_file = ""
   branch_ps_file = ""
+  site_ps_file = ""
   col_file = ""
   exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
   xmax = 0.125
@@ -105,7 +113,7 @@ if(tree_type == "astral"){
 
 ```
 
-```{r read-col, out.width="75%", fig.align = "center", warning=FALSE}
+```{r read-col-branches, out.width="75%", fig.align = "center", warning=FALSE}
 
 col_branches = read.csv(col_file, header=F)
 names(col_branches) = c("tp", "region")
@@ -126,54 +134,139 @@ for(i in 1:nrow(tree_info)){
 
 ```
 
+# Positive selection by gene (all genes)
 
-```{r read-ps, out.width="75%", fig.align = "center", warning=FALSE}
+```{r read-gene-ps, out.width="75%", fig.align = "center", warning=FALSE}
 
-ps_genes = read.csv(gene_ps_file, header=T, comment.char="#")
+gene_ps = read.csv(gene_ps_file, header=T, comment.char="#")
+gene_ps$pval.adj = p.adjust(gene_ps$pval, "fdr")
+
+gene_ps = gene_ps %>% separate(file, c("pid", "aln", "ext"), sep="-", remove=F)
+
+morpho_genes = read.csv(morpho_genes_file, header=F)
+names(morpho_genes)[1] = "pid"
+
+arid_genes = read.csv(arid_genes_file, header=F)
+names(arid_genes)[1] = "pid"
+
+```
+
+[BUSTED](http://www.hyphy.org/methods/selection-methods/#busted) was run on all genes testing all branches. BUSTED fits a model with three omega classes such that $\omega_1 \leq \omega_2 \leq 1 \leq \omega_3$. It is run once while restricting $\omega_3 = 1$ and once while allowing $\omega_3$ to vary freely. It performs a likelihood ratio test to calculate p-values to detect whether the full model (allowing positive selection on the test branches) fits better than the constrained model.
+
+We correct these p-values for false-discovery rate and select genes with adjusted p-values less than 0.01.
+
+```{r gene-ps, out.width="75%", fig.align = "center", warning=FALSE}
+
+gene_ps$label = "Non-PS"
+gene_ps[gene_ps$pval.adj < 0.01, ]$label = "PS"
+
+num_ps_genes = nrow(subset(gene_ps, pval.adj < 0.01))
+num_non_ps_genes = nrow(subset(gene_ps, pval.adj >= 0.01))
+total_genes = nrow(gene_ps)
+
+ps_all_df = data.frame("prop.genes"=c(num_ps_genes/total_genes, num_non_ps_genes/total_genes), "num.genes"=c(num_ps_genes, num_non_ps_genes), "type"=c("Evidence for selection\nin at least one branch", "No evidence for selection"))
+ps_all_df$label = "All genes"
+
+num_mf_ps_genes = nrow(subset(gene_ps, pval.adj < 0.01 & pid %in% morpho_genes$pid))
+num_mf_non_ps_genes = nrow(subset(gene_ps, pval.adj >= 0.01 & pid %in% morpho_genes$pid))
+total_mf_genes = num_mf_ps_genes + num_mf_non_ps_genes
+
+ps_mf_df = data.frame("prop.genes"=c(num_mf_ps_genes/total_mf_genes, num_mf_non_ps_genes/total_mf_genes), "num.genes"=c(num_mf_ps_genes, num_mf_non_ps_genes), "type"=c("Evidence for selection\nin at least one branch", "No evidence for selection"))
+ps_mf_df$label = "Morphofacial genes"
+
+num_arid_ps_genes = nrow(subset(gene_ps, pval.adj < 0.01 & pid %in% arid_genes$pid))
+num_arid_non_ps_genes = nrow(subset(gene_ps, pval.adj >= 0.01 & pid %in% arid_genes$pid))
+total_arid_genes = num_arid_ps_genes + num_arid_non_ps_genes
+
+ps_arid_df = data.frame("prop.genes"=c(num_arid_ps_genes/total_arid_genes, num_arid_non_ps_genes/total_arid_genes), "num.genes"=c(num_arid_ps_genes, num_arid_non_ps_genes), "type"=c("Evidence for selection\nin at least one branch", "No evidence for selection"))
+ps_arid_df$label = "Arid genes"
+
+ps_df = rbind(ps_all_df, ps_mf_df, ps_arid_df)
+
+gene_ps_counts = ggplot(ps_df, aes(x=label, y=prop.genes, fill=type)) +
+  geom_bar(stat="identity") +
+  geom_text(aes(label=num.genes), size=6, position=position_stack(vjust=0.5), color="#f2f2f2") +
+  # geom_text(size=2.3, position=position_stack(vjust=0.5), color="#f2f2f2") +
+  # geom_text(aes(label=text2), size=2.3, color="#f2f2f2", nudge_y=0.05) +
+  # geom_text(aes(label=text3), size=2.3, color="#f2f2f2", nudge_y=-0.05) +
+  # geom_text(aes(label=text4), size=2.3, color="#f2f2f2", nudge_y=0.82) +
+  xlab("") +
+  ylab("Proportion of genes of genes") +
+  #scale_y_continuous(expand=c(0,0), limits=c(0,1)) +
+  #scale_x_discrete(limits=unique(comps$label)) +
+  #scale_x_continuous(limits=c(-0.5,3)) +
+  #scale_fill_manual(guide=guide_legend(reverse=T), values=cols) +
+  scale_fill_manual(values=corecol(pal="wilke", numcol=2), guide=guide_legend(reverse=T)) +
+  #scale_fill_discrete(, values=cols) +
+  bartheme() +
+  theme(legend.position="bottom",
+        axis.title.y=element_blank()) +
+  coord_flip()
+print(gene_ps_counts)
+
+morpho_fisher = matrix(c(num_ps_genes,num_mf_ps_genes,num_non_ps_genes,num_mf_non_ps_genes), nrow = 2)
+fisher.test(morpho_fisher)
+
+arid_fisher = matrix(c(num_ps_genes,num_arid_ps_genes,num_non_ps_genes,num_arid_non_ps_genes), nrow = 2)
+fisher.test(arid_fisher)
+
+
+```
+```{r get-ps-genes, out.width="75%", fig.align = "center", warning=FALSE}
+
+
+
+ps_genes = subset(gene_ps, pval.adj < 0.01)$pid
+
+#write.csv(ps_genes, file="../../data/ps/busted-full-gene-list.txt", quote=F, row.names=F, col.names=F)
+write(ps_genes, file="../../data/ps/busted-full-gene-list.txt")
+
+
+```
+
+# Positive selection by branch (all genes)
+
+[aBSREL](http://www.hyphy.org/methods/selection-methods/#absrel) was run on all genes. aBSREL optimizes the number of rate categories per branch and then runs both a free-rate model and a model where it restricts the max rate to be 1 (no positive selection). It compares these models with a likelihood ratio test and computes a p-value using a mixture of chi-squared distributions. All branches are tested, and aBSREL corrects the p-values for multiple testing within a gene using the Holm-Bonferroni method. After correcting p-values, branches are said to have evidence for positive selection if p < 0.05.
+
+Subsequently, we correct for multiple testing again between genes by adjusting our siginficance level using the Bonferroni method from 0.01 to (0.01 / the number of genes tested).
+
+```{r gene-ps-absrel, out.width="33%", fig.align = "center", warning=FALSE, eval=FALSE}
+
+# ## Percent of branches with significant p-value per gene
+
+# Since each gene may have a different number of branches tested, we report the percent of genes with evidence for positive selection per gene.
+
+# ps_genes = read.csv(gene_ps_file, header=T, comment.char="#")
+# ps_genes$perc.br.ps = ps_genes$num.branches.pval.less.than.alpha / ps_genes$num.branches
+# 
+# gene_p = ggplot(ps_genes, aes(x=1, y=perc.br.ps)) +
+#   geom_quasirandom(size=2, width=0.25, alpha=0.25, color=corecol(numcol=1, offset=2)) +
+#   geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666", width=0.25) +
+#   scale_x_continuous(limits=c(0.5,1.5)) +
+#   xlab("") +
+#   ylab("% of branches with evidence\nfor positive selection per gene") +
+#   bartheme() +
+#   theme(axis.title.x=element_blank(),
+#         axis.text.x=element_blank(),
+#         axis.ticks.x=element_blank())
+# print(gene_p)
+
+```
+
+```{r read-branch-ps-all, out.width="50%", fig.align="center", warning=FALSE}
 
 ps_branches = read.csv(branch_ps_file, header=T, comment.char="#")
 names(ps_branches)[1] = "tp"
 cols_to_na = names(ps_branches)[5:11]
+
 for(col in cols_to_na){
   ps_branches[ps_branches$tp %in% exclude_branches,][[col]] = NA
 }
 # This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
 
-
-#ps_branches = subset(ps_branches, !(tp %in% exclude_branches) )
-
+ps_branches$perc.ps.genes = ps_branches$num.ps.genes / (ps_branches$num.genes.full + ps_branches$num.genes.partial)
 
 ```
-
-# Positive selection by gene
-
-(aBSREL)[http://www.hyphy.org/methods/selection-methods/#absrel] was run on all genes. aBSREL optimizes the number of rate categories per branch and then runs both a free-rate model and a model where it restricts the max rate to be 1 (no positive selection). It compares theses models with a likelihood ratio test and computes a p-value using a mixture of chi-squared distributions. All branches are tested, and aBSREL corrects the p-values for multiple testing within a gene using the Holm-Bonferroni method. After correcting p-values, branches are said to have evidence for positive selection if p < 0.05.
-
-Subsequently, we correct for multiple testing again between genes by adjusting our siginficance level from 0.01 to (0.01 / the number of genes tested) (again a Bonferroni correction).
-
-## Percent of branches with significant p-value per gene
-
-Since each gene may have a different number of branches tested, we report the percent of genes with evidence for positive selection per gene.
-
-```{r gene-ps, out.width="33%", fig.align = "center", warning=FALSE}
-
-ps_genes$perc.br.ps = ps_genes$num.branches.pval.less.than.alpha / ps_genes$num.branches
-
-gene_p = ggplot(ps_genes, aes(x=1, y=perc.br.ps)) +
-  geom_quasirandom(size=2, width=0.25, alpha=0.25, color=corecol(numcol=1, offset=2)) +
-  geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666", width=0.25) +
-  scale_x_continuous(limits=c(0.5,1.5)) +
-  xlab("") +
-  ylab("% of branches with evidence\nfor positive selection per gene") +
-  bartheme() +
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
-print(gene_p)
-
-```
-
-# Positive selection by branch
 
 ## Species tree branch presence/absence per gene
 
@@ -181,7 +274,7 @@ Following the [same procedure as before](https://goodest-goodlab.github.io/murin
 
 NOTE: These distributions are for the PARED tree.
 
-```{r gt_branch_categories, out.width="50%", fig.align="center", warning=FALSE}
+```{r gt-branch-presence, out.width="50%", fig.align="center", warning=FALSE}
 
 #anc_info = subset(anc_info_w_root, node.type != "root")
 
@@ -239,10 +332,9 @@ tree_info = tree_info[order(tree_info$node), ]
 
 ```
 
+## Tree with colonization branches labeled
 
-## Tree with branch categorizations
-
-```{r fig1, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+```{r col-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
@@ -262,23 +354,19 @@ if(save_tree_fig){
 # Colonization branch tree
 ```
 
-## Branches under positive selection by partition
+## Branches under positive selection by colonization partition
 
-```{r ps_branch_partitions, out.width="50%", fig.align="center", warning=FALSE}
+```{r ps-col-branches-all, out.width="50%", fig.align="center", warning=FALSE}
 
-#anc_info = subset(anc_info_w_root, node.type != "root")
-
-col_ps = subset(select(tree_info, clade, node.type, col.branch, num.ps.genes), col.branch == "Colonization")
+col_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes), col.branch == "Colonization")
 col_ps$label = "Colonization"
 #names(full_clade)[3] = "num.genes"
 
-desc_ps = subset(select(tree_info, clade, node.type, col.branch, num.ps.genes), col.branch == "Descendant")
+desc_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes), col.branch == "Descendant")
 desc_ps$label = "Descendant"
 
-other_ps = subset(select(tree_info, clade, node.type, col.branch, num.ps.genes), col.branch == "Other")
+other_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes), col.branch == "Other")
 other_ps$label = "Other"
-
-
 
 ps_counts = rbind(col_ps, desc_ps, other_ps)
 # Convert branch categories to long format
@@ -287,16 +375,334 @@ ps_counts$label = factor(ps_counts$label, levels=c("Colonization", "Descendant",
 
 x_comps = list(c("Colonization", "Descendant"), c("Colonization", "Other"), c("Descendant", "Other"))
 
-branch_ps_counts = ggplot(ps_counts, aes(x=label, y=num.ps.genes, group=label, color=node.type)) +
+branch_ps_counts = ggplot(ps_counts, aes(x=label, y=perc.ps.genes, group=label, color=node.type)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25) +
   geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
   geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
-  ylab("# of genes") +
+  ylab("Proportion of genes\nwith evidence for PS") +
   xlab("Species tree\nbranch partition") +
   bartheme() +
   theme(axis.text.x = element_text(angle=25, hjust=1)) +
   guides(colour=guide_legend(override.aes=list(alpha=1)))
 print(branch_ps_counts)
+
+```
+
+# Positive selection by branch (4659 BUSTED genes)
+
+```{r read-branch-ps-priori, out.width="50%", fig.align="center", warning=FALSE}
+
+ps_branches_priori = read.csv(priori_branch_ps_file, header=T, comment.char="#")
+names(ps_branches_priori)[1] = "tp"
+cols_to_na = names(ps_branches_priori)[5:11]
+
+for(col in cols_to_na){
+  ps_branches_priori[ps_branches_priori$tp %in% exclude_branches,][[col]] = NA
+}
+# This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
+
+ps_branches_priori$perc.ps.genes = ps_branches_priori$num.ps.genes / (ps_branches_priori$num.genes.full + ps_branches_priori$num.genes.partial)
+```
+
+## Branch presence
+
+```{r branch-presence-priori, out.width="50%", fig.align="center", warning=FALSE}
+
+full_clade = select(ps_branches_priori, clade, node.type, num.genes.full)
+full_clade$label = "Full clade"
+names(full_clade)[3] = "num.genes"
+
+partial_clade = select(ps_branches_priori, clade, node.type, num.genes.partial)
+partial_clade$label = "Partial clade"
+names(partial_clade)[3] = "num.genes"
+
+descendant_counted = select(ps_branches_priori, clade, node.type, num.genes.descendant.counted)
+descendant_counted$label = "Descendant counted"
+names(descendant_counted)[3] = "num.genes"
+
+discordant_clade = select(ps_branches_priori, clade, node.type, num.genes.discordant)
+discordant_clade$label = "Discordant clade"
+names(discordant_clade)[3] = "num.genes"
+
+no_clade = select(ps_branches_priori, clade, node.type, num.genes.missing)
+no_clade$label = "Missing clade"
+names(no_clade)[3] = "num.genes"
+# Subset each clade count column to add a label
+
+clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
+# Convert branch categories to long format
+
+clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
+# Factorize the labels in order
+
+branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  ylab("# of genes") +
+  xlab("Species tree\nbranch classification") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_counts)
+
+```
+
+## Branches under positive selection by colonization partition
+
+```{r ps-col-branches-busted, out.width="50%", fig.align="center", warning=FALSE}
+
+priori_ps_counts = select(ps_branches_priori, tp, perc.ps.genes)
+names(priori_ps_counts)[2] = "perc.ps.genes.priori"
+
+tree_info = merge(tree_info, priori_ps_counts, by="tp")
+
+tree_info = tree_info[order(tree_info$node), ]
+# Re-order the rows by the R node
+
+col_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes.priori), col.branch == "Colonization")
+col_ps$label = "Colonization"
+#names(full_clade)[3] = "num.genes"
+
+desc_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes.priori), col.branch == "Descendant")
+desc_ps$label = "Descendant"
+
+other_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes.priori), col.branch == "Other")
+other_ps$label = "Other"
+
+ps_counts = rbind(col_ps, desc_ps, other_ps)
+# Convert branch categories to long format
+
+ps_counts$label = factor(ps_counts$label, levels=c("Colonization", "Descendant", "Other"))
+
+x_comps = list(c("Colonization", "Descendant"), c("Colonization", "Other"), c("Descendant", "Other"))
+
+branch_ps_counts = ggplot(ps_counts, aes(x=label, y=perc.ps.genes.priori, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("Proportion of genes\nwith evidence for PS") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_ps_counts)
+
+```
+
+# Positive selection by branch (1072 morphofacial genes)
+
+```{r read-branch-ps-mf, out.width="50%", fig.align="center", warning=FALSE}
+
+ps_branches_mf = read.csv(morpho_branch_ps_file, header=T, comment.char="#")
+names(ps_branches_mf)[1] = "tp"
+cols_to_na = names(ps_branches_mf)[5:11]
+
+for(col in cols_to_na){
+  ps_branches_mf[ps_branches_mf$tp %in% exclude_branches,][[col]] = NA
+}
+# This loop changes all the counts for the branches descending from the root and the outgroup to NA to exclude them
+
+ps_branches_mf$perc.ps.genes = ps_branches_mf$num.ps.genes / (ps_branches_mf$num.genes.full + ps_branches_mf$num.genes.partial)
+
+```
+
+## Branch presence
+
+```{r branch-presence-mf, out.width="50%", fig.align="center", warning=FALSE}
+
+full_clade = select(ps_branches_mf, clade, node.type, num.genes.full)
+full_clade$label = "Full clade"
+names(full_clade)[3] = "num.genes"
+
+partial_clade = select(ps_branches_mf, clade, node.type, num.genes.partial)
+partial_clade$label = "Partial clade"
+names(partial_clade)[3] = "num.genes"
+
+descendant_counted = select(ps_branches_mf, clade, node.type, num.genes.descendant.counted)
+descendant_counted$label = "Descendant counted"
+names(descendant_counted)[3] = "num.genes"
+
+discordant_clade = select(ps_branches_mf, clade, node.type, num.genes.discordant)
+discordant_clade$label = "Discordant clade"
+names(discordant_clade)[3] = "num.genes"
+
+no_clade = select(ps_branches_mf, clade, node.type, num.genes.missing)
+no_clade$label = "Missing clade"
+names(no_clade)[3] = "num.genes"
+# Subset each clade count column to add a label
+
+clade_counts = rbind(full_clade, partial_clade, descendant_counted, discordant_clade, no_clade)
+# Convert branch categories to long format
+
+clade_counts$label = factor(clade_counts$label, levels=c("Full clade", "Partial clade", "Descendant counted", "Discordant clade", "Missing clade"))
+# Factorize the labels in order
+
+branch_counts = ggplot(clade_counts, aes(x=label, y=num.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  ylab("# of genes") +
+  xlab("Species tree\nbranch classification") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_counts)
+
+```
+
+## Tree with OU shift branches labeled
+
+```{r mf-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+morpho_branches = read.csv(morpho_file, header=F, comment.char="#")
+names(morpho_branches) = c("tp")
+
+tree_info$morpho.branch = "No OU shift"
+tree_info$morpho.branch[tree_info$tp %in% morpho_branches$tp] = "OU shift"
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+col_tree = ggtree(tree, size=0.8, ladderize=F, aes(color=tree_info$morpho.branch)) +
+  scale_color_manual(name='Branch partition', values=corecol(numcol=2)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.15,0.9))
+print(col_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(branch_rates$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree-PARED-gcf50.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# OU shift branch tree
+```
+
+## Branches under positive selection by OU shift partition
+
+```{r ps-mf, out.width="50%", fig.align="center", warning=FALSE}
+
+morpho_ps_counts = select(ps_branches_mf, tp, perc.ps.genes)
+names(morpho_ps_counts)[2] = "perc.ps.genes.mf"
+
+tree_info = merge(tree_info, morpho_ps_counts, by="tp")
+
+tree_info = tree_info[order(tree_info$node), ]
+# Re-order the rows by the R node
+
+morpho_ps_mf = subset(select(tree_info, clade, node.type, morpho.branch, perc.ps.genes.mf), morpho.branch == "OU shift")
+names(morpho_ps_mf)[4] = "perc.ps.genes"
+morpho_ps_mf$label = "OU shift (MF genes)"
+
+other_ps_mf = subset(select(tree_info, clade, node.type, morpho.branch, perc.ps.genes.mf), morpho.branch == "No OU shift")
+names(other_ps_mf)[4] = "perc.ps.genes"
+other_ps_mf$label = "No OU shift (MF genes)"
+
+morpho_ps_all = subset(select(tree_info, clade, node.type, morpho.branch, perc.ps.genes), morpho.branch == "OU shift")
+morpho_ps_all$label = "OU shift (All genes)"
+#names(full_clade)[3] = "num.genes"
+
+other_ps_all = subset(select(tree_info, clade, node.type, morpho.branch, perc.ps.genes), morpho.branch == "No OU shift")
+other_ps_all$label = "No OU shift (All genes)"
+
+ps_df = rbind(morpho_ps_all, other_ps_all, morpho_ps_mf, other_ps_mf)
+# Convert branch categories to long format
+
+ps_df$label = factor(ps_df$label, levels=c("OU shift (All genes)", "No OU shift (All genes)", "OU shift (MF genes)", "No OU shift (MF genes)"))
+
+x_comps = list(c("OU shift (All genes)", "No OU shift (All genes)"), c("OU shift (MF genes)", "No OU shift (MF genes)"), c("OU shift (All genes)", "OU shift (MF genes)"), c("No OU shift (All genes)", "No OU shift (MF genes)"))
+
+morpho_branch_ps = ggplot(ps_df, aes(x=label, y=perc.ps.genes, group=label, color=node.type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1, color="#333333") +
+  ylab("Proportion of genes\nwith evidence for PS") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(morpho_branch_ps)
+
+```
+
+# Positive selection by site
+
+[FEL](http://www.hyphy.org/methods/selection-methods/#fel) was run on all genes. FEL estimates dN and dS per site, but assumes these rates are constant across branches. It compares dN and dS with a likelihood ratio test at each site and computes a p-value using a chi-squared distribution. A site is said to be under selection then if its p-value falls below an initial level of 0.01, corrected using the Bonferroni method across all sites.
+
+```{r read-site-ps, out.width="75%", fig.align = "center", warning=FALSE}
+
+site_ps = read.csv(site_ps_file, header=T, comment.char="#")
+site_ps$prop.sites.ps = site_ps$num.sites.ps / site_ps$num.sites
+site_ps = site_ps %>% separate(file, c("pid", "aln", "ext"), sep="-", remove=F)
+
+# Other files read above
+
+```
+
+## Proportion of sites under selection (all genes)
+
+```{r ps-sites-all, out.width="50%", fig.align="center", warning=FALSE}
+
+site_ps_counts = ggplot(subset(site_ps, num.sites.ps > 0), aes(x=prop.sites.ps)) +
+  geom_histogram(bins=100, color="#ececec") +
+  #geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  #geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  #geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  scale_y_continuous(expand=c(0,0)) +
+  ylab("# of genes") +
+  xlab("Porportion of sites with evidence for selection") +
+  bartheme()
+  #theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  #guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(site_ps_counts)
+
+```
+## Proportion of sites under selection (all genes vs. morpho-facial genes vs. arid genes)
+
+```{r ps-sites-subsets, out.width="50%", fig.align="center", warning=FALSE}
+
+site_ps_priori = subset(site_ps, pid %in% ps_genes)
+site_ps_priori_sub = select(site_ps_priori, pid, prop.sites.ps)
+site_ps_priori_sub$label = "BUSTED genes"
+
+site_ps_mf = subset(site_ps, pid %in% morpho_genes$pid)
+site_ps_mf_sub = select(site_ps_mf, pid, prop.sites.ps)
+site_ps_mf_sub$label = "MF genes"
+
+site_ps_arid = subset(site_ps, pid %in% arid_genes$pid)
+site_ps_arid_sub = select(site_ps_arid, pid, prop.sites.ps)
+site_ps_arid_sub$label = "Arid genes"
+
+site_ps_sub = select(site_ps, pid, prop.sites.ps)
+site_ps_sub$label = "All genes"
+
+site_ps_cats = rbind(site_ps_sub, site_ps_priori_sub, site_ps_mf_sub, site_ps_arid_sub)
+
+site_ps_cats$label = factor(site_ps_cats$label, levels=c("All genes", "BUSTED genes", "MF genes", "Arid genes"))
+
+x_comps = list(c("All genes", "BUSTED genes"), c("All genes", "MF genes"), c("All genes", "Arid genes"))
+
+site_ps_comps = ggplot(site_ps_cats, aes(x=label, y=prop.sites.ps, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("Proportion of sites\nwith evidence for PS") +
+  xlab("Gene partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(site_ps_comps)
+
+```
+
+```{r ps-sites-table, out.width="50%", fig.align="center", warning=FALSE}
+
+site_table = data.frame("Gene set"=c("All genes", "BUSTED genes", "Morphofacial genes", "Arid genes"),
+                        "Avg. proportion of sites under positive selection"=c(mean(site_ps_sub$prop.sites.ps, na.rm=T), mean(site_ps_priori_sub$prop.sites.ps, na.rm=T), mean(site_ps_mf_sub$prop.sites.ps, na.rm=T), mean(site_ps_arid_sub$prop.sites.ps, na.rm=T)),
+                        "Median proportion of sites under positive selection"=c(median(site_ps_sub$prop.sites.ps, na.rm=T), median(site_ps_priori_sub$prop.sites.ps, na.rm=T), median(site_ps_mf_sub$prop.sites.ps, na.rm=T), median(site_ps_arid_sub$prop.sites.ps, na.rm=T)))
+
+site_table %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+
 
 ```
 
