@@ -28,7 +28,8 @@ library(ggplot2)
 library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
-#library(kableExtra)
+library(kableExtra)
+library(ggsignif)
 library(tidyr)
 library(ggtree)
 library(phytools)
@@ -63,6 +64,7 @@ if(tree_type == "astral"){
   convergence_branch_file = "../../data/convergence/full-coding-astral-pairwise-convergence/substitutions-by-branch-pairs.csv"
   convergence_branch_nodesc_file = "../../data/convergence/full-coding-astral-pairwise-convergence-nodesc/substitutions-by-branch-pairs.csv"
   convergence_gene_file = "../../data/convergence/full-coding-astral-pairwise-convergence-nodesc/substitution-pairs-by-gene.csv"
+  codon_file = "../../data/convergence/full-coding-astral-pairwise-convergence-nodesc/codons-by-branch.csv"
   branch_count_file = "../../data/rates/full-coding-astral-mg94-local-branch-mns.csv"
   
   col_branches_file = "../../data/trees/astral-colonization-branches.txt"
@@ -516,13 +518,6 @@ if(save_tree_fig){
 
 Excluding all descendant pair comparisons
 
-
-
-
-Do morpho branches experience more convergence in morpho genes compared to all genes?
-
-Do morpho branches experience more convergence in morpho genes compared to other branches?
-
 ```{r partition-branches, out.width="75%", fig.align = "center", warning=FALSE}
 
 col_branches = read.csv(col_branches_file, header=F, comment.char="#")
@@ -564,84 +559,181 @@ names(busted_genes)[1] = "pid"
 ```{r read-gene-convergence, out.width="75%", fig.align = "center", warning=FALSE}
 
 #gene_conv = vroom(convergence_gene_file, comment="#", col_names=F)
-gene_conv = read.table(convergence_gene_file, sep=",")
-names(gene_conv) = c("pid", "branch1", "branch2", "sub.type")
+gene_conv = read.table(convergence_gene_file, header=T, sep=",")
+#names(gene_conv) = c("pid", "branch1", "branch2", "sub.type")
 #gene_conv = gene_conv %>% separate(file, c("pid", "aln", "ext"), sep="-", remove=T)
+
+gene_conv_table = data.frame("Data"=c(), "Slope"=c(), "R-squared"=c())
 
 ```
 
+## Convergent vs. divergent substitutions 
+
+```{r all-genes-all-branches, out.width="75%", fig.align = "center", warning=FALSE}
+
+non_mf_branches_all_genes = subset(gene_conv, !node1 %in% morpho_branches$tp & !node2 %in% morpho_branches$tp)
+non_mf_branches_all_genes$label = "All genes, non-MF branches"
+
+non_mf_branches_all_genes_by_genes = non_mf_branches_all_genes %>% group_by(pid, aa.class) %>% tally()
+non_mf_branches_all_genes_by_genes = subset(non_mf_branches_all_genes_by_genes, aa.class=="div" | aa.class=="con")
+non_mf_branches_all_genes_by_genes = spread(non_mf_branches_all_genes_by_genes, key = aa.class, value = n, fill=0)
+non_mf_branches_all_genes_by_genes$label = "All genes, non-MF branches"
+
+non_mf_branches_all_genes_by_genes_fit = lm(non_mf_branches_all_genes_by_genes$con ~ non_mf_branches_all_genes_by_genes$div)
+
+non_mf_branch_all_gene_p = ggplot(non_mf_branches_all_genes_by_genes, aes(x=div, y=con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  #geom_point(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), method="lm", size=2, linetype="dashed", color="#920000") +
+  ggtitle("All genes, non-MF branches") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
+  bartheme() +
+  theme(axis.title=element_text(size=12),
+        plot.title = element_text(hjust=0.5, size=14))
+
+#print(non_mf_branch_all_gene_p)
+
+
+gene_conv_table = rbind(gene_conv_table, data.frame("Data"=c("All genes, non-MF branches"), "Slope"=c(non_mf_branches_all_genes_by_genes_fit$coefficients[2]), "R-squared"=c(summary(non_mf_branches_all_genes_by_genes_fit)$adj.r.squared)))
+
+```
+
+```{r mf-genes-all-branches, out.width="75%", fig.align = "center", warning=FALSE}
+
+non_mf_branches_mf_genes_by_genes = subset(non_mf_branches_all_genes_by_genes, pid %in% morpho_genes$pid)
+non_mf_branches_mf_genes_by_genes$label = "MF genes, non-MF branches"
+
+non_mf_branches_mf_genes_by_genes_fit = lm(non_mf_branches_mf_genes_by_genes$con ~ non_mf_branches_mf_genes_by_genes$div)
+
+non_mf_branch_mf_gene_p = ggplot(non_mf_branches_mf_genes_by_genes, aes(x=div, y=con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  #geom_point(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), method="lm", size=2, linetype="dashed", color="#920000") +
+  ggtitle("MF genes, non-MF branches") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
+  bartheme() +
+  theme(axis.title=element_text(size=12),
+        plot.title = element_text(hjust=0.5, size=14))
+
+#print(non_mf_branch_mf_gene_p)
+
+gene_conv_table = rbind(gene_conv_table, data.frame("Data"=c("MF genes, non-MF branches"), "Slope"=c(non_mf_branches_mf_genes_by_genes_fit$coefficients[2]), "R-squared"=c(summary(non_mf_branches_mf_genes_by_genes_fit)$adj.r.squared)))
+
+```
+
+```{r all-genes-mf-branches, out.width="75%", fig.align = "center", warning=FALSE}
+
+mf_branches_all_genes = subset(gene_conv, node1 %in% morpho_branches$tp & node2 %in% morpho_branches$tp)
+mf_branches_all_genes$label = "All genes, MF branches"
+
+mf_branches_all_genes_by_genes = mf_branches_all_genes %>% group_by(pid, aa.class) %>% tally()
+mf_branches_all_genes_by_genes = subset(mf_branches_all_genes_by_genes, aa.class=="div" | aa.class=="con")
+mf_branches_all_genes_by_genes = spread(mf_branches_all_genes_by_genes, key = aa.class, value = n, fill=0)
+mf_branches_all_genes_by_genes$label = "All genes, MF branches"
+
+mf_branches_all_genes_by_genes_fit = lm(mf_branches_all_genes_by_genes$con ~ mf_branches_all_genes_by_genes$div)
+
+mf_branch_all_gene_p = ggplot(mf_branches_all_genes_by_genes, aes(x=div, y=con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  #geom_point(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), method="lm", size=2, linetype="dashed", color="#920000") +
+  ggtitle("All genes, MF branches") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
+  bartheme() +
+  theme(axis.title=element_text(size=12),
+        plot.title = element_text(hjust=0.5, size=14))
+
+#print(mf_branch_all_gene_p)
+
+
+gene_conv_table = rbind(gene_conv_table, data.frame("Data"=c("All genes, MF branches"), "Slope"=c(mf_branches_all_genes_by_genes_fit$coefficients[2]), "R-squared"=c(summary(mf_branches_all_genes_by_genes_fit)$adj.r.squared)))
+
+```
+
+```{r mf-genes-mf-branches, out.width="75%", fig.align = "center", warning=FALSE}
+
+mf_branches_mf_genes_by_genes = subset(mf_branches_all_genes_by_genes, pid %in% morpho_genes$pid)
+mf_branches_mf_genes_by_genes$label = "MF genes, MF branches"
+
+mf_branches_mf_genes_by_genes_fit = lm(mf_branches_mf_genes_by_genes$con ~ mf_branches_mf_genes_by_genes$div)
+
+mf_branch_mf_gene_p = ggplot(mf_branches_mf_genes_by_genes, aes(x=div, y=con)) +
+  geom_point(size=2, alpha=0.3, color="#333333") +
+  #geom_point(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), size=2, alpha=0.3, color=corecol(numcol=1)) +
+  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
+  #geom_smooth(data=mf_branches_all_genes_by_genes, aes(x=div, y=con), method="lm", size=2, linetype="dashed", color="#920000") +
+  ggtitle("MF genes, MF branches") +
+  xlab("Divergent AA substitutions") +
+  ylab("Convergent AA substitutions") +
+  bartheme() +
+  theme(axis.title=element_text(size=12),
+        plot.title = element_text(hjust=0.5, size=14))
+
+#print(mf_branch_mf_gene_p)
+
+gene_conv_table = rbind(gene_conv_table, data.frame("Data"=c("MF genes, MF branches"), "Slope"=c(mf_branches_mf_genes_by_genes_fit$coefficients[2]), "R-squared"=c(summary(mf_branches_mf_genes_by_genes_fit)$adj.r.squared)))
+
+```
+
+```{r combine-gene-plots, out.width="75%", fig.align = "center", warning=FALSE}
+
+gene_conv_plots = plot_grid(non_mf_branch_all_gene_p, mf_branch_all_gene_p, non_mf_branch_mf_gene_p, mf_branch_mf_gene_p, ncol=2)
+print(gene_conv_plots)
+
+gene_conv_table %>% kable(row.names=F) %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+```
+
+## Convergent substitutions
 
 ```{r gene-convergence, out.width="75%", fig.align = "center", warning=FALSE}
 
-mf_branches_all_genes = subset(gene_conv, branch1 %in% morpho_branches$tp & branch2 %in% morpho_branches$tp)
-mf_branches_all_genes$label = "All genes, MF branches"
-mf_branches_all_genes = mf_branches_all_genes %>% separate(sub.type, c("codon1", "codon2", "codon.type", "aa.type"), sep="-", remove=T)
-mf_branches_all_genes_by_genes = mf_branches_all_genes %>% group_by(pid, aa.type) %>% tally()
-mf_branches_all_genes_by_genes = subset(mf_branches_all_genes_by_genes, aa.type=="div" | aa.type=="con")
-mf_branches_all_genes_by_genes = spread(mf_branches_all_genes_by_genes, key = aa.type, value = n, fill=0)
-
-aa_p = ggplot(mf_branches_all_genes_by_genes, aes(x=div, y=con)) +
-  geom_point(size=2, alpha=0.3, color="#333333") +
-  #geom_point(data=second_cor, aes(x=aa.div, y=aa.con), size=2, alpha=0.3, color=corecol(numcol=1)) +
-  geom_smooth(method="lm", size=2, linetype="dashed", color="#920000") +
-  #geom_smooth(data=second_cor, aes(x=aa.div, y=aa.con), method="lm", size=2, linetype="dashed", color="#920000") +
-  xlab("Divergent AA substitutions") +
-  ylab("Convergent AA substitutions") +
-  bartheme()
-
-print(aa_p)
-
-
-
-
-
-x = table(stack(lapply(split(mf_branches_all_genes$sub.type, mf_branches_all_genes$pid), 
-            function(x) unlist(strsplit(x, "-"))[4]))[2:1])
-
-
-y = mf_branches_all_genes %>%
-     group_by(pid) %>% 
-     separate_rows(sub.type, sep="-") %>%
-     filter(nzchar(sub.type)) %>% 
-     count(pid, sub.type) %>% 
-     spread(sub.type, n, fill = 0)
-
-
-
-mf_branches_all_genes = mf_branches_all_genes %>% group_by(pid) %>% summarize(aa.div = count(select(., ends_with(".div"))))
-conv_branches = conv_branches %>% mutate(aa.par = rowSums(select(., ends_with(".par")), na.rm=T))
-conv_branches = conv_branches %>% mutate(aa.con = rowSums(select(., ends_with(".con")), na.rm=T))
-
-non_mf_branches_all_genes = subset(gene_conv, !branch1 %in% morpho_branches$tp & !branch2 %in% morpho_branches$tp)
-non_mf_branches_all_genes$label = "All genes, non-MF branches"
-non_mf_branches_all_genes = non_mf_branches_all_genes %>% separate(sub.type, c("codon1", "codon2", "codon.type", "aa.type"), sep="-", remove=T)
-non_mf_branches_all_genes_by_genes = non_mf_branches_all_genes %>% group_by(pid, aa.type) %>% tally()
-non_mf_branches_all_genes_by_genes = subset(non_mf_branches_all_genes_by_genes, aa.type=="div" | aa.type=="con")
-non_mf_branches_all_genes_by_genes = spread(non_mf_branches_all_genes_by_genes, key = aa.type, value = n, fill=0)
-
-
-
-non_mf_branches_all_genes = subset(gene_conv, !branch1 %in% morpho_branches$tp & !branch2 %in% morpho_branches$tp)
-non_mf_branches_all_genes$label = "All genes, non-MF branches"
-
-conv_counts = rbind(non_mf_branches_all_genes, mf_branches_all_genes)
+conv_counts = rbind(non_mf_branches_all_genes_by_genes, non_mf_branches_mf_genes_by_genes, mf_branches_all_genes_by_genes, mf_branches_mf_genes_by_genes)
 # Convert branch categories to long format
 
-conv_counts$label = factor(conv_counts$label, levels=c("Colonization", "Descendant", "Other"))
+conv_counts$label = factor(conv_counts$label, levels=c("All genes, non-MF branches", "All genes, MF branches", "MF genes, non-MF branches", "MF genes, MF branches"))
 
-x_comps = list(c("Colonization", "Descendant"), c("Colonization", "Other"), c("Descendant", "Other"))
+x_comps = list(c("All genes, non-MF branches", "All genes, MF branches"), c("All genes, MF branches", "MF genes, MF branches"), c("MF genes, non-MF branches", "MF genes, MF branches"))
 
-branch_ps_counts = ggplot(conv_counts, aes(x=label, y=perc.ps.genes, group=label, color=node.type)) +
+gene_conv_counts = ggplot(conv_counts, aes(x=label, y=con, group=label)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.25) +
   geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
   geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
-  ylab("Proportion of genes\nwith evidence for PS") +
-  xlab("Species tree\nbranch partition") +
+  ylab("# of convergent substitutions\nper gene") +
+  xlab("") +
   bartheme() +
-  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  theme(axis.text.x = element_text(angle=15, hjust=1)) +
   guides(colour=guide_legend(override.aes=list(alpha=1)))
-print(branch_ps_counts)
+print(gene_conv_counts)
 
+```
+## Convergent substitutions
+
+```{r gene-convergence-divergence, out.width="75%", fig.align = "center", warning=FALSE}
+
+conv_counts = rbind(non_mf_branches_all_genes_by_genes, non_mf_branches_mf_genes_by_genes, mf_branches_all_genes_by_genes, mf_branches_mf_genes_by_genes)
+# Convert branch categories to long format
+
+conv_counts$label = factor(conv_counts$label, levels=c("All genes, non-MF branches", "All genes, MF branches", "MF genes, non-MF branches", "MF genes, MF branches"))
+
+x_comps = list(c("All genes, non-MF branches", "All genes, MF branches"), c("All genes, MF branches", "MF genes, MF branches"), c("MF genes, non-MF branches", "MF genes, MF branches"))
+
+gene_conv_counts = ggplot(conv_counts, aes(x=label, y=con/div, group=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("Ratio of convergent to\ndivergent substitutions\nper gene") +
+  xlab("") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=15, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(gene_conv_counts)
 
 ```
 
@@ -730,10 +822,14 @@ print(s_ns_codon_p)
 ```
 
 
+# Codon usage over time
 
+```{r read-codon-subs, out.width="75%", fig.align = "center", warning=FALSE}
 
+codons_by_branch = read.csv(codon_file, header=T)
+tree_info = merge(tree_info, codons_by_branch, by='clade')
 
-
+```
 
 
 

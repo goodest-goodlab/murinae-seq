@@ -1,0 +1,14 @@
+Anisomys_imitator_ABTC45107
+Halmaheramys_bokimekot_33262-WD225
+Bunomys_andrewsi_sample1
+Pseudomys_chapmani_WAMM29440
+Notomys_alexis_U1308
+Notomys_mitchellii_M21518
+Kadarsanomys_sodyi_MZB-Sample
+Mirzamys_louiseae_ABTC133754
+Paraleptomys_wilhelmina_H126-ABTC133716
+Bunomys_torajae_NMVZ21736
+Notomys_cervinus_M22857
+Hyorhinomys_stuempkei_JAE4661
+Hyomys_goliath_ABTC42697
+Bunomys_chrysocomus_JAE4867
