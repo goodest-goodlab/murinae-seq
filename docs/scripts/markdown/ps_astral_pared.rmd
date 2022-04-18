@@ -38,7 +38,7 @@ library(ggExtra)
 library(ggrepel)
 #library(vroom)
 library(ggdist)
-#library(stringr)
+library(stringr)
 library(ggsignif)
 source("../lib/design.r")
 source("../lib/get_tree_info.r")
@@ -48,7 +48,7 @@ source("../lib/get_tree_info.r")
 [< Back to summary](summary_210.html)
 
 ```{r read, out.width="75%", fig.align = "center", warning=FALSE}
-#tree_type = "astral"
+tree_type = "astral"
 save_tree_fig = F
 
 cat(tree_type, " tree\n")
@@ -358,14 +358,14 @@ if(save_tree_fig){
 
 ```{r ps-col-branches-all, out.width="50%", fig.align="center", warning=FALSE}
 
-col_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes), col.branch == "Colonization")
+col_ps = subset(select(tree_info, clade, tp, node.type, col.branch, num.ps.genes, perc.ps.genes, ps.gene.list), col.branch == "Colonization")
 col_ps$label = "Colonization"
 #names(full_clade)[3] = "num.genes"
 
-desc_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes), col.branch == "Descendant")
+desc_ps = subset(select(tree_info, clade, tp, node.type, col.branch, num.ps.genes, perc.ps.genes, ps.gene.list), col.branch == "Descendant")
 desc_ps$label = "Descendant"
 
-other_ps = subset(select(tree_info, clade, node.type, col.branch, perc.ps.genes), col.branch == "Other")
+other_ps = subset(select(tree_info, clade, tp, node.type, col.branch, num.ps.genes, perc.ps.genes, ps.gene.list), col.branch == "Other")
 other_ps$label = "Other"
 
 ps_counts = rbind(col_ps, desc_ps, other_ps)
@@ -385,6 +385,107 @@ branch_ps_counts = ggplot(ps_counts, aes(x=label, y=perc.ps.genes, group=label, 
   theme(axis.text.x = element_text(angle=25, hjust=1)) +
   guides(colour=guide_legend(override.aes=list(alpha=1)))
 print(branch_ps_counts)
+
+```
+
+## Proportion of genes shared by branch category
+
+```{r ps-col-branches-all, out.width="50%", fig.align="center", warning=FALSE}
+
+# set.seed(12345)  
+# 
+# 
+# null_dist = data.frame("rep"=c(), "count"=c())
+# 
+# for(i in 1:100){
+#   cur_subset = other_ps[sample(1:nrow(other_ps), 20), ]
+#   cur_subset$tp = str_replace(cur_subset$tp, ">", "")
+#   cur_subset$tp = str_replace(cur_subset$tp, "<", "")
+#   cur_subset$tp = paste("N", cur_subset$tp, sep="")
+#   gene_lists = str_split(cur_subset$ps.gene.list, ";")
+#   cur_overlaps = Reduce(intersect, gene_lists)
+#   
+#   null_dist = rbind(null_dist, data.frame("rep"=i, "count"=length(cur_overlaps)))
+#   
+# }
+# 
+# col_lists = str_split(col_ps$ps.gene.list, ";")
+# col_overlaps = Reduce(intersect, col_lists)
+# 
+# desc_lists = str_split(desc_ps$ps.gene.list, ";")
+# desc_overlaps = Reduce(intersect, desc_lists)
+# 
+# p = ggplot(null_dist, aes(x=count)) +
+#   geom_histogram() +
+#   bartheme()
+# print(p)
+
+getOverlaps <- function(input_data, output_data, label){
+  
+
+  done = c()
+  for(i in 1:nrow(input_data)){
+  row1 = input_data[i,]
+  gene_list1 = str_split(row1$ps.gene.list, ";")[[1]]
+  for(j in 1:nrow(input_data)){
+    #(paste(i, j, sep=":"))
+    row2 = input_data[j,]
+    
+    if(row1$tp == row2$tp){
+      next
+    }
+    
+    node_pair1 = paste(row1$tp, row2$tp, sep=";")
+    node_pair2 = paste(row2$tp, row1$tp, sep=";")
+    
+    if(node_pair1 %in% done || node_pair2 %in% done){
+      next
+    }
+    
+    done = c(done, node_pair1, node_pair2)
+    
+    gene_list2 = str_split(row2$ps.gene.list, ";")[[1]]
+    overlap = intersect(gene_list1, gene_list2)
+    total_ps_genes = length(union(gene_list1, gene_list2))
+    
+    num_overlap = length(overlap)
+    perc_overlap = num_overlap / total_ps_genes
+    
+    output_data = rbind(output_data, data.frame("n1"=row1$tp, "n2"=row2$tp, "num.overlap"=num_overlap, "perc.overlap"=perc_overlap, "label"=label))
+    
+    }
+  }
+  
+  return(output_data)
+}
+
+other_ps = subset(other_ps, !is.na(ps.gene.list))
+
+pairwise_overlaps = data.frame("n1"=c(), "n2"=c(), "num.overlap"=c(), "perc.overlap"=c(), "label"=c())
+print("other")
+pairwise_overlaps = getOverlaps(other_ps, pairwise_overlaps, "Other")
+print("col")
+pairwise_overlaps = getOverlaps(col_ps, pairwise_overlaps, "Colonization")
+print("desc")
+pairwise_overlaps = getOverlaps(desc_ps, pairwise_overlaps, "Descendant")
+
+
+
+pairwise_overlaps$label = factor(pairwise_overlaps$label, levels=c("Colonization", "Descendant", "Other"))
+
+x_comps = list(c("Colonization", "Descendant"), c("Colonization", "Other"), c("Descendant", "Other"))
+
+branch_ps_overlap_counts = ggplot(pairwise_overlaps, aes(x=label, y=perc.overlap, group=label, color=label)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  ylab("Genes with evidence for\npositive selection shared\nbetween branch pairs") +
+  xlab("Species tree\nbranch partition") +
+  bartheme() +
+  theme(axis.text.x = element_text(angle=25, hjust=1)) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+print(branch_ps_overlap_counts)
+
 
 ```
 

@@ -55,7 +55,7 @@ source("C:/bin/core/r/get_tree_info.r")
 ```{r read, out.width="75%", fig.align = "center", warning=FALSE}
 # This chunk handles all of the main inputs and reads the tree
 
-#tree_type = "astral"
+tree_type = "astral"
 save_tree_fig = F
 # Meta options. Comment tree_type when running form generator
 
@@ -1536,6 +1536,84 @@ p = ggplot(pheno_rates_long, aes(x=log(value), y=log(dNdS))) +
 print(p)
 
 ```  
+  
+```{r mass-anc, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+astral_bl_tree = read.tree(file="../../data/trees/full_coding_iqtree_astral.cf.bl.nrf25.rooted.treefile")
+
+mass_samples = pheno$sample[!is.na(pheno$Adult_Mass.g.)]
+
+mass_df = subset(pheno, sample %in% mass_samples)
+mass_data = mass_df$Adult_Mass.g.
+names(mass_data) = mass_df$sample
+
+mass_rates = subset(tips, sample %in% mass_samples)
+mass_ds = mass_rates$dS
+names(mass_ds) = mass_rates$sample
+
+rodent_tree_mass = drop.tip(astral_bl_tree, setdiff(astral_bl_tree$tip.label, mass_samples))
+plotTree(rodent_tree_mass, type="fan", ftype="i")
+
+#plot(rodent_tree_mass, label.offset=0.1)
+#nodelabels(round(mass_data,3), adj=c(-10,0), cex=0.7)
+
+mass_anc = fastAnc(rodent_tree_mass, log(mass_data), vars=TRUE, CI=TRUE)
+
+obj = contMap(rodent_tree_mass, log(mass_data), plot=FALSE)
+plot(obj, type="fan", legend = 0.7*max(nodeHeights(rodent_tree_mass)), fsize=c(0.7,0.9))
+
+#phenogram(rodent_tree_mass,log(mass_data),fsize=0.6,spread.costs=c(1,0))
+
+# mass_tree = ggtree(rodent_tree_mass, size=0.8, ladderize=F) +
+#   #scale_color_manual(name='Branch partition', values=corecol(numcol=2)) +
+#   xlim(0, 0.12) +
+#   geom_tiplab(color="#333333", fontface='italic', size=2) +
+#   theme(legend.position=c(0.15,0.9))
+# print(mass_tree)
+# 
+# pic_mass = pic(log(mass_data), rodent_tree_mass)
+# pic_ds = pic(mass_ds, rodent_tree_mass)
+# 
+# plot(pic_mass, pic_ds)
+# fit_mass_ds = lm(pic_ds ~ pic_mass -1)
+# abline(fit_mass_ds)
+# 
+# summary(fit_mass_ds)
+
+``` 
+  
+  
+```{r mass-pic, out.width="75%", fig.align = "center", warning=FALSE, fig.height=8}
+astral_bl_tree = read.tree(file="../../data/trees/full_coding_iqtree_astral.cf.bl.nrf25.rooted.treefile")
+
+mass_samples = pheno$sample[!is.na(pheno$Adult_Mass.g.)]
+
+mass_df = subset(pheno, sample %in% mass_samples)
+mass_data = mass_df$Adult_Mass.g.
+names(mass_data) = mass_df$sample
+
+mass_rates = subset(tips, sample %in% mass_samples)
+mass_ds = mass_rates$dS
+names(mass_ds) = mass_rates$sample
+
+rodent_tree_mass = drop.tip(astral_bl_tree, setdiff(astral_bl_tree$tip.label, mass_samples))
+mass_tree = ggtree(rodent_tree_mass, size=0.8, ladderize=F) +
+  #scale_color_manual(name='Branch partition', values=corecol(numcol=2)) +
+  xlim(0, 0.12) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.15,0.9))
+print(mass_tree)
+
+pic_mass = pic(log(mass_data), rodent_tree_mass)
+pic_ds = pic(mass_ds, rodent_tree_mass)
+
+plot(pic_mass, pic_ds)
+fit_mass_ds = lm(pic_ds ~ pic_mass -1)
+abline(fit_mass_ds)
+
+summary(fit_mass_ds)
+
+``` 
+  
   
 [< Back to summary](summary_210.html)
 
