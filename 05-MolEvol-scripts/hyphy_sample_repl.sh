@@ -6,6 +6,7 @@
 # Uses sed.
 
 indir="../05-MolEvol/full-coding-absrel-pared/csv"
+#indir="../05-MolEvol/coding-full-species-tree-slac/csv"
 #indir="../05-MolEvol/full-coding-mg94-local-rooted-anc/csv"
 #indir="../05-MolEvol/full-coding-slac-morphometrics/csv"
 # Use the csv file to preserve original Hyphy outputs.

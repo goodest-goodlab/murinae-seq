@@ -9,7 +9,7 @@
 # query  - the mouse protein sequence.
 ###########################################################
 
-import sys, os, core, math, argparse, subprocess, multiprocessing as mp
+import sys, os, core, math, argparse, subprocess, multiprocessing as mp, seqparse
 from Bio.Seq import Seq
 from difflib import SequenceMatcher
 
@@ -80,7 +80,7 @@ def readSeqInfo(seqfile, tabfile):
     #     expecteds[tid]['len'] = tlen;
     # # Get CDS lengths.
 
-    seqs_orig = core.fastaGetDict(seqfile);
+    seqs_orig = seqparse.fastaGetDict(seqfile);
     # Read the sequences into a dictionary.
     seqs = {};
     for title in seqs_orig:
@@ -878,11 +878,11 @@ with open(log_file, "w") as logfile:
         mus_pids[pid]['num-samples'].append((int(num_samples)));
 
         nt_file = os.path.join(mouse_nt_dir, eid + "-nt-trimmed.fa");
-        cur_title, cur_seq = core.fastaGetLists(nt_file);
+        cur_title, cur_seq = seqparse.fastaGetLists(nt_file);
         mus_pids[pid]['mm-nt-seqs'].append(cur_seq[0]);
 
         aa_file = os.path.join(mouse_aa_dir, eid + "-aa-trimmed.fa");
-        cur_title, cur_seq = core.fastaGetLists(aa_file);
+        cur_title, cur_seq = seqparse.fastaGetLists(aa_file);
         mus_pids[pid]['mm-aa-seqs'].append(cur_seq[0]);
 
         num_targets += 1;
@@ -948,11 +948,14 @@ with open(log_file, "w") as logfile:
     pid_lists = list(core.chunks(pids, pids_per_proc));
     # Splitting the protein IDs into even chunks for parallelization
 
-    pool = mp.Pool(processes=args.procs);
+    #pool = mp.Pool(processes=args.procs);
     # Starting the pool of processes
 
     core.PWS(core.spacedOut("# " + core.getDateTime() + " Start exonerate parse.", pad), logfile);
-    for result in pool.starmap(parseExonerate, ( (pl, mus_pids, args.input, args.output, args.filter, args.noseq, True) for pl in pid_lists )):
+    #for result in pool.starmap(parseExonerate, ( (pl, mus_pids, args.input, args.output, args.filter, args.noseq, True) for pl in pid_lists )):
+
+    for pl in pid_lists:
+        result = parseExonerate(pl, mus_pids, args.input, args.output, args.filter, args.noseq, True);
         if result == "exit":
             sys.exit();
         target_tracker_main.update(result[0]);

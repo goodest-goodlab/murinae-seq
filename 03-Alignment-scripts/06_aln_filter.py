@@ -5,7 +5,7 @@
 # and removes corresponding sites from codon alignment.
 ############################################################
 
-import sys, os, core, coreseq, argparse
+import sys, os, core, seqparse, argparse
 from Bio.Seq import Seq
 
 ############################################################
@@ -66,8 +66,10 @@ def siteCount(codon_seqs, aln_len):
 # and stop codons.
 
     stop_codons = ["TAG", "TAA", "TAR", "TGA", "TRA"];
+    skip_chars = ["---", "NNN"];
 
     invar_sites, gap_sites, stop_codon_count, high_gap_sites = 0, 0, 0, 0;
+    variant_sites, informative_sites = 0,0;
 
     codon_seq_list = list(codon_seqs.values());
     #print(codon_seqs);
@@ -76,8 +78,27 @@ def siteCount(codon_seqs, aln_len):
         for j in range(len(codon_seq_list)):
             site.append(codon_seq_list[j][i]);
 
-        if site.count(site[0]) == len(site):
-            invar_sites += 1;
+        # if site.count(site[0]) == len(site):
+        #     invar_sites += 1;
+        # else:
+        #     variant_sites += 1;
+
+            allele_counts = { allele : site.count(allele) for allele in site if allele not in skip_chars };
+            # Count the occurrence of each allele in the site
+
+            if len(allele_counts) > 1:
+                variant_sites += 1;
+                # If there is more than one allele in the site, it is variable
+
+                multi_allele_counts = [ allele for allele in allele_counts if allele_counts[allele] >= 2 ];
+                # Count the number of allele present in at least 2 species
+
+                if len(multi_allele_counts) >= 2:
+                    informative_sites += 1;
+                # If 2 or more alleles are present in 2 or more species, this site is informative
+            else:
+                invar_sites += 1;
+
 
         num_gaps = site.count("---");
         if num_gaps > 1:
@@ -95,7 +116,7 @@ def siteCount(codon_seqs, aln_len):
                 stop_codon_samples.append(sample);
                 break;
 
-    return invar_sites, gap_sites, stop_codon_count, high_gap_sites, stop_codon_samples;
+    return invar_sites, variant_sites, informative_sites, gap_sites, stop_codon_count, high_gap_sites, stop_codon_samples;
 
 #########################
 
@@ -159,6 +180,7 @@ parser.add_argument("-o", dest="output", help="Desired output directory for filt
 #parser.add_argument("--noncoding", dest="noncoding", help="Set this option to check non-coding data. Will not check for stop codons.", action="store_true", default=False);
 #parser.add_argument("--protein", dest="protein", help="Set this option to check amino acid data.", action="store_true", default=False);
 
+parser.add_argument("--informativesites", dest="informative_sites", help="Set this option to also count informative sites per alignmend (takes much longer)", action="store_true", default=False);
 parser.add_argument("--count", dest="count_only", help="Set this option to just provide the log file with counts/stats. Will not filter or write new sequences", action="store_true", default=False);
 parser.add_argument("--overwrite", dest="overwrite", help="If the output directory already exists and you wish to overwrite it, set this option.", action="store_true", default=False);
 # IO options
@@ -260,7 +282,7 @@ with open(log_file, "w") as logfile, open(sample_file, "w") as samplefile:
     pre_samples, pre_proteins = 0, 0;
     post_samples, post_proteins = 0, 0;
 
-    aln_stats = ["num seqs", "codon aln length", "avg nongap length", "uniq seqs", "ident seqs", "gappy seqs", "invariant sites", "stop codons", 
+    aln_stats = ["num seqs", "codon aln length", "avg nongap length", "uniq seqs", "ident seqs", "gappy seqs", "invariant sites", "variant sites", "informative sites", "stop codons", 
                 "percent sites with gap", "gappy sites"];
     aln_headers = ["align"] + [ "pre " + s for s in aln_stats ];
     if not args.count_only:
@@ -282,6 +304,8 @@ with open(log_file, "w") as logfile, open(sample_file, "w") as samplefile:
     # Read align file names from input directory
 
     written, num_short, num_high_ident, num_gappy, aln_prem_stop, num_no_info, num_stoppy = 0.0,0.0,0.0,0.0,0.0,0.0,0.0;
+    pre_total_col, pre_total_nongap_col, pre_invariant, pre_variant, pre_informative, = 0,0,0,0,0;
+    post_total_col, post_total_nongap_col, post_invariant, post_variant, post_informative, = 0,0,0,0,0;
     # Some count variables for all aligns
 
     # spec_high = {};
@@ -313,7 +337,7 @@ with open(log_file, "w") as logfile, open(sample_file, "w") as samplefile:
             cur_aa_outfile = os.path.join(aa_outdir, f.replace(".fa", ".filter.fa"));
         # Get the current in and output files
 
-        seqs_orig = core.fastaGetDict(cur_infile);
+        seqs_orig = seqparse.fastaGetDict(cur_infile);
         seqs = { t : seqs_orig[t].upper() for t in seqs_orig };
         samples = list(seqs.keys());
         pre_samples += len(samples);
@@ -341,13 +365,18 @@ with open(log_file, "w") as logfile, open(sample_file, "w") as samplefile:
         # Count the number of samples in the alignment
 
         cur_out["pre codon aln length"] = len(codons[samples[0]]);
+        pre_total_col += cur_out["pre codon aln length"];
         # Count the overall length of the alignment
 
         cur_out["pre avg nongap length"], cur_out["pre gappy seqs"], gappy_seqs = countNongapLength(codons, args.seq_filter);
+        pre_total_nongap_col += cur_out["pre avg nongap length"];
 
         cur_out["pre uniq seqs"], cur_out["pre ident seqs"] = countUniqIdentSeqs(seqs);
 
-        cur_out["pre invariant sites"], cur_out["pre percent sites with gap"], cur_out["pre stop codons"], cur_out["pre gappy sites"], pre_stop_samples = siteCount(codons, cur_out["pre codon aln length"]);
+        cur_out["pre invariant sites"], cur_out["pre variant sites"], cur_out["pre informative sites"], cur_out["pre percent sites with gap"], cur_out["pre stop codons"], cur_out["pre gappy sites"], pre_stop_samples = siteCount(codons, cur_out["pre codon aln length"]);
+        pre_invariant += cur_out["pre invariant sites"];
+        pre_variant += cur_out["pre variant sites"];
+        pre_informative += cur_out["pre informative sites"];
 
         for sample in gappy_seqs:
             rm_gappy.append(f + "\t" + sample);
@@ -372,12 +401,17 @@ with open(log_file, "w") as logfile, open(sample_file, "w") as samplefile:
                 f_samples = list(f_codons.keys());
 
                 cur_out["post codon aln length"] = len(f_codons[f_samples[0]]);
+                post_total_col += cur_out["post codon aln length"];
 
                 cur_out["post avg nongap length"], cur_out["post gappy seqs"], gappy_seqs = countNongapLength(f_codons, args.seq_filter);
+                post_total_nongap_col += cur_out["post avg nongap length"];
 
                 cur_out["post uniq seqs"], cur_out["post ident seqs"] = countUniqIdentSeqs(f_codons);
 
-                cur_out["post invariant sites"], cur_out["post percent sites with gap"], cur_out["post stop codons"], cur_out["post gappy sites"], post_stop_samples = siteCount(f_codons, cur_out["post codon aln length"]);
+                cur_out["post invariant sites"], cur_out["post variant sites"], cur_out["post informative sites"], cur_out["post percent sites with gap"], cur_out["post stop codons"], cur_out["post gappy sites"], post_stop_samples = siteCount(f_codons, cur_out["post codon aln length"]);
+                post_invariant += cur_out["post invariant sites"];
+                post_variant += cur_out["post variant sites"];
+                post_informative += cur_out["post informative sites"];
 
                 for sample in post_stop_samples:
                     rm_stop_codons.append(f + "\t" + sample);

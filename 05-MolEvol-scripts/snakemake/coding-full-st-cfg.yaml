@@ -1,0 +1,15 @@
+#############################################################################
+# Configuration information for using the full coding tree
+#############################################################################
+
+aln_dir: /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt/
+
+gene_tree_dir: /mnt/beegfs/gt156213e/murinae-seq/04-Phylo/full-coding-iqtree/loci/
+
+tree_suffix: "-mafft-cds.filter.species.treefile"
+
+out_prefix: "coding-full-species-tree"
+
+out_dir: /mnt/beegfs/gt156213e/murinae-seq/05-MolEvol/
+
+#############################################################################

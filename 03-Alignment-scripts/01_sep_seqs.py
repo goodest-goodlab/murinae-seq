@@ -75,9 +75,9 @@ def readSeqs(spec, tid_list, utr=False):
 
 datasets = ["australian-full-all", "australian-full-coding", "australian-reduced-all", "australian-reduced-coding", "reproductive-all", "reproductive-coding",
             "reproductive-mclennan-all", "reproductive-mclennan-coding", "reproductive-pahl-all", "reproductive-pahl-coding", "reproductive-testes-mass-all", "reproductive-testes-mass-coding", 
-            "reproductive-sperm-img-all", "reproductive-sperm-img-coding", "reproductive-sperm-morpho-all", "reproductive-sperm-morpho-coding", "full-all", "full-coding"]
+            "reproductive-sperm-img-all", "reproductive-sperm-img-coding", "reproductive-sperm-morpho-all", "reproductive-sperm-morpho-coding", "full-all", "full-coding", "morphofacial-coding"]
 
-dataset = "reproductive-all";
+dataset = "morphofacial-coding";
 if dataset not in datasets:
     sys.exit(" * ERROR: check dataset.");
 
@@ -332,6 +332,16 @@ if dataset == "full-coding":
     infilename = "../03-Alignments/raw/coding_full-dataset_unaligned-contigs.fa";
 # Full dataset, noncoding
 
+if dataset == "morphofacial-coding":
+    add_mouse = True;
+    add_rat = False;
+    # Since rat is one of the removed sequences anyways...
+    rm_samples = True;
+    rm_file = os.path.join(rmdir, "morphofacial-dataset-rm-samples.csv");
+    # A CSV file with samples to exclude in the first column.    
+
+    infilename = "../03-Alignments/raw/coding_full-dataset_unaligned-contigs.fa";
+
 if not infilename:
     sys.exit(" * ERROR: No infilename.");
 
@@ -344,7 +354,8 @@ if add_rat:
     rat_exons, rat_5utr, rat_3utr = readSeqs("rat", rat_tids, utr=True);
 # Read the rat reference seqs
 if rm_samples:
-    exclude_samples = { line.split(",")[0].replace("-", "_") : 0 for line in open(rm_file) if not line.startswith("#") };
+    exclude_samples = { line.strip().split(",")[0] : 0 for line in open(rm_file) if not line.startswith("#") };
+    #print(exclude_samples);
     #del(exclude_samples['Species']);
 # Read the samples to exclude   
 
@@ -413,8 +424,12 @@ for target in seqs_by_target:
             spec_skip = False;
             for exclude in exclude_samples:
                 if exclude in spec:
+                    #print(spec);
                     spec_skip = True;
             # Skip the sequence if it is in the excluded samples
+
+            # if spec == "Genus_sp-nov_NMVZ21816":
+            #     print(spec_skip);
 
             if not spec_skip:
                 #target_seqs[">" + spec] = seqs_by_target[target][spec];

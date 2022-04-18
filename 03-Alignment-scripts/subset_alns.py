@@ -12,8 +12,8 @@ import sys, os
 
 #############################################################################
 
-indir = "../03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt/";
-outdir = "../03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt-nrf-below-0.25/";
+indir = "../03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/aa/";
+outdir = "../03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/aa-nrf-below-0.25/";
 
 subset_file = "/mnt/beegfs/gt156213e/murinae-seq/04-Phylo/full-coding-iqtree/loci-nrf-below-0.25.txt";
 subset_loci = [ line.split("\t")[0] for line in open(subset_file, "r").read().split("\n") ];

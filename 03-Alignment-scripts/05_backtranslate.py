@@ -6,7 +6,7 @@
 # string indices.
 ###########################################################
 
-import sys, os, core, math, argparse, subprocess, multiprocessing as mp
+import sys, os, core, seqparse as seq, argparse
 
 ###########################################################
 
@@ -69,8 +69,8 @@ for f in aa_files:
     outfilename = os.path.join(args.outdir, pid + "-mafft-cds.fa");
     # Assign the file names for the input AA, NT, and output NT sequences.
 
-    aa_seqs = core.fastaGetDict(aa_file);
-    cds_seqs = core.fastaGetDict(cds_file);
+    aa_seqs = seq.fastaGetDict(aa_file);
+    cds_seqs = seq.fastaGetDict(cds_file);
     # Read the sequences for the input AA and NT files.
 
     #####
