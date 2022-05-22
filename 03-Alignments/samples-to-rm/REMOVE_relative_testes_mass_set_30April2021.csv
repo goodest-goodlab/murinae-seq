@@ -1,0 +1,21 @@
+Carl_sample_name,Tribe,Division,Genus,Species,Notes
+Apodemus_sylvaticus_SMG3823,Apodemini,Apodemus,Apodemus,sp. (sylvaticus),genus-level pheno data
+Lemniscomys_striatus_TCD4711,Arvicanthini,Arvicanthis,Lemniscomys,sp. (striatus),genus-level pheno data
+Rhabdomys_pumilio_MNHN1995065,Arvicanthini,Arvicanthis,Rhabdomys,sp. (pumilio),genus-level pheno data
+Hybomys_univittatus_TCD4026,Arvicanthini,Hybomys,Hybomys,univittatus,
+Grammomys_dryas_LSUMZ37716,Arvicanthini?,Oenomys?,Grammomys,sp. (dryas),genus-level pheno data
+Apomys_lubangensis_JAE169,Hydromyini,Chrotomys,Apomys,lubangensis,
+Rhynchomys_isarogensis_JAE2195,Hydromyini,Chrotomys,Rhynchomys,isarogensis,
+Pseudohydromys_pumehanae_ABTC43920,Hydromyini,Hydromys,Pseudohydromys,ellermani,"pheno data for same genus, different species - USE FOR SPERM MORPHO ONLY"
+Coccymys_ruemmleri_ABTC49489,Hydromyini,incertae sedis,Coccymys,sp. (ruemmleri),genus-level pheno data
+Solomys_salebrosus_ABTC64864,Hydromyini,Uromys,Solomys,sp. (salebrosus),genus-level pheno data
+Vandeleuria_oleracea_ABTC116404,incertae sedis,incertae sedis,Vandeleuria,oleracea,
+Otomys_denti_LSUMZ37840,Otomyini,Otomys,Otomys,denti,
+Taeromys_callitrichus_LSUMZ37153,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_punicans_MVZ225815,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_taerae_LSUMZ39224,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Niviventer_lepturus_JAE4746,Rattini,Dacnomys,Niviventer,lepturus,
+Saxatilomys_paulinae_ABTC116266,Rattini,Dacnomys,Saxatilomys,paulinae,
+Crunomys_melanius_KU168558,Rattini,Maxomys,Crunomys,melanius,
+Limnomys_sibuanus_FMNH147948,Rattini,Rattus,Limnomys,sibuanus,
+Rattus_praetor_sample1,Rattini,Rattus,Rattus,praetor,

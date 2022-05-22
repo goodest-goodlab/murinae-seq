@@ -1,0 +1,72 @@
+Carl_sample_name,Tribe,Division,Genus,Species,Notes
+Apodemus_sylvaticus_SMG3823,Apodemini,Apodemus,Apodemus,sp. (sylvaticus),genus-level pheno data
+Aethomys_hindei_MVZ196257,Arvicanthini,Aethomys,Aethomys,hindei,
+Lemniscomys_striatus_TCD4711,Arvicanthini,Arvicanthis,Lemniscomys,sp. (striatus),genus-level pheno data
+Rhabdomys_pumilio_MNHN1995065,Arvicanthini,Arvicanthis,Rhabdomys,sp. (pumilio),genus-level pheno data
+Dasymys_incomtus_LSUMZ37702,Arvicanthini,Dasymys,Dasymys,incomtus ,
+Hybomys_univittatus_TCD4026,Arvicanthini,Hybomys,Hybomys,univittatus,
+Grammomys_dryas_LSUMZ37716,Arvicanthini?,Oenomys?,Grammomys,sp. (dryas),genus-level pheno data
+Chiropodomys_gliroides_Z25153,Hydromyini,Chiropodomys,Chiropodomys,gliroides,
+Apomys_lubangensis_JAE169,Hydromyini,Chrotomys,Apomys,lubangensis,
+Chrotomys_mindorensis_JAE520,Hydromyini,Chrotomys,Chrotomys,mindorensis,
+Rhynchomys_isarogensis_JAE2195,Hydromyini,Chrotomys,Rhynchomys,isarogensis,
+Chrotomys_whiteheadi_KU168311,Hydromyini,Chrotomys,Chrotomys,whiteheadi,
+Conilurus_penicillatus_M14056,Hydromyini,Conilurus,Conilurus,penicillatus,
+Mesembriomys_gouldii_ABTC7449,Hydromyini,Conilurus,Mesembriomys,gouldii,
+Mesembriomys_macrurus_ABTC7337,Hydromyini,Conilurus,Mesembriomys,macrurus,
+Hydromys_chrysogaster_Z5248,Hydromyini,Hydromys,Hydromys,chrysogaster,
+Leptomys_elegans_ABTC45741,Hydromyini,Hydromys,Leptomys,elegans,
+Pseudohydromys_pumehanae_ABTC43920,Hydromyini,Hydromys,Pseudohydromys,ellermani,"pheno data for same genus, different species - USE FOR SPERM MORPHO ONLY"
+Xeromys_myoides_ABTC30709,Hydromyini,Hydromys,Xeromys,myoides,
+Coccymys_ruemmleri_ABTC49489,Hydromyini,incertae sedis,Coccymys,sp. (ruemmleri),genus-level pheno data
+Abeomelomys_sevia_KUM161018,Hydromyini,Mallomys,Abeomelomys,sevia,
+Mallomys_rothschildi_ABTC47402,Hydromyini,Mallomys,Mallomys,rothschildi,
+Mammelomys_lanosus_ABTC47208,Hydromyini,Mallomys,Mammelomys,lanosus,
+Xenuromys_barbatus_ABTC129204,Hydromyini,Mallomys,Xenuromys,barbatus,
+Anisomys_imitator_ABTC45107,Hydromyini,Pogonomys,Anisomys,imitator,
+Chiruromys_vates_ABTC43096,Hydromyini,Pogonomys,Chiruromys,vates,
+Lorentzimys_nouhuysi_ABTC-46314,Hydromyini,Pogonomys,Lorentzimys,nouhuysi,
+Pogonomys_macrourus_ABTC43144,Hydromyini,Pogonomys,Pogonomys,macrourus,
+Leggadina_forresti_WAMM62323,Hydromyini,Pseudomys,Leggadina,forresti,
+Leggadina_lakedownensis_WAMM21623,Hydromyini,Pseudomys,Leggadina,lakedownensis,
+Mastacomys_fuscus_M13957,Hydromyini,Pseudomys,Mastacomys,fuscus,
+Notomys_alexis_U1308,Hydromyini,Pseudomys,Notomys,alexis,
+Notomys_cervinus_M22857,Hydromyini,Pseudomys,Notomys,cervinus,
+Notomys_fuscus_M22830,Hydromyini,Pseudomys,Notomys,fuscus,
+Notomys_mitchellii_M21518,Hydromyini,Pseudomys,Notomys,mitchellii,
+Pseudomys_albocinereus_WAMM18855,Hydromyini,Pseudomys,Pseudomys,albocinereus,
+Pseudomys_apodemoides_M16672,Hydromyini,Pseudomys,Pseudomys,apodemoides,
+Pseudomys_australis_M25541,Hydromyini,Pseudomys,Pseudomys,australis,
+Pseudomys_delicatulus_U1509,Hydromyini,Pseudomys,Pseudomys,delicatulus,
+Pseudomys_desertor_ABTC41464,Hydromyini,Pseudomys,Pseudomys,desertor,
+Pseudomys_gouldii_ABTC08164,Hydromyini,Pseudomys,Pseudomys,fieldi,P. fieldi and P. gouldi synonymized according to Carl
+Pseudomys_fumeus_ABTC08168,Hydromyini,Pseudomys,Pseudomys,fumeus,
+Pseudomys_gracilicaudatus_ABTC08163,Hydromyini,Pseudomys,Pseudomys,gracilicaudatus,
+Pseudomys_hermannsburgensis_ABTC08067,Hydromyini,Pseudomys,Pseudomys,hermannsburgensis,
+Pseudomys_higginsi_UC1421,Hydromyini,Pseudomys,Pseudomys,higginsi,
+Pseudomys_nanus_U1448,Hydromyini,Pseudomys,Pseudomys,nanus,
+Pseudomys_novaehollandiae_ABTC08140,Hydromyini,Pseudomys,Pseudomys,novaehollandiae,Gregg flagged due to high read coverage; Jeff seems to think it's okay for phylo inference
+Pseudomys_oralis_RAT7,Hydromyini,Pseudomys,Pseudomys,oralis,
+Pseudomys_shortridgei_Z25113,Hydromyini,Pseudomys,Pseudomys,shortridgei,
+Zyzomys_argurus_ABTC61630,Hydromyini,Pseudomys,Zyzomys,argurus,
+Zyzomys_maini_ABTC07900,Hydromyini,Pseudomys,Zyzomys,maini,
+Zyzomys_pedunculatus_Z34925,Hydromyini,Pseudomys,Zyzomys,pedunculatus,
+Zyzomys_woodwardi_WAMM21724,Hydromyini,Pseudomys,Zyzomys,woodwardi,
+Melomys_rufescens_ABTC44798,Hydromyini,Uromys,Melomys,rufescens,
+Solomys_salebrosus_ABTC64864,Hydromyini,Uromys,Solomys,sp. (salebrosus),genus-level pheno data
+Uromys_caudimaculatus_DT10Uc01,Hydromyini,Uromys,Uromys,caudimaculatus,
+Vandeleuria_oleracea_ABTC116404,incertae sedis,incertae sedis,Vandeleuria,oleracea,
+Mus_caroli_10460X9,Murini,Mus,Mus,caroli,
+Mus_minutoides_10460X2,Murini,Mus,Mus,minutoides,
+Mus_musculus-musculus_10460X14,Murini,Mus,Mus,musculus musculus,
+Otomys_denti_LSUMZ37840,Otomyini,Otomys,Otomys,denti,
+Batomys_russatus_KU165776,Phloeomyini,Phloeomys,Batomys,salomonseni,
+Praomys_jacksoni_REC31,Praomyini,Stenocephalemys,Praomys,jacksoni,
+Berylmys_bowersi_ABTC116431,Rattini,Berylmys,Berylymys,bowersi,
+Taeromys_callitrichus_LSUMZ37153,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_punicans_MVZ225815,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_taerae_LSUMZ39224,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Paucidentomys_vermidax_Z21914,Rattini,Echiothrix,Paucidentomys,vermidax,
+Rattus_praetor_sample1,Rattini,Rattus,Rattus,praetor,
+NA,Rattini,Rattus,Rattus,norvegicus,rnor6 reference; NOT in Carl alignments
+NA,Murini,Mus,Mus,musculus,mm10 reference; NOT in Carl alignments

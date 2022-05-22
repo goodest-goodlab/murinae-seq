@@ -1,0 +1,62 @@
+Carl_sample_name,Tribe,Division,Genus,Species,Notes
+Apodemus_sylvaticus_SMG3823,Apodemini,Apodemus,Apodemus,sp. (sylvaticus),genus-level pheno data
+Aethomys_hindei_MVZ196257,Arvicanthini,Aethomys,Aethomys,hindei,
+Lemniscomys_striatus_TCD4711,Arvicanthini,Arvicanthis,Lemniscomys,sp. (striatus),genus-level pheno data
+Rhabdomys_pumilio_MNHN1995065,Arvicanthini,Arvicanthis,Rhabdomys,sp. (pumilio),genus-level pheno data
+Dasymys_incomtus_LSUMZ37702,Arvicanthini,Dasymys,Dasymys,incomtus ,
+Hybomys_univittatus_TCD4026,Arvicanthini,Hybomys,Hybomys,univittatus,
+Grammomys_dryas_LSUMZ37716,Arvicanthini?,Oenomys?,Grammomys,sp. (dryas),genus-level pheno data
+Chiropodomys_gliroides_Z25153,Hydromyini,Chiropodomys,Chiropodomys,gliroides,
+Apomys_lubangensis_JAE169,Hydromyini,Chrotomys,Apomys,lubangensis,
+Chrotomys_mindorensis_JAE520,Hydromyini,Chrotomys,Chrotomys,mindorensis,
+Rhynchomys_isarogensis_JAE2195,Hydromyini,Chrotomys,Rhynchomys,isarogensis,
+Chrotomys_whiteheadi_KU168311,Hydromyini,Chrotomys,Chrotomys,whiteheadi,
+Mesembriomys_gouldii_ABTC7449,Hydromyini,Conilurus,Mesembriomys,gouldii,
+Leptomys_elegans_ABTC45741,Hydromyini,Hydromys,Leptomys,elegans,
+Pseudohydromys_pumehanae_ABTC43920,Hydromyini,Hydromys,Pseudohydromys,ellermani,"pheno data for same genus, different species - USE FOR SPERM MORPHO ONLY"
+Coccymys_ruemmleri_ABTC49489,Hydromyini,incertae sedis,Coccymys,sp. (ruemmleri),genus-level pheno data
+Pseudomys_delicatulus_U1509,Hydromyini,Pseudomys,Pseudomys,delicatulus,
+Pseudomys_fumeus_ABTC08168,Hydromyini,Pseudomys,Pseudomys,fumeus,
+Zyzomys_maini_ABTC07900,Hydromyini,Pseudomys,Zyzomys,maini,
+Zyzomys_pedunculatus_Z34925,Hydromyini,Pseudomys,Zyzomys,pedunculatus,
+Solomys_salebrosus_ABTC64864,Hydromyini,Uromys,Solomys,sp. (salebrosus),genus-level pheno data
+Vandeleuria_oleracea_ABTC116404,incertae sedis,incertae sedis,Vandeleuria,oleracea,
+Mus_caroli_10460X9,Murini,Mus,Mus,caroli,
+Mus_minutoides_10460X2,Murini,Mus,Mus,minutoides,
+Mus_musculus-musculus_10460X14,Murini,Mus,Mus,musculus musculus,
+Otomys_denti_LSUMZ37840,Otomyini,Otomys,Otomys,denti,
+Batomys_russatus_KU165776,Phloeomyini,Phloeomys,Batomys,salomonseni,
+Praomys_jacksoni_REC31,Praomyini,Stenocephalemys,Praomys,jacksoni,
+Berylmys_bowersi_ABTC116431,Rattini,Berylmys,Berylymys,bowersi,
+Bunomys_andrewsi_sample1,Rattini,Bunomys,Bunomys,andrewsi,
+Bunomys_chrysocomus_JAE4867,Rattini,Bunomys,Bunomys,chrysocomus,
+Paruromys_dominator_JAE4870,Rattini,Bunomys,Paruromys,dominator,
+Sundamys_muelleri_JAE1283,Rattini,Bunomys,Sundamys,meulleri,
+Taeromys_callitrichus_LSUMZ37153,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_punicans_MVZ225815,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Taeromys_taerae_LSUMZ39224,Rattini,Bunomys,Taeromys,sp.,genus-level pheno data
+Leopoldomys_sabanus_Z25191,Rattini,Dacnomys,Leopoldomys,sabanus,
+Niviventer_lepturus_JAE4746,Rattini,Dacnomys,Niviventer,lepturus,
+Saxatilomys_paulinae_ABTC116266,Rattini,Dacnomys,Saxatilomys,paulinae,
+Gracilimus_radix_Z08508,Rattini,Echiothrix,Gracillimus,radix,
+Paucidentomys_vermidax_Z21914,Rattini,Echiothrix,Paucidentomys,vermidax,
+Sommeromys_macrorhinos_Z21740,Rattini,Echiothrix,Sommeromys,macrorhinos,
+Tateomys_macrocercus_Z21834,Rattini,Echiothrix,Tateomys,macrocercus,
+Waiomys_mamasae_Z20624,Rattini,Echiothrix,Waiomys,mamasae,
+Crunomys_melanius_KU168558,Rattini,Maxomys,Crunomys,melanius,
+Maxomys_musschenbroekii_sample1,Rattini,Maxomys,Maxomys,musschenbroekii,
+Maxomys_surifer_JAE3632,Rattini,Maxomys,Maxomys,surifer,
+Bandicota_indica_ABTC119185,Rattini,Rattus,Bandicota,indica,
+Limnomys_sibuanus_FMNH147948,Rattini,Rattus,Limnomys,sibuanus,
+Nesokia_indica_ABTC117074,Rattini,Rattus,Nesokia,indica,
+Rattus_argentiventer_LSUMZ38199,Rattini,Rattus,Rattus,argentiventer,
+Rattus_colletti_RAT25,Rattini,Rattus,Rattus,colletti,
+Rattus_exulans_sample1,Rattini,Rattus,Rattus,exulans,
+Rattus_hoffmanni_LSUMZ39187,Rattini,Rattus,Rattus,hoffmanni,
+Rattus_leucopus_sample1,Rattini,Rattus,Rattus,leucopus,
+Rattus_lutreolus_sample2,Rattini,Rattus,Rattus,lutreolus,
+Rattus_praetor_sample1,Rattini,Rattus,Rattus,praetor,
+Rattus_tunneyi_RAT130,Rattini,Rattus,Rattus,tunneyi,
+Rattus_villosissimus_sample1,Rattini,Rattus,Rattus,villosissimus,
+NA,Rattini,Rattus,Rattus,norvegicus,rnor6 reference; NOT in Carl alignments
+NA,Murini,Mus,Mus,musculus,mm10 reference; NOT in Carl alignments
