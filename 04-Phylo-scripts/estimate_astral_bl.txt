@@ -1,8 +1,0 @@
-time -p iqtree -p /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt/ -te /mnt/beegfs/gt156213e/murinae-seq/04-Phylo/full-coding-iqtree/concord/full_coding_iqtree_astral.cf.tree --prefix astral-bl/full_coding_iqtree_astral.cf.bl.tree -T 20
-# All genes
-
-time -p iqtree -p /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt-nrf-above-0.75/ -te /mnt/beegfs/gt156213e/murinae-seq/04-Phylo/full-coding-iqtree/concord/full_coding_iqtree_astral.cf.tree --prefix astral-bl-nrf75/full_coding_iqtree_astral.cf.bl.nrf75 -T 64
-# Genes with normalized RF to astral topology >= 0.75
-
-time -p iqtree -p /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt-nrf-below-0.25/ -te /mnt/beegfs/gt156213e/murinae-seq/04-Phylo/full-coding-iqtree/concord/full_coding_iqtree_astral.cf.tree --prefix astral-bl-nrf25/full_coding_iqtree_astral.cf.bl.nrf25 -T 35
-# Genes with normalized RF to astral topology <= 0.25

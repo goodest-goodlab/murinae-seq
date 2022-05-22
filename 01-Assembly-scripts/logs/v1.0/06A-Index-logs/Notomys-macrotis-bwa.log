@@ -1,9 +1,0 @@
-[bwa_index] Pack FASTA... 0.14 sec
-[bwa_index] Construct BWT for the packed sequence...
-[bwa_index] 6.14 seconds elapse.
-[bwa_index] Update BWT... 0.11 sec
-[bwa_index] Pack forward-only FASTA... 0.10 sec
-[bwa_index] Construct SA from BWT and Occ... 3.43 sec
-[main] Version: 0.7.17-r1188
-[main] CMD: bwa index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05A-Spades/Notomys-macrotis/scaffolds.fasta
-[main] Real time: 11.752 sec; CPU: 9.937 sec

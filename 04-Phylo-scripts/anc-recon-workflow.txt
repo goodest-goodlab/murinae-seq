@@ -1,8 +1,0 @@
-1. Root gene trees: root_gene_trees.py          # find . -type f -name "*.treefile" | while read FILE; do newfile="$(echo ${FILE} | sed -e 's/.treefile/.rooted.treefile/g')" ; nw_reroot -l "${FILE}" Lophiomys_imhausi_UM5152 Lophuromys_woosnami_LSUMZ37793 > "${newfile}"; done
-2. Generate mg94-local commands: hyphy_gen.py -i ../03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt/ -m mg94-local -s - -o ../05-MolEvol/full-coding-mg94-local-rooted/ -n full_coding_mg94_local_rooted -genetrees ../04-Phylo/full-coding-iqtree/loci/ --savefit -part good_lab_reincarnation -tasks 65 --overwrite
-3. Run mg94-local on the rooted trees with the generated script.
-4. Generate ancestral recon commands: hyphy_gen.py -i ../05-MolEvol/full-coding-mg94-local-rooted/ -m anc-recon -s - -o ../05-MolEvol/full-coding-mg94-local-rooted-anc/ -n full_coding_ancs -part good_lab_cpu -tasks 65
-5. Run the ancestral reconsctructions with the generated script.
-6. Parse the hyphy ancestral reconstructions: hyphy_to_csv.py -i full-coding-mg94-local-rooted-anc/ -m "anc-recon" -o full-coding-mg94-local-anc.csv
-7. Replace the hyphens in the sample names in the output csv files with hyphy_sample_repl.sh
-8. Sum substitutions by branch: time -p branch_rates.py -i ../docs/data/trees/full-coding-astral-cf-rooted.csv -r full-coding-mg94-local-rooted-anc/csv/ -f full-coding-mg94-local-ds-filter-0.95quant.csv -o full-coding-branch-ancs -n 64 --rooted --overwrite

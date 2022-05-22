@@ -1,9 +1,0 @@
-[bwa_index] Pack FASTA... 0.12 sec
-[bwa_index] Construct BWT for the packed sequence...
-[bwa_index] 3.60 seconds elapse.
-[bwa_index] Update BWT... 0.08 sec
-[bwa_index] Pack forward-only FASTA... 0.09 sec
-[bwa_index] Construct SA from BWT and Occ... 3.08 sec
-[main] Version: 0.7.17-r1188
-[main] CMD: bwa index /mnt/beegfs/gt156213e/murinae-seq/01-Assembly-data/05A-Spades/Mus-pos_ctrl_G/scaffolds.fasta
-[main] Real time: 8.583 sec; CPU: 6.980 sec
