@@ -1,0 +1,29 @@
+{
+    "total_runtime": 3508.8146889209747,
+    "rules": {
+        "iqtree_concordance": {
+            "mean-runtime": 3508.8146889209747,
+            "min-runtime": 3508.8146889209747,
+            "max-runtime": 3508.8146889209747
+        }
+    },
+    "files": {
+        "/mnt/beegfs/gt156213e/murinae-seq/04-Phylo/morphofacial-coding-iqtree/astral-concord/morphofacial-coding.cf.tree": {
+            "start-time": "Fri Apr  1 12:14:03 2022",
+            "stop-time": "Fri Apr  1 13:12:32 2022",
+            "duration": 3508.8146889209747,
+            "priority": 0,
+            "resources": {
+                "_cores": 1,
+                "_nodes": 1,
+                "mem_mb": 1000,
+                "disk_mb": 1000,
+                "tmpdir": "/tmp",
+                "partition": "good_lab_large_cpu",
+                "mem": "32g",
+                "time": "12:00:00",
+                "cpus": 1
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+#############################################################################
+# Configuration information for aligning the morphofacial lineages with MAFFT
+#############################################################################
+
+dataset: "morphofacial-coding"
+
+aln_dir: /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/exonerate/morphofacial-coding-trimmed-f0-seq20-site50/nt/
+
+bootstrap_reps: 1000
+
+out_dir: /mnt/beegfs/gt156213e/murinae-seq/04-Phylo/morphofacial-coding-iqtree/
+
+#############################################################################
