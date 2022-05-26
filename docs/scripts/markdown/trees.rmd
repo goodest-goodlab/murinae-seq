@@ -1734,6 +1734,55 @@ plotRateThroughTime(ed, intervalCol=corecol(numcol=1), avgCol=corecol(numcol=1),
 dev.off()
 
 ```
+```{r bamm-tribe-delta, out.width="50%", fig.align = "center", warning=FALSE}
+
+labeled_timetree_file = here("docs", "data", "trees", "astral", "iqtree-dating", "full-coding-astral-iqtree-dating-anil-mmus-12.1.timetree.nex")
+labeled_timetree = read.nexus(labeled_timetree_file)
+tree_to_df_list = treeToDF(labeled_timetree)
+labeled_timetree_info = tree_to_df_list[["info"]]
+# Read the tree and parse with treetoDF
+
+tree_info_clades = select(tree_info, node, clade, tp, delta)
+names(tree_info_clades)[1] = "orig.node"
+
+labeled_timetree_info = merge(labeled_timetree_info, tree_info_clades, by="clade")
+labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
+labeled_timetree$node.label = paste(labeled_timetree_info$label, "/", labeled_timetree_info$delta, sep="")
+
+labeled_tribe_timetree = drop.tip(labeled_timetree, c(missing_samples, tribe_prob_full))
+
+
+############
+############
+# START HERE TOMORROW
+# GET SPECIATION RATES (EDGE.LABEL) ON TO SAME TREE AS DELTA
+############
+############
+
+
+
+
+speciation_tree = getMeanBranchLengthTree(best)
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+
+delta_labeled_tree = rodent_tree
+delta_labeled_tree$node.label = paste(delta_labeled_tree$node.label, "/", tree_info$delta, sep="")
+
+delta_tree = ggtree(speciation_tree$phy, size=0.8, ladderize=F) +
+  #scale_color_continuous(name="Delta", high=h, low=l) +
+  xlim(0, 25) +
+  geom_tiplab(color="#333333", fontface='italic', size=2)
+  #theme(legend.position=c(0.05,0.9)) +
+  #geom_label(aes(x=branch, label=ifelse(tree_info$delta.sig,as.character(tree_info$tp),'')), label.size=NA, fill="transparent", show.legend=F, vjust=-0.1)
+#geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
+#geom_nodepoint(color="#666666", alpha=0.85, size=4)
+print(delta_tree)
+
+```
+
 
 ## Sampling rates based on Division
 
