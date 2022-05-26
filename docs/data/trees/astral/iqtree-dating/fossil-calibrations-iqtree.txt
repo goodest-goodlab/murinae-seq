@@ -1,0 +1,4 @@
+mm10,Arvicanthus_niloticus_MNHN1999201  -11.1:-12.3
+Pithecheir_melanurus_LSUMZ38198,Arvicanthus_niloticus_MNHN1999201   -8.7:-10.1
+mm10,Mus_pahari_10460X1 -7.3:-8.3
+Leggadina_forresti_WAMM62323,Pseudomys_shortridgei_Z25113   -4:-4.5

@@ -1,0 +1,535 @@
+IQ-TREE 2.1.2 COVID-edition built Mar 30 2021
+
+Input file name: /mnt/beegfs/gt156213e/murinae-seq/03-Alignments/exonerate/full-coding-trimmed-f175-seq20-site50/nt-nrf-below-0.25/
+User tree file name: /mnt/beegfs/gt156213e/murinae-seq/04-Phylo/full-coding-iqtree/concord/astral-bl-nrf25/full_coding_iqtree_astral.cf.bl.nrf25.treefile
+Type of analysis: ModelFinder + tree reconstruction
+Random seed number: 135656
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+To cite ModelFinder please use: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+Since you used least square dating (LSD) please also cite: 
+
+Thu-Hien To, Matthieu Jung, Samantha Lycett, Olivier Gascuel (2016)
+Fast dating using least-squares criteria and algorithms. Syst. Biol. 65:82-97.
+https://doi.org/10.1093/sysbio/syv068
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 188 sequences with 3025551 nucleotide sites
+Number of constant sites: 1.72851e+06 (= 57.1305% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 1.72851e+06 (= 57.1305% of all sites)
+Number of parsimony informative sites: 891657
+Number of distinct site patterns: 1529448
+
+ModelFinder
+-----------
+
+Best-fit model according to BIC: GTR+F+R10
+
+List of models sorted by BIC scores: 
+
+Model                  LogL         AIC      w-AIC        AICc     w-AICc         BIC      w-BIC
+GTR+F+R10       -28013181.170 56027160.340 +        1 56027160.446 +        1 56032316.459 +        1
+GTR+F+R9        -28013301.360 56027396.720 - 4.69e-52 56027396.824 - 4.69e-52 56032526.994 - 1.92e-46
+GTR+F+R8        -28013383.330 56027556.660 - 8.71e-87 56027556.763 - 8.72e-87 56032661.088 - 1.46e-75
+GTR+F+R7        -28013613.490 56028012.980 - 7.11e-186 56028013.082 - 7.12e-186 56033091.563 - 4.88e-169
+GTR+F+R6        -28013730.870 56028243.740 - 5.53e-236 56028243.841 - 5.54e-236 56033296.478 - 1.55e-213
+SYM+R10         -28014063.210 56028918.420 -        0 56028918.524 -        0 56034035.771 -        0
+GTR+F+R5        -28014330.720 56029439.440 -        0 56029439.540 -        0 56034466.333 -        0
+TVMe+R10        -28014784.000 56030358.000 -        0 56030358.103 -        0 56035462.428 -        0
+GTR+F+R4        -28016336.610 56033447.220 -        0 56033447.319 -        0 56038448.268 -        0
+TIM+F+R10       -28017316.990 56035427.980 -        0 56035428.084 -        0 56040558.254 -        0
+TVM+F+R10       -28017997.420 56036790.840 -        0 56036790.945 -        0 56041934.036 -        0
+TIM3+F+R10      -28020160.460 56041114.920 -        0 56041115.024 -        0 56046245.194 -        0
+TIM3e+R10       -28021411.370 56043610.740 -        0 56043610.843 -        0 56048702.246 -        0
+K3Pu+F+R10      -28022395.550 56045583.100 -        0 56045583.204 -        0 56050700.451 -        0
+TIM2+F+R10      -28024463.380 56049720.760 -        0 56049720.864 -        0 56054851.034 -        0
+TN+F+R10        -28024537.710 56049867.420 -        0 56049867.524 -        0 56054984.771 -        0
+TIMe+R10        -28025084.260 56050956.520 -        0 56050956.623 -        0 56056048.026 -        0
+TPM3u+F+R10     -28025192.190 56051176.380 -        0 56051176.484 -        0 56056293.731 -        0
+TPM3+F+R10      -28025192.190 56051176.380 -        0 56051176.484 -        0 56056293.731 -        0
+K3P+R10         -28025754.660 56052295.320 -        0 56052295.422 -        0 56057373.903 -        0
+TPM2u+F+R10     -28029541.600 56059875.200 -        0 56059875.304 -        0 56064992.551 -        0
+TPM2+F+R10      -28029541.610 56059875.220 -        0 56059875.324 -        0 56064992.571 -        0
+HKY+F+R10       -28029617.540 56060025.080 -        0 56060025.183 -        0 56065129.508 -        0
+TIM2e+R10       -28032132.300 56065052.600 -        0 56065052.703 -        0 56070144.106 -        0
+TNe+R10         -28032389.750 56065565.500 -        0 56065565.602 -        0 56070644.083 -        0
+K2P+R10         -28033064.320 56066912.640 -        0 56066912.742 -        0 56071978.301 -        0
+GTR+F+R3        -28040681.700 56082133.400 -        0 56082133.498 -        0 56087108.602 -        0
+GTR+F+I+G4      -28174398.300 56349562.600 -        0 56349562.697 -        0 56354511.957 -        0
+GTR+F+G4        -28248263.690 56497291.380 -        0 56497291.477 -        0 56502227.815 -        0
+GTR+F+R2        -28301340.580 56603447.160 -        0 56603447.257 -        0 56608396.517 -        0
+GTR+F+I         -28607598.240 57215960.480 -        0 57215960.577 -        0 57220896.915 -        0
+JC+R10          -29524390.180 59049562.360 -        0 59049562.461 -        0 59054615.098 -        0
+F81+F+R10       -29528583.970 59057955.940 -        0 59057956.043 -        0 59063047.446 -        0
+GTR+F           -29910570.680 59821903.360 -        0 59821903.456 -        0 59826826.872 -        0
+
+AIC, w-AIC   : Akaike information criterion scores and weights.
+AICc, w-AICc : Corrected AIC scores and weights.
+BIC, w-BIC   : Bayesian information criterion scores and weights.
+
+Plus signs denote the 95% confidence sets.
+Minus signs denote significant exclusion.
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: GTR+F+R10
+
+Rate parameter R:
+
+  A-C: 1.2069
+  A-G: 5.9529
+  A-T: 0.7434
+  C-G: 0.9443
+  C-T: 7.1059
+  G-T: 1.0000
+
+State frequencies: (empirical counts from alignment)
+
+  pi(A) = 0.2626
+  pi(C) = 0.2584
+  pi(G) = 0.2555
+  pi(T) = 0.2236
+
+Rate matrix Q:
+
+  A   -0.9476    0.1478     0.721   0.07878
+  C    0.1502    -1.018    0.1144    0.7531
+  G     0.741    0.1156   -0.9626     0.106
+  T   0.09253    0.8703    0.1211    -1.084
+
+Model of rate heterogeneity: FreeRate with 10 categories
+Site proportion and rates:  (0.1853,0.01377) (0.1566,0.03447) (0.1295,0.1088) (0.1092,0.3831) (0.1036,0.9611) (0.1111,1.351) (0.1171,1.773) (0.06858,4.012) (0.01691,9.721) (0.002167,18.1)
+
+ Category  Relative_rate  Proportion
+  1         0.01377        0.1853
+  2         0.03447        0.1566
+  3         0.1088         0.1295
+  4         0.3831         0.1092
+  5         0.9611         0.1036
+  6         1.351          0.1111
+  7         1.773          0.1171
+  8         4.012          0.06858
+  9         9.721          0.01691
+  10         18.1           0.002167
+
+USER TREE
+---------
+
+Log-likelihood of the tree: -28012965.3865 (s.e. 21003.4099)
+Unconstrained log-likelihood (without tree): -39605353.1407
+Number of free parameters (#branches + #model parameters): 399
+Akaike information criterion (AIC) score: 56026728.7730
+Corrected Akaike information criterion (AICc) score: 56026728.8785
+Bayesian information criterion (BIC) score: 56031884.8919
+
+Total tree length (sum of branch lengths): 1.7065
+Sum of internal branch lengths: 0.5380 (31.5234% of tree length)
+
+NOTE: Tree is UNROOTED although outgroup taxon 'mm10' is drawn at root
+
++--mm10
+|
+|                                                                 +--Zyzomys_pedunculatus_Z34925
+|                                                              +--| (1/36.5/44)
+|                                                              |  +--Zyzomys_woodwardi_WAMM21724
+|                                                           +--| (1/64.6/72.8)
+|                                                           |  |     +--Zyzomys_palatalis_ABTC30744
+|                                                           |  |  +--| (1/51.3/57.1)
+|                                                           |  |  |  +--Zyzomys_argurus_ABTC61630
+|                                                           |  +--| (1/47.1/54.9)
+|                                                           |     +--Zyzomys_maini_ABTC07900
+|                                                        +--| (1/31.9/44.6)
+|                                                        |  |                    +--Pseudomys_oralis_RAT7
+|                                                        |  |                 +--| (1/26.8/45.7)
+|                                                        |  |                 |  |  +--Pseudomys_shortridgei_Z25113
+|                                                        |  |                 |  +--| (1/72.7/81)
+|                                                        |  |                 |     +--Pseudomys_desertor_ABTC41464
+|                                                        |  |              +--| (1/8.64/40.3)
+|                                                        |  |              |  |        +--Pseudomys_higginsi_UC1421
+|                                                        |  |              |  |     +--| (1/25/43.1)
+|                                                        |  |              |  |     |  |        +--Pseudomys_bolami_ABTC107389
+|                                                        |  |              |  |     |  |     +--| (1/27.2/38.2)
+|                                                        |  |              |  |     |  |     |  +--Pseudomys_novaehollandiae_ABTC08140
+|                                                        |  |              |  |     |  |  +--| (1/38.3/51.3)
+|                                                        |  |              |  |     |  |  |  +--Pseudomys_delicatulus_U1509
+|                                                        |  |              |  |     |  +--| (1/50.6/65.5)
+|                                                        |  |              |  |     |     +--Pseudomys_hermannsburgensis_ABTC08067
+|                                                        |  |              |  |  +--| (1/20.9/40.3)
+|                                                        |  |              |  |  |  +--Mastacomys_fuscus_M13957
+|                                                        |  |              |  +--| (1/19.7/45.2)
+|                                                        |  |              |     +--Pseudomys_australis_M25541
+|                                                        |  |           +--| (1/10.9/37.1)
+|                                                        |  |           |  |  +--Pseudomys_nanus_U1448
+|                                                        |  |           |  +--| (1/75.6/82.9)
+|                                                        |  |           |     +--Pseudomys_gracilicaudatus_ABTC08163
+|                                                        |  |        +--| (1/17.5/41.5)
+|                                                        |  |        |  |  +--Pseudomys_fumeus_ABTC08168
+|                                                        |  |        |  +--| (1/32/49.4)
+|                                                        |  |        |     |  +--Pseudomys_apodemoides_M16672
+|                                                        |  |        |     +--| (1/74.9/81.3)
+|                                                        |  |        |        +--Pseudomys_albocinereus_WAMM18855
+|                                                        |  |     +--| (1/24.7/45.8)
+|                                                        |  |     |  +--Pseudomys_occidentalis_ABTC08043
+|                                                        |  |  +--| (1/45.2/57.7)
+|                                                        |  |  |  |              +--Notomys_alexis_U1308
+|                                                        |  |  |  |           +--| (1/23.8/38.6)
+|                                                        |  |  |  |           |  +--Notomys_aquilo_M-32455
+|                                                        |  |  |  |        +--| (1/22.4/38.8)
+|                                                        |  |  |  |        |  +--Notomys_fuscus_M22830
+|                                                        |  |  |  |     +--| (1/64.5/72.3)
+|                                                        |  |  |  |     |  +--Notomys_mitchellii_M21518
+|                                                        |  |  |  |  +--| (1/43.3/56.3)
+|                                                        |  |  |  |  |  +--Notomys_cervinus_M22857
+|                                                        |  |  |  +--| (1/22.1/39.8)
+|                                                        |  |  |     |        +--Pseudomys_patrius_JM10865
+|                                                        |  |  |     |     +--| (1/45.3/55.4)
+|                                                        |  |  |     |     |  +--Pseudomys_johnsoni_ABTC08053
+|                                                        |  |  |     |  +--| (1/30.4/39.9)
+|                                                        |  |  |     |  |  +--Pseudomys_chapmani_WAMM29440
+|                                                        |  |  |     +--| (1/65.6/75.2)
+|                                                        |  |  |        +--Pseudomys_calabyi_U4324
+|                                                        |  +--| (1/17.1/34.2)
+|                                                        |     |    +--Leggadina_lakedownensis_WAMM21623
+|                                                        |     +----| (1/88.2/92.1)
+|                                                        |          +--Leggadina_forresti_WAMM62323
+|                                                     +--| (1/52.2/55.7)
+|                                                     |  |        +--Solomys_salebrosus_ABTC64864
+|                                                     |  |     +--| (1/70.1/73.9)
+|                                                     |  |     |  +--Melomys_rufescens_ABTC44798
+|                                                     |  |  +--| (1/34/44.8)
+|                                                     |  |  |  |  +--Uromys_sp-nov_YS380
+|                                                     |  |  |  +--| (1/82.4/87.5)
+|                                                     |  |  |     +--Uromys_caudimaculatus_DT10Uc01
+|                                                     |  +--| (1/30.9/43.6)
+|                                                     |     |        +--Mesembriomys_macrurus_ABTC7337
+|                                                     |     |     +--| (1/68.1/69.5)
+|                                                     |     |     |  +--Mesembriomys_gouldii_ABTC7449
+|                                                     |     |  +--| (1/44.2/50.2)
+|                                                     |     |  |  |  +--Conilurus_penicillatus_M14056
+|                                                     |     |  |  +--| (1/39.8/44.4)
+|                                                     |     |  |     +--Conilurus_albipes_NMV-c7585
+|                                                     |     +--| (1/52.2/61.9)
+|                                                     |        |  +--Leporillus_conditor_ABTC13335
+|                                                     |        +--| (1/34.3/54)
+|                                                     |           +--Leporillus_apicalis_C90
+|                                                  +--| (1/61.5/61.2)
+|                                                  |  |        +--Paraleptomys_wilhelmina_H126-ABTC133716
+|                                                  |  |     +--| (1/18.6/40.2)
+|                                                  |  |     |  |  +--Leptomys_elegans_ABTC45741
+|                                                  |  |     |  +--| (1/27.1/40.1)
+|                                                  |  |     |     +--Mirzamys_louiseae_ABTC133754
+|                                                  |  |  +--| (1/24.7/42.6)
+|                                                  |  |  |  |  +--Xeromys_myoides_ABTC30709
+|                                                  |  |  |  +--| (1/37.4/45.8)
+|                                                  |  |  |     |  +--Pseudohydromys_pumehanae_ABTC43920
+|                                                  |  |  |     +--| (1/58.8/64.1)
+|                                                  |  |  |        +--Microhydromys_richardsoni_ANWCM35851
+|                                                  |  +--| (1/70.6/71.2)
+|                                                  |     |  +--Crossomys_moncktoni_ABTC46614
+|                                                  |     +--| (1/70.2/74.2)
+|                                                  |        |     +--Hydromys_sp-nov_YS391
+|                                                  |        |  +--| (1/47.7/53.2)
+|                                                  |        |  |  +--Hydromys_chrysogaster_Z5248
+|                                                  |        +--| (1/70.7/75.5)
+|                                                  |           +--Parahydromys_asper_ABTC45798
+|                                               +--| (1/19.1/32.5)
+|                                               |  |        +---Pogonomelomys_mayeri_AMM21849
+|                                               |  |     +--| (1/65.3/61.5)
+|                                               |  |     |  +--Abeomelomys_sevia_KUM161018
+|                                               |  |  +--| (1/38/44.8)
+|                                               |  |  |  +---Mallomys_rothschildi_ABTC47402
+|                                               |  +--| (1/57.2/57.8)
+|                                               |     |  +---Xenuromys_barbatus_ABTC129204
+|                                               |     +--| (1/65.6/60.8)
+|                                               |        +----Mammelomys_lanosus_ABTC47208
+|                                            +--| (1/28.1/39.2)
+|                                            |  +-----Coccymys_ruemmleri_ABTC49489
+|                                         +--| (1/32.7/42)
+|                                         |  |              +----Hyomys_goliath_ABTC42697
+|                                         |  |           +--| (1/26.9/39.3)
+|                                         |  |           |  +-----Pogonomys_macrourus_ABTC43144
+|                                         |  |        +--| (1/22.1/38.8)
+|                                         |  |        |  +------Chiruromys_vates_ABTC43096
+|                                         |  |     +--| (1/12.6/39.1)
+|                                         |  |     |  +----Macruromys_major_ABTC43909
+|                                         |  |  +--| (1/9.99/31.6)
+|                                         |  |  |  +--------Lorentzimys_nouhuysi_ABTC-46314
+|                                         |  +--| (1/13.9/41.1)
+|                                         |     +----Anisomys_imitator_ABTC45107
+|                                      +--| (1/46/45.4)
+|                                      |  |  +------Apomys_lubangensis_JAE169
+|                                      |  +--| (1/75.4/65.9)
+|                                      |     |         +--Chrotomys_mindorensis_JAE520
+|                                      |     |     +---| (1/90.1/91.8)
+|                                      |     |     |   +--Chrotomys_whiteheadi_KU168311
+|                                      |     |  +--| (1/40.6/39.1)
+|                                      |     |  |  +---Rhynchomys_isarogensis_JAE2195
+|                                      |     +--| (1/63.6/59.3)
+|                                      |        +---Archboldomys_luzonensis_EAR1826
+|                                   +--| (1/60.7/52.5)
+|                                   |  +--------Haeromys_minahassae_JAE4996
+|                                +--| (1/63.7/53.9)
+|                                |  +----------Chiropodomys_gliroides_Z25153
+|                             +--| (1/20.9/35.2)
+|                             |  |                                +--rnor6
+|                             |  |                             +--| (1/20.8/38.2)
+|                             |  |                             |  |  +--Rattus_hoffmanni_LSUMZ39187
+|                             |  |                             |  +--| (1/46.7/62.5)
+|                             |  |                             |     +--Rattus_argentiventer_LSUMZ38199
+|                             |  |                          +--| (1/32.6/50.9)
+|                             |  |                          |  +--Rattus_exulans_sample1
+|                             |  |                       +--| (1/29.8/46.4)
+|                             |  |                       |  |        +--Tarsomys_apoensis_KU167148
+|                             |  |                       |  |     +--| (1/56.9/64.4)
+|                             |  |                       |  |     |  +--Limnomys_sibuanus_FMNH147948
+|                             |  |                       |  |  +--| (1/21.7/41.3)
+|                             |  |                       |  |  |  |  +--Rattus_xanthurus_LSUMZ39196
+|                             |  |                       |  |  |  +--| (1/42.2/57.3)
+|                             |  |                       |  |  |     |  +--Rattus_morotaiensis_ASAM29
+|                             |  |                       |  |  |     +--| (1/42.1/48.9)
+|                             |  |                       |  |  |        |           +--Rattus_colletti_RAT25
+|                             |  |                       |  |  |        |        +--| (1/48.5/53.2)
+|                             |  |                       |  |  |        |        |  +--Rattus_villosissimus_sample1
+|                             |  |                       |  |  |        |     +--| (0.93/18.1/32)
+|                             |  |                       |  |  |        |     |  +--Rattus_tunneyi_RAT130
+|                             |  |                       |  |  |        |  +--| (1/23.5/41.8)
+|                             |  |                       |  |  |        |  |  +--Rattus_lutreolus_sample2
+|                             |  |                       |  |  |        +--| (1/26.8/54)
+|                             |  |                       |  |  |           |  +--Rattus_leucopus_sample1
+|                             |  |                       |  |  |           +--| (1/16.7/41.4)
+|                             |  |                       |  |  |              +--Rattus_praetor_sample1
+|                             |  |                       |  +--| (1/16.9/38.8)
+|                             |  |                       |     +--Kadarsanomys_sodyi_MZB-Sample
+|                             |  |                    +--| (1/39.9/50.2)
+|                             |  |                    |  |  +--Bandicota_indica_ABTC119185
+|                             |  |                    |  +--| (1/75.9/78.7)
+|                             |  |                    |     +--Nesokia_indica_ABTC117074
+|                             |  |                 +--| (1/55.5/60.9)
+|                             |  |                 |  |                    +--Genus_sp-nov_NMVZ21816
+|                             |  |                 |  |                 +--| (1/9.32/34.8)
+|                             |  |                 |  |                 |  |     +--Taeromys_celebensis_NMVZ20637
+|                             |  |                 |  |                 |  |  +--| (1/24.8/39.2)
+|                             |  |                 |  |                 |  |  |  +--Paruromys_dominator_JAE4870
+|                             |  |                 |  |                 |  +--| (1/17.8/44.3)
+|                             |  |                 |  |                 |     |  +--Lenomys_meyeri_LSUMZ39079
+|                             |  |                 |  |                 |     +--| (1/14.6/38)
+|                             |  |                 |  |                 |        +--Eropeplus_canus_NMVZ21733
+|                             |  |                 |  |              +--| (1/15.9/48.3)
+|                             |  |                 |  |              |  |     +--Taeromys_punicans_MVZ225815
+|                             |  |                 |  |              |  |  +--| (1/71/79.3)
+|                             |  |                 |  |              |  |  |  +--Taeromys_callitrichus_LSUMZ37153
+|                             |  |                 |  |              |  +--| (1/41.6/57.8)
+|                             |  |                 |  |              |     |  +--Taeromys_taerae_LSUMZ39224
+|                             |  |                 |  |              |     +--| (1/47.4/57.4)
+|                             |  |                 |  |              |        +--Taeromys_hamatus_NMVZ63317
+|                             |  |                 |  |           +--| (1/13/36.5)
+|                             |  |                 |  |           |  |     +--Bunomys_chrysocomus_JAE4867
+|                             |  |                 |  |           |  |  +--| (1/30.3/47.9)
+|                             |  |                 |  |           |  |  |  +--Bunomys_torajae_NMVZ21736
+|                             |  |                 |  |           |  +--| (1/31.1/45)
+|                             |  |                 |  |           |     +--Bunomys_andrewsi_sample1
+|                             |  |                 |  |        +--| (1/9.67/40.8)
+|                             |  |                 |  |        |  +--Halmaheramys_bokimekot_33262-WD225
+|                             |  |                 |  |     +--| (0.99/5.01/38)
+|                             |  |                 |  |     |  +--Papagomys_armandvillei_WAMM32592
+|                             |  |                 |  |  +--| (1/15.5/41.3)
+|                             |  |                 |  |  |  +--Bullimus_bagobus_JAE1712
+|                             |  |                 |  +--| (1/26.3/45.7)
+|                             |  |                 |     |  +--Sundamys_annandalei_YS118
+|                             |  |                 |     +--| (1/57.3/65.1)
+|                             |  |                 |        +--Sundamys_muelleri_JAE1283
+|                             |  |              +--| (1/69.4/67.7)
+|                             |  |              |  |    +--Berylmys_bowersi_ABTC116431
+|                             |  |              |  +----| (1/88.4/92.6)
+|                             |  |              |       +--Berylmys_mackenziei_ABTC116402
+|                             |  |           +--| (1/32.5/35.4)
+|                             |  |           |  |  +----Saxatilomys_paulinae_ABTC116266
+|                             |  |           |  +--| (1/70.5/61)
+|                             |  |           |     |           +--Niviventer_lepturus_JAE4746
+|                             |  |           |     |        +--| (1/77/70.2)
+|                             |  |           |     |        |  |  +--Niviventer_bukit_LSUMZ38136
+|                             |  |           |     |        |  +--| (1/91/92.6)
+|                             |  |           |     |        |     +--Niviventer_rapit_LSUMZ38196
+|                             |  |           |     |     +--| (1/43.1/41.8)
+|                             |  |           |     |     |  +--Anonymomys_mindorensis_FMNH2222010
+|                             |  |           |     |  +--| (1/49.1/46)
+|                             |  |           |     |  |  +---Leopoldomys_sabanus_Z25191
+|                             |  |           |     +--| (1/50.8/48.1)
+|                             |  |           |        |  +--Margaretamys_parvus_NMVZ21833
+|                             |  |           |        +--| (1/80.2/79.3)
+|                             |  |           |           +--Margaretamys_christinae_TMar1
+|                             |  |        +--| (1/71/63.4)
+|                             |  |        |  |        +--Paucidentomys_vermidax_Z21914
+|                             |  |        |  |     +--| (1/30.2/39.8)
+|                             |  |        |  |     |  +--Echiothrix_centrosa_Z27993
+|                             |  |        |  |  +--| (1/25.6/44.9)
+|                             |  |        |  |  |  |  +--Tateomys_rhinogradoides_Z21785
+|                             |  |        |  |  |  +--| (1/58.6/66.6)
+|                             |  |        |  |  |     |  +--Tateomys_macrocercus_Z21834
+|                             |  |        |  |  |     +--| (0.99/29.3/37.5)
+|                             |  |        |  |  |        +--Melasmothrix_naso_Z21808
+|                             |  |        |  +--| (1/55.2/60.4)
+|                             |  |        |     |         +--Waiomys_mamasae_Z20624
+|                             |  |        |     |     +---| (1/87.4/84.1)
+|                             |  |        |     |     |   +--Gracilimus_radix_Z08508
+|                             |  |        |     |  +--| (1/18.6/31.8)
+|                             |  |        |     |  |  +---Sommeromys_macrorhinos_Z21740
+|                             |  |        |     +--| (1/17/33.5)
+|                             |  |        |        +--Hyorhinomys_stuempkei_JAE4661
+|                             |  |  +-----| (1/78.5/67)
+|                             |  |  |     |  +----Maxomys_surifer_JAE3632
+|                             |  |  |     +--| (1/79.2/67)
+|                             |  |  |        |     +--Crunomys_melanius_KU168558
+|                             |  |  |        |  +--| (1/88.1/86.7)
+|                             |  |  |        |  |  +--Crunomys_celebensis_Z21894
+|                             |  |  |        +--| (1/65.2/56.4)
+|                             |  |  |           +---Maxomys_musschenbroekii_sample1
+|                             |  +--| (1/38.2/39.1)
+|                             |     |               +--Phloeomys_cumingi_FMNH198472
+|                             |     |        +------| (1/93.9/92.8)
+|                             |     |        |      +--Phloeomys_pallidus_JEC43
+|                             |     |   +----| (1/83.5/64.3)
+|                             |     |   |    |      +--Carpomys_melanurus_FMNH198723
+|                             |     |   |    |  +---| (1/90.1/76.3)
+|                             |     |   |    |  |   +---Musseromys_anacuao_FMNH209523
+|                             |     |   |    +--| (1/72.6/51.8)
+|                             |     |   |       |  +----Crateromys_heaneyi_KU165014
+|                             |     |   |       +--| (1/82.1/65)
+|                             |     |   |          +----Batomys_russatus_KU165776
+|                             |     +---| (1/73.6/52.7)
+|                             |         |       +-------------------------Lophuromys_woosnami_LSUMZ37793
+|                             |         +-------| (1/84.3/63.6)
+|                             |                 +------------------------Lophiomys_imhausi_UM5152
+|                          +--| (1/40.4/42.2)
+|                          |  |               +---Otomys_tropicalis_LSUMZ37841
+|                          |  |        +------| (1/92/85.7)
+|                          |  |        |      +--Otomys_denti_LSUMZ37840
+|                          |  |     +--| (1/61.7/50.2)
+|                          |  |     |  |                    +---Lemniscomys_striatus_TCD4711
+|                          |  |     |  |                 +--| (1/69.4/60.3)
+|                          |  |     |  |                 |  |  +--Arvicanthus_niloticus_MNHN1999201
+|                          |  |     |  |                 |  +--| (1/83.3/78.8)
+|                          |  |     |  |                 |     +--Arvicanthus_neumanni_FMNH158037
+|                          |  |     |  |              +--| (1/45.6/42.8)
+|                          |  |     |  |              |  |     +--Pelomys_minor_FMNH219213
+|                          |  |     |  |              |  |  +--| (1/73.6/65.5)
+|                          |  |     |  |              |  |  |  +--Pelomys_isseli_FMNH137886
+|                          |  |     |  |              |  +--| (1/65.4/58.6)
+|                          |  |     |  |              |     +--Mylomys_dybowskii_MNHN1997072
+|                          |  |     |  |           +--| (1/73.6/64.6)
+|                          |  |     |  |           |  +-----Rhabdomys_pumilio_MNHN1995065
+|                          |  |     |  |        +--| (1/30.9/40.2)
+|                          |  |     |  |        |  |      +--Dasymys_montanus_FMNH144389
+|                          |  |     |  |        |  +------| (1/93.8/96)
+|                          |  |     |  |        |         +--Dasymys_incomtus_LSUMZ37702
+|                          |  |     |  |     +--| (1/15.4/37.1)
+|                          |  |     |  |     |  |           +------Grammomys_dryas_LSUMZ37716
+|                          |  |     |  |     |  |        +--| (1/40.8/44.3)
+|                          |  |     |  |     |  |        |  |  +----Thamnomys_venustus_LSUMZ37935
+|                          |  |     |  |     |  |        |  +--| (1/60.3/56)
+|                          |  |     |  |     |  |        |     +---Thamnomys_kempi_TCD4437
+|                          |  |     |  |     |  |     +--| (0.92/15.5/34.5)
+|                          |  |     |  |     |  |     |  +------Thallomys_paedulcus_FMNH158089
+|                          |  |     |  |     |  |  +--| (1/25.9/40)
+|                          |  |     |  |     |  |  |  |  +----Aethomys_nyikae_FMNH196708
+|                          |  |     |  |     |  |  |  +--| (1/73.2/64.9)
+|                          |  |     |  |     |  |  |     +----Aethomys_hindei_MVZ196257
+|                          |  |     |  |     |  +--| (1/18/39.2)
+|                          |  |     |  |     |     +-----Micaelemys_namaquensis_MNHN1987009
+|                          |  |     |  |  +--| (1/15.4/33.6)
+|                          |  |     |  |  |  |  +--------Hybomys_planifrons_R24117
+|                          |  |     |  |  |  +--| (1/39.1/42.8)
+|                          |  |     |  |  |     |     +---Stochomys_longicaudatus_MNHN1999459
+|                          |  |     |  |  |     |  +--| (1/68.6/58.5)
+|                          |  |     |  |  |     |  |  +---Dephomys_defua_MNHNR24062
+|                          |  |     |  |  |     +--| (1/70.1/58.8)
+|                          |  |     |  |  |        |      +--Hybomys_univittatus_TCD4026
+|                          |  |     |  |  |        +------| (1/92.4/94.5)
+|                          |  |     |  |  |               +--Hybomys_lunaris_LSUMZ37734
+|                          |  |     |  +--| (1/58.6/53.2)
+|                          |  |     |     +------Oenomys_hypoxanthus_LSUMZ37838
+|                          |  |  +--| (1/53.9/47.1)
+|                          |  |  |  +---------Pithecheir_melanurus_LSUMZ38198
+|                          |  +--| (1/31.6/38.1)
+|                          |     +---------------Vandeleuria_oleracea_ABTC116404
+|                       +--| (1/40.4/40.1)
+|                       |  |  +-----------Malacomys_longipes_TCD4253
+|                       |  +--| (1/32.8/37.9)
+|                       |     +-----------------Apodemus_sylvaticus_SMG3823
+|                 +-----| (1/84.3/74)
+|                 |     |               +---Myomyscus_verreauxii_MNHN1999102
+|                 |     |            +--| (1/62.4/54.8)
+|                 |     |            |  |  +--Zelotomys_woosnami_TTU-M115260
+|                 |     |            |  +--| (1/68.9/60.6)
+|                 |     |            |     +--Colomys_goslingi_TCD4175
+|                 |     |         +--| (1/37.8/39.5)
+|                 |     |         |  +----Mastomys_natalensis_T4162
+|                 |     |      +--| (1/53.3/48.6)
+|                 |     |      |  |  +--Praomys_jacksoni_REC31
+|                 |     |      |  +--| (1/80.3/75.1)
+|                 |     |      |     +--Praomys_degraaffi_TCD4312
+|                 |     +------| (1/86/78.3)
+|                 |            |     +--Hylomyscus_stella_LSUMZ37742
+|                 |            |  +--| (1/75.9/64)
+|                 |            |  |  +--Hylomyscus_vulcanorum_TCD4382
+|                 |            +--| (1/68.8/58.8)
+|                 |               +----Heimyscus_fumosus_FMNH167810
+|              +--| (1/37.7/38.9)
+|              |  +--------Mus_pahari_10460X1
+|           +--| (1/36.1/41.7)
+|           |  |     +--Mus_musculoides_LSUMZ37820
+|           |  +-----| (1/92.7/87.7)
+|           |        +--Mus_minutoides_10460X2
+|        +--| (1/78.8/72.8)
+|        |  +-----Mus_platythrix_10460X13
+|     +--| (1/77.3/78.3)
+|     |  |     +--Mus_cookii_10460X3
+|     |  |  +--| (1/61.7/58.2)
+|     |  |  |  +--Mus_cervicolor_10460X10
+|     |  +--| (1/58.4/51.8)
+|     |     +--Mus_caroli_10460X9
+|  +--| (1/60.4/66.6)
+|  |  |  +--Mus_spretus_10460X4
+|  |  +--| (1/37.6/45.9)
+|  |     |  +--Mus_spicilegus_10460X11
+|  |     +--| (1/62.5/65.7)
+|  |        +--Mus_macedonicus_10460X12
++--| (1/60.9/65)
+|  |     +--Mus_musculus-reference_10460X5
+|  |  +--| (1/49.7/55.7)
+|  |  |  +--Mus_musculus-musculus_10460X14
+|  +--| (1/49.2/65.7)
+|     +--Mus_musculus-castaneus_10460X7
+|
++--Mus_musculus-domesticus_10460X15
+
+Tree in newick format:
+
+(mm10:0.0005367780,(((((((((((((((((((((Zyzomys_pedunculatus_Z34925:0.0038743210,Zyzomys_woodwardi_WAMM21724:0.0037556179)1/36.5/44:0.0008087317,((Zyzomys_palatalis_ABTC30744:0.0025697304,Zyzomys_argurus_ABTC61630:0.0023504704)1/51.3/57.1:0.0012421566,Zyzomys_maini_ABTC07900:0.0033455409)1/47.1/54.9:0.0012781915)1/64.6/72.8:0.0043444645,(((((((Pseudomys_oralis_RAT7:0.0043607066,(Pseudomys_shortridgei_Z25113:0.0017483563,Pseudomys_desertor_ABTC41464:0.0013584927)1/72.7/81:0.0035953500)1/26.8/45.7:0.0009522025,(((Pseudomys_higginsi_UC1421:0.0035417438,(((Pseudomys_bolami_ABTC107389:0.0016567886,Pseudomys_novaehollandiae_ABTC08140:0.0017317782)1/27.2/38.2:0.0002463905,Pseudomys_delicatulus_U1509:0.0019244935)1/38.3/51.3:0.0007553182,Pseudomys_hermannsburgensis_ABTC08067:0.0024547041)1/50.6/65.5:0.0016142970)1/25/43.1:0.0005640762,Mastacomys_fuscus_M13957:0.0038803025)1/20.9/40.3:0.0005412048,Pseudomys_australis_M25541:0.0040629807)1/19.7/45.2:0.0008827966)1/8.64/40.3:0.0003108648,(Pseudomys_nanus_U1448:0.0017839255,Pseudomys_gracilicaudatus_ABTC08163:0.0019596221)1/75.6/82.9:0.0050034999)1/10.9/37.1:0.0004467710,(Pseudomys_fumeus_ABTC08168:0.0047489853,(Pseudomys_apodemoides_M16672:0.0019242863,Pseudomys_albocinereus_WAMM18855:0.0020151711)1/74.9/81.3:0.0037190742)1/32/49.4:0.0010808741)1/17.5/41.5:0.0007711408,Pseudomys_occidentalis_ABTC08043:0.0055033290)1/24.7/45.8:0.0009236622,(((((Notomys_alexis_U1308:0.0013059423,Notomys_aquilo_M-32455:0.0020553089)1/23.8/38.6:0.0002852233,Notomys_fuscus_M22830:0.0018499834)1/22.4/38.8:0.0001879804,Notomys_mitchellii_M21518:0.0023336096)1/64.5/72.3:0.0030109474,Notomys_cervinus_M22857:0.0043030947)1/43.3/56.3:0.0014458216,(((Pseudomys_patrius_JM10865:0.0024616466,Pseudomys_johnsoni_ABTC08053:0.0016463094)1/45.3/55.4:0.0009822653,Pseudomys_chapmani_WAMM29440:0.0037794179)1/30.4/39.9:0.0005087503,Pseudomys_calabyi_U4324:0.0034639667)1/65.6/75.2:0.0037278212)1/22.1/39.8:0.0006315680)1/45.2/57.7:0.0022299396,(Leggadina_lakedownensis_WAMM21623:0.0017178208,Leggadina_forresti_WAMM62323:0.0018328124)1/88.2/92.1:0.0098021855)1/17.1/34.2:0.0003551714)1/31.9/44.6:0.0009872411,(((Solomys_salebrosus_ABTC64864:0.0037853465,Melomys_rufescens_ABTC44798:0.0038086055)1/70.1/73.9:0.0038653292,(Uromys_sp-nov_YS380:0.0014347578,Uromys_caudimaculatus_DT10Uc01:0.0013223212)1/82.4/87.5:0.0048686540)1/34/44.8:0.0009398257,(((Mesembriomys_macrurus_ABTC7337:0.0028582344,Mesembriomys_gouldii_ABTC7449:0.0026300617)1/68.1/69.5:0.0027736021,(Conilurus_penicillatus_M14056:0.0045210999,Conilurus_albipes_NMV-c7585:0.0038548849)1/39.8/44.4:0.0007349080)1/44.2/50.2:0.0012474516,(Leporillus_conditor_ABTC13335:0.0043471062,Leporillus_apicalis_C90:0.0038174377)1/34.3/54:0.0011460784)1/52.2/61.9:0.0026343118)1/30.9/43.6:0.0010668388)1/52.2/55.7:0.0027229220,(((Paraleptomys_wilhelmina_H126-ABTC133716:0.0047015686,(Leptomys_elegans_ABTC45741:0.0059159769,Mirzamys_louiseae_ABTC133754:0.0041276421)1/27.1/40.1:0.0004894999)1/18.6/40.2:0.0003827755,(Xeromys_myoides_ABTC30709:0.0071493877,(Pseudohydromys_pumehanae_ABTC43920:0.0030971964,Microhydromys_richardsoni_ANWCM35851:0.0046322059)1/58.8/64.1:0.0016166956)1/37.4/45.8:0.0010319947)1/24.7/42.6:0.0005645904,(Crossomys_moncktoni_ABTC46614:0.0027295767,((Hydromys_sp-nov_YS391:0.0006566916,Hydromys_chrysogaster_Z5248:0.0012843169)1/47.7/53.2:0.0008866317,Parahydromys_asper_ABTC45798:0.0013911045)1/70.7/75.5:0.0025863751)1/70.2/74.2:0.0033520977)1/70.6/71.2:0.0048290505)1/61.5/61.2:0.0044834591,(((Pogonomelomys_mayeri_AMM21849:0.0078011888,Abeomelomys_sevia_KUM161018:0.0072609845)1/65.3/61.5:0.0030300632,Mallomys_rothschildi_ABTC47402:0.0079294262)1/38/44.8:0.0009692818,(Xenuromys_barbatus_ABTC129204:0.0088827813,Mammelomys_lanosus_ABTC47208:0.0107233372)1/65.6/60.8:0.0033726026)1/57.2/57.8:0.0030116005)1/19.1/32.5:0.0005715976,Coccymys_ruemmleri_ABTC49489:0.0136096775)1/28.1/39.2:0.0011161660,(((((Hyomys_goliath_ABTC42697:0.0108822927,Pogonomys_macrourus_ABTC43144:0.0134999937)1/26.9/39.3:0.0007981448,Chiruromys_vates_ABTC43096:0.0149692734)1/22.1/38.8:0.0006434013,Macruromys_major_ABTC43909:0.0104171046)1/12.6/39.1:0.0002822476,Lorentzimys_nouhuysi_ABTC-46314:0.0180834852)1/9.99/31.6:0.0001800025,Anisomys_imitator_ABTC45107:0.0097689840)1/13.9/41.1:0.0002617488)1/32.7/42:0.0010990266,(Apomys_lubangensis_JAE169:0.0143586427,(((Chrotomys_mindorensis_JAE520:0.0012270136,Chrotomys_whiteheadi_KU168311:0.0010051686)1/90.1/91.8:0.0087998820,Rhynchomys_isarogensis_JAE2195:0.0078000141)1/40.6/39.1:0.0007414662,Archboldomys_luzonensis_EAR1826:0.0083378265)1/63.6/59.3:0.0024138833)1/75.4/65.9:0.0064826087)1/46/45.4:0.0022223779,Haeromys_minahassae_JAE4996:0.0180253260)1/60.7/52.5:0.0041330183,Chiropodomys_gliroides_Z25153:0.0225386686)1/63.7/53.9:0.0060717051,((((((((((rnor6:0.0062477797,(Rattus_hoffmanni_LSUMZ39187:0.0027203210,Rattus_argentiventer_LSUMZ38199:0.0026542223)1/46.7/62.5:0.0014712333)1/20.8/38.2:0.0004758312,Rattus_exulans_sample1:0.0059435198)1/32.6/50.9:0.0013503738,(((Tarsomys_apoensis_KU167148:0.0031018694,Limnomys_sibuanus_FMNH147948:0.0033070267)1/56.9/64.4:0.0017937583,(Rattus_xanthurus_LSUMZ39196:0.0021061989,(Rattus_morotaiensis_ASAM29:0.0020572386,((((Rattus_colletti_RAT25:0.0004461914,Rattus_villosissimus_sample1:0.0010643528)1/48.5/53.2:0.0012764554,Rattus_tunneyi_RAT130:0.0020661442)0.93/18.1/32:0.0002118330,Rattus_lutreolus_sample2:0.0021624100)1/23.5/41.8:0.0005227045,(Rattus_leucopus_sample1:0.0021402114,Rattus_praetor_sample1:0.0019791933)1/16.7/41.4:0.0004171824)1/26.8/54:0.0004648274)1/42.1/48.9:0.0010096411)1/42.2/57.3:0.0013784118)1/21.7/41.3:0.0006447653,Kadarsanomys_sodyi_MZB-Sample:0.0067089312)1/16.9/38.8:0.0005282682)1/29.8/46.4:0.0012145577,(Bandicota_indica_ABTC119185:0.0029725713,Nesokia_indica_ABTC117074:0.0027353192)1/75.9/78.7:0.0048762279)1/39.9/50.2:0.0020398929,(((((((Genus_sp-nov_NMVZ21816:0.0041368027,((Taeromys_celebensis_NMVZ20637:0.0031680535,Paruromys_dominator_JAE4870:0.0031818256)1/24.8/39.2:0.0007440430,(Lenomys_meyeri_LSUMZ39079:0.0031487849,Eropeplus_canus_NMVZ21733:0.0021330518)1/14.6/38:0.0002548202)1/17.8/44.3:0.0004967827)1/9.32/34.8:0.0001856960,((Taeromys_punicans_MVZ225815:0.0001004568,Taeromys_callitrichus_LSUMZ37153:0.0006671382)1/71/79.3:0.0024310250,(Taeromys_taerae_LSUMZ39224:0.0021270936,Taeromys_hamatus_NMVZ63317:0.0023884343)1/47.4/57.4:0.0010859255)1/41.6/57.8:0.0013606553)1/15.9/48.3:0.0005610963,((Bunomys_chrysocomus_JAE4867:0.0029576539,Bunomys_torajae_NMVZ21736:0.0026067981)1/30.3/47.9:0.0002307605,Bunomys_andrewsi_sample1:0.0024184810)1/31.1/45:0.0016038969)1/13/36.5:0.0003539128,Halmaheramys_bokimekot_33262-WD225:0.0045253690)1/9.67/40.8:0.0002629691,Papagomys_armandvillei_WAMM32592:0.0053033267)0.99/5.01/38:0.0000937968,Bullimus_bagobus_JAE1712:0.0066932809)1/15.5/41.3:0.0005413644,(Sundamys_annandalei_YS118:0.0036901421,Sundamys_muelleri_JAE1283:0.0042781175)1/57.3/65.1:0.0029325836)1/26.3/45.7:0.0009819402)1/55.5/60.9:0.0038925108,(Berylmys_bowersi_ABTC116431:0.0005237383,Berylmys_mackenziei_ABTC116402:0.0009305764)1/88.4/92.6:0.0112975001)1/69.4/67.7:0.0068951164,(Saxatilomys_paulinae_ABTC116266:0.0113366902,((((Niviventer_lepturus_JAE4746:0.0061185399,(Niviventer_bukit_LSUMZ38136:0.0003570663,Niviventer_rapit_LSUMZ38196:0.0005130032)1/91/92.6:0.0059364247)1/77/70.2:0.0045631418,Anonymomys_mindorensis_FMNH2222010:0.0076724040)1/43.1/41.8:0.0011558859,Leopoldomys_sabanus_Z25191:0.0091662272)1/49.1/46:0.0015607110,(Margaretamys_parvus_NMVZ21833:0.0034383744,Margaretamys_christinae_TMar1:0.0039306781)1/80.2/79.3:0.0041859700)1/50.8/48.1:0.0016998387)1/70.5/61:0.0045144401)1/32.5/35.4:0.0012185300,(((Paucidentomys_vermidax_Z21914:0.0068936461,Echiothrix_centrosa_Z27993:0.0069342428)1/30.2/39.8:0.0007138415,(Tateomys_rhinogradoides_Z21785:0.0041061803,(Tateomys_macrocercus_Z21834:0.0041588445,Melasmothrix_naso_Z21808:0.0040022439)0.99/29.3/37.5:0.0003639913)1/58.6/66.6:0.0022991049)1/25.6/44.9:0.0006501589,(((Waiomys_mamasae_Z20624:0.0044314480,Gracilimus_radix_Z08508:0.0048001596)1/87.4/84.1:0.0077822949,Sommeromys_macrorhinos_Z21740:0.0083066610)1/18.6/31.8:0.0002661809,Hyorhinomys_stuempkei_JAE4661:0.0076502958)1/17/33.5:0.0002650824)1/55.2/60.4:0.0025835888)1/71/63.4:0.0077549571,(Maxomys_surifer_JAE3632:0.0107861998,((Crunomys_melanius_KU168558:0.0028425849,Crunomys_celebensis_Z21894:0.0032438761)1/88.1/86.7:0.0074793445,Maxomys_musschenbroekii_sample1:0.0085548174)1/65.2/56.4:0.0033647753)1/79.2/67:0.0070785964)1/78.5/67:0.0125738275,(((Phloeomys_cumingi_FMNH198472:0.0023651357,Phloeomys_pallidus_JEC43:0.0024374546)1/93.9/92.8:0.0142663279,((Carpomys_melanurus_FMNH198723:0.0076866646,Musseromys_anacuao_FMNH209523:0.0080289560)1/90.1/76.3:0.0084194229,(Crateromys_heaneyi_KU165014:0.0109206622,Batomys_russatus_KU165776:0.0111368622)1/82.1/65:0.0057359226)1/72.6/51.8:0.0039319856)1/83.5/64.3:0.0099966225,(Lophuromys_woosnami_LSUMZ37793:0.0519312839,Lophiomys_imhausi_UM5152:0.0486359035)1/84.3/63.6:0.0167536138)1/73.6/52.7:0.0093136829)1/38.2/39.1:0.0020518270)1/20.9/35.2:0.0009914388,((((Otomys_tropicalis_LSUMZ37841:0.0080334716,Otomys_denti_LSUMZ37840:0.0057501832)1/92/85.7:0.0141572364,(((((((Lemniscomys_striatus_TCD4711:0.0079037451,(Arvicanthus_niloticus_MNHN1999201:0.0027015037,Arvicanthus_neumanni_FMNH158037:0.0032943446)1/83.3/78.8:0.0047218327)1/69.4/60.3:0.0033116669,((Pelomys_minor_FMNH219213:0.0049417611,Pelomys_isseli_FMNH137886:0.0049592374)1/73.6/65.5:0.0026628346,Mylomys_dybowskii_MNHN1997072:0.0075948934)1/65.4/58.6:0.0025240292)1/45.6/42.8:0.0012881588,Rhabdomys_pumilio_MNHN1995065:0.0124894188)1/73.6/64.6:0.0056689972,(Dasymys_montanus_FMNH144389:0.0006246015,Dasymys_incomtus_LSUMZ37702:0.0007245139)1/93.8/96:0.0144335263)1/30.9/40.2:0.0012939206,((((Grammomys_dryas_LSUMZ37716:0.0152069156,(Thamnomys_venustus_LSUMZ37935:0.0103748491,Thamnomys_kempi_TCD4437:0.0086921204)1/60.3/56:0.0024088559)1/40.8/44.3:0.0016317849,Thallomys_paedulcus_FMNH158089:0.0155229352)0.92/15.5/34.5:0.0004383677,(Aethomys_nyikae_FMNH196708:0.0115435013,Aethomys_hindei_MVZ196257:0.0109448156)1/73.2/64.9:0.0051556803)1/25.9/40:0.0010686086,Micaelemys_namaquensis_MNHN1987009:0.0132706450)1/18/39.2:0.0006887194)1/15.4/37.1:0.0006711917,(Hybomys_planifrons_R24117:0.0176037251,((Stochomys_longicaudatus_MNHN1999459:0.0088949254,Dephomys_defua_MNHNR24062:0.0082926797)1/68.6/58.5:0.0027341815,(Hybomys_univittatus_TCD4026:0.0007162641,Hybomys_lunaris_LSUMZ37734:0.0005364728)1/92.4/94.5:0.0139001665)1/70.1/58.8:0.0042461129)1/39.1/42.8:0.0017201612)1/15.4/33.6:0.0005172306,Oenomys_hypoxanthus_LSUMZ37838:0.0153878196)1/58.6/53.2:0.0036334393)1/61.7/50.2:0.0036793507,Pithecheir_melanurus_LSUMZ38198:0.0203585953)1/53.9/47.1:0.0029921776,Vandeleuria_oleracea_ABTC116404:0.0328407991)1/31.6/38.1:0.0017334035)1/40.4/42.2:0.0028415573,(Malacomys_longipes_TCD4253:0.0248952049,Apodemus_sylvaticus_SMG3823:0.0350842788)1/32.8/37.9:0.0015965666)1/40.4/40.1:0.0019742045,((((Myomyscus_verreauxii_MNHN1999102:0.0089312369,(Zelotomys_woosnami_TTU-M115260:0.0067983242,Colomys_goslingi_TCD4175:0.0050460562)1/68.9/60.6:0.0028968869)1/62.4/54.8:0.0022945992,Mastomys_natalensis_T4162:0.0110411003)1/37.8/39.5:0.0010208207,(Praomys_jacksoni_REC31:0.0047518105,Praomys_degraaffi_TCD4312:0.0051159974)1/80.3/75.1:0.0057647010)1/53.3/48.6:0.0020603084,((Hylomyscus_stella_LSUMZ37742:0.0068786603,Hylomyscus_vulcanorum_TCD4382:0.0064172535)1/75.9/64:0.0034729602,Heimyscus_fumosus_FMNH167810:0.0100643004)1/68.8/58.8:0.0031547389)1/86/78.3:0.0144582197)1/84.3/74:0.0130994611,Mus_pahari_10460X1:0.0174988447)1/37.7/38.9:0.0014313125,(Mus_musculoides_LSUMZ37820:0.0047663284,Mus_minutoides_10460X2:0.0043443115)1/92.7/87.7:0.0134175625)1/36.1/41.7:0.0012761991,Mus_platythrix_10460X13:0.0128252757)1/78.8/72.8:0.0065525776,((Mus_cookii_10460X3:0.0041311186,Mus_cervicolor_10460X10:0.0046248938)1/61.7/58.2:0.0016132487,Mus_caroli_10460X9:0.0071864193)1/58.4/51.8:0.0018020223)1/77.3/78.3:0.0051192207,(Mus_spretus_10460X4:0.0032436255,(Mus_spicilegus_10460X11:0.0016518506,Mus_macedonicus_10460X12:0.0012425536)1/62.5/65.7:0.0017647510)1/37.6/45.9:0.0007029275)1/60.4/66.6:0.0021268280,((Mus_musculus-reference_10460X5:0.0002439642,Mus_musculus-musculus_10460X14:0.0003327071)1/49.7/55.7:0.0007795934,Mus_musculus-castaneus_10460X7:0.0005774817)1/49.2/65.7:0.0012485538)1/60.9/65:0.0011915121,Mus_musculus-domesticus_10460X15:0.0008710616);
+
+TIME STAMP
+----------
+
+Date and time: Fri Apr  8 08:40:25 2022
+Total CPU time used: 144.963358 seconds (0h:2m:24s)
+Total wall-clock time used: 10.6633033 seconds (0h:0m:10s)
+

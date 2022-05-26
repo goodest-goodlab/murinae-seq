@@ -1,0 +1,26 @@
+# This line is a comment. It will not be read by BAMM
+modeltype = speciationextinction
+treefile = full-coding-astral-iqtree-dating-anil-mmus-12.1.timetree.nwk
+runInfoFilename = run_info.txt
+# This line is also a comment and not read
+runMCMC = 1
+numberOfGenerations = 5000
+mcmcWriteFreq = 1000
+eventDataWriteFreq = 1000
+printFreq = 100
+acceptanceResetFreq = 1000
+useGlobalSamplingProbability = 1
+globalSamplingFraction = 0.81
+seed = 12345
+expectedNumberOfShifts = 1.0 # Another comment here
+lambdaInitPrior = 0.756832235307185
+lambdaShiftPrior = 0.0533400124605551
+muInitPrior = 0.756832235307185
+initialNumberEvents = 0
+initializeModel = 0
+lambdaInit0 = 1
+lambdaIsTimeVariablePrior = 1
+lambdaShift0 = 1
+localGlobalMoveRatio = 1
+muInit0 = 0
+segLength = 1

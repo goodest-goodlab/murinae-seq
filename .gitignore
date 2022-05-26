@@ -56,16 +56,18 @@ Targets/
 03-Alignments/scripts/etc/full-all-alnlens-200.csv
 03-Alignments/roycroft-alns/
 
-
 04-Phylo/full-coding-iqtree/
 04-Phylo/old/
 04-Phylo/reproductive-datasets/
 
 05-MolEvol/
 
-docs/data/all-samples_contig-match.txt
+docs/data/annotations/all-samples_contig-match.txt
+
 docs/data/06-cds-trim-stats.csv
-docs/data/count-ns.csv
+
+docs/data/assembly-stats/count-ns.csv
+
 docs/data/aln-stats/sample-hits-exons.csv
 docs/data/aln-stats/sample-segments-exonerate-f0-TEST.csv
 docs/data/aln-stats/sample-segments-exonerate-f175-TEST.csv
@@ -74,9 +76,9 @@ docs/data/aln-stats/sample-targets-exonerate-f150.csv
 docs/data/aln-stats/sample-segments-exonerate-f175.csv
 docs/data/aln-stats/sample-targets-exonerate-f175.csv
 
-docs/data/rates/full-coding-mg94-local.csv.gz
-docs/data/rates/full-coding-mg94-local.csv
-docs/data/rates/full-coding-slac.csv.gz
+docs/data/substitution-rates/full-coding-mg94-local.csv.gz
+docs/data/substitution-rates/full-coding-mg94-local.csv
+docs/data/substitution-rates/full-coding-slac.csv.gz
 
 docs/data/noncoding-aln-stats/full-all-alnlens-200.csv
 docs/data/noncoding-aln-stats/full-all-alnlens-500.csv
@@ -86,7 +88,6 @@ docs/data/noncoding-aln-stats/full-all-seqlens-500.csv
 docs/data/noncoding-aln-stats/mm10-exons-lens-200.csv
 docs/data/noncoding-aln-stats/mm10-exons-lens-500.csv
 docs/data/noncoding-aln-stats/mm10-exons-lens-noflank.csv
-
 docs/data/noncoding-aln-stats/reproductive-all-alnlens-200.csv
 docs/data/noncoding-aln-stats/reproductive-all-alnlens-500.csv
 docs/data/noncoding-aln-stats/reproductive-all-seqlens-200.csv
@@ -95,12 +96,17 @@ docs/data/noncoding-aln-stats/rnor6-exons-lens-200.csv
 docs/data/noncoding-aln-stats/rnor6-exons-lens-500.csv
 docs/data/noncoding-aln-stats/rnor6-exons-lens-noflank.csv
 
-docs/data/trees/loci.treefile
-docs/data/trees/loci-labeled.treefile
-docs/data/trees/astral-cf-reps/
-docs/data/trees/concat-cf-reps/
+docs/data/trees/astral/concord-rooted/cf-reps/
+docs/data/trees/astral/concord-rooted-bl/cf-reps/
+docs/data/trees/astral/concord-rooted-bl/topo-counts.tab
+docs/data/trees/astral/concord-rooted-bl/full_coding_iqtree_astral_rooted_bl.cf.tree.nex
+docs/data/trees/concat/concat-cf-reps/
 
-docs/data/wgs-ps-comps/
+docs/data/trees/old/astral-cf-reps/
+docs/data/trees/old/concord-astral-rooted/astral-cf-reps/
+docs/data/trees/old/concord-astral-rooted/full_coding_iqtree_astral.cf.tree.nex
+
+docs/data/wgs-ps-comps/mm10-cds-windows.csv
 
 docs/scripts/generators/tmp/
 

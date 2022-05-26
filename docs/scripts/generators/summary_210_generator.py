@@ -32,7 +32,7 @@ html_template = """
                     <!-- <p><h4><a href="full_mapping_stats.html">Mapping with BWA to Mouse and Rat reference genomes</a></h4></p> -->
                     <p><h4><a href="mouse_rat_transcripts.html">Transcript selection from mouse and rat references</a></h4></p>
                     <p><h4><a href="aln_stats.html">CDS alignment stats</a></h4></p>
-                    <p><h4>Species tree, discordance, and substitution rates: <a href="trees-astral.html">ASTRAL</a></h4></p>
+                    <p><h4><a href="trees.html">Phylogeny (ASTRAL)</a></h4></p>
                     <p><h4>Convergence: <a href="convergence-astral.html">ASTRAL</a></h4></p>
                     <p><h4>Multi-nucleotide substitutions: <a href="mns-astral.html">ASTRAL</a></h4></p>
                     <p><h4>Tree pruning: <a href="prune-astral.html">ASTRAL</a></h4></p>
@@ -77,9 +77,9 @@ footer = RC.readFooter();
 
 page_title = "Summary of 210 exome samples"
 
-infilename = "../../data/exome-stats.csv";
+infilename = "../../data/assembly-stats/exome-stats.csv";
 outfilename = "../../" + pagefile;
-csvdatafile = "data/exome-stats.csv"
+csvdatafile = "data/assembly-stats/exome-stats.csv"
 
 to_include = ['Species', 'Sample ID', 'Sequencing platform', 'Batch']#, 'Total reads', 'Avg read len', 'Total bases']
 

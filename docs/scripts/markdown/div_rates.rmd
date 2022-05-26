@@ -1,0 +1,196 @@
+---
+title: "Murine divergence times & diversification rates"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(cowplot)
+library(ggbeeswarm)
+library(dplyr)
+library(kableExtra)
+library(tidyr)
+library(ggtree)
+library(phytools)
+library(phangorn)
+library(reshape2)
+library(ggExtra)
+library(ggrepel)
+library(vroom)
+library(ggdist)
+library(stringr)
+library(ggsignif)
+library(RPANDA)
+library(treeio)
+source("C:/bin/core/r/design.r")
+source("C:/bin/core/r/get_tree_info.r")
+#source("C:/Users/grt814/bin/core/corelib/design.r")
+#source("C:/Users/grt814/bin/core/get_tree_info.r")
+
+#htmltools::includeHTML("../html-chunks/rmd_nav.html")
+```
+
+[< Back to summary](summary_210.html)
+
+# Full coding species tree
+
+```{r read, out.width="75%", fig.align = "center", warning=FALSE}
+# This chunk handles all of the main inputs and reads the tree
+
+save_tree_fig = F
+# Meta options. Comment tree_type when running form generator
+
+cat("188 species targeted capture to mouse exons assembled with SPADES.\n")
+cat("11,775 coding loci aligned with exonerate+mafft\n")
+cat("Gene trees inferred with IQtree.\n")
+# Data summary
+
+
+cat("Species tree inferred with ASTRAL.\n")
+cat("Branch lengths estimated by ASTRAL.\n")
+tree_file = "../../data/div-time/full-coding-astral-iqtree-dating-anil-mmus-12.1.timetree.nex"
+
+
+col_file = "../../data/trees/astral-colonization-branches.txt"
+morpho_file = "../../data/trees/astral-moprho-ou-shift-branches.txt"
+exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
+xmax = 31
+
+gt_file = "../../data/trees/loci-labeled.treefile"
+# The file containing the gene trees
+
+
+rodent_nex = read.beast(tree_file)
+rodent_tree = read.nexus(tree_file)
+tree_to_df_list = treeToDF(rodent_tree)
+tree_info = tree_to_df_list[["info"]]
+# Read the tree and parse with treetoDF
+
+# if(tree_type == "astral"){
+#   tree_info = tree_info %>% separate(label, c("tp", "astral", "gcf", "scf"), sep="/", remove=F)
+#   # Split the label by /. tp is my treeParse label.
+#   
+#   tree_info$astral[tree_info$node.type=="tip"] = NA
+#   # Fill in ASTRAL support as NA for the tips
+#   
+#   tree_info$astral = as.numeric(tree_info$astral)
+#   tree_info$gcf = as.numeric(tree_info$gcf)
+#   tree_info$scf = as.numeric(tree_info$scf)
+#   # Convert all supports to numeric
+#   
+# }
+
+
+```
+
+
+## Branches colored by gCF
+
+```{r species-tree-div-time, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=4)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+gcf_tree = ggtree(rodent_nex, size=0.8, ladderize=F) +
+  #scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  geom_label(aes(label=ifelse(date != 0, signif(date,2), '')), label.size=NA, fill="transparent", hjust=-0.1, vjust=-0.1) +
+  geom_range("CI_height", color=h, size=2, alpha=.5) +
+  theme(legend.position=c(0.05,0.9))
+print(gcf_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree-PARED-gcf50.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# gCF tree
+```
+
+
+
+```{r rpanda, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+
+res = spectR(rodent_tree)
+plot_spectR(res)
+
+res2 = BICompare(rodent_tree, 2)
+plot_BICompare(rodent_tree, res2)
+
+#res3 = JSDtree(rodent_tree)
+
+f.lamb<-function(t,y){y[1]*exp(y[2]*t)}
+f.mu<-function(t,y){y[1]}
+f.lamb.lin<-function(t,y){y[1]+y[2]*t}
+lamb_par_init<-c(0.05,0.01)
+mu_par_init<-c(0.005)
+tot_time = max(node.age(rodent_tree)$ages)
+res4 = fit_bd(rodent_tree,tot_time,f.lamb,f.mu,lamb_par_init,mu_par_init,f=188/600,expo.lamb=TRUE,cst.mu=TRUE)
+plot_fit_bd(res4,tot_time)
+
+
+plot_dtt(res4,tot_time,N0=600)
+
+
+
+
+
+
+
+f.lamb<-function(t,x,y){y[1]*exp(y[2]*x)}
+f.mu<-function(t,x,y){0}
+lamb_par_init<-c(0.10,0.01)
+mu_par_init<- c()
+res5 = fit_env(rodent_tree,InfTemp,tot_time,f.lamb,f.mu,lamb_par_init,mu_par_init,f=188/600,fix.mu=TRUE,dt=1e-3)
+plot_fit_env(res5,InfTemp,tot_time)
+
+
+
+library(RevGadgets)
+rdir = "C:/Users/Gregg/Downloads/RevBayes_Win_1.1.1/RevBayes_Win_1.1.1/"
+
+# specify the output files
+speciation_time_file <- paste(rdir, "output/rodents100_speciation_times.log", sep="")
+speciation_rate_file <- paste(rdir, "output/rodents100_speciation_rates.log", sep="")
+extinction_time_file <- paste(rdir, "output/rodents100_extinction_times.log", sep="")
+extinction_rate_file <- paste(rdir, "output/rodents100_extinction_rates.log", sep="")
+
+# read in and process rates
+rates <- processDivRates(speciation_time_log = speciation_time_file,
+                         speciation_rate_log = speciation_rate_file,
+                         extinction_time_log = extinction_time_file,
+                         extinction_rate_log = extinction_rate_file,
+                         burnin = 0.25,
+                         summary = "median")
+
+# plot rates through time
+p <- plotDivRates(rates) +
+        xlab("Millions of years ago") +
+        ylab("Rate per million years")
+print(p)
+#ggsave("EBD.png", p)
+
+
+
+```

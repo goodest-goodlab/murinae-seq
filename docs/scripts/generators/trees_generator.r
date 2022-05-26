@@ -1,20 +1,22 @@
 ############################################################
-# For rodent web, 01.20
+# For rodent web, 05.22
 # This generates the file "trees.html"
 ############################################################
 
 #options(nwarnings = 100000)
-tree_type = "astral"
+#tree_type = "astral"
 
-cat("Rendering trees-", tree_type, ".rmd/html\n", sep="")
+cat("Rendering trees.rmd/html\n", sep="")
 
-setwd("../generators/")
+#setwd("../generators/")
+library(here)
+setwd(here("docs", "scripts", "generators"))
 # Set the working directory.
 
-vroom_tmp_dir = "../generators/tmp/"
-cat(" -> Creating vroom tmp dir:", vroom_tmp_dir, "\n")
-dir.create(vroom_tmp_dir)
-Sys.setenv(VROOM_TEMP_PATH = vroom_tmp_dir)
+#vroom_tmp_dir = "../generators/tmp/"
+#cat(" -> Creating vroom tmp dir:", vroom_tmp_dir, "\n")
+#dir.create(vroom_tmp_dir)
+#Sys.setenv(VROOM_TEMP_PATH = vroom_tmp_dir)
 # Handle the vroom tmp directory
 
 Sys.setenv(RSTUDIO_PANDOC="C:/Program Files/RStudio/bin/pandoc/")
@@ -26,13 +28,13 @@ library(rmarkdown)
 output_dir = "../.."
 # Set the output directory to be the docs directory, two up
 
-output_file = paste("trees-", tree_type, ".html", sep="")
+output_file = paste("trees.html", sep="")
 
 render("../markdown/trees.rmd", output_dir = output_dir, output_file = output_file, params = list(output_dir = output_dir, output_file = output_file, tree_type = tree_type), quiet = TRUE)
 # Knit the html page
 
-f = list.files(vroom_tmp_dir, include.dirs = F, full.names = T, recursive = T)
-cat(" -> Removing vroom tmp files:", f, "\n")
+#f = list.files(vroom_tmp_dir, include.dirs = F, full.names = T, recursive = T)
+#cat(" -> Removing vroom tmp files:", f, "\n")
 #file.remove(f)
-unlink(vroom_tmp_dir, recursive=TRUE, force=TRUE)
+#unlink(vroom_tmp_dir, recursive=TRUE, force=TRUE)
 # Remove the vroom tmp directory
