@@ -1569,11 +1569,6 @@ write.table(tribe_props, file=tribe_sampling_file, row.names=F, quote=F)
 
 ###############
 
-```
-
-
-```{r bamm-prep, out.width="75%", fig.align = "center", warning=FALSE, eval=F}
-
 sample_taxo_data = subset(taxo_data, Exome==1)
 # Get the sampled species
 
@@ -1589,6 +1584,11 @@ div_prob = c("Coccymys ruemmleri", "Vandeleuria oleracea", "Anonymomys mindorens
 # Lists of samples with unclear taxonomy
 
 ###############
+
+```
+
+
+```{r bamm-prep, out.width="75%", fig.align = "center", warning=FALSE, eval=F}
 
 tribe_tree_file = here("docs", "data", "bamm", "full-coding-astral-timetree-tribe.tre")
 time_tree = read.nexus(dated_tree_file)
@@ -1749,10 +1749,57 @@ labeled_timetree_info = merge(labeled_timetree_info, tree_info_clades, by="clade
 labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
 # Re-sort the data frame by R node order after the merge so the trees still work
 
+labeled_timetree_info$depth = node.depth(labeled_timetree)
+
+#tips_to_drop = c(missing_samples, tribe_prob_full, "Paruromys_dominator_JAE4870", "Lophiomys_imhausi_UM5152", "Mus_musculus-castaneus_10460X7", "Mus_musculus-musculus_10460X14")
+tips_to_drop = c(missing_samples, tribe_prob_full)
+
+for(tip in tips_to_drop){
+  labeled_timetree_info = subset(labeled_timetree_info, label != tip)
+  labeled_timetree_info$clade = gsub(paste(";", tip, sep=""), "", labeled_timetree_info$clade)
+  labeled_timetree_info$clade = gsub(paste(tip, ";", sep=""), "", labeled_timetree_info$clade)
+  labeled_timetree_info$clade = gsub(tip, "", labeled_timetree_info$clade)
+}
+labeled_timetree_info = subset(labeled_timetree_info, clade != "")
+
 labeled_timetree$node.label = paste(labeled_timetree_info$label, "/", labeled_timetree_info$delta, sep="")
 
-labeled_tribe_timetree = drop.tip(labeled_timetree, c(missing_samples, tribe_prob_full))
+labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info[,'clade'],labeled_timetree_info[,'depth']),]
+labeled_timetree_info = labeled_timetree_info[!duplicated(labeled_timetree_info$clade),]
 
+labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
+labeled_tribetree = drop.tip(labeled_timetree, c(missing_samples, tribe_prob_full))
+tree_to_df_list = treeToDF(labeled_tribetree)
+labeled_tribetree_info = tree_to_df_list[["info"]]
+# Read the tree and parse with treetoDF
+
+labeled_tribetree_info = merge(select(labeled_timetree_info, clade, tp, delta), labeled_tribetree_info, by="clade")
+labeled_tribetree_info = labeled_tribetree_info[order(labeled_tribetree_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
+# for(i in 1:nrow(labeled_timetree_info)){
+#   if(!labeled_timetree_info[i,]$clade %in% labeled_tribetree_info$clade){
+#     print(labeled_timetree_info[i,]$clade)
+#   }
+# }
+
+
+
+speciation_tree = getMeanBranchLengthTree(best)
+tree_to_df_list = treeToDF(speciation_tree$phy)
+speciation_tree_info = tree_to_df_list[["info"]]
+
+speciation_tree_info = merge(select(labeled_tribetree_info, clade, tp, delta), speciation_tree_info, by="clade")
+speciation_tree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
+p = ggplot(speciation_tree_info, aes(x=delta, y=branch.length)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  bartheme()
+print(p)
 
 ############
 ############
@@ -1762,9 +1809,6 @@ labeled_tribe_timetree = drop.tip(labeled_timetree, c(missing_samples, tribe_pro
 ############
 
 
-
-
-speciation_tree = getMeanBranchLengthTree(best)
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 
