@@ -46,6 +46,7 @@ library(MCMCtreeR)
 library(here)
 library(stringr)
 library(BAMMtools)
+library(nlme)
 
 source(here("docs", "scripts", "lib", "design.r"))
 source(here("docs", "scripts", "lib", "get_tree_info.r"))
@@ -660,8 +661,10 @@ ggsave(fig_outfile, delta_tree, width=12, height=12, unit="in")
 
 ## Phylogenetic signal of delta (Pagel's lambda, Bloomberg K)
 
-```{r delta-phylosig, out.width="75%", fig.align = "center", warning=FALSE}
+```{r delta-phylosig-clades, out.width="75%", fig.align = "center", warning=FALSE}
 # Generally helpful: https://lukejharmon.github.io/pcm/chapter6_beyondbm/
+
+
 
 phylosig(tree2, tree2_tip_info$delta, test=T)
 # Bloomberg K
@@ -682,6 +685,69 @@ phylosig(tree2, tree2_tip_info$delta, method="lambda", test=T)
 ###############
 
 ```
+
+## Phylogenetic signal of delta (Pagel's lambda, Bloomberg K) for clades with high speciation rates (see below)
+
+### Rattini
+
+```{r delta-phylosig-rattini, out.width="50%", fig.align = "center", warning=FALSE}
+# Generally helpful: https://lukejharmon.github.io/pcm/chapter6_beyondbm/
+
+tree2_rattini = tree2
+tree2_rattini$tip.label = paste(tree2_rattini$tip.label, "/", subset(tree2_info, node.type == "tip")$delta, sep="")
+tree2_rattini$node.label = paste(tree2_rattini$node.label, "/", subset(tree2_info, node.type != "tip")$delta, sep="")
+# Add delta values to the labels of the tree with no tips
+
+tree2_rattini = extract.clade(tree2_rattini, tree2_info$node[tree2_info$tp=="<169>"])
+tree_to_df_list = treeToDF(tree2_rattini)
+tree2_rattini_info = tree_to_df_list[["info"]]
+# Get the subtree and parse to df
+
+tree2_rattini_info = tree2_rattini_info %>% separate(label, c("tp", "delta"), sep="/", remove=F)
+tree2_rattini_info$delta = as.numeric(tree2_rattini_info$delta)
+# Split the label by / to get the delta value
+
+tree2_rattini_tip_info = subset(tree2_rattini_info, node.type=="tip")
+# Get only the tip info for the tests
+
+phylosig(tree2_rattini, tree2_rattini_tip_info$delta, test=T)
+# Bloomberg K
+
+phylosig(tree2_rattini, tree2_rattini_tip_info$delta, method="lambda", test=T)
+#Pagel's lambda
+
+```
+
+### Hydromyini
+
+```{r delta-phylosig-hydromyini, out.width="50%", fig.align = "center", warning=FALSE}
+# Generally helpful: https://lukejharmon.github.io/pcm/chapter6_beyondbm/
+
+tree2_rattini = tree2
+tree2_rattini$tip.label = paste(tree2_rattini$tip.label, "/", subset(tree2_info, node.type == "tip")$delta, sep="")
+tree2_rattini$node.label = paste(tree2_rattini$node.label, "/", subset(tree2_info, node.type != "tip")$delta, sep="")
+# Add delta values to the labels of the tree with no tips
+
+tree2_rattini = extract.clade(tree2_rattini, tree2_info$node[tree2_info$tp=="<177>"])
+tree_to_df_list = treeToDF(tree2_rattini)
+tree2_rattini_info = tree_to_df_list[["info"]]
+# Get the subtree and parse to df
+
+tree2_rattini_info = tree2_rattini_info %>% separate(label, c("tp", "delta"), sep="/", remove=F)
+tree2_rattini_info$delta = as.numeric(tree2_rattini_info$delta)
+# Split the label by / to get the delta value
+
+tree2_rattini_tip_info = subset(tree2_rattini_info, node.type=="tip")
+# Get only the tip info for the tests
+
+phylosig(tree2_rattini, tree2_rattini_tip_info$delta, test=T)
+# Bloomberg K
+
+phylosig(tree2_rattini, tree2_rattini_tip_info$delta, method="lambda", test=T)
+#Pagel's lambda
+
+```
+
 
 ## Phylogenetic independent contrasts of delta
 
@@ -1734,25 +1800,38 @@ plotRateThroughTime(ed, intervalCol=corecol(numcol=1), avgCol=corecol(numcol=1),
 dev.off()
 
 ```
+## Speciation rates based on Tribe sampling and delta
+
 ```{r bamm-tribe-delta, out.width="50%", fig.align = "center", warning=FALSE}
 
 labeled_timetree_file = here("docs", "data", "trees", "astral", "iqtree-dating", "full-coding-astral-iqtree-dating-anil-mmus-12.1.timetree.nex")
 labeled_timetree = read.nexus(labeled_timetree_file)
 tree_to_df_list = treeToDF(labeled_timetree)
 labeled_timetree_info = tree_to_df_list[["info"]]
-# Read the tree and parse with treetoDF
+# Read the labeled time tree and parse with treetoDF
 
 tree_info_clades = select(tree_info, node, clade, tp, delta)
 names(tree_info_clades)[1] = "orig.node"
+# Select relevant columns from original tree df
 
 labeled_timetree_info = merge(labeled_timetree_info, tree_info_clades, by="clade")
+# Merge the original tree info with the time tree info to get the delta values
+
 labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
 # Re-sort the data frame by R node order after the merge so the trees still work
 
-labeled_timetree_info$depth = node.depth(labeled_timetree)
+###############
+# Since the speciation rates are missing some species, we need to prune the tree info
+# to remove those species. We do this by removing those species from the tree info df
+# and from any clade in any other node. At the end, for clades that are identical 
+# (because their descendants have been pruned), we keep the branch at the shallowest
+# depth
 
-#tips_to_drop = c(missing_samples, tribe_prob_full, "Paruromys_dominator_JAE4870", "Lophiomys_imhausi_UM5152", "Mus_musculus-castaneus_10460X7", "Mus_musculus-musculus_10460X14")
+labeled_timetree_info$depth = node.depth(labeled_timetree)
+# Get the depth of each node in the tree for pruning
+
 tips_to_drop = c(missing_samples, tribe_prob_full)
+# The species we need to remove
 
 for(tip in tips_to_drop){
   labeled_timetree_info = subset(labeled_timetree_info, label != tip)
@@ -1760,70 +1839,112 @@ for(tip in tips_to_drop){
   labeled_timetree_info$clade = gsub(paste(tip, ";", sep=""), "", labeled_timetree_info$clade)
   labeled_timetree_info$clade = gsub(tip, "", labeled_timetree_info$clade)
 }
+# Loop over each species to remove and remove that row from the df and that species from any
+# clade in the df
+
 labeled_timetree_info = subset(labeled_timetree_info, clade != "")
+# For some branches with all descendant species removed, they will now have empty clades
+# Remove them here
 
 labeled_timetree$node.label = paste(labeled_timetree_info$label, "/", labeled_timetree_info$delta, sep="")
+# Add delta to the label of the time tree
 
 labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info[,'clade'],labeled_timetree_info[,'depth']),]
 labeled_timetree_info = labeled_timetree_info[!duplicated(labeled_timetree_info$clade),]
+# Sort nodes in the tree df by clade and then by depth
+# Then, for duplicate clades, keep the one at the shallowest depth
 
 labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
 # Re-sort the data frame by R node order after the merge so the trees still work
 
+###############
+
 labeled_tribetree = drop.tip(labeled_timetree, c(missing_samples, tribe_prob_full))
 tree_to_df_list = treeToDF(labeled_tribetree)
 labeled_tribetree_info = tree_to_df_list[["info"]]
-# Read the tree and parse with treetoDF
+# Now, prune the tree structure and re-read the pruned tree and parse with treetoDF
 
 labeled_tribetree_info = merge(select(labeled_timetree_info, clade, tp, delta), labeled_tribetree_info, by="clade")
+# Add the info from the full tree to the pruned tribe tree by merging by clade
+
 labeled_tribetree_info = labeled_tribetree_info[order(labeled_tribetree_info$node), ]
 # Re-sort the data frame by R node order after the merge so the trees still work
 
-# for(i in 1:nrow(labeled_timetree_info)){
-#   if(!labeled_timetree_info[i,]$clade %in% labeled_tribetree_info$clade){
-#     print(labeled_timetree_info[i,]$clade)
-#   }
-# }
+###############
 
-
-
-speciation_tree = getMeanBranchLengthTree(best)
-tree_to_df_list = treeToDF(speciation_tree$phy)
+speciation_tree = getMeanBranchLengthTree(best)$phy
+tree_to_df_list = treeToDF(speciation_tree)
 speciation_tree_info = tree_to_df_list[["info"]]
+# Get the tree with speciation rates as branch lengths from BAMM and parse to df
 
 speciation_tree_info = merge(select(labeled_tribetree_info, clade, tp, delta), speciation_tree_info, by="clade")
+# Add the info from the tribe tree to the speciation tree
+
 speciation_tree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
 # Re-sort the data frame by R node order after the merge so the trees still work
+
+###############
 
 p = ggplot(speciation_tree_info, aes(x=delta, y=branch.length)) +
   geom_point() +
   geom_smooth(method="lm") +
   bartheme()
-print(p)
+#print(p)
+# Simple correlation
 
-############
-############
-# START HERE TOMORROW
-# GET SPECIATION RATES (EDGE.LABEL) ON TO SAME TREE AS DELTA
-############
-############
+###############
+
+speciation_tree_internal_info = subset(speciation_tree_info, node.type != "tip")
+speciation_tree$node.label = paste(speciation_tree_internal_info$label, "/", speciation_tree_internal_info$delta, sep="")
+# Add delta values to the internal node labels of the speciation tree
+
+###############
+# At this point, to do PGLS without delta values on the tips, we need to again
+# remove tip branches. To do this, you'd have to write.tree() and then use
+# bonsai to remove the tips
+#write.tree(speciation_tree)
 
 
-h = corecol(numcol=1, pal="wilke", offset=3)
-l = corecol(numcol=1, offset=3)
+speciation_tree2_file = here("docs", "data", "trees", "astral", "concord-rooted-bl",  "full_coding_iqtree_astral_rooted_speciation.bl.cf.labeled.notips.tree")
+speciation_tree2 = read.tree(file=speciation_tree2_file)
+tree_to_df_list = treeToDF(speciation_tree2)
+speciation_tree2_info = tree_to_df_list[["info"]]
+# Read the speciation tree without tips and parse to df
 
-delta_labeled_tree = rodent_tree
-delta_labeled_tree$node.label = paste(delta_labeled_tree$node.label, "/", tree_info$delta, sep="")
+speciation_tree2_info = speciation_tree2_info %>% separate(label, c("tp", "support"), sep=">", remove=F)
+speciation_tree2_info$tp = paste(speciation_tree2_info$tp, ">", sep="")
+speciation_tree2_info = speciation_tree2_info %>% separate(support, c("astral", "gcf", "scf", "delta"), sep="/", remove=T)
+speciation_tree2_info$delta = as.numeric(speciation_tree2_info$delta)
+# Split the label by /. tp is my treeParse label.
 
-delta_tree = ggtree(speciation_tree$phy, size=0.8, ladderize=F) +
-  #scale_color_continuous(name="Delta", high=h, low=l) +
-  xlim(0, 25) +
-  geom_tiplab(color="#333333", fontface='italic', size=2)
-  #theme(legend.position=c(0.05,0.9)) +
-  #geom_label(aes(x=branch, label=ifelse(tree_info$delta.sig,as.character(tree_info$tp),'')), label.size=NA, fill="transparent", show.legend=F, vjust=-0.1)
-#geom_text(aes(label=rodent_data$support), hjust=-.1, color="#006ddb") +
-#geom_nodepoint(color="#666666", alpha=0.85, size=4)
-print(delta_tree)
+speciation_tree2_tip_info = subset(speciation_tree2_info, node.type=="tip")
+# Get only the tip info from the new tree
+
+###############
+# From: https://lukejharmon.github.io/ilhabela/instruction/2015/07/03/PGLS/
+
+delta = speciation_tree2_tip_info$delta
+speciation.rate = speciation_tree2_tip_info$branch.length
+# Get the delta values and branch length values for plotting later
+
+pglsModel = gls(delta ~ branch.length, correlation = corBrownian(phy = speciation_tree2),
+    data = speciation_tree2_tip_info, method = "ML")
+summary(pglsModel)
+coef(pglsModel)
+# Run the PGLS
+
+plot(speciation.rate,delta)
+abline(a = coef(pglsModel)[1], b = coef(pglsModel)[2])
+# Plot the PGLS
+
+###############
+
+fig_outfile = here("docs", "figs", "full-coding-bamm-tribe-spec-delta.png")
+png(fig_outfile, width=6, height=4, units="in", res=320)
+plot(speciation.rate,delta)
+abline(a = coef(pglsModel)[1], b = coef(pglsModel)[2])
+dev.off()
+# Save the figure
 
 ```
 
