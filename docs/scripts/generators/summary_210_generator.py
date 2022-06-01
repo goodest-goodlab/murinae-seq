@@ -33,6 +33,7 @@ html_template = """
                     <p><h4><a href="mouse_rat_transcripts.html">Transcript selection from mouse and rat references</a></h4></p>
                     <p><h4><a href="aln_stats.html">CDS alignment stats</a></h4></p>
                     <p><h4><a href="trees.html">Phylogeny (ASTRAL)</a></h4></p>
+                    <p><h4><a href="rates.html">Substitution rates</a></h4></p>
                     <p><h4>Convergence: <a href="convergence-astral.html">ASTRAL</a></h4></p>
                     <p><h4>Multi-nucleotide substitutions: <a href="mns-astral.html">ASTRAL</a></h4></p>
                     <p><h4>Tree pruning: <a href="prune-astral.html">ASTRAL</a></h4></p>

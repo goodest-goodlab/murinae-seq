@@ -238,7 +238,7 @@ print(p)
 ###############
 
 fig_outfile = here("docs", "figs", "full-coding-astral-cf.png")
-ggsave(fig_outfile, p, width=6, height=4, unit="in")
+ggsave(fig_outfile, p, width=6, height=3, unit="in")
 # Save the figure
 
 ```
@@ -664,8 +664,6 @@ ggsave(fig_outfile, delta_tree, width=12, height=12, unit="in")
 ```{r delta-phylosig-clades, out.width="75%", fig.align = "center", warning=FALSE}
 # Generally helpful: https://lukejharmon.github.io/pcm/chapter6_beyondbm/
 
-
-
 phylosig(tree2, tree2_tip_info$delta, test=T)
 # Bloomberg K
 
@@ -989,7 +987,7 @@ ggsave(fig_outfile, p, width=6, height=4, unit="in")
 
 ```
 
-## Delta differences to ancestors
+## Delta differences to ancestors (observed)
 
 My own attempt at some sort of phylogenetic independent comparison.
 
@@ -997,7 +995,7 @@ For each branch, compute the difference in the value delta between it and its an
 
 ```{r delta-anc, out.width="50%", fig.align = "center", warning=FALSE}
 
-delta_info = subset(tree_info, !is.na(delta))
+delta_info = subset(tree2_info, !is.na(delta))
 # Get info only from branches with delta values
 
 #delta_diffs = data.frame("ref.node"=c(), "ref.delta"=c(), "query.node"=c(), "query.delta"=c(), "query.type"=c(), "delta.diff"=c())
@@ -1019,8 +1017,8 @@ for(i in 1:nrow(delta_info)){
   }
   # Get the delta value and other info from the branch
   
-  anc = Ancestors(rodent_tree, node, type="parent")
-  if(tree_info[tree_info$node==anc,]$tp %in% exclude_branches){
+  anc = Ancestors(tree2, node, type="parent")
+  if(tree2_info[tree2_info$node==node,]$tp %in% exclude_branches || tree2_info[tree2_info$node==anc,]$tp %in% exclude_branches){
     next
   }
   # Get the ancestral node, but move on if it is an excluded branch
@@ -1160,6 +1158,177 @@ fig_outfile = here("docs", "figs", "full-coding-delta-anc-diffs.png")
 ggsave(fig_outfile, p, width=12, height=4, unit="in")
 # Save the figure
 
+
+```
+
+## Delta differences to ancestors (reconstructed)
+
+The same comparisons, but using values of delta reconstructed via a Brownian motion model
+
+```{r delta-anc-recon, out.width="50%", fig.align = "center", warning=FALSE}
+
+delta_info = subset(tree2_info, !is.na(delta.recon))
+# Get info only from branches with delta values
+
+#delta_diffs = data.frame("ref.node"=c(), "ref.delta"=c(), "query.node"=c(), "query.delta"=c(), "query.type"=c(), "delta.diff"=c())
+
+delta_anc_diffs = data.frame("ref.node"=c(), "ref.delta"=c(), "sig.ref.delta"=c(), "query.node"=c(), "query.delta"=c(), "query.type"=c(), "delta.diff"=c())
+delta_random_diffs = data.frame("ref.node"=c(), "ref.delta"=c(), "sig.ref.delta"=c(), "query.node"=c(), "query.delta"=c(), "query.type"=c(), "delta.diff"=c(), "replicate"=c())
+# Data frames to save delta diffs
+
+for(i in 1:nrow(delta_info)){
+# Loop over every branch with delta
+  
+  node = delta_info[i,]$node
+  delta = delta_info[i,]$delta.recon
+  sig_delta = delta_info[i,]$delta.sig
+  sig_label = "N"
+  
+  if(sig_delta){
+    sig_label = "Y"
+  }
+  # Get the delta value and other info from the branch
+  
+  anc = Ancestors(tree2, node, type="parent")
+  if(tree2_info[tree2_info$node==node,]$tp %in% exclude_branches || tree2_info[tree2_info$node==anc,]$tp %in% exclude_branches){
+    next
+  }
+  # Get the ancestral node, but move on if it is an excluded branch
+  
+  anc_delta = delta_info[delta_info$node==anc,]$delta.recon
+  if(delta_info[delta_info$node==anc,]$delta.sig){
+    sig_label = "Ancestor Y"
+  }
+  # Get the delta info from the ancestor
+  
+  #delta_info[delta_info$node==node,]$delta.diff = abs(delta - anc_delta)
+  
+    delta_anc_diffs = rbind(delta_anc_diffs, data.frame("ref.node"=node, "ref.delta"=delta, "sig.ref.delta"=sig_label, "query.node"=anc, "query.delta"=anc_delta, "query.type"="Ancestor", "delta.diff"=abs(delta-anc_delta)))
+    # Add the info of the comparison of this node to its ancestor to the anc delta diff data frame
+  
+  for(j in 1:100){
+  # Select random branches
+    
+    random_anc = anc
+    while(random_anc == anc || random_anc == node){
+      random_row = delta_info[sample(nrow(delta_info),1),]
+      random_anc = random_row$node
+    }
+    # Select a random branch in the tree as long as it is not this branch or its ancestor
+    
+    delta_random_diffs = rbind(delta_random_diffs, data.frame("ref.node"=node, "ref.delta"=delta, "sig.ref.delta"=sig_label, "query.node"=random_anc, "query.delta"=random_row$delta, "query.type"="Random branch", "delta.diff"=abs(delta-random_row$delta), "replicate"=j))
+    # Add the info of the comparison of this node to the random branch to the random delta diff data frame
+  }
+    
+  #delta_info[delta_info$node==node,]$random.diff = abs(delta - random_row$delta)
+
+}
+
+###############
+
+x_comps = list(c("Ancestor", "Random branch"))
+# List of comparisons to make
+
+delta_random_single = subset(delta_random_diffs, replicate==1)
+delta_random_single = select(delta_random_single, -replicate)
+delta_random_single$query.type = "Random branch"
+delta_diffs_single = rbind(delta_anc_diffs, delta_random_single)
+# Get the first replicate, add label, and combine with anc diffs
+
+delta_diff_single_p = ggplot(data=delta_diffs_single, aes(x=query.type, y=delta.diff, group=query.type, color=sig.ref.delta)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.30) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  scale_y_continuous(limits=c(0,0.7)) +
+  scale_color_manual("Significant delta?", values=c(corecol(numcol=1, pal="wilke", offset=4), corecol(numcol=1, pal="wilke", offset=3), "#920000")) +
+  ggtitle("Single random sample") +
+  xlab("") +
+  ylab("Delta difference") +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=15, hjust=1),
+        plot.title = element_text(size=14, vjust=1),
+        legend.title=element_text(size=12),
+        legend.position="bottom",
+        plot.margin = unit(c(1,0,0,0), "cm")) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+
+print(delta_diff_single_p)
+
+# Distribution of delta diffs to ancestor and one random branch
+###############
+
+x_comps = list(c("Ancestor", "Random branch"))
+# List of comparisons to make
+
+delta_random_meds = delta_random_diffs %>% group_by(ref.node, query.type, sig.ref.delta) %>% summarize(delta.diff=median(delta.diff))
+delta_diffs_meds = rbind(select(delta_anc_diffs, ref.node, query.type, sig.ref.delta, delta.diff), delta_random_meds)
+# Calculate median of all random branch diffs and combine with anc diffs
+
+delta_diff_med_p = ggplot(data=delta_diffs_meds, aes(x=query.type, y=delta.diff, group=query.type, color=sig.ref.delta)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.30) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  scale_y_continuous(limits=c(0,0.7)) +
+  scale_color_manual("Significant delta?", values=c(corecol(numcol=1, pal="wilke", offset=4), corecol(numcol=1, pal="wilke", offset=3), "#920000")) +
+  #ggtitle("Difference between delta and ancestral delta / average after 100 replicates of random sampling") +
+  ggtitle("Median after 100 random samples") +
+  xlab("") +
+  ylab("Delta difference") +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=15, hjust=1),
+        plot.title = element_text(size=14, vjust=1),
+        legend.title=element_text(size=12),
+        legend.position="bottom",
+        plot.margin = unit(c(1,0,0,0), "cm")) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+
+print(delta_diff_med_p)
+
+# Distribution of delta diffs to ancestor and median over many random branches
+###############
+
+x_comps = list(c("Ancestor", "Random branch"))
+# List of comparisons to make
+
+delta_random_avgs = delta_random_diffs %>% group_by(ref.node, query.type, sig.ref.delta) %>% summarize(delta.diff=mean(delta.diff))
+delta_random_avgs$query.type = "Random branch"
+delta_diffs_avgs = rbind(select(delta_anc_diffs, ref.node, query.type, sig.ref.delta, delta.diff), delta_random_avgs)
+# Calculate average of all random branch diffs and combine with anc diffs
+
+delta_diff_avg_p = ggplot(data=delta_diffs_avgs, aes(x=query.type, y=delta.diff, group=query.type, color=sig.ref.delta)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.30) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  scale_y_continuous(limits=c(0,0.7)) +
+  scale_color_manual("Significant delta?", values=c(corecol(numcol=1, pal="wilke", offset=4), corecol(numcol=1, pal="wilke", offset=3), "#920000")) +
+  #ggtitle("Difference between delta and ancestral delta / average after 100 replicates of random sampling") +
+  ggtitle("Mean after 100 random samples") +
+  xlab("") +
+  ylab("Delta difference") +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=15, hjust=1),
+        plot.title = element_text(size=14, vjust=1),
+        legend.title=element_text(size=12),
+        legend.position="bottom",
+        plot.margin = unit(c(1,0,0,0), "cm")) +
+  guides(colour=guide_legend(override.aes=list(alpha=1)))
+
+print(delta_diff_avg_p)
+
+# Distribution of delta diffs to ancestor and average over many random branches
+###############
+
+p_legend = get_legend(delta_diff_single_p)
+p_grid = plot_grid(delta_diff_single_p + theme(legend.position="none"),
+                   delta_diff_med_p + theme(legend.position="none"),
+                   delta_diff_avg_p + theme(legend.position="none"), 
+                   ncol=3)
+p = plot_grid(p_grid, p_legend, nrow=2, rel_heights=c(1,0.1), align='vh')
+
+
+fig_outfile = here("docs", "figs", "full-coding-delta-anc-diffs-recon.png")
+ggsave(fig_outfile, p, width=12, height=4, unit="in")
+# Save the figure
 
 ```
 
@@ -1876,6 +2045,8 @@ speciation_tree = getMeanBranchLengthTree(best)$phy
 tree_to_df_list = treeToDF(speciation_tree)
 speciation_tree_info = tree_to_df_list[["info"]]
 # Get the tree with speciation rates as branch lengths from BAMM and parse to df
+
+write.csv(speciation_tree_info, file=here("docs", "data", "bamm", "full-coding-astral-bamm-as-bl.csv"), row.names=F)
 
 speciation_tree_info = merge(select(labeled_tribetree_info, clade, tp, delta), speciation_tree_info, by="clade")
 # Add the info from the tribe tree to the speciation tree
