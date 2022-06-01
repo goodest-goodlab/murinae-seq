@@ -969,6 +969,7 @@ p = ggplot(z, aes(x=label, y=delta, group=label, color=delta.sig)) +
   geom_quasirandom(size=2, width=0.25, alpha=0.5) +
   geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
   geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  scale_y_continuous(limits=c(0, 0.65)) +
   ylab("Delta") +
   xlab("") +
   scale_color_manual("Significant delta?", values=c(corecol(numcol=1, pal="wilke", offset=3), corecol(numcol=1, pal="wilke", offset=4))) +
@@ -984,6 +985,13 @@ print(p)
 fig_outfile = here("docs", "figs", "full-coding-delta-recon.png")
 ggsave(fig_outfile, p, width=6, height=4, unit="in")
 # Save the figure
+
+
+# p = ggplot(tree2_info, aes(x=delta.recon, delta, color=delta.sig)) +
+#   geom_point(size=2, alpha=0.5) +
+#   bartheme()
+# print(p)
+
 
 ```
 
