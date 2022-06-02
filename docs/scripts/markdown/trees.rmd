@@ -893,6 +893,8 @@ fit = fastAnc(tree3, b, vars=T,CI=T)
 ###############
 
 tree2_info$delta.recon = NA
+tree2_info$delta.lower = NA
+tree2_info$delta.upper = NA
 for(i in 1:nrow(tree2_info)){
   row = tree2_info[i,]
   if(row$node.type == "tip" || row$node.type=="ROOT"){
@@ -904,6 +906,8 @@ for(i in 1:nrow(tree2_info)){
   new_node = tree3_info$node[tree3_info$tp==tp_node]
   
   tree2_info$delta.recon[tree2_info$tp==row$tp] = fit[["ace"]][[as.character(new_node)]]
+  tree2_info$delta.lower[tree2_info$tp==row$tp] = fit[["CI95"]][as.character(new_node),1]
+  tree2_info$delta.upper[tree2_info$tp==row$tp] = fit[["CI95"]][as.character(new_node),2]
 }
 # Add the inferred delta values to the main data frame for the no tip tree
 
@@ -987,10 +991,40 @@ ggsave(fig_outfile, p, width=6, height=4, unit="in")
 # Save the figure
 
 
-# p = ggplot(tree2_info, aes(x=delta.recon, delta, color=delta.sig)) +
-#   geom_point(size=2, alpha=0.5) +
-#   bartheme()
-# print(p)
+p = ggplot(tree2_info, aes(x=delta.recon, delta)) +
+  geom_point(size=2, alpha=0.5) +
+  geom_smooth(method="lm") +
+  bartheme()
+print(p)
+
+fig_outfile = here("docs", "figs", "full-coding-delta-recon-corr.png")
+ggsave(fig_outfile, p, width=6, height=4, unit="in")
+# Save the figure
+
+###############
+
+tree2_internal_info = subset(tree2_info, node.type=="internal" & !tp %in% exclude_branches)
+p = ggplot(tree2_internal_info, aes(x=delta.recon, y=node)) +
+  geom_point(aes(color="Inferred (95% CI)"), size=2, alpha=0.7) +
+  geom_segment(aes(x=delta.lower, xend=delta.upper, y=node, yend=node)) +
+  geom_point(aes(x=delta, y=node, color="Observed"), size=2, alpha=0.7) +
+  scale_color_manual(values=c("Inferred (95% CI)"="black", "Observed"="red")) +
+  xlab("Delta") +
+  ylab("Node") +
+  bartheme() +
+  theme(legend.position="bottom")
+print(p)
+
+tree2_internal_info$within.bounds = 0
+for(i in 1:nrow(tree2_internal_info)){
+  if(tree2_internal_info[i,]$delta >= tree2_internal_info[i,]$delta.lower && tree2_internal_info[i,]$delta <= tree2_internal_info[i,]$delta.upper){
+    tree2_internal_info[i,]$within.bounds = 1
+  }
+}
+
+fig_outfile = here("docs", "figs", "full-coding-delta-recon-ci.png")
+ggsave(fig_outfile, p, width=4, height=6, unit="in")
+# Save the figure
 
 
 ```
