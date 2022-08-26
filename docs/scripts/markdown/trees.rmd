@@ -603,7 +603,10 @@ ggsave(fig_outfile, p, width=6, height=4, unit="in")
 
 
 #no_tip_file = here("docs", "data", "trees", "astral", "concord-rooted", "full_coding_iqtree_astral.cf.labeled.notips.tree")
-no_tip_file = here("docs", "data", "trees", "astral", "concord-rooted-bl", "full_coding_iqtree_astral_rooted_bl.cf.labeled.notips.tree")
+#no_tip_file = here("docs", "data", "trees", "astral", "concord-rooted-bl", "full_coding_iqtree_astral_rooted_bl.cf.labeled.notips.tree")
+
+no_tip_file = here("docs", "data", "trees", "astral", "iqtree-dating", "full-coding-astral-iqtree-dating-anil-mmus-12.1.timetree.reordered.labeled.notips.tre")
+
 
 tree2 = read.tree(no_tip_file)
 tree_to_df_list = treeToDF(tree2)
@@ -638,8 +641,8 @@ tree3_tip_info = subset(tree3_info, node.type=="tip")
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 
-#no_tip_max = 13
-no_tip_max = 0.13
+no_tip_max = 25
+#no_tip_max = 0.13
 
 delta_tree = ggtree(tree2, size=0.8, ladderize=F, aes(color=tree2_info$delta)) +
   scale_color_continuous(name="Delta", high=h, low=l) +
@@ -926,8 +929,8 @@ for(i in 1:nrow(tree2_info)){
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 
-#no_tip_max = 13
-no_tip_max = 0.13
+no_tip_max = 25
+#no_tip_max = 0.13
 
 delta_tree = ggtree(tree2, size=0.8, ladderize=F, aes(color=tree2_info$delta.recon)) +
   scale_color_continuous(name="Delta", high=h, low=l) +
@@ -956,27 +959,28 @@ ggsave(fig_outfile, delta_tree, width=12, height=12, unit="in")
 
 x = subset(tree2_info, node.type != "tip")
 x = select(x, tp, delta, delta.sig)
+x$delta.sig = ifelse(x$delta.sig, "Yes", "No")
 x$label = "Observed"
 
 y = select(tree2_info, tp, delta.recon, delta.sig)
 names(y)[2] = "delta"
-y$label = "Inferred"
+y$delta.sig = ifelse(y$delta.sig, "Yes", "No")
+y$label = "Simulated"
 
 z = rbind(x,y)
 # Convert to long with two categories
 
 ###############
 
-x_comps = list(c("Observed", "Inferred"))
+x_comps = list(c("Observed", "Simulated"))
 
 p = ggplot(z, aes(x=label, y=delta, group=label, color=delta.sig)) +
-  geom_quasirandom(size=2, width=0.25, alpha=0.5) +
+  geom_quasirandom(size=3, width=0.25, alpha=0.5) +
   geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
   geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
-  scale_y_continuous(limits=c(0, 0.65)) +
   ylab("Delta") +
   xlab("") +
-  scale_color_manual("Significant delta?", values=c(corecol(numcol=1, pal="wilke", offset=3), corecol(numcol=1, pal="wilke", offset=4))) +
+  scale_color_manual("Significant observed delta?", values=c(corecol(numcol=1, pal="wilke", offset=3), corecol(numcol=1, pal="wilke", offset=4))) +
   bartheme() +
   theme(plot.title = element_text(size=14, vjust=1),
         legend.title=element_text(size=12),
@@ -987,9 +991,10 @@ print(p)
 ###############
 
 fig_outfile = here("docs", "figs", "full-coding-delta-recon.png")
-ggsave(fig_outfile, p, width=6, height=4, unit="in")
+ggsave(fig_outfile, p, width=6, height=5, unit="in")
 # Save the figure
 
+###############
 
 p = ggplot(tree2_info, aes(x=delta.recon, delta)) +
   geom_point(size=2, alpha=0.5) +
@@ -1005,10 +1010,10 @@ ggsave(fig_outfile, p, width=6, height=4, unit="in")
 
 tree2_internal_info = subset(tree2_info, node.type=="internal" & !tp %in% exclude_branches)
 p = ggplot(tree2_internal_info, aes(x=delta.recon, y=node)) +
-  geom_point(aes(color="Inferred (95% CI)"), size=2, alpha=0.7) +
+  geom_point(aes(color="Simulated (95% CI)"), size=2, alpha=0.7) +
   geom_segment(aes(x=delta.lower, xend=delta.upper, y=node, yend=node)) +
   geom_point(aes(x=delta, y=node, color="Observed"), size=2, alpha=0.7) +
-  scale_color_manual(values=c("Inferred (95% CI)"="black", "Observed"="red")) +
+  scale_color_manual(values=c("Simulated (95% CI)"="black", "Observed"="red")) +
   xlab("Delta") +
   ylab("Node") +
   bartheme() +
