@@ -18,6 +18,7 @@ parser.add_argument("--wgs", dest="wgs", help="Without --all: build wgs.html. Wi
 parser.add_argument("--assembly", dest="assembly", help="Without --all: build assembly_stats.html. With --all: exlude assembly_stats.html", action="store_true", default=False);
 parser.add_argument("--aln", dest="aln", help="Without --all: build aln_stats.html. With --all: exlude aln_stats.html", action="store_true", default=False);
 parser.add_argument("--trees", dest="trees", help="Without --all: build trees.html. With --all: exlude trees.html", action="store_true", default=False);
+parser.add_argument("--morpho", dest="morpho", help="Without --all: build trees-morpho.html. With --all: exlude trees-morpho.html", action="store_true", default=False);
 parser.add_argument("--rates", dest="rates", help="Without --all: build rates.html. With --all: exlude rates.html", action="store_true", default=False);
 parser.add_argument("--convergence", dest="convergence", help="Without --all: build convergence.html. With --all: exlude convergence.html", action="store_true", default=False);
 parser.add_argument("--mns", dest="mns", help="Without --all: build mns.html. With --all: exlude mns.html", action="store_true", default=False);
@@ -46,6 +47,7 @@ pages = {
     'assembly' : args.assembly,
     'aln' : args.aln,
     'trees' : args.trees,
+    'morpho' : args.morpho,
     'rates' : args.rates,
     'convergence' : args.convergence,
     'mns' : args.mns,
@@ -93,6 +95,9 @@ if pages['aln']:
 
 if pages['trees']:
     os.system("Rscript trees_generator.r");
+
+if pages['morpho']:
+    os.system("Rscript trees_morpho_generator.r");
 
 if pages['rates']:
     os.system("Rscript rates_generator.r");

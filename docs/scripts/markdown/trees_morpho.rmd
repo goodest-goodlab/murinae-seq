@@ -1,0 +1,342 @@
+---
+title: "Murine species trees"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(cowplot)
+library(ggbeeswarm)
+library(dplyr)
+library(kableExtra)
+library(tidyr)
+library(ggtree)
+library(phytools)
+library(phangorn)
+library(reshape2)
+library(ggExtra)
+library(ggrepel)
+library(vroom)
+library(ggdist)
+library(stringr)
+library(ggsignif)
+library(phytools)
+library(castor)
+library(MCMCtreeR)
+library(here)
+library(stringr)
+library(BAMMtools)
+library(nlme)
+
+source(here("docs", "scripts", "lib", "design.r"))
+source(here("docs", "scripts", "lib", "get_tree_info.r"))
+
+#source("C:/bin/core/r/design.r")
+#source("C:/bin/core/r/get_tree_info.r")
+
+#source("C:/Users/grt814/bin/core/corelib/design.r")
+#source("C:/Users/grt814/bin/core/get_tree_info.r")
+
+#htmltools::includeHTML("../html-chunks/rmd_nav.html")
+```
+
+[< Back to summary](summary_210.html)
+
+# Full coding species tree
+
+1. 188 species targeted capture to mouse exons
+2. Assembled with [SPADES](https://github.com/ablab/spades)
+3. 11,795 coding loci aligned with [exonerate](https://www.ebi.ac.uk/about/vertebrate-genomics/software/exonerate-manual)+[MAFFT](https://mafft.cbrc.jp/alignment/software/)
+4. Gene trees inferred with [IQ-Tree](http://www.iqtree.org/)
+5. Species tree inferred with [ASTRAL](https://github.com/smirarab/ASTRAL)
+6. Branch lengths inferred with [IQ-Tree](http://www.iqtree.org/) using the 866 loci with a normalized RF distance to the species tree of less than 0.25.
+
+```{r read, out.width="75%", fig.align = "center", warning=FALSE}
+# This chunk handles all of the main inputs and reads the tree
+
+# cat("188 species targeted capture to mouse exons assembled with SPADES.\n")
+# cat("11,775 coding loci aligned with exonerate+mafft\n")
+# cat("Gene trees inferred with IQtree.\n")
+# cat("Species tree inferred with ASTRAL.\n")
+# cat("Branch lengths estimated by ASTRAL.\n")
+# Data summary
+
+###############
+
+#tree_file = here("docs", "data", "trees", "astral", "concord-rooted", "full_coding_iqtree_astral.cf.labeled.tree")
+tree_file = here("docs", "data", "trees", "astral", "morphometrics-pruned", "morpho-coding-iqtree-astral-rooted-bl-cf.tre")
+# Newick tree file, with tp labels
+
+rodent_tree = read.tree(tree_file)
+tree_to_df_list = treeToDF(rodent_tree)
+tree_info = tree_to_df_list[["info"]]
+# Read the tree and parse with treetoDF
+
+tree_info = tree_info %>% separate(label, c("tp", "support"), sep=">", remove=F)
+tree_info$tp = paste(tree_info$tp, ">", sep="")
+tree_info = tree_info %>% separate(support, c("gcf", "scf"), sep="/", remove=T)
+# Split the label by /. tp is my treeParse label.
+
+tree_info$gcf = as.numeric(tree_info$gcf)
+tree_info$scf = as.numeric(tree_info$scf)
+# Convert all supports to numeric
+
+###############
+
+#iq_tree_labels = here("docs", "data", "trees", "astral", "concord-rooted", "full_coding_iqtree_astral.cf.branch")
+#iq_tree_labels = here("docs", "data", "trees", "astral", "concord-rooted-bl", "full_coding_iqtree_astral_rooted_bl.cf.branch")
+# Newick tree file, with iqtree labels
+
+###############
+
+#cf_stat_file = here("docs", "data", "trees", "astral", "concord-rooted", "full_coding_iqtree_astral.cf.stat")
+cf_stat_file = here("docs", "data", "trees", "astral", "morphometrics-pruned", "morpho-coding-iqtree-astral-rooted-bl-cf-stats.tab")
+cf_stats = read.table(cf_stat_file, header=T)
+# Concordance factor file
+
+###############
+
+#cf_rep_dir = here("docs", "data", "trees", "astral", "concord-rooted", "cf-reps")
+#cf_rep_dir = here("docs", "data", "trees", "astral", "concord-rooted-bl", "cf-reps")
+#delta_outfile = here("docs", "data", "trees", "astral", "concord-rooted", "delta.tab")
+#delta_outfile = here("docs", "data", "trees", "astral", "concord-rooted-bl", "delta.tab")
+# CF reps for delta and delta outfile
+
+###############
+
+#col_file = here("docs", "data", "trees", "astral", "astral-colonization-branches.txt")
+#exclude_branches = c("Lophiomys_imhausi_UM5152", "Lophuromys_woosnami_LSUMZ37793", "<1>", "<187>", "<186>")
+# Colonization branches and branches around the root to exclude from some things
+
+###############
+
+gt_file = here("docs", "data", "trees", "astral", "morphometrics-pruned", "morpho-coding-gene-trees-rooted-labeled.tre")
+# The file containing the gene trees
+
+###############
+
+#xmax = 31
+xmax = 0.175
+# The max of the x-axis for tree figures
+
+```
+
+
+## Branches colored by gCF
+
+```{r species-tree-gcf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+gcf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$gcf)) +
+  scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,1)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9))
+#gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+# Option to add branch labels to the figure
+print(gcf_tree)
+
+###############
+
+fig_outfile = here("docs", "figs", "morpho-coding-astral-rooted-gcf.png")
+ggsave(fig_outfile, gcf_tree, width=14, height=14, unit="in")
+# Save the tree image
+
+## gCF tree
+```
+
+## Branches colored by sCF
+
+```{r species-tree-scf, out.width="75%", fig.align = "center", warning=FALSE, fig.height=16}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+scf_tree = ggtree(rodent_tree, size=0.8, ladderize=F, aes(color=tree_info$scf)) +
+  scale_color_continuous(name='sCF', low=l, high=h, limits=c(0,1)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=2) +
+  theme(legend.position=c(0.05,0.9))
+#gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+# Option to add branch labels to the figure
+print(gcf_tree)
+
+###############
+
+fig_outfile = here("docs", "figs", "morpho-coding-astral-rooted-scf.png")
+ggsave(fig_outfile, scf_tree, width=14, height=14, unit="in")
+# Save the tree image
+
+## gCF tree
+```
+
+## Gene vs site concordance factors colored by branch support
+
+```{r gcf-scf-supp, out.width="50%", fig.align = "center", warning=FALSE}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+p = ggplot(tree_info, aes(x=gcf, y=scf)) + 
+  geom_point(size=2, alpha=0.5) +
+  bartheme() +
+  theme(legend.title=element_text(size=12))
+print(p)
+
+###############
+
+fig_outfile = here("docs", "figs", "full-coding-astral-cf.png")
+ggsave(fig_outfile, p, width=6, height=3, unit="in")
+# Save the figure
+
+```
+
+## Concordance factors vs. branch lengths
+
+```{r bl-v-cf, out.width="60%", fig.align = "center", warning=FALSE}
+
+bl_gcf_p = ggplot(tree_info, aes(x=branch.length, y=gcf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  scale_x_continuous(limits=c(0,0.03)) +
+  xlab("Branch length") + 
+  ylab("gCF per branch") + 
+  bartheme()
+bl_gcf_p = ggExtra::ggMarginal(bl_gcf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666")
+
+bl_scf_p = ggplot(tree_info, aes(x=branch.length, y=scf)) +
+  geom_point(size=3, alpha=0.5) +
+  #geom_text_repel(aes(label=ifelse(avg.ds>0.2|avg.dn>0.01,as.character(node),'')), show_guide=F) +
+  #geom_smooth(method="lm", se=F, ) +
+  scale_x_continuous(limits=c(0,0.03)) +
+  xlab("Branch length") + 
+  ylab("sCF per branch") + 
+  bartheme()
+bl_scf_p = ggExtra::ggMarginal(bl_scf_p, type="histogram", bins=50, fill=corecol(pal="wilke", numcol=1, offset=5), color="#666666")
+
+p = plot_grid(bl_gcf_p, bl_scf_p, ncol=2)
+print(p)
+
+###############
+
+fig_outfile = here("docs", "figs", "morpho-coding-astral-cf-bl.png")
+ggsave(fig_outfile, p, width=6, height=3, unit="in")
+# Save the figure
+
+```
+
+# Gene trees
+
+The 11,774 gene trees contain varying numbers of taxa due to filtering on the alignment and filtering by IQtree for identical sequences.
+
+## Taxa per gene tree
+
+```{r taxa-per-gene, out.width="50%", fig.align = "center", warning=FALSE}
+gene_trees = read.table(gt_file, sep="\t")
+names(gene_trees) = c("gene", "tree")
+# Read the geen tree file
+
+gene_trees$gene = word(gene_trees$gene, 1, sep="-")
+#gene_trees$gene = word(gene_trees$gene, 2, sep="/")
+# Parse out the protein ID from the filename for each gene
+
+###############
+
+gt_data = data.frame("gene"=c(), "rf"=c(), "num.tips"=c(), "rf.zeros"=c(), "num.tips.zeros"=c())
+# A df to track info for each gene tree
+
+for(i in 1:nrow(gene_trees)){
+  gt = read.tree(text=gene_trees[i,]$tree)
+  # Read the gene tree as a phylo object
+  
+  cur_tips = gt$tip.label
+  pruned_tree = drop.tip(rodent_tree, rodent_tree$tip.label[-match(cur_tips, rodent_tree$tip.label)])
+  # Get a list of the tips and prune the species tree to contain only those tips
+  
+  cur_rf = RF.dist(pruned_tree, gt, normalize=T)
+  # Calculate RF between the pruned species tree and the gene tree
+  
+  if(cur_rf==0){
+    gt_data = rbind(gt_data, data.frame("gene"=gene_trees[i,]$gene, "rf"=cur_rf, "num.tips"=length(cur_tips), "rf.zeros"=cur_rf, "num.tips.zeros"=length(cur_tips)))
+  }else{
+    gt_data = rbind(gt_data, data.frame("gene"=gene_trees[i,]$gene, "rf"=cur_rf, "num.tips"=length(cur_tips), "rf.zeros"=NA, "num.tips.zeros"=NA))
+  }
+  # Add the gene tree info to the df, with a special case for when the RF is 0
+}
+# Read all the gene trees
+
+p = ggplot(gt_data, aes(x=num.tips)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=6), color="#666666") +
+  #geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  #geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("# of taxa") +
+  ylab("# of gene trees") +
+  bartheme()
+print(p)
+
+###############
+
+fig_outfile = here("docs", "figs", "morpho-coding-gt-taxa-dist.png")
+ggsave(fig_outfile, p, width=6, height=3, unit="in")
+# Save the figure
+
+#rf_file = here("docs", "data", "trees", "astral", "concord-rooted", "loci-nrf-below-0.25.txt")
+#write.table(subset(gt_data, rf<=0.25), file=rf_file, row.names=F, quote=F, sep="\t")
+# Write info for genes with low RF
+
+```
+
+## Tree distance (RF) between gene trees and species tree
+
+Since RF cannot handle missing taxa, the species tree is pruned for each gene tree to calculate Robinson-Foulds distance. We use the normalized metric since there are varying numbers of tips per gene tree.
+
+```{r gt-st-rf, out.width="50%", fig.align = "center", warning=FALSE}
+
+p = ggplot(gt_data, aes(x=rf)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=4), color="#666666") +
+  #geom_quasirandom(size=2, width=0.25, alpha=0.25, color="#666666") +
+  #geom_boxplot(outlier.shape=NA, alpha=0.75, width=0.5, color="#666666") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("Normalized RF") +
+  ylab("# of gene trees") +
+  bartheme()
+print(p)
+
+###############
+
+fig_outfile = here("docs", "figs", "morpho-coding-gt-rf-dist.png")
+ggsave(fig_outfile, p, width=6, height=3, unit="in")
+# Save the figure
+
+```
+
+[< Back to summary](summary_210.html)
+
+```{r footer, echo=FALSE, eval=FALSE}
+cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
+htmltools::includeHTML("../html-chunks/rmd_footer.html")
+```

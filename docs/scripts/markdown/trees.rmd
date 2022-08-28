@@ -308,7 +308,7 @@ for(i in 1:nrow(gene_trees)){
   
   cur_rf = RF.dist(pruned_tree, gt, normalize=T)
   # Calculate RF between the pruned species tree and the gene tree
-  
+
   if(cur_rf==0){
     gt_data = rbind(gt_data, data.frame("gene"=gene_trees[i,]$gene, "rf"=cur_rf, "num.tips"=length(cur_tips), "rf.zeros"=cur_rf, "num.tips.zeros"=length(cur_tips)))
   }else{
