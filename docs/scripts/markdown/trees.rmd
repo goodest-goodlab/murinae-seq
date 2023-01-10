@@ -47,6 +47,7 @@ library(here)
 library(stringr)
 library(BAMMtools)
 library(nlme)
+library(RPANDA)
 
 source(here("docs", "scripts", "lib", "design.r"))
 source(here("docs", "scripts", "lib", "get_tree_info.r"))
@@ -1968,7 +1969,7 @@ tribe_props %>% kable() %>% kable_styling(bootstrap_options=c("striped", "conden
 
 ```
 
-## Speciation rates based on Tribe sampling
+## Speciation rates based on Tribe sampling (BAMM)
 
 ```{r bamm-tribe-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=14}
 # From: https://lukejharmon.github.io/ilhabela/instruction/2015/07/02/diversification-analysis-bamm-rpanda/
@@ -2016,7 +2017,7 @@ plotRateThroughTime(ed, intervalCol=corecol(numcol=1), avgCol=corecol(numcol=1),
 dev.off()
 
 ```
-## Speciation rates based on Tribe sampling and delta
+## Speciation rates based on Tribe sampling (BAMM) and delta
 
 ```{r bamm-tribe-delta, out.width="50%", fig.align = "center", warning=FALSE}
 
@@ -2166,7 +2167,6 @@ dev.off()
 
 ```
 
-
 ## Sampling rates based on Division
 
 ```{r bamm-div-sampling, out.width="75%", fig.align = "center", warning=FALSE, fig.height=14}
@@ -2175,7 +2175,7 @@ div_props %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condende
 
 ```
 
-## Speciation rates based on Division sampling
+## Speciation rates based on Division sampling (BAMM)
 
 ```{r bamm-div-tree, out.width="75%", fig.align = "center", warning=FALSE, fig.height=14}
 # From: https://lukejharmon.github.io/ilhabela/instruction/2015/07/02/diversification-analysis-bamm-rpanda/
@@ -2224,9 +2224,494 @@ dev.off()
 
 ```
 
+# Speciation rates with RPanda
+
+## Species tree colored by tribe
+
+Following [http://www.phytools.org/***SanJuan2016/ex/14/Complex-diversification-models.html](http://www.phytools.org/***SanJuan2016/ex/14/Complex-diversification-models.html)
+
+```{r rpanda-get-subtrees, out.width="75%", fig.align = "center", warning=FALSE, fig.height=14}
+## The following rpanda sections follow http://www.phytools.org/***SanJuan2016/ex/14/Complex-diversification-models.html
+
+labeled_timetree_file = here("docs", "data", "trees", "astral", "iqtree-dating", "full-coding-astral-iqtree-dating-anil-mmus-12.1.timetree.nex")
+labeled_timetree = read.nexus(labeled_timetree_file)
+labeled_timetree = drop.tip(labeled_timetree, c(missing_samples, tribe_prob_full))
+tree_to_df_list = treeToDF(labeled_timetree)
+labeled_timetree_info = tree_to_df_list[["info"]]
+# Read the labeled time tree and parse with treetoDF
+
+labeled_timetree_info = labeled_timetree_info[order(labeled_timetree_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
+rpanda_tree_tips = subset(labeled_timetree_info, node.type=="tip")
+rpanda_tree_tips = rpanda_tree_tips %>% separate(clade, c("genus", "species", "sample"), sep="_", remove=F)
+rpanda_tree_tips$Genus.species = paste(rpanda_tree_tips$genus, rpanda_tree_tips$species)
+rpanda_tree_tips[rpanda_tree_tips$label=="mm10",]$Genus.species = "Mus musculus"
+rpanda_tree_tips[rpanda_tree_tips$label=="rnor6",]$Genus.species = "Rattus norvegicus"
+# Parse the genus and species names of the remaining tips
+
+labeled_timetree$tip.label = rpanda_tree_tips$Genus.species
+# Replace the tip labels in the time tree with the genus and species names
+
+labeled_timetree_info$Genus.species = NA
+labeled_timetree_info[labeled_timetree_info$clade == rpanda_tree_tips$clade,]$Genus.species = rpanda_tree_tips$Genus.species
+# Add the genus and species labels to the info df
+
+labeled_timetree_info$tribe = NA
+# Initialize a tribe column in the tree info
+
+###############
+
+rpanda_taxo_data = subset(sample_taxo_data, !Genus.species %in% tribe_prob)
+# Remove the problematic tribe samples for rpanda
+
+rpanda_taxo_data$Tribe = as.factor(rpanda_taxo_data$Tribe)
+# Factorize the tribe column
+
+tribes = c()
+tribe_subtrees = list()
+# Initialize a vector of tribes for all tribes with > 1 species and
+# a list of tribe subtrees
+
+for(tribe in levels(rpanda_taxo_data$Tribe)){
+  #print(tribe)
+  
+  tribe_samples = subset(rpanda_taxo_data, Tribe==tribe)$Genus.species
+  # Get all the samples from the current tribe
+
+  if(length(tribe_samples) < 2){
+    labeled_timetree_info[labeled_timetree_info$Genus.species %in% tribe_samples,]$tribe = tribe
+    next
+  }
+  # If the tribe has only one species, add the tribe label to the tree info column for that species,
+  # but then skip the rest
+  
+  tribes = c(tribes, tribe)
+  # Add this tribe to the vector of tribes that have > 2 species
+  
+  n = getMRCA(labeled_timetree, tribe_samples)
+  #print(n)
+  # Get the mrca of all the tribe species
+  
+  tribe_nodes = getDescendants(labeled_timetree, n)
+  # Get all the descendant nodes from the mrca
+  
+  labeled_timetree_info[labeled_timetree_info$node == n,]$tribe = tribe
+  labeled_timetree_info[labeled_timetree_info$node %in% tribe_nodes,]$tribe = tribe
+  # Add tribe info for the tribe nodes to the tree info df
+  
+  tribe_subtrees[[tribe]] = extract.clade(labeled_timetree, n)
+  # Extract the subtree for this tribe
+}
+
+tribe_cols = c(corecol(numcol=8), corecol(numcol=2, offset=10))
+
+xmax = 16
+tribe_tree = ggtree(labeled_timetree, size=0.8, aes(color=labeled_timetree_info$tribe)) + 
+    xlim(0, xmax) +
+  geom_tiplab(fontface='italic', size=2, show.legend=F) +
+  scale_color_manual(name="Tribe", values=tribe_cols) + 
+  #theme(legend.position="bottom")
+  theme(legend.position=c(0.05,0.9))
+print(tribe_tree)
+# A tribe tree figure
+
+num_tribes = length(tribes)
+# Variable to keep track of the number of tribes
+
+###############
+```
+
+```{r rpanda-fit-models, out.width="50%", fig.align = "center", warning=FALSE}
+###############
+
+lambda.cst <- function(x,y){y}
+lambda.var <- function(x,y){y[1]*exp(y[2]*x)}
+mu.cst <- function(x,y){y}
+mu.var <- function(x,y){y[1]*exp(y[2]*x)}
+# The different models to test
+
+fit.multi.rpanda <- function(tree, par, sample_rate) {
+  bcstdcst = fit_bd(tree, max(branching.times(tree)), f.lamb=lambda.cst, f.mu=mu.cst, lamb_par=par[[1]][1], mu_par=par[[1]][2], cst.lamb=TRUE, cst.mu=TRUE, cond="crown", f=sample_rate, dt=1e-3)
+  bvardcst = fit_bd(tree, max(branching.times(tree)), f.lamb=lambda.var, f.mu=mu.cst, lamb_par=par[[2]][c(1,2)], mu_par=par[[2]][3], expo.lamb=TRUE, cst.mu=TRUE, cond="crown", f=sample_rate, dt=1e-3)
+  bcstdvar = fit_bd(tree, max(branching.times(tree)), f.lamb=lambda.cst, f.mu=mu.var, lamb_par=par[[3]][1], mu_par=par[[3]][c(2,3)], cst.lamb=TRUE, expo.mu=TRUE, cond="crown", f=sample_rate, dt=1e-3)
+  bvardvar = fit_bd(tree, max(branching.times(tree)), f.lamb=lambda.var, f.mu=mu.var, lamb_par=par[[4]][c(1,2)], mu_par=par[[4]][c(3,4)], expo.lamb=TRUE, expo.mu=TRUE, cond="crown", f=sample_rate, dt=1e-3)
+  return(list("bcstdcst"=bcstdcst,"bvardcst"=bvardcst,"bcstdvar"=bcstdvar,"bvardvar"=bvardvar))
+}
+# A function that uses rpanda to fit various models, given a tree and some initial params
+
+###############
+
+init_params = list(c(0.4,0),c(0.4,-0.05,0),c(0.4,0.1,0.05),c(0.4,-0.05,0.1,0.05)) 
+# We need to supply starting parameter values for optimization to RPANDA
+
+rpanda_results = list()
+# Initialize a list of results by tribe
+
+for(tribe in tribes){
+  #print(tribe)
+  prop_sampled = tribe_props[tribe_props$Tribe==tribe,]$tribe.prop.sampled
+  #print(prop_sampled)
+  rpanda_results[[tribe]] = fit.multi.rpanda(tribe_subtrees[[tribe]], init_params, 1)
+}
+# Run the model fitting function on each tribe
+
+###############
+```
+
+## AICc results for 4 models
+
+See: [http://www.phytools.org/***SanJuan2016/ex/14/Complex-diversification-models.html](http://www.phytools.org/***SanJuan2016/ex/14/Complex-diversification-models.html)
+
+```{r rpanda-aic-table, out.width="50%", fig.align = "center", warning=FALSE}
+
+aic.table = matrix(nrow=4,ncol=num_tribes,NA)
+# Initialize a matrix for the AIC table
+# One column for each tribe, one row for each model
+
+colnames(aic.table) = tribes
+rownames(aic.table) = c("bcstdcst","bvardcst","bcstdvar","bvardvar")
+# Rename the columns and the rows based on the tribes and the models
+
+rpanda_best_fit = list()
+# Initialize an empty list with the best fitting (lowest aicc) model for each tribe
+
+col_i = 0
+# A column counter
+
+for(tribe in tribes) {
+  col_i = col_i + 1
+  # Increment the column counter to match the current tribe's column
+  
+  min_aic = 999999999
+  min_aic_model = ""
+  # Initialize the min aic and model to pick the best model
+  
+  row_j = 0
+  # A row counter
+  
+  for(model in rownames(aic.table)) {
+    row_j = row_j + 1
+    # Increment the row counter to match the current model's row
+    
+    cur_aic = rpanda_results[[tribe]][[model]]$aicc
+    # Get the aic for the current model
+    
+    if(cur_aic < min_aic){
+      min_aic = cur_aic
+      min_aic_model = model
+    }
+    # Check if the aic is lower than the lowest so far and replace if so
+    
+    aic.table[row_j,col_i] = cur_aic
+    # Add the aic to the table
+  }
+  
+  rpanda_best_fit[[tribe]] = min_aic_model
+  # After all models have been checked for this tribe, store the best fitting one on the list
+}
+# Retrieve the AIC values from the rpanda results
+
+aic.table %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+###############
+
+```
+
+## Parameter estimates for the best fitting model for each tribe
+
+RPanda estimates lambda (speciation rate) and mu (extinction rate)
+
+```{r rpanda-param-table, out.width="50%", fig.align = "center", warning=FALSE}
+
+param_table = data.frame("dummy"=c(0,0,0,0))
+# Initialize the parameters table with a dummy column with one row per model tested
+
+for(tribe in tribes){
+  best_model = rpanda_best_fit[[tribe]]
+  # Get the best model for the current tribe
+  
+  param_table[,tribe] = c(rpanda_results[[tribe]][[best_model]]$lamb_par[1:2],rpanda_results[[tribe]][[best_model]]$mu_par[1:2])
+  # Add the estimated params for the best model for each tribe to the table
+}
+
+param_table = select(param_table, -dummy)
+# Remove the dummy column
+
+rownames(param_table) = c("Lambda1", "Lambda2", "Mu1", "Mu2")
+# Add row names to the table for each parameter
+
+param_table %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+###############
+
+```
+
+## Estimating total number of species over time
+
+```{r rpanda-plot, out.width="50%", fig.align = "center", warning=FALSE}
+
+rpanda_plot_df = data.frame(tribe=c(), t=c(), N=c())
+# A df to store results for each tribe
+
+for(tribe in tribes){
+  best_model = rpanda_results[[tribe]][[rpanda_best_fit[[tribe]]]]
+  # Get the best fitting model for the current tribe
+  
+  max_div_time = max(branching.times(tribe_subtrees[[tribe]]))
+  
+  if (!inherits(best_model, "fit.bd")) { 
+    stop("object \"fit.bd\" is not of class \"fit.bd\"")
+  }
+  # If the best fitting model isn't an rpanda bd then error out
+  
+  t = seq(0, max_div_time, 0.01)
+  # Intervals of time to estimate N
+  
+  if ("f.mu" %in% attributes(best_model)$names) {
+    r <- function(t) { -best_model$f.lamb(t) + best_model$f.mu(t) }
+  } else {
+    r <- function(t) { -best_model$f.lamb(t) }
+  }
+    R <- function(s) { RPANDA:::.Integrate(Vectorize(r), 0, s) }
+  # Depending on the best model, functions to sample parameters at a given time
+  
+  num_tips = Ntip(tribe_subtrees[[tribe]])
+  N = num_tips * exp(Vectorize(R)(t))
+  # Estimate the number of tips at a given time
+  
+  rpanda_plot_df = rbind(rpanda_plot_df, data.frame(tribe=tribe, t=-t, N=N))
+  # Add the data for the current tribe to the results df
+}
+
+###############
+
+matched_tribe_cols = c(tribe_cols[2:3], tribe_cols[5:9])
+
+rpanda_p = ggplot(rpanda_plot_df, aes(x=t, y=N, color=tribe)) +
+  geom_line(size=1) +
+  xlab("Time (mya)") +
+  ylab("# of species") +
+  scale_color_manual(values=matched_tribe_cols) +
+  bartheme() +
+  theme(legend.position="bottom")
+print(rpanda_p)
+
+```
+
+## Spectral density analysis of murine phylogeny
+
+https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12526
+
+```{r rpanda-spect, out.width="50%", fig.align = "center", warning=FALSE}
+
+res1 = spectR(labeled_timetree)
+plot_spectR(res1)
+
+```
+
+
+```{r rpanda-spect-tree, out.width="50%", fig.align = "center", warning=FALSE, fig.height=8}
+
+res2 = BICompare(labeled_timetree, res1$eigengap)
+plot_BICompare(labeled_timetree, res2)
+
+```
+
+# Tip introgression with RND
+
+From https://onlinelibrary.wiley.com/doi/10.1111/mec.13610
+
+RND is a measure of sequence divergence between a pair of species corrected for divergence from an outgroup:
+
+$$RND = \frac{d_{XY}}{d_{out}}$$
+
+Where: $d_{XY}$ is the average distance ($d_{x,y}$) between all sequences between the two species $X$ and $Y$, and:
+
+$$d_{out} = \frac{d_{XO} + d_{YO}}{2}$$
+
+Since we have two outgroups, $O_1$ and $O_2$, each of $d_{XO}$ and $d_{XY}$ is also an average of the distances between the two outgroups, e.g.:
+
+$$d_{XO} = \frac{d_{XO_1} + d_{XO_2}}{2}$$
+Low values of $d_{XY}$ and/or $RND$ are indicative of recent introgression.
+
+## Summary of sister pairs
+
+```{r rnd-sis-example, out.width="50%", fig.align = "center", warning=FALSE, fig.height=4}
+
+#source("C:/bin/Ks_plots/fitMixEM.R")
+#source("C:/bin/Ks_plots/bicWGD.R")
+#source("C:/bin/Ks_plots/plotComponentExpectations.R")
+# Files for mixture model testing code
+
+rnd_dir = here("docs", "data", "trees", "tip-introgression-rnd")
+# The input directory for the dxy files
+
+rnd_sis_dir = paste0(rnd_dir, "/sister/")
+sis_files = list.files(rnd_sis_dir)
+sis_files = paste0(rnd_sis_dir, sis_files)
+# Read the sister tip pairs
+
+rnd_non_sis_dir = paste0(rnd_dir, "/non-sister/")
+non_sis_files = list.files(rnd_non_sis_dir)
+non_sis_files = paste0(rnd_non_sis_dir, non_sis_files)
+# Read the non-sister tip pairs
+
+#rnd_files = c(sis_files, non_sis_files)
+#rnd_files = sis_files
+#rnd_files = sample(non_sis_files, 10)
+
+rnd_summary_sis = data.frame("pair"=c(), "mean.rnd"=c(), "median.rnd"=c())
+# A df for the sister pairs
+
+for(file in sis_files){
+  cur_data = read.csv(file, header=F)
+  names(cur_data) = c("gene", "cds.len", "pair.diffs", "x.out1", "x.out2", "y.out1", "y.out2")
+  # Read the file for the current pair and add headers
+  
+  comp = tools::file_path_sans_ext(basename(file))
+  cur_data$pair = comp
+  # Get the pair name
+  
+  cur_data$d.xy = cur_data$pair.diffs / cur_data$cds.len
+  # Calculate dxy between the pair
+  
+  cur_data$x.out = rowMeans(cur_data[,c('x.out1', 'x.out2')], na.rm=T)
+  cur_data$y.out = rowMeans(cur_data[,c('y.out1', 'y.out2')], na.rm=T)
+  # Calculate the average number of differences between each in the pair and both outgroups
+  
+  cur_data$d.out = rowMeans(cur_data[,c('x.out', 'y.out')], na.rm=T)
+  # Calculate average dxy to the outgroups
+  
+  cur_data$rnd = cur_data$d.xy / cur_data$d.out
+  # Calculate RND as dxy / d_out
+  
+  #bic.test.wgd(cur_data$rnd, startK = 1, maxK = 2, model = 1, nstarts = 100, outPrefix = comp)
+  #x = modetest(cur_data$rnd, method="HH")
+  # Mixture model and multimode testing
+  
+  p = ggplot(cur_data, aes(x=rnd)) +
+    geom_histogram(bins=100) +
+    ggtitle(basename(comp)) +
+    xlab("RND") +
+    ylab("# of genes") +
+    scale_y_continuous(expand=c(0,0)) +
+    bartheme() +
+    theme(plot.title=element_text(size=12))
+  #print(p)
+  # Histogram of rnd for the current pair
+
+  rnd_summary_sis = rbind(rnd_summary_sis, data.frame(pair=comp, mean.rnd=mean(cur_data$rnd, na.rm=T), median.rnd=median(cur_data$rnd, na.rm=T)))
+  # Summarize the RND distribution for the current pair
+}
+
+print(p)
+
+```
+
+```{r rnd-sis, out.width="50%", fig.align = "center", warning=FALSE, fig.height=8}
+
+rnd_summary_sis$pair <- reorder(rnd_summary_sis$pair, -rnd_summary_sis$median.rnd)
+
+p = ggplot(rnd_summary_sis, aes(x=pair, y=mean.rnd, color="Mean")) + 
+  geom_point() + 
+  xlab("") +
+  ylab("RND") +
+  geom_point(aes(y=median.rnd, color="Median")) +
+  scale_color_manual(values=c("Mean"="#333333", "Median"=corecol(numcol=1))) +
+  theme(legend.position="bottom") +
+  coord_flip()
+print(p)
+
+```
+
+# Non-sister pairs
+
+Distributions of median RND values for each pair
+
+```{r rnd-non-sis, out.width="50%", fig.align = "center", warning=FALSE}
+
+rnd_non_sis_dir = paste0(rnd_dir, "/non-sister/")
+non_sis_files = list.files(rnd_non_sis_dir)
+non_sis_files = paste0(rnd_non_sis_dir, non_sis_files)
+# Read the non-sister tip pairs
+
+#non_sis_files = sample(non_sis_files, 50)
+
+rnd_summary_non_sis = data.frame("pair"=c(), "mean.rnd"=c(), "median.rnd"=c())
+# A df for the sister pairs
+
+for(file in non_sis_files){
+  cur_data = read.csv(file, header=F)
+  names(cur_data) = c("gene", "cds.len", "pair.diffs", "x.out1", "x.out2", "y.out1", "y.out2")
+  # Read the file for the current pair and add headers
+  
+  comp = tools::file_path_sans_ext(basename(file))
+  cur_data$pair = comp
+  # Get the pair name
+  
+  cur_data$d.xy = cur_data$pair.diffs / cur_data$cds.len
+  # Calculate dxy between the pair
+  
+  cur_data$x.out = rowMeans(cur_data[,c('x.out1', 'x.out2')], na.rm=T)
+  cur_data$y.out = rowMeans(cur_data[,c('y.out1', 'y.out2')], na.rm=T)
+  # Calculate the average number of differences between each in the pair and both outgroups
+  
+  cur_data$d.out = rowMeans(cur_data[,c('x.out', 'y.out')], na.rm=T)
+  # Calculate average dxy to the outgroups
+  
+  cur_data$rnd = cur_data$d.xy / cur_data$d.out
+  # Calculate RND as dxy / d_out
+
+  rnd_summary_non_sis = rbind(rnd_summary_non_sis, data.frame(pair=comp, mean.rnd=mean(cur_data$rnd, na.rm=T), median.rnd=median(cur_data$rnd, na.rm=T)))
+  # Summarize the RND distribution for the current pair
+}
+
+rnd_summary_sis$type = "Sister pairs"
+rnd_summary_non_sis$type = "Non-sister pairs"
+
+rnd_summary = rbind(rnd_summary_sis, rnd_summary_non_sis)
+
+p = ggplot(rnd_summary, aes(x=type, y=median.rnd, group=type, color=type)) +
+  geom_quasirandom(size=2, width=0.25, alpha=0.25) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  xlab("") +
+  ylab("Median RND") +
+  scale_color_manual(values=corecol(numcol=2, pal="wilke")) +
+  #geom_signif(comparisons=x_comps, map_signif_level=TRUE, textsize=4, size=1, step_increase=0.12, margin_top=0.1) +
+  #scale_x_continuous(limits=c(0,2)) +
+  bartheme() +
+  theme(legend.position="none")
+print(p)
+
+
+
+```
+
 [< Back to summary](summary_210.html)
 
 ```{r footer, echo=FALSE, eval=FALSE}
 cat("Page last updated:", format(Sys.time(), "%m/%d/%Y %H:%M:%S %Z"))
 htmltools::includeHTML("../html-chunks/rmd_footer.html")
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
