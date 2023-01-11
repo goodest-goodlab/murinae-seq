@@ -2625,7 +2625,7 @@ print(p)
 
 ```
 
-# Non-sister pairs
+## Summary of non-sister pairs
 
 Distributions of median RND values for each pair
 
