@@ -279,6 +279,42 @@ ggsave(fig_outfile, p, width=6, height=3, unit="in")
 
 ```
 
+# Species tree comparisons
+
+## ASTRAL tree vs. concatenated tree
+
+```{r astral-concat, out.width="50%", fig.align = "center", warning=FALSE, fig.height=16}
+
+concat_file = here("docs", "data", "trees", "concat", "full-coding-concat-r-labels.tre")
+concat_tree = read.tree(concat_file)
+# Read the concatenated tree
+
+astral_concat_comp = cophylo(rodent_tree, concat_tree)
+# Generate the cophylo object
+
+plot(astral_concat_comp, link.type="curved", link.lwd=4, link.lty="solid", link.col=make.transparent(corecol(numcol=1), 0.5), fsize=c(0.5,0.5))
+# Plot the trees
+
+#comparePhylo(rodent_tree, concat_tree, plot=T, force.rooted=T)
+
+```
+
+## ASTRAL tree vs. mitochondrial tree
+
+```{r astral-mito, out.width="50%", fig.align = "center", warning=FALSE, fig.height=16}
+
+mito_file = here("docs", "data", "trees", "mitochondrial", "concat-concord", "full-mitochondrial-concat.cf.rooted.tree")
+mito_tree = read.tree(mito_file)
+# Read the mitochondrial tree
+
+astral_mito_comp = cophylo(rodent_tree, mito_tree)
+# Generate the cophylo object
+
+plot(astral_mito_comp, link.type="curved", link.lwd=4, link.lty="solid", link.col=make.transparent(corecol(numcol=1, offset=1), 0.5), fsize=c(0.5,0.5))
+# Plot the trees
+
+```
+
 # Gene trees
 
 The 11,774 gene trees contain varying numbers of taxa due to filtering on the alignment and filtering by IQtree for identical sequences.
