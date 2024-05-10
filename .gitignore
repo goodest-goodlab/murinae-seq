@@ -80,6 +80,8 @@ docs/data/substitution-rates/full-coding-mg94-local.csv.gz
 docs/data/substitution-rates/full-coding-mg94-local.csv
 docs/data/substitution-rates/full-coding-slac.csv.gz
 docs/data/substitution-rates/full-coding-slac-cut.csv
+docs/data/substitution-rates/old/full-coding-mg94-local.csv.gz
+docs/data/substitution-rates/old/full-coding-slac.csv.gz
 
 docs/data/noncoding-aln-stats/full-all-alnlens-200.csv
 docs/data/noncoding-aln-stats/full-all-alnlens-500.csv
@@ -114,3 +116,4 @@ docs/data/wgs-ps-comps/mm10-cds-windows.csv
 docs/scripts/generators/tmp/
 
 docs/data/convergence/full-coding-astral-pairwise-convergence-nodesc/substitution-pairs-by-gene.csv
+

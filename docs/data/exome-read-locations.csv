@@ -1,0 +1,19 @@
+﻿Platform,Copy-dir,Raw-dir,Notes
+NextSeq single IDs,nextseq-single-1,3970-JG-0001-30508478/,NA
+NextSeq single 2 IDs,nextseq-single-2,3970-JG-0001-rerun/3970-JG-0001-30508478/,NA
+NextSeq paired 1,nextseq-paired-1,JG12/,NA
+MiSeq paired,miseq-paired,20150625_Rat_Capture/,??
+NextSeq paired 2 ID,nextseq-paired-2,3970-JG-0002-30556548/,??
+HiSeq paired ID,hiseq-paired,usc_20140721/usc_data_june_july_2014/,NA
+HiSeq paired ID no WGA,hiseq-paired-no-WGA,usc_20140721/usc_data_june_july_2014/,NA
+HiSeq2500 paired ID,hiseq2500-paired,uoregon_1876/,NA
+HiSeq2500 paired ID no WGA,hiseq2500-paired-no-WGA,uoregon_1876/,NA
+HiSeq2000 paired 1 ID,hiseq2000-paired-1,10460R/Fastq/,NA
+HiSeq2000 paired 2 ID,hiseq2000-paired-2,uoregon_1875/,NA
+HiSeq 4000 ID 1,hiseq4000-paired-1,Novogene-Dec2019-Exomes-and-SPRET/Capture1-2/H202SC19112857/Rawdata/,NA
+HiSeq 4000 ID 2,hiseq4000-paired-2,Novogene-Dec2019-Exomes-and-SPRET/Capture3/H202SC19112857/Rawdata,NA
+Seq run 1 ID,seq-run-1,NA,NA
+Seq run 2 ID,seq-run-2,NA,NA
+Seq run 3 ID,seq-run-3,NA,NA
+Seq run 4 ID,seq-run-4,NA,NA
+HiSeq 4000 ID 3,hiseq4000-paired-3,Novogene-Aug2020-Exomes/usftp21.novogene.com/raw_data/,NA
